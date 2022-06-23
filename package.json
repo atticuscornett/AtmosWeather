@@ -1,0 +1,35 @@
+{
+  "name": "io.atticusc.atmosweather",
+  "displayName": "Atmos Weather",
+  "version": "0.1",
+  "description": "A lightweight weather app for alerts and forecasts.",
+  "main": "atmos-ui.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Atticus Cornett",
+  "license": "MIT License",
+  "devDependencies": {
+    "cordova-android": "^10.1.2",
+    "cordova-browser": "^6.0.0",
+    "cordova-electron": "^3.0.0",
+    "cordova-plugin-file": "^7.0.0",
+    "cordova-plugin-geolocation": "^4.1.0"
+  },
+  "cordova": {
+    "platforms": [
+      "browser",
+      "android",
+      "electron"
+    ],
+    "plugins": {
+      "cordova-plugin-file": {},
+      "cordova-plugin-geolocation": {
+        "GPS_REQUIRED": "true"
+      }
+    }
+  }
+}
