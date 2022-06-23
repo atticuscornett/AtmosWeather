@@ -1,0 +1,40 @@
+/* Atmos Logo Design */
+
+#atmos-logo{
+	z-index: 999;
+	position: absolute;
+	overflow: hidden;
+	background-color: hsla(0,0%,99%,1.00);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	animation: logoBackgroundAnim 3s;
+}
+
+.logoletter{
+	font-family: Secular One;
+	display: inline;
+	animation: logoAnim 3s;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: dodgerblue;
+}
+
+/* Dark Mode Background */
+@media (prefers-color-scheme: dark){
+	#weatherLogo{
+		color: white;
+	}
+	#atmos-logo{
+		z-index: 999;
+		position: absolute;
+		overflow: hidden;
+		background-color: black;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		animation: logoBackgroundAnim 3s;
+	}
+}

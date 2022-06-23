@@ -1,0 +1,1 @@
+// To be removed - Remains from capacitor version

@@ -1,0 +1,117 @@
+/* Animation Keyframes */
+
+/* Logo Animations */
+
+@keyframes logoAnim{
+	0%{
+		font-size: 10000px;
+		padding-left: 100px;
+		padding-right: 100px;
+		color: white;
+	}
+	49%{
+		font-size: 30px;
+		padding-left: 100px;
+		padding-right: 100px;
+		color: white:
+	}
+	50%{
+		color: white;
+	}
+	100%{
+		padding-left: 10px;
+		padding-right: 10px;
+		color: dodgerblue;
+	}
+}
+
+@keyframes logoBackgroundAnim{
+	0% {
+		background-color: black;
+	}
+	100%{
+		background-color: hsla(0,0%,99%,1.00);
+	}
+}
+
+@keyframes delayedFadeIn{
+	0%{
+		opacity: 0;
+	}
+	75%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1.0;
+	}
+}
+
+/* General Animations */
+
+@keyframes fadeOut {
+	0%{
+		opacity: 1.0;
+		background-color: hsla(0,0%,99%,1.00);
+	}
+	100%{
+		opacity: 0.0;
+		display: none;
+		pointer-events: none;
+		background-color: hsla(0,0%,99%,1.00);
+	}
+}
+
+@keyframes offLeft{
+	0%{
+		right: 0%;
+	}
+	100%{
+		right: 300%;
+	}
+}
+
+@keyframes onRight{
+	0%{
+		left: 300%;
+	}
+	100%{
+		left: 0%;
+	}
+}
+
+/* Dark Mode Colors */
+@media (prefers-color-scheme: dark){
+	/* Logo Animations */
+	
+	@keyframes logoAnim{
+		0%{
+			font-size: 10000px;
+			padding-left: 100px;
+			padding-right: 100px;
+			color: black;
+		}
+		49%{
+			font-size: 30px;
+			padding-left: 100px;
+			padding-right: 100px;
+			color: black:
+		}
+		50%{
+			color: black;
+		}
+		100%{
+			padding-left: 10px;
+			padding-right: 10px;
+			color: dodgerblue;
+		}
+	}
+	
+	@keyframes logoBackgroundAnim{
+		0% {
+			background-color: hsla(0,0%,99%,1.00);
+		}
+		100%{
+			background-color: black;
+		}
+	}
+}

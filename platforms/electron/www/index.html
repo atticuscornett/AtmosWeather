@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Atmos Weather</title>
+		<meta charset="utf-8" lang="en">
+		
+		<!-- Font Import -->
+		<link rel="stylesheet" href="./css/font-imports.css">
+		
+		<!-- Logo Style and Animations -->
+		<link rel="stylesheet" href="./css/atmos-animations.css">
+		<link rel="stylesheet" href="./css/atmos-ui.css">
+		<link rel="stylesheet" href="./css/atmos-logo.css">
+		
+		
+	</head>
+	<body>
+		<div id="atmos-logo">
+			<div style="position:absolute;top:50%;left:50%;transform: translate(-50%, -50%);white-space: nowrap;font-size: 30px;">
+				<h1 class="logoletter">a</h1>
+				<h1 class="logoletter">t</h1>
+				<h1 class="logoletter">m</h1>
+				<h1 class="logoletter">o</h1>
+				<h1 class="logoletter">s</h1>
+				<h3 style="text-align: center; animation: delayedFadeIn 3s; position: relative; bottom: 70px;font-family: Secular One;" id="weatherLogo">weather</h3>
+			</div>
+		</div>
+		<div id="notice-window-container" hidden>
+			<h1 style="margin-left:20px;color:dodgerblue;">a t m o s weather</h1>
+			<div id="notice-window" style="padding: 20px;">
+				<h2 style="position: absolute;top:0;right:25px;color:dodgerblue;cursor: pointer;text-decoration: underline;" onClick="hideNotices();">x</h2>
+				
+				
+			</div>
+			
+		</div>
+		<div id="app">
+			<div id="main-app">
+				<!-- App Tabs -->
+				<div id="tab-about" class="tab-div" hidden>
+					<h1>About Atmos</h1>
+					<h3>Version 0.2</h3>
+					<h6>Written by Atticus Cornett</h6>
+					<hr>
+					<h2>Resources</h2>
+					<h3><a href="https://tablericons.com/" target="_blank">Tabler Icons</a></h3>
+					<h3><a href="https://cordova.apache.org/" target="_blank">Apache Cordova</a></h3>
+					<h3><a href="https://fonts.google.com/" target="_blank">Google Fonts</a></h3>
+					<h3><a href="https://nominatim.org/">OSM Nominatim</a></h3>
+				</div>
+				<div id="tab-alerts" class="tab-div" hidden>
+					<h1>Alerts</h1>
+					<br>
+					<div id="alerts-main" style="margin-right:20px;">
+						<h2>Currently Active</h2>
+						<hr>
+						<div id="active-alert-list">
+						</div>
+						<br>
+						<h2>Previously Recieved</h2>
+						<hr>
+						<div id="old-alert-list">
+						</div>
+					</div>
+				</div>
+				<!-- Default Tab -->
+				<div id="tab-locations" class="tab-div">
+					<h1>Locations</h1>
+					<div style="margin-right:20px;margin-bottom: 90px;" id="location-main">
+						<br>
+					</div>
+					<button id="add-location" onClick="navTo('search')">Add Location +</button>
+				</div>
+				<div id="tab-responses" class="tab-div" hidden>
+					<h1>Emergency Responses</h1>
+				</div>
+				<div id="tab-search" class="tab-div" hidden>
+					<h1>Location Search</h1>
+					<input id="location-search">
+					<img id="search-button" src="img/search.svg" style="vertical-align: bottom;cursor: pointer;" onClick="locationSearch();">
+					<h6>Powered by the <a href="https://nominatim.org/" target="_blank">Nominatim API</a></h6>
+					<br><br><br>
+					<div id="search-results">
+						
+					</div>
+				</div>
+				<div id="tab-settings" class="tab-div" hidden>
+					<h1>Settings</h1>
+					<h6><a href="#" onClick="navTo('about')">About Atmos Weather</a></h6>
+					<h2>Not yet available!</h2>
+				</div>
+				
+				<!-- Programatically Generated Tabs -->
+				<div id="location-data">
+				</div>
+			</div>
+			<!-- App Navigation Bar -->
+			<div id="app-nav">
+				<div style="position: absolute; left:0; width: 25%; height: 8%;" id="location-nav">
+					<center>
+						<img src="img/location.svg" class="nav-icon">
+					</center>
+				</div>
+				<div style="position: absolute; left:25%; width: 25%; height: 8%;" id="alerts-nav">
+					<center>
+						<img src="img/alerts.svg" class="nav-icon">
+					</center>
+				</div>
+				<div style="position: absolute; left:50%; width: 25%; height: 8%;" id="response-nav">
+					<center>
+						<img src="img/response.svg" class="nav-icon">
+					</center>
+				</div>
+				<div style="position: absolute; left:75%; width: 25%; height: 8%;" id="settings-nav">
+					<center>
+						<img src="img/settings.svg" class="nav-icon">
+					</center>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	
+	<!-- Javascript -->
+	
+	<!-- Import Functions -->
+	<script src="cordova.js"></script>
+	<script src="js/atmos-ui.js"></script>
+	<script src="js/storage-handler.js" type="module"></script>
+	<script src="js/web-storage-handler.js"></script>
+	<script src="js/nominatim-api.js"></script>
+	<script src="js/nws-api.js"></script>
+	
+	
+	<!-- Animation Code-->
+	<script>
+		// Fade out logo and handle notices after animation is done
+		setTimeout(function(){
+			showNotices();
+			console.log("testing");
+		}, 4000);
+	</script>
+	
+	<!-- Functional Code -->
+	<script>
+		// Adds function to the navigation buttons (from atmos-ui.js)
+		activateNavButtons();
+		// Check status of NWS API periodically (from atmos-ui.js)
+		setInterval(async () => {
+  			const result = await checkAPIstatus();
+  			if (!result){
+				window.location.href = "offline.html";
+			}
+		}, 60000);
+		setTimeout(async () => {
+  			const result = await checkAPIstatus();
+  			if (!result){
+				window.location.href = "offline.html";
+			}
+		}, 100);
+		
+		// Allow Enter key on search
+		document.getElementById("location-search").addEventListener("keypress", function(event) {
+			if (event.key === "Enter") {
+    			document.getElementById("search-button").click();
+  			}
+		});
+		
+		// Refresh location data
+		refreshLocations();
+	</script>
+	
+</html>

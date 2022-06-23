@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Atmos Weather",
+  "short_name": "Atmos Weather",
+  "version": "io.atticusc.atmosweather",
+  "description": "A lightweight weather app for alerts and forecasts.",
+  "author": "Atticus Cornett",
+  "icons": [],
+  "start_url": "index.html"
+}

@@ -1,0 +1,17 @@
+{
+  "browserWindow": {
+    "height": 600,
+    "webPreferences": {
+      "devTools": true,
+      "nodeIntegration": false
+    },
+    "width": 800
+  },
+  "browserWindowInstance": {
+    "loadURL": {
+      "url": "index.html"
+    }
+  },
+  "scheme": "file",
+  "hostname": "localhost"
+}
