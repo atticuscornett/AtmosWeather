@@ -18,6 +18,7 @@ out
 /app/build/generated
 /app/build/intermediates
 /app/build/tmp
+/app/build/outputs/logs
 gradle-app.setting
 # Android Studio
 .idea
