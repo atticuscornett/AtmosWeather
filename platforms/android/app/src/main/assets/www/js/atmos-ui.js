@@ -515,10 +515,10 @@ function getStatus(nomObj){
 
 // Sync files
 function syncFiles(){
-	if (getPlatform == "android"){
+	if (getPlatform() == "android"){
 		saveDataToFile();
 	}
-	saveDataToFile();
+	
 }
 
 // Removes a location from the list observed

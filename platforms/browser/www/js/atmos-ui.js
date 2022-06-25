@@ -515,7 +515,7 @@ function getStatus(nomObj){
 
 // Sync files
 function syncFiles(){
-	if (getPlatform == "android"){
+	if (getPlatform() == "android"){
 		saveDataToFile();
 	}
 	
