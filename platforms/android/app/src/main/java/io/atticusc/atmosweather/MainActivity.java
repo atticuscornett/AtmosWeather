@@ -19,6 +19,9 @@
 
 package io.atticusc.atmosweather;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import org.apache.cordova.*;
 
@@ -37,5 +40,12 @@ public class MainActivity extends CordovaActivity
 
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("watch", "Weather Watches", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager man = getSystemService(NotificationManager.class);
+            man.createNotificationChannel(channel);
+
+        }
+        new SimpleNotification("Flood Watch", "This is a test notification.", "Testing", getApplicationContext(), R.drawable.ic_android_black_24dp, 1);
     }
 }
