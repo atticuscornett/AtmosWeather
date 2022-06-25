@@ -518,7 +518,7 @@ function syncFiles(){
 	if (getPlatform == "android"){
 		saveDataToFile();
 	}
-	
+	saveDataToFile();
 }
 
 // Removes a location from the list observed
