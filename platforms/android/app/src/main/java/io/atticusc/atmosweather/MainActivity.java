@@ -21,6 +21,8 @@ package io.atticusc.atmosweather;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.ContentResolver;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import org.apache.cordova.*;
@@ -40,12 +42,9 @@ public class MainActivity extends CordovaActivity
 
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("watch", "Weather Watches", NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager man = getSystemService(NotificationManager.class);
-            man.createNotificationChannel(channel);
-
-        }
-        new SimpleNotification("Flood Watch", "This is a test notification.", "Testing", getApplicationContext(), R.drawable.ic_android_black_24dp, 1);
+//        new SimpleNotification().PrepareNotificationChannel("banana", "banana", getApplicationContext());
+//        new SimpleNotification().PrepareNotificationChannel("insist", "insist", getApplicationContext());
+//        //new SimpleNotification().NotifyWithAudio("Testing", "This is a test notification.", "banana", getApplicationContext(), R.drawable.ic_android_black_24dp, 1, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.metronome));
+//        new SimpleNotification().NotifyInsistently("I am annoying.", "I will bother you until you acknowledge me.", "insist", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);
     }
 }
