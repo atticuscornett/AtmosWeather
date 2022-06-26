@@ -53,7 +53,7 @@ public class MainActivity extends CordovaActivity
 //        new SimpleNotification().PrepareNotificationChannel("banana", "banana", getApplicationContext());
 //        new SimpleNotification().PrepareNotificationChannel("insist", "insist", getApplicationContext());
 //        //new SimpleNotification().NotifyWithAudio("Testing", "This is a test notification.", "banana", getApplicationContext(), R.drawable.ic_android_black_24dp, 1, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.metronome));
-//        new SimpleNotification().NotifyInsistently("I am annoying.", "I will bother you until you acknowledge me.", "insist", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);
+        new SimpleNotification().NotifyInsistently("I am annoying.", getTextFileData("/Android/data/io.atticusc.atmosweather/atmosweather.txt"), "insist", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);
     }
     public String getTextFileData(String fileName) {
 
