@@ -21,9 +21,9 @@
   },
   "cordova": {
     "platforms": [
-      "browser",
       "android",
-      "electron"
+      "electron",
+      "browser"
     ],
     "plugins": {
       "cordova-plugin-file": {},
