@@ -1,18 +1,11 @@
-/*
-	nws-api.js
-	Handles the caching and fetching of forcasts, alerts, and other information from the National Weather Service API
-*/
+// nws-api - Grab Weather Data from the National Weather Service API
 
 
 // Set up empty storage
 if (!localStorage.getItem("nws-location-cache")){
 	localStorage.setItem("nws-location-cache", "{}");
-	localStorage.setItem("nws-forecast-cache", "{}");
-	localStorage.setItem("nws-hourly-forecast-cache", "{}");
-	localStorage.setItem("nws-alerts-cache", "{}");
-	localStorage.setItem("nws-alerts-old", "[]");
-	localStorage.setItem("nws-alerts-current", "[]");
-	localStorage.setItem("nws-boundries-cache", "{}");
+	localStorage.setItem("nws-forecast-cache", "{}")
+	localStorage.setItem("nws-hourly-forecast-cache", "{}")
 }
 
 // Convert a Nominatim object into a weather grid object
@@ -31,7 +24,6 @@ function nomToWeatherGrid(nomObj){
 		console.log("Getting grid locations from NWS API");
 		theCache[temp] = httpGet("https://api.weather.gov/points/" + nomObj["lat"] + "," + nomObj["lon"]);
 		localStorage.setItem("nws-location-cache", JSON.stringify(theCache));
-		syncFiles();
 		return [JSON.parse(theCache[temp]), temp];
 	}
 }
@@ -62,7 +54,6 @@ function getHourlyForecast(weatherGrid){
 			hourlyForecast = hourlyForecast["properties"]["periods"];
 			theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
 			localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
-			document.getElementById("offlineError").hidden = true;
 			return theCache[weatherGrid[1]];
 		}
 	}
@@ -96,7 +87,6 @@ function getForecast(weatherGrid){
 		forecast = forecast["properties"]["periods"];
 		theCache[weatherGrid[1]] = [forecast, time.getTime()];
 		localStorage.setItem("nws-forecast-cache", JSON.stringify(theCache));
-		document.getElementById("offlineError").hidden = true;
 		return theCache[weatherGrid[1]];
 	}
 	}
@@ -132,128 +122,12 @@ function getForecastGeo(){
 }
 
 // Gets active weather alerts for a location
-function getWeatherAlertsForPos(lat, long){
+function getWeatherAlerts(lat, long){
 	try{
 		var theAlerts = JSONGet("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString())["features"];
-		addToActiveAlertsCheck(theCache[pos])
 		return theAlerts;
 	}
 	catch(err){
 		return false;
-	}
-}
-
-// Gets active weather alerts for a nominatim object
-function getWeatherAlertsForNom(nomObj){
-	try{
-		var pos = nomObj["lat"].toString() + "," + nomObj["lon"].toString();
-		var theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
-		var time = new Date();
-		if (theCache.hasOwnProperty(pos)){
-			console.log((time.getTime() - theCache[pos][1]))
-			// Check if got alerts within last minute
-			if ((time.getTime() - theCache[pos][1]) > 60*1000){
-				theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active?point=" + pos)["features"], time.getTime()]
-				localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
-				addToActiveAlertsCheck(theCache[pos]);
-				return theCache[pos];
-			}
-			else{
-				console.log("got in last minute")
-				return theCache[pos];
-			}
-		}
-		else{
-			theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active?point=" + pos)["features"], time.getTime()]
-			localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
-			addToActiveAlertsCheck(theCache[pos]);
-			return theCache[pos];
-		}
-	}
-	catch(err){
-		return false;
-	}
-}
-
-// Checks if weather alert should be added to the active alerts
-function addToActiveAlertsCheck(alerts){
-	var theCache = JSON.parse(localStorage.getItem("nws-alerts-current"));
-	var a = 0;
-	while (a < alerts.length){
-		if (!theCache.includes(alerts[a][0])){
-			theCache.push(alerts[a][0]);
-		}
-		a++;
-	}
-	localStorage.setItem("nws-alerts-current", JSON.stringify(theCache))
-}
-
-// Checks if weather alerts should be moved from current to old
-function checkIfOldAlerts(){
-	var nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
-	var a = 0;
-	var allCurrent = [];
-	var cacheCurrent = JSON.parse(localStorage.getItem("nws-alerts-current"));
-	var moveToOld = [];
-	while (a < nomLocations.length){
-		allCurrent = allCurrent.concat(getWeatherAlertsForNom(nomLocations[a])[0]);
-		a++;
-	}
-	a = 0;
-	var ids = [];
-	while (a < allCurrent.length){
-		ids.push(allCurrent[a]["id"])
-		a++;
-	}
-	a = 0;
-	console.log(ids)
-	while (a < cacheCurrent.length){
-		if (cacheCurrent[a] != null){
-			console.log(cacheCurrent[a]["id"])
-			if (!ids.includes(cacheCurrent[a]["id"])){
-				console.log(cacheCurrent[a]);
-				moveToOld.push(cacheCurrent[a]);
-			}
-		}
-		a++;
-	}
-	localStorage.setItem("nws-alerts-current", JSON.stringify(allCurrent));
-	var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"))
-	oldAlerts = oldAlerts.concat(moveToOld);
-	localStorage.setItem("nws-alerts-old", JSON.stringify(oldAlerts));
-}
-
-// Changes list of coords from longitude, latitude to latitude, longitude
-function fixNWSCoords(oldCoords){
-	var fixedCoords = [];
-	var a = 0;
-	var temp;
-	while (a < oldCoords.length){
-		temp = [oldCoords[a][1], oldCoords[a][0]];
-		fixedCoords.push(temp);
-		a++;
-	}
-	return fixedCoords;
-}
-
-// Gets the polygon boundry of weather alerts
-function getPolyBoundries(weatherAlert, wGrid){
-	if (weatherAlert["geometry"] == null){
-		var theCache = JSON.parse(localStorage.getItem("nws-boundries-cache"));
-		var forecastZone = wGrid[0]["properties"]["forecastZone"];
-		if (theCache.hasOwnProperty(forecastZone)){
-			return theCache[forecastZone];
-		}
-		else{
-			var theBoundries = JSONGet(forecastZone);
-			console.log(theBoundries)
-			//theBoundries = fixNWSCoords(theBoundries);
-			theCache[forecastZone] = theBoundries;
-			localStorage.setItem("nws-boundries-cache", JSON.stringify(theCache));
-			return theBoundries;
-		}
-	}
-	else{
-		return weatherAlert;
 	}
 }

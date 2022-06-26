@@ -2,13 +2,13 @@
   "main": "cdv-electron-main.js",
   "name": "io.atticusc.atmosweather",
   "displayName": "Atmos Weather",
-  "version": "0.3",
+  "version": "0.1",
   "description": "A lightweight weather app for alerts and forecasts.",
   "homepage": "https://cordova.apache.org",
   "license": "Apache-2.0",
   "author": {
     "name": "Atticus Cornett",
-    "email": "none"
+    "email": "dev@cordova.apache.org"
   },
   "dependencies": {
     "electron-devtools-installer": "^3.2.0"

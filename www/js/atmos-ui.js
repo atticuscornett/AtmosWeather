@@ -516,7 +516,7 @@ function getStatus(nomObj){
 // Sync files
 function syncFiles(){
 	if (getPlatform() == "android"){
-		NativeStorage.setItem("settings", localStorage.getItem("atmos-settings"), null, null);
+		saveDataToFile();
 	}
 	
 }

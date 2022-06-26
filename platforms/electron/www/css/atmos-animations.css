@@ -34,42 +34,6 @@
 	}
 }
 
-@keyframes watchAnim{
-	0%{
-		background-color: darkgoldenrod;
-	}
-	50%{
-		background-color: goldenrod;
-	}
-	100%{
-		background-color: darkgoldenrod;
-	}
-}
-
-@keyframes warningAnim{
-	0%{
-		background-color: darkred;
-	}
-	50%{
-		background-color: red;
-	}
-	100%{
-		background-color: darkred;
-	}
-}
-
-@keyframes otherAnim{
-	0%{
-		background-color: gray;
-	}
-	50%{
-		background-color: slategray;
-	}
-	100%{
-		background-color: gray;
-	}
-}
-
 @keyframes delayedFadeIn{
 	0%{
 		opacity: 0;

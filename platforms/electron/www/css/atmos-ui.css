@@ -24,16 +24,6 @@ a{
 	color: dodgerblue;
 }
 
-label{
-	font-family: Lexend Deca;
-	font-size: 25px;
-}
-
-select{
-	font-family: Lexend Deca;
-	font-size: 23px;
-}
-
 /* UI Component Styles */
 
 #location-main{
@@ -92,8 +82,6 @@ select{
 	width: 50%;
 }
 
-/* Class Styles */
-
 .tab-div{
 	width: 100%;
 	height: 92%;
@@ -130,27 +118,6 @@ select{
 	background-color: darkslategray;
 }
 
-.watch{
-	background-color: darkgoldenrod;
-	animation-name: watchAnim;
-	animation-iteration-count: infinite;
-	animation-duration: 5s;
-}
-
-.warning{
-	background-color: darkred;
-	animation-name: warningAnim;
-	animation-iteration-count: infinite;
-	animation-duration: 2s;
-}
-
-.other{
-	background-color: gray;
-	animation-name: otherAnim;
-	animation-iteration-count: infinite;
-	animation-duration: 5s;
-}
-
 .currentloc{
 	background-color: cadetblue;
 }
@@ -172,9 +139,6 @@ select{
 	cursor: pointer;
 }
 
-.box{
-	height: 22px;
-}
 
 /* Dark Mode Colors */
 @media (prefers-color-scheme: dark){
@@ -183,11 +147,10 @@ select{
 		color: white;
 	}
 	#notice-window-container{
-		z-index: 99;
 		position: absolute;
 		background-color: black;
-		min-width: 100%;
-		min-height: 100%;
+		width: 100%;
+		height: 100%;
 		top: 0;
 		left: 0;
 	}
