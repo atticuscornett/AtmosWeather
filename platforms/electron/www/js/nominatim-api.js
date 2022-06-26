@@ -1,4 +1,7 @@
-// Quick Functions for Geolocation with Caching
+/*
+	nominatim-api.js
+	Handles functions related to contacting and caching nominatim objects and search results
+*/
 
 // Initialize Cache
 if (!window.localStorage.getItem("nominatim-storage")){

@@ -19,6 +19,10 @@
             {
               "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"NativeStorage\"><param name=\"android-package\" value=\"NativeStorage\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -54,6 +58,9 @@
     },
     "cordova-plugin-geolocation": {
       "GPS_REQUIRED": "true",
+      "PACKAGE_NAME": "io.atticusc.atmosweather"
+    },
+    "cordova-plugin-nativestorage": {
       "PACKAGE_NAME": "io.atticusc.atmosweather"
     }
   },
@@ -253,10 +260,29 @@
       "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
       "pluginId": "cordova-plugin-geolocation",
       "runs": true
+    },
+    {
+      "id": "cordova-plugin-nativestorage.mainHandle",
+      "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
+      "pluginId": "cordova-plugin-nativestorage",
+      "clobbers": [
+        "NativeStorage"
+      ]
+    },
+    {
+      "id": "cordova-plugin-nativestorage.LocalStorageHandle",
+      "file": "plugins/cordova-plugin-nativestorage/www/LocalStorageHandle.js",
+      "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "id": "cordova-plugin-nativestorage.NativeStorageError",
+      "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
+      "pluginId": "cordova-plugin-nativestorage"
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-file": "7.0.0",
-    "cordova-plugin-geolocation": "4.1.0"
+    "cordova-plugin-geolocation": "4.1.0",
+    "cordova-plugin-nativestorage": "2.3.2"
   }
 }
