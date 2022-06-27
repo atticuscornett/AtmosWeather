@@ -1,4 +1,8 @@
-// Atmos UI Interation Javascript
+/*
+	atmos-ui.js
+	Handles most user interface related Javascript
+	Also functions as a miscellaneous function file
+*/
 
 // Initialize Cordova
 document.addEventListener('deviceready', function(){console.log(cordova.platformId);cordovaReady=true;}, false);
@@ -16,6 +20,15 @@ var lastLocationInfo;
 function hideNotices(){
 	document.getElementById("notice-window-container").hidden = true;
 }
+
+// Initialize Leaflet Map
+var map = L.map('alert-map').setView([33.543682, -86.8104], 13);
+map.on("load", function(){console.log("map loaded")})
+var polygon = false;
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    	maxZoom: 19,
+    	attribution: '© OpenStreetMap'
+	}).addTo(map);
 
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
@@ -79,25 +92,26 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	
-	if (!window.localStorage.getItem("notice-version0.2")){
+	if (!window.localStorage.getItem("notice-version0.3")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos v0.2 is here!</h2>
+		<h2>Atmos v0.3 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Hourly forecast information</dd>
-			<dd>- Weather icons added</dd>
-			<dd>- Removing locations added</dd>
+  			<dd>- Alerts Page</dd>
+			<dd>- LeafletJS generated alert maps</dd>
+			<dd>- Current location information</dd>
+			<dd>- Alerts display on locations page</dd>
+			<dd>- Information on alerts added.</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Notices show on Android again.</dd>
-			<dd>- Text no longer runs offscreen.</dd>
-			<dd>- Other Android visibility issues fixed.</dd>
-			<dd>- API Error Handling</dd>
+  			<dd>- Caching problems with hourly and full forecast fixed</dd>
+			<dd>- Added more error handling to forecast and alert systems</dd>
+			<dd>- Made offline error less agressive</dd>
 		</dl> 
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.2", "true");
+		window.localStorage.setItem("notice-version0.3", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning
@@ -109,12 +123,15 @@ function showNotices(){
 	`
 	document.getElementById("notice-window-container").hidden = false;
 	console.log(platform);
+	if (platform == "pwa"){
+		document.getElementById("settings-warning").hidden = false;
+	}
 }
 
 // Check the version of Atmos being run
 function getPlatform(){
 	var platform = "unknown"
-	if (Capacitor.getPlatform() == "web"){
+	if (cordova.platformId == "browser"){
 		// Running either electron version or online version
 		if (window && window.process && window.process.type){
 			console.log("Atmos Electron Version")
@@ -126,7 +143,7 @@ function getPlatform(){
 		}
 	}
 	else{
-		if (Capacitor.getPlatform() == "electron"){
+		if (cordova.platformId == "electron"){
 			if (navigator.platform.indexOf("Win") == 0){
 				console.log("Atmos for Windows")
 				platform = "desktop-windows"
@@ -142,7 +159,7 @@ function getPlatform(){
 		}
 		else{
 			console.log("Atmos Mobile Version")
-			platform = Capacitor.getPlatform();
+			platform = cordova.getPlatform();
 		}
 	}
 	return platform;
@@ -253,7 +270,8 @@ function refreshLocations(){
 		document.getElementById("location-data").innerHTML = "";
 		var a = 0;
 		while (a < nomLocations.length){
-			var alertStatus = getStatus(nomLocations[a]);
+			var fullStatus = getStatus(nomLocations[a]);
+			var alertStatus = fullStatus[0];
 			var image = "sunny"
 			var hourly = getHourlyForecast(nomToWeatherGrid(nomLocations[a]));
 			if (!hourly[0]){
@@ -263,6 +281,7 @@ function refreshLocations(){
 			}
 			else{
 				var sfor = hourly[0][0]["shortForecast"].toLowerCase();
+				var info = hourly[0][0]["temperature"] + " F - " + hourly[0][0]["shortForecast"];
 				if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
 					image = "rainy";
 				}
@@ -275,7 +294,16 @@ function refreshLocations(){
 				else if (sfor.includes("cloud")){
 					image = "cloudy";
 				}
-				var info = hourly[0][0]["temperature"] + " F - " + hourly[0][0]["shortForecast"];
+				if (alertStatus == "warning"){
+					image = "warning";
+					info = fullStatus[1].toString() + " warning(s) and " + fullStatus[2].toString() + " watche(s)";
+				}
+				if (alertStatus == "watch"){
+					info = fullStatus[2].toString() + " watche(s)";
+				}
+				if (alertStatus == "other"){
+					info = "Weather statements in effect";
+				}
 				var theDiv = '<div class="location ' + alertStatus + '" onclick="navTo(\'locdat-' + nomLocationNames[a] + '-' + a.toString() + '\')"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>' + info + '&emsp;(Tap for more info.)</h3></div></div><br>';
 				document.getElementById("location-main").innerHTML += theDiv;
 				document.getElementById("location-data").innerHTML += "<div id='tab-locdat-" + nomLocationNames[a] + '-' + a.toString() + "' class='tab-div' hidden><h1>" + nomLocationNames[a] + "</h1></div>";
@@ -300,10 +328,20 @@ function refreshLocations(){
 // Code to run when a page is navigated to
 function navCode(screenTo){
 	if (screenTo == "locations"){
-		setTimeout(refreshLocations, 0);
+		setTimeout(refreshLocations, 10);
 	}
 	if (screenTo.includes("locdat-")){
 		loadMoreInfo(screenTo);
+	}
+	if (screenTo == "alerts"){
+		setTimeout(refreshAlerts, 10);
+	}
+	if (screenTo == "settings"){
+		refreshSettings();
+		setTimeout(keepSaving, 10);
+	}
+	if (screenAt == "settings"){
+		saveSettings();
 	}
 }
 
@@ -332,11 +370,43 @@ function loadMoreInfo(navName){
 		image = "cloudy";
 	}
 	var generatedCode;
+	var activeAlertInfo = getWeatherAlertsForNom(nomObj)[0];
+	var fullStatus = getStatus(nomObj);
 	generatedCode = "<h1>" + nomName + "</h1><br>";
-	// Bar at the top of page
-	generatedCode += '<div style="margin-right:20px;"><div class="location ' + getStatus(nomObj) + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
-	var longHourForecast = "<h1>Hourly Forecast</h1>";
+	// Bars at the top of page
+	generatedCode += '<div style="margin-right:20px;">'
+	// Weather Alert Bar
+	var theWarnings = "";
+	var b = 0;
+	while (b < activeAlertInfo.length){
+		theWarnings += "<a href='#' style='color:white;' onclick='loadAlert(\"" + index.toString() + "-" + b +  "\")'>" + activeAlertInfo[b]["properties"]["event"] + "</a>&emsp;"
+		b++;
+	}
+	
+	if (fullStatus[0] == "warning"){
+		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>This location has active warnings!</h1><h3>' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+	}
+	if (fullStatus[0] == "watch"){
+		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>This location has active watches.</h1><h3>' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+	}
+	if (fullStatus[0] == "other"){
+		theWarnings = theWarnings.replaceAll(",", ", ")
+		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>This location has active weather statements.</h1><h3>' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+	}
+	// Temperature Bar
+	generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 	var a = 0;
+	// List alert details if any active alerts
+	var longHourForecast = "<h1>Hourly Forecast</h1>";
+//	if (activeAlertInfo.length > 0){
+//		generatedCode += '<h1>Active Weather Alerts</h1>';
+//		while (a < activeAlertInfo.length){
+//			generatedCode += '<h2>' + activeAlertInfo[a]["properties"]["event"] + "</h2>"
+//			generatedCode += '<h4>' + activeAlertInfo[a]["properties"]["description"].replaceAll("\n\n", "<br><br>").replaceAll("\n", " ") + "</h4><br>"
+//			a++;
+//		}
+//	}
+	a = 0;
 	var forecastTime;
 	var AMPM;
 	while (a < 12){
@@ -397,14 +467,58 @@ function loadMoreInfo(navName){
 	
 }
 
-// Check the status of a location for CSS - TODO
+// Check if a location is under any watches, warnings, etc.
 function getStatus(nomObj){
-	return "noalerts";
+	var warnings = 0;
+	var watches = 0;
+	var other = 0;
+	var weatherAlerts = getWeatherAlertsForNom(nomObj);
+	weatherAlerts = weatherAlerts[0];
+	var a = 0;
+	var warningsList = [];
+	var watchesList = [];
+	var otherList = [];
+	var statList = [];
+	// Count the number of watches and warnings
+	while (a < weatherAlerts.length){
+		console.log(weatherAlerts[a]["properties"]["event"])
+		if (weatherAlerts[a]["properties"]["event"].toLowerCase().includes("watch")){
+			watchesList.push(weatherAlerts[a]["properties"]["event"]);
+			watches++;
+		}
+		else if (weatherAlerts[a]["properties"]["event"].toLowerCase().includes("warning")){
+			warningsList.push(weatherAlerts[a]["properties"]["event"]);
+			warnings++;
+		}
+		else{
+			other++;
+			otherList.push(weatherAlerts[a]["properties"]["event"]);
+		}
+		a++;
+	}
+	statList = warningsList;
+	statList = statList.concat(watchesList);
+	statList = statList.concat(otherList);
+	if (warnings > 0){
+		return ["warning", warnings, watches, other, statList];
+	}
+	else if (watches > 0){
+		return ["watch", warnings, watches, other, statList];
+	}
+	else if (other > 0){
+		return ["other", warnings, watches, other, statList];
+	}
+	else{
+		return ["noalerts", warnings, watches, other, statList];
+	}
 }
 
-// Sync files - TODO
+// Sync files
 function syncFiles(){
-	console.log("not done yet")
+	if (getPlatform() == "android"){
+		saveDataToFile();
+	}
+	
 }
 
 // Removes a location from the list observed
@@ -436,17 +550,25 @@ function getCurrentLocation(){
 	}
 }
 
+// Gets the current location, the passes to function
+function getLocationWithFunction(success, error){
+	if (navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(success, error);
+	}
+	else{
+		console.log("Geolocation is not available.")
+	}
+}
+
 // Refreshes the current location information
 function refreshCurrentLocation(){
 	if (locationEnabled){
 		var time = new Date();
+		// Check if current location data more than two minutes old, if not grab from NWS api
 		if ((time.getTime() - lastLocationCheck) > 120*1000){
-			getCurrentLocation();
-			setTimeout(function(){
-				if (!currentLat){
-					document.getElementById("currentLocData").innerHTML = "Please allow location permission.";
-				}
-				else{
+			getLocationWithFunction(function(coordObj){
+					currentLat = coordObj.coords.latitude;
+					currentLong = coordObj.coords.longitude;
 					try{
 						var weatherGrid = JSONGet("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString());
 						var hourlyForecastLink = weatherGrid["properties"]["forecastHourly"]
@@ -455,13 +577,115 @@ function refreshCurrentLocation(){
 						var info = hourlyForecast["temperature"] + " F - " + hourlyForecast["shortForecast"];
 						document.getElementById("currentLocData").innerHTML = info;
 						document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
+						var theTime = new Date();
+						lastLocationCheck = theTime.getTime();
+						lastLocationInfo = info;
 					}
 					catch(err){
 						document.getElementById("currentLocData").innerHTML = "An error occurred.";
 						document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
 					}
-				}
-			}, 2000);
+				}, function(error){
+				document.getElementById("currentLocData").innerHTML = "Please allow location permission or disable this in app settings.";
+			}
+			);
+		}
+		else{
+			document.getElementById("currentLocData").innerHTML = lastLocationInfo;
+			document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
 		}
 	}
+}
+
+// Refreshes the alerts tab
+function refreshAlerts(){
+	checkIfOldAlerts()
+	var currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
+	var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
+	var a = 0;
+	var generatedCode = "";
+	while (a < currentAlerts.length){
+		if (currentAlerts[a] != null){
+			generatedCode += "<h2>" + currentAlerts[a]["properties"]["event"] + "</h2>"
+			generatedCode += "<h4>" + currentAlerts[a]["properties"]["headline"] + "</h4>"
+			generatedCode += "<h4>" + currentAlerts[a]["properties"]["areaDesc"] + "</h4>"
+			if (currentAlerts[a]["properties"]["instruction"] != null){
+				generatedCode += "<h4>" + currentAlerts[a]["properties"]["instruction"] + "</h4><br>";
+			}
+		}
+		a++;
+	}
+	document.getElementById("active-alert-list").innerHTML = generatedCode;
+	generatedCode = "";
+	a = 0;
+	while (a < oldAlerts.length){
+		if (oldAlerts[a] != null){
+			generatedCode += "<h2>" + oldAlerts[a]["properties"]["event"] + "</h2>"
+			generatedCode += "<h4>" + oldAlerts[a]["properties"]["headline"] + "</h4>"
+			generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
+		}
+		a++;
+	}
+	document.getElementById("old-alert-list").innerHTML = generatedCode;
+}
+
+// Loads the information for an alert and displays it
+function loadAlert(alertID){
+	clearMap();
+	var theSplit = alertID.split("-");
+	var locationIndex = parseInt(theSplit[0]);
+	var alertIndex = parseInt(theSplit[1]);
+	var theLocation = JSON.parse(localStorage.getItem("weather-locations"))[locationIndex];
+	console.log(locationIndex)
+	console.log(theLocation)
+	//map.setView([parseInt(theLocation["lat"]), parseInt(theLocation["lon"])])
+	var theAlert = getWeatherAlertsForNom(theLocation);
+	theAlert = theAlert[0][alertIndex];
+	var alertBoundries = getPolyBoundries(theAlert, nomToWeatherGrid(theLocation));
+	document.getElementById("weather-alert-title").innerHTML = theAlert["properties"]["headline"];
+	var divCode = "<h2>Areas Affected</h2>"
+	divCode += "<h3>" + theAlert["properties"]["areaDesc"] + "</h3>"
+	if (theAlert["properties"]["instruction"] != null){
+		divCode += "<h2>Instructions</h2>"
+		divCode += "<h3>" + theAlert["properties"]["instruction"] + "</h3>"
+	}
+	divCode += "<h2>Details</h2>"
+	var theDetails = theAlert["properties"]["description"]
+	theDetails = theDetails.replaceAll("\n\n", "<br><br>");
+	theDetails = theDetails.replaceAll("\n", " ");
+	theDetails = theDetails.replaceAll("* ", "");
+	theDetails = theDetails.replaceAll("...", " - ");
+	theDetails = theDetails.replaceAll("- -", "-")
+	divCode += "<h3>" + theDetails + "</h3>"
+	document.getElementById("alert-details").innerHTML = divCode;
+	if (theAlert["properties"]["event"].toLowerCase().includes("warning")){
+		polygon = L.geoJSON(alertBoundries["geometry"], {style:{"color":"red"}}).addTo(map);
+	}
+	else if (theAlert["properties"]["event"].toLowerCase().includes("watch")){
+		polygon = L.geoJSON(alertBoundries["geometry"], {style:{"color":"yellow"}}).addTo(map);
+	}
+	else{
+		polygon = L.geoJSON(alertBoundries["geometry"]).addTo(map);
+	}
+	navTo("alert-display")
+	setTimeout(function(){
+		map.invalidateSize(true)
+	}, 2000)
+	setTimeout(function(){
+		map.fitBounds(polygon.getBounds());
+	}, 6000);
+}
+
+// Clears polygons from the LeafletJS alert map
+function clearMap() {
+    for(i in map._layers) {
+        if(map._layers[i]._path != undefined) {
+            try {
+                map.removeLayer(map._layers[i]);
+            }
+            catch(e) {
+                console.log("problem with " + e + map._layers[i]);
+            }
+        }
+    }
 }

@@ -8,6 +8,9 @@
     <feature name="Geolocation">
         <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
     </feature>
+    <feature name="NativeStorage">
+        <param name="android-package" value="NativeStorage" />
+    </feature>
     <name>Atmos Weather</name>
     <description>A lightweight weather app for alerts and forecasts.</description>
     <author email="none" href="https://cordova.apache.org">

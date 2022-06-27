@@ -17,7 +17,8 @@
     "cordova-browser": "^6.0.0",
     "cordova-electron": "^3.0.0",
     "cordova-plugin-file": "^7.0.0",
-    "cordova-plugin-geolocation": "^4.1.0"
+    "cordova-plugin-geolocation": "^4.1.0",
+    "cordova-plugin-nativestorage": "github:TheCocoaProject/cordova-plugin-nativestorage"
   },
   "cordova": {
     "platforms": [
@@ -29,7 +30,8 @@
       "cordova-plugin-file": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
-      }
+      },
+      "cordova-plugin-nativestorage": {}
     }
   }
 }

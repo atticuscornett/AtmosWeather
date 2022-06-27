@@ -4,8 +4,46 @@
     "uninstalled": []
   },
   "config_munge": {
-    "files": {}
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"NativeStorage\"><param name=\"browser-package\" value=\"NativeStorage\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
   },
-  "installed_plugins": {},
-  "dependent_plugins": {}
+  "installed_plugins": {
+    "cordova-plugin-nativestorage": {
+      "PACKAGE_NAME": "io.atticusc.atmosweather"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
+      "id": "cordova-plugin-nativestorage.mainHandle",
+      "pluginId": "cordova-plugin-nativestorage",
+      "clobbers": [
+        "NativeStorage"
+      ]
+    },
+    {
+      "file": "plugins/cordova-plugin-nativestorage/www/LocalStorageHandle.js",
+      "id": "cordova-plugin-nativestorage.LocalStorageHandle",
+      "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
+      "id": "cordova-plugin-nativestorage.NativeStorageError",
+      "pluginId": "cordova-plugin-nativestorage"
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-plugin-nativestorage": "2.3.2"
+  }
 }
