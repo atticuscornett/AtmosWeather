@@ -24,6 +24,10 @@ if (cordovaConfig.IS_GRADLE_PLUGIN_KOTLIN_ENABLED) {
     apply plugin: 'kotlin-android-extensions'
 }
 
+dependencies {
+    implementation 'com.google.code.gson:gson:2.9.0';
+}
+
 buildscript {
     apply from: '../CordovaLib/cordova.gradle'
 
