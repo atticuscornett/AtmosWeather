@@ -25,7 +25,7 @@ public class InformWeather {
             jsonObject = new JSONObject(settings.getString("settings", ""));
             alertSound = jsonObject.getJSONObject("location-alerts").getString("default-alert");
             notificationSound = jsonObject.getJSONObject("location-alerts").getString("default-notification");
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
@@ -37,7 +37,7 @@ public class InformWeather {
         try{
             notificationSound = jsonObject.getJSONObject("per-location").getJSONObject(locationName).getJSONObject("location-alerts").getString("default-notification");
         }
-        catch (JSONException e){
+        catch (Exception e){
             System.out.println("Using default notification sound");
         }
         new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, notificationSound + "notification", context, R.drawable.lightning_icon, 2);
