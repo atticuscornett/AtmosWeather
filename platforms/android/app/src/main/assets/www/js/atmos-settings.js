@@ -308,6 +308,7 @@ function saveLocationSettings(){
 		a++;
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(allSettings));
+	syncFiles();
 }
 
 function keepSavingForLocation(){
