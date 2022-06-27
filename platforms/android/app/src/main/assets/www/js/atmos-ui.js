@@ -159,7 +159,7 @@ function getPlatform(){
 		}
 		else{
 			console.log("Atmos Mobile Version")
-			platform = cordova.getPlatform();
+			platform = device.platform;
 		}
 	}
 	return platform;
