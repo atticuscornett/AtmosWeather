@@ -162,7 +162,7 @@ function saveSettings(){
 function keepSaving(){
 	if (screenAt == "settings"){
 		saveSettings();
-		setTimeout(keepSaving, 100);
+		setTimeout(keepSaving, 250);
 	}
 }
 

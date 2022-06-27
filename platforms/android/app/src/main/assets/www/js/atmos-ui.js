@@ -517,6 +517,7 @@ function getStatus(nomObj){
 // Sync with native code
 function syncFiles(){
 	NativeStorage.setItem("settings", localStorage.getItem("atmos-settings"), function(obj){console.log("Saved settings natively")}, function(obj){console.log(error.exception);console.log(error.code);});
+    
 }
 
 // Removes a location from the list observed

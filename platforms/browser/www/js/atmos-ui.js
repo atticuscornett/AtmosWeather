@@ -159,9 +159,10 @@ function getPlatform(){
 		}
 		else{
 			console.log("Atmos Mobile Version")
-			platform = cordova.getPlatform();
+			platform = device.platform;
 		}
 	}
+	window.platform = platform;
 	return platform;
 }
 
@@ -515,9 +516,6 @@ function getStatus(nomObj){
 
 // Sync with native code
 function syncFiles(){
-	if (getPlatform() == "android"){
-		saveDataToFile();
-	}
 	NativeStorage.setItem("settings", localStorage.getItem("atmos-settings"), function(obj){console.log("Saved settings natively")}, function(obj){console.log(error.exception);console.log(error.code);});
 }
 
