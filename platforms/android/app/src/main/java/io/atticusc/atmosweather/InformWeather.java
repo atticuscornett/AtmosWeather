@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class InformWeather {
     public InformWeather(String eventTitle, String locationName, String eventInfo, Context context){
@@ -26,13 +27,15 @@ public class InformWeather {
             jsonObject = new JSONObject(settings.getString("settings", defaultSettings));
             alertSound = jsonObject.getJSONObject("location-alerts").getString("default-alert");
             notificationSound = jsonObject.getJSONObject("location-alerts").getString("default-notification");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         try {
             jsonObject = new JSONObject(settings.getString("settings", defaultSettings));
             alertSound = jsonObject.getJSONObject("per-location").getJSONObject(locationName).getJSONObject("location-alerts").getString("default-alert");
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             System.out.println("Using default alert sound");
         }
         try{
@@ -43,14 +46,17 @@ public class InformWeather {
         }
         String jsonKey = eventTitle.toLowerCase(Locale.ROOT).replaceAll(" ", "-");
         String behavior = "soundnotification";
+        int iconID = R.drawable.lightning_icon;
         try {
             if (jsonKey.contains("warning")){
                 jsonKey = jsonKey.replace("-warning", "");
                 behavior = jsonObject.getJSONObject("alert-types").getJSONObject("warnings").getString(jsonKey);
+                iconID = R.drawable.warning_icon;
             }
             else if (jsonKey.contains("watch")){
                 jsonKey = jsonKey.replace("-warning", "");
                 behavior = jsonObject.getJSONObject("alert-types").getJSONObject("watches").getString(jsonKey);
+                iconID = R.drawable.watch_icon;
             }
             else{
                 jsonKey = jsonKey.replace("-advisory", "");
@@ -67,7 +73,7 @@ public class InformWeather {
                 behavior = jsonObject.getJSONObject("per-location").getJSONObject(locationName).getJSONObject("alert-types").getJSONObject("warnings").getString(jsonKey);
             }
             else if (jsonKey.contains("watch")){
-                jsonKey = jsonKey.replace("-warning", "");
+                jsonKey = jsonKey.replace("-watch", "");
                 behavior = jsonObject.getJSONObject("per-location").getJSONObject(locationName).getJSONObject("alert-types").getJSONObject("watches").getString(jsonKey);
             }
             else{
@@ -78,8 +84,18 @@ public class InformWeather {
         catch (Exception e){
             System.out.println("No location specific setting set.");
         }
-        System.out.println("Behavior: " + behavior);
-        new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, notificationSound + "notification", context, R.drawable.lightning_icon, 2);
-        System.out.println("Test obj: " + notificationSound);
+        if (behavior.contains("silentnotification")){
+            new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, "silentnotification", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000+1));
+        }
+        else if (behavior.contains("soundnotification")){
+            new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, notificationSound + "notification", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+        }
+        else if (behavior.contains("alert")){
+            new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+        }
+        else if (behavior.contains("alertmove")){
+            //TODO
+            System.out.println("welp");
+        }
     }
 }

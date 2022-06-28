@@ -54,13 +54,15 @@ public class SimpleNotification {
     public void PrepareNotificationChannel(String channelID, String channelName, Context context){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationManager man = context.getSystemService(NotificationManager.class);
-            try{
-                man.deleteNotificationChannel(channelID);
-            }
-            catch (Exception e){
-                //Ignore
-            }
             NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+            man.createNotificationChannel(channel);
+        }
+    }
+
+    public void PrepareSilentNotificationChannel(String channelID, String channelName, Context context){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationManager man = context.getSystemService(NotificationManager.class);
+            NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_LOW);
             man.createNotificationChannel(channel);
         }
     }
@@ -68,12 +70,6 @@ public class SimpleNotification {
     public void PrepareNotificationChannelWithAudio(String channelID, String channelName, Context context, Uri audioUri){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationManager man = context.getSystemService(NotificationManager.class);
-            try{
-                man.deleteNotificationChannel(channelID);
-            }
-            catch (Exception e){
-                //Ignore
-            }
             NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
             AudioAttributes audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build();
             channel.setSound(audioUri, audioAttributes);
