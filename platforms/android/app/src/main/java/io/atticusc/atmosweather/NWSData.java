@@ -25,7 +25,7 @@ import java.util.Map;
 public class NWSData {
     public void GetAlerts(String lat, String lon, String locationName, Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.weather.gov/alerts?point=" + lat + "," + lon,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.weather.gov/alerts/active?point=" + lat + "," + lon,
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
                         try {
