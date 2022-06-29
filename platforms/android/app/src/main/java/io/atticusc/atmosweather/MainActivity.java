@@ -78,7 +78,7 @@ public class MainActivity extends CordovaActivity
         //new InformWeather("Severe Thunderstorm Warning", "Springville, St. Clair County, Alabama", "testing", getApplicationContext());
         //new SimpleNotification().NotifyInsistently("I am annoying.", sharedPreferences.getString("settings", "null"), "SimpleBeepAlarm", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);
 
-        new NWSData().GetAlerts("33.7751", "-86.4717", "Springville, St. Clair County, Alabama", this);
+        new NWSData().GetAlerts("41.1238873", "-100.7654232", "North Platte, Lincoln County, Nebraska", this);
 
 // Request a string response from the provided URL.
 
