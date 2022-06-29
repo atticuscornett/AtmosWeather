@@ -73,6 +73,8 @@ public class SimpleNotification {
             NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
             AudioAttributes audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build();
             channel.setSound(audioUri, audioAttributes);
+            channel.enableLights(true);
+            channel.enableVibration(true);
             man.createNotificationChannel(channel);
         }
     }
