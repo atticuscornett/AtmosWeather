@@ -19,9 +19,12 @@
 
 package io.atticusc.atmosweather;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
@@ -48,6 +51,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,11 +78,19 @@ public class MainActivity extends CordovaActivity
         new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesalert", "Alternating Tone Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.alternatingtonealarm));
         new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesnotification", "Alternating Tone Notification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.alternatingtonenotification));
         new SimpleNotification().PrepareSilentNotificationChannel("silentnotification", "Silent Notifications", getApplicationContext());
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", 0);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
         //new InformWeather("Severe Thunderstorm Warning", "Springville, St. Clair County, Alabama", "testing", getApplicationContext());
         //new SimpleNotification().NotifyInsistently("I am annoying.", sharedPreferences.getString("settings", "null"), "SimpleBeepAlarm", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);
-
-        new NWSData().GetAlerts("41.1238873", "-100.7654232", "North Platte, Lincoln County, Nebraska", this);
+        // new NWSData().GetAlerts("44.490817", "-103.85937", "North Platte, Lincoln County, Nebraska", this);
+        if (sharedPreferences.getBoolean("firstrun", true)){
+            System.out.println("First run");
+            sharedPreferences.edit().putBoolean("firstrun", false).commit();
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            Intent intentA = new Intent(this, BackgroundService.class);
+            PendingIntent pentent = PendingIntent.getBroadcast(this, 1, intentA, 0);
+            Calendar c = Calendar.getInstance();
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+        }
 
 // Request a string response from the provided URL.
 

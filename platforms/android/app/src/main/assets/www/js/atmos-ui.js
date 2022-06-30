@@ -324,6 +324,7 @@ function refreshLocations(){
 	if (locationEnabled){
 		refreshCurrentLocation();
 	}
+	syncFiles();
 }
 
 // Code to run when a page is navigated to

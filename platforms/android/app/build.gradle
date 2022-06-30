@@ -26,6 +26,7 @@ if (cordovaConfig.IS_GRADLE_PLUGIN_KOTLIN_ENABLED) {
 
 dependencies {
     implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.google.code.gson:gson:2.9.0'
     compile 'org.apache.commons:commons-lang3:3.12.0'
 }
 
