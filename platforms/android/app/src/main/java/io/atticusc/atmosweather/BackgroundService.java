@@ -21,7 +21,7 @@ public class BackgroundService extends BroadcastReceiver {
             JSONArray locationJSON = new JSONArray(weatherLocations.getString("locations", "[]"));
             JSONArray locationNameJSON = new JSONArray(weatherLocations.getString("location-names", "[]"));
             Integer checkLocation = weatherLocations.getInt("nextcheck", 0);
-            if (checkLocation == locationJSON.length()){
+            if (checkLocation >= locationJSON.length()){
                 checkLocation = 0;
             }
             if (locationJSON.length() > 0){

@@ -82,7 +82,7 @@ public class MainActivity extends CordovaActivity
         //new InformWeather("Severe Thunderstorm Warning", "Springville, St. Clair County, Alabama", "testing", getApplicationContext());
         //new SimpleNotification().NotifyInsistently("I am annoying.", sharedPreferences.getString("settings", "null"), "SimpleBeepAlarm", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);
         // new NWSData().GetAlerts("44.490817", "-103.85937", "North Platte, Lincoln County, Nebraska", this);
-        if (sharedPreferences.getBoolean("firstrun", true)){
+        if (sharedPreferences.getBoolean("firstrun", true) || true){
             System.out.println("First run");
             sharedPreferences.edit().putBoolean("firstrun", false).commit();
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);

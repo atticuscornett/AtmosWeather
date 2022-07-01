@@ -22,7 +22,11 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.net.ConnectException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +63,59 @@ public class NWSData {
                             Type objType = new TypeToken<ArrayList<String>>(){}.getType();
                             String s = gson.toJson(stringArray, objType);
                             sharedPreferences.edit().putString("alerted", s).commit();
+                            try{
+                                JSONObject get = new JSONObject(sharedPreferences.getString("location-cache", ""));
+                                get = new JSONObject(get.getString(locationName));
+                                get = get.getJSONObject("properties");
+                                String forecastLink = get.getString("forecast");
+                                get = new JSONObject(sharedPreferences.getString("settings", ""));
+                                get = get.getJSONObject("notifications");
+                                Boolean severe = get.getBoolean("severe-future");
+                                Boolean rain = get.getBoolean("rain-future");
+                                try{
+                                    get = new JSONObject(sharedPreferences.getString("settings", ""));
+                                    get = get.getJSONObject("per-location").getJSONObject(locationName);
+                                    get = get.getJSONObject("notifications");
+                                    severe = get.getBoolean("severe-future");
+                                    rain = get.getBoolean("rain-future");
+                                }
+                                catch (Exception e){
+
+                                }
+                                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                                Date date = new Date();
+                                RequestQueue queue2 = Volley.newRequestQueue(context);
+                                StringRequest stringRequest2 = new StringRequest(Request.Method.GET, forecastLink,
+                                        new Response.Listener<String>() {
+                                            public void onResponse(String response) {
+                                                System.out.println(response);
+
+                                            }
+                                        }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                    }
+                                }){@Override
+                                public Map<String, String> getHeaders(){
+                                    Map<String, String> headers = new HashMap<String, String>();
+                                    headers.put("User-agent", "Atmos Weather Background Service");
+                                    return headers;
+                                }};
+                                if (!formatter.format(date).equals(sharedPreferences.getString(locationName + "-lastNotif", ""))){
+                                    if (severe || rain){
+                                        queue2.add(stringRequest2);
+                                        System.out.println("Daily notif for " + locationName);
+                                        sharedPreferences.edit().putString(locationName + "-lastNotif", formatter.format(date)).commit();
+                                    }
+
+
+                                }
+                            }
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
