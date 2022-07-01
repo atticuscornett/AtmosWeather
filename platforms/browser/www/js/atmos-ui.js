@@ -92,21 +92,23 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	
-	if (!window.localStorage.getItem("notice-version0.3")){
+	if (!window.localStorage.getItem("notice-version0.5")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos v0.3 is here!</h2>
+		<h2>Atmos v0.5 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Alerts Page</dd>
-			<dd>- LeafletJS generated alert maps</dd>
-			<dd>- Current location information</dd>
+  			<dd>- Android version under development</dd>
+			<dd>- Ultra-customizable settings page for complete control</dd>
+			<dd>- Android boot service and notifications</dd>
 			<dd>- Alerts display on locations page</dd>
 			<dd>- Information on alerts added.</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Caching problems with hourly and full forecast fixed</dd>
-			<dd>- Added more error handling to forecast and alert systems</dd>
-			<dd>- Made offline error less agressive</dd>
+  			<dd>- BackgroundService on Android can now access up to date data.</dd>
+			<dd>- Added Cordova Plugins: NativeStorage</dd>
+			<dd>- Added Java Dependencies: Gson, Volley, StringUtils</dd>
+			<dt>Oh, and one more thing...</dt>
+			<dd>Github repo created, allowing for easier development across devices and constant code backups.</dd>
 		</dl> 
 		<br><br>
 		`
@@ -324,6 +326,7 @@ function refreshLocations(){
 	if (locationEnabled){
 		refreshCurrentLocation();
 	}
+	syncFiles();
 }
 
 // Code to run when a page is navigated to
