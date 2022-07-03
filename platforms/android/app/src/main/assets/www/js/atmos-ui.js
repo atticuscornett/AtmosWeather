@@ -111,7 +111,7 @@ function showNotices(){
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.3", "true");
+		window.localStorage.setItem("notice-version0.5", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning

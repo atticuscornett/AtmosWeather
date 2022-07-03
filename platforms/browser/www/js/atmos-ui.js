@@ -101,8 +101,6 @@ function showNotices(){
   			<dd>- Android version under development</dd>
 			<dd>- Ultra-customizable settings page for complete control</dd>
 			<dd>- Android boot service and notifications</dd>
-			<dd>- Alerts display on locations page</dd>
-			<dd>- Information on alerts added.</dd>
   			<dt>Bug Fixes Everywhere</dt>
   			<dd>- BackgroundService on Android can now access up to date data.</dd>
 			<dd>- Added Cordova Plugins: NativeStorage</dd>
@@ -113,7 +111,7 @@ function showNotices(){
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.3", "true");
+		window.localStorage.setItem("notice-version0.5", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning

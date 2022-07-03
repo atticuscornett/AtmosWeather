@@ -28,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class NWSData {
@@ -85,10 +86,39 @@ public class NWSData {
                                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                                 Date date = new Date();
                                 RequestQueue queue2 = Volley.newRequestQueue(context);
+                                Boolean finalSevere = severe;
+                                Boolean finalRain = rain;
                                 StringRequest stringRequest2 = new StringRequest(Request.Method.GET, forecastLink,
                                         new Response.Listener<String>() {
                                             public void onResponse(String response) {
-                                                System.out.println(response);
+                                                try {
+                                                    // Check settings and give notification if weather trigger words detected
+                                                    JSONObject jsonObject1 = new JSONObject(response);
+                                                    jsonObject1 = jsonObject1.getJSONObject("properties");
+                                                    JSONArray jsonArray1 = jsonObject1.getJSONArray("periods");
+                                                    jsonObject1 = jsonArray1.getJSONObject(0);
+                                                    String longForecast = jsonObject1.getString("detailedForecast");
+                                                    jsonObject1 = jsonArray1.getJSONObject(1);
+                                                    longForecast += jsonObject1.getString("detailedForecast");
+                                                    Boolean severeIndicate = false;
+                                                    Boolean rainIndicate = false;
+                                                    response = longForecast.toLowerCase(Locale.ROOT);
+                                                    if (response.contains("severe") || response.contains("tropical storm") || response.contains("damage") || response.contains("damaging") || response.contains("hurricane") || response.contains("tornado")){
+                                                        severeIndicate = true;
+                                                    }
+                                                    if (response.contains("storm") || response.contains("rain")){
+                                                        rainIndicate = true;
+                                                    }
+                                                    if (finalSevere && severeIndicate){
+                                                        new SimpleNotification().Notify("Future Severe Weather Expected for " + locationName, jsonObject1.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
+                                                    }
+                                                    else if (rainIndicate && finalRain){
+                                                        new SimpleNotification().Notify("Future Rain or Storms Expected for " + locationName, jsonObject1.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
+                                                    }
+                                                }
+                                                catch (Exception e){
+
+                                                }
 
                                             }
                                         }, new Response.ErrorListener() {
