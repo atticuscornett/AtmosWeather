@@ -1,0 +1,16 @@
+directories:
+  output: C:\Users\attic\OneDrive\Documents\GitHub\Cordova\AtmosWeather\AtmosWeather\platforms\electron\build
+  buildResources: C:\Users\attic\OneDrive\Documents\GitHub\Cordova\AtmosWeather\AtmosWeather\platforms\electron\build-res
+  app: C:\Users\attic\OneDrive\Documents\GitHub\Cordova\AtmosWeather\AtmosWeather\platforms\electron\www
+appId: io.atticusc.atmosweather
+productName: Atmos Weather
+electronVersion: 14.0.0
+electronDownload:
+  version: 14.0.0
+win:
+  icon: installer.png
+  target:
+    - target: nsis
+      arch:
+        - x64
+files: []

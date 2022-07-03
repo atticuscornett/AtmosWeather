@@ -92,26 +92,26 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	
-	if (!window.localStorage.getItem("notice-version0.3")){
+	if (!window.localStorage.getItem("notice-version0.5")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos v0.3 is here!</h2>
+		<h2>Atmos v0.5 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Alerts Page</dd>
-			<dd>- LeafletJS generated alert maps</dd>
-			<dd>- Current location information</dd>
-			<dd>- Alerts display on locations page</dd>
-			<dd>- Information on alerts added.</dd>
+  			<dd>- Android version under development</dd>
+			<dd>- Ultra-customizable settings page for complete control</dd>
+			<dd>- Android boot service and notifications</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Caching problems with hourly and full forecast fixed</dd>
-			<dd>- Added more error handling to forecast and alert systems</dd>
-			<dd>- Made offline error less agressive</dd>
+  			<dd>- BackgroundService on Android can now access up to date data.</dd>
+			<dd>- Added Cordova Plugins: NativeStorage</dd>
+			<dd>- Added Java Dependencies: Gson, Volley, StringUtils</dd>
+			<dt>Oh, and one more thing...</dt>
+			<dd>Github repo created, allowing for easier development across devices and constant code backups.</dd>
 		</dl> 
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.3", "true");
+		window.localStorage.setItem("notice-version0.5", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning
@@ -159,9 +159,10 @@ function getPlatform(){
 		}
 		else{
 			console.log("Atmos Mobile Version")
-			platform = cordova.getPlatform();
+			platform = device.platform;
 		}
 	}
+	window.platform = platform;
 	return platform;
 }
 
@@ -323,6 +324,7 @@ function refreshLocations(){
 	if (locationEnabled){
 		refreshCurrentLocation();
 	}
+	syncFiles();
 }
 
 // Code to run when a page is navigated to
@@ -513,12 +515,14 @@ function getStatus(nomObj){
 	}
 }
 
-// Sync files
+// Sync with native code
 function syncFiles(){
-	if (getPlatform() == "android"){
-		saveDataToFile();
-	}
-	
+	if (getPlatform() != "desktop-windows"){
+		NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){console.log("Saved settings natively")}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){console.log("Saved locations natively")}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){console.log("Saved location names natively")}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){console.log("Saved location cache natively")}, function(obj){console.log(error.exception);console.log(error.code);});
+	}	
 }
 
 // Removes a location from the list observed
