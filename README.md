@@ -1,4 +1,4 @@
-![Atmos Weather](https://raw.githubusercontent.com/atticuscornett/atmos-weather/main/logo.svg?token=GHSAT0AAAAAABT7DDRGNROFJ7HIN74GZKMKYUNH64Q)
+![Atmos Weather](https://raw.githubusercontent.com/atticuscornett/AtmosWeather/main/logo.svg)
 ## The lightweight app for weather forecasts and alerts.
 (This app was originally created for the 2022 Congressional App Challenge.)
 
