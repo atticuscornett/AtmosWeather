@@ -16,6 +16,9 @@
     },
     "cordova-plugin-nativestorage": {
       "PACKAGE_NAME": "io.atticusc.atmosweather"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.atticusc.atmosweather"
     }
   },
   "dependent_plugins": {},
@@ -216,11 +219,20 @@
       "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
       "id": "cordova-plugin-nativestorage.NativeStorageError",
       "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "id": "cordova-plugin-device.device",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-file": "7.0.0",
     "cordova-plugin-geolocation": "4.1.0",
-    "cordova-plugin-nativestorage": "2.3.2"
+    "cordova-plugin-nativestorage": "2.3.2",
+    "cordova-plugin-device": "2.1.0"
   }
 }

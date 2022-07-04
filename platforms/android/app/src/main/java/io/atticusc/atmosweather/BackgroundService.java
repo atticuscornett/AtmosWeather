@@ -1,23 +1,61 @@
 package io.atticusc.atmosweather;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.concurrent.Executor;
 
 public class BackgroundService extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         SharedPreferences weatherLocations = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
         try {
+            int getLocationNow = weatherLocations.getInt("locationchecktime", 0);
+            System.out.println(getLocationNow);
+            if (getLocationNow == 0){
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    fusedLocationClient.getLastLocation()
+                            .addOnSuccessListener((Executor) ContextCompat.getMainExecutor(context), new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    // Got last known location. In some rare situations this can be null.
+                                    if (location != null) {
+                                        System.out.println("Longitude: ");
+                                        System.out.println(location.getLongitude());
+                                        System.out.println("Latitude: ");
+                                        System.out.println(location.getLatitude());
+                                    }
+                                }
+                            });
+                }
+            }
+            getLocationNow ++;
+            if (getLocationNow == 5){
+                getLocationNow = 0;
+            }
+            weatherLocations.edit().putInt("locationchecktime", getLocationNow).commit();
             JSONArray locationJSON = new JSONArray(weatherLocations.getString("locations", "[]"));
             JSONArray locationNameJSON = new JSONArray(weatherLocations.getString("location-names", "[]"));
             Integer checkLocation = weatherLocations.getInt("nextcheck", 0);

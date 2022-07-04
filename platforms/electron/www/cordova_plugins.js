@@ -196,6 +196,14 @@ cordova.define('cordova/plugin_list', function (require, exports, module) {
         "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
         "id": "cordova-plugin-nativestorage.NativeStorageError",
         "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "id": "cordova-plugin-device.device",
+        "pluginId": "cordova-plugin-device",
+        "clobbers": [
+            "device"
+        ]
     }
 ];
 
@@ -204,7 +212,8 @@ cordova.define('cordova/plugin_list', function (require, exports, module) {
             {
     "cordova-plugin-file": "7.0.0",
     "cordova-plugin-geolocation": "4.1.0",
-    "cordova-plugin-nativestorage": "2.3.2"
+    "cordova-plugin-nativestorage": "2.3.2",
+    "cordova-plugin-device": "2.1.0"
 }
             // BOTTOM OF METADATA
         });
