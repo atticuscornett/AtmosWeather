@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var PLATFORM_VERSION_BUILD_LABEL = '3.0.0';
+var PLATFORM_VERSION_BUILD_LABEL = '3.1.0';
 // file: src/scripts/require.js
 var require;
 var define;
@@ -885,7 +885,7 @@ function Config (xhr) {
 }
 
 function readConfig (success, error) {
-    var xhr;
+    let xhr; // eslint-disable-line prefer-const
 
     if (typeof config !== 'undefined') {
         success(config);
@@ -899,7 +899,7 @@ function readConfig (success, error) {
         }
     }
 
-    var xhrStatusChangeHandler = function () {
+    const xhrStatusChangeHandler = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200 || xhr.status === 304 || xhr.status === 0 /* file:// */) {
                 config = new Config(xhr);
@@ -926,7 +926,7 @@ function readConfig (success, error) {
  * Returns preference value or undefined if it does not exist.
  * @param {String} preferenceName Preference name to read */
 Config.prototype.getPreferenceValue = function getPreferenceValue (preferenceName) {
-    var preferenceItem = this.preferences && this.preferences.filter(function (item) {
+    const preferenceItem = this.preferences && this.preferences.filter(function (item) {
         return item.attributes.name && item.attributes.name.value === preferenceName;
     });
 
@@ -972,7 +972,7 @@ module.exports = function (success, fail, service, action, args) {
         args = args || [];
 
         if (proxy) {
-            var callbackId = service + cordova.callbackId++;
+            const callbackId = service + cordova.callbackId++;
 
             if (typeof success === 'function' || typeof fail === 'function') {
                 cordova.callbacks[callbackId] = { success: success, fail: fail };
@@ -980,9 +980,9 @@ module.exports = function (success, fail, service, action, args) {
             try {
                 // callbackOptions param represents additional optional parameters command could pass back, like keepCallback or
                 // custom callbackId, for example {callbackId: id, keepCallback: true, status: cordova.callbackStatus.JSON_EXCEPTION }
-                var onSuccess = function (result, callbackOptions) {
+                const onSuccess = function (result, callbackOptions) {
                     callbackOptions = callbackOptions || {};
-                    var callbackStatus;
+                    let callbackStatus;
                     // covering both undefined and null.
                     // strict null comparison was causing callbackStatus to be undefined
                     // and then no callback was called because of the check in cordova.callbackFromNative
@@ -999,9 +999,9 @@ module.exports = function (success, fail, service, action, args) {
                             keepCallback: callbackOptions.keepCallback || false
                         });
                 };
-                var onError = function (err, callbackOptions) {
+                const onError = function (err, callbackOptions) {
                     callbackOptions = callbackOptions || {};
-                    var callbackStatus;
+                    let callbackStatus;
                     // covering both undefined and null.
                     // strict null comparison was causing callbackStatus to be undefined
                     // and then no callback was called because of the check in cordova.callbackFromNative
@@ -1264,8 +1264,8 @@ module.exports = {
     cordovaVersion: '4.2.0', // cordova-js
 
     bootstrap: function () {
-        var modulemapper = require('cordova/modulemapper');
-        var channel = require('cordova/channel');
+        const modulemapper = require('cordova/modulemapper');
+        const channel = require('cordova/channel');
 
         modulemapper.clobbers('cordova/exec/proxy', 'cordova.commandProxy');
 

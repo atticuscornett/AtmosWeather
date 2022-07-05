@@ -15,7 +15,7 @@
   "devDependencies": {
     "cordova-android": "^10.1.2",
     "cordova-browser": "^6.0.0",
-    "cordova-electron": "^3.0.0",
+    "cordova-electron": "^3.1.0",
     "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-geolocation": "^4.1.0",
@@ -24,8 +24,8 @@
   "cordova": {
     "platforms": [
       "android",
-      "electron",
-      "browser"
+      "browser",
+      "electron"
     ],
     "plugins": {
       "cordova-plugin-file": {},

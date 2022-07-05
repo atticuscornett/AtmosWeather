@@ -4,9 +4,9 @@ directories:
   app: C:\Users\attic\OneDrive\Documents\GitHub\Cordova\AtmosWeather\AtmosWeather\platforms\electron\www
 appId: io.atticusc.atmosweather
 productName: Atmos Weather
-electronVersion: 14.0.0
+electronVersion: 14.2.9
 electronDownload:
-  version: 14.0.0
+  version: 14.2.9
 win:
   icon: installer.png
   target:

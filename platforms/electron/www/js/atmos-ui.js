@@ -519,12 +519,15 @@ function getStatus(nomObj){
 
 // Sync with native code
 function syncFiles(){
-	if (getPlatform() != "desktop-windows"){
+	if (!getPlatform().includes("desktop")){
 		NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){console.log("Saved settings natively")}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){console.log("Saved locations natively")}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){console.log("Saved location names natively")}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){console.log("Saved location cache natively")}, function(obj){console.log(error.exception);console.log(error.code);});
-	}	
+	}
+	else{
+		console.log("Electron Version")
+	}
 }
 
 // Removes a location from the list observed

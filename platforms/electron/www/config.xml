@@ -8,4 +8,6 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <icon src="res/icon/electron/app.png" target="app" />
+    <icon src="res/icon/electron/installer.png" target="installer" />
 </widget>

@@ -10,13 +10,13 @@
     "name": "Atticus Cornett",
     "email": "none"
   },
-  "dependencies": {
-    "cordova-plugin-device-electron": "file:../../../plugins/cordova-plugin-device/src/electron",
-    "electron-devtools-installer": "^3.2.0"
-  },
   "cordova": {
     "services": {
       "Device": "cordova-plugin-device-electron"
     }
+  },
+  "dependencies": {
+    "cordova-plugin-device-electron": "file:../../../plugins/cordova-plugin-device/src/electron",
+    "electron-devtools-installer": "^3.2.0"
   }
 }
