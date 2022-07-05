@@ -9,6 +9,7 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 	<platform name="android">
-        <icon src="res/android/xxxhdpi.png" density="xxxhdpi" />
+		<resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml" />
+        <icon background="@color/background" density="xxxhdpi" foreground="res/icon/android/xxxhdpi-foreground.png" />
     </platform>
 </widget>
