@@ -32,30 +32,6 @@ public class BackgroundService extends BroadcastReceiver {
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         SharedPreferences weatherLocations = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
         try {
-            int getLocationNow = weatherLocations.getInt("locationchecktime", 0);
-            System.out.println(getLocationNow);
-            if (getLocationNow == 0){
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    fusedLocationClient.getLastLocation()
-                            .addOnSuccessListener((Executor) ContextCompat.getMainExecutor(context), new OnSuccessListener<Location>() {
-                                @Override
-                                public void onSuccess(Location location) {
-                                    // Got last known location. In some rare situations this can be null.
-                                    if (location != null) {
-                                        System.out.println("Longitude: ");
-                                        System.out.println(location.getLongitude());
-                                        System.out.println("Latitude: ");
-                                        System.out.println(location.getLatitude());
-                                    }
-                                }
-                            });
-                }
-            }
-            getLocationNow ++;
-            if (getLocationNow == 5){
-                getLocationNow = 0;
-            }
-            weatherLocations.edit().putInt("locationchecktime", getLocationNow).commit();
             JSONArray locationJSON = new JSONArray(weatherLocations.getString("locations", "[]"));
             JSONArray locationNameJSON = new JSONArray(weatherLocations.getString("location-names", "[]"));
             Integer checkLocation = weatherLocations.getInt("nextcheck", 0);
@@ -73,6 +49,39 @@ public class BackgroundService extends BroadcastReceiver {
             PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, 0);
             Calendar c = Calendar.getInstance();
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 10000, pentent);
+            JSONObject jObj = new JSONObject(weatherLocations.getString("settings", ""));
+            Boolean getLocationInBackground = true;
+                try {
+                    if (jObj.getJSONObject("location").getBoolean("alerts")) {
+                        getLocationInBackground = true;
+                    } else {
+                        getLocationInBackground = false;
+                    }
+                }
+                catch (Exception e){
+
+                }
+            int getLocationNow = weatherLocations.getInt("locationchecktime", 0);
+            System.out.println(getLocationNow);
+            if (getLocationNow == 0 && getLocationInBackground){
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    fusedLocationClient.getLastLocation()
+                            .addOnSuccessListener((Executor) ContextCompat.getMainExecutor(context), new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    // Got last known location. In some rare situations this can be null.
+                                    if (location != null) {
+                                        new NWSData().GetAlerts(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "Current Location", context);
+                                    }
+                                }
+                            });
+                }
+            }
+            getLocationNow ++;
+            if (getLocationNow >= 3){
+                getLocationNow = 0;
+            }
+            weatherLocations.edit().putInt("locationchecktime", getLocationNow).commit();
 
         } catch (Exception e) {
             e.printStackTrace();

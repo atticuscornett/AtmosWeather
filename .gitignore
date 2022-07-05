@@ -25,3 +25,4 @@ node_modules/
 /plugins/
 
 /platforms/android/app/build/outputs/logs
+/platforms/electron/build/win-unpacked/

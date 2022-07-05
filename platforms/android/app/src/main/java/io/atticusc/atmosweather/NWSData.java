@@ -50,6 +50,7 @@ public class NWSData {
                             JSONObject current;
                             jsonArray = jsonObject.getJSONArray("features");
                             Integer a = 0;
+                            System.out.println(jsonArray);
                             while (a < jsonArray.length()){
                                 current = jsonArray.getJSONObject(a);
                                 current = current.getJSONObject("properties");

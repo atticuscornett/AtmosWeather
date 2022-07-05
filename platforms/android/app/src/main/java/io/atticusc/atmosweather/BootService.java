@@ -14,8 +14,12 @@ public class BootService extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
-            new SimpleNotification().PrepareNotificationChannelWithAudio("simplebeepsnotification", "Simple Beep Notification", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ context.getPackageName() + "/" + R.raw.simplebeepnotification));
-            new SimpleNotification().NotifyInsistently("I am annoying.", "annoy", "simplebeepsnotification", context, R.drawable.ic_android_black_24dp, 2);
+            new SimpleNotification().PrepareNotificationChannelWithAudio("simplebeepsalert", "Simple Beep Alert", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.simplebeepalarm));
+            new SimpleNotification().PrepareNotificationChannelWithAudio("simplebeepsnotification", "Simple Beep Notification", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.simplebeepnotification));
+            new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesalert", "Alternating Tone Alert", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.alternatingtonealarm));
+            new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesnotification", "Alternating Tone Notification", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.alternatingtonenotification));
+            new SimpleNotification().PrepareSilentNotificationChannel("silentnotification", "Silent Notifications", context);
+            new SimpleNotification().PrepareNotificationChannel("notification", "Forecast Notifications", context);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
             Intent intentA = new Intent(context, BackgroundService.class);
             PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, 0);

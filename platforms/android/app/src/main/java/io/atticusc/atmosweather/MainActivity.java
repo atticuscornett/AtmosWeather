@@ -102,8 +102,7 @@ public class MainActivity extends CordovaActivity {
             Boolean getLocationInBackground = true;
             try {
                 JSONObject jObj = new JSONObject(sharedPreferences.getString("settings", ""));
-                jObj = jObj.getJSONObject("location");
-                if (jObj.getJSONObject("location").getBoolean("weather") || jObj.getJSONObject("alerts").getBoolean("weather")){
+                if (jObj.getJSONObject("location").getBoolean("alerts")){
                     getLocationInBackground = true;
                 }
                 else{
