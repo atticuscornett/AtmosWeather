@@ -78,7 +78,7 @@ public class BackgroundService extends BroadcastReceiver {
                 }
             }
             getLocationNow ++;
-            if (getLocationNow >= 3){
+            if (getLocationNow >= 8){
                 getLocationNow = 0;
             }
             weatherLocations.edit().putInt("locationchecktime", getLocationNow).commit();
