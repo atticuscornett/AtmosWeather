@@ -22,6 +22,7 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <icon density="xxxhdpi" src="res/android/xxxhdpi.png" />
+    <resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml" />
+    <icon background="@color/background" density="xxxhdpi" foreground="res/icon/android/xxxhdpi-foreground.png" />
     <preference name="loglevel" value="DEBUG" />
 </widget>
