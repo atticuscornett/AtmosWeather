@@ -1,0 +1,197 @@
+/* User Interface Components
+DONE:
+
+NEEDS WORK:
+
+NOTHING YET:
+*/
+
+/* Tag Styles */
+
+body{
+	background-color: hsla(0,0%,99%,1.00);
+}
+
+h1{
+	font-family: Secular One;
+}
+
+h2, h3, h4, h5, h6{
+	font-family: Lexend Deca;
+}
+
+a{
+	color: dodgerblue;
+}
+
+label{
+	font-family: Lexend Deca;
+	font-size: 25px;
+}
+
+select{
+	font-family: Lexend Deca;
+	font-size: 23px;
+}
+
+/* UI Component Styles */
+
+#location-main{
+	margin-right: 20px;
+}
+
+#notice-window-container{
+	z-index: 99;
+	position: absolute;
+	background-color: white;
+	min-width: 100%;
+	min-height: 100%;
+	top: 0;
+	left: 0;
+}
+
+#app{
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#main-app{
+	height: 92%;
+	width: 100%;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+#app-nav{
+	height: 8%;
+	width: 100%;
+	background-color: white;
+}
+
+#add-location{
+	position: fixed;
+	z-layer: 99;
+	bottom: 10%;
+	padding-left: 15px;
+	padding-right: 15px;
+	border: none;
+	background-color: rgba(34,55,91,0.88);
+	color: white;
+	font-family: Secular One;
+	font-size: 25px;
+	border-radius: 7px;
+	cursor: pointer;
+}
+
+#location-search{
+	font-size: 30px;
+	width: 50%;
+}
+
+/* Class Styles */
+
+.tab-div{
+	width: 100%;
+	height: 92%;
+	border: none;
+	position: relative;
+}
+
+.nav-icon{
+	height: 4vh;
+	margin-top: 2vh;
+	cursor: pointer;
+}
+
+.location{
+	margin-right: 20px;
+	width: calc(100% - 20px);
+	background-color: blue;
+	color: white;
+	border-radius: 7px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 20px;
+	-webkit-box-sizing: border-box;
+	-mox-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.noalerts{
+	background-color: dodgerblue;
+}
+
+.error{
+	background-color: darkslategray;
+}
+
+.watch{
+	background-color: darkgoldenrod;
+	animation-name: watchAnim;
+	animation-iteration-count: infinite;
+	animation-duration: 5s;
+}
+
+.warning{
+	background-color: darkred;
+	animation-name: warningAnim;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+}
+
+.other{
+	background-color: gray;
+	animation-name: otherAnim;
+	animation-iteration-count: infinite;
+	animation-duration: 5s;
+}
+
+.currentloc{
+	background-color: cadetblue;
+}
+
+.tab-div{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.searchResult{
+	display: flex;
+	align-items: center;
+	width: calc(100% - 40px);
+	background-color: dodgerblue;
+	color: white;
+	border: none;
+	border-radius: 7px;
+	padding: 20px 0;
+	cursor: pointer;
+}
+
+.box{
+	height: 22px;
+}
+
+/* Dark Mode Colors */
+@media (prefers-color-scheme: dark){
+	body{
+		background-color: black;
+		color: white;
+	}
+	#notice-window-container{
+		z-index: 99;
+		position: absolute;
+		background-color: black;
+		min-width: 100%;
+		min-height: 100%;
+		top: 0;
+		left: 0;
+	}
+	#app-nav{
+		background-color: hsla(0,0%,4%,1.00);
+	}
+}

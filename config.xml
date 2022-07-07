@@ -15,6 +15,7 @@
 	<platform name="electron">
     	<icon src="res/icon/electron/app.png" target="app" />
     	<icon src="res/icon/electron/installer.png" target="installer" />
+		<preference name="ElectronSettingsFilePath" value="res/electron/settings.json" />
 	</platform>
 
 </widget>

@@ -19,7 +19,8 @@
     "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-geolocation": "^4.1.0",
-    "cordova-plugin-nativestorage": "github:TheCocoaProject/cordova-plugin-nativestorage"
+    "cordova-plugin-nativestorage": "github:TheCocoaProject/cordova-plugin-nativestorage",
+    "electron": "^19.0.8"
   },
   "cordova": {
     "platforms": [

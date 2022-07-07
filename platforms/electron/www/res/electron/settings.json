@@ -1,0 +1,9 @@
+{
+    "browserWindow": {
+        "webPreferences": {
+            "nodeIntegration": false,
+			"autoHideMenuBar": true,
+			"resizable": false
+        }
+    }
+}

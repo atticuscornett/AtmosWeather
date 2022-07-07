@@ -3,7 +3,9 @@
     "height": 600,
     "webPreferences": {
       "devTools": true,
-      "nodeIntegration": false
+      "nodeIntegration": false,
+      "autoHideMenuBar": true,
+      "resizable": false
     },
     "width": 800
   },
