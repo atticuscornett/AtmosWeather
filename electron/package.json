@@ -1,0 +1,15 @@
+{
+  "name": "Atmos Weather",
+  "version": "0.5.0",
+  "description": "A lightweight app for weather forecasts and alerts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "electron ."
+  },
+  "author": "Atticus Cornett",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^19.0.8"
+  }
+}
