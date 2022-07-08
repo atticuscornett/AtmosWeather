@@ -54,7 +54,7 @@
 				<!-- App Tabs -->
 				<div id="tab-about" class="tab-div" hidden>
 					<h1>About Atmos</h1>
-					<h3>Version 0.3</h3>
+					<h3>Version 0.5.0</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>
@@ -122,7 +122,7 @@
 				<div id="tab-settings" style="margin-right:20px;" class="tab-div" hidden>
 					<h1>Settings</h1>
 					<h6><a href="#" onClick="navTo('about')">About Atmos Weather</a>&emsp;<a href="#" onClick="navTo('privacy')">Privacy Statement</a></h6>
-					<h2 id="settings-warning" hidden>Some settings/features are not functional on web version, including weather alerts.</h2>
+					<h2 id="settings-warning" hidden>Some settings/features are not functional on the web version, including weather alerts.</h2>
 					<hr>
 					<h2>Device Location</h2>
 					<h6>Settings related to use of your GPS location.</h6>
@@ -142,7 +142,7 @@
 					<h2>Location Alerts</h2>
 					<h6>Choose the level of alerts for different locations.</h6>
 					<label for="setting-default-sound-alert">Default Alert Sound - </label>
-					<select id="setting-default-sound-alert">
+					<select id="setting-default-sound-alert" onChange="playAlarmSoundMain();">
 						<option value="readynow">ReadyNow Warning</option>
 						<option value="suremind">SureMind Warning</option>
 						<option value="alternatingtones">Alternating Tones</option>
@@ -150,7 +150,7 @@
 					</select>
 					<br>
 					<label for="setting-default-sound-notification">Default Notification Sound - </label>
-					<select id="setting-default-sound-notification">
+					<select id="setting-default-sound-notification" onChange="playNotificationSoundMain();">
 						<option value="readynow">ReadyNow Watch</option>
 						<option value="suremind">SureMind Watch</option>
 						<option value="alternatingtones">Alternating Tones</option>
@@ -566,7 +566,7 @@
 					<hr>
 					<h2>Sounds</h2>
 					<label for="setting-default-sound-alert-location">Default Alert Sound - </label>
-					<select id="setting-default-sound-alert-location">
+					<select id="setting-default-sound-alert-location" onChange="playAlarmSoundLocation();">
 						<option value="readynow">ReadyNow Warning</option>
 						<option value="suremind">SureMind Warning</option>
 						<option value="alternatingtones">Alternating Tones</option>
@@ -574,7 +574,7 @@
 					</select>
 					<br>
 					<label for="setting-default-sound-notification-location">Default Notification Sound - </label>
-					<select id="setting-default-sound-notification-location">
+					<select id="setting-default-sound-notification-location" onChange="playNotificationSoundLocation();">
 						<option value="readynow">ReadyNow Watch</option>
 						<option value="suremind">SureMind Watch</option>
 						<option value="alternatingtones">Alternating Tones</option>

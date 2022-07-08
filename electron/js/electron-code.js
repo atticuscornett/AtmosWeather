@@ -1,3 +1,5 @@
+cordovaReady = true;
+
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
 	if (!cordovaReady){
