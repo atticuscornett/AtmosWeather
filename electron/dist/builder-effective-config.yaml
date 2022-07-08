@@ -1,0 +1,10 @@
+directories:
+  output: dist
+  buildResources: build
+appId: io.atticusc.atmosweather
+productName: Atmos Weather
+win:
+  target: nsis
+  icon: img/icon.png
+files: []
+electronVersion: 19.0.8

@@ -1,15 +1,29 @@
 {
-  "name": "Atmos Weather",
+  "name": "atmos-weather",
   "version": "0.5.0",
   "description": "A lightweight app for weather forecasts and alerts.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "author": "Atticus Cornett",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^19.0.8"
+    "electron": "^19.0.8",
+    "electron-builder": "^23.1.0"
+  },
+  "build": {
+    "appId": "io.atticusc.atmosweather",
+    "productName": "Atmos Weather",
+    "win": {
+      "target": "nsis",
+      "icon": "img/icon.png"
+    }
+  },
+  "dependencies": {
+    "electron-builder-squirrel-windows": "^23.3.0"
   }
 }
