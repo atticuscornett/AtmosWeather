@@ -27,3 +27,6 @@ node_modules/
 /platforms/android/app/build/outputs/logs
 /platforms/electron/build/win-unpacked/
 /electron/dist/win-unpacked
+builder-debug.yml
+# Files in dist folder for electron are now too big
+/electron/dist
