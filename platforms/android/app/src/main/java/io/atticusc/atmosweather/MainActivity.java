@@ -86,6 +86,10 @@ public class MainActivity extends CordovaActivity {
         new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesnotification", "Alternating Tone Notification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.alternatingtonenotification));
         new SimpleNotification().PrepareSilentNotificationChannel("silentnotification", "Silent Notifications", getApplicationContext());
         new SimpleNotification().PrepareNotificationChannel("notification", "Forecast Notifications", getApplicationContext());
+        new SimpleNotification().PrepareNotificationChannelWithAudio("readynownotification", "ReadyNow Notification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.readynownotification));
+        new SimpleNotification().PrepareNotificationChannelWithAudio("readynowalert", "ReadyNow Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.readynowalarm));
+        new SimpleNotification().PrepareNotificationChannelWithAudio("suremindnotification", "SureMind Notification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.suremindnotification));
+        new SimpleNotification().PrepareNotificationChannelWithAudio("suremindalert", "SureMind Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.suremindalarm));
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
         //new InformWeather("Severe Thunderstorm Warning", "Springville, St. Clair County, Alabama", "testing", getApplicationContext());
         //new SimpleNotification().NotifyInsistently("I am annoying.", sharedPreferences.getString("settings", "null"), "SimpleBeepAlarm", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);

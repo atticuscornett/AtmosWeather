@@ -18,6 +18,10 @@ public class BootService extends BroadcastReceiver {
             new SimpleNotification().PrepareNotificationChannelWithAudio("simplebeepsnotification", "Simple Beep Notification", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.simplebeepnotification));
             new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesalert", "Alternating Tone Alert", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.alternatingtonealarm));
             new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesnotification", "Alternating Tone Notification", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.alternatingtonenotification));
+            new SimpleNotification().PrepareNotificationChannelWithAudio("readynownotification", "ReadyNow Notification", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.readynownotification));
+            new SimpleNotification().PrepareNotificationChannelWithAudio("readynowalert", "ReadyNow Alert", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.readynowalarm));
+            new SimpleNotification().PrepareNotificationChannelWithAudio("suremindnotification", "SureMind Notification", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.suremindnotification));
+            new SimpleNotification().PrepareNotificationChannelWithAudio("suremindalert", "SureMind Alert", context, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + context.getPackageName() + "/" + R.raw.suremindalarm));
             new SimpleNotification().PrepareSilentNotificationChannel("silentnotification", "Silent Notifications", context);
             new SimpleNotification().PrepareNotificationChannel("notification", "Forecast Notifications", context);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
