@@ -75,7 +75,7 @@ else{
 				if (win2.isVisible()) {
 					win2.hide()
 				} else {
-					win2.reload();
+					win2.webContents.executeJavaScript('refreshLocations();', false);
 					win2.show()
 				}
 			});
@@ -134,7 +134,7 @@ function checkLocation(){
 	}
 }
 
-// HTTP Get Call
+// Check the location at for alerts
 function alertCheck(urlGet){
 	try{
 		var request = net.request(urlGet);
@@ -147,6 +147,7 @@ function alertCheck(urlGet){
 				chunk = chunk["features"];
 				var at = 0;
 				while (at < chunk.length){
+					// Get Alert Settings
 					if (!notifiedAlerts.includes(chunk[at]["id"])){
 						console.log(locationNames[cycleAt])
 						var eventType = chunk[at]["properties"]["event"];
@@ -154,16 +155,20 @@ function alertCheck(urlGet){
 							eventType = "Fire Weather Warning";
 						}
 						var notificationSetting = "soundnotification";
+						var notificationSound = settings["location-alerts"]["default-notification"];
+						var alertSound = settings["location-alerts"]["default-alert"];
 						eventType = eventType.toLowerCase().replaceAll(" ", "-");
+						console.log(eventType.replace("-watch", ""));
 						if (eventType.includes("warning")){
 							notificationSetting = settings["alert-types"]["warnings"][eventType.replace("-warning", "")];
 						}
-						else if (eventType.includes("watches")){
-							notificationSetting = settings["alert-types"]["watches"][eventType.replace("-watch", "")];
+						else if (eventType.includes("watch")){
+							notificationSetting = settings["alert-types"]['watches'][eventType.replace("-watch", "")];
 						}
 						else{
 							notificationSetting = settings["alert-types"]["advisory"][eventType.replace("-advisory", "")];
 						}
+						// Check if has location specific settings
 						if (settings["per-location"][locationNames[cycleAt]] != undefined){
 							if (eventType.includes("warning")){
 								if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")] != undefined){
@@ -171,7 +176,7 @@ function alertCheck(urlGet){
 								}
 							}
 							else if (eventType.includes("watches")){
-								if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"][eventType.replace("-watch", "")] != undefined){
+								if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"] != undefined){
 									notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"][eventType.replace("-watch", "")];
 								}
 								notificationSetting = settings["alert-types"]["watches"][eventType.replace("-watch", "")];
@@ -181,9 +186,35 @@ function alertCheck(urlGet){
 									notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")];	
 								}
 							}
+							if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"] != undefined){
+								notificationSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"];
+							}
+							if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"] != undefined){
+								alertSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"];
+							}
 						}
-						new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"}).show()
-						win2.webContents.executeJavaScript("var audio = new Audio('audio/readynownotification.mp3');audio.play();", false);
+						if (notificationSetting == undefined){
+							notificationSetting = "soundnotification";
+						}
+						if (notificationSetting == "alert"){
+							new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"}).show()
+							win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();", false);
+						}
+						else if (notificationSetting == "alertmove"){
+							//TODO
+						}
+						else if (notificationSetting == "silentnotification"){
+							new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"}).show()
+						}
+						else if (notificationSetting == "soundnotification"){
+							if (chunk[at]["properties"]["event"].toLowerCase().includes("watch")){
+								new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"}).show();
+							}
+							else{
+								new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"}).show();
+							}
+							win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();", false);
+						}
 						locationNames[cycleAt]
 						console.log(notificationSetting);
 						notifiedAlerts.push(chunk[at]["id"]);

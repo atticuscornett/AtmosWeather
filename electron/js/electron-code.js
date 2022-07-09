@@ -36,26 +36,25 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	
-	if (!window.localStorage.getItem("notice-version0.5")){
+	// UPDATE
+	if (!window.localStorage.getItem("notice-version0.6.0")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos v0.5 is here!</h2>
+		<h2>Atmos v0.6.0 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Android version under development</dd>
-			<dd>- Ultra-customizable settings page for complete control</dd>
-			<dd>- Android boot service and notifications</dd>
+  			<dd>- Android version is now stable!</dd>
+			<dd>- Moved ElectronJS to independent development</dd>
+			<dd>- Windows version under development with functioning notifications and builds.</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- BackgroundService on Android can now access up to date data.</dd>
-			<dd>- Added Cordova Plugins: NativeStorage</dd>
-			<dd>- Added Java Dependencies: Gson, Volley, StringUtils</dd>
-			<dt>Oh, and one more thing...</dt>
-			<dd>Github repo created, allowing for easier development across devices and constant code backups.</dd>
+  			<dd>- Fixed sleep bug on Windows</dd>
+			<dd>- Fixed sound bug on Windows</dd>
+			<dd>- Fixed watch notification bug on Windows</dd>
 		</dl> 
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.5", "true");
+		window.localStorage.setItem("notice-version0.6.0", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning
