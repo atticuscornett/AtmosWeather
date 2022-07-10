@@ -7,9 +7,15 @@ function showNotices(){
 		return;
 	}
 	document.getElementById("atmos-logo").style = "animation: fadeOut 2s; animation-fill-mode: forwards;"
+	// Hide geolocation settings
+	document.getElementById("settings-device-location").hidden = true;
+	var elementsList = document.querySelectorAll(`[value="alertmove"]`);
+	var b = 0;
+	while (b < elementsList.length){
+		elementsList[b].remove();
+		b++;
+	}
 	// Check if running the web browser version
-	/* NOTE: Unlike other messages that do not show again after they are read,
-	this message will continue to pop up every time the website is accessed */
 	var platform = "unknown"
 	if (navigator.platform.indexOf("Win") == 0){
 		console.log("Atmos for Windows")

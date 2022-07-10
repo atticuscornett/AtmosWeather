@@ -53,8 +53,10 @@
 				<br>
 				<!-- App Tabs -->
 				<div id="tab-about" class="tab-div" hidden>
-					<h1>About Atmos</h1>
-					<h3>Version 0.5.0</h3>
+					<!-- UPDATE -->
+					<h1>About Atmos Weather</h1>
+					<h3>Version 0.6.0</h3>
+					<h3>Last updated 7-10-2022</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>
@@ -63,6 +65,7 @@
 					<h3><a href="https://fonts.google.com/" target="_blank">Google Fonts</a></h3>
 					<h3><a href="https://nominatim.org/" target="_blank">OSM Nominatim</a></h3>
 					<h3><a href="https://leafletjs.com/index.html" target="_blank">LeafletJS</a></h3>
+					<h3><a href="https://www.electronjs.org/" target="_blank">ElectronJS</a></h3>
 				</div>
 				<div id="tab-alerts" class="tab-div" hidden>
 					<h1>Alerts</h1>
@@ -124,14 +127,16 @@
 					<h6><a href="#" onClick="navTo('about')">About Atmos Weather</a>&emsp;<a href="#" onClick="navTo('privacy')">Privacy Statement</a></h6>
 					<h2 id="settings-warning" hidden>Some settings/features are not functional on the web version, including weather alerts.</h2>
 					<hr>
-					<h2>Device Location</h2>
-					<h6>Settings related to use of your GPS location.</h6>
-					<input class="box" type="checkbox" id="setting-current-location" checked>
-					<label for="setting-current-location">Give Weather for Current Location</label>
-					<br>
-					<input class="box" type="checkbox" id="setting-current-location-alerts" checked>
-					<label for="setting-current-location-alerts">Give Alerts for Current Location</label>
-					<hr>
+					<div id="settings-device-location">
+						<h2>Device Location</h2>
+						<h6>Settings related to use of your GPS location.</h6>
+						<input class="box" type="checkbox" id="setting-current-location" checked>
+						<label for="setting-current-location">Give Weather for Current Location</label>
+						<br>
+						<input class="box" type="checkbox" id="setting-current-location-alerts" checked>
+						<label for="setting-current-location-alerts">Give Alerts for Current Location</label>
+						<hr>
+					</div>
 					<h2>Notifications</h2>
 					<input class="box" type="checkbox" id="setting-future-severe-notifications" checked>
 					<label for="setting-future-severe-notifications">Get notifications for forecast future severe weather</label>
@@ -1018,6 +1023,7 @@
 	<script src="js/web-storage-handler.js"></script>
 	<script src="js/nominatim-api.js"></script>
 	<script src="js/nws-api.js"></script>
+	<script src="js/electron-code.js"></script>
 	<script src="js/atmos-settings.js"></script>
 	
 	

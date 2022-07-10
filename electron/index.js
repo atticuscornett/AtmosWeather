@@ -87,7 +87,7 @@ else{
 	})
 
 	function sendNotif (theTitle, theBody) {
-	  new Notification({ title: theTitle, body: theBody }).show()
+		new Notification({ title: theTitle, body: theBody }).show()
 	}
 }
 
@@ -102,7 +102,7 @@ setInterval(function(){
 	win2.webContents.executeJavaScript('localStorage.getItem("weather-locations");', true)
 		.then(result => {
 			weatherLocations = JSON.parse(result);
-	  	});
+	});
 	win2.webContents.executeJavaScript('localStorage.getItem("weather-location-names")', true)
 		.then(result =>{
 		locationNames = JSON.parse(result);
@@ -130,7 +130,7 @@ function checkLocation(){
 		cycleAt = 0;
 	}
 	if (locationNames.length > 0){
-		var locationAlerts = alertCheck("https://api.weather.gov/alerts/active?point=" + weatherLocations[cycleAt]["lat"] + "," + weatherLocations[cycleAt]["lon"]);
+		alertCheck("https://api.weather.gov/alerts/active?point=" + weatherLocations[cycleAt]["lat"] + "," + weatherLocations[cycleAt]["lon"]);
 	}
 }
 
@@ -199,9 +199,6 @@ function alertCheck(urlGet){
 						if (notificationSetting == "alert"){
 							new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"}).show()
 							win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();", false);
-						}
-						else if (notificationSetting == "alertmove"){
-							//TODO
 						}
 						else if (notificationSetting == "silentnotification"){
 							new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"}).show()
