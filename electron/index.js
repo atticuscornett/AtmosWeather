@@ -116,7 +116,6 @@ setInterval(function(){
 		settings = JSON.parse(result);
 	});
 	setTimeout(checkLocation, 100);
-	
 	cycleAt++;
 }, 10000);
 
@@ -132,6 +131,31 @@ function checkLocation(){
 	if (locationNames.length > 0){
 		alertCheck("https://api.weather.gov/alerts/active?point=" + weatherLocations[cycleAt]["lat"] + "," + weatherLocations[cycleAt]["lon"]);
 	}
+	win2.webContents.executeJavaScript('localStorage.getItem("lastForecastNotification' + locationNames[cycleAt] + '");', true)
+		.then(result => {
+			var date = new Date();
+			var dateString = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
+			if (result != dateString || true){
+				win2.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
+				var severeNotification =  settings["notifications"]["severe-future"];
+				var rainNotification = settings["notifications"]["rain-future"];
+				if (settings["per-location"][locationNames[cycleAt]] != undefined){
+					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"] != undefined){
+						severeNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"];
+					}
+					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"] != undefined){
+						rainNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"];
+					}
+				}
+				
+				// TODO -- Combine periods 0 and 1 for forecast
+				if (severeNotification || rainNotification){
+					if (rainNotification){
+					
+					}
+				}				
+			}
+	});
 }
 
 // Check the location at for alerts
