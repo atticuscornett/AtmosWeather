@@ -135,7 +135,7 @@ function checkLocation(){
 		.then(result => {
 			var date = new Date();
 			var dateString = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
-			if (result != dateString || true){
+			if (result != dateString){
 				win2.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
 				var severeNotification =  settings["notifications"]["severe-future"];
 				var rainNotification = settings["notifications"]["rain-future"];
@@ -147,12 +147,30 @@ function checkLocation(){
 						rainNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"];
 					}
 				}
-				
-				// TODO -- Combine periods 0 and 1 for forecast
 				if (severeNotification || rainNotification){
-					if (rainNotification){
-					
-					}
+					var forecastLink = JSON.parse(locationCache[locationNames[cycleAt]])["properties"]['forecast'];
+					var notificationRequest = net.request(forecastLink);
+					notificationRequest.on("response", (response) => {
+						response.on("data", (chunk) => {
+							chunk = JSON.parse(chunk);
+							var fullForecast = chunk["properties"]["periods"][0]["detailedForecast"] + " " + chunk["properties"]["periods"][1]["detailedForecast"];
+							var fullForecastCaps = fullForecast;
+							fullForecast = fullForecast.toLowerCase();
+							// Check for severe trigger words
+							if (fullForecast.includes("severe") || fullForecast.includes("tropical") || fullForecast.includes("strong") || fullForecast.includes("tornado") || fullForecast.includes("damaging") || fullForecast.includes("damage") || fullForecast.includes("hail")){
+								new Notification({ title: "Future severe weather expected at " + locationNames[cycleAt], body: fullForecastCaps, icon: __dirname + "/img/icon.png"}).show();
+							}
+							else{
+								if (rainNotification){
+									// Check rain trigger words
+									if (fullForecast.includes("rain") || fullForecast.includes("storm")){
+										new Notification({ title: "Future rain/storms expected at " + locationNames[cycleAt], body: fullForecastCaps, icon: __dirname + "/img/icon.png"}).show();
+									}
+								}
+							}
+						})
+					})
+					notificationRequest.end()
 				}				
 			}
 	});
