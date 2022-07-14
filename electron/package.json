@@ -24,6 +24,5 @@
     }
   },
   "dependencies": {
-    "electron-builder-squirrel-windows": "^23.3.0"
   }
 }
