@@ -7,6 +7,7 @@ var settings;
 var notifiedAlerts = [];
 var cycleAt = 0;
 var lastNetworkCheck = true;
+let trayIcon = null;
 const createWindow = () => {
 const win = new BrowserWindow({
     width: 800,
@@ -44,7 +45,7 @@ else{
 			app.setAppUserModelId("Atmos Weather");
 		}
 		createWindow()
-		let trayIcon = new Tray(__dirname + "/img/icon.png")
+		trayIcon = new Tray(__dirname + "/img/icon.png")
 		trayIcon.setToolTip('Atmos Weather')
 		const trayMenuTemplate = [{
 				   label: 'Atmos Weather',
@@ -151,6 +152,10 @@ function checkLocation(){
 				}
 				if (severeNotification || rainNotification){
 					try{
+						if (locationNames.length == 0){
+							// Don't send garbage requests if there are no locations
+							return;
+						}
 						var forecastLink = JSON.parse(locationCache[locationNames[cycleAt]])["properties"]['forecast'];
 						var notificationRequest = net.request(forecastLink);
 						notificationRequest.on("response", (response) => {
