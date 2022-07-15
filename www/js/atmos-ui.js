@@ -677,10 +677,10 @@ function loadAlert(alertID){
 	navTo("alert-display")
 	setTimeout(function(){
 		map.invalidateSize(true)
-	}, 2000)
+	}, 1000)
 	setTimeout(function(){
 		map.fitBounds(polygon.getBounds());
-	}, 6000);
+	}, 2000);
 }
 
 // Clears polygons from the LeafletJS alert map

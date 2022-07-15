@@ -60,6 +60,7 @@ if (!localStorage.getItem("atmos-settings")){
 					"heat": "soundnotification",
 					"dense-fog": "soundnotification",
 					"small-craft": "soundnotification",
+					"flood": "soundnotification",
 					"coastal-flood": "soundnotification"
 				}
 			},
@@ -119,6 +120,7 @@ if (!localStorage.getItem("atmos-settings")){
 				"heat": "soundnotification",
 				"dense-fog": "soundnotification",
 				"small-craft": "soundnotification",
+				"flood": "soundnotification",
 				"coastal-flood": "soundnotification"
 			}
 		},

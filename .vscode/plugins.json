@@ -1,0 +1,1 @@
+{"plugins":["cordova-plugin-file","cordova-plugin-geolocation","cordova-plugin-nativestorage","cordova-plugin-device"]}
