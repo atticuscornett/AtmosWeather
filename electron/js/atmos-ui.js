@@ -260,6 +260,7 @@ function refreshLocations(){
 	var nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
 	var nomLocationNames = JSON.parse(localStorage.getItem("weather-location-names"));
 	var theSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	var refreshAgain = false;
 	locationEnabled = theSettings["location"]["weather"];
 	if (nomLocations.length > 0){
 		if (locationEnabled){
@@ -276,8 +277,11 @@ function refreshLocations(){
 			var image = "sunny"
 			var hourly = getHourlyForecast(nomToWeatherGrid(nomLocations[a]));
 			if (!hourly[0]){
-				console.log("Could not fetch hourly forecast for display.")
-				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>There was an error retrieving the data for this location.</h3></div></div><br>';
+				if (!refreshAgain){
+					refreshAgain = true;
+					setTimeout(refreshLocations, 7000);
+				}
+				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
 				document.getElementById("location-main").innerHTML += theDiv;
 			}
 			else{

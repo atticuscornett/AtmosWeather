@@ -53,7 +53,20 @@ else{
 				},
 				{
 				   label: 'About Atmos Weather',
-				   enabled: true
+				   enabled: true,
+				   click: () => {
+					if (win2 == null){
+						win2 = new BrowserWindow({
+							width: 800,
+							height: 600,
+							icon: __dirname + "/img/icon.png",
+							autoHideMenuBar: true
+						});
+						win2.loadFile('index.html')
+					}
+					win2.show()
+					win2.webContents.executeJavaScript("navTo('about');")
+				   }
 				},
 				{
 					label: 'Quit',
@@ -233,7 +246,10 @@ function alertCheck(urlGet){
 					var notificationSound = settings["location-alerts"]["default-notification"];
 					var alertSound = settings["location-alerts"]["default-alert"];
 					eventType = eventType.toLowerCase().replaceAll(" ", "-");
-					console.log(eventType.replace("-watch", ""));
+					if (eventType == "special-weather-statement"){
+						eventType = "special-weather-statement-advisory";
+					}
+					console.log(eventType);
 					if (eventType.includes("warning")){
 						notificationSetting = settings["alert-types"]["warnings"][eventType.replace("-warning", "")];
 					}

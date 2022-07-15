@@ -54,6 +54,7 @@ if (!localStorage.getItem("atmos-settings")){
 				},
 				"advisory":{
 					"wind": "soundnotification",
+					"special-weather-statement": "soundnotification",
 					"winter-weather": "soundnotification",
 					"frost": "soundnotification",
 					"wind-chill": "soundnotification",
@@ -114,6 +115,7 @@ if (!localStorage.getItem("atmos-settings")){
 			},
 			"advisory":{
 				"wind": "soundnotification",
+				"special-weather-statement": "soundnotification",
 				"winter-weather": "soundnotification",
 				"frost": "soundnotification",
 				"wind-chill": "soundnotification",
