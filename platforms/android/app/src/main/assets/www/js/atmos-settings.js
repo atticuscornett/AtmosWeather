@@ -5,7 +5,77 @@
 
 // Initialize settings
 if (!localStorage.getItem("atmos-settings")){
-	var atmosSettingsTemp = {
+	var atmosSettingsTemp;
+	var thePlatform = getPlatform();
+	if (thePlatform.includes("desktop")){
+		atmosSettingsTemp = {
+			"location": {"weather": false, "alerts": false},
+			"notifications": {"severe-future": true, "rain-future": false},
+			"location-alerts": {"default-alert": "readynow", "default-notification": "readynow", "locations":{}},
+			"alert-types": {
+				"warnings":{
+					"tornado": "alert",
+					"hurricane": "alert",
+					"hurricane-force-wind": "alert",
+					"tropical-storm": "alert",
+					"special-marine": "alert",
+					"severe-thunderstorm": "alert",
+					"storm": "alert",
+					"gale": "alert",
+					"flash-flood": "alert",
+					"flood": "alert",
+					"coastal-flood": "alert",
+					"river-flood": "alert",
+					"high-wind": "soundnotification",
+					"extreme-wind": "alert",
+					"excessive-heat": "soundnotification",
+					"fire-weather": "alert",
+					"air-quality": "soundnotification",
+					"blizzard": "alert",
+					"snow-squall": "alert",
+					"ice-storm": "alert",
+					"winter-storm": "alert",
+					"freeze": "soundnotification",
+					"wind-chill": "soundnotification"
+				},
+				"watches":{
+					"tornado": "soundnotification",
+					"hurricane": "soundnotification",
+					"tropical-storm": "soundnotification",
+					"severe-thunderstorm": "soundnotification",
+					"flash-flood": "soundnotification",
+					"flood": "soundnotification",
+					"coastal-flood": "soundnotification",
+					"river-flood": "soundnotification",
+					"high-wind": "soundnotification",
+					"excessive-heat": "soundnotification",
+					"fire-weather": "soundnotification",
+					"winter-storm": "soundnotification",
+					"freeze": "soundnotification"
+				},
+				"advisory":{
+					"wind": "soundnotification",
+					"hazardous-weather-outlook": "soundnotification",
+					"severe-weather-statement": "soundnotification",
+					"special-weather-statement": "soundnotification",
+					"winter-weather": "soundnotification",
+					"frost": "soundnotification",
+					"marine-weather-statement": "soundnotification",
+					"rip-current-statement": "soundnotification",
+					"beach-hazards-statement": "soundnotification",
+					"wind-chill": "soundnotification",
+					"heat": "soundnotification",
+					"dense-fog": "soundnotification",
+					"small-craft": "soundnotification",
+					"flood": "soundnotification",
+					"coastal-flood": "soundnotification"
+				}
+			},
+			"per-location": {}
+		};
+	}
+	else{
+		atmosSettingsTemp = {
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"default-alert": "readynow", "default-notification": "readynow", "locations":{}},
@@ -27,6 +97,7 @@ if (!localStorage.getItem("atmos-settings")){
 				"extreme-wind": "alert",
 				"excessive-heat": "soundnotification",
 				"fire-weather": "alert",
+				"air-quality": "soundnotification",
 				"blizzard": "alert",
 				"snow-squall": "alertmove",
 				"ice-storm": "alert",
@@ -51,16 +122,24 @@ if (!localStorage.getItem("atmos-settings")){
 			},
 			"advisory":{
 				"wind": "soundnotification",
+				"hazardous-weather-outlook": "soundnotification",
+				"severe-weather-statement": "soundnotification",
+				"special-weather-statement": "soundnotification",
+				"marine-weather-statement": "soundnotification",
+				"rip-current-statement": "soundnotification",
+				"beach-hazards-statement": "soundnotification",
 				"winter-weather": "soundnotification",
 				"frost": "soundnotification",
 				"wind-chill": "soundnotification",
 				"heat": "soundnotification",
 				"dense-fog": "soundnotification",
 				"small-craft": "soundnotification",
+				"flood": "soundnotification",
 				"coastal-flood": "soundnotification"
 			}
 		},
 		"per-location": {}
+	};
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(atmosSettingsTemp))
 }

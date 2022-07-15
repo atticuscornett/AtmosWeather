@@ -85,33 +85,30 @@ function showNotices(){
 		document.getElementById("notice-window").innerHTML += `
 		<h2>Important Information About Weather Warnings</h2>
 		<hr>
-		<h3>Although we strive to give rapid, accurate warning notifications 24/7, Atmos Weather should not be your only method of recieving emergency alerts. If internet service is lost, Atmos cannot give you alerts. All homes should have at least one weather radio with a battery backup so that they can recieve weather information even when the power is out.</h3>
+		<h3>Although we strive to give rapid, accurate warning notifications 24/7, Atmos Weather should not be your only method of recieving emergency alerts. If internet service is lost or other errors occur, Atmos cannot give you alerts. All homes should have at least one weather radio with a battery backup so that they can recieve weather information even when the power is out. Atmos Weather is not responsible for alerts not sending or the consequences of alerts not sending.</h3>
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
-	
-	if (!window.localStorage.getItem("notice-version0.5")){
+	// UPDATE
+	if (!window.localStorage.getItem("notice-version0.7.0")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos v0.5 is here!</h2>
+		<h2>Atmos Weather v0.7.0 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Android version under development</dd>
-			<dd>- Ultra-customizable settings page for complete control</dd>
-			<dd>- Android boot service and notifications</dd>
+  			<dd>- Electron build is now stable!</dd>
+			<dd>- Windows build is now available and fully functioning.</dd>
+			<dd>- Support for more weather events added including Special Weather Statements, Severe Weather Statements, Air Quality Alerts, and many more!</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- BackgroundService on Android can now access up to date data.</dd>
-			<dd>- Added Cordova Plugins: NativeStorage</dd>
-			<dd>- Added Java Dependencies: Gson, Volley, StringUtils</dd>
-			<dt>Oh, and one more thing...</dt>
-			<dd>Github repo created, allowing for easier development across devices and constant code backups.</dd>
+  			<dd>- Fixed networking bugs on Windows.</dd>
+			<dd>- Fixed tray issues on Windows.</dd>
 		</dl> 
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.5", "true");
+		window.localStorage.setItem("notice-version0.7.0", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning
@@ -259,9 +256,13 @@ function selectResult(id){
 
 // Refreshes the information on the locations page
 function refreshLocations(){
+	if (screenAt != "locations"){
+		return;
+	}
 	var nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
 	var nomLocationNames = JSON.parse(localStorage.getItem("weather-location-names"));
 	var theSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	var refreshAgain = false;
 	locationEnabled = theSettings["location"]["weather"];
 	if (nomLocations.length > 0){
 		if (locationEnabled){
@@ -278,8 +279,11 @@ function refreshLocations(){
 			var image = "sunny"
 			var hourly = getHourlyForecast(nomToWeatherGrid(nomLocations[a]));
 			if (!hourly[0]){
-				console.log("Could not fetch hourly forecast for display.")
-				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>There was an error retrieving the data for this location.</h3></div></div><br>';
+				if (!refreshAgain){
+					refreshAgain = true;
+					setTimeout(refreshLocations, 7000);
+				}
+				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
 				document.getElementById("location-main").innerHTML += theDiv;
 			}
 			else{
@@ -679,10 +683,10 @@ function loadAlert(alertID){
 	navTo("alert-display")
 	setTimeout(function(){
 		map.invalidateSize(true)
-	}, 2000)
+	}, 1000)
 	setTimeout(function(){
 		map.fitBounds(polygon.getBounds());
-	}, 6000);
+	}, 2000);
 }
 
 // Clears polygons from the LeafletJS alert map
