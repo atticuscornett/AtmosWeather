@@ -92,24 +92,23 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version0.6.0")){
+	if (!window.localStorage.getItem("notice-version0.7.0")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos v0.6.0 is here!</h2>
+		<h2>Atmos Weather v0.7.0 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Android version is now stable!</dd>
-			<dd>- Moved ElectronJS to independent development</dd>
-			<dd>- Windows version under development with functioning notifications and builds.</dd>
+  			<dd>- Electron build is now stable!</dd>
+			<dd>- Windows build is now available and fully functioning.</dd>
+			<dd>- Support for more weather events added including Special Weather Statements, Severe Weather Statements, Air Quality Alerts, and many more!</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed sleep bug on Windows</dd>
-			<dd>- Fixed sound bug on Windows</dd>
-			<dd>- Fixed watch notification bug on Windows</dd>
+  			<dd>- Fixed networking bugs on Windows.</dd>
+			<dd>- Fixed tray issues on Windows.</dd>
 		</dl> 
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.6.0", "true");
+		window.localStorage.setItem("notice-version0.7.0", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning
@@ -257,6 +256,9 @@ function selectResult(id){
 
 // Refreshes the information on the locations page
 function refreshLocations(){
+	if (screenAt != "locations"){
+		return;
+	}
 	var nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
 	var nomLocationNames = JSON.parse(localStorage.getItem("weather-location-names"));
 	var theSettings = JSON.parse(localStorage.getItem("atmos-settings"));

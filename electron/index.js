@@ -249,6 +249,27 @@ function alertCheck(urlGet){
 					if (eventType == "special-weather-statement"){
 						eventType = "special-weather-statement-advisory";
 					}
+					if (eventType == "severe-weather-statement"){
+						eventType = "severe-weather-statement-advisory";
+					}
+					if (eventType == "marine-weather-statement"){
+						eventType = "marine-weather-statement-advisory";
+					}
+					if (eventType == "rip-current-statement"){
+						eventType = "rip-current-statement-advisory";
+					}
+					if (eventType = "coastal-flood-statement"){
+						eventType = "coastal-flood-advisory";
+					}
+					if (eventType = "beach-hazards-statement"){
+						eventType = "beach-hazards-statement-advisory";
+					}
+					if (eventType == "hazardous-weather-outlook"){
+						eventType = "hazardous-weather-outlook";
+					}
+					if (eventType == "air-quality-alert"){
+						eventType = "air-quality-warning";
+					}
 					console.log(eventType);
 					if (eventType.includes("warning")){
 						notificationSetting = settings["alert-types"]["warnings"][eventType.replace("-warning", "")];
