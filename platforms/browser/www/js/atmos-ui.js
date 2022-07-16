@@ -92,24 +92,23 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version0.6.0")){
+	if (!window.localStorage.getItem("notice-version0.7.0")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos v0.6.0 is here!</h2>
+		<h2>Atmos Weather v0.7.0 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Android version is now stable!</dd>
-			<dd>- Moved ElectronJS to independent development</dd>
-			<dd>- Windows version under development with functioning notifications and builds.</dd>
+  			<dd>- Electron build is now stable!</dd>
+			<dd>- Windows build is now available and fully functioning.</dd>
+			<dd>- Support for more weather events added including Special Weather Statements, Severe Weather Statements, Air Quality Alerts, and many more!</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed sleep bug on Windows</dd>
-			<dd>- Fixed sound bug on Windows</dd>
-			<dd>- Fixed watch notification bug on Windows</dd>
+  			<dd>- Fixed networking bugs on Windows.</dd>
+			<dd>- Fixed tray issues on Windows.</dd>
 		</dl> 
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.6.0", "true");
+		window.localStorage.setItem("notice-version0.7.0", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning
@@ -257,9 +256,13 @@ function selectResult(id){
 
 // Refreshes the information on the locations page
 function refreshLocations(){
+	if (screenAt != "locations"){
+		return;
+	}
 	var nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
 	var nomLocationNames = JSON.parse(localStorage.getItem("weather-location-names"));
 	var theSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	var refreshAgain = false;
 	locationEnabled = theSettings["location"]["weather"];
 	if (nomLocations.length > 0){
 		if (locationEnabled){
@@ -276,8 +279,11 @@ function refreshLocations(){
 			var image = "sunny"
 			var hourly = getHourlyForecast(nomToWeatherGrid(nomLocations[a]));
 			if (!hourly[0]){
-				console.log("Could not fetch hourly forecast for display.")
-				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>There was an error retrieving the data for this location.</h3></div></div><br>';
+				if (!refreshAgain){
+					refreshAgain = true;
+					setTimeout(refreshLocations, 7000);
+				}
+				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
 				document.getElementById("location-main").innerHTML += theDiv;
 			}
 			else{
@@ -677,10 +683,10 @@ function loadAlert(alertID){
 	navTo("alert-display")
 	setTimeout(function(){
 		map.invalidateSize(true)
-	}, 2000)
+	}, 1000)
 	setTimeout(function(){
 		map.fitBounds(polygon.getBounds());
-	}, 6000);
+	}, 2000);
 }
 
 // Clears polygons from the LeafletJS alert map

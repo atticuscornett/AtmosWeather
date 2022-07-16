@@ -4,9 +4,15 @@
 */
 
 // Initialize settings
+setTimeout(function(){
 if (!localStorage.getItem("atmos-settings")){
 	var atmosSettingsTemp;
-	var thePlatform = getPlatform();
+	try{
+		var thePlatform = getPlatform();
+	}
+	catch(err){
+		thePlatform = "other";
+	}
 	if (thePlatform.includes("desktop")){
 		atmosSettingsTemp = {
 			"location": {"weather": false, "alerts": false},
@@ -142,7 +148,7 @@ if (!localStorage.getItem("atmos-settings")){
 	};
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(atmosSettingsTemp))
-}
+}}, 100);
 
 // Refresh settings tab
 function refreshSettings(){

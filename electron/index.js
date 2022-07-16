@@ -265,7 +265,7 @@ function alertCheck(urlGet){
 						eventType = "beach-hazards-statement-advisory";
 					}
 					if (eventType == "hazardous-weather-outlook"){
-						eventType = "hazardous-weather-outlook";
+						eventType = "hazardous-weather-outlook-advisory";
 					}
 					if (eventType == "air-quality-alert"){
 						eventType = "air-quality-warning";
