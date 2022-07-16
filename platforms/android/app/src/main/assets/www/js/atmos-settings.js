@@ -4,7 +4,8 @@
 */
 
 // Initialize settings
-if (!localStorage.getItem("atmos-settings")){
+console.log(localStorage.getItem("atmos-settings") == null)
+if (localStorage.getItem("atmos-settings") == null){
 	var atmosSettingsTemp;
 	var thePlatform = getPlatform();
 	if (thePlatform.includes("desktop")){
@@ -141,7 +142,7 @@ if (!localStorage.getItem("atmos-settings")){
 		"per-location": {}
 	};
 	}
-	localStorage.setItem("atmos-settings", JSON.stringify(atmosSettingsTemp))
+	localStorage.setItem("atmos-settings", JSON.stringify(atmosSettingsTemp));
 }
 
 // Refresh settings tab

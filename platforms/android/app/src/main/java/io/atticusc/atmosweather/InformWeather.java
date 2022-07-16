@@ -43,6 +43,34 @@ public class InformWeather {
             System.out.println("Using default notification sound");
         }
         String jsonKey = eventTitle.toLowerCase(Locale.ROOT).replaceAll(" ", "-");
+        switch (jsonKey) {
+            case "air-quality-alert":
+                jsonKey = "air-quality-warning";
+                break;
+            case "hazardous-weather-outlook":
+                jsonKey = "hazardous-weather-outlook-advisory";
+                break;
+            case "special-weather-statement":
+                jsonKey = "special-weather-statement-advisory";
+                break;
+            case "marine-weather-statement":
+                jsonKey = "marine-weather-statement-advisory";
+                break;
+            case "coastal-flood-statement":
+                jsonKey = "coastal-flood-advisory";
+                break;
+            case "rip-current-statement":
+                jsonKey = "rip-current-statement-advisory";
+                break;
+            case "beach-hazards-statement":
+                jsonKey = "beach-hazards-statement-advisory";
+                break;
+            case "severe-weather-statement":
+                jsonKey = "severe-weather-statement-advisory";
+                break;
+            default:
+                break;
+        }
         String behavior = "soundnotification";
         int iconID = R.drawable.lightning_icon;
         try {
