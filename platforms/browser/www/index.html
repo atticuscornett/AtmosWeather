@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<title>Atmos Weather</title>
 		<meta charset="utf-8" lang="en">
@@ -32,6 +32,20 @@
 				<h3 style="text-align: center; animation: delayedFadeIn 3s; position: relative; bottom: 70px;font-family: Secular One;" id="weatherLogo">weather</h3>
 			</div>
 		</div>
+		<div id="welcome-window-native" hidden>
+			<center>
+				<br>
+				<img src="img/logo.svg" style="max-width: 75%;max-height: 10vh;">
+			</center>
+			<center id="fade-section">
+				<br>
+				<img id="welcome-image-native" src="img/sunny-day.svg">
+				<h1 id="welcome-title-native">Welcome To Atmos Weather</h1>
+				<h3 id="welcome-body-native">Atmos Weather is the ultimate lightweight weather forecast and alert program.</h3>
+				<br>
+				<button id="welcome-button-native" onclick="showNextIntro();">Next</button>
+			</center>
+		</div>
 		<div id="notice-window-container" hidden>
 			<h1 style="margin-left:20px;color:dodgerblue;">a t m o s weather</h1>
 			<div id="notice-window" style="padding: 20px;">
@@ -55,8 +69,8 @@
 				<div id="tab-about" class="tab-div" hidden>
 					<!-- UPDATE -->
 					<h1>About Atmos Weather</h1>
-					<h3>Version 0.6.0</h3>
-					<h3>Last updated 7-15-2022</h3>
+					<h3>Version 0.7.0</h3>
+					<h3>Last updated 7-23-2022</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>

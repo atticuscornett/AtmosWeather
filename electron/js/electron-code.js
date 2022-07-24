@@ -2,6 +2,11 @@ cordovaReady = true;
 
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
+	if (!localStorage.getItem("run-before")){
+		document.getElementById("welcome-window-native").hidden = false;
+		document.getElementById("atmos-logo").style = "animation: fadeOut 2s; animation-fill-mode: forwards;";
+		return;
+	}
 	if (!cordovaReady){
 		setTimeout(showNotices, 1000);
 		return;

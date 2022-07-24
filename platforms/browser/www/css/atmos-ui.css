@@ -50,6 +50,17 @@ select{
 	left: 0;
 }
 
+#welcome-window-native{
+	z-index: 99;
+	position: absolute;
+	background-color: black;
+	min-width: 100%;
+	min-height: 100%;
+	top: 0;
+	left: 0;
+	color: white;
+}
+
 #app{
 	z-index: 1;
 	position: absolute;
@@ -74,7 +85,7 @@ select{
 
 #add-location{
 	position: fixed;
-	z-layer: 99;
+	z-index: 99;
 	bottom: 10%;
 	padding-left: 15px;
 	padding-right: 15px;
@@ -87,9 +98,30 @@ select{
 	cursor: pointer;
 }
 
+#welcome-button-native{
+	border: none;
+	background-color: dodgerblue;
+	color: white;
+	font-family: Secular One;
+	font-size: 25px;
+	border-radius: 7px;
+	cursor: pointer;
+}
+
 #location-search{
 	font-size: 30px;
 	width: 50%;
+}
+
+#fade-section{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+
+#welcome-image-native{
+	max-height: 50vh;
+	max-width: 100vh;
 }
 
 /* Class Styles */
@@ -184,6 +216,15 @@ select{
 	}
 	#notice-window-container{
 		z-index: 99;
+		position: absolute;
+		background-color: black;
+		min-width: 100%;
+		min-height: 100%;
+		top: 0;
+		left: 0;
+	}
+	#welcome-window-native{
+		z-index: 100;
 		position: absolute;
 		background-color: black;
 		min-width: 100%;

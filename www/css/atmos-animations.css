@@ -13,7 +13,7 @@
 		font-size: 30px;
 		padding-left: 100px;
 		padding-right: 100px;
-		color: white:
+		color: white;
 	}
 	50%{
 		color: white;
@@ -130,7 +130,7 @@
 			font-size: 30px;
 			padding-left: 100px;
 			padding-right: 100px;
-			color: black:
+			color: black;
 		}
 		50%{
 			color: black;
@@ -149,5 +149,22 @@
 		100%{
 			background-color: black;
 		}
+	}
+}
+
+@keyframes simpleFadeOut{
+	0%{
+		opacity: 1.0;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+@keyframes simpleFadeIn{
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1.0;
 	}
 }
