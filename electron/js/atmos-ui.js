@@ -90,7 +90,7 @@ function showNotices(){
 		document.getElementById("notice-window").innerHTML += `
 		<h2>Important Information About Weather Warnings</h2>
 		<hr>
-		<h3>Although we strive to give rapid, accurate warning notifications 24/7, Atmos Weather should not be your only method of recieving emergency alerts. If internet service is lost or other errors occur, Atmos cannot give you alerts. All homes should have at least one weather radio with a battery backup so that they can recieve weather information even when the power is out. Atmos Weather is not responsible for alerts not sending or the consequences of alerts not sending.</h3>
+		<h3>Although we strive to give rapid, accurate warning notifications 24/7, Atmos Weather should not be your only method of recieving emergency alerts. If internet service is lost or other errors occur, Atmos cannot give you alerts. All homes should have at least one weather radio with a battery backup so that they can receive weather information even when the power is out. Atmos Weather is not responsible for alerts not sending or the consequences of alerts not sending.</h3>
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
@@ -180,9 +180,9 @@ function activateNavButtons(){
 			navTo("alerts");
 		}
 	};
-	document.getElementById("response-nav").onclick = function (){
-		if (screenAt != "responses"){
-			navTo("responses");
+	document.getElementById("radar-nav").onclick = function (){
+		if (screenAt != "radar"){
+			navTo("radar");
 		}
 	};
 	document.getElementById("settings-nav").onclick = function (){
@@ -747,7 +747,7 @@ function showNextIntro(){
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Everywhere You Care About"){
 			document.getElementById("welcome-title-native").innerHTML = "Privacy First";
-			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Minimal data is recieved by the National Weather Service and Open Street Map.";
+			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Minimal data is received by the National Weather Service and Open Street Map.";
 			document.getElementById("welcome-image-native").setAttribute("src", "img/privacy.svg");
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Privacy First"){
