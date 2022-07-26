@@ -101,18 +101,17 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version0.7.0")){
+	if (!window.localStorage.getItem("notice-version0.8.0")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v0.7.0 is here!</h2>
+		<h2>Atmos Weather v0.8.0 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Electron build is now stable!</dd>
-			<dd>- Windows build is now available and fully functioning.</dd>
-			<dd>- Support for more weather events added including Special Weather Statements, Severe Weather Statements, Air Quality Alerts, and many more!</dd>
-  			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed networking bugs on Windows.</dd>
-			<dd>- Fixed tray issues on Windows.</dd>
+  			<dd>- Welcome Screen Added On First Launch</dd>
+			<dd>- Radar Screen Added</dd>
+			<dt>Bug Fixes Everywhere</dt>
+  			<dd>- Fixed bug with notification settings on Electron version</dd>
+			<dd>- Fixed Android version not updating properly.</dd>
 		</dl> 
 		<br><br>
 		`

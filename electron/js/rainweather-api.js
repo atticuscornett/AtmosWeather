@@ -112,7 +112,7 @@ function changeRadarPosition(position, preloadOnly, force) {
     if (radarLayers[currentFrame.path]) {
         radarLayers[currentFrame.path].setOpacity(0);
     }
-    radarLayers[nextFrame.path].setOpacity(100);
+    radarLayers[nextFrame.path].setOpacity(60);
 
 
     var pastOrForecast = nextFrame.time > Date.now() / 1000 ? 'FORECAST' : 'PAST';
@@ -128,7 +128,7 @@ function addLayer(frame) {
 
         var source = new L.TileLayer(radarData.host + frame.path + '/' + radarTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.png', {
             tileSize: 256,
-            opacity: 0.01,
+            opacity: 0.5,
             zIndex: frame.time
         });
 
@@ -141,7 +141,8 @@ function addLayer(frame) {
         radarLayers[frame.path] = source;
     }
     if (!map2.hasLayer(radarLayers[frame.path])) {
-        map2.addLayer(radarLayers[frame.path]);
+        var layerTemp = map2.addLayer(radarLayers[frame.path]);
+        layerTemp.setOpacity(0.6);
     }
 }
 

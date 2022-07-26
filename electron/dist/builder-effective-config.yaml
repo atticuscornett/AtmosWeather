@@ -7,4 +7,4 @@ win:
   target: nsis
   icon: img/icon.png
 files: []
-electronVersion: 19.0.8
+electronVersion: 19.0.9
