@@ -21,15 +21,19 @@ function hideNotices(){
 	document.getElementById("notice-window-container").hidden = true;
 }
 
-// Initialize Leaflet Map
+// Initialize Leaflet Maps
 var map = L.map('alert-map').setView([33.543682, -86.8104], 13);
+var map2 = L.map('radar-map').setView([40.58207622, -95.461760283], 3);
 map.on("load", function(){console.log("map loaded")})
 var polygon = false;
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     	maxZoom: 19,
     	attribution: '© OpenStreetMap'
 	}).addTo(map);
-
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map2);
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
 	if (!localStorage.getItem("run-before") && getPlatform() != "pwa"){
@@ -349,6 +353,13 @@ function navCode(screenTo){
 	if (screenTo == "alerts"){
 		setTimeout(refreshAlerts, 10);
 	}
+	if (screenTo == "radar"){
+		setTimeout(function(){
+			map2.invalidateSize(true);
+			loadRadarData();
+			setTimeout(playRadarAnimation, 1000);
+		}, 500);
+	}
 	if (screenTo == "settings"){
 		refreshSettings();
 		setTimeout(keepSaving, 10);
@@ -633,7 +644,11 @@ function refreshAlerts(){
 		}
 		a++;
 	}
+	if (a == 0){
+		generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
+	}
 	document.getElementById("active-alert-list").innerHTML = generatedCode;
+	
 	generatedCode = "";
 	a = 0;
 	while (a < oldAlerts.length){
@@ -643,6 +658,9 @@ function refreshAlerts(){
 			generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
 		}
 		a++;
+	}
+	if (a == 0){
+		generatedCode = "<h2>You have no previously recieved alerts.</h2>"
 	}
 	document.getElementById("old-alert-list").innerHTML = generatedCode;
 }
