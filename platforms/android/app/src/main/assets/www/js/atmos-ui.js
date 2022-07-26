@@ -21,15 +21,19 @@ function hideNotices(){
 	document.getElementById("notice-window-container").hidden = true;
 }
 
-// Initialize Leaflet Map
+// Initialize Leaflet Maps
 var map = L.map('alert-map').setView([33.543682, -86.8104], 13);
+var map2 = L.map('radar-map').setView([40.58207622, -95.461760283], 3);
 map.on("load", function(){console.log("map loaded")})
 var polygon = false;
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     	maxZoom: 19,
     	attribution: '© OpenStreetMap'
 	}).addTo(map);
-
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map2);
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
 	if (!localStorage.getItem("run-before") && getPlatform() != "pwa"){
@@ -90,7 +94,7 @@ function showNotices(){
 		document.getElementById("notice-window").innerHTML += `
 		<h2>Important Information About Weather Warnings</h2>
 		<hr>
-		<h3>Although we strive to give rapid, accurate warning notifications 24/7, Atmos Weather should not be your only method of recieving emergency alerts. If internet service is lost or other errors occur, Atmos cannot give you alerts. All homes should have at least one weather radio with a battery backup so that they can recieve weather information even when the power is out. Atmos Weather is not responsible for alerts not sending or the consequences of alerts not sending.</h3>
+		<h3>Although we strive to give rapid, accurate warning notifications 24/7, Atmos Weather should not be your only method of recieving emergency alerts. If internet service is lost or other errors occur, Atmos cannot give you alerts. All homes should have at least one weather radio with a battery backup so that they can receive weather information even when the power is out. Atmos Weather is not responsible for alerts not sending or the consequences of alerts not sending.</h3>
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
@@ -180,9 +184,9 @@ function activateNavButtons(){
 			navTo("alerts");
 		}
 	};
-	document.getElementById("response-nav").onclick = function (){
-		if (screenAt != "responses"){
-			navTo("responses");
+	document.getElementById("radar-nav").onclick = function (){
+		if (screenAt != "radar"){
+			navTo("radar");
 		}
 	};
 	document.getElementById("settings-nav").onclick = function (){
@@ -348,6 +352,13 @@ function navCode(screenTo){
 	}
 	if (screenTo == "alerts"){
 		setTimeout(refreshAlerts, 10);
+	}
+	if (screenTo == "radar"){
+		setTimeout(function(){
+			map2.invalidateSize(true);
+			loadRadarData();
+			setTimeout(playRadarAnimation, 1000);
+		}, 500);
 	}
 	if (screenTo == "settings"){
 		refreshSettings();
@@ -633,7 +644,11 @@ function refreshAlerts(){
 		}
 		a++;
 	}
+	if (a == 0){
+		generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
+	}
 	document.getElementById("active-alert-list").innerHTML = generatedCode;
+	
 	generatedCode = "";
 	a = 0;
 	while (a < oldAlerts.length){
@@ -643,6 +658,9 @@ function refreshAlerts(){
 			generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
 		}
 		a++;
+	}
+	if (a == 0){
+		generatedCode = "<h2>You have no previously recieved alerts.</h2>"
 	}
 	document.getElementById("old-alert-list").innerHTML = generatedCode;
 }
@@ -747,7 +765,7 @@ function showNextIntro(){
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Everywhere You Care About"){
 			document.getElementById("welcome-title-native").innerHTML = "Privacy First";
-			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Minimal data is recieved by the National Weather Service and Open Street Map.";
+			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Minimal data is received by the National Weather Service and Open Street Map.";
 			document.getElementById("welcome-image-native").setAttribute("src", "img/privacy.svg");
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Privacy First"){

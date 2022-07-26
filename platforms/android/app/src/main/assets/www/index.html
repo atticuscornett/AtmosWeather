@@ -80,6 +80,7 @@
 					<h3><a href="https://nominatim.org/" target="_blank">OSM Nominatim</a></h3>
 					<h3><a href="https://leafletjs.com/index.html" target="_blank">LeafletJS</a></h3>
 					<h3><a href="https://www.electronjs.org/" target="_blank">ElectronJS</a></h3>
+					<h3><a href="https://www.rainviewer.com/api.html" target="_blank">RainViewer</a></h3>
 					<h3><a href="https://storyset.com/people" target="_blank">People illustrations by Storyset</a></h3>
 				</div>
 				<div id="tab-alerts" class="tab-div" hidden>
@@ -124,11 +125,20 @@
 					<h4>WHERE IS IT SENT: National Weather Service API</h4>
 					<h4>WHY: To provide forecasts for the current location and check for alerts</h4>
 				</div>
-				<div id="tab-responses" class="tab-div" hidden>
-					<h1>Emergency Responses</h1>
+				<div id="tab-radar" class="tab-div" hidden>
+					<h1>Radar</h1>
+					<div id="radar-map" style="height:50%;right:20px;border-radius:7px;">
+					
+					</div>
+					<h6 id="radar-time"></h6>
+					<h3>Jump To Location</h3>
+					<div id="radar-locations">
+
+					</div>
 				</div>
 				<div id="tab-search" class="tab-div" hidden>
 					<h1>Location Search</h1>
+					<h6>Enter a city name or a zip code.</h6>
 					<input id="location-search">
 					<img id="search-button" src="img/search.svg" style="vertical-align: bottom;cursor: pointer;" onClick="locationSearch();">
 					<h6>Powered by the <a href="https://nominatim.org/" target="_blank">Nominatim API</a></h6>
@@ -1158,9 +1168,9 @@
 						<img src="img/alerts.svg" class="nav-icon">
 					</center>
 				</div>
-				<div style="position: absolute; left:50%; width: 25%; height: 8%;" id="response-nav">
+				<div style="position: absolute; left:50%; width: 25%; height: 8%;" id="radar-nav">
 					<center>
-						<img src="img/response.svg" class="nav-icon">
+						<img src="img/radar.svg" class="nav-icon">
 					</center>
 				</div>
 				<div style="position: absolute; left:75%; width: 25%; height: 8%;" id="settings-nav">
@@ -1184,6 +1194,7 @@
 	<script src="js/nws-api.js"></script>
 	<script src="js/electron-code.js"></script>
 	<script src="js/atmos-settings.js"></script>
+	<script src="js/rainweather-api.js"></script>
 	
 	
 	<!-- Animation Code-->
