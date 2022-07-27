@@ -257,3 +257,33 @@ function getPolyBoundries(weatherAlert, wGrid){
 		return weatherAlert;
 	}
 }
+
+// Gets all active weather alerts
+function getAllActiveAlerts(){
+	try{
+		var pos = "9999,9999";
+		var theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
+		var time = new Date();
+		if (theCache.hasOwnProperty(pos)){
+			console.log((time.getTime() - theCache[pos][1]))
+			// Check if got alerts within last minute
+			if ((time.getTime() - theCache[pos][1]) > 60*1000){
+				theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active")["features"], time.getTime()]
+				localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
+				return theCache[pos];
+			}
+			else{
+				console.log("got in last minute")
+				return theCache[pos];
+			}
+		}
+		else{
+			theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active")["features"], time.getTime()]
+			localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
+			return theCache[pos];
+		}
+	}
+	catch(err){
+		return false;
+	}
+}
