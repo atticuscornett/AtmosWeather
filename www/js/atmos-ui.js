@@ -353,10 +353,38 @@ function navCode(screenTo){
 		setTimeout(refreshAlerts, 10);
 	}
 	if (screenTo == "radar"){
+		for(i in map2._layers) {
+			if(map2._layers[i]._path != undefined) {
+				try {
+					map.removeLayer(map2._layers[i]);
+				}
+				catch(e) {
+					console.log("problem with " + e + map2._layers[i]);
+				}
+			}
+		}
 		setTimeout(function(){
 			map2.invalidateSize(true);
 			loadRadarData();
 			setTimeout(playRadarAnimation, 1000);
+			var polygon;
+			setTimeout(function(){
+				var alerts = getAllActiveAlerts();
+				var a = 0;
+				while (a < alerts[0].length){
+					if (alerts[0][a]["geometry"]){
+						if (alerts[0][a]["properties"]["event"].includes("Warning")){
+							polygon = L.geoJSON(alerts[0][a]["geometry"], {style:{"color":"red"}}).addTo(map2);
+							polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
+						}
+						else{
+							polygon = L.geoJSON(alerts[0][a]["geometry"], {style:{"color":"blue"}}).addTo(map2);
+							polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
+						}
+					}
+					a++;
+				}
+			}, 2000)
 		}, 500);
 	}
 	if (screenTo == "settings"){

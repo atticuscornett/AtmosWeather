@@ -141,8 +141,7 @@ function addLayer(frame) {
         radarLayers[frame.path] = source;
     }
     if (!map2.hasLayer(radarLayers[frame.path])) {
-        var layerTemp = map2.addLayer(radarLayers[frame.path]);
-        //layerTemp.setOpacity(0.6);
+        map2.addLayer(radarLayers[frame.path]);
     }
 }
 
