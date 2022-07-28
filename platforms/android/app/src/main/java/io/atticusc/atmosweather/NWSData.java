@@ -55,8 +55,9 @@ public class NWSData {
                                 current = jsonArray.getJSONObject(a);
                                 current = current.getJSONObject("properties");
                                 if (!stringArray.contains(current.getString("@id"))){
-                                    new InformWeather(current.getString("event"), locationName, current.getString("description"), context);
-                                    stringArray.add(current.getString("@id"));
+                                    if (InformWeather.InformWeatherReturn(current.getString("event"), locationName, current.getString("description"), context)){
+                                        stringArray.add(current.getString("@id"));
+                                    }
                                 }
 
                                 a++;

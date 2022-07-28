@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class InformWeather {
-    public InformWeather(String eventTitle, String locationName, String eventInfo, Context context){
+    public static Boolean InformWeatherReturn(String eventTitle, String locationName, String eventInfo, Context context){
         if (eventTitle.contains("Red Flag Warning")){
             eventTitle = "Fire Weather Warning";
         }
@@ -120,9 +120,18 @@ public class InformWeather {
         }
         else if (behavior.contains("alertmove")){
             //TODO
+            Boolean moving = settings.getBoolean("currentlyMoving", false);
+            if (moving){
+                new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+            }
+            else{
+                return false;
+            }
         }
         else if (behavior.contains("alert")){
             new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
         }
+
+        return true;
     }
 }
