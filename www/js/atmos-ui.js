@@ -30,10 +30,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     	maxZoom: 19,
     	attribution: '© OpenStreetMap'
 	}).addTo(map);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap'
-}).addTo(map2);
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
 	if (!localStorage.getItem("run-before") && getPlatform() != "pwa"){
@@ -353,16 +349,12 @@ function navCode(screenTo){
 		setTimeout(refreshAlerts, 10);
 	}
 	if (screenTo == "radar"){
-		for(i in map2._layers) {
-			if(map2._layers[i]._path != undefined) {
-				try {
-					map.removeLayer(map2._layers[i]);
-				}
-				catch(e) {
-					console.log("problem with " + e + map2._layers[i]);
-				}
-			}
-		}
+		map2.remove();
+		map2 = L.map('radar-map').setView([40.58207622, -95.461760283], 3);
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    		maxZoom: 19,
+    		attribution: '© OpenStreetMap'
+		}).addTo(map2);
 		setTimeout(function(){
 			map2.invalidateSize(true);
 			loadRadarData();
