@@ -42,7 +42,9 @@ if (!localStorage.getItem("atmos-settings")){
 					"ice-storm": "alert",
 					"winter-storm": "alert",
 					"freeze": "soundnotification",
-					"wind-chill": "soundnotification"
+					"wind-chill": "soundnotification",
+					"dust-storm": "alert",
+					"fire": "alert"
 				},
 				"watches":{
 					"tornado": "soundnotification",
@@ -74,7 +76,10 @@ if (!localStorage.getItem("atmos-settings")){
 					"dense-fog": "soundnotification",
 					"small-craft": "soundnotification",
 					"flood": "soundnotification",
-					"coastal-flood": "soundnotification"
+					"coastal-flood": "soundnotification",
+					"high-surf": "soundnotification",
+					"brisk-wind": "soundnotification",
+					"lake-wind": "soundnotification"
 				}
 			},
 			"per-location": {}
@@ -109,7 +114,9 @@ if (!localStorage.getItem("atmos-settings")){
 				"ice-storm": "alert",
 				"winter-storm": "alert",
 				"freeze": "soundnotification",
-				"wind-chill": "soundnotification"
+				"wind-chill": "soundnotification",
+				"dust-storm": "alert",
+				"fire": "alert"
 			},
 			"watches":{
 				"tornado": "soundnotification",
@@ -141,7 +148,10 @@ if (!localStorage.getItem("atmos-settings")){
 				"dense-fog": "soundnotification",
 				"small-craft": "soundnotification",
 				"flood": "soundnotification",
-				"coastal-flood": "soundnotification"
+				"coastal-flood": "soundnotification",
+				"high-surf": "soundnotification",
+				"brisk-wind": "soundnotification",
+				"lake-wind": "soundnotification"
 			}
 		},
 		"per-location": {}

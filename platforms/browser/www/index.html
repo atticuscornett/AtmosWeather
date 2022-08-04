@@ -70,7 +70,7 @@
 					<!-- UPDATE -->
 					<h1>About Atmos Weather</h1>
 					<h3>Version 0.8.0</h3>
-					<h3>Last updated 7-26-2022</h3>
+					<h3>Last updated 8-3-2022</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>
@@ -327,6 +327,15 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-fire-warning">Fire Warning - </label>
+					<select id="setting-fire-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-fire-weather-warning">Red Flag/Fire Weather Warning - </label>
 					<select id="setting-fire-weather-warning">
 						<option value="alert">Alert</option>
@@ -338,6 +347,15 @@
 					<br>
 					<label for="setting-air-quality-warning">Air Quality Alert - </label>
 					<select id="setting-air-quality-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-dust-storm-warning">Dust Storm Warning - </label>
+					<select id="setting-dust-storm-warning">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -527,6 +545,24 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-brisk-wind-advisory">Brisk Wind Advisory - </label>
+					<select id="setting-brisk-wind-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-lake-wind-advisory">Lake Wind Advisory - </label>
+					<select id="setting-lake-wind-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-severe-weather-statement-advisory">Severe Weather Statement - </label>
 					<select id="setting-severe-weather-statement-advisory">
 						<option value="alert">Alert</option>
@@ -574,6 +610,15 @@
 					<br>
 					<label for="setting-marine-weather-statement-advisory">Marine Weather Statement - </label>
 					<select id="setting-marine-weather-statement-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-high-surf-advisory">High Surf Advisory - </label>
+					<select id="setting-high-surf-advisory">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -821,6 +866,15 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-fire-warning-location">Fire Warning - </label>
+					<select id="setting-fire-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-fire-weather-warning-location">Red Flag/Fire Weather Warning - </label>
 					<select id="setting-fire-weather-warning-location">
 						<option value="alert">Alert</option>
@@ -832,6 +886,15 @@
 					<br>
 					<label for="setting-air-quality-warning-location">Air Quality Alert - </label>
 					<select id="setting-air-quality-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-dust-storm-warning-location">Dust Storm Warning - </label>
+					<select id="setting-dust-storm-warning-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -1021,6 +1084,24 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-brisk-wind-advisory-location">Brisk Wind Advisory - </label>
+					<select id="setting-brisk-wind-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-lake-wind-advisory-location">Lake Wind Advisory - </label>
+					<select id="setting-lake-wind-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-severe-weather-statement-advisory-location">Severe Weather Statement - </label>
 					<select id="setting-severe-weather-statement-advisory-location">
 						<option value="alert">Alert</option>
@@ -1068,6 +1149,15 @@
 					<br>
 					<label for="setting-marine-weather-statement-advisory-location">Marine Weather Statement - </label>
 					<select id="setting-marine-weather-statement-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-high-surf-advisory-location">High Surf Advisory - </label>
+					<select id="setting-high-surf-advisory-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
