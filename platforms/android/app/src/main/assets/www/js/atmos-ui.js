@@ -454,7 +454,7 @@ function loadMoreInfo(navName){
 	var AMPM;
 	while (a < 12){
 		sfor = hourly[0][a]["shortForecast"].toLowerCase();
-		longHourForecast += "<div style='background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
+		longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
 		if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
 			image = "rainy";
 		}
@@ -493,16 +493,26 @@ function loadMoreInfo(navName){
 	// Add detailed forecast at bottom
 	var theFiveForecast = "<br><h1>NWS Forecast</h1><br>";
 	console.log(forecast);
-	theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
-	theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
-	theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
-	theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
-	theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
+	try{
+		theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
+		theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
+		theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
+		theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
+		theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
+	}
+	catch(err){
+		theFiveForecast = "<h3>Loading location forecast...</h3>";
+		setTimeout(function(){
+			if (screenAt.includes("locdat")){
+				loadMoreInfo(navName);
+			}
+		}, 7000)
+	}
 	generatedCode += theFiveForecast;
 	generatedCode += "<button style='width:100%;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
 	document.getElementById("tab-" + navName).innerHTML = generatedCode + "</div>";
