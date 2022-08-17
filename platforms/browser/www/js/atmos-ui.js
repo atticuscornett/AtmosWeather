@@ -454,7 +454,7 @@ function loadMoreInfo(navName){
 	var AMPM;
 	while (a < 12){
 		sfor = hourly[0][a]["shortForecast"].toLowerCase();
-		longHourForecast += "<div style='background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
+		longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
 		if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
 			image = "rainy";
 		}

@@ -148,6 +148,16 @@ function checkLocation(){
 	if (locationNames.length > 0){
 		alertCheck("https://api.weather.gov/alerts/active?point=" + weatherLocations[cycleAt]["lat"] + "," + weatherLocations[cycleAt]["lon"]);
 	}
+	if (win2 == null){
+		win2 = new BrowserWindow({
+			width: 800,
+			height: 600,
+			icon: __dirname + "/img/icon.png",
+			autoHideMenuBar: true
+		});
+		win2.loadFile('index.html')
+		win2.hide();
+	}
 	win2.webContents.executeJavaScript('localStorage.getItem("lastForecastNotification' + locationNames[cycleAt] + '");', true)
 		.then(result => {
 			var date = new Date();
@@ -220,6 +230,25 @@ function checkLocation(){
 				}
 			}
 	});
+}
+
+function loadAlertE(event, arg){
+	try{
+		win2.webContents.executeJavaScript('loadAlert("' + this.cycleAt.toString() + '-' + this.at.toString() +  '")', false);
+		win2.show()
+	}
+	catch(err){
+		win2 = new BrowserWindow({
+			width: 800,
+			height: 600,
+			icon: __dirname + "/img/icon.png",
+			autoHideMenuBar: true
+		});
+		win2.loadFile('index.html')
+		win2.webContents.executeJavaScript('loadAlert("' + this.cycleAt.toString() + '-' + this.at.toString() +  '")', false);
+		win2.show()
+	}
+	
 }
 
 // Check the location at for alerts
@@ -309,18 +338,26 @@ function alertCheck(urlGet){
 						notificationSetting = "soundnotification";
 					}
 					if (notificationSetting == "alert"){
-						new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"}).show()
+						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
+						notif.show()
+						notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
 						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();", false);
 					}
 					else if (notificationSetting == "silentnotification"){
-						new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"}).show()
+						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
+						notif.show()
+						notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
 					}
 					else if (notificationSetting == "soundnotification"){
 						if (chunk[at]["properties"]["event"].toLowerCase().includes("watch")){
-							new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"}).show();
+							var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
+							notif.show()
+							notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
 						}
 						else{
-							new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"}).show();
+							var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"});
+							notif.show()
+							notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
 						}
 						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();", false);
 					}
