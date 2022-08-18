@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Notification, Tray, Menu, net} = require('electron')
+const { app, BrowserWindow, Notification, Tray, Menu, net, dialog} = require('electron')
 var win2 = null;
 var weatherLocations;
 var locationNames;
@@ -8,6 +8,11 @@ var notifiedAlerts = [];
 var cycleAt = 0;
 var lastNetworkCheck = true;
 let trayIcon = null;
+
+dialog.showErrorBox = function(title, content) {
+    console.log(`${title}\n${content}`);
+};
+
 const createWindow = () => {
 const win = new BrowserWindow({
     width: 800,
@@ -45,6 +50,12 @@ else{
 			app.setAppUserModelId("Atmos Weather");
 		}
 		createWindow()
+		win2.webContents.executeJavaScript('localStorage.getItem("run-before")', true)
+		.then(result => {
+			if (!result){
+				win2.show();
+			}
+		});
 		trayIcon = new Tray(__dirname + "/img/icon.png")
 		trayIcon.setToolTip('Atmos Weather')
 		const trayMenuTemplate = [{
@@ -234,6 +245,7 @@ function checkLocation(){
 
 function loadAlertE(event, arg){
 	try{
+		win2.webContents.executeJavaScript('stopAllAudio();', false);
 		win2.webContents.executeJavaScript('loadAlert("' + this.cycleAt.toString() + '-' + this.at.toString() +  '")', false);
 		win2.show()
 	}
@@ -245,6 +257,7 @@ function loadAlertE(event, arg){
 			autoHideMenuBar: true
 		});
 		win2.loadFile('index.html')
+		win2.webContents.executeJavaScript('stopAllAudio();', false);
 		win2.webContents.executeJavaScript('loadAlert("' + this.cycleAt.toString() + '-' + this.at.toString() +  '")', false);
 		win2.show()
 	}
@@ -341,7 +354,8 @@ function alertCheck(urlGet){
 						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
 						notif.show()
 						notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();", false);
+						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();allAudio.push(audio);", false);
+						notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
 					}
 					else if (notificationSetting == "silentnotification"){
 						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
@@ -353,13 +367,15 @@ function alertCheck(urlGet){
 							var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
 							notif.show()
 							notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
+							notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
 						}
 						else{
 							var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"});
 							notif.show()
 							notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
+							notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
 						}
-						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();", false);
+						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
 					}
 					locationNames[cycleAt]
 					console.log(notificationSetting);

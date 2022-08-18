@@ -1,4 +1,14 @@
 cordovaReady = true;
+var allAudio = [];
+
+function stopAllAudio(){
+	var a = 0;
+	while (a < allAudio.length){
+		allAudio[a].pause();
+		a++;
+	}
+	allAudio = [];
+}
 
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
