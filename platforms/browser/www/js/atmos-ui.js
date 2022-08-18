@@ -275,6 +275,8 @@ function refreshLocations(){
 		else{
 			document.getElementById("location-main").innerHTML = "";
 		}
+		document.getElementById("location-w-alert").innerHTML = "";
+		document.getElementById("location-w-other").innerHTML = "";
 		document.getElementById("location-data").innerHTML = "";
 		var a = 0;
 		while (a < nomLocations.length){
@@ -316,7 +318,15 @@ function refreshLocations(){
 					info = "Weather statements in effect";
 				}
 				var theDiv = '<div class="location ' + alertStatus + '" onclick="navTo(\'locdat-' + nomLocationNames[a] + '-' + a.toString() + '\')"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>' + info + '&emsp;(Tap for more info.)</h3></div></div><br>';
-				document.getElementById("location-main").innerHTML += theDiv;
+				if (alertStatus == "warning"){
+					document.getElementById("location-w-alert").innerHTML += theDiv;
+				}
+				else if (alertStatus == "watch" || alertStatus == "other"){
+					document.getElementById("location-w-other").innerHTML += theDiv;
+				}
+				else{
+					document.getElementById("location-main").innerHTML += theDiv;
+				}
 				document.getElementById("location-data").innerHTML += "<div id='tab-locdat-" + nomLocationNames[a] + '-' + a.toString() + "' class='tab-div' hidden><h1>" + nomLocationNames[a] + "</h1></div>";
 			}
 			a++;
@@ -493,16 +503,26 @@ function loadMoreInfo(navName){
 	// Add detailed forecast at bottom
 	var theFiveForecast = "<br><h1>NWS Forecast</h1><br>";
 	console.log(forecast);
-	theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
-	theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
-	theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
-	theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
-	theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
-	theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
+	try{
+		theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
+		theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
+		theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
+		theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
+		theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
+		theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
+	}
+	catch(err){
+		theFiveForecast = "<h3>Loading location forecast...</h3>";
+		setTimeout(function(){
+			if (screenAt.includes("locdat")){
+				loadMoreInfo(navName);
+			}
+		}, 7000)
+	}
 	generatedCode += theFiveForecast;
 	generatedCode += "<button style='width:100%;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
 	document.getElementById("tab-" + navName).innerHTML = generatedCode + "</div>";
@@ -687,6 +707,7 @@ function refreshAlerts(){
 // Loads the information for an alert and displays it
 function loadAlert(alertID){
 	clearMap();
+	console.log(alertID);
 	var theSplit = alertID.split("-");
 	var locationIndex = parseInt(theSplit[0]);
 	var alertIndex = parseInt(theSplit[1]);

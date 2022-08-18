@@ -275,6 +275,8 @@ function refreshLocations(){
 		else{
 			document.getElementById("location-main").innerHTML = "";
 		}
+		document.getElementById("location-w-alert").innerHTML = "";
+		document.getElementById("location-w-other").innerHTML = "";
 		document.getElementById("location-data").innerHTML = "";
 		var a = 0;
 		while (a < nomLocations.length){
@@ -316,7 +318,15 @@ function refreshLocations(){
 					info = "Weather statements in effect";
 				}
 				var theDiv = '<div class="location ' + alertStatus + '" onclick="navTo(\'locdat-' + nomLocationNames[a] + '-' + a.toString() + '\')"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>' + info + '&emsp;(Tap for more info.)</h3></div></div><br>';
-				document.getElementById("location-main").innerHTML += theDiv;
+				if (alertStatus == "warning"){
+					document.getElementById("location-w-alert").innerHTML += theDiv;
+				}
+				else if (alertStatus == "watch" || alertStatus == "other"){
+					document.getElementById("location-w-other").innerHTML += theDiv;
+				}
+				else{
+					document.getElementById("location-main").innerHTML += theDiv;
+				}
 				document.getElementById("location-data").innerHTML += "<div id='tab-locdat-" + nomLocationNames[a] + '-' + a.toString() + "' class='tab-div' hidden><h1>" + nomLocationNames[a] + "</h1></div>";
 			}
 			a++;
