@@ -43,11 +43,18 @@
 				display: inline-block;
 				margin-right: 20px;
 			}
+			.gradient-title{
+				background: rgb(41,171,226);
+   				background: linear-gradient(90deg, rgba(41,171,226,1) 0%, rgba(0,169,157,1) 100%);
+    			color: transparent;
+    			-webkit-background-clip: text;
+    			background-clip: text;
+			}
 		</style>
 	</head>
 	<body>
 		<img src="logo.svg" style="width: 400px;">
-		<h1>The future of weather alerts is here.</h1>
+		<h1 class="gradient-title">The future of weather alerts is here.</h1>
 		<h2>Atmos Weather is the ultimate lightweight weather forecast and alert app.<br>
 			Unlike other apps, it isn't bloated with ads and unclearable notifications.<br>
 			It's cross-plaform, so you can get alerts on the go or at home.<br>
@@ -77,29 +84,32 @@
 			</div>
 			<h6>Requires Android 5 or above.<br>Uses sideloading.</h6>
 		</div>
-		<div class="downloadButton">
-			<div id="githubView"  style="background-color: rebeccapurple; vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
-				<h4 style="display: inline;height: 100%;margin-left:20px;">GitHub</h4>
-				<img src="webIcons/github.svg" style="margin-right:20px;">
+		<a href="https://github.com/atticuscornett/AtmosWeather" target="_blank" style="color:white;text-decoration: none;">
+			<div class="downloadButton">
+				<div id="githubView"  style="background-color: rebeccapurple; vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
+					<h4 style="display: inline;height: 100%;margin-left:20px;">GitHub</h4>
+					<img src="webIcons/github.svg" style="margin-right:20px;">
+				</div>
+				<h6>View source on GitHub.<br>&emsp;</h6>
 			</div>
-			<h6>View source on GitHub.<br>&emsp;</h6>
-		</div>
+		</a>
 		<br><br><br><br>
 		<h5>Want to download the version made for the Congressional App Challenge?</h5>
 		<h6>Windows&emsp;Android</h6>
-		<h1>Total Control</h1>
+		<br><br>
+		<h1 class="gradient-title">Total Control</h1>
 		<h2>Atmos lets you control everything about weather alerts.<br>Recieve weather alerts for multiple locations? Done.<br>Choose which types of alerts you get? Done.<br>Manage sound and vibration? Done.</h2>
 		<br><br><br><br>
-		<h1>Better Alerts</h1>
+		<h1 class="gradient-title">Better Alerts</h1>
 		<h2>Classic weather alerts are text only.<br>Atmos provides maps so you can get the full picture<br>and understand the storms.</h2>
    		<br><br><br><br>
-		<h1>Desktop + Mobile</h1>
+		<h1 class="gradient-title">Desktop + Mobile</h1>
 		<h2>Most weather apps only provide active alerts on mobile.<br>Atmos provides weather alerts on desktop and mobile,<br> so you never miss an alert.</h2>
 		<br><br><br><br>
-		<h1>Reliable Data</h1>
+		<h1 class="gradient-title">Reliable Data</h1>
 		<h2>Atmos directly uses the National Weather Service API.<br>Rest assured, you are getting reliable data from<br>the nation's top weather agency.</h2>
 		<br><br><br><br>
-		<h1>Free + Lightweight</h1>
+		<h1 class="gradient-title">Free + Lightweight</h1>
 		<h2>Atmos is free in the truest sense of the word.<br>No ads, no subscription, and no bloatware.<br>How do we achieve this?<br>Atmos relies on free services and APIs, so there are no server costs.<br>It is maintained by a team of unpaid volunteers.<br>No cost to us = No cost to you.</h2>
 	</body>
 </html>
