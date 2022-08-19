@@ -162,6 +162,12 @@ if (!localStorage.getItem("atmos-settings")){
 	localStorage.setItem("atmos-settings", JSON.stringify(atmosSettingsTemp))
 }}, 100);
 
+// Initialize Locations
+if (!localStorage.getItem("weather-locations")){
+	localStorage.setItem("weather-locations", "[]");
+	localStorage.setItem("weather-location-names", "[]")
+}
+
 // Refresh settings tab
 function refreshSettings(){
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
