@@ -53,8 +53,11 @@ function nomItemsToNames(items){
 	var temp;
 	while (a < items.length){
 		temp = items[a]["display_name"];
-		temp = temp.split(", ")
-		theList.push(temp[0] + ", " + temp[1] + ", " + temp[2])
+		temp = temp.split(", ");
+		temp = temp[0] + ", " + temp[1] + ", " + temp[2];
+		temp = temp.replaceAll("undefined, ", "");
+		temp = temp.replaceAll(", undefined", "");
+		theList.push(temp)
 		a++;
 	}
 	return theList;
