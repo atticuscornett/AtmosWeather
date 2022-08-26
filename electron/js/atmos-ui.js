@@ -4,8 +4,10 @@
 	Also functions as a miscellaneous function file
 */
 
+console.log("🌥⚡ Atmos Weather")
+
 // Initialize Cordova
-document.addEventListener('deviceready', function(){console.log(cordova.platformId);cordovaReady=true;}, false);
+document.addEventListener('deviceready', function(){cordovaReady=true;}, false);
 
 // Initial Variable States
 var screenAt = "locations";
@@ -24,7 +26,7 @@ function hideNotices(){
 // Initialize Leaflet Maps
 var map = L.map('alert-map').setView([33.543682, -86.8104], 13);
 var map2 = L.map('radar-map').setView([40.58207622, -95.461760283], 3);
-map.on("load", function(){console.log("map loaded")})
+map.on("load", function(){})
 var polygon = false;
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     	maxZoom: 19,
@@ -123,7 +125,6 @@ function showNotices(){
 	<br><br>
 	`
 	document.getElementById("notice-window-container").hidden = false;
-	console.log(platform);
 	if (platform == "pwa"){
 		document.getElementById("settings-warning").hidden = false;
 	}
@@ -135,31 +136,25 @@ function getPlatform(){
 	if (cordova.platformId == "browser"){
 		// Running either electron version or online version
 		if (window && window.process && window.process.type){
-			console.log("Atmos Electron Version")
 			platform = "desktop";
 		}
 		else{
-			console.log("Atmos Web Version")
 			platform = "pwa";
 		}
 	}
 	else{
 		if (cordova.platformId == "electron"){
 			if (navigator.platform.indexOf("Win") == 0){
-				console.log("Atmos for Windows")
 				platform = "desktop-windows"
 			}
 			else if (navigator.platform.indexOf("Mac") == 0){
-				console.log("Atmos for Mac")
 				platform = "desktop-mac"
 			}
 			else{
-				console.log("Atmos for Linux/Other")
 				platform = "desktop-linux"
 			}
 		}
 		else{
-			console.log("Atmos Mobile Version")
 			platform = device.platform;
 		}
 	}
@@ -221,7 +216,6 @@ function locationSearch(){
 	var searchOutput = nomSearch(theSearch);
 	var searchResults = nomItemsToNames(searchOutput);
 	var noRep = [];
-	console.log(searchResults);
 	var a = 0;
 	while (a < searchResults.length){
 		if (searchOutput[a]["display_name"].includes("United States") && !noRep.includes(searchResults[a])){
@@ -234,7 +228,6 @@ function locationSearch(){
 	if (document.getElementById("search-results").innerHTML == ""){
 		document.getElementById("search-results").innerHTML = "<h1>Couldn't find that location!";
 	}
-	console.log(searchResults);
 }
 
 // Add the selected location to the database
@@ -246,8 +239,6 @@ function selectResult(id){
 	var searchOutput = nomSearch(theSearch)[id];
 	var tempJSON = JSON.parse(localStorage.getItem("weather-locations"));
 	var tempJSON2 = JSON.parse(localStorage.getItem("weather-location-names"));
-	console.log(tempJSON2);
-	console.log(name);
 	if (!tempJSON2.includes(name)){
 		tempJSON.push(searchOutput);
 		tempJSON2.push(name)
@@ -402,7 +393,6 @@ function navCode(screenTo){
 function loadMoreInfo(navName){
 	var index = navName.split("-");
 	index = parseInt(index[index.length -1]);
-	console.log(index)
 	var nomObj = JSON.parse(localStorage.getItem("weather-locations"))[index];
 	var nomName = JSON.parse(localStorage.getItem("weather-location-names"))[index];
 	var wGrid = nomToWeatherGrid(nomObj);
@@ -482,7 +472,6 @@ function loadMoreInfo(navName){
 		}
 		forecastTime = hourly[0][a]["startTime"];
 		forecastTime = parseInt(forecastTime.substr(11,2));
-		console.log(forecastTime);
 		AMPM = "AM";
 		if (forecastTime > 11){
 			AMPM = "PM";
@@ -502,7 +491,6 @@ function loadMoreInfo(navName){
 	generatedCode += longHourForecast;
 	// Add detailed forecast at bottom
 	var theFiveForecast = "<br><h1>NWS Forecast</h1><br>";
-	console.log(forecast);
 	try{
 		theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
 		theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
@@ -544,7 +532,6 @@ function getStatus(nomObj){
 	var statList = [];
 	// Count the number of watches and warnings
 	while (a < weatherAlerts.length){
-		console.log(weatherAlerts[a]["properties"]["event"])
 		if (weatherAlerts[a]["properties"]["event"].toLowerCase().includes("watch")){
 			watchesList.push(weatherAlerts[a]["properties"]["event"]);
 			watches++;
@@ -579,13 +566,10 @@ function getStatus(nomObj){
 // Sync with native code
 function syncFiles(){
 	if (!getPlatform().includes("desktop")){
-		NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){console.log("Saved settings natively")}, function(obj){console.log(error.exception);console.log(error.code);});
-		NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){console.log("Saved locations natively")}, function(obj){console.log(error.exception);console.log(error.code);});
-		NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){console.log("Saved location names natively")}, function(obj){console.log(error.exception);console.log(error.code);});
-		NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){console.log("Saved location cache natively")}, function(obj){console.log(error.exception);console.log(error.code);});
-	}
-	else{
-		console.log("Electron Version")
+		NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 	}
 }
 
@@ -610,7 +594,6 @@ function getCurrentLocation(){
 		}, function(error){
 			currentLat = false;
 			currentLong = false;
-			console.log("Could not get location.")
 		})
 	}
 	else{
@@ -707,14 +690,10 @@ function refreshAlerts(){
 // Loads the information for an alert and displays it
 function loadAlert(alertID){
 	clearMap();
-	console.log(alertID);
 	var theSplit = alertID.split("-");
 	var locationIndex = parseInt(theSplit[0]);
 	var alertIndex = parseInt(theSplit[1]);
 	var theLocation = JSON.parse(localStorage.getItem("weather-locations"))[locationIndex];
-	console.log(locationIndex)
-	console.log(theLocation)
-	//map.setView([parseInt(theLocation["lat"]), parseInt(theLocation["lon"])])
 	var theAlert = getWeatherAlertsForNom(theLocation);
 	theAlert = theAlert[0][alertIndex];
 	var alertBoundries = getPolyBoundries(theAlert, nomToWeatherGrid(theLocation));
@@ -760,7 +739,7 @@ function clearMap() {
                 map.removeLayer(map._layers[i]);
             }
             catch(e) {
-                console.log("problem with " + e + map._layers[i]);
+                console.log("Error removing " + e + map._layers[i]);
             }
         }
     }

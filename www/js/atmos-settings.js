@@ -278,7 +278,6 @@ function loadLocationSettings(index){
 	var names = nomItemsToNames(locations);
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	if (!allSettings["per-location"].hasOwnProperty(names[window.settingsIndex])){
-		console.log("Making blank")
 		allSettings["per-location"][names[window.settingsIndex]] = {"notifications":{}, "location-alerts":{}, "alert-types":{"warnings":{}, "watches":{}, "advisory":{}}};
 	}
 	var theName = names[window.settingsIndex];
@@ -362,7 +361,6 @@ function saveLocationSettings(){
 		allSettings["per-location"][name]["notifications"]["rain-future"] = document.getElementById("setting-future-storm-notifications-location").checked;
 	}
 	else{
-		console.log("delete")
 		delete allSettings["per-location"][name]["notifications"]["rain-future"]
 	}
 	if (document.getElementById("setting-default-sound-alert-location").value != allSettings["location-alerts"]["default-alert"]){

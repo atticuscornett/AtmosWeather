@@ -34,11 +34,9 @@ function nomSearch(query){
 	var theCache = JSON.parse(window.localStorage.getItem("nominatim-storage"));
 	
 	if (theCache.hasOwnProperty(query)){
-		console.log("Query from cache");
 		return theCache[query];
 	}
 	else{
-		console.log("Getting from nominatim")
 		var res = JSONGet('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(query) + "&format=json");
 		theCache[query] = res;
 		window.localStorage.setItem("nominatim-storage", JSON.stringify(theCache));

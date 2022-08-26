@@ -94,15 +94,12 @@ function showNotices(){
 function getPlatform(){
 	var platform = "unknown"
 	if (navigator.platform.indexOf("Win") == 0){
-		console.log("Atmos for Windows")
 		platform = "desktop-windows"
 	}
 	else if (navigator.platform.indexOf("Mac") == 0){
-		console.log("Atmos for Mac")
 		platform = "desktop-mac"
 	}
 	else{
-		console.log("Atmos for Linux/Other")
 		platform = "desktop-linux"
 	}
 	window.platform = platform;
