@@ -76,7 +76,7 @@ function showNotices(){
 			<dd>- Cleaned up messy console output.</dd>
 		</dl> 
 		<br><br>
-		`
+		`;
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-version0.9.0", "true");
 	}
