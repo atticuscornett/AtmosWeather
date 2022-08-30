@@ -69,8 +69,8 @@
 				<div id="tab-about" class="tab-div" hidden>
 					<!-- UPDATE -->
 					<h1>About Atmos Weather</h1>
-					<h3>Version 0.8.1</h3>
-					<h3>Last updated 8-17-2022</h3>
+					<h3>Version 0.9.0</h3>
+					<h3>Last updated 8-30-2022</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>
@@ -542,6 +542,15 @@
 					<h3>Advisories</h3>
 					<label for="setting-wind-advisory">Wind Advisory - </label>
 					<select id="setting-wind-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-dust-advisory">Dust Advisory - </label>
+					<select id="setting-dust-advisory">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -1088,6 +1097,15 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-dust-advisory-location">Dust Advisory - </label>
+					<select id="setting-dust-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-brisk-wind-advisory-location">Brisk Wind Advisory - </label>
 					<select id="setting-brisk-wind-advisory-location">
 						<option value="alert">Alert</option>
@@ -1282,8 +1300,6 @@
 	<!-- Import Functions -->
 	<script src="cordova.js"></script>
 	<script src="js/atmos-ui.js"></script>
-	<script src="js/storage-handler.js"></script>
-	<script src="js/web-storage-handler.js"></script>
 	<script src="js/nominatim-api.js"></script>
 	<script src="js/nws-api.js"></script>
 	<script src="js/electron-code.js"></script>
@@ -1296,7 +1312,6 @@
 		// Fade out logo and handle notices after animation is done
 		setTimeout(function(){
 			showNotices();
-			console.log("testing");
 		}, 4000);
 	</script>
 	

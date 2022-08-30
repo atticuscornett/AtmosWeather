@@ -63,6 +63,7 @@ if (!localStorage.getItem("atmos-settings")){
 				},
 				"advisory":{
 					"wind": "soundnotification",
+					"dust": "soundnotification",
 					"hazardous-weather-outlook": "soundnotification",
 					"severe-weather-statement": "soundnotification",
 					"special-weather-statement": "soundnotification",
@@ -135,6 +136,7 @@ if (!localStorage.getItem("atmos-settings")){
 			},
 			"advisory":{
 				"wind": "soundnotification",
+				"dust": "soundnotification",
 				"hazardous-weather-outlook": "soundnotification",
 				"severe-weather-statement": "soundnotification",
 				"special-weather-statement": "soundnotification",
@@ -159,6 +161,12 @@ if (!localStorage.getItem("atmos-settings")){
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(atmosSettingsTemp))
 }}, 100);
+
+// Initialize Locations
+if (!localStorage.getItem("weather-locations")){
+	localStorage.setItem("weather-locations", "[]");
+	localStorage.setItem("weather-location-names", "[]")
+}
 
 // Refresh settings tab
 function refreshSettings(){
@@ -270,7 +278,6 @@ function loadLocationSettings(index){
 	var names = nomItemsToNames(locations);
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	if (!allSettings["per-location"].hasOwnProperty(names[window.settingsIndex])){
-		console.log("Making blank")
 		allSettings["per-location"][names[window.settingsIndex]] = {"notifications":{}, "location-alerts":{}, "alert-types":{"warnings":{}, "watches":{}, "advisory":{}}};
 	}
 	var theName = names[window.settingsIndex];
@@ -354,7 +361,6 @@ function saveLocationSettings(){
 		allSettings["per-location"][name]["notifications"]["rain-future"] = document.getElementById("setting-future-storm-notifications-location").checked;
 	}
 	else{
-		console.log("delete")
 		delete allSettings["per-location"][name]["notifications"]["rain-future"]
 	}
 	if (document.getElementById("setting-default-sound-alert-location").value != allSettings["location-alerts"]["default-alert"]){

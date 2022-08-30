@@ -22,13 +22,10 @@ function nomToWeatherGrid(nomObj){
 	temp = nomObj["display_name"];
 	temp = temp.split(", ");
 	temp = temp[0] + ", " + temp[1] + ", " + temp[2];
-	console.log(temp);
 	if (theCache.hasOwnProperty(temp)){
-		console.log("Getting grid location from cache");
 		return [JSON.parse(theCache[temp]), temp];
 	}
 	else{
-		console.log("Getting grid locations from NWS API");
 		theCache[temp] = httpGet("https://api.weather.gov/points/" + nomObj["lat"] + "," + nomObj["lon"]);
 		localStorage.setItem("nws-location-cache", JSON.stringify(theCache));
 		syncFiles();
@@ -39,16 +36,12 @@ function nomToWeatherGrid(nomObj){
 // Get hourly forecast information from weather grid returned by above function
 function getHourlyForecast(weatherGrid){
 	try{
-		console.log("Weather grid: ")
-		console.log(weatherGrid);
-		console.log(weatherGrid[1])
 		var theCache = JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"));
 		var useCache = false;
 		var time = new Date();
 		// Check if has forecast from last five minutes
 		if (theCache.hasOwnProperty(weatherGrid[1])){
 			if ((time.getTime() - theCache[weatherGrid[1]][1]) < 300*1000){
-				console.log("Using cache for forecast")
 				useCache = true;
 			}
 		}
@@ -56,7 +49,6 @@ function getHourlyForecast(weatherGrid){
 			return theCache[weatherGrid[1]];
 		}
 		else{
-			console.log("Grabbing forecast from NWS")
 			var hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
 			var hourlyForecast = JSON.parse(httpGet(hourlyForecastLink));
 			hourlyForecast = hourlyForecast["properties"]["periods"];
@@ -67,7 +59,6 @@ function getHourlyForecast(weatherGrid){
 		}
 	}
 	catch(err){
-		console.log(hourlyForecast)
 		return [false, hourlyForecast];
 	}
 }
@@ -75,7 +66,6 @@ function getHourlyForecast(weatherGrid){
 // Get full forecast information
 function getForecast(weatherGrid){
 	try{
-	console.log(weatherGrid);
 	var theCache = JSON.parse(localStorage.getItem("nws-forecast-cache"));
 	var useCache = false;
 	var time = new Date();
@@ -83,7 +73,6 @@ function getForecast(weatherGrid){
 	// Check if has forecast from last five minutes
 	if (theCache.hasOwnProperty(weatherGrid[1])){
 		if ((time.getTime() - theCache[weatherGrid[1]][1]) < 300*1000){
-			console.log("Using cache for forecast")
 			useCache = true;
 		}
 	}
@@ -101,7 +90,6 @@ function getForecast(weatherGrid){
 	}
 	}
 	catch (err){
-		console.log(forecast);
 		return [false, forecast];
 	}
 	
@@ -150,7 +138,6 @@ function getWeatherAlertsForNom(nomObj){
 		var theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
 		var time = new Date();
 		if (theCache.hasOwnProperty(pos)){
-			console.log((time.getTime() - theCache[pos][1]))
 			// Check if got alerts within last minute
 			if ((time.getTime() - theCache[pos][1]) > 60*1000){
 				theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active?point=" + pos)["features"], time.getTime()]
@@ -159,7 +146,6 @@ function getWeatherAlertsForNom(nomObj){
 				return theCache[pos];
 			}
 			else{
-				console.log("got in last minute")
 				return theCache[pos];
 			}
 		}
@@ -206,12 +192,9 @@ function checkIfOldAlerts(){
 		a++;
 	}
 	a = 0;
-	console.log(ids)
 	while (a < cacheCurrent.length){
 		if (cacheCurrent[a] != null){
-			console.log(cacheCurrent[a]["id"])
 			if (!ids.includes(cacheCurrent[a]["id"])){
-				console.log(cacheCurrent[a]);
 				moveToOld.push(cacheCurrent[a]);
 			}
 		}
@@ -246,8 +229,6 @@ function getPolyBoundries(weatherAlert, wGrid){
 		}
 		else{
 			var theBoundries = JSONGet(forecastZone);
-			console.log(theBoundries)
-			//theBoundries = fixNWSCoords(theBoundries);
 			theCache[forecastZone] = theBoundries;
 			localStorage.setItem("nws-boundries-cache", JSON.stringify(theCache));
 			return theBoundries;
@@ -265,7 +246,6 @@ function getAllActiveAlerts(){
 		var theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
 		var time = new Date();
 		if (theCache.hasOwnProperty(pos)){
-			console.log((time.getTime() - theCache[pos][1]))
 			// Check if got alerts within last minute
 			if ((time.getTime() - theCache[pos][1]) > 60*1000){
 				theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active")["features"], time.getTime()]
@@ -273,7 +253,6 @@ function getAllActiveAlerts(){
 				return theCache[pos];
 			}
 			else{
-				console.log("got in last minute")
 				return theCache[pos];
 			}
 		}
