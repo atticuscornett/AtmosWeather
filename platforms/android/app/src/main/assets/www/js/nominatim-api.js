@@ -34,11 +34,9 @@ function nomSearch(query){
 	var theCache = JSON.parse(window.localStorage.getItem("nominatim-storage"));
 	
 	if (theCache.hasOwnProperty(query)){
-		console.log("Query from cache");
 		return theCache[query];
 	}
 	else{
-		console.log("Getting from nominatim")
 		var res = JSONGet('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(query) + "&format=json");
 		theCache[query] = res;
 		window.localStorage.setItem("nominatim-storage", JSON.stringify(theCache));
@@ -53,8 +51,11 @@ function nomItemsToNames(items){
 	var temp;
 	while (a < items.length){
 		temp = items[a]["display_name"];
-		temp = temp.split(", ")
-		theList.push(temp[0] + ", " + temp[1] + ", " + temp[2])
+		temp = temp.split(", ");
+		temp = temp[0] + ", " + temp[1] + ", " + temp[2];
+		temp = temp.replaceAll("undefined, ", "");
+		temp = temp.replaceAll(", undefined", "");
+		theList.push(temp)
 		a++;
 	}
 	return theList;

@@ -96,6 +96,7 @@ select{
 	font-size: 25px;
 	border-radius: 7px;
 	cursor: pointer;
+	box-shadow: 0px 0px 7px #898989;
 }
 
 #welcome-button-native{
