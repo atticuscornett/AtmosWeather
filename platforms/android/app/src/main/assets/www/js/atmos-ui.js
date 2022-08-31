@@ -382,8 +382,8 @@ function navCode(screenTo){
 					}
 					a++;
 				}
-			}, 2000)
-		}, 500);
+			}, 5000)
+		}, 2000);
 	}
 	if (screenTo == "settings"){
 		refreshSettings();
