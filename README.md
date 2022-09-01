@@ -82,7 +82,7 @@ Most of the cross-platform Cordova codebase (found in the www folder) is well do
 
 # Development
 Atmos Weather is written in HTML, CSS, JavaScript, and Java. Atmos Weather uses Apache Cordova to build for multiple platforms.
-At the moment, Atmos Weather is primarily developed by Atticus Cornett (me), however, I would love to expand this project over time with multiple contributors. If you have feature ideas or want to work on this project, don't hesitate to reach out.
+Developed by Atticus Cornett. Please do not attempt to contribute until after the 2022 Congressional App Challenge is finished.
 Development plans and progress and be viewed on the Atmos Weather Notion Site: https://atticuscornett.notion.site/atticuscornett/00bc25c1bb07405d9bbe8c8c33ad195a
 
 ###### This project was originally created for the 2022 Congressional App Challenge.
