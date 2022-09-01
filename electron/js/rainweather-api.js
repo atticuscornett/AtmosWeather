@@ -89,6 +89,9 @@ function showFrame(nextPosition, force) {
 }
 
 function changeRadarPosition(position, preloadOnly, force) {
+    if (radarFrames.length < 1){
+        return;
+    }
     while (position >= radarFrames.length) {
         position -= radarFrames.length;
     }

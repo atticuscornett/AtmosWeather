@@ -363,8 +363,8 @@ function navCode(screenTo){
 		}).addTo(map2);
 		setTimeout(function(){
 			map2.invalidateSize(true);
-			loadRadarData();
-			setTimeout(playRadarAnimation, 1000);
+			setTimeout(loadRadarData, 1000);
+			setTimeout(playRadarAnimation, 5000);
 			var polygon;
 			setTimeout(function(){
 				var alerts = getAllActiveAlerts();
@@ -677,16 +677,16 @@ function refreshAlerts(){
 	document.getElementById("active-alert-list").innerHTML = generatedCode;
 	
 	generatedCode = "";
-	a = 0;
-	while (a < oldAlerts.length){
+	a = oldAlerts.length - 1;
+	while (a > -1){
 		if (oldAlerts[a] != null){
 			generatedCode += "<h2>" + oldAlerts[a]["properties"]["event"] + "</h2>"
 			generatedCode += "<h4>" + oldAlerts[a]["properties"]["headline"] + "</h4>"
 			generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
 		}
-		a++;
+		a--;
 	}
-	if (a == 0){
+	if (oldAlerts.length == 0){
 		generatedCode = "<h2>You have no previously recieved alerts.</h2>"
 	}
 	document.getElementById("old-alert-list").innerHTML = generatedCode;
