@@ -1,6 +1,12 @@
 ![Atmos Weather](https://raw.githubusercontent.com/atticuscornett/AtmosWeather/main/logo.svg)
 ## The lightweight app for weather forecasts and alerts.
 
+[![GitHub license](https://img.shields.io/github/license/atticuscornett/AtmosWeather)](https://github.com/atticuscornett/AtmosWeather/blob/main/LICENSE)
+![GitHub all releases](https://img.shields.io/github/downloads/atticuscornett/atmosweather/total)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/atticuscornett/atmosweather)
+![GitHub last commit](https://img.shields.io/github/last-commit/atticuscornett/atmosweather)
+![GitHub deployments](https://img.shields.io/github/deployments/atticuscornett/atmosweather/github-pages?label=github%20pages)
+
 ### Table of Contents
 [Features](#features)
 
@@ -36,14 +42,13 @@ Atmos Weather uses the official National Weather Service API to provide the most
 ## Stable Version
 
 ### Website
-The easiest way to install Atmos Weather is by using the website: [Atmos Weather Website](https://atticuscornett.github.io/atmos-weather).
+The easiest way to install Atmos Weather is by using the website: [Atmos Weather Website](https://atticuscornett.github.io/AtmosWeather).
+
 Download the version for your platform and run the installer.
 
 ### GitHub Releases
 You can download stable versions from the releases on GitHub.
 
-### Build Folder
-You can download stable versions from the build folder on Github.
 
 ## Beta Versions (Unstable, Power Users)
 
@@ -51,7 +56,7 @@ You can download stable versions from the build folder on Github.
 Some beta version builds will be added to GitHub releases.
 
 ## Latest Builds (Unstable, Not Recommended)
-You can download the latest builds for individual platforms from the appropriate build locations for Cordova in the platforms folder. These builds (especially Android builds, which may not be full builds) may be broken.
+You can download the latest builds for individual platforms from the appropriate build locations for Cordova in the platforms folder or the dist folder inside of the electron folder for ElectronJS builds. These builds (especially Android builds, which may be partial builds) may be broken.
 
 ## Latest Code (Unstable, Not Recommended)
 By downloading the repository files, you can build the latest code on your machine using Cordova.
