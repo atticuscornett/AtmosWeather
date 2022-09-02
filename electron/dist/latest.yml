@@ -1,0 +1,8 @@
+version: 0.9.0
+files:
+  - url: Atmos-Weather-Setup-0.9.0.exe
+    sha512: k64aXclmK1aasX2qBRufJQTej5sj9JrVxq3B1gfHwzoUoDnvmjEB2TFo3JyT48eqg3veKV7Qa+T5ScEpBnEs2A==
+    size: 65887055
+path: Atmos-Weather-Setup-0.9.0.exe
+sha512: k64aXclmK1aasX2qBRufJQTej5sj9JrVxq3B1gfHwzoUoDnvmjEB2TFo3JyT48eqg3veKV7Qa+T5ScEpBnEs2A==
+releaseDate: '2022-09-02T05:17:36.851Z'

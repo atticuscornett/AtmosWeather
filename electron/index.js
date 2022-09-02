@@ -1,4 +1,5 @@
 const { app, BrowserWindow, Notification, Tray, Menu, net, dialog} = require('electron')
+const { autoUpdater } = require("electron-updater")
 var win2 = null;
 var weatherLocations;
 var locationNames;
@@ -48,6 +49,7 @@ else{
 	app.whenReady().then(() => {
 		if (process.platform === 'win32'){
 			app.setAppUserModelId("Atmos Weather");
+			autoUpdater.checkForUpdatesAndNotify()
 		}
 		createWindow()
 		win2.webContents.executeJavaScript('localStorage.getItem("run-before")', true)

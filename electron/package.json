@@ -20,9 +20,15 @@
     "productName": "Atmos Weather",
     "win": {
       "target": "nsis",
-      "icon": "img/icon.png"
+      "icon": "img/icon.png",
+      "publish": ["github"]
     }
   },
   "dependencies": {
+    "electron-updater": "^5.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atticuscornett/AtmosWeather.git"
   }
 }

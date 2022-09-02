@@ -6,5 +6,7 @@ productName: Atmos Weather
 win:
   target: nsis
   icon: img/icon.png
+  publish:
+    - github
 files: []
-electronVersion: 19.0.9
+electronVersion: 19.0.15
