@@ -1,11 +1,16 @@
 ![Atmos Weather](https://raw.githubusercontent.com/atticuscornett/AtmosWeather/main/logo.svg)
-## The lightweight app for weather forecasts and alerts.
+## The cross-platform lightweight app for weather forecasts and alerts.
+Available for Windows, MacOS, Linux, and Android at the [Atmos Weather Website](https://atticuscornett.github.io/AtmosWeather)
 
 [![GitHub license](https://img.shields.io/github/license/atticuscornett/AtmosWeather)](https://github.com/atticuscornett/AtmosWeather/blob/main/LICENSE)
 ![GitHub all releases](https://img.shields.io/github/downloads/atticuscornett/atmosweather/total)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/atticuscornett/atmosweather)
 ![GitHub last commit](https://img.shields.io/github/last-commit/atticuscornett/atmosweather)
 ![GitHub deployments](https://img.shields.io/github/deployments/atticuscornett/atmosweather/github-pages?label=github%20pages)
+
+GitHub Actions
+
+[![Build for Linux](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml)
 
 ### Table of Contents
 [Features](#features)
