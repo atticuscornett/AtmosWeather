@@ -22,7 +22,10 @@
       "target": "nsis",
       "icon": "img/icon.png",
       "publish": ["github"]
-    }
+    },
+    "Linux": {
+      "target": "AppImage"
+    } 
   },
   "dependencies": {
     "electron-updater": "^5.2.1"
