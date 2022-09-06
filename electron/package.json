@@ -23,7 +23,7 @@
       "icon": "img/icon.png",
       "publish": ["github"]
     },
-    "Linux": {
+    "linux": {
       "target": "AppImage"
     } 
   },
