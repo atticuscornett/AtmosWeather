@@ -11,6 +11,7 @@ Available for Windows, MacOS, Linux, and Android at the [Atmos Weather Website](
 GitHub Actions
 
 [![Build for Linux](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml)
+[![Build for MacOS](https://github.com/atticuscornett/AtmosWeather/actions/workflows/main.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/main.yml)
 
 ### Table of Contents
 [Features](#features)

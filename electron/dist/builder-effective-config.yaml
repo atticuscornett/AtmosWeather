@@ -8,5 +8,7 @@ win:
   icon: img/icon.png
   publish:
     - github
+linux:
+  target: AppImage
 files: []
 electronVersion: 19.0.15

@@ -58,27 +58,24 @@ function showNotices(){
 	}
 	
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version0.9.0")){
+	if (!window.localStorage.getItem("notice-version0.9.1")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v0.9.0 is here!</h2>
+		<h2>Atmos Weather v0.9.1 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Alert if moving for mobile devices. Now you can get certains alerts only if you are currently moving/driving.</dd>
-			<dd>- Alert polygons now show on the radar page.</dd>
-			<dd>- Locations with active alerts now show on top of locations page.</dd>
-			<dd>- Design changes to improve the look and feel of Atmos Weather.</dd>
-			<dd>- Support for new alert types, including: fire warning, dust storm warning, and various advisories.</dd>
+  			<dd>- Auto update (hopefully) added for Windows.</dd>
+			<dd>- MacOS is now supported!</dd>
+			<dd>- Linux is now supported!</dd>
+			<dd>- Blowing dust advisory now supported!</dd>
 			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed bug where location names would include the word "undefined" due to a parsing error.</dd>
-			<dd>- Alert sounds now stop when a notification is opened on desktop.</dd>
-			<dd>- Removed unnecessary files that where left from previous versions.</dd>
-			<dd>- Cleaned up messy console output.</dd>
+  			<dd>- Fixed some bugs that caused the app to freeze on radar screen.</dd>
+			<dd>- Fixed issues when building for MacOS and Linux</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.9.0", "true");
+		window.localStorage.setItem("notice-version0.9.1", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning

@@ -80,7 +80,8 @@ if (!localStorage.getItem("atmos-settings")){
 					"coastal-flood": "soundnotification",
 					"high-surf": "soundnotification",
 					"brisk-wind": "soundnotification",
-					"lake-wind": "soundnotification"
+					"lake-wind": "soundnotification",
+					"blowing-dust": "soundnotification"
 				}
 			},
 			"per-location": {}
@@ -153,7 +154,8 @@ if (!localStorage.getItem("atmos-settings")){
 				"coastal-flood": "soundnotification",
 				"high-surf": "soundnotification",
 				"brisk-wind": "soundnotification",
-				"lake-wind": "soundnotification"
+				"lake-wind": "soundnotification",
+				"blowing-dust": "soundnotification"
 			}
 		},
 		"per-location": {}
