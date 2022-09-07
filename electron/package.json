@@ -24,8 +24,12 @@
       "publish": ["github"]
     },
     "linux": {
-      "target": ["deb", "tar.gz"]
-    } 
+      "target": ["deb", "tar.gz"],
+      "icon": "img/icon.png"
+    },
+    "mac":{
+      "icon": "img/icon.png"
+    }
   },
   "dependencies": {
     "electron-updater": "^5.2.1"
