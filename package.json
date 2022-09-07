@@ -10,7 +10,7 @@
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Atticus Cornett",
+  "author": "Atticus Cornett <64325242+atticuscornett@users.noreply.github.com>",
   "license": "GPL-3.0 License",
   "devDependencies": {
     "cordova-android": "^10.1.2",

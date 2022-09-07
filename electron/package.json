@@ -9,7 +9,7 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
-  "author": "Atticus Cornett",
+  "author": "Atticus Cornett <64325242+atticuscornett@users.noreply.github.com>",
   "license": "GPL-3.0 License",
   "devDependencies": {
     "electron": "^19.0.8",
@@ -24,7 +24,7 @@
       "publish": ["github"]
     },
     "linux": {
-      "target": "AppImage"
+      "target": ["deb", "tar.gz"]
     } 
   },
   "dependencies": {
