@@ -5,7 +5,6 @@
 
 // Initialize settings
 setTimeout(function(){
-if (!localStorage.getItem("atmos-settings")){
 	var atmosSettingsTemp;
 	try{
 		var thePlatform = getPlatform();
@@ -161,8 +160,11 @@ if (!localStorage.getItem("atmos-settings")){
 		"per-location": {}
 	};
 	}
-	localStorage.setItem("atmos-settings", JSON.stringify(atmosSettingsTemp))
-}}, 100);
+	var currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+
+	// Set missing settings values to the default
+	localStorage.setItem("atmos-settings", JSON.stringify(fixMissingKeys(atmosSettingsTemp, currentSettings)));
+}, 100);
 
 // Initialize Locations
 if (!localStorage.getItem("weather-locations")){
@@ -418,5 +420,24 @@ function keepSavingForLocation(){
 	if (screenAt == "single-location-settings"){
 		saveLocationSettings()
 		setTimeout(keepSavingForLocation, 250);
+	}
+}
+
+// Find any keys that are present in the default that are missing in the current object and set to the default values (without changing present keys)
+function fixMissingKeys(defaultValues, currentValues){
+	if (currentValues == undefined){
+		return defaultValues;
+	}
+	if (currentValues.constructor != Object || defaultValues.constructor != Object){
+		return currentValues;
+	}
+	else{
+		var keysToCheck = Object.keys(defaultValues);
+		var a = 0;
+		while (a < keysToCheck.length){
+			currentValues[keysToCheck[a]] = fixMissingKeys(defaultValues[keysToCheck[a]], currentValues[keysToCheck[a]]);
+			a++;
+		}
+		return currentValues;
 	}
 }
