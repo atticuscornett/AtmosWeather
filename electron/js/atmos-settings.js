@@ -3,8 +3,9 @@
 	Handles the setting up and storing of app settings
 */
 
-// Initialize settings
+// Initializes settings and updates settings on new version
 setTimeout(function(){
+	// Get default settings for platform
 	var atmosSettingsTemp;
 	try{
 		var thePlatform = getPlatform();
