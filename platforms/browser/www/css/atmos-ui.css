@@ -125,6 +125,16 @@ select{
 	max-width: 100vh;
 }
 
+#radar-animation-control{
+	background-color: dodgerblue;
+	color: white;
+	font-size: 20px;
+	border-radius: 7px;
+	cursor: pointer;
+	border: none;
+	font-family: Secular One;
+}
+
 /* Class Styles */
 
 .tab-div{

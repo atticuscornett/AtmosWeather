@@ -136,6 +136,16 @@
 					
 					</div>
 					<h6 id="radar-time"></h6>
+					<div style="display: flex;align-items:center;">
+						<div style="text-align: center;width:fit-content;display: inline-block;margin-right: 20px;">
+							<label style="font-size:15px;">Radar Transparency</label>
+							<br>
+							<input type="range" min="1" max="100" value="85" class="slider" id="radar-opacity">
+						</div>
+						<div style="text-align: center;width:fit-content;display: inline-block;margin-right: 10px;">
+							<button id="radar-animation-control" onclick="toggleRadarPlayback();">Pause ⏸️</button>
+						</div>
+					</div>
 					<h3>Jump To Location</h3>
 					<div id="radar-locations">
 
@@ -173,6 +183,21 @@
 					<br>
 					<input class="box" type="checkbox" id="setting-future-storm-notifications" >
 					<label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label>
+					<hr>
+					<h2>Radar</h2>
+					<h6>Radar powered by RainViewer API.</h6>
+					<label for="setting-radar-color-scheme">Radar Color Scheme - </label>
+					<select id="setting-radar-color-scheme">
+						<option value="0">Black & White</option>
+						<option value="1">Original</option>
+						<option value="2">Universal Blue</option>
+						<option value="3">TITAN</option>
+						<option value="4">TWC</option>
+						<option value="5">Meteored</option>
+						<option value="6">NEXRAD Level III</option>
+						<option value="7">Rainbow</option>
+						<option value="8">Dark Sky</option>
+					</select>
 					<hr>
 					<h2>Location Alerts</h2>
 					<h6>Choose the level of alerts for different locations.</h6>
