@@ -365,36 +365,8 @@ function navCode(screenTo){
 			var polygon;
 			setTimeout(function(){
 				var alerts = getAllActiveAlerts();
-				var a = 0;
-				while (a < alerts[0].length){
-					var styling = {"color":"blue"};
-					var eventLowered = alerts[0][a]["properties"]["event"].toLowerCase();
-					if (eventLowered.includes("warning")){
-						styling = {"color":"red"};
-					}
-					if (eventLowered.toLowerCase().includes("watch")){
-						styling = {"color":"yellow"};
-					}
-					if (eventLowered.includes("advisory") || eventLowered.includes("marine") || eventLowered.includes("rip current") || eventLowered.includes("gale")  || eventLowered.includes("beach") || eventLowered.includes("coast") || eventLowered.includes("seas")){
-						a++;
-						continue;
-					}
-					var x = 0;
-
-					var alertBoundries = getPolyBoundries(alerts[0][a]);
-					while (x < alertBoundries.length){
-						if (alerts[0][a]["properties"]["affectedZones"][0].includes("fire") || alerts[0][a]["properties"]["affectedZones"][0].includes("county")){
-							//console.log(alerts[0][a]["properties"]["affectedZones"][0])
-							x++;
-							continue;
-						}
-						
-						polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
-						x++;
-					}
-					polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map2);
-					a++;
-				}
+				slowLoadPolygons(alerts, 0);
+				
 			}, 5000)
 		}, 2000);
 	}
