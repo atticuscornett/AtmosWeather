@@ -5,6 +5,7 @@
 
 // Keep downloaded polygons until page reload.
 var tempPolyCache = {};
+var missed = [];
 
 // Set up empty storage
 if (!localStorage.getItem("nws-location-cache")){
@@ -249,7 +250,7 @@ function getPolyBoundries(weatherAlert){
 			}
 			theBoundries = getForecastZonePoly(forecastZone);
 			if (theBoundries == false){
-				console.log("Could not get " + forecastZone + " from Atmos Weather dataset!");
+				missed.push(forecastZone);
 				theBoundries = JSONGet(forecastZone);
 			}
 			zonesGeo.push(theBoundries);
