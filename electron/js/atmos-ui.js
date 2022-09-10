@@ -367,16 +367,32 @@ function navCode(screenTo){
 				var alerts = getAllActiveAlerts();
 				var a = 0;
 				while (a < alerts[0].length){
-					if (alerts[0][a]["geometry"]){
-						if (alerts[0][a]["properties"]["event"].includes("Warning")){
-							polygon = L.geoJSON(alerts[0][a]["geometry"], {style:{"color":"red"}}).addTo(map2);
-							polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
-						}
-						else{
-							polygon = L.geoJSON(alerts[0][a]["geometry"], {style:{"color":"blue"}}).addTo(map2);
-							polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
-						}
+					var styling = {"color":"blue"};
+					var eventLowered = alerts[0][a]["properties"]["event"].toLowerCase();
+					if (eventLowered.includes("warning")){
+						styling = {"color":"red"};
 					}
+					if (eventLowered.toLowerCase().includes("watch")){
+						styling = {"color":"yellow"};
+					}
+					if (eventLowered.includes("advisory") || eventLowered.includes("marine") || eventLowered.includes("rip current") || eventLowered.includes("gale")  || eventLowered.includes("beach") || eventLowered.includes("coast") || eventLowered.includes("seas")){
+						a++;
+						continue;
+					}
+					var x = 0;
+
+					var alertBoundries = getPolyBoundries(alerts[0][a]);
+					while (x < alertBoundries.length){
+						if (alerts[0][a]["properties"]["affectedZones"][0].includes("fire") || alerts[0][a]["properties"]["affectedZones"][0].includes("county")){
+							//console.log(alerts[0][a]["properties"]["affectedZones"][0])
+							x++;
+							continue;
+						}
+						
+						polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
+						x++;
+					}
+					polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map2);
 					a++;
 				}
 			}, 5000)
@@ -715,14 +731,20 @@ function loadAlert(alertID){
 	theDetails = theDetails.replaceAll("- -", "-")
 	divCode += "<h3>" + theDetails + "</h3>"
 	document.getElementById("alert-details").innerHTML = divCode;
+	var styling;
 	if (theAlert["properties"]["event"].toLowerCase().includes("warning")){
-		polygon = L.geoJSON(alertBoundries["geometry"], {style:{"color":"red"}}).addTo(map);
+		styling = {"color":"red"};
 	}
 	else if (theAlert["properties"]["event"].toLowerCase().includes("watch")){
-		polygon = L.geoJSON(alertBoundries["geometry"], {style:{"color":"yellow"}}).addTo(map);
+		styling = {"color":"yellow"};
 	}
 	else{
-		polygon = L.geoJSON(alertBoundries["geometry"]).addTo(map);
+		styling = {"color":"blue"};
+	}
+	var x = 0;
+	while (x < alertBoundries.length){
+		polygon = L.geoJSON(alertBoundries[x], {style:styling}).addTo(map);
+		x++;
 	}
 	navTo("alert-display")
 	setTimeout(function(){
