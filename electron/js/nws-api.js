@@ -232,6 +232,7 @@ function getPolyBoundries(weatherAlert){
 		var theBoundries;
 		if (weatherAlert["properties"]["affectedZones"][0].includes("fire")){
 			while (a < weatherAlert["properties"]["affectedZones"].length){
+				missed.push(weatherAlert["properties"]["affectedZones"][a])
 				if(!(weatherAlert["properties"]["affectedZones"][a] in theCache)){
 					theCache[weatherAlert["properties"]["affectedZones"][a]] = JSONGet(weatherAlert["properties"]["affectedZones"][a]);
 				}
@@ -294,13 +295,13 @@ function getAllActiveAlerts(){
 
 function getForecastZonePoly(forecastZone){
 	var zoneCode = forecastZone.substring(39);
-	var zoneNum = Number(forecastZone);
+	var zoneNum = Number(zoneCode.substring(3));
 	var zoneId = zoneCode.substring(0,2);
 	var eo = "odd";
 	if (zoneNum % 2 == 0){
 		eo = "even"
 	}
-	var fullCode = zoneId + "-" + eo
+	var fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyCache){
 		areaData = tempPolyCache[fullCode];
 	}
