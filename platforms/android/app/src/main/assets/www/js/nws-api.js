@@ -3,6 +3,10 @@
 	Handles the caching and fetching of forcasts, alerts, and other information from the National Weather Service API
 */
 
+// Keep downloaded polygons until page reload.
+var tempPolyCache = {};
+var tempPolyFireCache = {}
+var missed = [];
 
 // Set up empty storage
 if (!localStorage.getItem("nws-location-cache")){
@@ -220,22 +224,45 @@ function fixNWSCoords(oldCoords){
 }
 
 // Gets the polygon boundry of weather alerts
-function getPolyBoundries(weatherAlert, wGrid){
+function getPolyBoundries(weatherAlert){
 	if (weatherAlert["geometry"] == null){
 		var theCache = JSON.parse(localStorage.getItem("nws-boundries-cache"));
-		var forecastZone = wGrid[0]["properties"]["forecastZone"];
-		if (theCache.hasOwnProperty(forecastZone)){
-			return theCache[forecastZone];
-		}
-		else{
-			var theBoundries = JSONGet(forecastZone);
+		var forecastZone;
+		var a = 0;
+		var zonesGeo = []
+		var theBoundries;
+		// if (weatherAlert["properties"]["affectedZones"][0].includes("fire")){
+		// 	while (a < weatherAlert["properties"]["affectedZones"].length){
+		// 		missed.push(weatherAlert["properties"]["affectedZones"][a])
+		// 		if(!(weatherAlert["properties"]["affectedZones"][a] in theCache)){
+		// 			theCache[weatherAlert["properties"]["affectedZones"][a]] = JSONGet(weatherAlert["properties"]["affectedZones"][a]);
+		// 		}
+		// 		zonesGeo.push(theCache[weatherAlert["properties"]["affectedZones"][a]]);
+		// 		a++;
+		// 	}
+			
+		// 	localStorage.setItem("nws-boundries-cache", JSON.stringify(theCache));
+		// 	return zonesGeo;
+		// }
+		while (a < weatherAlert["properties"]["affectedZones"].length){
+			forecastZone = weatherAlert["properties"]["affectedZones"][a];
+			if (forecastZone.includes("county")){
+				a++;
+				continue;
+			}
+			theBoundries = getForecastZonePoly(forecastZone);
+			if (theBoundries == false){
+				missed.push(forecastZone);
+				theBoundries = JSONGet(forecastZone);
+			}
+			zonesGeo.push(theBoundries);
 			theCache[forecastZone] = theBoundries;
-			localStorage.setItem("nws-boundries-cache", JSON.stringify(theCache));
-			return theBoundries;
+			a++;
 		}
+		return zonesGeo;
 	}
 	else{
-		return weatherAlert;
+		return [weatherAlert];
 	}
 }
 
@@ -265,4 +292,61 @@ function getAllActiveAlerts(){
 	catch(err){
 		return false;
 	}
+}
+
+function getForecastZonePoly(forecastZone){
+	if (forecastZone.includes("fire")){
+		return getFireZonePoly(forecastZone);
+	}
+	var zoneCode = forecastZone.substring(39);
+	var zoneNum = Number(zoneCode.substring(3));
+	var zoneId = zoneCode.substring(0,2);
+	var eo = "odd";
+	if (zoneNum % 2 == 0){
+		eo = "even"
+	}
+	var fullCode = zoneId + "-" + eo;
+	if (fullCode in tempPolyCache){
+		areaData = tempPolyCache[fullCode];
+	}
+	else{
+		try{
+			areaData = JSONGet("https://atticuscornett.github.io/AtmosWeather/data/geometry/forecastZones/" + zoneId + "-" + eo + ".json")
+			tempPolyCache[fullCode] = areaData;
+		}
+		catch(err){
+			areaData = {};
+		}
+	}
+	if (zoneCode in areaData){
+		return areaData[zoneCode];
+	}
+	return false;
+}
+
+function getFireZonePoly(forecastZone){
+	var zoneCode = forecastZone.substring(35);
+	var zoneNum = Number(zoneCode.substring(3));
+	var zoneId = zoneCode.substring(0,2);
+	var eo = "odd";
+	if (zoneNum % 2 == 0){
+		eo = "even"
+	}
+	var fullCode = zoneId + "-" + eo;
+	if (fullCode in tempPolyFireCache){
+		areaData = tempPolyFireCache[fullCode];
+	}
+	else{
+		try{
+			areaData = JSONGet("https://atticuscornett.github.io/AtmosWeather/data/geometry/fireZones/" + zoneId + "-" + eo + ".json")
+			tempPolyFireCache[fullCode] = areaData;
+		}
+		catch(err){
+			areaData = {};
+		}
+	}
+	if (zoneCode in areaData){
+		return areaData[zoneCode];
+	}
+	return false;
 }

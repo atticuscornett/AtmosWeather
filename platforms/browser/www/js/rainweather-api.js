@@ -179,3 +179,29 @@ function toggleRadarPlayback(){
         document.getElementById("radar-animation-control").innerHTML = "Pause ⏸️";
     }
 }
+
+function slowLoadPolygons(alerts, index){
+    var a = index;
+    while(a < index + 10 && a < alerts[0].length){
+        var styling = {"color":"blue"};
+        var eventLowered = alerts[0][a]["properties"]["event"].toLowerCase();
+        if (eventLowered.includes("warning")){
+            styling = {"color":"red"};
+        }
+        if (eventLowered.toLowerCase().includes("watch")){
+            styling = {"color":"yellow"};
+        }
+        if (eventLowered.includes("advisory") || eventLowered.includes("marine") || eventLowered.includes("rip current") || eventLowered.includes("gale")  || eventLowered.includes("beach") || eventLowered.includes("coast") || eventLowered.includes("seas")){
+            a++;
+            continue;
+        }
+        var x = 0;
+        var alertBoundries = getPolyBoundries(alerts[0][a]);
+        polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map2);
+        polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
+        a++;
+    }
+    if (a < alerts[0].length){
+        setTimeout(function(){slowLoadPolygons(alerts, a)}, 500);
+    }
+}

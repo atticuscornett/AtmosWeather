@@ -58,24 +58,25 @@ function showNotices(){
 	}
 	
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version0.9.1")){
+	if (!window.localStorage.getItem("notice-version0.9.2")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v0.9.1 is here!</h2>
+		<h2>Atmos Weather v0.9.2 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Auto update (hopefully) added for Windows.</dd>
-			<dd>- MacOS is now supported!</dd>
-			<dd>- Linux is now supported!</dd>
-			<dd>- Blowing dust advisory now supported!</dd>
+  			<dd>- Radar page updated with transparency.</dd>
+  			<dd>- Color scheme settings added for radar.</dd>
+  			<dd>- More polygons now show on radar page.</dd>
+  			<dd>- Radar page polygon loading optimized.</dd>
+  			<dd>- Builds for Linux changed.</dd>
+			<dd>- Settings now automatically fill default values on updates.</dd>
 			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed some bugs that caused the app to freeze on radar screen.</dd>
-			<dd>- Fixed issues when building for MacOS and Linux</dd>
+  			<dd>- Unusual settings behavior after updates fixed.</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.9.1", "true");
+		window.localStorage.setItem("notice-version0.9.2", "true");
 	}
 	
 	// Congressional App Challenge Outdated Version Warning

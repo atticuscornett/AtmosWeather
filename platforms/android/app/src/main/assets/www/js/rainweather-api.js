@@ -115,7 +115,7 @@ function changeRadarPosition(position, preloadOnly, force) {
     if (radarLayers[currentFrame.path]) {
         radarLayers[currentFrame.path].setOpacity(0);
     }
-    radarLayers[nextFrame.path].setOpacity(60);
+    radarLayers[nextFrame.path].setOpacity(Number(document.getElementById("radar-opacity").value)/100);
 
 
     var pastOrForecast = nextFrame.time > Date.now() / 1000 ? 'FORECAST' : 'PAST';
@@ -124,6 +124,8 @@ function changeRadarPosition(position, preloadOnly, force) {
 }
 
 function addLayer(frame) {
+    var settings = JSON.parse(localStorage.getItem("atmos-settings"));
+    radarColorScheme = settings["radar"]["color-scheme"];
     if (!radarLayers[frame.path]) {
         var colorScheme = radarKind == 'satellite' ? 0 : radarColorScheme;
         var smooth = radarKind == 'satellite' ? 0 : smoothRadarData;
@@ -131,16 +133,14 @@ function addLayer(frame) {
 
         var source = new L.TileLayer(radarData.host + frame.path + '/' + radarTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.png', {
             tileSize: 256,
-            opacity: 0.01,
             zIndex: frame.time
         });
-
         // Track layer loading state to not display the overlay 
         // before it will completelly loads
         source.on('loading', startLoadingTile);
         source.on('load', finishLoadingTile); 
         source.on('remove', finishLoadingTile);
-
+        source.setOpacity(Number(document.getElementById("radar-opacity").value)/100);
         radarLayers[frame.path] = source;
     }
     if (!map2.hasLayer(radarLayers[frame.path])) {
@@ -166,5 +166,42 @@ function playRadarAnimation(){
             showFrame(animationPosition + 1);
         }
         setTimeout(playRadarAnimation, 400);
+    }
+}
+
+function toggleRadarPlayback(){
+    if (playingRadar){
+        playingRadar = false;
+        document.getElementById("radar-animation-control").innerHTML = "Play ▶️";
+    }
+    else{
+        playingRadar = true;
+        document.getElementById("radar-animation-control").innerHTML = "Pause ⏸️";
+    }
+}
+
+function slowLoadPolygons(alerts, index){
+    var a = index;
+    while(a < index + 10 && a < alerts[0].length){
+        var styling = {"color":"blue"};
+        var eventLowered = alerts[0][a]["properties"]["event"].toLowerCase();
+        if (eventLowered.includes("warning")){
+            styling = {"color":"red"};
+        }
+        if (eventLowered.toLowerCase().includes("watch")){
+            styling = {"color":"yellow"};
+        }
+        if (eventLowered.includes("advisory") || eventLowered.includes("marine") || eventLowered.includes("rip current") || eventLowered.includes("gale")  || eventLowered.includes("beach") || eventLowered.includes("coast") || eventLowered.includes("seas")){
+            a++;
+            continue;
+        }
+        var x = 0;
+        var alertBoundries = getPolyBoundries(alerts[0][a]);
+        polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map2);
+        polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
+        a++;
+    }
+    if (a < alerts[0].length){
+        setTimeout(function(){slowLoadPolygons(alerts, a)}, 500);
     }
 }

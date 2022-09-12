@@ -3,9 +3,9 @@
 	Handles the setting up and storing of app settings
 */
 
-// Initialize settings
+// Initializes settings and updates settings on new version
 setTimeout(function(){
-if (!localStorage.getItem("atmos-settings")){
+	// Get default settings for platform
 	var atmosSettingsTemp;
 	try{
 		var thePlatform = getPlatform();
@@ -17,6 +17,7 @@ if (!localStorage.getItem("atmos-settings")){
 		atmosSettingsTemp = {
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
+			"radar":{"color-scheme":4},
 			"location-alerts": {"default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 			"alert-types": {
 				"warnings":{
@@ -92,6 +93,7 @@ if (!localStorage.getItem("atmos-settings")){
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"default-alert": "readynow", "default-notification": "readynow", "locations":{}},
+		"radar":{"color-scheme":4},
 		"alert-types": {
 			"warnings":{
 				"tornado": "alert",
@@ -161,8 +163,11 @@ if (!localStorage.getItem("atmos-settings")){
 		"per-location": {}
 	};
 	}
-	localStorage.setItem("atmos-settings", JSON.stringify(atmosSettingsTemp))
-}}, 100);
+	var currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+
+	// Set missing settings values to the default
+	localStorage.setItem("atmos-settings", JSON.stringify(fixMissingKeys(atmosSettingsTemp, currentSettings)));
+}, 100);
 
 // Initialize Locations
 if (!localStorage.getItem("weather-locations")){
@@ -181,6 +186,9 @@ function refreshSettings(){
 	// Notification Settings
 	document.getElementById("setting-future-severe-notifications").checked = allSettings["notifications"]["severe-future"];
 	document.getElementById("setting-future-storm-notifications").checked = allSettings["notifications"]["rain-future"];
+
+	// Radar Settings
+	document.getElementById("setting-radar-color-scheme").value = allSettings["radar"]["color-scheme"];
 	
 	// Alert Sound Settings
 	document.getElementById("setting-default-sound-alert").value = allSettings["location-alerts"]["default-alert"];
@@ -231,6 +239,8 @@ function saveSettings(){
 	
 	allSettings["notifications"]["severe-future"] = document.getElementById("setting-future-severe-notifications").checked;
 	allSettings["notifications"]["rain-future"] = document.getElementById("setting-future-storm-notifications").checked;
+
+	allSettings["radar"]["color-scheme"] = Number(document.getElementById("setting-radar-color-scheme").value);
 	
 	allSettings["location-alerts"]["default-alert"] = document.getElementById("setting-default-sound-alert").value;
 	allSettings["location-alerts"]["default-notification"] = document.getElementById("setting-default-sound-notification").value;
@@ -418,5 +428,24 @@ function keepSavingForLocation(){
 	if (screenAt == "single-location-settings"){
 		saveLocationSettings()
 		setTimeout(keepSavingForLocation, 250);
+	}
+}
+
+// Find any keys that are present in the default that are missing in the current object and set to the default values (without changing present keys)
+function fixMissingKeys(defaultValues, currentValues){
+	if (currentValues == undefined){
+		return defaultValues;
+	}
+	if (currentValues.constructor != Object || defaultValues.constructor != Object){
+		return currentValues;
+	}
+	else{
+		var keysToCheck = Object.keys(defaultValues);
+		var a = 0;
+		while (a < keysToCheck.length){
+			currentValues[keysToCheck[a]] = fixMissingKeys(defaultValues[keysToCheck[a]], currentValues[keysToCheck[a]]);
+			a++;
+		}
+		return currentValues;
 	}
 }

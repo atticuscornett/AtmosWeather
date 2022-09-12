@@ -99,26 +99,26 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version0.9.1")){
+	if (!window.localStorage.getItem("notice-version0.9.2")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v0.9.1 is here!</h2>
+		<h2>Atmos Weather v0.9.2 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Auto update (hopefully) added for Windows.</dd>
-			<dd>- MacOS is now supported!</dd>
-			<dd>- Linux is now supported!</dd>
-			<dd>- Blowing dust advisory now supported!</dd>
+  			<dd>- Radar page updated with transparency.</dd>
+  			<dd>- Color scheme settings added for radar.</dd>
+  			<dd>- More polygons now show on radar page.</dd>
+  			<dd>- Radar page polygon loading optimized.</dd>
+  			<dd>- Builds for Linux changed.</dd>
+			<dd>- Settings now automatically fill default values on updates.</dd>
 			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed some bugs that caused the app to freeze on radar screen.</dd>
-			<dd>- Fixed issues when building for MacOS and Linux</dd>
+  			<dd>- Unusual settings behavior after updates fixed.</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.9.1", "true");
+		window.localStorage.setItem("notice-version0.9.2", "true");
 	}
-	
 	// Congressional App Challenge Outdated Version Warning
 	document.getElementById("notice-window").innerHTML += `
 	<h2>You are running the Congressional App Challenge version of Atmos Weather.</h2>
@@ -365,20 +365,8 @@ function navCode(screenTo){
 			var polygon;
 			setTimeout(function(){
 				var alerts = getAllActiveAlerts();
-				var a = 0;
-				while (a < alerts[0].length){
-					if (alerts[0][a]["geometry"]){
-						if (alerts[0][a]["properties"]["event"].includes("Warning")){
-							polygon = L.geoJSON(alerts[0][a]["geometry"], {style:{"color":"red"}}).addTo(map2);
-							polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
-						}
-						else{
-							polygon = L.geoJSON(alerts[0][a]["geometry"], {style:{"color":"blue"}}).addTo(map2);
-							polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
-						}
-					}
-					a++;
-				}
+				slowLoadPolygons(alerts, 0);
+				
 			}, 5000)
 		}, 2000);
 	}
@@ -715,14 +703,20 @@ function loadAlert(alertID){
 	theDetails = theDetails.replaceAll("- -", "-")
 	divCode += "<h3>" + theDetails + "</h3>"
 	document.getElementById("alert-details").innerHTML = divCode;
+	var styling;
 	if (theAlert["properties"]["event"].toLowerCase().includes("warning")){
-		polygon = L.geoJSON(alertBoundries["geometry"], {style:{"color":"red"}}).addTo(map);
+		styling = {"color":"red"};
 	}
 	else if (theAlert["properties"]["event"].toLowerCase().includes("watch")){
-		polygon = L.geoJSON(alertBoundries["geometry"], {style:{"color":"yellow"}}).addTo(map);
+		styling = {"color":"yellow"};
 	}
 	else{
-		polygon = L.geoJSON(alertBoundries["geometry"]).addTo(map);
+		styling = {"color":"blue"};
+	}
+	var x = 0;
+	while (x < alertBoundries.length){
+		polygon = L.geoJSON(alertBoundries[x], {style:styling}).addTo(map);
+		x++;
 	}
 	navTo("alert-display")
 	setTimeout(function(){
