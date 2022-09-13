@@ -296,6 +296,7 @@ function getAllActiveAlerts(){
 
 // Get polygon for forecast zone
 function getForecastZonePoly(forecastZone){
+	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	if (forecastZone.includes("fire")){
 		return getFireZonePoly(forecastZone);
 	}
@@ -305,6 +306,9 @@ function getForecastZonePoly(forecastZone){
 	var eo = "odd";
 	if (zoneNum % 2 == 0){
 		eo = "even"
+	}
+	if (allSettings["radar"]["polygons"]["high-res"]){
+		eo += "-highres";
 	}
 	var fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyCache){
@@ -327,12 +331,16 @@ function getForecastZonePoly(forecastZone){
 
 // Get polygon for fire forecast zone
 function getFireZonePoly(forecastZone){
+	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	var zoneCode = forecastZone.substring(35);
 	var zoneNum = Number(zoneCode.substring(3));
 	var zoneId = zoneCode.substring(0,2);
 	var eo = "odd";
 	if (zoneNum % 2 == 0){
 		eo = "even"
+	}
+	if (allSettings["radar"]["polygons"]["high-res"]){
+		eo += "-highres";
 	}
 	var fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyFireCache){

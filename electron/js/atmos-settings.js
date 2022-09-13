@@ -17,7 +17,7 @@ setTimeout(function(){
 		atmosSettingsTemp = {
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
-			"radar":{"color-scheme":4, "polygons":{"watch":true, "advisories":true, "warnings":true}},
+			"radar":{"color-scheme":4, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
 			"location-alerts": {"default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 			"alert-types": {
 				"warnings":{
@@ -93,7 +93,7 @@ setTimeout(function(){
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"default-alert": "readynow", "default-notification": "readynow", "locations":{}},
-		"radar":{"color-scheme":4, "polygons":{"watch":true, "advisories":true, "warnings":true}},
+		"radar":{"color-scheme":4, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
 		"alert-types": {
 			"warnings":{
 				"tornado": "alert",
@@ -192,6 +192,7 @@ function refreshSettings(){
 	document.getElementById("setting-radar-show-watches").checked = allSettings["radar"]["polygons"]["watch"];
 	document.getElementById("setting-radar-show-advisories").checked = allSettings["radar"]["polygons"]["advisories"];
 	document.getElementById("setting-radar-show-warnings").checked = allSettings["radar"]["polygons"]["warnings"];
+	document.getElementById("setting-radar-high-res").checked = allSettings["radar"]["polygons"]["high-res"];
 	
 	// Alert Sound Settings
 	document.getElementById("setting-default-sound-alert").value = allSettings["location-alerts"]["default-alert"];
@@ -247,6 +248,7 @@ function saveSettings(){
 	allSettings["radar"]["polygons"]["watch"] = document.getElementById("setting-radar-show-watches").checked;
 	allSettings["radar"]["polygons"]["advisories"] = document.getElementById("setting-radar-show-advisories").checked;
 	allSettings["radar"]["polygons"]["warnings"] = document.getElementById("setting-radar-show-warnings").checked;
+	allSettings["radar"]["polygons"]["high-res"] = document.getElementById("setting-radar-high-res").checked;
 	
 	allSettings["location-alerts"]["default-alert"] = document.getElementById("setting-default-sound-alert").value;
 	allSettings["location-alerts"]["default-notification"] = document.getElementById("setting-default-sound-notification").value;
