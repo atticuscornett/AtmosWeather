@@ -186,6 +186,15 @@
 					<hr>
 					<h2>Radar</h2>
 					<h6>Radar powered by RainViewer API.</h6>
+					<input class="box" type="checkbox" id="setting-radar-show-watches" >
+					<label for="setting-radar-show-watches">Show watch polygons on radar</label>
+					<br>
+					<input class="box" type="checkbox" id="setting-radar-show-advisories" >
+					<label for="setting-radar-show-advisories">Show advisory polygons on radar</label>
+					<br>
+					<input class="box" type="checkbox" id="setting-radar-show-warnings" >
+					<label for="setting-radar-show-warnings">Show warning polygons on radar</label>
+					<br><br>
 					<label for="setting-radar-color-scheme">Radar Color Scheme</label>
 					<br>
 					<select id="setting-radar-color-scheme">
@@ -811,7 +820,7 @@
 				<!-- Programatically Generated Tabs -->
 				<div id="location-data">
 				</div>
-				<div id="tab-single-location-settings" class="tab-div" hidden>
+				<div id="tab-single-location-settings" style="margin-right: 15px;" class="tab-div" hidden>
 					<h1 id="single-location-settings-title">Alert Settings for Location, Location</h1>
 					<h2>Notifications</h2>
 					<input class="box" type="checkbox" id="setting-future-severe-notifications-location" checked>

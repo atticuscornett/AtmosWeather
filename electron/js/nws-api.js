@@ -294,6 +294,7 @@ function getAllActiveAlerts(){
 	}
 }
 
+// Get polygon for forecast zone
 function getForecastZonePoly(forecastZone){
 	if (forecastZone.includes("fire")){
 		return getFireZonePoly(forecastZone);
@@ -324,6 +325,7 @@ function getForecastZonePoly(forecastZone){
 	return false;
 }
 
+// Get polygon for fire forecast zone
 function getFireZonePoly(forecastZone){
 	var zoneCode = forecastZone.substring(35);
 	var zoneNum = Number(zoneCode.substring(3));
@@ -349,4 +351,37 @@ function getFireZonePoly(forecastZone){
 		return areaData[zoneCode];
 	}
 	return false;
+}
+
+// Sort events for radar display
+function sortByEventType(alertsList){
+	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	var a = 0;
+	var watchesL = [];
+	var otherL = [];
+	var warningL = [];
+	while (a < alertsList[0].length){
+		if (alertsList[0][a]["properties"]["event"].toLowerCase().includes("warning")){
+			if (allSettings["radar"]["polygons"]["warnings"]){
+				warningL.push(alertsList[0][a]);
+			}
+		}
+		else if (alertsList[0][a]["properties"]["event"].toLowerCase().includes("watch")){
+			if (allSettings["radar"]["polygons"]["watch"]){
+				watchesL.push(alertsList[0][a]);
+			}
+		}
+		else{
+			if (allSettings["radar"]["polygons"]["advisories"]){
+				otherL.push(alertsList[0][a]);
+			}
+		}
+		a++;
+	}
+	var orgList = [];
+	orgList = orgList.concat(watchesL);
+	orgList = orgList.concat(otherL);
+	orgList = orgList.concat(warningL);
+	alertsList[0] = orgList;
+	return alertsList;
 }

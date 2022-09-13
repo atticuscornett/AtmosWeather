@@ -365,6 +365,7 @@ function navCode(screenTo){
 			var polygon;
 			setTimeout(function(){
 				var alerts = getAllActiveAlerts();
+				alerts = sortByEventType(alerts);
 				slowLoadPolygons(alerts, 0);
 				
 			}, 5000)
