@@ -263,7 +263,7 @@ function refreshLocations(){
 	locationEnabled = theSettings["location"]["weather"];
 	if (nomLocations.length > 0){
 		if (locationEnabled){
-			document.getElementById("location-main").innerHTML = '<div class="location ' + "currentloc" + '" id="currentLocDiv"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "current-location" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2 id="currentLocTitle">' + "Current Location" + '</h2><h3 id="currentLocData">Loading information...</h3></div></div><br>';
+			document.getElementById("location-main").innerHTML = '<div class="location ' + "currentloc" + '" id="currentLocDiv"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "current-location" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2 id="currentLocTitle">' + "Current Location" + '</h2><h3 id="currentLocData">Loading information...</h3></div></div><br>';
 		}
 		else{
 			document.getElementById("location-main").innerHTML = "";
@@ -282,7 +282,7 @@ function refreshLocations(){
 					refreshAgain = true;
 					setTimeout(refreshLocations, 7000);
 				}
-				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
+				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
 				document.getElementById("location-main").innerHTML += theDiv;
 			}
 			else{
@@ -302,15 +302,15 @@ function refreshLocations(){
 				}
 				if (alertStatus == "warning"){
 					image = "warning";
-					info = fullStatus[1].toString() + " warning(s) and " + fullStatus[2].toString() + " watche(s)";
+					info = fullStatus[1].toString() + " warning(s) and " + fullStatus[2].toString() + " watch(es)";
 				}
 				if (alertStatus == "watch"){
-					info = fullStatus[2].toString() + " watche(s)";
+					info = fullStatus[2].toString() + " watch(es)";
 				}
 				if (alertStatus == "other"){
 					info = "Weather statements in effect";
 				}
-				var theDiv = '<div class="location ' + alertStatus + '" onclick="navTo(\'locdat-' + nomLocationNames[a] + '-' + a.toString() + '\')"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>' + info + '&emsp;(Tap for more info.)</h3></div></div><br>';
+				var theDiv = '<div class="location ' + alertStatus + '" onclick="navTo(\'locdat-' + nomLocationNames[a] + '-' + a.toString() + '\')"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3 style="margin-right:8px;">' + info + '&emsp;(Tap for more info.)</h3></div></div><br>';
 				if (alertStatus == "warning"){
 					document.getElementById("location-w-alert").innerHTML += theDiv;
 				}
@@ -328,7 +328,7 @@ function refreshLocations(){
 	}
 	else{
 		if (locationEnabled){
-			document.getElementById("location-main").innerHTML = '<div class="location ' + "currentloc" + '" id="currentLocDiv"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "current-location" + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h2 h2 id="currentLocTitle">' + "Current Location" + '</h2><h3 id="currentLocData">Loading information...</h3></div></div><br>';
+			document.getElementById("location-main").innerHTML = '<div class="location ' + "currentloc" + '" id="currentLocDiv"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "current-location" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2 h2 id="currentLocTitle">' + "Current Location" + '</h2><h3 id="currentLocData">Loading information...</h3></div></div><br>';
 		}
 		else{
 			document.getElementById("location-main").innerHTML = '<div class="location"><h2>You have no locations.</h2></div>';
@@ -365,6 +365,7 @@ function navCode(screenTo){
 			var polygon;
 			setTimeout(function(){
 				var alerts = getAllActiveAlerts();
+				alerts = sortByEventType(alerts);
 				slowLoadPolygons(alerts, 0);
 				
 			}, 5000)
@@ -417,17 +418,17 @@ function loadMoreInfo(navName){
 	}
 	
 	if (fullStatus[0] == "warning"){
-		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>This location has active warnings!</h1><h3>' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active warnings!</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
 	}
 	if (fullStatus[0] == "watch"){
-		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>This location has active watches.</h1><h3>' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active watches.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
 	}
 	if (fullStatus[0] == "other"){
 		theWarnings = theWarnings.replaceAll(",", ", ")
-		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>This location has active weather statements.</h1><h3>' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
 	}
 	// Temperature Bar
-	generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
+	generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 	var a = 0;
 	// List alert details if any active alerts
 	var longHourForecast = "<h1>Hourly Forecast</h1>";
@@ -618,6 +619,7 @@ function refreshCurrentLocation(){
 						var info = hourlyForecast["temperature"] + " F - " + hourlyForecast["shortForecast"];
 						document.getElementById("currentLocData").innerHTML = info;
 						document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
+						document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
 						var theTime = new Date();
 						lastLocationCheck = theTime.getTime();
 						lastLocationInfo = info;

@@ -619,6 +619,7 @@ function refreshCurrentLocation(){
 						var info = hourlyForecast["temperature"] + " F - " + hourlyForecast["shortForecast"];
 						document.getElementById("currentLocData").innerHTML = info;
 						document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
+						document.getElementById("currentLocDiv").onclick = "navTo('current-location-data');";
 						var theTime = new Date();
 						lastLocationCheck = theTime.getTime();
 						lastLocationInfo = info;
