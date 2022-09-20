@@ -430,16 +430,7 @@ function loadMoreInfo(navName){
 	// Temperature Bar
 	generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 	var a = 0;
-	// List alert details if any active alerts
 	var longHourForecast = "<h1>Hourly Forecast</h1>";
-//	if (activeAlertInfo.length > 0){
-//		generatedCode += '<h1>Active Weather Alerts</h1>';
-//		while (a < activeAlertInfo.length){
-//			generatedCode += '<h2>' + activeAlertInfo[a]["properties"]["event"] + "</h2>"
-//			generatedCode += '<h4>' + activeAlertInfo[a]["properties"]["description"].replaceAll("\n\n", "<br><br>").replaceAll("\n", " ") + "</h4><br>"
-//			a++;
-//		}
-//	}
 	a = 0;
 	var forecastTime;
 	var AMPM;
@@ -615,18 +606,111 @@ function refreshCurrentLocation(){
 						var weatherGrid = JSONGet("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString());
 						var hourlyForecastLink = weatherGrid["properties"]["forecastHourly"]
 						var hourlyForecast = JSONGet(hourlyForecastLink);
+						var hourly = [hourlyForecast["properties"]["periods"]];
+						var forecast = [JSONGet(weatherGrid["properties"]["forecast"])["properties"]["periods"]];
 						hourlyForecast = hourlyForecast["properties"]["periods"][0];
 						var info = hourlyForecast["temperature"] + " F - " + hourlyForecast["shortForecast"];
 						document.getElementById("currentLocData").innerHTML = info;
 						document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
-						document.getElementById("currentLocDiv").onclick = "navTo('current-location-data');";
+						var weatherAlerts = getWeatherAlertsForPos(currentLat, currentLong);
+						var status = getStatusForPos(weatherAlerts);
+						if (status[0] == "noalerts"){
+							document.getElementById("currentLocDiv").setAttribute("class", "location currentloc");
+						}
+						else{
+							document.getElementById("currentLocDiv").setAttribute("class", "location " + status[0]);
+						}
+						var theWarnings = "";
+						var generatedCode = "";
+						var b = 0;
+						while (b < weatherAlerts.length){
+							theWarnings += "<a href='#' style='color:white;'>" + weatherAlerts[b]["properties"]["event"] + "</a>&emsp;"
+							b++;
+						}
+						
+						if (status[0] == "warning"){
+							generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active warnings!</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
+						}
+						if (status[0] == "watch"){
+							generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active watches.</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
+						}
+						if (status[0] == "other"){
+							theWarnings = theWarnings.replaceAll(",", ", ")
+							generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
+						}
+						if (generatedCode == ""){
+							document.getElementById("current-loc-alerts").hidden = true;
+						}
+						else{
+							document.getElementById("current-loc-alerts").hidden = false;
+						}
+						document.getElementById("current-loc-alerts").innerHTML = generatedCode;
+						document.getElementById("current-loc-main-info").setAttribute("class", "location " + status[0]);
+						document.getElementById("current-loc-temp").innerHTML = hourlyForecast["temperature"] + "° F";
+						document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
+						document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
+						var a = 0;
+						var longHourForecast = "";
+						a = 0;
+						var forecastTime;
+						var AMPM;
+						while (a < 12){
+							sfor = hourly[0][a]["shortForecast"].toLowerCase();
+							longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
+							if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
+								image = "rainy";
+							}
+							else if (sfor.includes("snow")){
+								image = "snowy";
+							}
+							else if (sfor.includes("wind")){
+								image = "windy";
+							}
+							else if (sfor.includes("cloud")){
+								image = "cloudy";
+							}
+							else{
+								image = "sunny";
+							}
+							forecastTime = hourly[0][a]["startTime"];
+							forecastTime = parseInt(forecastTime.substr(11,2));
+							AMPM = "AM";
+							if (forecastTime > 11){
+								AMPM = "PM";
+							}
+							if (forecastTime > 12){
+								forecastTime -= 12;
+							}
+							if (forecastTime == 0){
+								forecastTime = 12;
+							}
+							longHourForecast += "<img src='img/" + image + ".svg'>"
+							longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
+							longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
+							longHourForecast += "</center></div>"
+							a++;
+						}
+						document.getElementById("current-loc-hourly").innerHTML = longHourForecast;
+						var theFiveForecast = "";
+						theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
+						theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
+						theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
+						theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
+						theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
+						theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
+						theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
+						theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
+						theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
+						theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
+						document.getElementById("current-loc-nws").innerHTML = theFiveForecast;
 						var theTime = new Date();
 						lastLocationCheck = theTime.getTime();
 						lastLocationInfo = info;
 					}
 					catch(err){
-						document.getElementById("currentLocData").innerHTML = "An error occurred.";
+						document.getElementById("currentLocData").innerHTML = "Loading...";
 						document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
+						setTimeout(refreshCurrentLocation, 8000);
 					}
 				}, function(error){
 				document.getElementById("currentLocData").innerHTML = "Please allow location permission or disable this in app settings.";
@@ -636,7 +720,52 @@ function refreshCurrentLocation(){
 		else{
 			document.getElementById("currentLocData").innerHTML = lastLocationInfo;
 			document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
+			document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
 		}
+	}
+}
+
+// Get status for a position
+function getStatusForPos(nomObj){
+	var warnings = 0;
+	var watches = 0;
+	var other = 0;
+	var weatherAlerts = nomObj;
+	var a = 0;
+	var warningsList = [];
+	var watchesList = [];
+	var otherList = [];
+	var statList = [];
+	// Count the number of watches and warnings
+	while (a < weatherAlerts.length){
+		if (weatherAlerts[a]["properties"]["event"].toLowerCase().includes("watch")){
+			watchesList.push(weatherAlerts[a]["properties"]["event"]);
+			watches++;
+		}
+		else if (weatherAlerts[a]["properties"]["event"].toLowerCase().includes("warning")){
+			warningsList.push(weatherAlerts[a]["properties"]["event"]);
+			warnings++;
+		}
+		else{
+			other++;
+			otherList.push(weatherAlerts[a]["properties"]["event"]);
+		}
+		a++;
+	}
+	statList = warningsList;
+	statList = statList.concat(watchesList);
+	statList = statList.concat(otherList);
+	if (warnings > 0){
+		return ["warning", warnings, watches, other, statList];
+	}
+	else if (watches > 0){
+		return ["watch", warnings, watches, other, statList];
+	}
+	else if (other > 0){
+		return ["other", warnings, watches, other, statList];
+	}
+	else{
+		return ["noalerts", warnings, watches, other, statList];
 	}
 }
 
