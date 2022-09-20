@@ -18,6 +18,7 @@
   "build": {
     "appId": "io.atticusc.atmosweather",
     "productName": "Atmos Weather",
+    "icon": "img/icon.png",
     "win": {
       "target": "nsis",
       "icon": "img/icon.png",
