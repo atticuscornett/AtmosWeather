@@ -28,6 +28,7 @@
       "icon": "img/icon.png"
     },
     "mac":{
+      "target": [{ "target": "dmg", "arch": [ "x64", "arm64"] }]
       "icon": "img/icon.png"
     }
   },
