@@ -125,9 +125,10 @@ function getForecastGeo(){
 
 // Gets active weather alerts for a location
 function getWeatherAlertsForPos(lat, long){
+	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
 	try{
 		var theAlerts = JSONGet("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString())["features"];
-		addToActiveAlertsCheck(theCache[pos])
+		addToActiveAlertsCheck(theAlerts);
 		return theAlerts;
 	}
 	catch(err){
