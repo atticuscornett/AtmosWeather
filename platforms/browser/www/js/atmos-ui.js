@@ -99,25 +99,27 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version0.9.2")){
+	if (!window.localStorage.getItem("notice-version0.9.3")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v0.9.2 is here!</h2>
+		<h2>Atmos Weather v0.9.3 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Radar page updated with transparency.</dd>
-  			<dd>- Color scheme settings added for radar.</dd>
-  			<dd>- More polygons now show on radar page.</dd>
-  			<dd>- Radar page polygon loading optimized.</dd>
-  			<dd>- Builds for Linux changed.</dd>
-			<dd>- Settings now automatically fill default values on updates.</dd>
+  			<dd>- Layers can now be enabled and disabled on radar.</dd>
+  			<dd>- High resolution polygons can now be enabled for radar.</dd>
+  			<dd>- Settings UI now looks better for mobile.</dd>
+  			<dd>- Information on current location can now be viewed.</dd>
+  			<dd>- New build variants for Linux.</dd>
+  			<dd>- New build variants for macOS.</dd>
 			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Unusual settings behavior after updates fixed.</dd>
+  			<dd>- Minor UI issues fixed.</dd>
+  			<dd>- Minor grammatical error fixed.</dd>
+  			<dd>- Minor privacy statement error fixed.</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version0.9.2", "true");
+		window.localStorage.setItem("notice-version0.9.3", "true");
 	}
 	// Congressional App Challenge Outdated Version Warning
 	document.getElementById("notice-window").innerHTML += `

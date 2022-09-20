@@ -125,9 +125,10 @@ function getForecastGeo(){
 
 // Gets active weather alerts for a location
 function getWeatherAlertsForPos(lat, long){
+	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
 	try{
 		var theAlerts = JSONGet("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString())["features"];
-		addToActiveAlertsCheck(theCache[pos])
+		addToActiveAlertsCheck(theAlerts);
 		return theAlerts;
 	}
 	catch(err){
@@ -294,7 +295,9 @@ function getAllActiveAlerts(){
 	}
 }
 
+// Get polygon for forecast zone
 function getForecastZonePoly(forecastZone){
+	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	if (forecastZone.includes("fire")){
 		return getFireZonePoly(forecastZone);
 	}
@@ -304,6 +307,9 @@ function getForecastZonePoly(forecastZone){
 	var eo = "odd";
 	if (zoneNum % 2 == 0){
 		eo = "even"
+	}
+	if (allSettings["radar"]["polygons"]["high-res"]){
+		eo += "-highres";
 	}
 	var fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyCache){
@@ -324,13 +330,18 @@ function getForecastZonePoly(forecastZone){
 	return false;
 }
 
+// Get polygon for fire forecast zone
 function getFireZonePoly(forecastZone){
+	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	var zoneCode = forecastZone.substring(35);
 	var zoneNum = Number(zoneCode.substring(3));
 	var zoneId = zoneCode.substring(0,2);
 	var eo = "odd";
 	if (zoneNum % 2 == 0){
 		eo = "even"
+	}
+	if (allSettings["radar"]["polygons"]["high-res"]){
+		eo += "-highres";
 	}
 	var fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyFireCache){
@@ -349,4 +360,37 @@ function getFireZonePoly(forecastZone){
 		return areaData[zoneCode];
 	}
 	return false;
+}
+
+// Sort events for radar display
+function sortByEventType(alertsList){
+	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	var a = 0;
+	var watchesL = [];
+	var otherL = [];
+	var warningL = [];
+	while (a < alertsList[0].length){
+		if (alertsList[0][a]["properties"]["event"].toLowerCase().includes("warning")){
+			if (allSettings["radar"]["polygons"]["warnings"]){
+				warningL.push(alertsList[0][a]);
+			}
+		}
+		else if (alertsList[0][a]["properties"]["event"].toLowerCase().includes("watch")){
+			if (allSettings["radar"]["polygons"]["watch"]){
+				watchesL.push(alertsList[0][a]);
+			}
+		}
+		else{
+			if (allSettings["radar"]["polygons"]["advisories"]){
+				otherL.push(alertsList[0][a]);
+			}
+		}
+		a++;
+	}
+	var orgList = [];
+	orgList = orgList.concat(watchesL);
+	orgList = orgList.concat(otherL);
+	orgList = orgList.concat(warningL);
+	alertsList[0] = orgList;
+	return alertsList;
 }
