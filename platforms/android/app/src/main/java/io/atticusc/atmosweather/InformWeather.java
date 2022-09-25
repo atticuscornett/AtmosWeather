@@ -19,12 +19,14 @@ public class InformWeather {
         SharedPreferences settings = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
         String defaultSettings = "{\"location\":{\"weather\":true,\"alerts\":true},\"notifications\":{\"severe-future\":true,\"rain-future\":false},\"location-alerts\":{\"default-alert\":\"readynow\",\"default-notification\":\"readynow\",\"locations\":{}},\"alert-types\":{\"warnings\":{\"tornado\":\"alert\",\"hurricane\":\"alert\",\"hurricane-force-wind\":\"alert\",\"tropical-storm\":\"alert\",\"special-marine\":\"alert\",\"severe-thunderstorm\":\"alert\",\"storm\":\"alert\",\"gale\":\"alert\",\"flash-flood\":\"alertmove\",\"flood\":\"alertmove\",\"coastal-flood\":\"alertmove\",\"river-flood\":\"alertmove\",\"high-wind\":\"soundnotification\",\"extreme-wind\":\"alert\",\"excessive-heat\":\"soundnotification\",\"fire-weather\":\"alert\",\"blizzard\":\"alert\",\"snow-squall\":\"alertmove\",\"ice-storm\":\"alert\",\"winter-storm\":\"alert\",\"freeze\":\"soundnotification\",\"wind-chill\":\"soundnotification\"},\"watches\":{\"tornado\":\"soundnotification\",\"hurricane\":\"soundnotification\",\"tropical-storm\":\"soundnotification\",\"severe-thunderstorm\":\"soundnotification\",\"flash-flood\":\"soundnotification\",\"flood\":\"soundnotification\",\"coastal-flood\":\"soundnotification\",\"river-flood\":\"soundnotification\",\"high-wind\":\"soundnotification\",\"excessive-heat\":\"soundnotification\",\"fire-weather\":\"soundnotification\",\"winter-storm\":\"soundnotification\",\"freeze\":\"soundnotification\"},\"advisory\":{\"wind\":\"soundnotification\",\"winter-weather\":\"soundnotification\",\"frost\":\"soundnotification\",\"wind-chill\":\"soundnotification\",\"heat\":\"soundnotification\",\"dense-fog\":\"soundnotification\",\"small-craft\":\"soundnotification\",\"coastal-flood\":\"soundnotification\"}},\"per-location\":{}}";
         JSONObject jsonObject = null;
+        boolean doTTS = false;
         String alertSound = "readynow";
         String notificationSound = "readynow";
         try {
             jsonObject = new JSONObject(settings.getString("settings", defaultSettings));
             alertSound = jsonObject.getJSONObject("location-alerts").getString("default-alert");
             notificationSound = jsonObject.getJSONObject("location-alerts").getString("default-notification");
+            doTTS = jsonObject.getJSONObject("location-alerts").getBoolean("tts-alerts");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -41,6 +43,12 @@ public class InformWeather {
         }
         catch (Exception e){
             System.out.println("Using default notification sound");
+        }
+        try{
+            doTTS = jsonObject.getJSONObject("per-location").getJSONObject(locationName).getJSONObject("location-alerts").getBoolean("tts-alerts");
+        }
+        catch (Exception e){
+            System.out.println("Using default tts setting");
         }
         String jsonKey = eventTitle.toLowerCase(Locale.ROOT).replaceAll(" ", "-");
         switch (jsonKey) {
@@ -119,17 +127,30 @@ public class InformWeather {
             new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, notificationSound + "notification", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
         }
         else if (behavior.contains("alertmove")){
-            //TODO
             Boolean moving = settings.getBoolean("currentlyMoving", false);
             if (moving){
-                new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+                if (doTTS){
+                    new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+                    new EasyTTS(eventTitle + " has been issued for " + locationName + ". " + eventInfo, context.getApplicationContext());
+                }
+                else{
+                    new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+
+                }
             }
             else{
                 return false;
             }
         }
         else if (behavior.contains("alert")){
-            new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+            if (doTTS){
+                new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+                new EasyTTS(eventTitle + " has been issued for " + locationName + ". " + eventInfo, context.getApplicationContext());
+            }
+            else{
+                new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+
+            }
         }
 
         return true;

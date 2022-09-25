@@ -48,7 +48,7 @@ public class BackgroundService extends BroadcastReceiver {
                 new NWSData().GetAlerts(locationJSON.getJSONObject(checkLocation).getString("lat"), locationJSON.getJSONObject(checkLocation).getString("lon"), locationNameJSON.getString(checkLocation), context);
             }
             checkLocation += 1;
-            //new EasyTTS("This is a ping", context.getApplicationContext());
+            // new EasyTTS("Test", context.getApplicationContext());
             weatherLocations.edit().putInt("nextcheck", checkLocation).commit();
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
             Intent intentA = new Intent(context, BackgroundService.class);

@@ -18,7 +18,7 @@ setTimeout(function(){
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
 			"radar":{"color-scheme":4, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
-			"location-alerts": {"default-alert": "readynow", "default-notification": "readynow", "locations":{}},
+			"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 			"alert-types": {
 				"warnings":{
 					"tornado": "alert",
@@ -92,7 +92,7 @@ setTimeout(function(){
 		atmosSettingsTemp = {
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
-		"location-alerts": {"default-alert": "readynow", "default-notification": "readynow", "locations":{}},
+		"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 		"radar":{"color-scheme":4, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
 		"alert-types": {
 			"warnings":{
@@ -195,6 +195,7 @@ function refreshSettings(){
 	document.getElementById("setting-radar-high-res").checked = allSettings["radar"]["polygons"]["high-res"];
 	
 	// Alert Sound Settings
+	document.getElementById("setting-tts-alerts").checked = allSettings["location-alerts"]["tts-alerts"];
 	document.getElementById("setting-default-sound-alert").value = allSettings["location-alerts"]["default-alert"];
 	document.getElementById("setting-default-sound-notification").value = allSettings["location-alerts"]["default-notification"];
 	
@@ -250,6 +251,7 @@ function saveSettings(){
 	allSettings["radar"]["polygons"]["warnings"] = document.getElementById("setting-radar-show-warnings").checked;
 	allSettings["radar"]["polygons"]["high-res"] = document.getElementById("setting-radar-high-res").checked;
 	
+	allSettings["location-alerts"]["tts-alerts"] = document.getElementById("setting-tts-alerts").checked;
 	allSettings["location-alerts"]["default-alert"] = document.getElementById("setting-default-sound-alert").value;
 	allSettings["location-alerts"]["default-notification"] = document.getElementById("setting-default-sound-notification").value;
 	
@@ -313,6 +315,12 @@ function loadLocationSettings(index){
 	}
 	else{
 		document.getElementById("setting-future-storm-notifications-location").checked = allSettings["notifications"]["rain-future"];
+	}
+	if (allSettings["per-location"][theName]["location-alerts"].hasOwnProperty("tts-alerts")){
+		document.getElementById("setting-tts-alerts-location").checked = allSettings["per-location"][theName]["location-alerts"]["tts-alerts"]	
+	}
+	else{
+		document.getElementById("setting-tts-alerts-location").checked = allSettings["location-alerts"]["tts-alerts"]
 	}
 	if (allSettings["per-location"][theName]["location-alerts"].hasOwnProperty("default-alert")){
 		document.getElementById("setting-default-sound-alert-location").value = allSettings["per-location"][theName]["location-alerts"]["default-alert"]	
@@ -382,6 +390,12 @@ function saveLocationSettings(){
 	}
 	else{
 		delete allSettings["per-location"][name]["notifications"]["rain-future"]
+	}
+	if (document.getElementById("setting-tts-alerts-location").checked != allSettings["location-alerts"]["tts-alerts"]){
+		allSettings["per-location"][name]["location-alerts"]["tts-alerts"] = document.getElementById("setting-tts-alerts-location").checked;
+	}
+	else{
+		delete allSettings["per-location"][name]["location-alerts"]["tts-alerts"];
 	}
 	if (document.getElementById("setting-default-sound-alert-location").value != allSettings["location-alerts"]["default-alert"]){
 		allSettings["per-location"][name]["location-alerts"]["default-alert"] = document.getElementById("setting-default-sound-alert-location").value;
