@@ -15,6 +15,7 @@
 - Select install.
 - After the installer finishes, open Atmos Weather. It will begin running in the background even after you close it.
 - Atmos Weather does not automatically update on Android, but can be updated manually by downloading and running the latest APK. This will update the app and keep your settings and data.
+- IMPORTANT: Some Android devices (especially those from Samsung) may try to limit Atmos Weather's background abilities. Make sure that you check your settings and allow background battery usage or else notifications may not work properly.
 
 ### Linux
 - Download the Linux installer that is appropriate for your CPU architecture. (.deb)
