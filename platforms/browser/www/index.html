@@ -3,7 +3,7 @@
 	<head>
 		<title>Atmos Weather</title>
 		<meta charset="utf-8" lang="en">
-		<link href="/img/favicon.svg" rel="icon" type="image/x-icon" />
+		<link href="./img/favicon.svg" rel="icon" type="image/x-icon" />
 		
 		<!-- Font Import -->
 		<link rel="stylesheet" href="./css/font-imports.css">
@@ -70,7 +70,7 @@
 					<!-- UPDATE -->
 					<h1>About Atmos Weather</h1>
 					<h3>Version 0.9.3</h3>
-					<h3>Last updated 9-20-2022</h3>
+					<h3>Last updated 9-25-2022</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>
@@ -214,6 +214,9 @@
 					<hr>
 					<h2>Location Alerts</h2>
 					<h6>Choose the level of alerts for different locations.</h6>
+					<input class="box" type="checkbox" id="setting-tts-alerts" >
+					<label for="setting-tts-alerts">Read alerts with text to speech</label>
+					<br><br>
 					<label for="setting-default-sound-alert">Default Alert Sound</label>
 					<br>
 					<select id="setting-default-sound-alert" onChange="playAlarmSoundMain();">
@@ -862,6 +865,10 @@
 					<label for="setting-future-storm-notifications-location">Get notifications for forecast future storms and rain (not severe)</label>
 					<hr>
 					<h2>Sounds</h2>
+					<input class="box" type="checkbox" id="setting-tts-alerts-location" >
+					<label for="setting-tts-alerts-location">Read alerts with text to speech</label>
+					<br>
+					<br>
 					<label for="setting-default-sound-alert-location">Default Alert Sound</label>
 					<br>
 					<select id="setting-default-sound-alert-location" onChange="playAlarmSoundLocation();">
