@@ -315,6 +315,7 @@ function alertCheck(urlGet){
 						eventType = "air-quality-warning";
 					}
 					console.log(eventType);
+					let tts = settings["location-alerts"]["tts-alerts"];
 					if (eventType.includes("warning")){
 						notificationSetting = settings["alert-types"]["warnings"][eventType.replace("-warning", "")];
 					}
@@ -353,11 +354,17 @@ function alertCheck(urlGet){
 						notificationSetting = "soundnotification";
 					}
 					if (notificationSetting == "alert"){
+						if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"] != undefined){
+							tts = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"];
+						}
 						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
 						notif.show()
 						notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
 						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();allAudio.push(audio);", false);
 						notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
+						if (tts){
+							ttsTask(chunk[at]["properties"]["headline"] + ". " + chunk[at]["properties"]["description"].replaceAll("'", "\\'"));
+						}
 					}
 					else if (notificationSetting == "silentnotification"){
 						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
@@ -401,4 +408,13 @@ function alertCheck(urlGet){
 		}
 	})
 	request.end();
+}
+
+function ttsTask(toSay){
+	setTimeout(function(){
+		win2.webContents.executeJavaScript("stopAllAudio();", false);
+		toSay = toSay.replaceAll("\n", " ")
+		console.log(toSay);
+		win2.webContents.executeJavaScript("sayTTS('" +  toSay + "');", false);
+	}, 3000);
 }
