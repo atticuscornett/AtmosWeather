@@ -29,3 +29,9 @@
   - Atmos Weather may show with a default blank app logo. This is a bug that we plan to fix in future releases.
 - Atmos Weather does not run automatically after installation. Launch Atmos Weather to start the background task. Launching again will open the GUI.
 - Atmos Weather does not automatically run on startup on Linux. This is a bug that we plan to fix in future releases.
+
+### Mac
+- Download the Mac installer that is appropriate for your CPU architecture.
+  - If you have an Apple Silicon device (M1 or M2 chip), download the silicon/arm64 version.
+  - If you have an Intel device (i3, i5, i7, etc.), download the x64 version.
+- Follow Apple's instuctions on how to install unsigned software here: https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac
