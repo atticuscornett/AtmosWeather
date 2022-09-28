@@ -23,6 +23,7 @@ setTimeout(function(){
 				"warnings":{
 					"tornado": "alert",
 					"hurricane": "alert",
+					"storm-surge": "alert",
 					"hurricane-force-wind": "alert",
 					"tropical-storm": "alert",
 					"special-marine": "alert",
@@ -98,6 +99,7 @@ setTimeout(function(){
 			"warnings":{
 				"tornado": "alert",
 				"hurricane": "alert",
+				"storm-surge": "alert",
 				"hurricane-force-wind": "alert",
 				"tropical-storm": "alert",
 				"special-marine": "alert",

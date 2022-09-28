@@ -135,6 +135,7 @@
 					<div id="radar-map" style="height:50%;right:20px;border-radius:7px;box-shadow: 0px 0px 7px #898989;">
 					
 					</div>
+					<h5 id="polygon-load-count" hidden></h5>
 					<h6 id="radar-time"></h6>
 					<div style="display: flex;align-items:center;">
 						<div style="text-align: center;width:fit-content;display: inline-block;margin-right: 20px;">
@@ -253,6 +254,16 @@
 					<label for="setting-hurricane-warning">Hurricane/Cyclone Warning</label>
 					<br>
 					<select id="setting-hurricane-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-storm-surge-warning">Storm Surge Warning</label>
+					<br>
+					<select id="setting-storm-surge-warning">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -903,6 +914,16 @@
 					<label for="setting-hurricane-warning-location">Hurricane/Cyclone Warning</label>
 					<br>
 					<select id="setting-hurricane-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-storm-surge-warning-location">Storm Surge Warning</label>
+					<br>
+					<select id="setting-storm-surge-warning-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>

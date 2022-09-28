@@ -278,6 +278,7 @@ function alertCheck(urlGet){
 			chunk = JSON.parse(chunk);
 			chunk = chunk["features"];
 			var at = 0;
+			let playedAlready = [];
 			while (at < chunk.length){
 				// Get Alert Settings
 				if (!notifiedAlerts.includes(chunk[at]["id"])){
@@ -354,8 +355,12 @@ function alertCheck(urlGet){
 						notificationSetting = "soundnotification";
 					}
 					if (notificationSetting == "alert"){
-						if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"] != undefined){
-							tts = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"];
+						if (settings["per-location"][locationNames[cycleAt]] != undefined){
+							if (settings["per-location"][locationNames[cycleAt]]["location-alerts"] != undefined){
+								if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"] != undefined){
+									tts = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"];
+								}
+							}
 						}
 						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
 						notif.show()
@@ -384,7 +389,10 @@ function alertCheck(urlGet){
 							notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
 							notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
 						}
-						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
+						if (!playedAlready.includes(notificationSound)){
+							win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
+							playedAlready.push(notificationSound);
+						}
 					}
 					locationNames[cycleAt]
 					console.log(notificationSetting);
