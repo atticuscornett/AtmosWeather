@@ -626,10 +626,10 @@ function refreshCurrentLocation(){
 						var generatedCode = "";
 						var b = 0;
 						while (b < weatherAlerts.length){
-							theWarnings += "<a href='#' style='color:white;'>" + weatherAlerts[b]["properties"]["event"] + "</a>&emsp;"
+							theWarnings += "<a href='#' onclick='loadAlertForCurrent(" + String(b) + ")' style='color:white;'>" + weatherAlerts[b]["properties"]["event"] + "</a>&emsp;"
 							b++;
 						}
-						
+						theWarnings += " (Tap for more info.)";
 						if (status[0] == "warning"){
 							generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active warnings!</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
 						}
@@ -720,6 +720,14 @@ function refreshCurrentLocation(){
 			);
 		}
 		else{
+			var weatherAlerts = getWeatherAlertsForPos(currentLat, currentLong);
+			var status = getStatusForPos(weatherAlerts);
+			if (status[0] == "noalerts"){
+				document.getElementById("currentLocDiv").setAttribute("class", "location currentloc");
+			}
+			else{
+				document.getElementById("currentLocDiv").setAttribute("class", "location " + status[0]);
+			}
 			document.getElementById("currentLocData").innerHTML = lastLocationInfo;
 			document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
 			document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
@@ -846,11 +854,53 @@ function loadAlert(alertID){
 	else{
 		styling = {"color":"blue"};
 	}
-	var x = 0;
-	while (x < alertBoundries.length){
-		polygon = L.geoJSON(alertBoundries[x], {style:styling}).addTo(map);
-		x++;
+	polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map);
+	navTo("alert-display")
+	setTimeout(function(){
+		map.invalidateSize(true)
+	}, 1000)
+	setTimeout(function(){
+		map.fitBounds(polygon.getBounds());
+	}, 2000);
+}
+
+function loadAlertForCurrent(alertObj){
+	clearMap();
+	// var theSplit = alertID.split("-");
+	// var locationIndex = parseInt(theSplit[0]);
+	// var alertIndex = parseInt(theSplit[1]);
+	// var theLocation = JSON.parse(localStorage.getItem("weather-locations"))[locationIndex];
+	// var theAlert = getWeatherAlertsForNom(theLocation);
+	theAlert = getWeatherAlertsForPos(currentLat, currentLong)[alertObj]
+	var alertBoundries = getPolyBoundries(theAlert);
+	document.getElementById("weather-alert-title").innerHTML = theAlert["properties"]["headline"];
+	var divCode = "<h2>Areas Affected</h2>"
+	divCode += "<h3>" + theAlert["properties"]["areaDesc"] + "</h3>"
+	if (theAlert["properties"]["instruction"] != null){
+		divCode += "<h2>Instructions</h2>"
+		divCode += "<h3>" + theAlert["properties"]["instruction"] + "</h3>"
 	}
+	divCode += "<h2>Details</h2>"
+	var theDetails = theAlert["properties"]["description"]
+	theDetails = theDetails.replaceAll("\n\n", "<br><br>");
+	theDetails = theDetails.replaceAll("\n", " ");
+	theDetails = theDetails.replaceAll("* ", "");
+	theDetails = theDetails.replaceAll("...", " - ");
+	theDetails = theDetails.replaceAll("- -", "-")
+	divCode += "<h3>" + theDetails + "</h3>"
+	document.getElementById("alert-details").innerHTML = divCode;
+	var styling;
+	if (theAlert["properties"]["event"].toLowerCase().includes("warning")){
+		styling = {"color":"red"};
+	}
+	else if (theAlert["properties"]["event"].toLowerCase().includes("watch")){
+		styling = {"color":"yellow"};
+	}
+	else{
+		styling = {"color":"blue"};
+	}
+	var x = 0;
+	polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map);
 	navTo("alert-display")
 	setTimeout(function(){
 		map.invalidateSize(true)
