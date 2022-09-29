@@ -68,7 +68,26 @@ else{
 		trayIcon.setToolTip('Atmos Weather')
 		const trayMenuTemplate = [{
 				   label: 'Atmos Weather',
-				   enabled: false
+				   enabled: true,
+				   click: () => {
+					if (win2 == null){
+						win2 = new BrowserWindow({
+							width: 800,
+							height: 600,
+							icon: __dirname + "/img/icon.png",
+							autoHideMenuBar: true
+						});
+						win2.loadFile('index.html')
+						win2.hide()
+					}
+					if (win2.isVisible()) {
+						win2.hide()
+					} else {
+						// Refresh displayed weather data so that old data is not shown to the user
+						win2.webContents.executeJavaScript('refreshLocations();', false);
+						win2.show()
+					}
+				   }
 				},
 				{
 				   label: 'About Atmos Weather',
