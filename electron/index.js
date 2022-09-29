@@ -300,6 +300,9 @@ function alertCheck(urlGet){
 					if (eventType == "tropical-cyclone-statement"){
 						eventType = "tropical-cyclone-statement-advisory";
 					}
+					if (eventType == "hurricane-local-statement"){
+						eventType = "hurricane-local-statement-advisory";
+					}
 					if (eventType == "marine-weather-statement"){
 						eventType = "marine-weather-statement-advisory";
 					}

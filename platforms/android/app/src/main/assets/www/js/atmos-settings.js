@@ -23,6 +23,7 @@ setTimeout(function(){
 				"warnings":{
 					"tornado": "alert",
 					"hurricane": "alert",
+					"storm-surge": "alert",
 					"hurricane-force-wind": "alert",
 					"tropical-storm": "alert",
 					"special-marine": "alert",
@@ -50,6 +51,7 @@ setTimeout(function(){
 				"watches":{
 					"tornado": "soundnotification",
 					"hurricane": "soundnotification",
+					"storm-surge": "soundnotification",
 					"tropical-storm": "soundnotification",
 					"severe-thunderstorm": "soundnotification",
 					"flash-flood": "soundnotification",
@@ -67,6 +69,7 @@ setTimeout(function(){
 					"dust": "soundnotification",
 					"hazardous-weather-outlook": "soundnotification",
 					"severe-weather-statement": "soundnotification",
+					"tropical-cyclone-statement": "soundnotification",
 					"special-weather-statement": "soundnotification",
 					"winter-weather": "soundnotification",
 					"frost": "soundnotification",
@@ -98,6 +101,7 @@ setTimeout(function(){
 			"warnings":{
 				"tornado": "alert",
 				"hurricane": "alert",
+				"storm-surge": "alert",
 				"hurricane-force-wind": "alert",
 				"tropical-storm": "alert",
 				"special-marine": "alert",
@@ -125,6 +129,7 @@ setTimeout(function(){
 			"watches":{
 				"tornado": "soundnotification",
 				"hurricane": "soundnotification",
+				"storm-surge": "soundnotification",
 				"tropical-storm": "soundnotification",
 				"severe-thunderstorm": "soundnotification",
 				"flash-flood": "soundnotification",
@@ -142,6 +147,7 @@ setTimeout(function(){
 				"dust": "soundnotification",
 				"hazardous-weather-outlook": "soundnotification",
 				"severe-weather-statement": "soundnotification",
+				"tropical-cyclone-statement": "soundnotification",
 				"special-weather-statement": "soundnotification",
 				"marine-weather-statement": "soundnotification",
 				"rip-current-statement": "soundnotification",

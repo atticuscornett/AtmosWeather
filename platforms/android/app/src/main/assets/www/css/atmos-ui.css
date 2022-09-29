@@ -228,13 +228,13 @@ select{
 /* Dark Mode Colors */
 @media (prefers-color-scheme: dark){
 	body{
-		background-color: black;
+		background-color: #222222;
 		color: white;
 	}
 	#notice-window-container{
 		z-index: 99;
 		position: absolute;
-		background-color: black;
+		background-color: #222222;
 		min-width: 100%;
 		min-height: 100%;
 		top: 0;
@@ -243,13 +243,13 @@ select{
 	#welcome-window-native{
 		z-index: 100;
 		position: absolute;
-		background-color: black;
+		background-color: #222222;
 		min-width: 100%;
 		min-height: 100%;
 		top: 0;
 		left: 0;
 	}
 	#app-nav{
-		background-color: hsla(0,0%,4%,1.00);
+		background-color: hsla(0,0%,15%,1.00);
 	}
 }

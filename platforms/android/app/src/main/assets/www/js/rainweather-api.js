@@ -201,7 +201,12 @@ function slowLoadPolygons(alerts, index){
         polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
         a++;
     }
+    document.getElementById("polygon-load-count").innerHTML = "Loading alert polygons... (" + Math.floor(((a+1)/alerts[0].length)*100) + "%)";
+    document.getElementById("polygon-load-count").hidden = false;
     if (a < alerts[0].length){
         setTimeout(function(){slowLoadPolygons(alerts, a)}, 500);
+    }
+    else{
+        document.getElementById("polygon-load-count").hidden = true;
     }
 }

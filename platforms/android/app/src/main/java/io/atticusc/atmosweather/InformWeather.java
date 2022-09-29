@@ -76,6 +76,12 @@ public class InformWeather {
             case "severe-weather-statement":
                 jsonKey = "severe-weather-statement-advisory";
                 break;
+            case "hurricane-local-statement":
+                jsonKey = "hurricane-local-statement-advisory";
+                break;
+            case "tropical-cyclone-statement":
+                jsonKey = "tropical-cyclone-statement-advisory";
+                break;
             default:
                 break;
         }
