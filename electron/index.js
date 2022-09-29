@@ -39,7 +39,8 @@ else{
 	if (process.platform == "linux"){
 		var AutoLaunch = require('auto-launch');
 		let auto = new AutoLaunch({
-			name: 'Atmos Weather'
+			name: 'Atmos Weather',
+			path: '"' + process.execPath + '" %U'
 		});
 		auto.enable();
 	}
