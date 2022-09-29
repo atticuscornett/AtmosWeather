@@ -29,6 +29,7 @@ win2 = win;
 // Check if app is already running to prevent multiple background instances
 const singleAppLock = app.requestSingleInstanceLock();
 if (!singleAppLock){
+	console.log("Lock.")
 	app.quit();
 }
 else{
@@ -37,12 +38,10 @@ else{
 		openAtLogin: true
 	})
 	if (process.platform == "linux"){
-		var AutoLaunch = require('auto-launch');
-		let auto = new AutoLaunch({
-			name: 'Atmos Weather',
-			path: '"' + process.execPath + '" %U'
-		});
-		auto.enable();
+		console.log("Begin");
+		// Make desktop for startup
+		var fs = require("fs");
+		fs.writeFile('/home/' + require("os").userInfo().username + '/.config/autostart/atmos-weather.desktop','[Desktop Entry]\nName=Atmos Weather\nExec="/opt/Atmos Weather/atmos-weather" %U\nTerminal=false\nType=Application\nIcon=atmos-weather\nStartupWMClass=Atmos Weather\nComment=A lightweight app for weather forecasts and alerts.\nCategories=Utility;', function(err){console.log(err)})	
 	}
 	app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
 		if (win2 == null){
