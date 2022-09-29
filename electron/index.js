@@ -36,6 +36,13 @@ else{
 	app.setLoginItemSettings({
 		openAtLogin: true
 	})
+	if (process.platform == "linux"){
+		var AutoLaunch = require('auto-launch');
+		let auto = new AutoLaunch({
+			name: 'Atmos Weather'
+		});
+		auto.enable();
+	}
 	app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
 		if (win2 == null){
 			createWindow();

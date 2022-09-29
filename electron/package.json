@@ -1,6 +1,6 @@
 {
   "name": "atmos-weather",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "A lightweight app for weather forecasts and alerts.",
   "main": "index.js",
   "scripts": {
@@ -22,18 +22,39 @@
     "win": {
       "target": "nsis",
       "icon": "img/icon.png",
-      "publish": ["github"]
+      "publish": [
+        "github"
+      ]
     },
     "linux": {
-      "target": [{ "target": "deb", "arch": [ "x64", "arm64", "armv7l"] }, "tar.gz"],
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64",
+            "armv7l"
+          ]
+        },
+        "tar.gz"
+      ],
       "icon": "img/icon.png"
     },
-    "mac":{
-      "target": [{ "target": "dmg", "arch": [ "x64", "arm64"] }],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
       "icon": "img/icon.png"
     }
   },
   "dependencies": {
+    "auto-launch": "^5.0.5",
     "electron-updater": "^5.2.1"
   },
   "repository": {
