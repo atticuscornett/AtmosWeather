@@ -38,8 +38,7 @@ else{
 		openAtLogin: true
 	})
 	if (process.platform == "linux"){
-		console.log("Begin");
-		// Make desktop for startup
+		// Make desktop file for startup on Linux
 		var fs = require("fs");
 		fs.writeFile('/home/' + require("os").userInfo().username + '/.config/autostart/atmos-weather.desktop','[Desktop Entry]\nName=Atmos Weather\nExec="/opt/Atmos Weather/atmos-weather" %U\nTerminal=false\nType=Application\nIcon=atmos-weather\nStartupWMClass=Atmos Weather\nComment=A lightweight app for weather forecasts and alerts.\nCategories=Utility;', function(err){console.log(err)})	
 	}
