@@ -86,6 +86,16 @@ Atmos Weather should not collect any user data beyond what is strictly necessary
 Samsung marks Atmos Weather as a high battery user, because it wakes up the phone often to check for weather alerts.
 This can mean automatic throttling of weather checks, leading to late alerts.
 Despite this warning, Atmos Weather has not been observed to use more than 1-2% a day on these models.
+At the moment, the only solution is to allow background battery usage and disable battery optimizing for the app.
+This solves the negative performance impacts, but does not get rid of the warning.
+
+### Notifications Don't Work On Some Linux Distros
+
+Some Linux distros lack the components to support electron notifications. There is no current workaround for this issue known to me.
+
+### Text To Speech Doesn't Work On Some Linux Distros
+
+Some Linux distros lack the components to support text to speech. This can be solved by the user manually installing text to speech components.
 
 # Documentation
 
