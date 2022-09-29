@@ -135,6 +135,7 @@
 					<div id="radar-map" style="height:50%;right:20px;border-radius:7px;box-shadow: 0px 0px 7px #898989;">
 					
 					</div>
+					<h5 id="polygon-load-count" hidden></h5>
 					<h6 id="radar-time"></h6>
 					<div style="display: flex;align-items:center;">
 						<div style="text-align: center;width:fit-content;display: inline-block;margin-right: 20px;">
@@ -253,6 +254,16 @@
 					<label for="setting-hurricane-warning">Hurricane/Cyclone Warning</label>
 					<br>
 					<select id="setting-hurricane-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-storm-surge-warning">Storm Surge Warning</label>
+					<br>
+					<select id="setting-storm-surge-warning">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -511,6 +522,16 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-storm-surge-watch">Storm Surge Watch</label>
+					<br>
+					<select id="setting-storm-surge-watch">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-tropical-storm-watch">Tropical Storm Watch</label>
 					<br>
 					<select id="setting-tropical-storm-watch">
@@ -675,6 +696,16 @@
 					<label for="setting-severe-weather-statement-advisory">Severe Weather Statement</label>
 					<br>
 					<select id="setting-severe-weather-statement-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-tropical-cyclone-statement-advisory">Tropical Cyclone Statement</label>
+					<br>
+					<select id="setting-tropical-cyclone-statement-advisory">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -903,6 +934,16 @@
 					<label for="setting-hurricane-warning-location">Hurricane/Cyclone Warning</label>
 					<br>
 					<select id="setting-hurricane-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-storm-surge-warning-location">Storm Surge Warning</label>
+					<br>
+					<select id="setting-storm-surge-warning-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -1161,6 +1202,16 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-storm-surge-watch-location">Storm Surge Watch</label>
+					<br>
+					<select id="setting-storm-surge-watch-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-tropical-storm-watch-location">Tropical Storm Watch</label>
 					<br>
 					<select id="setting-tropical-storm-watch-location">
@@ -1325,6 +1376,16 @@
 					<label for="setting-severe-weather-statement-advisory-location">Severe Weather Statement</label>
 					<br>
 					<select id="setting-severe-weather-statement-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-tropical-cyclone-statement-advisory-location">Tropical Cyclone Statement</label>
+					<br>
+					<select id="setting-tropical-cyclone-statement-advisory-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>

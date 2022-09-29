@@ -430,47 +430,52 @@ function loadMoreInfo(navName){
 		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
 	}
 	// Temperature Bar
-	generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
-	var a = 0;
-	var longHourForecast = "<h1>Hourly Forecast</h1>";
-	a = 0;
-	var forecastTime;
-	var AMPM;
-	while (a < 12){
-		sfor = hourly[0][a]["shortForecast"].toLowerCase();
-		longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
-		if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
-			image = "rainy";
+	try{
+		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
+		var a = 0;
+		var longHourForecast = "<h1>Hourly Forecast</h1>";
+		a = 0;
+		var forecastTime;
+		var AMPM;
+		while (a < 12){
+			sfor = hourly[0][a]["shortForecast"].toLowerCase();
+			longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
+			if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
+				image = "rainy";
+			}
+			else if (sfor.includes("snow")){
+				image = "snowy";
+			}
+			else if (sfor.includes("wind")){
+				image = "windy";
+			}
+			else if (sfor.includes("cloud")){
+				image = "cloudy";
+			}
+			else{
+				image = "sunny";
+			}
+			forecastTime = hourly[0][a]["startTime"];
+			forecastTime = parseInt(forecastTime.substr(11,2));
+			AMPM = "AM";
+			if (forecastTime > 11){
+				AMPM = "PM";
+			}
+			if (forecastTime > 12){
+				forecastTime -= 12;
+			}
+			if (forecastTime == 0){
+				forecastTime = 12;
+			}
+			longHourForecast += "<img src='img/" + image + ".svg'>"
+			longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
+			longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
+			longHourForecast += "</center></div>"
+			a++;
 		}
-		else if (sfor.includes("snow")){
-			image = "snowy";
-		}
-		else if (sfor.includes("wind")){
-			image = "windy";
-		}
-		else if (sfor.includes("cloud")){
-			image = "cloudy";
-		}
-		else{
-			image = "sunny";
-		}
-		forecastTime = hourly[0][a]["startTime"];
-		forecastTime = parseInt(forecastTime.substr(11,2));
-		AMPM = "AM";
-		if (forecastTime > 11){
-			AMPM = "PM";
-		}
-		if (forecastTime > 12){
-			forecastTime -= 12;
-		}
-		if (forecastTime == 0){
-			forecastTime = 12;
-		}
-		longHourForecast += "<img src='img/" + image + ".svg'>"
-		longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
-		longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
-		longHourForecast += "</center></div>"
-		a++;
+	}
+	catch (e){
+		var longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
 	}
 	generatedCode += longHourForecast;
 	// Add detailed forecast at bottom

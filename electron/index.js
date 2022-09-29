@@ -203,7 +203,7 @@ function checkLocation(){
 									win2.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
 									fullForecast = fullForecast.toLowerCase();
 									// Check for severe trigger words
-									if (fullForecast.includes("severe") || fullForecast.includes("tropical") || fullForecast.includes("strong") || fullForecast.includes("tornado") || fullForecast.includes("damaging") || fullForecast.includes("damage") || fullForecast.includes("hail")){
+									if (fullForecast.includes("severe") || fullForecast.includes("tropical") || fullForecast.includes("hurricane") || fullForecast.includes("strong") || fullForecast.includes("tornado") || fullForecast.includes("damaging") || fullForecast.includes("damage") || fullForecast.includes("hail")){
 										new Notification({ title: "Future severe weather expected at " + locationNames[cycleAt], body: fullForecastCaps, icon: __dirname + "/img/icon.png"}).show();
 									}
 									else{
@@ -296,6 +296,9 @@ function alertCheck(urlGet){
 					}
 					if (eventType == "severe-weather-statement"){
 						eventType = "severe-weather-statement-advisory";
+					}
+					if (eventType == "tropical-cyclone-statement"){
+						eventType = "tropical-cyclone-statement-advisory";
 					}
 					if (eventType == "marine-weather-statement"){
 						eventType = "marine-weather-statement-advisory";
