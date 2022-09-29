@@ -27,8 +27,8 @@
 - After the installer runs, Atmos Weather should appear in your program list.
   - If your apps are sorted into categories, Atmos Weather should be found under "Utilities." Some distros may call it "Accessories" instead.
   - Atmos Weather may show with a default blank app logo. This is a bug that we plan to fix in future releases.
+  - If Atmos Weather does not appear in your apps list after installation, you may have to run it in your terminal using `"/opt/Atmos Weather/atmos-weather" %U` . Atmos Weather will create an autostart file so that it is always running in the background and can be opened from its background icon. Alternatively, you can manually create a desktop file to run `"/opt/Atmos Weather/atmos-weather" %U` in `menu://applications/Accessories` . 
 - Atmos Weather does not run automatically after installation. Launch Atmos Weather to start the background task. Launching again will open the GUI.
-- Atmos Weather does not automatically run on startup on Linux. This is a bug that we plan to fix in future releases.
 
 ### Mac
 - Download the Mac installer that is appropriate for your CPU architecture.
