@@ -189,6 +189,9 @@ function toggleRadarPlayback(){
 }
 
 function slowLoadPolygons(alerts, index){
+    if (screenAt != "radar"){
+        return;
+    }
     var a = index;
     while(a < index + 10 && a < alerts[0].length){
         var styling = {"color":"blue"};
