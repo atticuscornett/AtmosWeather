@@ -1,8 +1,8 @@
-version: 0.9.3
+version: 0.9.4
 files:
-  - url: atmos-weather-windows.exe
-    sha512: pA+ZkTgcC1xgQact57o2V27gpWMoNuTY1KLoz9l6T6ADgeKdJqi3lh2fw1Y6FDJus5IsbBzdxq6FFQR7RL+Luw==
-    size: 65892092
-path: atmos-weather-windows.exe
-sha512: pA+ZkTgcC1xgQact57o2V27gpWMoNuTY1KLoz9l6T6ADgeKdJqi3lh2fw1Y6FDJus5IsbBzdxq6FFQR7RL+Luw==
-releaseDate: '2022-09-20T18:39:23.210Z'
+  - url: Atmos-Weather-Setup-0.9.4.exe
+    sha512: p2Yv7ZxB6qxiFc4jiD8YVFlPiyvKKRAFmUKO50UCNJ5cX1GNNnJSSY+FOYFNvxli+TkyUw6WLuY+1I82gUh9OA==
+    size: 65920214
+path: Atmos-Weather-Setup-0.9.4.exe
+sha512: p2Yv7ZxB6qxiFc4jiD8YVFlPiyvKKRAFmUKO50UCNJ5cX1GNNnJSSY+FOYFNvxli+TkyUw6WLuY+1I82gUh9OA==
+releaseDate: '2022-10-06T18:23:07.422Z'

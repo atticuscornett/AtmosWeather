@@ -26,4 +26,4 @@ mac:
         - arm64
   icon: img/icon.png
 files: []
-electronVersion: 19.0.15
+electronVersion: 19.1.1
