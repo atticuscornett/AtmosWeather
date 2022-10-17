@@ -88,6 +88,7 @@ setTimeout(function(){
 					"high-surf": "soundnotification",
 					"brisk-wind": "soundnotification",
 					"lake-wind": "soundnotification",
+					"air-stagnation": "soundnotification",
 					"blowing-dust": "soundnotification"
 				}
 			},
@@ -169,6 +170,7 @@ setTimeout(function(){
 				"high-surf": "soundnotification",
 				"brisk-wind": "soundnotification",
 				"lake-wind": "soundnotification",
+				"air-stagnation": "soundnotification",
 				"blowing-dust": "soundnotification"
 			}
 		},
