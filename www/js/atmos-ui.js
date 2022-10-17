@@ -308,7 +308,7 @@ function refreshLocations(){
 				else if (sfor.includes("wind")){
 					image = "windy";
 				}
-				else if (sfor.includes("cloud")){
+				else if (sfor.includes("cloud") || sfor.includes("fog")){
 					image = "cloudy";
 				}
 				if (alertStatus == "warning"){
@@ -411,7 +411,7 @@ function loadMoreInfo(navName){
 	else if (sfor.includes("wind")){
 		image = "windy";
 	}
-	else if (sfor.includes("cloud")){
+	else if (sfor.includes("cloud") || sfor.includes("fog")){
 		image = "cloudy";
 	}
 	var generatedCode;
@@ -458,7 +458,7 @@ function loadMoreInfo(navName){
 			else if (sfor.includes("wind")){
 				image = "windy";
 			}
-			else if (sfor.includes("cloud")){
+			else if (sfor.includes("cloud") || sfor.includes("fog")){
 				image = "cloudy";
 			}
 			else{
@@ -682,7 +682,7 @@ function refreshCurrentLocation(){
 							else if (sfor.includes("wind")){
 								image = "windy";
 							}
-							else if (sfor.includes("cloud")){
+							else if (sfor.includes("cloud") || sfor.includes("fog")){
 								image = "cloudy";
 							}
 							else{
