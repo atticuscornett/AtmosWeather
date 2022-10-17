@@ -26,6 +26,7 @@ setTimeout(function(){
 					"storm-surge": "alert",
 					"hurricane-force-wind": "alert",
 					"tropical-storm": "alert",
+					"tsunami": "alert",
 					"special-marine": "alert",
 					"severe-thunderstorm": "alert",
 					"storm": "alert",
@@ -43,6 +44,7 @@ setTimeout(function(){
 					"snow-squall": "alert",
 					"ice-storm": "alert",
 					"winter-storm": "alert",
+					"hard-freeze": "soundnotification",
 					"freeze": "soundnotification",
 					"wind-chill": "soundnotification",
 					"dust-storm": "alert",
@@ -70,6 +72,7 @@ setTimeout(function(){
 					"hazardous-weather-outlook": "soundnotification",
 					"severe-weather-statement": "soundnotification",
 					"hurricane-local-statement": "alert",
+					"tsunami": "alert",
 					"tropical-cyclone-statement": "soundnotification",
 					"special-weather-statement": "soundnotification",
 					"winter-weather": "soundnotification",
@@ -86,6 +89,7 @@ setTimeout(function(){
 					"high-surf": "soundnotification",
 					"brisk-wind": "soundnotification",
 					"lake-wind": "soundnotification",
+					"air-stagnation": "soundnotification",
 					"blowing-dust": "soundnotification"
 				}
 			},
@@ -105,6 +109,7 @@ setTimeout(function(){
 				"storm-surge": "alert",
 				"hurricane-force-wind": "alert",
 				"tropical-storm": "alert",
+				"tsunami": "alert",
 				"special-marine": "alert",
 				"severe-thunderstorm": "alert",
 				"storm": "alert",
@@ -122,6 +127,7 @@ setTimeout(function(){
 				"snow-squall": "alertmove",
 				"ice-storm": "alert",
 				"winter-storm": "alert",
+				"hard-freeze": "soundnotification",
 				"freeze": "soundnotification",
 				"wind-chill": "soundnotification",
 				"dust-storm": "alert",
@@ -149,6 +155,7 @@ setTimeout(function(){
 				"hazardous-weather-outlook": "soundnotification",
 				"severe-weather-statement": "soundnotification",
 				"hurricane-local-statement": "alert",
+				"tsunami": "alert",
 				"tropical-cyclone-statement": "soundnotification",
 				"special-weather-statement": "soundnotification",
 				"marine-weather-statement": "soundnotification",
@@ -165,6 +172,7 @@ setTimeout(function(){
 				"high-surf": "soundnotification",
 				"brisk-wind": "soundnotification",
 				"lake-wind": "soundnotification",
+				"air-stagnation": "soundnotification",
 				"blowing-dust": "soundnotification"
 			}
 		},

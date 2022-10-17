@@ -86,7 +86,6 @@ function showNotices(){
 			platform = cordova.platformId;
 		}
 	}
-	
 	// Important Notice About Weather Alerts
 	if (!window.localStorage.getItem("notice-weatherAlerts")){
 		document.getElementById("notice-window").innerHTML += `
@@ -97,6 +96,16 @@ function showNotices(){
 		`
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-weatherAlerts", "true");
+	}
+	// Warn users about issues with phone battery optimization
+	if (platform.toLocaleLowerCase() == "android" && !window.localStorage.getItem("notice-batteryOptimization")){
+		document.getElementById("notice-window").innerHTML += `
+		<h2>Battery Optimization & Data Warning</h2>
+		<hr>
+		<h3>Certain Android versions and phone models may limit the capabilities of Atmos Weather. Check the battery section of the app info for Atmos Weather and ensure that Atmos Weather is not optimized and that background power usage is allowed. If you do not disable background optimizations and enable background battery usage, Atmos Weather may not be able to give weather alerts in a timely manner. Although some devices may indicate that Atmos Weather is a heavy battery user, this is due to the fact that Atmos Weather frequently wakes up the device processor, and is not based on actual battery percentage used. Atmos Weather has not been observed to use more than 3% in an entire day of use. On devices with limited mobile data or data saver turned on, users may want to also enable background data usage to recieve weather alerts when WiFi is unavailable.</h3>
+		<br><br>
+		`;
+		window.localStorage.setItem("notice-batteryOptimization", "true");
 	}
 	// UPDATE
 	if (!window.localStorage.getItem("notice-version0.9.3")){
@@ -299,7 +308,7 @@ function refreshLocations(){
 				else if (sfor.includes("wind")){
 					image = "windy";
 				}
-				else if (sfor.includes("cloud")){
+				else if (sfor.includes("cloud") || sfor.includes("fog")){
 					image = "cloudy";
 				}
 				if (alertStatus == "warning"){
@@ -402,7 +411,7 @@ function loadMoreInfo(navName){
 	else if (sfor.includes("wind")){
 		image = "windy";
 	}
-	else if (sfor.includes("cloud")){
+	else if (sfor.includes("cloud") || sfor.includes("fog")){
 		image = "cloudy";
 	}
 	var generatedCode;
@@ -449,7 +458,7 @@ function loadMoreInfo(navName){
 			else if (sfor.includes("wind")){
 				image = "windy";
 			}
-			else if (sfor.includes("cloud")){
+			else if (sfor.includes("cloud") || sfor.includes("fog")){
 				image = "cloudy";
 			}
 			else{
@@ -673,7 +682,7 @@ function refreshCurrentLocation(){
 							else if (sfor.includes("wind")){
 								image = "windy";
 							}
-							else if (sfor.includes("cloud")){
+							else if (sfor.includes("cloud") || sfor.includes("fog")){
 								image = "cloudy";
 							}
 							else{
