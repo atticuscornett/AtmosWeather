@@ -35,6 +35,7 @@ setTimeout(function(){
 					"flood": "alert",
 					"coastal-flood": "alert",
 					"river-flood": "alert",
+					"lakeshore-flood": "alert",
 					"high-wind": "soundnotification",
 					"extreme-wind": "alert",
 					"excessive-heat": "soundnotification",
@@ -48,6 +49,8 @@ setTimeout(function(){
 					"freeze": "soundnotification",
 					"wind-chill": "soundnotification",
 					"dust-storm": "alert",
+					"hazardous-seas": "soundnotification",
+					"heavy-freezing-spray": "soundnotification",
 					"fire": "alert"
 				},
 				"watches":{
@@ -64,6 +67,7 @@ setTimeout(function(){
 					"excessive-heat": "soundnotification",
 					"fire-weather": "soundnotification",
 					"winter-storm": "soundnotification",
+					"hazardous-seas": "soundnotification",
 					"freeze": "soundnotification"
 				},
 				"advisory":{
@@ -86,10 +90,12 @@ setTimeout(function(){
 					"small-craft": "soundnotification",
 					"flood": "soundnotification",
 					"coastal-flood": "soundnotification",
+					"lakeshore-flood": "soundnotification",
 					"high-surf": "soundnotification",
 					"brisk-wind": "soundnotification",
 					"lake-wind": "soundnotification",
 					"air-stagnation": "soundnotification",
+					"low-water": "soundnotification",
 					"blowing-dust": "soundnotification"
 				}
 			},
@@ -118,6 +124,7 @@ setTimeout(function(){
 				"flood": "alertmove",
 				"coastal-flood": "alertmove",
 				"river-flood": "alertmove",
+				"lakeshore-flood": "alertmove",
 				"high-wind": "soundnotification",
 				"extreme-wind": "alert",
 				"excessive-heat": "soundnotification",
@@ -131,6 +138,8 @@ setTimeout(function(){
 				"freeze": "soundnotification",
 				"wind-chill": "soundnotification",
 				"dust-storm": "alert",
+				"hazardous-seas": "soundnotification",
+				"heavy-freezing-spray": "soundnotification",
 				"fire": "alert"
 			},
 			"watches":{
@@ -147,6 +156,7 @@ setTimeout(function(){
 				"excessive-heat": "soundnotification",
 				"fire-weather": "soundnotification",
 				"winter-storm": "soundnotification",
+				"hazardous-seas": "soundnotification",
 				"freeze": "soundnotification"
 			},
 			"advisory":{
@@ -169,10 +179,12 @@ setTimeout(function(){
 				"small-craft": "soundnotification",
 				"flood": "soundnotification",
 				"coastal-flood": "soundnotification",
+				"lakeshore-flood": "soundnotification",
 				"high-surf": "soundnotification",
 				"brisk-wind": "soundnotification",
 				"lake-wind": "soundnotification",
 				"air-stagnation": "soundnotification",
+				"low-water": "soundnotification",
 				"blowing-dust": "soundnotification"
 			}
 		},
