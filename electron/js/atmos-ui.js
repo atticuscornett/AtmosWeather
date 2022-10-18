@@ -402,8 +402,11 @@ function loadMoreInfo(navName){
 	var hourly = getHourlyForecast(wGrid);
 	var image = "sunny"
 	var sfor = hourly[0][0]["shortForecast"].toLowerCase();
-	if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
+	if (sfor.includes("rain") || sfor.includes("drizzle")){
 		image = "rainy";
+	}
+	else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
+		image = "stormy";
 	}
 	else if (sfor.includes("snow")){
 		image = "snowy";
@@ -449,8 +452,11 @@ function loadMoreInfo(navName){
 		while (a < 12){
 			sfor = hourly[0][a]["shortForecast"].toLowerCase();
 			longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
-			if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
+			if (sfor.includes("rain") || sfor.includes("drizzle")){
 				image = "rainy";
+			}
+			else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
+				image = "stormy";
 			}
 			else if (sfor.includes("snow")){
 				image = "snowy";
@@ -673,8 +679,11 @@ function refreshCurrentLocation(){
 						while (a < 12){
 							sfor = hourly[0][a]["shortForecast"].toLowerCase();
 							longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
-							if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
+							if (sfor.includes("rain") || sfor.includes("drizzle")){
 								image = "rainy";
+							}
+							else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
+								image = "stormy";
 							}
 							else if (sfor.includes("snow")){
 								image = "snowy";
