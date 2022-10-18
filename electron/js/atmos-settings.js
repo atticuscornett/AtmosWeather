@@ -86,10 +86,12 @@ setTimeout(function(){
 					"small-craft": "soundnotification",
 					"flood": "soundnotification",
 					"coastal-flood": "soundnotification",
+					"lakeshore-flood": "soundnotification",
 					"high-surf": "soundnotification",
 					"brisk-wind": "soundnotification",
 					"lake-wind": "soundnotification",
 					"air-stagnation": "soundnotification",
+					"low-water": "soundnotification",
 					"blowing-dust": "soundnotification"
 				}
 			},
@@ -169,10 +171,12 @@ setTimeout(function(){
 				"small-craft": "soundnotification",
 				"flood": "soundnotification",
 				"coastal-flood": "soundnotification",
+				"lakeshore-flood": "soundnotification",
 				"high-surf": "soundnotification",
 				"brisk-wind": "soundnotification",
 				"lake-wind": "soundnotification",
 				"air-stagnation": "soundnotification",
+				"low-water": "soundnotification",
 				"blowing-dust": "soundnotification"
 			}
 		},
