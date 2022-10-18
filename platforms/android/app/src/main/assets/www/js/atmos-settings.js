@@ -17,7 +17,7 @@ setTimeout(function(){
 		atmosSettingsTemp = {
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
-			"radar":{"color-scheme":4, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
+			"radar":{"color-scheme":4, "satellite": false, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
 			"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 			"alert-types": {
 				"warnings":{
@@ -26,6 +26,7 @@ setTimeout(function(){
 					"storm-surge": "alert",
 					"hurricane-force-wind": "alert",
 					"tropical-storm": "alert",
+					"tsunami": "alert",
 					"special-marine": "alert",
 					"severe-thunderstorm": "alert",
 					"storm": "alert",
@@ -34,6 +35,7 @@ setTimeout(function(){
 					"flood": "alert",
 					"coastal-flood": "alert",
 					"river-flood": "alert",
+					"lakeshore-flood": "alert",
 					"high-wind": "soundnotification",
 					"extreme-wind": "alert",
 					"excessive-heat": "soundnotification",
@@ -43,9 +45,12 @@ setTimeout(function(){
 					"snow-squall": "alert",
 					"ice-storm": "alert",
 					"winter-storm": "alert",
+					"hard-freeze": "soundnotification",
 					"freeze": "soundnotification",
 					"wind-chill": "soundnotification",
 					"dust-storm": "alert",
+					"hazardous-seas": "soundnotification",
+					"heavy-freezing-spray": "soundnotification",
 					"fire": "alert"
 				},
 				"watches":{
@@ -62,6 +67,7 @@ setTimeout(function(){
 					"excessive-heat": "soundnotification",
 					"fire-weather": "soundnotification",
 					"winter-storm": "soundnotification",
+					"hazardous-seas": "soundnotification",
 					"freeze": "soundnotification"
 				},
 				"advisory":{
@@ -69,6 +75,8 @@ setTimeout(function(){
 					"dust": "soundnotification",
 					"hazardous-weather-outlook": "soundnotification",
 					"severe-weather-statement": "soundnotification",
+					"hurricane-local-statement": "alert",
+					"tsunami": "alert",
 					"tropical-cyclone-statement": "soundnotification",
 					"special-weather-statement": "soundnotification",
 					"winter-weather": "soundnotification",
@@ -82,9 +90,12 @@ setTimeout(function(){
 					"small-craft": "soundnotification",
 					"flood": "soundnotification",
 					"coastal-flood": "soundnotification",
+					"lakeshore-flood": "soundnotification",
 					"high-surf": "soundnotification",
 					"brisk-wind": "soundnotification",
 					"lake-wind": "soundnotification",
+					"air-stagnation": "soundnotification",
+					"low-water": "soundnotification",
 					"blowing-dust": "soundnotification"
 				}
 			},
@@ -96,7 +107,7 @@ setTimeout(function(){
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
-		"radar":{"color-scheme":4, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
+		"radar":{"color-scheme":4, "satellite": false, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
 		"alert-types": {
 			"warnings":{
 				"tornado": "alert",
@@ -104,6 +115,7 @@ setTimeout(function(){
 				"storm-surge": "alert",
 				"hurricane-force-wind": "alert",
 				"tropical-storm": "alert",
+				"tsunami": "alert",
 				"special-marine": "alert",
 				"severe-thunderstorm": "alert",
 				"storm": "alert",
@@ -112,6 +124,7 @@ setTimeout(function(){
 				"flood": "alertmove",
 				"coastal-flood": "alertmove",
 				"river-flood": "alertmove",
+				"lakeshore-flood": "alertmove",
 				"high-wind": "soundnotification",
 				"extreme-wind": "alert",
 				"excessive-heat": "soundnotification",
@@ -121,9 +134,12 @@ setTimeout(function(){
 				"snow-squall": "alertmove",
 				"ice-storm": "alert",
 				"winter-storm": "alert",
+				"hard-freeze": "soundnotification",
 				"freeze": "soundnotification",
 				"wind-chill": "soundnotification",
 				"dust-storm": "alert",
+				"hazardous-seas": "soundnotification",
+				"heavy-freezing-spray": "soundnotification",
 				"fire": "alert"
 			},
 			"watches":{
@@ -140,6 +156,7 @@ setTimeout(function(){
 				"excessive-heat": "soundnotification",
 				"fire-weather": "soundnotification",
 				"winter-storm": "soundnotification",
+				"hazardous-seas": "soundnotification",
 				"freeze": "soundnotification"
 			},
 			"advisory":{
@@ -147,6 +164,8 @@ setTimeout(function(){
 				"dust": "soundnotification",
 				"hazardous-weather-outlook": "soundnotification",
 				"severe-weather-statement": "soundnotification",
+				"hurricane-local-statement": "alert",
+				"tsunami": "alert",
 				"tropical-cyclone-statement": "soundnotification",
 				"special-weather-statement": "soundnotification",
 				"marine-weather-statement": "soundnotification",
@@ -160,9 +179,12 @@ setTimeout(function(){
 				"small-craft": "soundnotification",
 				"flood": "soundnotification",
 				"coastal-flood": "soundnotification",
+				"lakeshore-flood": "soundnotification",
 				"high-surf": "soundnotification",
 				"brisk-wind": "soundnotification",
 				"lake-wind": "soundnotification",
+				"air-stagnation": "soundnotification",
+				"low-water": "soundnotification",
 				"blowing-dust": "soundnotification"
 			}
 		},
@@ -195,6 +217,7 @@ function refreshSettings(){
 
 	// Radar Settings
 	document.getElementById("setting-radar-color-scheme").value = allSettings["radar"]["color-scheme"];
+	document.getElementById("setting-radar-satellite").checked = allSettings["radar"]["satellite"];
 	document.getElementById("setting-radar-show-watches").checked = allSettings["radar"]["polygons"]["watch"];
 	document.getElementById("setting-radar-show-advisories").checked = allSettings["radar"]["polygons"]["advisories"];
 	document.getElementById("setting-radar-show-warnings").checked = allSettings["radar"]["polygons"]["warnings"];
@@ -252,6 +275,7 @@ function saveSettings(){
 	allSettings["notifications"]["rain-future"] = document.getElementById("setting-future-storm-notifications").checked;
 
 	allSettings["radar"]["color-scheme"] = Number(document.getElementById("setting-radar-color-scheme").value);
+	allSettings["radar"]["satellite"] = document.getElementById("setting-radar-satellite").checked;
 	allSettings["radar"]["polygons"]["watch"] = document.getElementById("setting-radar-show-watches").checked;
 	allSettings["radar"]["polygons"]["advisories"] = document.getElementById("setting-radar-show-advisories").checked;
 	allSettings["radar"]["polygons"]["warnings"] = document.getElementById("setting-radar-show-warnings").checked;

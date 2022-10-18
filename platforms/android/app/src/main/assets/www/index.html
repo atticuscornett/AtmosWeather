@@ -69,8 +69,8 @@
 				<div id="tab-about" class="tab-div" hidden>
 					<!-- UPDATE -->
 					<h1>About Atmos Weather</h1>
-					<h3>Version 0.9.3</h3>
-					<h3>Last updated 9-25-2022</h3>
+					<h3>Version 1.0.0</h3>
+					<h3>Last updated 10-18-2022</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>
@@ -79,6 +79,7 @@
 					<h3><a href="https://github.com/TheCocoaProject/cordova-plugin-nativestorage" target="_blank">Cordova NativeStorage Plugin</a></h3>
 					<h3><a href="https://fonts.google.com/" target="_blank">Google Fonts</a></h3>
 					<h3><a href="https://nominatim.org/" target="_blank">OSM Nominatim</a></h3>
+					<h3><a href="https://www.weather.gov/documentation/services-web-api" target="_blank">NWS API</a></h3>
 					<h3><a href="https://leafletjs.com/index.html" target="_blank">LeafletJS</a></h3>
 					<h3><a href="https://www.electronjs.org/" target="_blank">ElectronJS</a></h3>
 					<h3><a href="https://www.rainviewer.com/api.html" target="_blank">RainViewer</a></h3>
@@ -132,7 +133,7 @@
 				</div>
 				<div id="tab-radar" class="tab-div" hidden>
 					<h1>Radar</h1>
-					<div id="radar-map" style="height:50%;right:20px;border-radius:7px;box-shadow: 0px 0px 7px #898989;">
+					<div id="radar-map" style="height:65%;right:20px;border-radius:7px;box-shadow: 0px 0px 7px #898989;">
 					
 					</div>
 					<h5 id="polygon-load-count" hidden></h5>
@@ -195,6 +196,9 @@
 					<br>
 					<input class="box" type="checkbox" id="setting-radar-show-warnings" >
 					<label for="setting-radar-show-warnings">Show warning polygons on radar</label>
+					<br>
+					<input class="box" type="checkbox" id="setting-radar-satellite" >
+					<label for="setting-radar-satellite">Show satellite instead of radar</label>
 					<br>
 					<input class="box" type="checkbox" id="setting-radar-high-res" >
 					<label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label>
@@ -291,6 +295,16 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-tsunami-warning">Tsunami Warning</label>
+					<br>
+					<select id="setting-tsunami-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-special-marine-warning">Special Marine Warning</label>
 					<br>
 					<select id="setting-special-marine-warning">
@@ -314,6 +328,16 @@
 					<label for="setting-storm-warning">Marine Storm Warning</label>
 					<br>
 					<select id="setting-storm-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-hazardous-seas-warning">Hazardous Seas Warning</label>
+					<br>
+					<select id="setting-hazardous-seas-warning">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -364,6 +388,16 @@
 					<label for="setting-river-flood-warning">River Flood Warning</label>
 					<br>
 					<select id="setting-river-flood-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-lakeshore-flood-warning">Lakeshore Flood Warning</label>
+					<br>
+					<select id="setting-lakeshore-flood-warning">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -481,9 +515,29 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-hard-freeze-warning">Hard Freeze Warning</label>
+					<br>
+					<select id="setting-hard-freeze-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-freeze-warning">Freeze Warning</label>
 					<br>
 					<select id="setting-freeze-warning">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-heavy-freezing-spray-warning">Heavy Freezing Spray Warning</label>
+					<br>
+					<select id="setting-heavy-freezing-spray-warning">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -545,6 +599,16 @@
 					<label for="setting-severe-thunderstorm-watch">Severe Thunderstorm Watch</label>
 					<br>
 					<select id="setting-severe-thunderstorm-watch">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-hazardous-seas-watch">Hazardous Seas Watch</label>
+					<br>
+					<select id="setting-hazardous-seas-watch">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -693,9 +757,39 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-air-stagnation-advisory">Air Stagnation Advisory</label>
+					<br>
+					<select id="setting-air-stagnation-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-severe-weather-statement-advisory">Severe Weather Statement</label>
 					<br>
 					<select id="setting-severe-weather-statement-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-hurricane-local-statement-advisory">Hurricane Local Statement</label>
+					<br>
+					<select id="setting-hurricane-local-statement-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-tsunami-advisory">Tsunami Advisory</label>
+					<br>
+					<select id="setting-tsunami-advisory">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -833,6 +927,16 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-low-water-advisory">Low Water Advisory</label>
+					<br>
+					<select id="setting-low-water-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-flood-advisory">Flood Advisory</label>
 					<br>
 					<select id="setting-flood-advisory">
@@ -846,6 +950,16 @@
 					<label for="setting-coastal-flood-advisory">Coastal Flood Advisory</label>
 					<br>
 					<select id="setting-coastal-flood-advisory">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-lakeshore-flood-advisory">Lakeshore Flood Advisory</label>
+					<br>
+					<select id="setting-lakeshore-flood-advisory">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -971,6 +1085,16 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-tsunami-warning-location">Tsunami Warning</label>
+					<br>
+					<select id="setting-tsunami-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-special-marine-warning-location">Special Marine Warning</label>
 					<br>
 					<select id="setting-special-marine-warning-location">
@@ -994,6 +1118,16 @@
 					<label for="setting-storm-warning-location">Marine Storm Warning</label>
 					<br>
 					<select id="setting-storm-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-hazardous-seas-warning-location">Hazardous Seas Warning</label>
+					<br>
+					<select id="setting-hazardous-seas-warning-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -1044,6 +1178,16 @@
 					<label for="setting-river-flood-warning-location">River Flood Warning</label>
 					<br>
 					<select id="setting-river-flood-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-lakeshore-flood-warning-location">Lakeshore Flood Warning</label>
+					<br>
+					<select id="setting-lakeshore-flood-warning-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -1161,9 +1305,29 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-hard-freeze-warning-location">Hard Freeze Warning</label>
+					<br>
+					<select id="setting-hard-freeze-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-freeze-warning-location">Freeze Warning</label>
 					<br>
 					<select id="setting-freeze-warning-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-heavy-freezing-spray-warning-location">Heavy Freezing Spray Warning</label>
+					<br>
+					<select id="setting-heavy-freezing-spray-warning-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -1225,6 +1389,16 @@
 					<label for="setting-severe-thunderstorm-watch-location">Severe Thunderstorm Watch</label>
 					<br>
 					<select id="setting-severe-thunderstorm-watch-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-hazardous-seas-watch-location">Hazardous Seas Watch</label>
+					<br>
+					<select id="setting-hazardous-seas-watch-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -1373,9 +1547,39 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-air-stagnation-advisory-location">Air Stagnation Advisory</label>
+					<br>
+					<select id="setting-air-stagnation-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-severe-weather-statement-advisory-location">Severe Weather Statement</label>
 					<br>
 					<select id="setting-severe-weather-statement-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-hurricane-local-statement-advisory-location">Hurricane Local Statement</label>
+					<br>
+					<select id="setting-hurricane-local-statement-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-tsunami-advisory-location">Tsunami Advisory</label>
+					<br>
+					<select id="setting-tsunami-advisory-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>
@@ -1513,6 +1717,16 @@
 						<option value="nothing">Nothing</option>
 					</select>
 					<br>
+					<label for="setting-low-water-advisory-location">Low Water Advisory</label>
+					<br>
+					<select id="setting-low-water-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
 					<label for="setting-flood-advisory-location">Flood Advisory</label>
 					<br>
 					<select id="setting-flood-advisory-location">
@@ -1526,6 +1740,16 @@
 					<label for="setting-coastal-flood-advisory-location">Coastal Flood Advisory</label>
 					<br>
 					<select id="setting-coastal-flood-advisory-location">
+						<option value="alert">Alert</option>
+						<option value="alertmove">Alert if moving</option>
+						<option value="soundnotification">Sound Notification</option>
+						<option value="silentnotification">Silent Notification</option>
+						<option value="nothing">Nothing</option>
+					</select>
+					<br>
+					<label for="setting-lakeshore-flood-advisory-location">Lakeshore Flood Advisory</label>
+					<br>
+					<select id="setting-lakeshore-flood-advisory-location">
 						<option value="alert">Alert</option>
 						<option value="alertmove">Alert if moving</option>
 						<option value="soundnotification">Sound Notification</option>

@@ -49,6 +49,16 @@ function radarJumpTo(index){
 }
 
 function initialize(api, kind) {
+    var settings = JSON.parse(localStorage.getItem("atmos-settings"));
+    radarColorScheme = settings["radar"]["color-scheme"];
+    if (settings["radar"]["satellite"]){
+        radarKind = "satellite";
+        kind = "satellite";
+    }
+    else{
+        radarKind = "radar";
+        kind = "radar";
+    }
     // remove all already added tiled layers
     for (var i in radarLayers) {
         map2.removeLayer(radarLayers[i]);
@@ -124,8 +134,6 @@ function changeRadarPosition(position, preloadOnly, force) {
 }
 
 function addLayer(frame) {
-    var settings = JSON.parse(localStorage.getItem("atmos-settings"));
-    radarColorScheme = settings["radar"]["color-scheme"];
     if (!radarLayers[frame.path]) {
         var colorScheme = radarKind == 'satellite' ? 0 : radarColorScheme;
         var smooth = radarKind == 'satellite' ? 0 : smoothRadarData;
@@ -181,6 +189,9 @@ function toggleRadarPlayback(){
 }
 
 function slowLoadPolygons(alerts, index){
+    if (screenAt != "radar"){
+        return;
+    }
     var a = index;
     while(a < index + 10 && a < alerts[0].length){
         var styling = {"color":"blue"};
