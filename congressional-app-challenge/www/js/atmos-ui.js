@@ -136,6 +136,14 @@ function showNotices(){
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-version1.0.0", "true");
 	}
+	// Congressional App Challenge Outdated Version Warning
+	document.getElementById("notice-window").innerHTML += `
+	<h2>You are running the Congressional App Challenge version of Atmos Weather.</h2>
+	<hr>
+	<h3>Atmos Weather was originally created as an app for the Congressional App Challenge. However, the app has been updated since then. This is the version of Atmos that was current as of submission to the Congressional App Challenge, and is available as a snapshot to show the features that were created before submission. If you intended to use this outdated version of Atmos, you can ignore this message.</h3>
+	<br><br>
+	`
+	document.getElementById("notice-window-container").hidden = false;
 	if (platform == "pwa"){
 		document.getElementById("settings-warning").hidden = false;
 	}

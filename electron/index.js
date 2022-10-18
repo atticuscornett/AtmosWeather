@@ -55,7 +55,7 @@ else{
 	app.whenReady().then(() => {
 		if (process.platform === 'win32'){
 			app.setAppUserModelId("Atmos Weather");
-			//autoUpdater.checkForUpdatesAndNotify()
+			autoUpdater.checkForUpdatesAndNotify()
 		}
 		createWindow()
 		win2.webContents.executeJavaScript('localStorage.getItem("run-before")', true)

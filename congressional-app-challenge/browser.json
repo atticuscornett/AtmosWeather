@@ -1,0 +1,71 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"NativeStorage\"><param name=\"browser-package\" value=\"NativeStorage\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Device\"><param name=\"browser-package\" value=\"Device\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "cordova-plugin-nativestorage": {
+      "PACKAGE_NAME": "io.atticusc.atmosweather"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.atticusc.atmosweather"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "file": "plugins/cordova-plugin-nativestorage/www/mainHandle.js",
+      "id": "cordova-plugin-nativestorage.mainHandle",
+      "pluginId": "cordova-plugin-nativestorage",
+      "clobbers": [
+        "NativeStorage"
+      ]
+    },
+    {
+      "file": "plugins/cordova-plugin-nativestorage/www/LocalStorageHandle.js",
+      "id": "cordova-plugin-nativestorage.LocalStorageHandle",
+      "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "file": "plugins/cordova-plugin-nativestorage/www/NativeStorageError.js",
+      "id": "cordova-plugin-nativestorage.NativeStorageError",
+      "pluginId": "cordova-plugin-nativestorage"
+    },
+    {
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "id": "cordova-plugin-device.device",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
+    },
+    {
+      "file": "plugins/cordova-plugin-device/src/browser/DeviceProxy.js",
+      "id": "cordova-plugin-device.DeviceProxy",
+      "pluginId": "cordova-plugin-device",
+      "runs": true
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-plugin-nativestorage": "2.3.2",
+    "cordova-plugin-device": "2.1.0"
+  }
+}
