@@ -48,6 +48,7 @@ setTimeout(function(){
 					"freeze": "soundnotification",
 					"wind-chill": "soundnotification",
 					"dust-storm": "alert",
+					"hazardous-seas": "soundnotification",
 					"fire": "alert"
 				},
 				"watches":{
@@ -64,6 +65,7 @@ setTimeout(function(){
 					"excessive-heat": "soundnotification",
 					"fire-weather": "soundnotification",
 					"winter-storm": "soundnotification",
+					"hazardous-seas": "soundnotification",
 					"freeze": "soundnotification"
 				},
 				"advisory":{
@@ -133,6 +135,7 @@ setTimeout(function(){
 				"freeze": "soundnotification",
 				"wind-chill": "soundnotification",
 				"dust-storm": "alert",
+				"hazardous-seas": "soundnotification",
 				"fire": "alert"
 			},
 			"watches":{
@@ -149,6 +152,7 @@ setTimeout(function(){
 				"excessive-heat": "soundnotification",
 				"fire-weather": "soundnotification",
 				"winter-storm": "soundnotification",
+				"hazardous-seas": "soundnotification",
 				"freeze": "soundnotification"
 			},
 			"advisory":{
