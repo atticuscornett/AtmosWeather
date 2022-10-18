@@ -58,33 +58,20 @@ function showNotices(){
 	}
 	
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version1.0.0")){
+	if (!window.localStorage.getItem("notice-version1.0.1")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v1.0.0 is here!</h2>
+		<h2>Atmos Weather v1.0.1 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Text to speech is now available for alerts.</dd>
-  			<dd>- Satellite option added for radar.</dd>
-  			<dd>- Automatic startup added for Linux.</dd>
-  			<dd>- Storm icon fixed and implemented.</dd>
-  			<dd>- Radar page now indicates when polygons are loading.</dd>
-  			<dd>- Current location information can now be viewed.</dd>
-  			<dd>- Current location now changes styles when under alerts.</dd>
-  			<dd>- New events now supported: Storm Surge Warning, Storm Surge Warch, Tsunami Warning, Tsunami Advisory, Air Stagnation Advisory, Hazardous Seas Warning, Hazardous Seas Watch, Hard Freeze Warning, Tropical Cyclone Statement, Hurricane Local Statement, Lakeshore Flood Advisory, Low Water Advisory, Heavy Freezing Spray Warning, and Lakeshore Flood Warning</dd>
-			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed favicon issue on web version.</dd>
-  			<dd>- Lazy loading radar bug fixed.</dd>
-  			<dd>- Added missing link to about page.</dd>
-  			<dd>- Fixed audio bug when recieving multiple alerts at the same time on desktop versions.</dd>
-  			<dd>- Fixed map zoom bug with multi-polygon alerts.</dd>
-			<dt>Other Notes</dt>
-			<dd>- Temporarily removed auto-updates to allow viewing of archived Congressional App Challenge version without switching to latest version after first run.</dd>
+  			<dd>- Removed Congressional App Challenge warning screen.</dd>
+  			<dt>Bug Fixes Everywhere</dt>
+  			<dd>- Auto updates are enabled again.</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version1.0.0", "true");
+		window.localStorage.setItem("notice-version1.0.1", "true");
 	}
 	console.log(platform);
 	if (platform == "pwa"){
