@@ -49,6 +49,7 @@ setTimeout(function(){
 					"wind-chill": "soundnotification",
 					"dust-storm": "alert",
 					"hazardous-seas": "soundnotification",
+					"heavy-freezing-spray": "soundnotification",
 					"fire": "alert"
 				},
 				"watches":{
@@ -136,6 +137,7 @@ setTimeout(function(){
 				"wind-chill": "soundnotification",
 				"dust-storm": "alert",
 				"hazardous-seas": "soundnotification",
+				"heavy-freezing-spray": "soundnotification",
 				"fire": "alert"
 			},
 			"watches":{
