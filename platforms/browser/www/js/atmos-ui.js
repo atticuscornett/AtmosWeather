@@ -405,7 +405,7 @@ function loadMoreInfo(navName){
 	var generatedCode;
 	var activeAlertInfo = getWeatherAlertsForNom(nomObj)[0];
 	var fullStatus = getStatus(nomObj);
-	generatedCode = "<h1>" + nomName + "</h1><br>";
+	generatedCode = "<h1 style='margin-right:20px;'>" + nomName + "</h1><br>";
 	// Bars at the top of page
 	generatedCode += '<div style="margin-right:20px;">'
 	// Weather Alert Bar
@@ -430,13 +430,13 @@ function loadMoreInfo(navName){
 	try{
 		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 		var a = 0;
-		var longHourForecast = "<h1>Hourly Forecast</h1>";
+		var longHourForecast = "<h1>Hourly Forecast</h1><div class='hourly-container'>";
 		a = 0;
 		var forecastTime;
 		var AMPM;
 		while (a < 12){
 			sfor = hourly[0][a]["shortForecast"].toLowerCase();
-			longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
+			longHourForecast += "<div class='forecast-temp'><center>"
 			if (sfor.includes("rain") || sfor.includes("drizzle")){
 				image = "rainy";
 			}
@@ -473,6 +473,7 @@ function loadMoreInfo(navName){
 			longHourForecast += "</center></div>"
 			a++;
 		}
+		longHourForecast += "</div>";
 	}
 	catch (e){
 		var longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
@@ -657,13 +658,13 @@ function refreshCurrentLocation(){
 						document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
 						document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
 						var a = 0;
-						var longHourForecast = "";
+						var longHourForecast = "<div class='hourly-container' style='margin-right:20px'>";
 						a = 0;
 						var forecastTime;
 						var AMPM;
 						while (a < 12){
 							sfor = hourly[0][a]["shortForecast"].toLowerCase();
-							longHourForecast += "<div style='box-shadow: 0px 0px 7px #898989;background-color:dodgerblue;color:white;display:inline-block;padding:20px;margin-right:20px;margin-bottom:20px;border-radius:7px;'><center>"
+							longHourForecast += "<div class='forecast-temp'><center>"
 							if (sfor.includes("rain") || sfor.includes("drizzle")){
 								image = "rainy";
 							}
@@ -700,6 +701,7 @@ function refreshCurrentLocation(){
 							longHourForecast += "</center></div>"
 							a++;
 						}
+						longHourForecast += "</div>";
 						document.getElementById("current-loc-hourly").innerHTML = longHourForecast;
 						var theFiveForecast = "";
 						theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";

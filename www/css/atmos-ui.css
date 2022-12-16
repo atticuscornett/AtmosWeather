@@ -140,6 +140,10 @@ select{
 	font-family: Secular One;
 }
 
+#current-loc-nws{
+	margin-right: 20px;
+}
+
 /* Class Styles */
 
 .tab-div{
@@ -209,6 +213,17 @@ select{
 	margin-right: 20px;
 }
 
+.forecast-temp{
+	box-shadow: 0px 0px 7px #898989;
+	background-color:dodgerblue;
+	color:white;
+	display:inline-block;
+	padding:20px;
+	margin-right:20px;
+	margin-bottom:20px;
+	border-radius:7px;
+}
+
 .searchResult{
 	display: flex;
 	align-items: center;
@@ -223,6 +238,19 @@ select{
 
 .box{
 	height: 22px;
+}
+
+
+/* Fix issues on certain orientations */
+@media screen and (orientation:portrait) {
+	.forecast-temp{
+		display: inline-grid;
+	}
+
+	.hourly-container{
+		display: grid;
+		grid-template-columns: auto auto auto;
+	}
 }
 
 /* Dark Mode Colors */
