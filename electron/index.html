@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Atmos Weather</title>
+		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://unpkg.com/leaflet@1.8.0/ https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org;">
 		<meta charset="utf-8" lang="en">
 		<link href="./img/favicon.svg" rel="icon" type="image/x-icon" />
 		
@@ -1803,49 +1804,5 @@
 	<script src="js/electron-code.js"></script>
 	<script src="js/atmos-settings.js"></script>
 	<script src="js/rainweather-api.js"></script>
-	
-	
-	<!-- Animation Code-->
-	<script>
-		// Fade out logo and handle notices after animation is done
-		setTimeout(function(){
-			showNotices();
-		}, 4000);
-	</script>
-	
-	<!-- Functional Code -->
-	<script>
-		// Adds function to the navigation buttons (from atmos-ui.js)
-		activateNavButtons();
-		// Check status of NWS API periodically (from atmos-ui.js)
-		setInterval(async () => {
-  			const result = await checkAPIstatus();
-  			if (!result){
-				document.getElementById("offlineError").hidden = false;
-			}
-			else{
-				document.getElementById("offlineError").hidden = true;
-			}
-		}, 60000);
-		setTimeout(async () => {
-  			const result = await checkAPIstatus();
-  			if (!result){
-				document.getElementById("offlineError").hidden = false;
-			}
-			else{
-				document.getElementById("offlineError").hidden = true;
-			}
-		}, 100);
-		
-		// Allow Enter key on search
-		document.getElementById("location-search").addEventListener("keypress", function(event) {
-			if (event.key === "Enter") {
-    			document.getElementById("search-button").click();
-  			}
-		});
-		
-		// Refresh location data
-		refreshLocations();
-	</script>
-	
+	<script src="js/start.js"></script>
 </html>
