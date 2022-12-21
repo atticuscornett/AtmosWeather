@@ -428,7 +428,7 @@ function loadMoreInfo(navName){
 	}
 	// Temperature Bar
 	try{
-		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
+		generatedCode += '<div class="location noclick ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 		var a = 0;
 		var longHourForecast = "<h1>Hourly Forecast</h1><div class='hourly-container'>";
 		a = 0;
@@ -658,7 +658,7 @@ function refreshCurrentLocation(){
 							document.getElementById("current-loc-alerts").hidden = false;
 						}
 						document.getElementById("current-loc-alerts").innerHTML = generatedCode;
-						document.getElementById("current-loc-main-info").setAttribute("class", "location " + status[0]);
+						document.getElementById("current-loc-main-info").setAttribute("class", "location noclick " + status[0]);
 						document.getElementById("current-loc-temp").innerHTML = hourlyForecast["temperature"] + "° F";
 						document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
 						document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");

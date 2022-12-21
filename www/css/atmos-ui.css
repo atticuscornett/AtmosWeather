@@ -199,6 +199,9 @@ select{
 	background-color: cadetblue;
 }
 
+.noclick{
+	cursor: default;
+}
 
 .forecast-temp{
 	box-shadow: 0px 0px 7px #898989;
