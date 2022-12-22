@@ -224,7 +224,7 @@ function locationSearch(){
 		
 	}
 	if (document.getElementById("search-results").innerHTML == ""){
-		document.getElementById("search-results").innerHTML = "<h1>Couldn't find that location!";
+		document.getElementById("search-results").innerHTML = "<h1>Couldn't find that location!</h1>";
 	}
 }
 
@@ -560,7 +560,7 @@ function getStatus(nomObj){
 
 // Sync with native code
 function syncFiles(){
-	if (!getPlatform().includes("desktop")){
+	if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa")){
 		NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});

@@ -203,8 +203,75 @@ if (!localStorage.getItem("weather-locations")){
 	localStorage.setItem("weather-location-names", "[]")
 }
 
+function formatTitle(title, ending){
+	title = title.split("-");
+	for (let i in title){
+		title[i] = title[i][0].toUpperCase() + title[i].substring(1)
+	}
+	title = title.join(" ");
+	if (title.includes("Outlook") || title.includes("Statement")){
+		return title;
+	}
+	else{
+		return title + " " + ending;
+	}
+}
+
+// Add settings options to the settings page
+function populateSettingsPage(){
+	let types = ["Warning", "Watch", "Advisory"]
+	let types2 = ["warnings", "watches", "advisory"]
+	try{
+		var thePlatform = getPlatform();
+	}
+	catch(err){
+		thePlatform = "other";
+	}
+	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	for (type in types){
+		document.getElementById("settings-" + types2[type] + "-list").innerHTML = "";
+		let docFragment = document.createDocumentFragment();
+		for (let i in allSettings["alert-types"][types2[type]]){
+			let line = document.createElement("label");
+			line.innerText = formatTitle(i, types[type]);
+			line.setAttribute("for", "setting-" + i + "-" + types[type].toLowerCase());
+			docFragment.appendChild(line);
+			docFragment.appendChild(document.createElement("br"));
+			let select = document.createElement("select");
+			select.setAttribute("id", "setting-" + i + "-" + types[type].toLowerCase())
+			let option = document.createElement("option");
+			option.innerHTML = "Alert";
+			option.setAttribute("value", "alert");
+			select.appendChild(option);
+			if (!thePlatform.includes("desktop")){
+				option = document.createElement("option");
+				option.innerHTML = "Alert if moving";
+				option.setAttribute("value", "alertmove");
+				select.appendChild(option);
+			}
+			option = document.createElement("option");
+			option.innerHTML = "Sound Notification";
+			option.setAttribute("value", "soundnotification");
+			select.appendChild(option);
+			option = document.createElement("option");
+			option.innerHTML = "Silent Notification";
+			option.setAttribute("value", "silentnotification");
+			select.appendChild(option);
+			option = document.createElement("option");
+			option.innerHTML = "Nothing";
+			option.setAttribute("value", "nothing");
+			select.appendChild(option);
+			docFragment.appendChild(select);
+			docFragment.appendChild(document.createElement("br"));
+		}
+		document.getElementById("settings-" + types2[type] + "-list").appendChild(docFragment);
+	}
+	
+}
+
 // Refresh settings tab
 function refreshSettings(){
+	populateSettingsPage();
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	
 	// Location Settings
