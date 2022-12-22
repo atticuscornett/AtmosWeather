@@ -218,7 +218,8 @@ function formatTitle(title, ending){
 }
 
 // Add settings options to the settings page
-function populateSettingsPage(){
+function populateSettingsPage(locationMode){
+	let modifier = locationMode ? "-location" : "";
 	let types = ["Warning", "Watch", "Advisory"]
 	let types2 = ["warnings", "watches", "advisory"]
 	try{
@@ -229,16 +230,16 @@ function populateSettingsPage(){
 	}
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	for (type in types){
-		document.getElementById("settings-" + types2[type] + "-list").innerHTML = "";
+		document.getElementById("settings-" + types2[type] + "-list" + modifier).innerHTML = "";
 		let docFragment = document.createDocumentFragment();
 		for (let i in allSettings["alert-types"][types2[type]]){
 			let line = document.createElement("label");
 			line.innerText = formatTitle(i, types[type]);
-			line.setAttribute("for", "setting-" + i + "-" + types[type].toLowerCase());
+			line.setAttribute("for", "setting-" + i + "-" + types[type].toLowerCase() + modifier);
 			docFragment.appendChild(line);
 			docFragment.appendChild(document.createElement("br"));
 			let select = document.createElement("select");
-			select.setAttribute("id", "setting-" + i + "-" + types[type].toLowerCase())
+			select.setAttribute("id", "setting-" + i + "-" + types[type].toLowerCase() + modifier);
 			let option = document.createElement("option");
 			option.innerHTML = "Alert";
 			option.setAttribute("value", "alert");
@@ -264,14 +265,14 @@ function populateSettingsPage(){
 			docFragment.appendChild(select);
 			docFragment.appendChild(document.createElement("br"));
 		}
-		document.getElementById("settings-" + types2[type] + "-list").appendChild(docFragment);
+		document.getElementById("settings-" + types2[type] + "-list" + modifier).appendChild(docFragment);
 	}
 	
 }
 
 // Refresh settings tab
 function refreshSettings(){
-	populateSettingsPage();
+	populateSettingsPage(false);
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	
 	// Location Settings
@@ -390,6 +391,7 @@ function keepSaving(){
 
 // Load the location settings page
 function loadLocationSettings(index){
+	populateSettingsPage(true);
 	window.settingsIndex = index;
 	var locations = JSON.parse(localStorage.getItem("weather-locations"));
 	var names = nomItemsToNames(locations);
