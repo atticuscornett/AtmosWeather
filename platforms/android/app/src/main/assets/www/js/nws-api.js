@@ -1,6 +1,6 @@
 /*
 	nws-api.js
-	Handles the caching and fetching of forcasts, alerts, and other information from the National Weather Service API
+	Handles the caching and fetching of forecasts, alerts, and other information from the National Weather Service API
 */
 
 // Keep downloaded polygons until page reload.
@@ -208,6 +208,7 @@ function checkIfOldAlerts(){
 	localStorage.setItem("nws-alerts-current", JSON.stringify(allCurrent));
 	var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"))
 	oldAlerts = oldAlerts.concat(moveToOld);
+	oldAlerts = oldAlerts.slice(-20);
 	localStorage.setItem("nws-alerts-old", JSON.stringify(oldAlerts));
 }
 
@@ -224,7 +225,7 @@ function fixNWSCoords(oldCoords){
 	return fixedCoords;
 }
 
-// Gets the polygon boundry of weather alerts
+// Gets the polygon boundary of weather alerts
 function getPolyBoundries(weatherAlert){
 	if (weatherAlert["geometry"] == null){
 		var theCache = JSON.parse(localStorage.getItem("nws-boundries-cache"));

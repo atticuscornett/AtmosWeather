@@ -56,22 +56,42 @@ function showNotices(){
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
-	
-	// UPDATE
-	if (!window.localStorage.getItem("notice-version1.0.1")){
+	let latest = JSONGet("https://atticuscornett.github.io/AtmosWeather/package.json")["version"];
+	if (latest != version && !platform.includes("windows")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v1.0.1 is here!</h2>
+		<h2>An update is available!</h2>
+		<hr>
+		<h3>You are on an older version of Atmos Weather (` + version + `).<br>
+		A new version of Atmos Weather (` + latest +  `)
+		 can be downloaded at <a href="https://atticuscornett.github.io/AtmosWeather" target="_blank">here</a>.<br>
+		Updates may include security upgrades, so it is important to keep your apps updated.</h3>
+		<br><br>
+		`;
+	}
+	// UPDATE
+	if (!window.localStorage.getItem("notice-version1.0.2")){
+		document.getElementById("notice-window").innerHTML += `
+		<h2>Atmos Weather v1.0.2 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Removed Congressional App Challenge warning screen.</dd>
+  			<dd>- Added support for 7 new event types, just in time for winter weather.</dd>
+  			<dd>- New version popup added for non-Windows devices.</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Auto updates are enabled again.</dd>
+  			<dd>- Fixed text running off screen on certain screens.</dd>
+  			<dd>- Fixed hourly forecast UI issues on certain devices.</dd>
+  			<dd>- Fixed minor spelling errors.</dd>
+  			<dd>- Fixed blank locations page on first run.</dd>
+  			<dd>- Fixed potential issue with alerts page.</dd>
+  			<dd>- Other internal code changes made that should improve future development.</dd>
+  			<dt>Security Updates</dt>
+  			<dd>- Security updates that remove known Electron vulnerabilities on desktop.</dd>
+  			<dd>- Security updates that improve resilience to XSS attacks.</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version1.0.1", "true");
+		window.localStorage.setItem("notice-version1.0.2", "true");
 	}
 	console.log(platform);
 	if (platform == "pwa"){

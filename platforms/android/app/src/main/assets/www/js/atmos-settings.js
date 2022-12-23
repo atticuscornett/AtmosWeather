@@ -45,6 +45,7 @@ setTimeout(function(){
 					"snow-squall": "alert",
 					"ice-storm": "alert",
 					"winter-storm": "alert",
+					"avalanche": "alert",
 					"hard-freeze": "soundnotification",
 					"freeze": "soundnotification",
 					"wind-chill": "soundnotification",
@@ -59,16 +60,21 @@ setTimeout(function(){
 					"storm-surge": "soundnotification",
 					"tropical-storm": "soundnotification",
 					"severe-thunderstorm": "soundnotification",
+					"storm": "soundnotification",
 					"flash-flood": "soundnotification",
 					"flood": "soundnotification",
 					"coastal-flood": "soundnotification",
 					"river-flood": "soundnotification",
+					"lakeshore-flood": "soundnotification",
 					"high-wind": "soundnotification",
 					"excessive-heat": "soundnotification",
 					"fire-weather": "soundnotification",
 					"winter-storm": "soundnotification",
+					"avalanche": "soundnotification",
 					"hazardous-seas": "soundnotification",
-					"freeze": "soundnotification"
+					"freeze": "soundnotification",
+					"hard-freeze": "soundnotification",
+					"wind-chill": "soundnotification"
 				},
 				"advisory":{
 					"wind": "soundnotification",
@@ -87,6 +93,7 @@ setTimeout(function(){
 					"wind-chill": "soundnotification",
 					"heat": "soundnotification",
 					"dense-fog": "soundnotification",
+					"freezing-fog": "soundnotification",
 					"small-craft": "soundnotification",
 					"flood": "soundnotification",
 					"coastal-flood": "soundnotification",
@@ -134,6 +141,7 @@ setTimeout(function(){
 				"snow-squall": "alertmove",
 				"ice-storm": "alert",
 				"winter-storm": "alert",
+				"avalanche": "alert",
 				"hard-freeze": "soundnotification",
 				"freeze": "soundnotification",
 				"wind-chill": "soundnotification",
@@ -148,16 +156,21 @@ setTimeout(function(){
 				"storm-surge": "soundnotification",
 				"tropical-storm": "soundnotification",
 				"severe-thunderstorm": "soundnotification",
+				"storm": "soundnotification",
 				"flash-flood": "soundnotification",
 				"flood": "soundnotification",
 				"coastal-flood": "soundnotification",
 				"river-flood": "soundnotification",
+				"lakeshore-flood": "soundnotification",
 				"high-wind": "soundnotification",
 				"excessive-heat": "soundnotification",
 				"fire-weather": "soundnotification",
 				"winter-storm": "soundnotification",
+				"avalanche": "soundnotification",
 				"hazardous-seas": "soundnotification",
-				"freeze": "soundnotification"
+				"freeze": "soundnotification",
+				"hard-freeze": "soundnotification",
+				"wind-chill": "soundnotification"
 			},
 			"advisory":{
 				"wind": "soundnotification",
@@ -176,6 +189,7 @@ setTimeout(function(){
 				"wind-chill": "soundnotification",
 				"heat": "soundnotification",
 				"dense-fog": "soundnotification",
+				"freezing-fog": "soundnotification",
 				"small-craft": "soundnotification",
 				"flood": "soundnotification",
 				"coastal-flood": "soundnotification",
@@ -203,8 +217,76 @@ if (!localStorage.getItem("weather-locations")){
 	localStorage.setItem("weather-location-names", "[]")
 }
 
+function formatTitle(title, ending){
+	title = title.split("-");
+	for (let i in title){
+		title[i] = title[i][0].toUpperCase() + title[i].substring(1)
+	}
+	title = title.join(" ");
+	if (title.includes("Outlook") || title.includes("Statement")){
+		return title;
+	}
+	else{
+		return title + " " + ending;
+	}
+}
+
+// Add settings options to the settings page
+function populateSettingsPage(locationMode){
+	let modifier = locationMode ? "-location" : "";
+	let types = ["Warning", "Watch", "Advisory"]
+	let types2 = ["warnings", "watches", "advisory"]
+	try{
+		var thePlatform = getPlatform();
+	}
+	catch(err){
+		thePlatform = "other";
+	}
+	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	for (type in types){
+		document.getElementById("settings-" + types2[type] + "-list" + modifier).innerHTML = "";
+		let docFragment = document.createDocumentFragment();
+		for (let i in allSettings["alert-types"][types2[type]]){
+			let line = document.createElement("label");
+			line.innerText = formatTitle(i, types[type]);
+			line.setAttribute("for", "setting-" + i + "-" + types[type].toLowerCase() + modifier);
+			docFragment.appendChild(line);
+			docFragment.appendChild(document.createElement("br"));
+			let select = document.createElement("select");
+			select.setAttribute("id", "setting-" + i + "-" + types[type].toLowerCase() + modifier);
+			let option = document.createElement("option");
+			option.innerHTML = "Alert";
+			option.setAttribute("value", "alert");
+			select.appendChild(option);
+			if (!thePlatform.includes("desktop")){
+				option = document.createElement("option");
+				option.innerHTML = "Alert if moving";
+				option.setAttribute("value", "alertmove");
+				select.appendChild(option);
+			}
+			option = document.createElement("option");
+			option.innerHTML = "Sound Notification";
+			option.setAttribute("value", "soundnotification");
+			select.appendChild(option);
+			option = document.createElement("option");
+			option.innerHTML = "Silent Notification";
+			option.setAttribute("value", "silentnotification");
+			select.appendChild(option);
+			option = document.createElement("option");
+			option.innerHTML = "Nothing";
+			option.setAttribute("value", "nothing");
+			select.appendChild(option);
+			docFragment.appendChild(select);
+			docFragment.appendChild(document.createElement("br"));
+		}
+		document.getElementById("settings-" + types2[type] + "-list" + modifier).appendChild(docFragment);
+	}
+	
+}
+
 // Refresh settings tab
 function refreshSettings(){
+	populateSettingsPage(false);
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	
 	// Location Settings
@@ -323,6 +405,7 @@ function keepSaving(){
 
 // Load the location settings page
 function loadLocationSettings(index){
+	populateSettingsPage(true);
 	window.settingsIndex = index;
 	var locations = JSON.parse(localStorage.getItem("weather-locations"));
 	var names = nomItemsToNames(locations);

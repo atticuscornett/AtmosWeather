@@ -1,6 +1,6 @@
 /*
 	nws-api.js
-	Handles the caching and fetching of forcasts, alerts, and other information from the National Weather Service API
+	Handles the caching and fetching of forecasts, alerts, and other information from the National Weather Service API
 */
 
 // Keep downloaded polygons until page reload.

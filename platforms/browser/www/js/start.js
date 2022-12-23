@@ -33,4 +33,4 @@ document.getElementById("location-search").addEventListener("keypress", function
 });
 
 // Refresh location data
-refreshLocations();
+setTimeout(refreshLocations, 200);

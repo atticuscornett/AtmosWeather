@@ -10,6 +10,8 @@ console.log("🌥⚡ Atmos Weather")
 document.addEventListener('deviceready', function(){cordovaReady=true;}, false);
 
 // Initial Variable States
+// UPDATE
+var version = "1.0.2";
 var screenAt = "locations";
 var cordovaReady = false;
 var currentLat = false;
@@ -91,7 +93,7 @@ function showNotices(){
 		document.getElementById("notice-window").innerHTML += `
 		<h2>Important Information About Weather Warnings</h2>
 		<hr>
-		<h3>Although we strive to give rapid, accurate warning notifications 24/7, Atmos Weather should not be your only method of recieving emergency alerts. If internet service is lost or other errors occur, Atmos cannot give you alerts. All homes should have at least one weather radio with a battery backup so that they can receive weather information even when the power is out. Atmos Weather is not responsible for alerts not sending or the consequences of alerts not sending.</h3>
+		<h3>Although we strive to give rapid, accurate warning notifications 24/7, Atmos Weather should not be your only method of receiving emergency alerts. If internet service is lost or other errors occur, Atmos cannot give you alerts. All homes should have at least one weather radio with a battery backup so that they can receive weather information even when the power is out. Atmos Weather is not responsible for alerts not sending or the consequences of alerts not sending.</h3>
 		<br><br>
 		`
 		document.getElementById("notice-window-container").hidden = false;
@@ -102,26 +104,47 @@ function showNotices(){
 		document.getElementById("notice-window").innerHTML += `
 		<h2>Battery Optimization & Data Warning</h2>
 		<hr>
-		<h3>Certain Android versions and phone models may limit the capabilities of Atmos Weather. Check the battery section of the app info for Atmos Weather and ensure that Atmos Weather is not optimized and that background power usage is allowed. If you do not disable background optimizations and enable background battery usage, Atmos Weather may not be able to give weather alerts in a timely manner. Although some devices may indicate that Atmos Weather is a heavy battery user, this is due to the fact that Atmos Weather frequently wakes up the device processor, and is not based on actual battery percentage used. Atmos Weather has not been observed to use more than 3% in an entire day of use. On devices with limited mobile data or data saver turned on, users may want to also enable background data usage to recieve weather alerts when WiFi is unavailable.</h3>
+		<h3>Certain Android versions and phone models may limit the capabilities of Atmos Weather. Check the battery section of the app info for Atmos Weather and ensure that Atmos Weather is not optimized and that background power usage is allowed. If you do not disable background optimizations and enable background battery usage, Atmos Weather may not be able to give weather alerts in a timely manner. Although some devices may indicate that Atmos Weather is a heavy battery user, this is due to the fact that Atmos Weather frequently wakes up the device processor, and is not based on actual battery percentage used. Atmos Weather has not been observed to use more than 3% in an entire day of use. On devices with limited mobile data or data saver turned on, users may want to also enable background data usage to receive weather alerts when WiFi is unavailable.</h3>
 		<br><br>
 		`;
 		window.localStorage.setItem("notice-batteryOptimization", "true");
 	}
-	// UPDATE
-	if (!window.localStorage.getItem("notice-version1.0.1")){
+	let latest = JSONGet("https://atticuscornett.github.io/AtmosWeather/package.json")["version"];
+	if (latest != version && !platform.includes("windows")){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v1.0.1 is here!</h2>
+		<h2>An update is available!</h2>
+		<hr>
+		<h3>You are on an older version of Atmos Weather (` + version + `).<br>
+		A new version of Atmos Weather (` + latest +  `)
+		 can be downloaded <a href="https://atticuscornett.github.io/AtmosWeather" target="_blank">here</a>.<br>
+		Updates may include security upgrades, so it is important to keep your apps updated.</h3>
+		<br><br>
+		`;
+	}
+	// UPDATE
+	if (!window.localStorage.getItem("notice-version1.0.2")){
+		document.getElementById("notice-window").innerHTML += `
+		<h2>Atmos Weather v1.0.2 is here!</h2>
 		<hr>
 		 <dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Removed Congressional App Challenge warning screen.</dd>
+  			<dd>- Added support for 7 new event types, just in time for winter weather.</dd>
+  			<dd>- New version popup added for non-Windows devices.</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Auto updates are enabled again.</dd>
+  			<dd>- Fixed text running off screen on certain screens.</dd>
+  			<dd>- Fixed hourly forecast UI issues on certain devices.</dd>
+  			<dd>- Fixed minor spelling errors.</dd>
+  			<dd>- Fixed blank locations page on first run.</dd>
+  			<dd>- Fixed potential issue with alerts page.</dd>
+  			<dd>- Other internal code changes made that should improve future development.</dd>
+  			<dt>Security Updates</dt>
+  			<dd>- Security updates that remove known Electron vulnerabilities on desktop.</dd>
+  			<dd>- Security updates that improve resilience to XSS attacks.</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version1.0.1", "true");
+		window.localStorage.setItem("notice-version1.0.2", "true");
 	}
 	if (platform == "pwa"){
 		document.getElementById("settings-warning").hidden = false;
@@ -224,7 +247,7 @@ function locationSearch(){
 		
 	}
 	if (document.getElementById("search-results").innerHTML == ""){
-		document.getElementById("search-results").innerHTML = "<h1>Couldn't find that location!";
+		document.getElementById("search-results").innerHTML = "<h1>Couldn't find that location!</h1>";
 	}
 }
 
@@ -323,6 +346,9 @@ function refreshLocations(){
 		document.getElementById("location-main").innerHTML += "<br><br><br><h1>&emsp;</h1>";
 	}
 	else{
+		document.getElementById("location-w-alert").innerHTML = "";
+		document.getElementById("location-w-other").innerHTML = "";
+		document.getElementById("location-data").innerHTML = "";
 		if (locationEnabled){
 			document.getElementById("location-main").innerHTML = '<div class="location ' + "currentloc" + '" id="currentLocDiv"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "current-location" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2 h2 id="currentLocTitle">' + "Current Location" + '</h2><h3 id="currentLocData">Loading information...</h3></div></div><br>';
 		}
@@ -405,9 +431,9 @@ function loadMoreInfo(navName){
 	var generatedCode;
 	var activeAlertInfo = getWeatherAlertsForNom(nomObj)[0];
 	var fullStatus = getStatus(nomObj);
-	generatedCode = "<h1 style='margin-right:20px;'>" + nomName + "</h1><br>";
+	generatedCode = "<h1>" + nomName + "</h1><br>";
 	// Bars at the top of page
-	generatedCode += '<div style="margin-right:20px;">'
+	generatedCode += '<div>'
 	// Weather Alert Bar
 	var theWarnings = "";
 	var b = 0;
@@ -428,7 +454,7 @@ function loadMoreInfo(navName){
 	}
 	// Temperature Bar
 	try{
-		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
+		generatedCode += '<div class="location noclick ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 		var a = 0;
 		var longHourForecast = "<h1>Hourly Forecast</h1><div class='hourly-container'>";
 		a = 0;
@@ -436,7 +462,12 @@ function loadMoreInfo(navName){
 		var AMPM;
 		while (a < 12){
 			sfor = hourly[0][a]["shortForecast"].toLowerCase();
-			longHourForecast += "<div class='forecast-temp'><center>"
+			if (a == 11){
+				longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
+			}
+			else{
+				longHourForecast += "<div class='forecast-temp'><center>";
+			}
 			if (sfor.includes("rain") || sfor.includes("drizzle")){
 				image = "rainy";
 			}
@@ -555,7 +586,7 @@ function getStatus(nomObj){
 
 // Sync with native code
 function syncFiles(){
-	if (!getPlatform().includes("desktop")){
+	if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa")){
 		NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
@@ -653,18 +684,23 @@ function refreshCurrentLocation(){
 							document.getElementById("current-loc-alerts").hidden = false;
 						}
 						document.getElementById("current-loc-alerts").innerHTML = generatedCode;
-						document.getElementById("current-loc-main-info").setAttribute("class", "location " + status[0]);
+						document.getElementById("current-loc-main-info").setAttribute("class", "location noclick " + status[0]);
 						document.getElementById("current-loc-temp").innerHTML = hourlyForecast["temperature"] + "° F";
 						document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
 						document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
 						var a = 0;
-						var longHourForecast = "<div class='hourly-container' style='margin-right:20px'>";
+						var longHourForecast = "<div class='hourly-container'>";
 						a = 0;
 						var forecastTime;
 						var AMPM;
 						while (a < 12){
 							sfor = hourly[0][a]["shortForecast"].toLowerCase();
-							longHourForecast += "<div class='forecast-temp'><center>"
+							if (a == 11){
+								longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
+							}
+							else{
+								longHourForecast += "<div class='forecast-temp'><center>";
+							}
 							if (sfor.includes("rain") || sfor.includes("drizzle")){
 								image = "rainy";
 							}

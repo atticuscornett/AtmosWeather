@@ -1,8 +1,8 @@
-version: 1.0.1
+version: 1.0.2
 files:
-  - url: Atmos-Weather-Setup-1.0.1.exe
-    sha512: Q7qW8APxOp1oY2FVg9+EPqJokQnGuvrvI2ZA4WMkoCbPoSwGAbF6oIPV9u4LpUKhaIDrYCCDV8BlU0JXT1OvNA==
-    size: 71646430
-path: Atmos-Weather-Setup-1.0.1.exe
-sha512: Q7qW8APxOp1oY2FVg9+EPqJokQnGuvrvI2ZA4WMkoCbPoSwGAbF6oIPV9u4LpUKhaIDrYCCDV8BlU0JXT1OvNA==
-releaseDate: '2022-12-08T05:12:41.350Z'
+  - url: Atmos-Weather-Setup-1.0.2.exe
+    sha512: DlKKWJGmDqonATDuskrfutUO0BmDLrp3XVQ6BmuqlF0nh+qCfGnvnFwMQEnhPTl/QMDCf7maSUU62k7wgxsTGQ==
+    size: 71634817
+path: Atmos-Weather-Setup-1.0.2.exe
+sha512: DlKKWJGmDqonATDuskrfutUO0BmDLrp3XVQ6BmuqlF0nh+qCfGnvnFwMQEnhPTl/QMDCf7maSUU62k7wgxsTGQ==
+releaseDate: '2022-12-23T21:19:18.586Z'
