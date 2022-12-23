@@ -323,6 +323,9 @@ function refreshLocations(){
 		document.getElementById("location-main").innerHTML += "<br><br><br><h1>&emsp;</h1>";
 	}
 	else{
+		document.getElementById("location-w-alert").innerHTML = "";
+		document.getElementById("location-w-other").innerHTML = "";
+		document.getElementById("location-data").innerHTML = "";
 		if (locationEnabled){
 			document.getElementById("location-main").innerHTML = '<div class="location ' + "currentloc" + '" id="currentLocDiv"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "current-location" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2 h2 id="currentLocTitle">' + "Current Location" + '</h2><h3 id="currentLocData">Loading information...</h3></div></div><br>';
 		}
