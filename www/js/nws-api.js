@@ -20,38 +20,31 @@ if (!localStorage.getItem("nws-location-cache")){
 }
 
 // Convert a Nominatim object into a weather grid object
-function nomToWeatherGrid(nomObj){
+function nomToWeatherGridAsync(nomObj, nomCallback, extraReturn=null){
 	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
 	var temp;
 	temp = nomObj["display_name"];
 	temp = temp.split(", ");
 	temp = temp[0] + ", " + temp[1] + ", " + temp[2];
 	if (theCache.hasOwnProperty(temp)){
-		return [JSON.parse(theCache[temp]), temp];
-	}
-	else{
-		theCache[temp] = httpGet("https://api.weather.gov/points/" + nomObj["lat"] + "," + nomObj["lon"]);
-		localStorage.setItem("nws-location-cache", JSON.stringify(theCache));
-		syncFiles();
-		return [JSON.parse(theCache[temp]), temp];
-	}
-}
-
-function nomToWeatherGridAsync(nomObj, nomCallback){
-	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
-	var temp;
-	temp = nomObj["display_name"];
-	temp = temp.split(", ");
-	temp = temp[0] + ", " + temp[1] + ", " + temp[2];
-	if (theCache.hasOwnProperty(temp)){
-		nomCallback([JSON.parse(theCache[temp]), temp]);
+		if (extraReturn != null){
+			nomCallback([JSON.parse(theCache[temp]), temp], extraReturn);
+		}
+		else{
+			nomCallback([JSON.parse(theCache[temp]), temp]);
+		}
 	}
 	else{
 		httpGetAsync("https://api.weather.gov/points/" + nomObj["lat"] + "," + nomObj["lon"], (res) => {
 			theCache[temp] = res;
 			localStorage.setItem("nws-location-cache", JSON.stringify(theCache));
 			syncFiles();
-			nomCallback([JSON.parse(theCache[temp]), temp]);
+			if (extraReturn != null){
+				nomCallback([JSON.parse(theCache[temp]), temp], extraReturn);
+			}
+			else{
+				nomCallback([JSON.parse(theCache[temp]), temp]);
+			}
 		});
 	}
 }

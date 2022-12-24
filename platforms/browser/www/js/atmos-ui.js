@@ -300,56 +300,57 @@ function refreshLocations(){
 		while (a < nomLocations.length){
 			var fullStatus = getStatus(nomLocations[a]);
 			var alertStatus = fullStatus[0];
-			var image = "sunny"
-			var hourly = getHourlyForecast(nomToWeatherGrid(nomLocations[a]));
-			if (!hourly[0]){
-				if (!refreshAgain){
-					refreshAgain = true;
-					setTimeout(refreshLocations, 7000);
-				}
-				var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
-				document.getElementById("location-main").innerHTML += theDiv;
-			}
-			else{
-				var sfor = hourly[0][0]["shortForecast"].toLowerCase();
-				var info = hourly[0][0]["temperature"] + " F - " + hourly[0][0]["shortForecast"];
-				if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
-					image = "rainy";
-				}
-				else if (sfor.includes("snow")){
-					image = "snowy";
-				}
-				else if (sfor.includes("wind")){
-					image = "windy";
-				}
-				else if (sfor.includes("cloud") || sfor.includes("fog")){
-					image = "cloudy";
-				}
-				if (alertStatus == "warning"){
-					image = "warning";
-					info = fullStatus[1].toString() + " warning(s) and " + fullStatus[2].toString() + " watch(es)";
-				}
-				if (alertStatus == "watch"){
-					info = fullStatus[2].toString() + " watch(es)";
-				}
-				if (alertStatus == "other"){
-					info = "Weather statements in effect";
-				}
-				var theDiv = '<div class="location ' + alertStatus + '" onclick="navTo(\'locdat-' + nomLocationNames[a] + '-' + a.toString() + '\')"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3 style="margin-right:8px;">' + info + '&emsp;(Tap for more info.)</h3></div></div><br>';
-				if (alertStatus == "warning"){
-					document.getElementById("location-w-alert").innerHTML += theDiv;
-				}
-				else if (alertStatus == "watch" || alertStatus == "other"){
-					document.getElementById("location-w-other").innerHTML += theDiv;
-				}
-				else{
+			var image = "sunny";
+			nomToWeatherGridAsync(nomLocations[a], (nomRes, a) => {
+				var hourly = getHourlyForecast(nomRes);
+				if (!hourly[0]){
+					if (!refreshAgain){
+						refreshAgain = true;
+						setTimeout(refreshLocations, 7000);
+					}
+					var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
 					document.getElementById("location-main").innerHTML += theDiv;
 				}
-				document.getElementById("location-data").innerHTML += "<div id='tab-locdat-" + nomLocationNames[a] + '-' + a.toString() + "' class='tab-div' hidden><h1>" + nomLocationNames[a] + "</h1></div>";
-			}
+				else{
+					var sfor = hourly[0][0]["shortForecast"].toLowerCase();
+					var info = hourly[0][0]["temperature"] + " F - " + hourly[0][0]["shortForecast"];
+					if (sfor.includes("rain") || sfor.includes("storm") || sfor.includes("drizzle")){
+						image = "rainy";
+					}
+					else if (sfor.includes("snow")){
+						image = "snowy";
+					}
+					else if (sfor.includes("wind")){
+						image = "windy";
+					}
+					else if (sfor.includes("cloud") || sfor.includes("fog")){
+						image = "cloudy";
+					}
+					if (alertStatus == "warning"){
+						image = "warning";
+						info = fullStatus[1].toString() + " warning(s) and " + fullStatus[2].toString() + " watch(es)";
+					}
+					if (alertStatus == "watch"){
+						info = fullStatus[2].toString() + " watch(es)";
+					}
+					if (alertStatus == "other"){
+						info = "Weather statements in effect";
+					}
+					var theDiv = '<div class="location ' + alertStatus + '" onclick="navTo(\'locdat-' + nomLocationNames[a] + '-' + a.toString() + '\')"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3 style="margin-right:8px;">' + info + '&emsp;(Tap for more info.)</h3></div></div><br>';
+					if (alertStatus == "warning"){
+						document.getElementById("location-w-alert").innerHTML += theDiv;
+					}
+					else if (alertStatus == "watch" || alertStatus == "other"){
+						document.getElementById("location-w-other").innerHTML += theDiv;
+					}
+					else{
+						document.getElementById("location-main").innerHTML += theDiv;
+					}
+					document.getElementById("location-data").innerHTML += "<div id='tab-locdat-" + nomLocationNames[a] + '-' + a.toString() + "' class='tab-div' hidden><h1>" + nomLocationNames[a] + "</h1></div>";
+				}
+			}, a);
 			a++;
 		}
-		document.getElementById("location-main").innerHTML += "<br><br><br><h1>&emsp;</h1>";
 	}
 	else{
 		document.getElementById("location-w-alert").innerHTML = "";
@@ -414,135 +415,134 @@ function loadMoreInfo(navName){
 	index = parseInt(index[index.length -1]);
 	var nomObj = JSON.parse(localStorage.getItem("weather-locations"))[index];
 	var nomName = JSON.parse(localStorage.getItem("weather-location-names"))[index];
-	var wGrid = nomToWeatherGrid(nomObj);
-	var forecast = getForecast(wGrid);
-	var hourly = getHourlyForecast(wGrid);
-	var image = "sunny"
-	var sfor = hourly[0][0]["shortForecast"].toLowerCase();
-	if (sfor.includes("rain") || sfor.includes("drizzle")){
-		image = "rainy";
-	}
-	else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
-		image = "stormy";
-	}
-	else if (sfor.includes("snow")){
-		image = "snowy";
-	}
-	else if (sfor.includes("wind")){
-		image = "windy";
-	}
-	else if (sfor.includes("cloud") || sfor.includes("fog")){
-		image = "cloudy";
-	}
-	var generatedCode;
-	var activeAlertInfo = getWeatherAlertsForNom(nomObj)[0];
-	var fullStatus = getStatus(nomObj);
-	generatedCode = "<h1>" + nomName + "</h1><br>";
-	// Bars at the top of page
-	generatedCode += '<div>'
-	// Weather Alert Bar
-	var theWarnings = "";
-	var b = 0;
-	while (b < activeAlertInfo.length){
-		theWarnings += "<a href='#' style='color:white;' onclick='loadAlert(\"" + index.toString() + "-" + b +  "\")'>" + activeAlertInfo[b]["properties"]["event"] + "</a>&emsp;"
-		b++;
-	}
-	
-	if (fullStatus[0] == "warning"){
-		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active warnings!</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
-	}
-	if (fullStatus[0] == "watch"){
-		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active watches.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
-	}
-	if (fullStatus[0] == "other"){
-		theWarnings = theWarnings.replaceAll(",", ", ")
-		generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
-	}
-	// Temperature Bar
-	try{
-		generatedCode += '<div class="location noclick ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
-		var a = 0;
-		var longHourForecast = "<h1>Hourly Forecast</h1><div class='hourly-container'>";
-		a = 0;
-		var forecastTime;
-		var AMPM;
-		while (a < 12){
-			sfor = hourly[0][a]["shortForecast"].toLowerCase();
-			if (a == 11 && window.screen.orientation.type.includes("landscape")){
-				longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
-			}
-			else{
-				longHourForecast += "<div class='forecast-temp'><center>";
-			}
-			if (sfor.includes("rain") || sfor.includes("drizzle")){
-				image = "rainy";
-			}
-			else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
-				image = "stormy";
-			}
-			else if (sfor.includes("snow")){
-				image = "snowy";
-			}
-			else if (sfor.includes("wind")){
-				image = "windy";
-			}
-			else if (sfor.includes("cloud") || sfor.includes("fog")){
-				image = "cloudy";
-			}
-			else{
-				image = "sunny";
-			}
-			forecastTime = hourly[0][a]["startTime"];
-			forecastTime = parseInt(forecastTime.substr(11,2));
-			AMPM = "AM";
-			if (forecastTime > 11){
-				AMPM = "PM";
-			}
-			if (forecastTime > 12){
-				forecastTime -= 12;
-			}
-			if (forecastTime == 0){
-				forecastTime = 12;
-			}
-			longHourForecast += "<img src='img/" + image + ".svg'>"
-			longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
-			longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
-			longHourForecast += "</center></div>"
-			a++;
+	nomToWeatherGridAsync(nomObj, (wGrid) => {
+		var forecast = getForecast(wGrid);
+		var hourly = getHourlyForecast(wGrid);
+		var image = "sunny"
+		var sfor = hourly[0][0]["shortForecast"].toLowerCase();
+		if (sfor.includes("rain") || sfor.includes("drizzle")){
+			image = "rainy";
 		}
-		longHourForecast += "</div>";
-	}
-	catch (e){
-		var longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
-	}
-	generatedCode += longHourForecast;
-	// Add detailed forecast at bottom
-	var theFiveForecast = "<br><h1>NWS Forecast</h1><br>";
-	try{
-		theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
-		theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
-		theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
-		theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
-		theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
-		theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
-		theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
-		theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
-		theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
-		theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
-	}
-	catch(err){
-		theFiveForecast = "<h3>Loading location forecast...</h3>";
-		setTimeout(function(){
-			if (screenAt.includes("locdat")){
-				loadMoreInfo(navName);
+		else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
+			image = "stormy";
+		}
+		else if (sfor.includes("snow")){
+			image = "snowy";
+		}
+		else if (sfor.includes("wind")){
+			image = "windy";
+		}
+		else if (sfor.includes("cloud") || sfor.includes("fog")){
+			image = "cloudy";
+		}
+		var generatedCode;
+		var activeAlertInfo = getWeatherAlertsForNom(nomObj)[0];
+		var fullStatus = getStatus(nomObj);
+		generatedCode = "<h1>" + nomName + "</h1><br>";
+		// Bars at the top of page
+		generatedCode += '<div>'
+		// Weather Alert Bar
+		var theWarnings = "";
+		var b = 0;
+		while (b < activeAlertInfo.length){
+			theWarnings += "<a href='#' style='color:white;' onclick='loadAlert(\"" + index.toString() + "-" + b +  "\")'>" + activeAlertInfo[b]["properties"]["event"] + "</a>&emsp;"
+			b++;
+		}
+		
+		if (fullStatus[0] == "warning"){
+			generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active warnings!</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+		}
+		if (fullStatus[0] == "watch"){
+			generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active watches.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+		}
+		if (fullStatus[0] == "other"){
+			theWarnings = theWarnings.replaceAll(",", ", ")
+			generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
+		}
+		// Temperature Bar
+		try{
+			generatedCode += '<div class="location noclick ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
+			var a = 0;
+			var longHourForecast = "<h1>Hourly Forecast</h1><div class='hourly-container'>";
+			a = 0;
+			var forecastTime;
+			var AMPM;
+			while (a < 12){
+				sfor = hourly[0][a]["shortForecast"].toLowerCase();
+				if (a == 11 && window.screen.orientation.type.includes("landscape")){
+					longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
+				}
+				else{
+					longHourForecast += "<div class='forecast-temp'><center>";
+				}
+				if (sfor.includes("rain") || sfor.includes("drizzle")){
+					image = "rainy";
+				}
+				else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
+					image = "stormy";
+				}
+				else if (sfor.includes("snow")){
+					image = "snowy";
+				}
+				else if (sfor.includes("wind")){
+					image = "windy";
+				}
+				else if (sfor.includes("cloud") || sfor.includes("fog")){
+					image = "cloudy";
+				}
+				else{
+					image = "sunny";
+				}
+				forecastTime = hourly[0][a]["startTime"];
+				forecastTime = parseInt(forecastTime.substr(11,2));
+				AMPM = "AM";
+				if (forecastTime > 11){
+					AMPM = "PM";
+				}
+				if (forecastTime > 12){
+					forecastTime -= 12;
+				}
+				if (forecastTime == 0){
+					forecastTime = 12;
+				}
+				longHourForecast += "<img src='img/" + image + ".svg'>"
+				longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
+				longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
+				longHourForecast += "</center></div>"
+				a++;
 			}
-		}, 7000)
-	}
-	generatedCode += theFiveForecast;
-	generatedCode += "<button style='width:100%;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
-	document.getElementById("tab-" + navName).innerHTML = generatedCode + "</div>";
-	
-	
+			longHourForecast += "</div>";
+		}
+		catch (e){
+			var longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
+		}
+		generatedCode += longHourForecast;
+		// Add detailed forecast at bottom
+		var theFiveForecast = "<br><h1>NWS Forecast</h1><br>";
+		try{
+			theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
+			theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
+			theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
+			theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
+			theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
+			theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
+			theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
+			theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
+			theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
+			theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
+		}
+		catch(err){
+			theFiveForecast = "<h3>Loading location forecast...</h3>";
+			setTimeout(function(){
+				if (screenAt.includes("locdat")){
+					loadMoreInfo(navName);
+				}
+			}, 7000)
+		}
+		generatedCode += theFiveForecast;
+		generatedCode += "<button style='width:100%;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
+		document.getElementById("tab-" + navName).innerHTML = generatedCode + "</div>";
+	});
 }
 
 // Check if a location is under any watches, warnings, etc.
@@ -887,41 +887,43 @@ function loadAlert(alertID){
 	var theLocation = JSON.parse(localStorage.getItem("weather-locations"))[locationIndex];
 	var theAlert = getWeatherAlertsForNom(theLocation);
 	theAlert = theAlert[0][alertIndex];
-	var alertBoundries = getPolyBoundries(theAlert, nomToWeatherGrid(theLocation));
-	document.getElementById("weather-alert-title").innerHTML = theAlert["properties"]["headline"];
-	var divCode = "<h2>Areas Affected</h2>"
-	divCode += "<h3>" + theAlert["properties"]["areaDesc"] + "</h3>"
-	if (theAlert["properties"]["instruction"] != null){
-		divCode += "<h2>Instructions</h2>"
-		divCode += "<h3>" + theAlert["properties"]["instruction"] + "</h3>"
-	}
-	divCode += "<h2>Details</h2>"
-	var theDetails = theAlert["properties"]["description"]
-	theDetails = theDetails.replaceAll("\n\n", "<br><br>");
-	theDetails = theDetails.replaceAll("\n", " ");
-	theDetails = theDetails.replaceAll("* ", "");
-	theDetails = theDetails.replaceAll("...", " - ");
-	theDetails = theDetails.replaceAll("- -", "-")
-	divCode += "<h3>" + theDetails + "</h3>"
-	document.getElementById("alert-details").innerHTML = divCode;
-	var styling;
-	if (theAlert["properties"]["event"].toLowerCase().includes("warning")){
-		styling = {"color":"red"};
-	}
-	else if (theAlert["properties"]["event"].toLowerCase().includes("watch")){
-		styling = {"color":"yellow"};
-	}
-	else{
-		styling = {"color":"blue"};
-	}
-	polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map);
-	navTo("alert-display")
-	setTimeout(function(){
-		map.invalidateSize(true)
-	}, 1000)
-	setTimeout(function(){
-		map.fitBounds(polygon.getBounds());
-	}, 2000);
+	nomToWeatherGridAsync(theLocation, (nomRes) => {
+		var alertBoundries = getPolyBoundries(theAlert, nomRes);
+		document.getElementById("weather-alert-title").innerHTML = theAlert["properties"]["headline"];
+		var divCode = "<h2>Areas Affected</h2>"
+		divCode += "<h3>" + theAlert["properties"]["areaDesc"] + "</h3>"
+		if (theAlert["properties"]["instruction"] != null){
+			divCode += "<h2>Instructions</h2>"
+			divCode += "<h3>" + theAlert["properties"]["instruction"] + "</h3>"
+		}
+		divCode += "<h2>Details</h2>"
+		var theDetails = theAlert["properties"]["description"]
+		theDetails = theDetails.replaceAll("\n\n", "<br><br>");
+		theDetails = theDetails.replaceAll("\n", " ");
+		theDetails = theDetails.replaceAll("* ", "");
+		theDetails = theDetails.replaceAll("...", " - ");
+		theDetails = theDetails.replaceAll("- -", "-")
+		divCode += "<h3>" + theDetails + "</h3>"
+		document.getElementById("alert-details").innerHTML = divCode;
+		var styling;
+		if (theAlert["properties"]["event"].toLowerCase().includes("warning")){
+			styling = {"color":"red"};
+		}
+		else if (theAlert["properties"]["event"].toLowerCase().includes("watch")){
+			styling = {"color":"yellow"};
+		}
+		else{
+			styling = {"color":"blue"};
+		}
+		polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map);
+		navTo("alert-display")
+		setTimeout(function(){
+			map.invalidateSize(true)
+		}, 1000)
+		setTimeout(function(){
+			map.fitBounds(polygon.getBounds());
+		}, 2000);
+	});
 }
 
 function loadAlertForCurrent(alertObj){
