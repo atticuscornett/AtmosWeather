@@ -20,23 +20,6 @@ if (!localStorage.getItem("nws-location-cache")){
 }
 
 // Convert a Nominatim object into a weather grid object
-function nomToWeatherGrid(nomObj){
-	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
-	var temp;
-	temp = nomObj["display_name"];
-	temp = temp.split(", ");
-	temp = temp[0] + ", " + temp[1] + ", " + temp[2];
-	if (theCache.hasOwnProperty(temp)){
-		return [JSON.parse(theCache[temp]), temp];
-	}
-	else{
-		theCache[temp] = httpGet("https://api.weather.gov/points/" + nomObj["lat"] + "," + nomObj["lon"]);
-		localStorage.setItem("nws-location-cache", JSON.stringify(theCache));
-		syncFiles();
-		return [JSON.parse(theCache[temp]), temp];
-	}
-}
-
 function nomToWeatherGridAsync(nomObj, nomCallback, extraReturn=null){
 	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
 	var temp;
@@ -67,7 +50,7 @@ function nomToWeatherGridAsync(nomObj, nomCallback, extraReturn=null){
 }
 
 // Get hourly forecast information from weather grid returned by above function
-function getHourlyForecast(weatherGrid){
+function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 	try{
 		var theCache = JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"));
 		var useCache = false;
@@ -79,7 +62,12 @@ function getHourlyForecast(weatherGrid){
 			}
 		}
 		if (useCache){
-			return theCache[weatherGrid[1]];
+			if (extraReturn != null){
+				hourlyCallback(theCache[weatherGrid[1]], extraReturn);
+			}
+			else{
+				hourlyCallback(theCache[weatherGrid[1]]);
+			}
 		}
 		else{
 			var hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
@@ -88,11 +76,21 @@ function getHourlyForecast(weatherGrid){
 			theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
 			localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
 			document.getElementById("offlineError").hidden = true;
-			return theCache[weatherGrid[1]];
+			if (extraReturn != null){
+				hourlyCallback(theCache[weatherGrid[1]], extraReturn);
+			}
+			else{
+				hourlyCallback(theCache[weatherGrid[1]]);
+			}
 		}
 	}
 	catch(err){
-		return [false, hourlyForecast];
+		if (extraReturn != null){
+			hourlyCallback([false, hourlyForecast], extraReturn);
+		}
+		else{
+			hourlyCallback([false, hourlyForecast]);
+		}
 	}
 }
 

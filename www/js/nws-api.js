@@ -50,7 +50,7 @@ function nomToWeatherGridAsync(nomObj, nomCallback, extraReturn=null){
 }
 
 // Get hourly forecast information from weather grid returned by above function
-function getHourlyForecast(weatherGrid){
+function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 	try{
 		var theCache = JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"));
 		var useCache = false;
@@ -62,7 +62,12 @@ function getHourlyForecast(weatherGrid){
 			}
 		}
 		if (useCache){
-			return theCache[weatherGrid[1]];
+			if (extraReturn != null){
+				hourlyCallback(theCache[weatherGrid[1]], extraReturn);
+			}
+			else{
+				hourlyCallback(theCache[weatherGrid[1]]);
+			}
 		}
 		else{
 			var hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
@@ -71,11 +76,21 @@ function getHourlyForecast(weatherGrid){
 			theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
 			localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
 			document.getElementById("offlineError").hidden = true;
-			return theCache[weatherGrid[1]];
+			if (extraReturn != null){
+				hourlyCallback(theCache[weatherGrid[1]], extraReturn);
+			}
+			else{
+				hourlyCallback(theCache[weatherGrid[1]]);
+			}
 		}
 	}
 	catch(err){
-		return [false, hourlyForecast];
+		if (extraReturn != null){
+			hourlyCallback([false, hourlyForecast], extraReturn);
+		}
+		else{
+			hourlyCallback([false, hourlyForecast]);
+		}
 	}
 }
 
