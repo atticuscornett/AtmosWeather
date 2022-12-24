@@ -71,17 +71,19 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 		}
 		else{
 			var hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
-			var hourlyForecast = JSON.parse(httpGet(hourlyForecastLink));
-			hourlyForecast = hourlyForecast["properties"]["periods"];
-			theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
-			localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
-			document.getElementById("offlineError").hidden = true;
-			if (extraReturn != null){
-				hourlyCallback(theCache[weatherGrid[1]], extraReturn);
-			}
-			else{
-				hourlyCallback(theCache[weatherGrid[1]]);
-			}
+			httpGetAsync(hourlyForecastLink, (hourlyForecast)=>{
+				hourlyForecast = JSON.parse(hourlyForecast);
+				hourlyForecast = hourlyForecast["properties"]["periods"];
+				theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
+				localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
+				document.getElementById("offlineError").hidden = true;
+				if (extraReturn != null){
+					hourlyCallback(theCache[weatherGrid[1]], extraReturn);
+				}
+				else{
+					hourlyCallback(theCache[weatherGrid[1]]);
+				}
+			})
 		}
 	}
 	catch(err){
@@ -95,33 +97,50 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 }
 
 // Get full forecast information
-function getForecast(weatherGrid){
+function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 	try{
-	var theCache = JSON.parse(localStorage.getItem("nws-forecast-cache"));
-	var useCache = false;
-	var time = new Date();
-	
-	// Check if has forecast from last five minutes
-	if (theCache.hasOwnProperty(weatherGrid[1])){
-		if ((time.getTime() - theCache[weatherGrid[1]][1]) < 300*1000){
-			useCache = true;
+		var theCache = JSON.parse(localStorage.getItem("nws-forecast-cache"));
+		var useCache = false;
+		var time = new Date();
+		
+		// Check if has forecast from last five minutes
+		if (theCache.hasOwnProperty(weatherGrid[1])){
+			if ((time.getTime() - theCache[weatherGrid[1]][1]) < 300*1000){
+				useCache = true;
+			}
+		}
+		if (useCache){
+			if (extraReturn != null){
+				forecastCallback(theCache[weatherGrid[1]], extraReturn);
+			}
+			else{
+				forecastCallback(theCache[weatherGrid[1]]);
+			}
+		}
+		else{
+			var forecastLink = weatherGrid[0]["properties"]["forecast"]
+			httpGetAsync(forecastLink, (forecast) => {
+				var forecast = JSON.parse(httpGet(forecastLink));
+				forecast = forecast["properties"]["periods"];
+				theCache[weatherGrid[1]] = [forecast, time.getTime()];
+				localStorage.setItem("nws-forecast-cache", JSON.stringify(theCache));
+				document.getElementById("offlineError").hidden = true;
+				if (extraReturn != null){
+					forecastCallback(theCache[weatherGrid[1]], extraReturn);
+				}
+				else{
+					forecastCallback(theCache[weatherGrid[1]]);
+				}
+			});
 		}
 	}
-	if (useCache){
-		return theCache[weatherGrid[1]];
-	}
-	else{
-		var forecastLink = weatherGrid[0]["properties"]["forecast"]
-		var forecast = JSON.parse(httpGet(forecastLink));
-		forecast = forecast["properties"]["periods"];
-		theCache[weatherGrid[1]] = [forecast, time.getTime()];
-		localStorage.setItem("nws-forecast-cache", JSON.stringify(theCache));
-		document.getElementById("offlineError").hidden = true;
-		return theCache[weatherGrid[1]];
-	}
-	}
 	catch (err){
-		return [false, forecast];
+		if (extraReturn != null){
+			forecastCallback([false, forecast], extraReturn);
+		}
+		else{
+			forecastCallback([false, forecast]);
+		}
 	}
 	
 }
@@ -260,19 +279,6 @@ function getPolyBoundries(weatherAlert){
 		var a = 0;
 		var zonesGeo = []
 		var theBoundries;
-		// if (weatherAlert["properties"]["affectedZones"][0].includes("fire")){
-		// 	while (a < weatherAlert["properties"]["affectedZones"].length){
-		// 		missed.push(weatherAlert["properties"]["affectedZones"][a])
-		// 		if(!(weatherAlert["properties"]["affectedZones"][a] in theCache)){
-		// 			theCache[weatherAlert["properties"]["affectedZones"][a]] = JSONGet(weatherAlert["properties"]["affectedZones"][a]);
-		// 		}
-		// 		zonesGeo.push(theCache[weatherAlert["properties"]["affectedZones"][a]]);
-		// 		a++;
-		// 	}
-			
-		// 	localStorage.setItem("nws-boundries-cache", JSON.stringify(theCache));
-		// 	return zonesGeo;
-		// }
 		while (a < weatherAlert["properties"]["affectedZones"].length){
 			forecastZone = weatherAlert["properties"]["affectedZones"][a];
 			if (forecastZone.includes("county")){
