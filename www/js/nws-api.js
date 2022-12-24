@@ -37,6 +37,25 @@ function nomToWeatherGrid(nomObj){
 	}
 }
 
+function nomToWeatherGridAsync(nomObj, nomCallback){
+	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
+	var temp;
+	temp = nomObj["display_name"];
+	temp = temp.split(", ");
+	temp = temp[0] + ", " + temp[1] + ", " + temp[2];
+	if (theCache.hasOwnProperty(temp)){
+		nomCallback([JSON.parse(theCache[temp]), temp]);
+	}
+	else{
+		httpGetAsync("https://api.weather.gov/points/" + nomObj["lat"] + "," + nomObj["lon"], (res) => {
+			theCache[temp] = res;
+			localStorage.setItem("nws-location-cache", JSON.stringify(theCache));
+			syncFiles();
+			nomCallback([JSON.parse(theCache[temp]), temp]);
+		});
+	}
+}
+
 // Get hourly forecast information from weather grid returned by above function
 function getHourlyForecast(weatherGrid){
 	try{
