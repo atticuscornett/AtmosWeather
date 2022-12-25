@@ -8,24 +8,21 @@ if (!window.localStorage.getItem("nominatim-storage")){
 	window.localStorage.setItem("nominatim-storage", "{}");
 }
 
-// Get String HTTP Get
-function httpGet(urlGet){
-    var httpObj = new XMLHttpRequest();
-    httpObj.open("GET", urlGet, false); 
-    httpObj.send(null);
-    return httpObj.responseText;
+// Get String and convert to JSON asynchronously
+function JSONGetAsync(urlGet, callback){
+	fetch(urlGet)
+		.then((response) => response.json())
+		.then(callback)
+		.catch((err) => callback(err));
 }
 
-// Get String and convert to JSON http GET
-function JSONGet(urlGet){
-    var httpObj = new XMLHttpRequest();
-    httpObj.open("GET", urlGet, false); 
-    httpObj.send(null);
-    return JSON.parse(httpObj.responseText);
+function httpGetAsync(urlGet, callback){
+	fetch(urlGet)
+		.then((response) => response.text())
+		.then(callback);
 }
-
 // Check if location in cache and if not, check nominatim
-function nomSearch(query){
+function nomSearch(query, nomCallback){
 	// Format query to standard
 	query = query.replace(/,/g, " ")
 	query = query.replace(/ {2}/g, " ");
@@ -34,13 +31,15 @@ function nomSearch(query){
 	var theCache = JSON.parse(window.localStorage.getItem("nominatim-storage"));
 	
 	if (theCache.hasOwnProperty(query)){
-		return theCache[query];
+		nomCallback(theCache[query]);
 	}
 	else{
-		var res = JSONGet('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(query) + "&format=json");
-		theCache[query] = res;
-		window.localStorage.setItem("nominatim-storage", JSON.stringify(theCache));
-		return res;
+		JSONGetAsync('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(query) + "&format=json",
+		(res) => {
+			theCache[query] = res;
+			window.localStorage.setItem("nominatim-storage", JSON.stringify(theCache));
+			nomCallback(res);
+		});
 	}
 }
 

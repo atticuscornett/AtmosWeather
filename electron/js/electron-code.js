@@ -56,18 +56,20 @@ function showNotices(){
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
-	let latest = JSONGet("https://atticuscornett.github.io/AtmosWeather/package.json")["version"];
-	if (latest != version && !platform.includes("windows")){
-		document.getElementById("notice-window").innerHTML += `
-		<h2>An update is available!</h2>
-		<hr>
-		<h3>You are on an older version of Atmos Weather (` + version + `).<br>
-		A new version of Atmos Weather (` + latest +  `)
-		 can be downloaded at <a href="https://atticuscornett.github.io/AtmosWeather" target="_blank">here</a>.<br>
-		Updates may include security upgrades, so it is important to keep your apps updated.</h3>
-		<br><br>
-		`;
-	}
+	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/package.json", (latest) => {
+		latest = latest["version"];
+		if (latest != version && !platform.includes("windows")){
+			document.getElementById("notice-window").innerHTML += `
+			<h2>An update is available!</h2>
+			<hr>
+			<h3>You are on an older version of Atmos Weather (` + version + `).<br>
+			A new version of Atmos Weather (` + latest +  `)
+			 can be downloaded <a href="https://atticuscornett.github.io/AtmosWeather" target="_blank">here</a>.<br>
+			Updates may include security upgrades, so it is important to keep your apps updated.</h3>
+			<br><br>
+			`;
+		}
+	});
 	// UPDATE
 	if (!window.localStorage.getItem("notice-version1.0.2")){
 		document.getElementById("notice-window").innerHTML += `

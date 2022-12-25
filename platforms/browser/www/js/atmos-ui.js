@@ -395,10 +395,12 @@ function navCode(screenTo){
 			setTimeout(playRadarAnimation, 5000);
 			var polygon;
 			setTimeout(function(){
-				var alerts = getAllActiveAlerts();
-				alerts = sortByEventType(alerts);
-				slowLoadPolygons(alerts, 0);
-				
+				getAllActiveAlertsAsync(
+					(alerts) => {
+						alerts = sortByEventType(alerts);
+						slowLoadPolygons(alerts, 0);
+					}
+				);
 			}, 5000)
 		}, 2000);
 	}
@@ -946,14 +948,15 @@ function loadAlert(alertID){
 			else{
 				styling = {"color":"blue"};
 			}
-			polygon = L.geoJSON(alertBoundaries, {style:styling}).addTo(map);
+			console.log(alertBoundaries);
 			navTo("alert-display")
 			setTimeout(function(){
+				let polygon = L.geoJSON(alertBoundaries, {style:styling}).addTo(map);
 				map.invalidateSize(true)
+				setTimeout(function(){
+					map.fitBounds(polygon.getBounds());
+				}, 1000);
 			}, 1000)
-			setTimeout(function(){
-				map.fitBounds(polygon.getBounds());
-			}, 2000);
 		});
 	})
 }
@@ -995,14 +998,14 @@ function loadAlertForCurrent(alertObj){
 				styling = {"color":"blue"};
 			}
 			var x = 0;
-			polygon = L.geoJSON(alertBoundaries, {style:styling}).addTo(map);
 			navTo("alert-display")
 			setTimeout(function(){
+				let polygon = L.geoJSON(alertBoundaries, {style:styling}).addTo(map);
 				map.invalidateSize(true)
+				setTimeout(function(){
+					map.fitBounds(polygon.getBounds());
+				}, 1000);
 			}, 1000)
-			setTimeout(function(){
-				map.fitBounds(polygon.getBounds());
-			}, 2000);
 		});
 	});
 }

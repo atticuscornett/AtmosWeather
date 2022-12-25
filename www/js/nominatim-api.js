@@ -8,27 +8,12 @@ if (!window.localStorage.getItem("nominatim-storage")){
 	window.localStorage.setItem("nominatim-storage", "{}");
 }
 
-// Get String HTTP Get
-function httpGet(urlGet){
-    var httpObj = new XMLHttpRequest();
-    httpObj.open("GET", urlGet, false); 
-    httpObj.send(null);
-    return httpObj.responseText;
-}
-
-// Get String and convert to JSON http GET
-function JSONGet(urlGet){
-    var httpObj = new XMLHttpRequest();
-    httpObj.open("GET", urlGet, false); 
-    httpObj.send(null);
-    return JSON.parse(httpObj.responseText);
-}
-
 // Get String and convert to JSON asynchronously
 function JSONGetAsync(urlGet, callback){
 	fetch(urlGet)
 		.then((response) => response.json())
-		.then(callback);
+		.then(callback)
+		.catch((err) => callback(err));
 }
 
 function httpGetAsync(urlGet, callback){
