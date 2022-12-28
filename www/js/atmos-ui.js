@@ -951,7 +951,10 @@ function loadAlert(alertID){
 			console.log(alertBoundaries);
 			navTo("alert-display")
 			setTimeout(function(){
-				let polygon = L.geoJSON(alertBoundaries, {style:styling}).addTo(map);
+				let polygon = L.geoJSON(alertBoundaries, {style:styling});
+				polygon.addTo(map);
+				console.log(alertBoundaries);
+				console.log(polygon);
 				map.invalidateSize(true)
 				setTimeout(function(){
 					map.fitBounds(polygon.getBounds());
