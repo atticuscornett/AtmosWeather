@@ -20,6 +20,27 @@ h2, h3, h4, h5, h6{
 	font-family: Lexend Deca;
 }
 
+details{
+	font-family: Secular One;
+	font-size: 20px;
+	border: black solid;
+	padding: 10px;
+	border-radius: 7px;
+	margin-bottom: 15px;
+	box-shadow: 0px 0px 7px #898989;
+}
+
+details[open] summary{
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: black solid;
+}
+
+summary{
+	cursor: pointer;
+	font-size: 25px;
+}
+
 a{
 	color: dodgerblue;
 }
@@ -262,6 +283,14 @@ select{
 	body{
 		background-color: #222222;
 		color: white;
+	}
+	details{
+		border: white solid;
+		border-radius: 7px;
+		box-shadow: 0px 0px 7px #898989;
+	}
+	details[open] summary{
+		border-bottom: white solid;
 	}
 	#notice-window-container{
 		z-index: 99;

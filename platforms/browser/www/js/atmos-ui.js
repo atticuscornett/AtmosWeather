@@ -523,28 +523,21 @@ function loadMoreInfo(navName){
 						}
 						generatedCode += longHourForecast;
 						// Add detailed forecast at bottom
-						var theFiveForecast = "<br><h1>NWS Forecast</h1><br>";
+						var extendedForecast = "<br><h1>NWS Forecast</h1><br>";
 						try{
-							theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
-							theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
-							theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
-							theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
-							theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
-							theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
-							theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
-							theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
-							theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
-							theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
+							for (let i of forecast[0]){
+								extendedForecast += "<details><summary>" + i["name"] + "</summary>" + i["detailedForecast"] + "</details>";
+							}
 						}
 						catch(err){
-							theFiveForecast = "<h3>Loading location forecast...</h3>";
+							extendedForecast = "<h3>Loading location forecast...</h3>";
 							setTimeout(function(){
 								if (screenAt.includes("locdat")){
 									loadMoreInfo(navName);
 								}
 							}, 7000)
 						}
-						generatedCode += theFiveForecast;
+						generatedCode += extendedForecast;
 						generatedCode += "<button style='width:100%;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
 						document.getElementById("tab-" + navName).innerHTML = generatedCode + "</div>";
 					});
@@ -767,18 +760,11 @@ function refreshCurrentLocation(){
 														}
 														longHourForecast += "</div>";
 														document.getElementById("current-loc-hourly").innerHTML = longHourForecast;
-														var theFiveForecast = "";
-														theFiveForecast += "<h2>" + forecast[0][0]["name"] + "</h2>";
-														theFiveForecast += "<h3>" + forecast[0][0]["detailedForecast"] + "</h3><br>"
-														theFiveForecast += "<h2>" + forecast[0][1]["name"] + "</h2>";
-														theFiveForecast += "<h3>" + forecast[0][1]["detailedForecast"] + "</h3><br>"
-														theFiveForecast += "<h2>" + forecast[0][2]["name"] + "</h2>";
-														theFiveForecast += "<h3>" + forecast[0][2]["detailedForecast"] + "</h3><br>"
-														theFiveForecast += "<h2>" + forecast[0][3]["name"] + "</h2>";
-														theFiveForecast += "<h3>" + forecast[0][3]["detailedForecast"] + "</h3><br>"
-														theFiveForecast += "<h2>" + forecast[0][4]["name"] + "</h2>";
-														theFiveForecast += "<h3>" + forecast[0][4]["detailedForecast"] + "</h3><br>";
-														document.getElementById("current-loc-nws").innerHTML = theFiveForecast;
+														var extendedForecast = "";
+														for (let i of forecast[0]){
+															extendedForecast += "<details><summary>" + i["name"] + "</summary>" + i["detailedForecast"] + "</details>";
+														}
+														document.getElementById("current-loc-nws").innerHTML = extendedForecast;
 														var theTime = new Date();
 														lastLocationCheck = theTime.getTime();
 														lastLocationInfo = info;
