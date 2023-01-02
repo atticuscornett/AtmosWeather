@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Atmos Weather</title>
-		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://unpkg.com/leaflet@1.9.3/ https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org;">
+		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://unpkg.com/leaflet@1.9.3/ https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com;">
 		<meta charset="utf-8" lang="en">
 		<link href="./img/favicon.svg" rel="icon" type="image/x-icon" />
 		
@@ -69,7 +69,7 @@
 					<!-- UPDATE -->
 					<h1>About Atmos Weather</h1>
 					<h3>Version 1.0.2</h3>
-					<h3>Last updated 12-30-2022</h3>
+					<h3>Last updated 1-2-2023</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>
@@ -79,6 +79,7 @@
 					<h3><a href="https://fonts.google.com/" target="_blank">Google Fonts</a></h3>
 					<h3><a href="https://nominatim.org/" target="_blank">OSM Nominatim</a></h3>
 					<h3><a href="https://www.weather.gov/documentation/services-web-api" target="_blank">NWS API</a></h3>
+					<h3><a href="https://open-meteo.com/" target="_blank">Open-Meteo API</a></h3>
 					<h3><a href="https://leafletjs.com/index.html" target="_blank">LeafletJS</a></h3>
 					<h3><a href="https://www.electronjs.org/" target="_blank">ElectronJS</a></h3>
 					<h3><a href="https://www.rainviewer.com/api.html" target="_blank">RainViewer</a></h3>
@@ -93,7 +94,7 @@
 						<div id="active-alert-list">
 						</div>
 						<br>
-						<h2>Previously Recieved</h2>
+						<h2>Previously Received</h2>
 						<hr>
 						<div id="old-alert-list">
 						</div>
@@ -120,6 +121,10 @@
 					<h4>WHERE IS IT SENT: National Weather Service API</h4>
 					<h4>WHY: To provide forecasts for the current location and check for alerts</h4>
 					<br>
+					<h4>WHEN: When app is open</h4>
+					<h4>WHERE IS IT SENT: Open-Meteo API</h4>
+					<h4>WHY: To provide AQI for current location</h4>
+					<br>
 					<h3><b>Location Searches</b></h3>
 					<h4>WHEN: When you search for a location while adding a location</h4>
 					<h4>WHERE IS IT SENT: Nominatim API</h4>
@@ -129,6 +134,10 @@
 					<h4>WHEN: Periodically in the background and when app is open</h4>
 					<h4>WHERE IS IT SENT: National Weather Service API</h4>
 					<h4>WHY: To provide forecasts for added locations and check for alerts</h4>
+					<br>
+					<h4>WHEN: When app is open</h4>
+					<h4>WHERE IS IT SENT: Open-Meteo API</h4>
+					<h4>WHY: To provide AQI for added locations</h4>
 				</div>
 				<div id="tab-radar" class="tab-div" hidden>
 					<h1>Radar</h1>
@@ -278,6 +287,14 @@
 						</div>
 					</div>
 					<br>
+					<div class="clear-border">
+						<h1>Air Quality Index (AQI)</h1>
+						<h2 id="current-loc-aqi">Loading...</h2>
+						<div id="current-loc-aqi-bar">
+						</div>
+					</div>
+					<h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5>
+					<br>
 					<h1>Hourly Forecast</h1>
 					<div id="current-loc-hourly">
 
@@ -382,5 +399,6 @@
 	<script src="js/electron-code.js"></script>
 	<script src="js/atmos-settings.js"></script>
 	<script src="js/rainweather-api.js"></script>
+	<script src="js/open-meteo-api.js"></script>
 	<script src="js/start.js"></script>
 </html>
