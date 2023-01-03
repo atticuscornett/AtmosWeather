@@ -187,23 +187,40 @@ function getPlatform(){
 
 // Initialize Buttons for index.html
 function activateNavButtons(){
+	document.getElementById("location-nav").className = "selected-nav";
 	document.getElementById("location-nav").onclick = function (){
 		if (screenAt != "locations"){
+			document.getElementById("location-nav").className = "selected-nav";
+			document.getElementById("alerts-nav").className = "";
+			document.getElementById("radar-nav").className = "";
+			document.getElementById("settings-nav").className = "";
 			navTo("locations");
 		}
 	};
 	document.getElementById("alerts-nav").onclick = function (){
 		if (screenAt != "alerts"){
+			document.getElementById("location-nav").className = "";
+			document.getElementById("alerts-nav").className = "selected-nav";
+			document.getElementById("radar-nav").className = "";
+			document.getElementById("settings-nav").className = "";
 			navTo("alerts");
 		}
 	};
 	document.getElementById("radar-nav").onclick = function (){
 		if (screenAt != "radar"){
+			document.getElementById("location-nav").className = "";
+			document.getElementById("alerts-nav").className = "";
+			document.getElementById("radar-nav").className = "selected-nav";
+			document.getElementById("settings-nav").className = "";
 			navTo("radar");
 		}
 	};
 	document.getElementById("settings-nav").onclick = function (){
 		if (screenAt != "settings"){
+			document.getElementById("location-nav").className = "";
+			document.getElementById("alerts-nav").className = "";
+			document.getElementById("radar-nav").className = "";
+			document.getElementById("settings-nav").className = "selected-nav";
 			navTo("settings");
 		}
 	};
@@ -725,7 +742,7 @@ function refreshCurrentLocation(){
 														var AMPM;
 														while (a < 12){
 															sfor = hourly[0][a]["shortForecast"].toLowerCase();
-															if (a == 11){
+															if (a == 11 && window.screen.orientation.type.includes("landscape")){
 																longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
 															}
 															else{
@@ -908,7 +925,7 @@ function refreshAlerts(){
 		a--;
 	}
 	if (oldAlerts.length == 0){
-		generatedCode = "<h2>You have no previously recieved alerts.</h2>"
+		generatedCode = "<h2>You have no previously received alerts.</h2>"
 	}
 	document.getElementById("old-alert-list").innerHTML = generatedCode;
 }

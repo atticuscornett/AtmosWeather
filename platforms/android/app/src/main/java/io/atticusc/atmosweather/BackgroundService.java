@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Looper;
 
@@ -52,12 +54,20 @@ public class BackgroundService extends BroadcastReceiver {
             }
             checkLocation += 1;
             // new EasyTTS("Test", context.getApplicationContext());
+            // System.out.println(checkNetworkStatus(context));
             weatherLocations.edit().putInt("nextcheck", checkLocation).commit();
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
             Intent intentA = new Intent(context, BackgroundService.class);
             PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, 0);
             Calendar c = Calendar.getInstance();
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 10000, pentent);
+            // Update more often on WiFi
+            if (checkNetworkStatus(context)){
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 10000, pentent);
+            }
+            else{
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 25000, pentent);
+            }
+
             JSONObject jObj = new JSONObject(weatherLocations.getString("settings", ""));
             Boolean getLocationInBackground = true;
                 try {
@@ -143,5 +153,20 @@ public class BackgroundService extends BroadcastReceiver {
                         }, Looper.getMainLooper());
             }
         }
+    }
+    private static boolean checkNetworkStatus(final Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean networkStatus;
+        if (activeNetwork == null){
+            networkStatus = false;
+        }
+        else {
+            networkStatus = activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
+        }
+        return networkStatus;
+
     }
 }
