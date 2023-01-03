@@ -6,7 +6,6 @@
 // Keep downloaded polygons until page reload.
 var tempPolyCache = {};
 var tempPolyFireCache = {}
-var tempPolyCountyCache = {}
 var missed = [];
 
 // Set up empty storage
@@ -16,44 +15,30 @@ if (!localStorage.getItem("nws-location-cache")){
 	localStorage.setItem("nws-hourly-forecast-cache", "{}");
 	localStorage.setItem("nws-alerts-cache", "{}");
 	localStorage.setItem("nws-alerts-old", "[]");
-	localStorage.setItem("nws-alerts-current", "[]");	
-}
-if (!localStorage.setItem("nws-boundaries-cache", "{}")){
-	localStorage.setItem("nws-boundaries-cache", "{}");
+	localStorage.setItem("nws-alerts-current", "[]");
+	localStorage.setItem("nws-boundries-cache", "{}");
 }
 
 // Convert a Nominatim object into a weather grid object
-function nomToWeatherGridAsync(nomObj, nomCallback, extraReturn=null){
+function nomToWeatherGrid(nomObj){
 	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
 	var temp;
 	temp = nomObj["display_name"];
 	temp = temp.split(", ");
 	temp = temp[0] + ", " + temp[1] + ", " + temp[2];
 	if (theCache.hasOwnProperty(temp)){
-		if (extraReturn != null){
-			nomCallback([JSON.parse(theCache[temp]), temp], extraReturn);
-		}
-		else{
-			nomCallback([JSON.parse(theCache[temp]), temp]);
-		}
+		return [JSON.parse(theCache[temp]), temp];
 	}
 	else{
-		httpGetAsync("https://api.weather.gov/points/" + nomObj["lat"] + "," + nomObj["lon"], (res) => {
-			theCache[temp] = res;
-			localStorage.setItem("nws-location-cache", JSON.stringify(theCache));
-			syncFiles();
-			if (extraReturn != null){
-				nomCallback([JSON.parse(theCache[temp]), temp], extraReturn);
-			}
-			else{
-				nomCallback([JSON.parse(theCache[temp]), temp]);
-			}
-		});
+		theCache[temp] = httpGet("https://api.weather.gov/points/" + nomObj["lat"] + "," + nomObj["lon"]);
+		localStorage.setItem("nws-location-cache", JSON.stringify(theCache));
+		syncFiles();
+		return [JSON.parse(theCache[temp]), temp];
 	}
 }
 
 // Get hourly forecast information from weather grid returned by above function
-function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
+function getHourlyForecast(weatherGrid){
 	try{
 		var theCache = JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"));
 		var useCache = false;
@@ -65,167 +50,94 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 			}
 		}
 		if (useCache){
-			if (extraReturn != null){
-				hourlyCallback(theCache[weatherGrid[1]], extraReturn);
-			}
-			else{
-				hourlyCallback(theCache[weatherGrid[1]]);
-			}
+			return theCache[weatherGrid[1]];
 		}
 		else{
 			var hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
-			httpGetAsync(hourlyForecastLink, (hourlyForecast)=>{
-				try{
-					hourlyForecast = JSON.parse(hourlyForecast);
-					hourlyForecast = hourlyForecast["properties"]["periods"];
-					theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
-					localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
-					document.getElementById("offlineError").hidden = true;
-					if (extraReturn != null){
-						hourlyCallback(theCache[weatherGrid[1]], extraReturn);
-					}
-					else{
-						hourlyCallback(theCache[weatherGrid[1]]);
-					}
-				}
-				catch(err){
-					if (extraReturn != null){
-						hourlyCallback([false, hourlyForecast], extraReturn);
-					}
-					else{
-						hourlyCallback([false, hourlyForecast]);
-					}
-				}
-			})
+			var hourlyForecast = JSON.parse(httpGet(hourlyForecastLink));
+			hourlyForecast = hourlyForecast["properties"]["periods"];
+			theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
+			localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
+			document.getElementById("offlineError").hidden = true;
+			return theCache[weatherGrid[1]];
 		}
 	}
 	catch(err){
-		console.log(err);
+		return [false, hourlyForecast];
 	}
 }
 
 // Get full forecast information
-function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
+function getForecast(weatherGrid){
 	try{
-		var theCache = JSON.parse(localStorage.getItem("nws-forecast-cache"));
-		var useCache = false;
-		var time = new Date();
-		
-		// Check if has forecast from last five minutes
-		if (theCache.hasOwnProperty(weatherGrid[1])){
-			if ((time.getTime() - theCache[weatherGrid[1]][1]) < 300*1000){
-				useCache = true;
-			}
-		}
-		if (useCache){
-			if (extraReturn != null){
-				forecastCallback(theCache[weatherGrid[1]], extraReturn);
-			}
-			else{
-				forecastCallback(theCache[weatherGrid[1]]);
-			}
-		}
-		else{
-			var forecastLink = weatherGrid[0]["properties"]["forecast"]
-			JSONGetAsync(forecastLink, (forecast) => {
-				try{
-					forecast = forecast["properties"]["periods"];
-					theCache[weatherGrid[1]] = [forecast, time.getTime()];
-					localStorage.setItem("nws-forecast-cache", JSON.stringify(theCache));
-					document.getElementById("offlineError").hidden = true;
-					if (extraReturn != null){
-						forecastCallback(theCache[weatherGrid[1]], extraReturn);
-					}
-					else{
-						forecastCallback(theCache[weatherGrid[1]]);
-					}
-				}
-				catch (err){
-					if (extraReturn != null){
-						forecastCallback([false, forecast], extraReturn);
-					}
-					else{
-						forecastCallback([false, forecast]);
-					}
-				}
-			});
+	var theCache = JSON.parse(localStorage.getItem("nws-forecast-cache"));
+	var useCache = false;
+	var time = new Date();
+	
+	// Check if has forecast from last five minutes
+	if (theCache.hasOwnProperty(weatherGrid[1])){
+		if ((time.getTime() - theCache[weatherGrid[1]][1]) < 300*1000){
+			useCache = true;
 		}
 	}
+	if (useCache){
+		return theCache[weatherGrid[1]];
+	}
+	else{
+		var forecastLink = weatherGrid[0]["properties"]["forecast"]
+		var forecast = JSON.parse(httpGet(forecastLink));
+		forecast = forecast["properties"]["periods"];
+		theCache[weatherGrid[1]] = [forecast, time.getTime()];
+		localStorage.setItem("nws-forecast-cache", JSON.stringify(theCache));
+		document.getElementById("offlineError").hidden = true;
+		return theCache[weatherGrid[1]];
+	}
+	}
 	catch (err){
-		if (extraReturn != null){
-			forecastCallback([false, forecast], extraReturn);
-		}
-		else{
-			forecastCallback([false, forecast]);
-		}
+		return [false, forecast];
 	}
 	
 }
 
-// // Get hourly for current location (requires prior successful run of getCurrentLocation [atmos-ui.js])
-// function getHourlyGeoAsync(callback, extraReturn=null){
-// 	if (!currentLat){
-// 		if (extraReturn != null){
-// 			callback(false, extraReturn);
-// 		}
-// 		else{
-// 			callback(false);
-// 		}
-// 	}
-// 	JSONGetAsync("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString(), (weatherAlert) => {
-// 		var hourlyForecastLink = weatherGrid["properties"]["forecastHourly"]
-// 		JSONGetAsync(hourlyForecastLink, (hourlyForecast) => {
-// 			hourlyForecast = hourlyForecast["properties"]["periods"];
-// 			if (extraReturn != null){
-// 				callback(hourlyForecast, extraReturn);
-// 			}
-// 			else{
-// 				callback(hourlyForecast);
-// 			}
-// 		})
-// 	});
-// }
+// Get hourly for current location (requires prior successful run of getCurrentLocation [atmos-ui.js])
+function getHourlyGeo(){
+	if (!currentLat){
+		return false;
+	}
+	var weatherGrid = JSONGet("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString());
+	var hourlyForecastLink = weatherGrid["properties"]["forecastHourly"]
+	var hourlyForecast = JSON.parse(httpGet(hourlyForecastLink));
+	hourlyForecast = hourlyForecast["properties"]["periods"];
+	return hourlyForecast;
+}
 
-
-// // Get full forecast of current location (requires prior successful run of getCurrentLocation [atmos-ui.js])
-// function getForecastGeo(){
-// 	if (!currentLat){
-// 		return false;
-// 	}
-// 	var weatherGrid = JSONGet("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString());
-// 	var forecastLink = weatherGrid["properties"]["forecast"]
-// 	var forecast = JSON.parse(httpGet(forecastLink));
-// 	forecast = forecast["properties"]["periods"];
-// 	return forecast;
-// }
+// Get full forecast of current location (requires prior successful run of getCurrentLocation [atmos-ui.js])
+function getForecastGeo(){
+	if (!currentLat){
+		return false;
+	}
+	var weatherGrid = JSONGet("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString());
+	var forecastLink = weatherGrid["properties"]["forecast"]
+	var forecast = JSON.parse(httpGet(forecastLink));
+	forecast = forecast["properties"]["periods"];
+	return forecast;
+}
 
 // Gets active weather alerts for a location
-
-function getWeatherAlertsForPosAsync(lat, long, callback, extraReturn=null){
+function getWeatherAlertsForPos(lat, long){
 	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
 	try{
-		JSONGetAsync("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString(), (theAlerts) =>{
-			theAlerts = theAlerts["features"];
-			if (extraReturn != null){
-				callback(theAlerts, extraReturn);
-			}
-			else{
-				callback(theAlerts);
-			}
-		});
+		var theAlerts = JSONGet("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString())["features"];
+		addToActiveAlertsCheck(theAlerts);
+		return theAlerts;
 	}
 	catch(err){
-		if (extraReturn != null){
-			callback(false, extraReturn);
-		}
-		else{
-			callback(false);
-		}
+		return false;
 	}
 }
 
 // Gets active weather alerts for a nominatim object
-function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
+function getWeatherAlertsForNom(nomObj){
 	try{
 		var pos = nomObj["lat"].toString() + "," + nomObj["lon"].toString();
 		var theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
@@ -233,68 +145,24 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 		if (theCache.hasOwnProperty(pos)){
 			// Check if got alerts within last minute
 			if ((time.getTime() - theCache[pos][1]) > 60*1000){
-				JSONGetAsync("https://api.weather.gov/alerts/active?point=" + pos, (res) =>{
-				try{
-					theCache[pos] = [res["features"], time.getTime()]
-					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
-					addToActiveAlertsCheck(theCache[pos]);
-					if (extraReturn != null){
-						nomCallback(theCache[pos], extraReturn);
-					}
-					else{
-						nomCallback(theCache[pos]);
-					}
-				}
-				catch(err){
-					if (extraReturn != null){
-						nomCallback(false, extraReturn);
-					}
-					else{
-						nomCallback(false);
-					}
-				}
-			});
+				theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active?point=" + pos)["features"], time.getTime()]
+				localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
+				addToActiveAlertsCheck(theCache[pos]);
+				return theCache[pos];
 			}
 			else{
-				if (extraReturn != null){
-					nomCallback(theCache[pos], extraReturn);
-				}
-				else{
-					nomCallback(theCache[pos]);
-				}
+				return theCache[pos];
 			}
 		}
 		else{
-			JSONGetAsync("https://api.weather.gov/alerts/active?point=" + pos, (res) =>{
-				try{
-					theCache[pos] = [res["features"], time.getTime()]
-					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
-					addToActiveAlertsCheck(theCache[pos]);
-					if (extraReturn != null){
-						nomCallback(theCache[pos], extraReturn);
-					}
-					else{
-						nomCallback(theCache[pos]);
-					}
-				}
-				catch(err){
-					if (extraReturn != null){
-						nomCallback(false, extraReturn);
-					}
-					else{
-						nomCallback(false);
-					}
-				}
-			});
+			theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active?point=" + pos)["features"], time.getTime()]
+			localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
+			addToActiveAlertsCheck(theCache[pos]);
+			return theCache[pos];
 		}
 	}
 	catch(err){
-		if (extraReturn != null){
-			nomCallback(false, extraReturn);
-		}
-		else{
-			nomCallback(false);
-		}
+		return false;
 	}
 }
 
@@ -319,33 +187,29 @@ function checkIfOldAlerts(){
 	var cacheCurrent = JSON.parse(localStorage.getItem("nws-alerts-current"));
 	var moveToOld = [];
 	while (a < nomLocations.length){
-		getWeatherAlertsForNomAsync(nomLocations[a], (res, a) => {
-			allCurrent = allCurrent.concat(res[0]);
-			if (a == nomLocations.length - 1){
-				a = 0;
-				var ids = [];
-				while (a < allCurrent.length){
-					ids.push(allCurrent[a]["id"])
-					a++;
-				}
-				a = 0;
-				while (a < cacheCurrent.length){
-					if (cacheCurrent[a] != null){
-						if (!ids.includes(cacheCurrent[a]["id"])){
-							moveToOld.push(cacheCurrent[a]);
-						}
-					}
-					a++;
-				}
-				localStorage.setItem("nws-alerts-current", JSON.stringify(allCurrent));
-				var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"))
-				oldAlerts = oldAlerts.concat(moveToOld);
-				oldAlerts = oldAlerts.slice(-20);
-				localStorage.setItem("nws-alerts-old", JSON.stringify(oldAlerts));
-			}
-		}, a);
+		allCurrent = allCurrent.concat(getWeatherAlertsForNom(nomLocations[a])[0]);
 		a++;
 	}
+	a = 0;
+	var ids = [];
+	while (a < allCurrent.length){
+		ids.push(allCurrent[a]["id"])
+		a++;
+	}
+	a = 0;
+	while (a < cacheCurrent.length){
+		if (cacheCurrent[a] != null){
+			if (!ids.includes(cacheCurrent[a]["id"])){
+				moveToOld.push(cacheCurrent[a]);
+			}
+		}
+		a++;
+	}
+	localStorage.setItem("nws-alerts-current", JSON.stringify(allCurrent));
+	var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"))
+	oldAlerts = oldAlerts.concat(moveToOld);
+	oldAlerts = oldAlerts.slice(-20);
+	localStorage.setItem("nws-alerts-old", JSON.stringify(oldAlerts));
 }
 
 // Changes list of coords from longitude, latitude to latitude, longitude
@@ -362,63 +226,50 @@ function fixNWSCoords(oldCoords){
 }
 
 // Gets the polygon boundary of weather alerts
-function getPolyBoundariesAsync(weatherAlert, callback, extraReturn=null){
+function getPolyBoundries(weatherAlert){
 	if (weatherAlert["geometry"] == null){
-		var theCache = JSON.parse(localStorage.getItem("nws-boundaries-cache"));
+		var theCache = JSON.parse(localStorage.getItem("nws-boundries-cache"));
 		var forecastZone;
 		var a = 0;
 		var zonesGeo = []
-		var theBoundaries;
-		let called = 0;
-		let calledDone = 0;
+		var theBoundries;
+		// if (weatherAlert["properties"]["affectedZones"][0].includes("fire")){
+		// 	while (a < weatherAlert["properties"]["affectedZones"].length){
+		// 		missed.push(weatherAlert["properties"]["affectedZones"][a])
+		// 		if(!(weatherAlert["properties"]["affectedZones"][a] in theCache)){
+		// 			theCache[weatherAlert["properties"]["affectedZones"][a]] = JSONGet(weatherAlert["properties"]["affectedZones"][a]);
+		// 		}
+		// 		zonesGeo.push(theCache[weatherAlert["properties"]["affectedZones"][a]]);
+		// 		a++;
+		// 	}
+			
+		// 	localStorage.setItem("nws-boundries-cache", JSON.stringify(theCache));
+		// 	return zonesGeo;
+		// }
 		while (a < weatherAlert["properties"]["affectedZones"].length){
 			forecastZone = weatherAlert["properties"]["affectedZones"][a];
-			getForecastZonePolyAsync(forecastZone, (theBoundaries, a) =>{
-				if (theBoundaries == false){
-					missed.push(forecastZone);
-					called++;
-					JSONGetAsync(forecastZone, (theBoundaries) => {
-						zonesGeo.push(theBoundaries);
-						theCache[forecastZone] = theBoundaries;
-						calledDone++;
-						if (calledDone == called){
-							if (extraReturn != null){
-								callback(zonesGeo, extraReturn);
-							}
-							else{
-								callback(zonesGeo);
-							}
-						}
-					});
-				}
-				else{
-					zonesGeo.push(theBoundaries);
-					theCache[forecastZone] = theBoundaries;
-				}
-			}, a);
+			if (forecastZone.includes("county")){
+				a++;
+				continue;
+			}
+			theBoundries = getForecastZonePoly(forecastZone);
+			if (theBoundries == false){
+				missed.push(forecastZone);
+				theBoundries = JSONGet(forecastZone);
+			}
+			zonesGeo.push(theBoundries);
+			theCache[forecastZone] = theBoundries;
 			a++;
 		}
-		if (called == 0){
-			if (extraReturn != null){
-				callback(zonesGeo, extraReturn);
-			}
-			else{
-				callback(zonesGeo);
-			}
-		}
+		return zonesGeo;
 	}
 	else{
-		if (extraReturn != null){
-			callback([weatherAlert], extraReturn);
-		}
-		else{
-			callback([weatherAlert]);
-		}
+		return [weatherAlert];
 	}
 }
 
 // Gets all active weather alerts
-function getAllActiveAlertsAsync(callback){
+function getAllActiveAlerts(){
 	try{
 		var pos = "9999,9999";
 		var theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
@@ -426,55 +277,30 @@ function getAllActiveAlertsAsync(callback){
 		if (theCache.hasOwnProperty(pos)){
 			// Check if got alerts within last minute
 			if ((time.getTime() - theCache[pos][1]) > 60*1000){
-				JSONGetAsync("https://api.weather.gov/alerts/active", (res) => {
-					theCache[pos] = [res["features"], time.getTime()]
-					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
-					callback(theCache[pos]);
-				});
+				theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active")["features"], time.getTime()]
+				localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
+				return theCache[pos];
 			}
 			else{
-				callback(theCache[pos]);
+				return theCache[pos];
 			}
 		}
 		else{
-			JSONGetAsync("https://api.weather.gov/alerts/active", (res) => {
-					theCache[pos] = [res["features"], time.getTime()]
-					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
-					callback(theCache[pos]);
-			});
+			theCache[pos] = [JSONGet("https://api.weather.gov/alerts/active")["features"], time.getTime()]
+			localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
+			return theCache[pos];
 		}
 	}
 	catch(err){
-		console.log("Error");
-		console.log(err);
-		callback(false);
+		return false;
 	}
 }
 
 // Get polygon for forecast zone
-function getForecastZonePolyAsync(forecastZone, callback, extraReturn=null){
+function getForecastZonePoly(forecastZone){
 	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	if (forecastZone.includes("fire")){
-		getFireZonePolyAsync(forecastZone, (res) => {
-			if (extraReturn != null){
-				callback(res, extraReturn);
-			}
-			else{
-				callback(res);
-			}
-		})
-		return;
-	}
-	else if (forecastZone.includes("county")){
-		getCountyPolyAsync(forecastZone, (res) => {
-			if (extraReturn != null){
-				callback(res, extraReturn);
-			}
-			else{
-				callback(res);
-			}
-		})
-		return;
+		return getFireZonePoly(forecastZone);
 	}
 	var zoneCode = forecastZone.substring(39);
 	var zoneNum = Number(zoneCode.substring(3));
@@ -489,64 +315,24 @@ function getForecastZonePolyAsync(forecastZone, callback, extraReturn=null){
 	var fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyCache){
 		areaData = tempPolyCache[fullCode];
-		if (zoneCode in areaData){
-			if (extraReturn != null){
-				callback(areaData[zoneCode], extraReturn);
-			}
-			else{
-				callback(areaData[zoneCode]);
-			}
-		}
-		else{
-			if (extraReturn != null){
-				callback(false, extraReturn);
-			}
-			else{
-				callback(false);
-			}
-		}
 	}
 	else{
 		try{
-			JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/data/geometry/forecastZones/" + zoneId + "-" + eo + ".json", (areaData) => {
-				try{
-					tempPolyCache[fullCode] = areaData;
-				}
-				catch(err){
-					areaData = {};
-				}
-				if (zoneCode in areaData){
-					if (extraReturn != null){
-						callback(areaData[zoneCode], extraReturn);
-					}
-					else{
-						callback(areaData[zoneCode]);
-					}
-				}
-				else{
-					if (extraReturn != null){
-						callback(false, extraReturn);
-					}
-					else{
-						callback(false);
-					}
-				}
-			});
-			
+			areaData = JSONGet("https://atticuscornett.github.io/AtmosWeather/data/geometry/forecastZones/" + zoneId + "-" + eo + ".json")
+			tempPolyCache[fullCode] = areaData;
 		}
 		catch(err){
-			if (extraReturn != null){
-				callback(false, extraReturn);
-			}
-			else{
-				callback(false);
-			}
+			areaData = {};
 		}
 	}
+	if (zoneCode in areaData){
+		return areaData[zoneCode];
+	}
+	return false;
 }
 
 // Get polygon for fire forecast zone
-function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
+function getFireZonePoly(forecastZone){
 	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	var zoneCode = forecastZone.substring(35);
 	var zoneNum = Number(zoneCode.substring(3));
@@ -561,123 +347,20 @@ function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
 	var fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyFireCache){
 		areaData = tempPolyFireCache[fullCode];
-		if (zoneCode in areaData){
-			if (callback != null){
-				callback(areaData[zoneCode], extraReturn);
-			}
-			else{
-				callback(areaData[zoneCode]);
-			}
-			
-		}
-		else{
-			if (callback != null){
-				callback(false, extraReturn);
-			}
-			else{
-				callback(false);
-			}
-		}
 	}
 	else{
 		try{
-			JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/data/geometry/fireZones/" + zoneId + "-" + eo + ".json", (areaData) => {
-				try{
-					tempPolyFireCache[fullCode] = areaData;
-				}
-				catch(err){
-					areaData = {};
-				}
-				if (zoneCode in areaData){
-					if (callback != null){
-						callback(areaData[zoneCode], extraReturn);
-					}
-					else{
-						callback(areaData[zoneCode]);
-					}
-					
-				}
-				else{
-					if (callback != null){
-						callback(false, extraReturn);
-					}
-					else{
-						callback(false);
-					}
-				}
-			})
-			
+			areaData = JSONGet("https://atticuscornett.github.io/AtmosWeather/data/geometry/fireZones/" + zoneId + "-" + eo + ".json")
+			tempPolyFireCache[fullCode] = areaData;
 		}
 		catch(err){
 			areaData = {};
 		}
 	}
-}
-
-// Get polygon for fire forecast zone
-function getCountyPolyAsync(forecastZone, callback, extraReturn=null){
-	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-	var zoneCode = forecastZone.substring(37);
-	var zoneNum = Number(zoneCode.substring(3));
-	var zoneId = zoneCode.substring(0,2);
-	var eo = "";
-	if (allSettings["radar"]["polygons"]["high-res"]){
-		eo = "-highres";
+	if (zoneCode in areaData){
+		return areaData[zoneCode];
 	}
-	var fullCode = zoneId + eo;
-	if (fullCode in tempPolyCountyCache){
-		areaData = tempPolyCountyCache[fullCode];
-		if (zoneCode in areaData){
-			if (callback != null){
-				callback(areaData[zoneCode], extraReturn);
-			}
-			else{
-				callback(areaData[zoneCode]);
-			}
-			
-		}
-		else{
-			if (callback != null){
-				callback(false, extraReturn);
-			}
-			else{
-				callback(false);
-			}
-		}
-	}
-	else{
-		try{
-			JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/data/geometry/countyZones/" + zoneId + eo + ".json", (areaData) => {
-				try{
-					tempPolyCountyCache[fullCode] = areaData;
-				}
-				catch(err){
-					areaData = {};
-				}
-				if (zoneCode in areaData){
-					if (callback != null){
-						callback(areaData[zoneCode], extraReturn);
-					}
-					else{
-						callback(areaData[zoneCode]);
-					}
-					
-				}
-				else{
-					if (callback != null){
-						callback(false, extraReturn);
-					}
-					else{
-						callback(false);
-					}
-				}
-			})
-			
-		}
-		catch(err){
-			areaData = {};
-		}
-	}
+	return false;
 }
 
 // Sort events for radar display

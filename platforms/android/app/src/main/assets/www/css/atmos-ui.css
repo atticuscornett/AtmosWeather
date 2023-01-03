@@ -20,27 +20,6 @@ h2, h3, h4, h5, h6{
 	font-family: Lexend Deca;
 }
 
-details{
-	font-family: Secular One;
-	font-size: 20px;
-	border: black solid;
-	padding: 10px;
-	border-radius: 7px;
-	margin-bottom: 15px;
-	box-shadow: 0px 0px 7px #898989;
-}
-
-details[open] summary{
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-	border-bottom: black solid;
-}
-
-summary{
-	cursor: pointer;
-	font-size: 25px;
-}
-
 a{
 	color: dodgerblue;
 }
@@ -153,8 +132,8 @@ select{
 	font-family: Secular One;
 }
 
-#current-loc-aqi-bar{
-	position: relative;
+#current-loc-nws{
+	margin-right: 20px;
 }
 
 /* Class Styles */
@@ -251,36 +230,6 @@ select{
 	height: 22px;
 }
 
-.gauge-container{
-	height: 22px;
-	position: relative;
-}
-
-.gauge-background {
-	position: absolute;
-	background: linear-gradient(90deg, rgb(16, 167, 74) 0%, rgb(244, 248, 9) 20%, rgb(255, 145, 0) 40%, rgb(253, 1, 1) 60%, rgb(146, 13, 158) 80%, rgb(97, 12, 19) 100%);
-	height: 22px;
-	width: 100%;
-	border-radius: 5px;
-}
-
-.gauge-marker{
-	background-color: white;
-	position: relative;
-	border-radius: 50%;
-	width: 15px;
-	height: 15px;
-	top: 3.5px;
-	left: 3.5px;
-}
-
-.clear-border{
-	border: black solid;
-	border-radius: 7px;
-	box-shadow: 0px 0px 7px #898989;
-	padding: 0px 20px 20px 20px;
-}
-
 
 @media screen and (orientation:portrait) {
 	/* Fix issues on certain orientations */
@@ -313,20 +262,6 @@ select{
 	body{
 		background-color: #222222;
 		color: white;
-	}
-	details{
-		border: white solid;
-		border-radius: 7px;
-		box-shadow: 0px 0px 7px #898989;
-	}
-	details[open] summary{
-		border-bottom: white solid;
-	}
-	.clear-border{
-		border: white solid;
-		border-radius: 7px;
-		box-shadow: 0px 0px 7px #898989;
-		padding: 0px 20px 20px 20px;
 	}
 	#notice-window-container{
 		z-index: 99;

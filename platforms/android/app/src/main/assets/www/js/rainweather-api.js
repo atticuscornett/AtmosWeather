@@ -207,10 +207,9 @@ function slowLoadPolygons(alerts, index){
             continue;
         }
         var x = 0;
-        var alertBoundaries = getPolyBoundariesAsync(alerts[0][a], (alertBoundaries, a) => {
-            polygon = L.geoJSON(alertBoundaries, {style:styling}).addTo(map2);
-            polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
-        }, a);
+        var alertBoundries = getPolyBoundries(alerts[0][a]);
+        polygon = L.geoJSON(alertBoundries, {style:styling}).addTo(map2);
+        polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
         a++;
     }
     document.getElementById("polygon-load-count").innerHTML = "Loading alert polygons... (" + Math.floor(((a+1)/alerts[0].length)*100) + "%)";

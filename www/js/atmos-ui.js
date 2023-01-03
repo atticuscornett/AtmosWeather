@@ -908,7 +908,7 @@ function refreshAlerts(){
 		a--;
 	}
 	if (oldAlerts.length == 0){
-		generatedCode = "<h2>You have no previously received alerts.</h2>"
+		generatedCode = "<h2>You have no previously recieved alerts.</h2>"
 	}
 	document.getElementById("old-alert-list").innerHTML = generatedCode;
 }
