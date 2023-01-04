@@ -6,6 +6,7 @@
 // Keep downloaded polygons until page reload.
 var tempPolyCache = {};
 var tempPolyFireCache = {}
+var tempPolyCountyCache = {}
 var missed = [];
 
 // Set up empty storage
@@ -372,10 +373,6 @@ function getPolyBoundariesAsync(weatherAlert, callback, extraReturn=null){
 		let calledDone = 0;
 		while (a < weatherAlert["properties"]["affectedZones"].length){
 			forecastZone = weatherAlert["properties"]["affectedZones"][a];
-			if (forecastZone.includes("county")){
-				a++;
-				continue;
-			}
 			getForecastZonePolyAsync(forecastZone, (theBoundaries, a) =>{
 				if (theBoundaries == false){
 					missed.push(forecastZone);
@@ -448,6 +445,8 @@ function getAllActiveAlertsAsync(callback){
 		}
 	}
 	catch(err){
+		console.log("Error");
+		console.log(err);
 		callback(false);
 	}
 }
@@ -457,6 +456,17 @@ function getForecastZonePolyAsync(forecastZone, callback, extraReturn=null){
 	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	if (forecastZone.includes("fire")){
 		getFireZonePolyAsync(forecastZone, (res) => {
+			if (extraReturn != null){
+				callback(res, extraReturn);
+			}
+			else{
+				callback(res);
+			}
+		})
+		return;
+	}
+	else if (forecastZone.includes("county")){
+		getCountyPolyAsync(forecastZone, (res) => {
 			if (extraReturn != null){
 				callback(res, extraReturn);
 			}
@@ -551,6 +561,23 @@ function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
 	var fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyFireCache){
 		areaData = tempPolyFireCache[fullCode];
+		if (zoneCode in areaData){
+			if (callback != null){
+				callback(areaData[zoneCode], extraReturn);
+			}
+			else{
+				callback(areaData[zoneCode]);
+			}
+			
+		}
+		else{
+			if (callback != null){
+				callback(false, extraReturn);
+			}
+			else{
+				callback(false);
+			}
+		}
 	}
 	else{
 		try{
@@ -585,20 +612,70 @@ function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
 			areaData = {};
 		}
 	}
-	if (zoneCode in areaData){
-		if (callback != null){
-			callback(areaData[zoneCode], extraReturn);
+}
+
+// Get polygon for fire forecast zone
+function getCountyPolyAsync(forecastZone, callback, extraReturn=null){
+	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	var zoneCode = forecastZone.substring(37);
+	var zoneNum = Number(zoneCode.substring(3));
+	var zoneId = zoneCode.substring(0,2);
+	var eo = "";
+	if (allSettings["radar"]["polygons"]["high-res"]){
+		eo = "-highres";
+	}
+	var fullCode = zoneId + eo;
+	if (fullCode in tempPolyCountyCache){
+		areaData = tempPolyCountyCache[fullCode];
+		if (zoneCode in areaData){
+			if (callback != null){
+				callback(areaData[zoneCode], extraReturn);
+			}
+			else{
+				callback(areaData[zoneCode]);
+			}
+			
 		}
 		else{
-			callback(areaData[zoneCode]);
+			if (callback != null){
+				callback(false, extraReturn);
+			}
+			else{
+				callback(false);
+			}
 		}
 	}
 	else{
-		if (callback != null){
-			callback(false, extraReturn);
+		try{
+			JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/data/geometry/countyZones/" + zoneId + eo + ".json", (areaData) => {
+				try{
+					tempPolyCountyCache[fullCode] = areaData;
+				}
+				catch(err){
+					areaData = {};
+				}
+				if (zoneCode in areaData){
+					if (callback != null){
+						callback(areaData[zoneCode], extraReturn);
+					}
+					else{
+						callback(areaData[zoneCode]);
+					}
+					
+				}
+				else{
+					if (callback != null){
+						callback(false, extraReturn);
+					}
+					else{
+						callback(false);
+					}
+				}
+			})
+			
 		}
-		else{
-			callback(false);
+		catch(err){
+			areaData = {};
 		}
 	}
 }
