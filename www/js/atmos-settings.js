@@ -45,6 +45,7 @@ setTimeout(function(){
 					"snow-squall": "alert",
 					"ice-storm": "alert",
 					"winter-storm": "alert",
+					"lake-effect-snow": "alert",
 					"avalanche": "alert",
 					"hard-freeze": "soundnotification",
 					"freeze": "soundnotification",
@@ -103,7 +104,9 @@ setTimeout(function(){
 					"lake-wind": "soundnotification",
 					"air-stagnation": "soundnotification",
 					"low-water": "soundnotification",
-					"blowing-dust": "soundnotification"
+					"blowing-dust": "soundnotification",
+					"freezing-spray": "soundnotification",
+					"hydrologic-outlook": "soundnotification"
 				}
 			},
 			"per-location": {}
@@ -141,6 +144,7 @@ setTimeout(function(){
 				"snow-squall": "alertmove",
 				"ice-storm": "alert",
 				"winter-storm": "alert",
+				"lake-effect-snow": "alert",
 				"avalanche": "alert",
 				"hard-freeze": "soundnotification",
 				"freeze": "soundnotification",
@@ -199,7 +203,9 @@ setTimeout(function(){
 				"lake-wind": "soundnotification",
 				"air-stagnation": "soundnotification",
 				"low-water": "soundnotification",
-				"blowing-dust": "soundnotification"
+				"blowing-dust": "soundnotification",
+				"freezing-spray": "soundnotification",
+				"hydrologic-outlook": "soundnotification"
 			}
 		},
 		"per-location": {}

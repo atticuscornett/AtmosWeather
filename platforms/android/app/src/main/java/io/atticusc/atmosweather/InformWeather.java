@@ -58,6 +58,9 @@ public class InformWeather {
             case "hazardous-weather-outlook":
                 jsonKey = "hazardous-weather-outlook-advisory";
                 break;
+            case "hydrologic-outlook":
+                jsonKey = "hydrologic-outlook-advisory";
+                break;
             case "special-weather-statement":
                 jsonKey = "special-weather-statement-advisory";
                 break;
