@@ -24,7 +24,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
       # Runs a single command using the runners shell
       - name: Electron Builder Action
   # You may pin to the exact commit or the version.
