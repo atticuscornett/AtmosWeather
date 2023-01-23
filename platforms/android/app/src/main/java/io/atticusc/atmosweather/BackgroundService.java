@@ -29,10 +29,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.Executor;
+
+import io.atticusc.atmosweather.nws.NWSData;
 
 public class BackgroundService extends BroadcastReceiver {
     double lastLat = 0.0;
