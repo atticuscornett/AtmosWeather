@@ -1,9 +1,9 @@
 package io.atticusc.atmosweather.nws;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
@@ -18,13 +18,8 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 import io.atticusc.atmosweather.InformWeather;
-import io.atticusc.atmosweather.R;
-import io.atticusc.atmosweather.SimpleNotification;
 
 public class AlertListener implements Response.Listener<java.lang.String> {
     private final String locationName;
@@ -39,104 +34,71 @@ public class AlertListener implements Response.Listener<java.lang.String> {
     public void onResponse(String response) {
         try {
             SharedPreferences sharedPreferences = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
-            ArrayList<String> stringArray = new ArrayList<>();
+            ArrayList<String> stringAlerts = new ArrayList<>();
 
-            JSONArray jsonArray = new JSONArray(sharedPreferences.getString("alerted", "[]"));
+            JSONArray notifiedAlerts = new JSONArray(sharedPreferences.getString("alerted", "[]"));
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                stringArray.add(jsonArray.getString(i));
+            for (int i = 0; i < notifiedAlerts.length(); i++) {
+                stringAlerts.add(notifiedAlerts.getString(i));
             }
+
             JSONObject jsonObject = new JSONObject(response);
-            JSONObject current;
-            jsonArray = jsonObject.getJSONArray("features");
-            Integer a = 0;
-            System.out.println(jsonArray);
-            while (a < jsonArray.length()){
-                current = jsonArray.getJSONObject(a);
-                current = current.getJSONObject("properties");
-                if (!stringArray.contains(current.getString("@id"))){
-                    if (InformWeather.InformWeatherReturn(current.getString("event"), locationName, current.getString("description"), context)){
-                        stringArray.add(current.getString("@id"));
+
+            JSONArray activeAlerts = jsonObject.getJSONArray("features");
+
+            for (int i = 0; i < activeAlerts.length(); i++) {
+                JSONObject current = activeAlerts.getJSONObject(i).getJSONObject("properties");
+
+                if (!stringAlerts.contains(current.getString("@id"))){
+                    if (InformWeather.InformWeatherReturn(current.getString("event"), locationName, current.getString("description"), context)) {
+                        stringAlerts.add(current.getString("@id"));
                     }
                 }
-
-                a++;
             }
-            Gson gson = new Gson();
-            Type objType = new TypeToken<ArrayList<String>>(){}.getType();
-            String s = gson.toJson(stringArray, objType);
-            sharedPreferences.edit().putString("alerted", s).commit();
-            try{
-                JSONObject get = new JSONObject(sharedPreferences.getString("location-cache", ""));
-                get = new JSONObject(get.getString(locationName));
-                get = get.getJSONObject("properties");
-                String forecastLink = get.getString("forecast");
-                get = new JSONObject(sharedPreferences.getString("settings", ""));
-                get = get.getJSONObject("notifications");
-                Boolean severe = get.getBoolean("severe-future");
-                Boolean rain = get.getBoolean("rain-future");
-                try{
-                    get = new JSONObject(sharedPreferences.getString("settings", ""));
-                    get = get.getJSONObject("per-location").getJSONObject(locationName);
-                    get = get.getJSONObject("notifications");
-                    severe = get.getBoolean("severe-future");
-                    rain = get.getBoolean("rain-future");
+
+            serializeAlerts(stringAlerts, sharedPreferences);
+
+            try {
+                JSONObject locationCache = new JSONObject(sharedPreferences.getString("location-cache", ""));
+
+                JSONObject location = locationCache.getJSONObject("properties");
+
+                String forecastLink = location.getString("forecast");
+
+                JSONObject settings = new JSONObject(sharedPreferences.getString("settings", ""));
+                JSONObject notifications = settings.getJSONObject("notifications");
+
+                boolean severe;
+                boolean rain;
+
+                // Check if setting is different from default
+                try {
+                    JSONObject locationSettings = settings.getJSONObject("per-location").getJSONObject(locationName);
+                    JSONObject locationNotifications = locationSettings.getJSONObject("notifications");
+
+                    severe = locationNotifications.getBoolean("severe-future");
+                    rain = locationNotifications.getBoolean("rain-future");
                 }
+
                 catch (Exception ignored){
-
+                    severe = notifications.getBoolean("severe-future");
+                    rain = notifications.getBoolean("rain-future");
                 }
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+                RequestQueue queue = Volley.newRequestQueue(context);
+
+                StringRequest stringRequest2 = new ForecastRequest(forecastLink, severe, rain, locationName, context);
+
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
-                RequestQueue queue2 = Volley.newRequestQueue(context);
-                Boolean finalSevere = severe;
-                Boolean finalRain = rain;
-                StringRequest stringRequest2 = new StringRequest(Request.Method.GET, forecastLink,
-                        response1 -> {
-                            try {
-                                // Check settings and give notification if weather trigger words detected
-                                JSONObject jsonObject1 = new JSONObject(response1);
-                                jsonObject1 = jsonObject1.getJSONObject("properties");
-                                JSONArray jsonArray1 = jsonObject1.getJSONArray("periods");
-                                jsonObject1 = jsonArray1.getJSONObject(0);
-                                String longForecast = jsonObject1.getString("detailedForecast");
-                                jsonObject1 = jsonArray1.getJSONObject(1);
-                                longForecast += jsonObject1.getString("detailedForecast");
-                                Boolean severeIndicate = false;
-                                Boolean rainIndicate = false;
-                                response1 = longForecast.toLowerCase(Locale.ROOT);
-                                if (response1.contains("severe") || response1.contains("tropical storm") || response1.contains("damage") || response1.contains("damaging") || response1.contains("hurricane") || response1.contains("tornado")){
-                                    severeIndicate = true;
-                                }
-                                if (response1.contains("storm") || response1.contains("rain")){
-                                    rainIndicate = true;
-                                }
-                                if (finalSevere && severeIndicate){
-                                    new SimpleNotification().Notify("Future Severe Weather Expected for " + locationName, jsonObject1.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
-                                }
-                                else if (rainIndicate && finalRain){
-                                    new SimpleNotification().Notify("Future Rain or Storms Expected for " + locationName, jsonObject1.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
-                                }
-                            }
-                            catch (Exception ignored){
 
-                            }
-
-                        }, error -> {
-
-                }){@Override
-                public Map<String, String> getHeaders(){
-                    Map<String, String> headers = new HashMap<>();
-                    headers.put("User-agent", "Atmos Weather Background Service");
-                    return headers;
-                }};
-                if (!formatter.format(date).equals(sharedPreferences.getString(locationName + "-lastNotif", ""))){
+                // Check if notification has been sent today
+                if (!sdf.format(date).equals(sharedPreferences.getString(locationName + "-lastNotif", ""))){
                     if (severe || rain){
-                        queue2.add(stringRequest2);
+                        queue.add(stringRequest2);
                         System.out.println("Daily notif for " + locationName);
-                        sharedPreferences.edit().putString(locationName + "-lastNotif", formatter.format(date)).commit();
+                        sharedPreferences.edit().putString(locationName + "-lastNotif", sdf.format(date)).apply();
                     }
-
-
                 }
             }
             catch (Exception e){
@@ -146,7 +108,12 @@ public class AlertListener implements Response.Listener<java.lang.String> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-
+    private static void serializeAlerts(ArrayList<String> alerts, SharedPreferences sharedPreferences) {
+        Gson gson = new Gson();
+        Type objType = new TypeToken<ArrayList<String>>(){}.getType();
+        String s = gson.toJson(alerts, objType);
+        sharedPreferences.edit().putString("alerted", s).apply();
     }
 }
