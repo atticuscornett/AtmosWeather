@@ -1,6 +1,5 @@
 package io.atticusc.atmosweather.nws;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -18,6 +17,7 @@ import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import io.atticusc.atmosweather.InformWeather;
 
@@ -33,6 +33,8 @@ public class AlertListener implements Response.Listener<java.lang.String> {
     @Override
     public void onResponse(String response) {
         try {
+            System.out.println("owo wuwu gonna die!");
+
             SharedPreferences sharedPreferences = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
             ArrayList<String> stringAlerts = new ArrayList<>();
 
@@ -61,9 +63,10 @@ public class AlertListener implements Response.Listener<java.lang.String> {
             try {
                 JSONObject locationCache = new JSONObject(sharedPreferences.getString("location-cache", ""));
 
-                JSONObject location = locationCache.getJSONObject("properties");
+                JSONObject locationData = new JSONObject(locationCache.getString(locationName));
+                JSONObject properties = locationData.getJSONObject("properties");
 
-                String forecastLink = location.getString("forecast");
+                String forecastLink = properties.getString("forecast");
 
                 JSONObject settings = new JSONObject(sharedPreferences.getString("settings", ""));
                 JSONObject notifications = settings.getJSONObject("notifications");
@@ -87,32 +90,39 @@ public class AlertListener implements Response.Listener<java.lang.String> {
 
                 RequestQueue queue = Volley.newRequestQueue(context);
 
-                StringRequest stringRequest2 = new ForecastRequest(forecastLink, severe, rain, locationName, context);
+                StringRequest forecastRequest = new ForecastRequest(forecastLink, severe, rain, locationName, context);
 
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
 
-                // Check if notification has been sent today
-                if (!sdf.format(date).equals(sharedPreferences.getString(locationName + "-lastNotif", ""))){
-                    if (severe || rain){
-                        queue.add(stringRequest2);
+                if (!notificationSentToday(sharedPreferences, locationName, sdf)) {
+                    if (severe || rain) {
+                        queue.add(forecastRequest);
                         System.out.println("Daily notif for " + locationName);
-                        sharedPreferences.edit().putString(locationName + "-lastNotif", sdf.format(date)).apply();
+                        sharedPreferences.edit().putString(locationName + "-lastNotif", sdf.format(new Date())).apply();
                     }
                 }
-            }
-            catch (Exception e){
-                e.printStackTrace();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+    }
+
+    private static boolean notificationSentToday(SharedPreferences sharedPreferences, String locationName, SimpleDateFormat sdf) {
+        Date date = new Date();
+        String formatted = sdf.format(date);
+
+        String lastNotificationDate = sharedPreferences.getString(locationName + "-lastNotif", "");
+
+        return formatted.equals(lastNotificationDate);
     }
 
     private static void serializeAlerts(ArrayList<String> alerts, SharedPreferences sharedPreferences) {
         Gson gson = new Gson();
-        Type objType = new TypeToken<ArrayList<String>>(){}.getType();
+        Type objType = new TypeToken<ArrayList<String>>() {
+        }.getType();
         String s = gson.toJson(alerts, objType);
         sharedPreferences.edit().putString("alerted", s).apply();
     }

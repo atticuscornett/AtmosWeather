@@ -20,9 +20,10 @@ public class ForecastListener implements Response.Listener<String> {
             "tornado"
     };
 
-    private static final String[] rainTypes = {
+    private static final String[] rainyWeatherTypes = {
             "storm",
-            "rain"
+            "rain",
+            "shower"
     };
 
     private final boolean severe, rain;
@@ -52,17 +53,15 @@ public class ForecastListener implements Response.Listener<String> {
 
             JSONObject secondPeriod = periods.getJSONObject(1);
 
-            String completeForecast = (longForecast + secondPeriod.getString("detailedForecast")).toLowerCase();
+            String completeForecast = longForecast + secondPeriod.getString("detailedForecast");
 
             boolean severeIndicate = isSevere(completeForecast);
             boolean rainIndicate = isRain(completeForecast);
 
-            if (severe && severeIndicate){
+            if (severe && severeIndicate) {
                 new SimpleNotification().Notify("Future Severe Weather Expected for " + locationName, jsonResponse.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
-            }
-
-            else if (rain && rainIndicate ){
-                new SimpleNotification().Notify("Future Rain or Storms Expected for " + locationName, jsonResponse.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
+            } else if (rain && rainIndicate) {
+                new SimpleNotification().Notify("Future Rain or Storms Expected for " + locationName, completeForecast, "notification", context, R.drawable.future_icon, 2);
             }
         }
         catch (Exception ignored){
@@ -72,7 +71,7 @@ public class ForecastListener implements Response.Listener<String> {
 
     private static boolean isSevere(String request) {
         for (String requestType : severeWeatherTypes) {
-            if (request.contains(requestType)) {
+            if (request.toLowerCase().contains(requestType)) {
                 return true;
             }
         }
@@ -81,8 +80,8 @@ public class ForecastListener implements Response.Listener<String> {
     }
 
     private static boolean isRain(String request) {
-        for (String rainType : rainTypes) {
-            if (request.contains(rainType)) {
+        for (String rainType : rainyWeatherTypes) {
+            if (request.toLowerCase().contains(rainType)) {
                 return true;
             }
         }
