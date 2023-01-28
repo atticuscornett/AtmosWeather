@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
@@ -24,33 +25,24 @@ public class AlertListener implements Response.Listener<java.lang.String> {
         this.context = context;
     }
 
+    private static void serializeAlerts(String[] alerts, SharedPreferences sharedPreferences) {
+        Gson gson = new Gson();
+        Type objType = new TypeToken<String[]>() {
+        }.getType();
+        String s = gson.toJson(alerts, objType);
+        sharedPreferences.edit().putString("alerted", s).apply();
+    }
+
     @Override
     public void onResponse(String response) {
         try {
-            SharedPreferences sharedPreferences = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
-            ArrayList<String> stringAlerts = new ArrayList<>();
-
-            JSONArray notifiedAlerts = new JSONArray(sharedPreferences.getString("alerted", "[]"));
-
-            for (int i = 0; i < notifiedAlerts.length(); i++) {
-                stringAlerts.add(notifiedAlerts.getString(i));
-            }
-
             JSONObject responseJson = new JSONObject(response);
 
-            JSONArray activeAlerts = responseJson.getJSONArray("features");
+            SharedPreferences sharedPreferences = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
 
-            for (int i = 0; i < activeAlerts.length(); i++) {
-                JSONObject current = activeAlerts.getJSONObject(i).getJSONObject("properties");
+            String[] alerts = getAlerts(sharedPreferences, responseJson);
 
-                if (!stringAlerts.contains(current.getString("@id"))) {
-                    if (InformWeather.InformWeatherReturn(current.getString("event"), locationName, current.getString("description"), context)) {
-                        stringAlerts.add(current.getString("@id"));
-                    }
-                }
-            }
-
-            serializeAlerts(stringAlerts, sharedPreferences);
+            serializeAlerts(alerts, sharedPreferences);
 
             JSONForecast forecast = new JSONForecast(sharedPreferences, locationName);
             forecast.attemptNotify(context);
@@ -60,11 +52,33 @@ public class AlertListener implements Response.Listener<java.lang.String> {
         }
     }
 
-    private static void serializeAlerts(ArrayList<String> alerts, SharedPreferences sharedPreferences) {
-        Gson gson = new Gson();
-        Type objType = new TypeToken<ArrayList<String>>() {
-        }.getType();
-        String s = gson.toJson(alerts, objType);
-        sharedPreferences.edit().putString("alerted", s).apply();
+    /**
+     * Returns all relevant alerts found in the responseJson and stored on the users device
+     *
+     * @param preferences  The preferences to search for alerts that have already been sent
+     * @param responseJson The json to get the active alerts from
+     */
+    private String[] getAlerts(SharedPreferences preferences, JSONObject responseJson) throws JSONException {
+        ArrayList<String> results = new ArrayList<>();
+
+        JSONArray notifiedAlerts = new JSONArray(preferences.getString("alerted", "[]"));
+
+        for (int i = 0; i < notifiedAlerts.length(); i++) {
+            results.add(notifiedAlerts.getString(i));
+        }
+
+        JSONArray activeAlerts = responseJson.getJSONArray("features");
+
+        for (int i = 0; i < activeAlerts.length(); i++) {
+            JSONObject current = activeAlerts.getJSONObject(i).getJSONObject("properties");
+
+            if (!results.contains(current.getString("@id"))) {
+                if (InformWeather.InformWeatherReturn(current.getString("event"), locationName, current.getString("description"), context)) {
+                    results.add(current.getString("@id"));
+                }
+            }
+        }
+
+        return results.toArray(new String[0]);
     }
 }

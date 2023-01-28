@@ -22,30 +22,59 @@ public class JSONForecast {
 
     private final JSONObject properties;
     private final JSONObject notifications;
-    private final JSONObject localNotifications;
 
     public JSONForecast(SharedPreferences sharedPreferences, String locationName) throws JSONException {
         this.locationName = locationName;
 
-        final String LOCATION_CACHE_KEY = "locationCache";
+        final String LOCATION_CACHE_KEY = "location-cache";
         JSONObject locationCache = new JSONObject(sharedPreferences.getString(LOCATION_CACHE_KEY, ""));
 
-        final String PROPERTIES_KEY = "properties";
-        properties = locationCache.getJSONObject(PROPERTIES_KEY);
+        JSONObject locationData = new JSONObject(locationCache.getString(locationName));
 
+        final String PROPERTIES_KEY = "properties";
+        properties = locationData.getJSONObject(PROPERTIES_KEY);
+
+        JSONObject settings = determineSettings(sharedPreferences, locationName);
+
+        notifications = determineNotifications(settings);
+    }
+
+    /**
+     * @param sharedPreferences the data to grab the default settings from
+     * @param locationName      the location to get the local notification data for
+     * @return either the default global settings, or the local settings for this forecast
+     */
+    private JSONObject determineSettings(SharedPreferences sharedPreferences, String locationName) throws JSONException {
         final String SETTINGS_KEY = "settings";
         JSONObject settings = new JSONObject(sharedPreferences.getString(SETTINGS_KEY, ""));
 
-        final String NOTIFICATIONS_KEY = "notifications";
-        notifications = settings.getJSONObject(NOTIFICATIONS_KEY);
-
-        final String LOCATION_SETTINGS_KEY = "per-location";
-        JSONObject locationSettings = settings.getJSONObject(LOCATION_SETTINGS_KEY).getJSONObject(locationName);
-
-        final String LOCAL_NOTIFICATIONS_KEY = "notifications";
-        localNotifications = locationSettings.getJSONObject(LOCAL_NOTIFICATIONS_KEY);
+        try {
+            final String LOCATION_SETTINGS_KEY = "per-location";
+            return settings.getJSONObject(LOCATION_SETTINGS_KEY).getJSONObject(locationName);
+        } catch (JSONException e) {
+            return settings;
+        }
     }
 
+    /**
+     * @param settings the settings to grab the notification data from
+     * @return either the default global notification settings, or the local notification settings for this forecast
+     */
+    private JSONObject determineNotifications(JSONObject settings) throws JSONException {
+        final String NOTIFICATIONS_KEY = "notifications";
+        JSONObject notifications = settings.getJSONObject(NOTIFICATIONS_KEY);
+
+        try {
+            final String LOCAL_NOTIFICATIONS_KEY = "notifications";
+            return notifications.getJSONObject(LOCAL_NOTIFICATIONS_KEY);
+        } catch (JSONException e) {
+            return notifications;
+        }
+    }
+
+    /**
+     * @return the NWS API link to this forecast
+     */
     @Nullable
     public String getForecastLink() {
         final String FORECAST_LINK_KEY = "forecast";
@@ -57,13 +86,27 @@ public class JSONForecast {
     }
 
     public boolean isSevere() {
-        return defaultIfNotPresent("severe-future", localNotifications, notifications);
+        try {
+            return notifications.getBoolean("severe-future");
+        } catch (JSONException e) {
+            return false;
+        }
     }
 
     public boolean isRainy() {
-        return defaultIfNotPresent("rain-future", localNotifications, notifications);
+        try {
+            return notifications.getBoolean("rain-future");
+        } catch (JSONException e) {
+            return false;
+        }
     }
 
+    /**
+     * Sends notification if the user hasn't already been notified of this weather statement.
+     *
+     * @param context the context of the forecast
+     * @see JSONForecast#notifiedToday(SharedPreferences)
+     */
     public void attemptNotify(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
 
@@ -79,11 +122,15 @@ public class JSONForecast {
 
                 System.out.println("Notified user of location \"" + locationName + "\"'s current weather status.");
 
+                // Write the current date to memory so that the user cannot be notified multiple times in one day of the same weather statement.
                 sharedPreferences.edit().putString(locationName + "-lastNotif", JSONForecast.FORMAT.format(new Date())).apply();
             }
         }
     }
 
+    /**
+     * @param sharedPreferences the shared preferences to check this notification's last send time
+     */
     private boolean notifiedToday(SharedPreferences sharedPreferences) {
         Date date = new Date();
         String formatted = FORMAT.format(date);
@@ -91,17 +138,5 @@ public class JSONForecast {
         String lastNotificationDate = sharedPreferences.getString(locationName + "-lastNotif", "");
 
         return formatted.equals(lastNotificationDate);
-    }
-
-    private static boolean defaultIfNotPresent(String key, JSONObject first, JSONObject defaultObject) {
-        try {
-            return first.getBoolean(key);
-        } catch (JSONException ignored) {
-            try {
-                return defaultObject.getBoolean(key);
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 }

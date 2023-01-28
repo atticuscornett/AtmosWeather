@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.Response;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.atticusc.atmosweather.R;
@@ -26,50 +27,36 @@ public class ForecastListener implements Response.Listener<String> {
             "shower"
     };
 
-    private final boolean severe, rain;
+    private final boolean severeIndicate, rainIndicate;
     private final String locationName;
     private final Context context;
 
-    public ForecastListener(boolean severe, boolean rain, String locationName, Context context) {
-        this.severe = severe;
-        this.rain = rain;
+    public ForecastListener(boolean severeIndicate, boolean rainIndicate, String locationName, Context context) {
+        this.severeIndicate = severeIndicate;
+        this.rainIndicate = rainIndicate;
         this.locationName = locationName;
         this.context = context;
     }
 
+    /**
+     * @param periods the weather periods
+     * @return a readable forecast for the user
+     */
+    private static String generateCompleteForecast(JSONArray periods) throws JSONException {
+        StringBuilder builder = new StringBuilder();
 
-    @Override
-    public void onResponse(String response) {
-        try {
-            // Check settings and give notification if weather trigger words detected
-            JSONObject jsonResponse = new JSONObject(response); // Interpret the response
-            JSONObject properties = jsonResponse.getJSONObject("properties"); // Get Properties
+        final int DEPTH = 2;
+        for (int i = 0; i < DEPTH; i++) {
+            JSONObject period = periods.getJSONObject(i);
 
-            JSONArray periods = properties.getJSONArray("periods"); // Get the periods inside
-
-            JSONObject firstPeriod = periods.getJSONObject(0);
-
-            String longForecast = firstPeriod.getString("detailedForecast");
-
-            JSONObject secondPeriod = periods.getJSONObject(1);
-
-            String completeForecast = longForecast + secondPeriod.getString("detailedForecast");
-
-            boolean severeIndicate = isSevere(completeForecast);
-            boolean rainIndicate = isRain(completeForecast);
-
-            if (severe && severeIndicate) {
-                new SimpleNotification().Notify("Future Severe Weather Expected for " + locationName, jsonResponse.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
-            } else if (rain && rainIndicate) {
-                new SimpleNotification().Notify("Future Rain or Storms Expected for " + locationName, completeForecast, "notification", context, R.drawable.future_icon, 2);
-            }
+            final String FORECAST_KEY = "detailedForecast";
+            builder.append(period.getString(FORECAST_KEY));
         }
-        catch (Exception ignored){
 
-        }
+        return builder.toString();
     }
 
-    private static boolean isSevere(String request) {
+    private static boolean isSevereWeatherType(String request) {
         for (String requestType : severeWeatherTypes) {
             if (request.toLowerCase().contains(requestType)) {
                 return true;
@@ -79,7 +66,7 @@ public class ForecastListener implements Response.Listener<String> {
         return false;
     }
 
-    private static boolean isRain(String request) {
+    private static boolean isRainyWeatherType(String request) {
         for (String rainType : rainyWeatherTypes) {
             if (request.toLowerCase().contains(rainType)) {
                 return true;
@@ -87,5 +74,29 @@ public class ForecastListener implements Response.Listener<String> {
         }
 
         return false;
+    }
+
+    @Override
+    public void onResponse(String response) {
+        try {
+            // Check settings and give notification if weather trigger words detected
+            JSONObject jsonResponse = new JSONObject(response);
+            JSONObject properties = jsonResponse.getJSONObject("properties");
+
+            JSONArray periods = properties.getJSONArray("periods");
+
+            String forecast = generateCompleteForecast(periods);
+
+            boolean isSevere = isSevereWeatherType(forecast);
+            boolean isRainy = isRainyWeatherType(forecast);
+
+            if (isSevere && severeIndicate) {
+                new SimpleNotification().Notify("Future Severe Weather Expected for " + locationName, jsonResponse.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
+            } else if (isRainy && rainIndicate) {
+                new SimpleNotification().Notify("Future Rain or Storms Expected for " + locationName, forecast, "notification", context, R.drawable.future_icon, 2);
+            }
+        } catch (Exception ignored) {
+
+        }
     }
 }
