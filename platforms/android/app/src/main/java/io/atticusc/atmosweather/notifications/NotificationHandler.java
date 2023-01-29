@@ -49,7 +49,7 @@ public class NotificationHandler {
     }
 
     /**
-     * Send notification to user that cannot be cleared
+     * Send notification to the user that buzzes until cleared
      *
      * @param id                the id of the notification to be sent
      * @param atmosNotification the content info of the notification
