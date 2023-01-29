@@ -20,6 +20,7 @@
 package io.atticusc.atmosweather;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
@@ -27,11 +28,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 
 import org.apache.cordova.CordovaActivity;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
@@ -39,6 +42,8 @@ import java.util.Calendar;
 import io.atticusc.atmosweather.notifications.NotificationHandler;
 
 public class MainActivity extends CordovaActivity {
+    public final static String FIRST_RUN_KEY = "firstrun";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +54,69 @@ public class MainActivity extends CordovaActivity {
             moveTaskToBack(true);
         }
 
-        // Set by <content src="index.html" /> in config.xml
+        // Load the index.html file from cordova
         loadUrl(launchUrl);
-//        new NotificationHandler().prepareNotificationChannel("banana", "banana", getApplicationContext());
-//        new NotificationHandler().prepareNotificationChannel("insist", "insist", getApplicationContext());
-//        new NotificationHandler().notifyWithAudio("Testing", "This is a test notification.", "banana", getApplicationContext(), R.drawable.ic_android_black_24dp, 1, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.metronome));
+
+        prepareNotificationChannels();
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
+
+        if (isFirstRun()) {
+            // Make sure this doesn't get run again
+            sharedPreferences.edit().putBoolean(FIRST_RUN_KEY, false).apply();
+
+            Intent intent = new Intent(this, BackgroundService.class);
+
+            @SuppressLint("UnspecifiedImmutableFlag")
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+            startBackgroundTask(pendingIntent, 5);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            boolean locationInBackground = getLocationInBackgroundEnabled();
+
+            if (locationInBackground) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
+                }
+            }
+        }
+    }
+
+    private boolean getLocationInBackgroundEnabled() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
+
+        try {
+            final String SETTINGS_KEY = "settings";
+            JSONObject jsonObject = new JSONObject(sharedPreferences.getString(SETTINGS_KEY, ""));
+
+            final String LOCATION_KEY = "location";
+            final String ALERTS_KEY = "alerts";
+
+            // Return the setting
+            return jsonObject.getJSONObject(LOCATION_KEY).getBoolean(ALERTS_KEY);
+        } catch (JSONException ignored) {
+
+            // If there is no setting, return true
+            return true;
+        }
+    }
+
+    private void startBackgroundTask(PendingIntent pendingIntent, int delaySeconds) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        Calendar calendar = Calendar.getInstance();
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (delaySeconds * 1000L), pendingIntent);
+    }
+
+    private boolean isFirstRun() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
+
+        return sharedPreferences.getBoolean(FIRST_RUN_KEY, true);
+    }
+
+    private void prepareNotificationChannels() {
         NotificationHandler.prepareNotificationChannelWithAudio("simplebeepsalert", "Simple Beep Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.simplebeepalarm));
         NotificationHandler.prepareNotificationChannelWithAudio("simplebeepsnotification", "Simple Beep AtmosNotification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.simplebeepnotification));
         NotificationHandler.prepareNotificationChannelWithAudio("alternatingtonesalert", "Alternating Tone Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.alternatingtonealarm));
@@ -64,39 +127,5 @@ public class MainActivity extends CordovaActivity {
         NotificationHandler.prepareNotificationChannelWithAudio("readynowalert", "ReadyNow Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.readynowalarm));
         NotificationHandler.prepareNotificationChannelWithAudio("suremindnotification", "SureMind AtmosNotification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.suremindnotification));
         NotificationHandler.prepareNotificationChannelWithAudio("suremindalert", "SureMind Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.suremindalarm));
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
-        //new InformWeather("Severe Thunderstorm Warning", "Springville, St. Clair County, Alabama", "testing", getApplicationContext());
-        //new NotificationHandler().notifyInsistently("I am annoying.", sharedPreferences.getString("settings", "null"), "SimpleBeepAlarm", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);
-        // new NWSData().GetAlerts("44.490817", "-103.85937", "North Platte, Lincoln County, Nebraska", this);
-        if (sharedPreferences.getBoolean("firstrun", true) || true) {
-            sharedPreferences.edit().putBoolean("firstrun", false).commit();
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            Intent intentA = new Intent(this, BackgroundService.class);
-            PendingIntent pentent = PendingIntent.getBroadcast(this, 1, intentA, 0);
-            Calendar c = Calendar.getInstance();
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Boolean getLocationInBackground = true;
-            try {
-                JSONObject jObj = new JSONObject(sharedPreferences.getString("settings", ""));
-                getLocationInBackground = jObj.getJSONObject("location").getBoolean("alerts");
-            } catch (Exception e) {
-
-            }
-            finally {
-                if (getLocationInBackground){
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
-                }
-            }
-
-        }
-
-
-// Request a string response from the provided URL.
-
-
-// Add the request to the RequestQueue.
-
     }
 }
