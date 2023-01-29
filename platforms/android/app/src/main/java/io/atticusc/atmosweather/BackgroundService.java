@@ -33,6 +33,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.Executor;
 
+import io.atticusc.atmosweather.notifications.AtmosNotificationBuilder;
+import io.atticusc.atmosweather.notifications.NotificationHandler;
 import io.atticusc.atmosweather.nws.NWSData;
 
 public class BackgroundService extends BroadcastReceiver {
@@ -108,11 +110,27 @@ public class BackgroundService extends BroadcastReceiver {
                                 }
                             });
                 }
-                else{
+                else {
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
-                    if (weatherLocations.getString("last-background-location-warning", "na").equals(formatter.format(date)) == false){
-                        new SimpleNotification().Notify("Background Location Permission Warning", "Atmos Weather cannot access your find location in the background. This permission is required for Atmos Weather to give alerts for the current location. To prevent this notification in the future, either enable background location or disable current location alerts in the app.", "notification", context, R.drawable.warning_icon, 8);
+                    if (weatherLocations.getString("last-background-location-warning", "na").equals(formatter.format(date)) == false) {
+
+                        NotificationHandler.notify(
+                                8,
+
+                                new AtmosNotificationBuilder(context)
+                                        .setTitle("Background Location Permission Warning")
+                                        .setBody(
+                                                "Atmos Weather cannot access your location in the background. " +
+                                                        "This permission is required for Atmos Weather to give " +
+                                                        "alerts for the current location. To prevent this notification in the future, " +
+                                                        "either enable background location or disable current location alerts in the app."
+                                        )
+                                        .setChannel("notification")
+                                        .setIcon(R.drawable.warning_icon)
+                                        .build()
+                        );
+
                         weatherLocations.edit().putString("last-background-location-warning", formatter.format(date)).commit();
                     }
                 }

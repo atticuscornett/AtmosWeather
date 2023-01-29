@@ -9,7 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.atticusc.atmosweather.R;
-import io.atticusc.atmosweather.SimpleNotification;
+import io.atticusc.atmosweather.notifications.AtmosNotificationBuilder;
+import io.atticusc.atmosweather.notifications.NotificationHandler;
 
 public class ForecastListener implements Response.Listener<String> {
     private static final String[] severeWeatherTypes = {
@@ -90,10 +91,31 @@ public class ForecastListener implements Response.Listener<String> {
             boolean isSevere = isSevereWeatherType(forecast);
             boolean isRainy = isRainyWeatherType(forecast);
 
+            AtmosNotificationBuilder builder = new AtmosNotificationBuilder(context)
+                    .setChannel("notification")
+                    .setIcon(R.drawable.future_icon);
+
+            final int ID = 2;
+
             if (isSevere && severeIndicate) {
-                new SimpleNotification().Notify("Future Severe Weather Expected for " + locationName, jsonResponse.getString("detailedForecast"), "notification", context, R.drawable.future_icon, 2);
+                NotificationHandler.notify(
+                        ID,
+
+                        builder
+                                .setTitle("Future Severe Weather Expected for " + locationName)
+                                .setBody(jsonResponse.getString("detailedForecast"))
+                                .build()
+                );
+
             } else if (isRainy && rainIndicate) {
-                new SimpleNotification().Notify("Future Rain or Storms Expected for " + locationName, forecast, "notification", context, R.drawable.future_icon, 2);
+                NotificationHandler.notify(
+                        ID,
+
+                        builder
+                                .setTitle("Future Rain or Storms Expected for " + locationName)
+                                .setBody(forecast)
+                                .build()
+                );
             }
         } catch (Exception ignored) {
 
