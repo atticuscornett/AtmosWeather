@@ -20,53 +20,30 @@
 package io.atticusc.atmosweather;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
-
-import org.apache.cordova.*;
+import org.apache.cordova.CordovaActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+
+import io.atticusc.atmosweather.notifications.NotificationHandler;
 
 public class MainActivity extends CordovaActivity {
+    public final static String FIRST_RUN_KEY = "firstrun";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,59 +54,78 @@ public class MainActivity extends CordovaActivity {
             moveTaskToBack(true);
         }
 
-            // Set by <content src="index.html" /> in config.xml
+        // Load the index.html file from cordova
         loadUrl(launchUrl);
-//        new SimpleNotification().PrepareNotificationChannel("banana", "banana", getApplicationContext());
-//        new SimpleNotification().PrepareNotificationChannel("insist", "insist", getApplicationContext());
-//        new SimpleNotification().NotifyWithAudio("Testing", "This is a test notification.", "banana", getApplicationContext(), R.drawable.ic_android_black_24dp, 1, Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ getApplicationContext().getPackageName() + "/" + R.raw.metronome));
-        new SimpleNotification().PrepareNotificationChannelWithAudio("simplebeepsalert", "Simple Beep Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.simplebeepalarm));
-        new SimpleNotification().PrepareNotificationChannelWithAudio("simplebeepsnotification", "Simple Beep Notification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.simplebeepnotification));
-        new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesalert", "Alternating Tone Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.alternatingtonealarm));
-        new SimpleNotification().PrepareNotificationChannelWithAudio("alternatingtonesnotification", "Alternating Tone Notification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.alternatingtonenotification));
-        new SimpleNotification().PrepareSilentNotificationChannel("silentnotification", "Silent Notifications", getApplicationContext());
-        new SimpleNotification().PrepareNotificationChannel("notification", "Forecast Notifications", getApplicationContext());
-        new SimpleNotification().PrepareNotificationChannelWithAudio("readynownotification", "ReadyNow Notification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.readynownotification));
-        new SimpleNotification().PrepareNotificationChannelWithAudio("readynowalert", "ReadyNow Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.readynowalarm));
-        new SimpleNotification().PrepareNotificationChannelWithAudio("suremindnotification", "SureMind Notification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.suremindnotification));
-        new SimpleNotification().PrepareNotificationChannelWithAudio("suremindalert", "SureMind Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.suremindalarm));
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
-        //new InformWeather("Severe Thunderstorm Warning", "Springville, St. Clair County, Alabama", "testing", getApplicationContext());
-        //new SimpleNotification().NotifyInsistently("I am annoying.", sharedPreferences.getString("settings", "null"), "SimpleBeepAlarm", getApplicationContext(), R.drawable.ic_android_black_24dp, 2);
-        // new NWSData().GetAlerts("44.490817", "-103.85937", "North Platte, Lincoln County, Nebraska", this);
-        if (sharedPreferences.getBoolean("firstrun", true) || true) {
-            sharedPreferences.edit().putBoolean("firstrun", false).commit();
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            Intent intentA = new Intent(this, BackgroundService.class);
-            PendingIntent pentent = PendingIntent.getBroadcast(this, 1, intentA, 0);
-            Calendar c = Calendar.getInstance();
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Boolean getLocationInBackground = true;
-            try {
-                JSONObject jObj = new JSONObject(sharedPreferences.getString("settings", ""));
-                if (jObj.getJSONObject("location").getBoolean("alerts")){
-                    getLocationInBackground = true;
-                }
-                else{
-                    getLocationInBackground = false;
-                }
-            } catch (Exception e) {
 
-            }
-            finally {
-                if (getLocationInBackground){
+        prepareNotificationChannels();
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
+
+        if (isFirstRun()) {
+            // Make sure this doesn't get run again
+            sharedPreferences.edit().putBoolean(FIRST_RUN_KEY, false).apply();
+
+            Intent intent = new Intent(this, BackgroundService.class);
+
+            @SuppressLint("UnspecifiedImmutableFlag")
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+            startBackgroundTask(pendingIntent, 5);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            boolean locationInBackground = getLocationInBackgroundEnabled();
+
+            if (locationInBackground) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
                 }
             }
-
         }
+    }
 
+    private boolean getLocationInBackgroundEnabled() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
 
-// Request a string response from the provided URL.
+        try {
+            final String SETTINGS_KEY = "settings";
+            JSONObject jsonObject = new JSONObject(sharedPreferences.getString(SETTINGS_KEY, ""));
 
+            final String LOCATION_KEY = "location";
+            final String ALERTS_KEY = "alerts";
 
-// Add the request to the RequestQueue.
+            // Return the setting
+            return jsonObject.getJSONObject(LOCATION_KEY).getBoolean(ALERTS_KEY);
+        } catch (JSONException ignored) {
 
+            // If there is no setting, return true
+            return true;
+        }
+    }
+
+    private void startBackgroundTask(PendingIntent pendingIntent, int delaySeconds) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        Calendar calendar = Calendar.getInstance();
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (delaySeconds * 1000L), pendingIntent);
+    }
+
+    private boolean isFirstRun() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
+
+        return sharedPreferences.getBoolean(FIRST_RUN_KEY, true);
+    }
+
+    private void prepareNotificationChannels() {
+        NotificationHandler.prepareNotificationChannelWithAudio("simplebeepsalert", "Simple Beep Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.simplebeepalarm));
+        NotificationHandler.prepareNotificationChannelWithAudio("simplebeepsnotification", "Simple Beep AtmosNotification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.simplebeepnotification));
+        NotificationHandler.prepareNotificationChannelWithAudio("alternatingtonesalert", "Alternating Tone Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.alternatingtonealarm));
+        NotificationHandler.prepareNotificationChannelWithAudio("alternatingtonesnotification", "Alternating Tone AtmosNotification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.alternatingtonenotification));
+        NotificationHandler.prepareSilentNotificationChannel("silentnotification", "Silent Notifications", getApplicationContext());
+        NotificationHandler.prepareNotificationChannel("notification", "Forecast Notifications", getApplicationContext());
+        NotificationHandler.prepareNotificationChannelWithAudio("readynownotification", "ReadyNow AtmosNotification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.readynownotification));
+        NotificationHandler.prepareNotificationChannelWithAudio("readynowalert", "ReadyNow Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.readynowalarm));
+        NotificationHandler.prepareNotificationChannelWithAudio("suremindnotification", "SureMind AtmosNotification", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.suremindnotification));
+        NotificationHandler.prepareNotificationChannelWithAudio("suremindalert", "SureMind Alert", getApplicationContext(), Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.suremindalarm));
     }
 }

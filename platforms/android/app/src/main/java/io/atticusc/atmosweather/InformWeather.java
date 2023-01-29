@@ -6,10 +6,12 @@ import android.content.SharedPreferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
+
+import io.atticusc.atmosweather.notifications.AtmosNotification;
+import io.atticusc.atmosweather.notifications.AtmosNotificationBuilder;
+import io.atticusc.atmosweather.notifications.NotificationHandler;
 
 public class InformWeather {
     public static Boolean InformWeatherReturn(String eventTitle, String locationName, String eventInfo, Context context){
@@ -116,49 +118,53 @@ public class InformWeather {
             if (jsonKey.contains("warning")){
                 jsonKey = jsonKey.replace("-warning", "");
                 behavior = jsonObject.getJSONObject("per-location").getJSONObject(locationName).getJSONObject("alert-types").getJSONObject("warnings").getString(jsonKey);
-            }
-            else if (jsonKey.contains("watch")){
+            } else if (jsonKey.contains("watch")) {
                 jsonKey = jsonKey.replace("-watch", "");
                 behavior = jsonObject.getJSONObject("per-location").getJSONObject(locationName).getJSONObject("alert-types").getJSONObject("watches").getString(jsonKey);
-            }
-            else{
+            } else {
                 jsonKey = jsonKey.replace("-advisory", "");
                 behavior = jsonObject.getJSONObject("per-location").getJSONObject(locationName).getJSONObject("alert-types").getJSONObject("advisory").getString(jsonKey);
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("No location specific setting set.");
         }
-        if (behavior.contains("silentnotification")){
-            new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, "silentnotification", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000+1));
-        }
-        else if (behavior.contains("soundnotification")){
-            new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, notificationSound + "notification", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
-        }
-        else if (behavior.contains("alertmove")){
-            Boolean moving = settings.getBoolean("currentlyMoving", false);
-            if (moving){
-                if (doTTS){
-                    new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
-                    new EasyTTS(eventTitle + " has been issued for " + locationName + ". " + eventInfo, context.getApplicationContext());
-                }
-                else{
-                    new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
 
+        int id = ThreadLocalRandom.current().nextInt(1, 5000 + 1);
+
+        AtmosNotificationBuilder builder =
+                new AtmosNotificationBuilder(context)
+                        .setTitle(eventTitle + " has been issued for " + locationName)
+                        .setBody(eventInfo)
+                        .setIcon(iconID);
+
+        if (behavior.contains("silentnotification")) {
+            NotificationHandler.notify(id, builder.setChannel("silentnotification").build());
+        } else if (behavior.contains("soundnotification")) {
+            NotificationHandler.notify(id, builder.setChannel(notificationSound + "notification").build());
+        } else if (behavior.contains("alertmove")) {
+            boolean moving = settings.getBoolean("currentlyMoving", false);
+            if (moving) {
+                AtmosNotification notification = builder.setChannel(alertSound + "alert").build();
+
+                if (doTTS) {
+                    NotificationHandler.notify(id, notification);
+
+                    new EasyTTS(eventTitle + " has been issued for " + locationName + ". " + eventInfo, context.getApplicationContext());
+                } else {
+                    NotificationHandler.notifyInsistently(id, notification);
                 }
-            }
-            else{
+            } else {
                 return false;
             }
-        }
-        else if (behavior.contains("alert")){
-            if (doTTS){
-                new SimpleNotification().Notify(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
-                new EasyTTS(eventTitle + " has been issued for " + locationName + ". " + eventInfo, context.getApplicationContext());
-            }
-            else{
-                new SimpleNotification().NotifyInsistently(eventTitle + " has been issued for " + locationName, eventInfo, alertSound + "alert", context, iconID, ThreadLocalRandom.current().nextInt(1, 5000 + 1));
+        } else if (behavior.contains("alert")) {
+            AtmosNotification notification = builder.setChannel(alertSound + "alert").build();
 
+            if (doTTS) {
+                NotificationHandler.notify(id, notification);
+
+                new EasyTTS(eventTitle + " has been issued for " + locationName + ". " + eventInfo, context.getApplicationContext());
+            } else {
+                NotificationHandler.notifyInsistently(id, notification);
             }
         }
 
