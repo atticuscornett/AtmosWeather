@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Atmos Weather</title>
-		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://unpkg.com/leaflet@1.9.3/ https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com;">
+		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://unpkg.com/esri-leaflet-vector@4.0.0/ https://unpkg.com/esri-leaflet@3.0.10/ https://unpkg.com/leaflet@1.9.3/ https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com https://mapservices.weather.noaa.gov data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com https://mapservices.weather.noaa.gov;">
 		<meta charset="utf-8" lang="en">
 		<link href="./img/favicon.svg" rel="icon" type="image/x-icon" />
 		
@@ -13,6 +13,11 @@
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
 		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 		
+		<!-- Load Esri Leaflet from CDN -->
+		<script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+
+		<script src="https://unpkg.com/esri-leaflet-vector@4.0.0/dist/esri-leaflet-vector.js" crossorigin=""></script>
+
 		<!-- Logo Style and Animations -->
 		<link rel="stylesheet" href="./css/atmos-animations.css">
 		<link rel="stylesheet" href="./css/atmos-ui.css">
@@ -68,8 +73,8 @@
 				<div id="tab-about" class="tab-div" hidden>
 					<!-- UPDATE -->
 					<h1>About Atmos Weather</h1>
-					<h3>Version 1.0.2</h3>
-					<h3>Last updated 1-11-2023</h3>
+					<h3>Version 1.1.0</h3>
+					<h3>Last updated 2-6-2023</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>

@@ -312,7 +312,7 @@ function addToActiveAlertsCheck(alerts){
 }
 
 // Checks if weather alerts should be moved from current to old
-function checkIfOldAlerts(){
+function checkIfOldAlerts(runFunction=false, functionToRun=null){
 	var nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
 	var a = 0;
 	var allCurrent = [];
@@ -345,6 +345,9 @@ function checkIfOldAlerts(){
 			}
 		}, a);
 		a++;
+	}
+	if (runFunction){
+		functionToRun();
 	}
 }
 

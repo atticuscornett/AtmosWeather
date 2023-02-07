@@ -901,41 +901,42 @@ function getStatusForPos(nomObj){
 
 // Refreshes the alerts tab
 function refreshAlerts(){
-	checkIfOldAlerts()
-	var currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
-	var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
-	var a = 0;
-	var generatedCode = "";
-	while (a < currentAlerts.length){
-		if (currentAlerts[a] != null){
-			generatedCode += "<h2>" + currentAlerts[a]["properties"]["event"] + "</h2>"
-			generatedCode += "<h4>" + currentAlerts[a]["properties"]["headline"] + "</h4>"
-			generatedCode += "<h4>" + currentAlerts[a]["properties"]["areaDesc"] + "</h4>"
-			if (currentAlerts[a]["properties"]["instruction"] != null){
-				generatedCode += "<h4>" + currentAlerts[a]["properties"]["instruction"] + "</h4><br>";
+	checkIfOldAlerts(true, ()=>{
+		var currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
+		var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
+		var a = 0;
+		var generatedCode = "";
+		while (a < currentAlerts.length){
+			if (currentAlerts[a] != null){
+				generatedCode += "<h2>" + currentAlerts[a]["properties"]["event"] + "</h2>"
+				generatedCode += "<h4>" + currentAlerts[a]["properties"]["headline"] + "</h4>"
+				generatedCode += "<h4>" + currentAlerts[a]["properties"]["areaDesc"] + "</h4>"
+				if (currentAlerts[a]["properties"]["instruction"] != null){
+					generatedCode += "<h4>" + currentAlerts[a]["properties"]["instruction"] + "</h4><br>";
+				}
 			}
+			a++;
 		}
-		a++;
-	}
-	if (a == 0){
-		generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
-	}
-	document.getElementById("active-alert-list").innerHTML = generatedCode;
-	
-	generatedCode = "";
-	a = oldAlerts.length - 1;
-	while (a > -1){
-		if (oldAlerts[a] != null){
-			generatedCode += "<h2>" + oldAlerts[a]["properties"]["event"] + "</h2>"
-			generatedCode += "<h4>" + oldAlerts[a]["properties"]["headline"] + "</h4>"
-			generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
+		if (a == 0){
+			generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
 		}
-		a--;
-	}
-	if (oldAlerts.length == 0){
-		generatedCode = "<h2>You have no previously received alerts.</h2>"
-	}
-	document.getElementById("old-alert-list").innerHTML = generatedCode;
+		document.getElementById("active-alert-list").innerHTML = generatedCode;
+		
+		generatedCode = "";
+		a = oldAlerts.length - 1;
+		while (a > -1){
+			if (oldAlerts[a] != null){
+				generatedCode += "<h2>" + oldAlerts[a]["properties"]["event"] + "</h2>"
+				generatedCode += "<h4>" + oldAlerts[a]["properties"]["headline"] + "</h4>"
+				generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
+			}
+			a--;
+		}
+		if (oldAlerts.length == 0){
+			generatedCode = "<h2>You have no previously received alerts.</h2>"
+		}
+		document.getElementById("old-alert-list").innerHTML = generatedCode;
+	})
 }
 
 // Loads the information for an alert and displays it
