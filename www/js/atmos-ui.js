@@ -124,7 +124,7 @@ function showNotices(){
 		}
 	});
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version1.0.2")){
+	if (window.localStorage.getItem("notice-version") != version){
 		document.getElementById("notice-window").innerHTML += `
 		<h2>Atmos Weather v1.0.2 is here!</h2>
 		<hr>
@@ -146,7 +146,7 @@ function showNotices(){
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version1.0.2", "true");
+		window.localStorage.setItem("notice-version", version);
 	}
 	if (platform == "pwa"){
 		document.getElementById("settings-warning").hidden = false;
