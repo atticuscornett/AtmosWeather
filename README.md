@@ -1,5 +1,5 @@
 ![Atmos Weather](https://raw.githubusercontent.com/atticuscornett/AtmosWeather/main/logo.svg)
-## The cross-platform lightweight app for weather forecasts and alerts.
+## The cross-platform, lightweight app for weather forecasts and alerts across the US
 Available for Windows, MacOS, Linux, and Android at the [Atmos Weather Website](https://atticuscornett.github.io/AtmosWeather)
 
 [![GitHub license](https://img.shields.io/github/license/atticuscornett/AtmosWeather)](https://github.com/atticuscornett/AtmosWeather/blob/main/LICENSE)
@@ -33,7 +33,7 @@ Atmos Weather is available on both Windows and Android.
 Unlike most weather apps, Atmos also provides weather alerts to users on desktop.
 
 ### Total Control
-Atmos Weather gives you complete control over weather alerts. Choose multiple locations to recieve alerts from. Choose alert priority on both an alert type and a location basis.
+Atmos Weather gives you complete control over weather alerts. Choose multiple locations to receive alerts from. Choose alert priority on both an alert type and a location basis.
 
 ### More Information
 Atmos Weather gives you more information about weather warnings.
@@ -55,7 +55,6 @@ Download the version for your platform and run the installer.
 ### GitHub Releases
 You can download stable versions from the releases on GitHub.
 
-
 ## Beta Versions (Unstable, Power Users)
 
 ### GitHub Releases
@@ -69,7 +68,7 @@ By downloading the repository files, you can build the latest code on your machi
 
 # <a name="goals"></a>Project Goals
 ### Minimum Bloat
-Most weather apps have too much bloat, largely in the form of overwelming ads. Atmos Weather aims to be as lightweight as possible, providing function without a big footprint.
+Most weather apps have too much bloat, largely in the form of overwhelming ads. Atmos Weather aims to be as lightweight as possible, providing function without a big footprint.
 
 ### Timely Alerts
 Weather alerts should be given in a timely manner. Ideally, alerts should be given within one minute of being published to the NWS API.
@@ -82,7 +81,12 @@ Atmos Weather should not collect any user data beyond what is strictly necessary
 
 # <a name="issues"></a>Major Known Issues
 
+### US Only
+
+Because it uses the National Weather Service API, Atmos Weather only supports locations in the US.
+
 ### Battery Warning On Certain Samsung Models
+
 Samsung marks Atmos Weather as a high battery user, because it wakes up the phone often to check for weather alerts.
 This can mean automatic throttling of weather checks, leading to late alerts.
 Despite this warning, Atmos Weather has not been observed to use more than 1-2% a day on these models.
@@ -103,7 +107,7 @@ Most of the cross-platform Cordova codebase (found in the www folder) is well do
 
 # Development
 Atmos Weather is written in HTML, CSS, JavaScript, and Java. Atmos Weather uses Apache Cordova to build for multiple platforms.
-Developed by Atticus Cornett. Please do not attempt to contribute until after the 2022 Congressional App Challenge is finished.
+
 Development plans and progress and be viewed on the Atmos Weather Notion Site: https://atticuscornett.notion.site/atticuscornett/00bc25c1bb07405d9bbe8c8c33ad195a
 
 ###### This project was originally created for the 2022 Congressional App Challenge.
