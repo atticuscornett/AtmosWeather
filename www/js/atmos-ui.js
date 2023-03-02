@@ -1096,7 +1096,7 @@ function showNextIntro(){
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Everywhere You Care About"){
 			document.getElementById("welcome-title-native").innerHTML = "Privacy First";
-			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Minimal data is received by the National Weather Service and Open Street Map.";
+			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Precise location data is only sent to the National Weather Service, Open-Meteo, and OpenStreetMap.<br>A full list of how your information is handled can be found in the privacy statement (located in settings.)";
 			document.getElementById("welcome-image-native").setAttribute("src", "img/privacy.svg");
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Privacy First"){
