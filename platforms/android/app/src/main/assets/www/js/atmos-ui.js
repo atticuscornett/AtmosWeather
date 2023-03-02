@@ -124,7 +124,7 @@ function showNotices(){
 		}
 	});
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version1.0.2")){
+	if (window.localStorage.getItem("notice-version") != version){
 		document.getElementById("notice-window").innerHTML += `
 		<h2>Atmos Weather v1.0.2 is here!</h2>
 		<hr>
@@ -146,7 +146,7 @@ function showNotices(){
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version1.0.2", "true");
+		window.localStorage.setItem("notice-version", version);
 	}
 	if (platform == "pwa"){
 		document.getElementById("settings-warning").hidden = false;
@@ -187,23 +187,40 @@ function getPlatform(){
 
 // Initialize Buttons for index.html
 function activateNavButtons(){
+	document.getElementById("location-nav").className = "selected-nav";
 	document.getElementById("location-nav").onclick = function (){
 		if (screenAt != "locations"){
+			document.getElementById("location-nav").className = "selected-nav";
+			document.getElementById("alerts-nav").className = "";
+			document.getElementById("radar-nav").className = "";
+			document.getElementById("settings-nav").className = "";
 			navTo("locations");
 		}
 	};
 	document.getElementById("alerts-nav").onclick = function (){
 		if (screenAt != "alerts"){
+			document.getElementById("location-nav").className = "";
+			document.getElementById("alerts-nav").className = "selected-nav";
+			document.getElementById("radar-nav").className = "";
+			document.getElementById("settings-nav").className = "";
 			navTo("alerts");
 		}
 	};
 	document.getElementById("radar-nav").onclick = function (){
 		if (screenAt != "radar"){
+			document.getElementById("location-nav").className = "";
+			document.getElementById("alerts-nav").className = "";
+			document.getElementById("radar-nav").className = "selected-nav";
+			document.getElementById("settings-nav").className = "";
 			navTo("radar");
 		}
 	};
 	document.getElementById("settings-nav").onclick = function (){
 		if (screenAt != "settings"){
+			document.getElementById("location-nav").className = "";
+			document.getElementById("alerts-nav").className = "";
+			document.getElementById("radar-nav").className = "";
+			document.getElementById("settings-nav").className = "selected-nav";
 			navTo("settings");
 		}
 	};
@@ -616,6 +633,14 @@ function syncFiles(){
 		NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("old-alerts", JSON.parse(localStorage.getItem("nws-alerts-old")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-alerts-cache", JSON.parse(localStorage.getItem("nws-alerts-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nominatim-storage", JSON.parse(localStorage.getItem("nominatim-storage")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-alerts-current", JSON.parse(localStorage.getItem("nws-alerts-current")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-hourly-forecast-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-forecast-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-boundaries-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("notice-weatherAlerts", JSON.parse(localStorage.getItem("notice-weatherAlerts")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 	}
 }
 
@@ -725,7 +750,7 @@ function refreshCurrentLocation(){
 														var AMPM;
 														while (a < 12){
 															sfor = hourly[0][a]["shortForecast"].toLowerCase();
-															if (a == 11){
+															if (a == 11 && window.screen.orientation.type.includes("landscape")){
 																longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
 															}
 															else{
@@ -876,41 +901,42 @@ function getStatusForPos(nomObj){
 
 // Refreshes the alerts tab
 function refreshAlerts(){
-	checkIfOldAlerts()
-	var currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
-	var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
-	var a = 0;
-	var generatedCode = "";
-	while (a < currentAlerts.length){
-		if (currentAlerts[a] != null){
-			generatedCode += "<h2>" + currentAlerts[a]["properties"]["event"] + "</h2>"
-			generatedCode += "<h4>" + currentAlerts[a]["properties"]["headline"] + "</h4>"
-			generatedCode += "<h4>" + currentAlerts[a]["properties"]["areaDesc"] + "</h4>"
-			if (currentAlerts[a]["properties"]["instruction"] != null){
-				generatedCode += "<h4>" + currentAlerts[a]["properties"]["instruction"] + "</h4><br>";
+	checkIfOldAlerts(true, ()=>{
+		var currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
+		var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
+		var a = 0;
+		var generatedCode = "";
+		while (a < currentAlerts.length){
+			if (currentAlerts[a] != null){
+				generatedCode += "<h2>" + currentAlerts[a]["properties"]["event"] + "</h2>"
+				generatedCode += "<h4>" + currentAlerts[a]["properties"]["headline"] + "</h4>"
+				generatedCode += "<h4>" + currentAlerts[a]["properties"]["areaDesc"] + "</h4>"
+				if (currentAlerts[a]["properties"]["instruction"] != null){
+					generatedCode += "<h4>" + currentAlerts[a]["properties"]["instruction"] + "</h4><br>";
+				}
 			}
+			a++;
 		}
-		a++;
-	}
-	if (a == 0){
-		generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
-	}
-	document.getElementById("active-alert-list").innerHTML = generatedCode;
-	
-	generatedCode = "";
-	a = oldAlerts.length - 1;
-	while (a > -1){
-		if (oldAlerts[a] != null){
-			generatedCode += "<h2>" + oldAlerts[a]["properties"]["event"] + "</h2>"
-			generatedCode += "<h4>" + oldAlerts[a]["properties"]["headline"] + "</h4>"
-			generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
+		if (a == 0){
+			generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
 		}
-		a--;
-	}
-	if (oldAlerts.length == 0){
-		generatedCode = "<h2>You have no previously received alerts.</h2>"
-	}
-	document.getElementById("old-alert-list").innerHTML = generatedCode;
+		document.getElementById("active-alert-list").innerHTML = generatedCode;
+		
+		generatedCode = "";
+		a = oldAlerts.length - 1;
+		while (a > -1){
+			if (oldAlerts[a] != null){
+				generatedCode += "<h2>" + oldAlerts[a]["properties"]["event"] + "</h2>"
+				generatedCode += "<h4>" + oldAlerts[a]["properties"]["headline"] + "</h4>"
+				generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
+			}
+			a--;
+		}
+		if (oldAlerts.length == 0){
+			generatedCode = "<h2>You have no previously received alerts.</h2>"
+		}
+		document.getElementById("old-alert-list").innerHTML = generatedCode;
+	})
 }
 
 // Loads the information for an alert and displays it
@@ -1070,7 +1096,7 @@ function showNextIntro(){
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Everywhere You Care About"){
 			document.getElementById("welcome-title-native").innerHTML = "Privacy First";
-			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Minimal data is received by the National Weather Service and Open Street Map.";
+			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Precise location data is only sent to the National Weather Service, Open-Meteo, and OpenStreetMap.<br>A full list of how your information is handled can be found in the privacy statement (located in settings.)";
 			document.getElementById("welcome-image-native").setAttribute("src", "img/privacy.svg");
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Privacy First"){

@@ -238,7 +238,6 @@ select{
 .searchResult{
 	display: flex;
 	align-items: center;
-	width: calc(100% - 40px);
 	background-color: dodgerblue;
 	color: white;
 	border: none;
@@ -279,6 +278,11 @@ select{
 	border-radius: 7px;
 	box-shadow: 0px 0px 7px #898989;
 	padding: 0px 20px 20px 20px;
+}
+
+.selected-nav{
+	background-color: #EEEEEE;
+	border-radius: 7px;
 }
 
 
@@ -322,12 +326,6 @@ select{
 	details[open] summary{
 		border-bottom: white solid;
 	}
-	.clear-border{
-		border: white solid;
-		border-radius: 7px;
-		box-shadow: 0px 0px 7px #898989;
-		padding: 0px 20px 20px 20px;
-	}
 	#notice-window-container{
 		z-index: 99;
 		position: absolute;
@@ -348,5 +346,15 @@ select{
 	}
 	#app-nav{
 		background-color: hsla(0,0%,15%,1.00);
+	}
+	.clear-border{
+		border: white solid;
+		border-radius: 7px;
+		box-shadow: 0px 0px 7px #898989;
+		padding: 0px 20px 20px 20px;
+	}
+	.selected-nav{
+		background-color: #111111;
+		border-radius: 7px;
 	}
 }

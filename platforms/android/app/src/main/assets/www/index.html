@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Atmos Weather</title>
-		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://unpkg.com/leaflet@1.9.3/ https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com;">
+		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://unpkg.com/esri-leaflet-vector@4.0.0/ https://unpkg.com/esri-leaflet@3.0.10/ https://unpkg.com/leaflet@1.9.3/ https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com https://mapservices.weather.noaa.gov data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com https://mapservices.weather.noaa.gov;">
 		<meta charset="utf-8" lang="en">
 		<link href="./img/favicon.svg" rel="icon" type="image/x-icon" />
 		
@@ -13,6 +13,11 @@
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
 		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 		
+		<!-- Load Esri Leaflet from CDN -->
+		<script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+
+		<script src="https://unpkg.com/esri-leaflet-vector@4.0.0/dist/esri-leaflet-vector.js" crossorigin=""></script>
+
 		<!-- Logo Style and Animations -->
 		<link rel="stylesheet" href="./css/atmos-animations.css">
 		<link rel="stylesheet" href="./css/atmos-ui.css">
@@ -68,8 +73,8 @@
 				<div id="tab-about" class="tab-div" hidden>
 					<!-- UPDATE -->
 					<h1>About Atmos Weather</h1>
-					<h3>Version 1.0.2</h3>
-					<h3>Last updated 1-2-2023</h3>
+					<h3>Version 1.1.0</h3>
+					<h3>Last updated 3-1-2023</h3>
 					<h6>Written by Atticus Cornett</h6>
 					<hr>
 					<h2>Resources</h2>
@@ -115,29 +120,42 @@
 				<div id="tab-privacy" class="tab-div" hidden>
 					<h1>Privacy Statement</h1>
 					<hr>
-					<h2>Atmos Weather takes privacy very seriously and only uses data that is necessary to provide you with convenient, accurate weather information. <br>The following information is sent to third-party services to provide app functionality:</h2>
-					<h3><b>Device Location</b></h3>
-					<h4>WHEN: Periodically in the background and when app is open</h4>
-					<h4>WHERE IS IT SENT: National Weather Service API</h4>
-					<h4>WHY: To provide forecasts for the current location and check for alerts</h4>
+					<h2>Atmos Weather takes privacy very seriously and only uses data that is necessary to provide you with convenient, accurate weather information. <br>The following is a list of all of the services used to power Atmos Weather and what information they receive:</h2>
 					<br>
-					<h4>WHEN: When app is open</h4>
-					<h4>WHERE IS IT SENT: Open-Meteo API</h4>
-					<h4>WHY: To provide AQI for current location</h4>
+					<h3><b>National Weather Service API</b></h3>
+					<h4>Domain(s): api.weather.gov</h4>
+					<h4>Information: GPS Location (when app is open and in background), Saved Locations (when app is open and in background), IP Address (when app is open and in background)</h4>
+					<h4>Why: The National Weather Service provides the forecast information displayed in the app and provides weather alerts in the background.</h4>
 					<br>
-					<h3><b>Location Searches</b></h3>
-					<h4>WHEN: When you search for a location while adding a location</h4>
-					<h4>WHERE IS IT SENT: Nominatim API</h4>
-					<h4>WHY: To provide search results for a location and to convert a location into geocoordinates</h4>
+					<h3><b>Open-Meteo</b></h3>
+					<h4>Domain(s): air-quality-api.open-meteo.com</h4>
+					<h4>Information: GPS Location (when app is open), Saved Locations (when app is open), IP Address (when app is open)</h4>
+					<h4>Why: Open-Meteo provides the AQI information displayed on location pages.</h4>
 					<br>
-					<h3><b>Saved Weather Locations</b></h3>
-					<h4>WHEN: Periodically in the background and when app is open</h4>
-					<h4>WHERE IS IT SENT: National Weather Service API</h4>
-					<h4>WHY: To provide forecasts for added locations and check for alerts</h4>
+					<h3><b>OpenStreetMap</b></h3>
+					<h4>Domain(s): tile.openstreetmap.org, nominatim.opensteetmap.org</h4>
+					<h4>Information: Location Searches (when app is open), IP Address (when app is open)</h4>
+					<h4>Why: OpenStreetMap's Nominatim API powers the location search feature and OpenStreetMap's tile servers provide the map tiles used for the radar and alerts.</h4>
 					<br>
-					<h4>WHEN: When app is open</h4>
-					<h4>WHERE IS IT SENT: Open-Meteo API</h4>
-					<h4>WHY: To provide AQI for added locations</h4>
+					<h3><b>RainViewer</b></h3>
+					<h4>Domain(s): tilecache.rainviewer.com</h4>
+					<h4>Information: IP Address (when app is open)</h4>
+					<h4>Why: RainViewer provides the radar imagery displayed on the radar page.</h4>
+					<br>
+					<h3><b>Unpkg</b></h3>
+					<h4>Domain(s): unpkg.com</h4>
+					<h4>Information: IP Address (when app is open)</h4>
+					<h4>Why: Unpkg serves the LeafletJS map library to Atmos and enables the display of alerts and radars.</h4>
+					<br>
+					<h3><b>Github Releases</b></h3>
+					<h4>Domain(s): github.com</h4>
+					<h4>Information: IP Address (when app is open)</h4>
+					<h4>Why: Used on the desktop version to automatically download and update to the latest version of Atmos Weather.</h4>
+					<br>
+					<h3><b>Atmos Weather Github Site</b></h3>
+					<h4>Domain(s): atticuscornett.github.io</h4>
+					<h4>Information: IP Address (when app is open)</h4>
+					<h4>Why: The Atmos Weather site is used to check for updates and also hosts county polygon shapes that are displayed on maps.</h4>
 				</div>
 				<div id="tab-radar" class="tab-div" hidden>
 					<h1>Radar</h1>

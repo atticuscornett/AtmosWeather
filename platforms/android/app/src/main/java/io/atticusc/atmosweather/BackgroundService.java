@@ -9,21 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
-import android.os.Looper;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.Priority;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,7 +47,7 @@ public class BackgroundService extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
+        LocationManager locMan = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         SharedPreferences weatherLocations = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
         try {
             JSONArray locationJSON = new JSONArray(weatherLocations.getString("locations", "[]"));
@@ -102,25 +93,24 @@ public class BackgroundService extends BroadcastReceiver {
 
             if (getLocationNow == 0 && getLocationInBackground){
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    fusedLocationClient.getLastLocation()
-                            .addOnSuccessListener(ContextCompat.getMainExecutor(context), location -> {
-                                // Got last known location. In some rare situations this can be null.
-                                if (location != null) {
-                                    lastLat = Double.parseDouble(weatherLocations.getString("lastLat", "0.0"));
-                                    lastLon = Double.parseDouble(weatherLocations.getString("lastLon", "0.0"));
-                                    double dist = Math.pow(Math.pow(location.getLatitude() - lastLat, 2) + Math.pow(location.getLongitude() - lastLon, 2), 0.5);
-                                    System.out.println("Last lat " + lastLat);
-                                    System.out.println("Last lon" + lastLon);
-                                    System.out.println("Distance: " + dist);
-                                    boolean moving = dist > 0.00075;
-                                    System.out.println("Is moving: " + moving);
-                                    new NWSData().GetAlerts(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "Current Location", context);
-                                    weatherLocations.edit().putBoolean("currentlyMoving", moving).apply();
-                                    weatherLocations.edit().putString("lastLat", String.valueOf(location.getLatitude())).apply();
-                                    weatherLocations.edit().putString("lastLon", String.valueOf(location.getLongitude())).apply();
-                                    getCurrentLocation(context);
-                                }
-                            });
+                    Criteria criteria = new Criteria();
+                    criteria.setAccuracy(Criteria.ACCURACY_FINE);
+                    locMan.requestSingleUpdate(criteria, location -> {
+                        if (location != null) {
+                            lastLat = Double.parseDouble(weatherLocations.getString("lastLat", "0.0"));
+                            lastLon = Double.parseDouble(weatherLocations.getString("lastLon", "0.0"));
+                            double dist = Math.pow(Math.pow(location.getLatitude() - lastLat, 2) + Math.pow(location.getLongitude() - lastLon, 2), 0.5);
+                            System.out.println("Last lat " + lastLat);
+                            System.out.println("Last lon" + lastLon);
+                            System.out.println("Distance: " + dist);
+                            boolean moving = dist > 0.00075;
+                            System.out.println("Is moving: " + moving);
+                            new NWSData().GetAlerts(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "Current Location", context);
+                            weatherLocations.edit().putBoolean("currentlyMoving", moving).apply();
+                            weatherLocations.edit().putString("lastLat", String.valueOf(location.getLatitude())).apply();
+                            weatherLocations.edit().putString("lastLon", String.valueOf(location.getLongitude())).apply();
+                        }
+                    }, null);
                 } else {
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
                     Date date = new Date();
@@ -149,43 +139,13 @@ public class BackgroundService extends BroadcastReceiver {
 
             getLocationNow++;
 
-            if (getLocationNow >= 9) {
+            if (getLocationNow >= 8) {
                 getLocationNow = 0;
             }
             weatherLocations.edit().putInt("locationchecktime", getLocationNow).apply();
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private void getCurrentLocation(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            LocationRequest locationRequest = LocationRequest.create();
-            locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
-            locationRequest.setInterval(5000);
-            locationRequest.setFastestInterval(2000);
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                LocationServices.getFusedLocationProviderClient(context)
-                        .requestLocationUpdates(locationRequest, new LocationCallback() {
-                            @Override
-                            public void onLocationResult(@NonNull LocationResult locationResult) {
-                                super.onLocationResult(locationResult);
-
-                                LocationServices.getFusedLocationProviderClient(context)
-                                        .removeLocationUpdates(this);
-
-                                if (locationResult.getLocations().size() > 0) {
-
-                                    int index = locationResult.getLocations().size() - 1;
-
-                                    // Update latitude and longitude
-                                    locationResult.getLocations().get(index).getLatitude();
-                                    locationResult.getLocations().get(index).getLongitude();
-                                }
-                            }
-                        }, Looper.getMainLooper());
-            }
         }
     }
 }
