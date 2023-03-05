@@ -61,17 +61,20 @@ public class MainActivity extends CordovaActivity {
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);
 
-        if (isFirstRun()) {
-            // Make sure this doesn't get run again
-            sharedPreferences.edit().putBoolean(FIRST_RUN_KEY, false).apply();
+        sharedPreferences.edit().putBoolean(FIRST_RUN_KEY, false).apply();
 
-            Intent intent = new Intent(this, BackgroundService.class);
+        // Start the background task timer
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-            @SuppressLint("UnspecifiedImmutableFlag")
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+        Intent intent = new Intent(this, BackgroundService.class);
 
-            startBackgroundTask(pendingIntent, 5);
-        }
+        @SuppressLint("UnspecifiedImmutableFlag")
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        // Cancel any duplicate alarms
+        alarmManager.cancel(pendingIntent);
+
+        startBackgroundTask(pendingIntent, 5);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             boolean locationInBackground = getLocationInBackgroundEnabled();
