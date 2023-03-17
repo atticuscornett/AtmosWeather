@@ -16,13 +16,23 @@ import android.net.NetworkInfo;
 
 import androidx.core.app.ActivityCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import io.atticusc.atmosweather.notifications.AtmosNotificationBuilder;
 import io.atticusc.atmosweather.notifications.NotificationHandler;
@@ -105,10 +115,39 @@ public class BackgroundService extends BroadcastReceiver {
                             System.out.println("Distance: " + dist);
                             boolean moving = dist > 0.00075;
                             System.out.println("Is moving: " + moving);
-                            new NWSData().GetAlerts(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "Current Location", context);
                             weatherLocations.edit().putBoolean("currentlyMoving", moving).apply();
                             weatherLocations.edit().putString("lastLat", String.valueOf(location.getLatitude())).apply();
                             weatherLocations.edit().putString("lastLon", String.valueOf(location.getLongitude())).apply();
+                            RequestQueue queue = Volley.newRequestQueue(context);
+                            String url = "https://api.weather.gov/points/" + location.getLatitude() + "," + location.getLongitude();
+                            StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                                    new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            try {
+                                                JSONObject currentForecastLink = new JSONObject(response).getJSONObject("properties");
+                                                weatherLocations.edit().putString("currentLocationProperties", currentForecastLink.toString()).apply();
+                                                new NWSData().GetAlerts(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "Current Location", context);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    System.out.println("Error getting Current Location forecast link.");
+                                }
+                            }){
+                                @Override
+                                public Map<String, String> getHeaders() {
+                                    Map<String, String>  params = new HashMap<String, String>();
+                                    params.put("User-Agent", "Atmos Weather Background Service");
+                                    return params;
+                                }
+                            };
+
+                            queue.add(stringRequest);
+
                         }
                     }, null);
                 } else {

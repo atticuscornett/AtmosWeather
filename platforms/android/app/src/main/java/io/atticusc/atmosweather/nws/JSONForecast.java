@@ -20,19 +20,24 @@ public class JSONForecast {
 
     private final String locationName;
 
-    private final JSONObject properties;
+    private JSONObject properties;
     private final JSONObject notifications;
 
     public JSONForecast(SharedPreferences sharedPreferences, String locationName) throws JSONException {
         this.locationName = locationName;
 
-        final String LOCATION_CACHE_KEY = "location-cache";
-        JSONObject locationCache = new JSONObject(sharedPreferences.getString(LOCATION_CACHE_KEY, ""));
+        if (locationName.equals("Current Location")){
+            properties = new JSONObject(sharedPreferences.getString("currentLocationProperties", "{}"));
+        }
+        else{
+            final String LOCATION_CACHE_KEY = "location-cache";
+            JSONObject locationCache = new JSONObject(sharedPreferences.getString(LOCATION_CACHE_KEY, ""));
 
-        JSONObject locationData = new JSONObject(locationCache.getString(locationName));
+            JSONObject locationData = new JSONObject(locationCache.getString(locationName));
 
-        final String PROPERTIES_KEY = "properties";
-        properties = locationData.getJSONObject(PROPERTIES_KEY);
+            final String PROPERTIES_KEY = "properties";
+            properties = locationData.getJSONObject(PROPERTIES_KEY);
+        }
 
         JSONObject settings = determineSettings(sharedPreferences, locationName);
 
@@ -79,6 +84,9 @@ public class JSONForecast {
     public String getForecastLink() {
         final String FORECAST_LINK_KEY = "forecast";
         try {
+            if (properties == null){
+                return null;
+            }
             return properties.getString(FORECAST_LINK_KEY);
         } catch (JSONException e) {
             return null;

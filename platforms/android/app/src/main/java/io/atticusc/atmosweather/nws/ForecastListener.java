@@ -103,7 +103,7 @@ public class ForecastListener implements Response.Listener<String> {
 
                         builder
                                 .setTitle("Future Severe Weather Expected for " + locationName)
-                                .setBody(jsonResponse.getString("detailedForecast"))
+                                .setBody(forecast)
                                 .build()
                 );
 
