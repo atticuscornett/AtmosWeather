@@ -2,5 +2,6 @@
     "cSpell.words": [
         "Nominatim",
         "Storyset"
-    ]
+    ],
+    "todo-tree.tree.scanMode": "workspace only"
 }

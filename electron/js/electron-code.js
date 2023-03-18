@@ -1,5 +1,7 @@
 cordovaReady = true;
 var allAudio = [];
+// UPDATE
+var version = "1.1.0";
 
 function stopAllAudio(){
 	var a = 0;
@@ -71,29 +73,30 @@ function showNotices(){
 		}
 	});
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version1.0.2")){
+	if (window.localStorage.getItem("notice-version") != version){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v1.0.2 is here!</h2>
+		<h2>Atmos Weather v1.1.0 is here!</h2>
 		<hr>
-		 <dl style='font-family: Secular One;'>
+		<dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Added support for 7 new event types, just in time for winter weather.</dd>
-  			<dd>- New version popup added for non-Windows devices.</dd>
+			<dd>- Made UI much more responsive.</dd>
+			<dd>- Expandable forecasts show further into the future.</dd>
+			<dd>- Air quality is now available.
+			<dd>- Clearer and more detailed privacy statement in settings. (Suggested by @IzzySoft)</dd>
+			<dd>- Current screen is now indicated on navbar.</dd>
+			<dd>- Reduced battery usage on mobile data.</dd>
+			<dd>- Added support for 3 new event types.</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed text running off screen on certain screens.</dd>
-  			<dd>- Fixed hourly forecast UI issues on certain devices.</dd>
-  			<dd>- Fixed minor spelling errors.</dd>
-  			<dd>- Fixed blank locations page on first run.</dd>
-  			<dd>- Fixed potential issue with alerts page.</dd>
-  			<dd>- Other internal code changes made that should improve future development.</dd>
-  			<dt>Security Updates</dt>
-  			<dd>- Security updates that remove known Electron vulnerabilities on desktop.</dd>
-  			<dd>- Security updates that improve resilience to XSS attacks.</dd>
+  			<dd>- Fixed UI bug with location search results.</dd>
+			<dd>- Fixed UI bug with hourly temperatures in portrait mode.</dd>
+			<dd>- County polygons now display correctly on radar.</dd>
+			<dd>- Fixed background task not restarting after update.</dd>
+			<dd>- Numerous back-end changes, including those made by @Djtpj.</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version1.0.2", "true");
+		window.localStorage.setItem("notice-version", version);
 	}
 	console.log(platform);
 	if (platform == "pwa"){
