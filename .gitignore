@@ -27,5 +27,6 @@ node_modules/
 /platforms/android/app/build/outputs/logs
 /platforms/electron/build/win-unpacked/
 /electron/dist/win-unpacked
+/electron/dist/
 builder-debug.yml
 *.blockmap
