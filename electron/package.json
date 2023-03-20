@@ -36,7 +36,8 @@
             "armv7l"
           ]
         },
-        "tar.gz"
+        "tar.gz",
+        "AppImage"
       ],
       "icon": "img/icon.png"
     },
