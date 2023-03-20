@@ -109,7 +109,7 @@ function showNotices(){
 		`;
 		window.localStorage.setItem("notice-batteryOptimization", "true");
 	}
-	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/package.json", (latest) => {
+	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/update-details.json", (latest) => {
 		latest = latest["version"];
 		if (latest != version && !platform.includes("windows")){
 			document.getElementById("notice-window").innerHTML += `

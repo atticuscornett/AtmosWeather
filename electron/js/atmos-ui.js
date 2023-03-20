@@ -11,7 +11,7 @@ document.addEventListener('deviceready', function(){cordovaReady=true;}, false);
 
 // Initial Variable States
 // UPDATE
-var version = "1.0.2";
+var version = "1.1.0";
 var screenAt = "locations";
 var cordovaReady = false;
 var currentLat = false;
@@ -109,7 +109,7 @@ function showNotices(){
 		`;
 		window.localStorage.setItem("notice-batteryOptimization", "true");
 	}
-	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/package.json", (latest) => {
+	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/update-details.json", (latest) => {
 		latest = latest["version"];
 		if (latest != version && !platform.includes("windows")){
 			document.getElementById("notice-window").innerHTML += `
@@ -124,29 +124,30 @@ function showNotices(){
 		}
 	});
 	// UPDATE
-	if (!window.localStorage.getItem("notice-version1.0.2")){
+	if (window.localStorage.getItem("notice-version") != version){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v1.0.2 is here!</h2>
+		<h2>Atmos Weather v1.1.0 is here!</h2>
 		<hr>
-		 <dl style='font-family: Secular One;'>
+		<dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-  			<dd>- Added support for 7 new event types, just in time for winter weather.</dd>
-  			<dd>- New version popup added for non-Windows devices.</dd>
+			<dd>- Made UI much more responsive.</dd>
+			<dd>- Expandable forecasts show further into the future.</dd>
+			<dd>- Air quality is now available.
+			<dd>- Clearer and more detailed privacy statement in settings. (Suggested by @IzzySoft)</dd>
+			<dd>- Current screen is now indicated on navbar.</dd>
+			<dd>- Reduced battery usage on mobile data.</dd>
+			<dd>- Added support for 3 new event types.</dd>
   			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed text running off screen on certain screens.</dd>
-  			<dd>- Fixed hourly forecast UI issues on certain devices.</dd>
-  			<dd>- Fixed minor spelling errors.</dd>
-  			<dd>- Fixed blank locations page on first run.</dd>
-  			<dd>- Fixed potential issue with alerts page.</dd>
-  			<dd>- Other internal code changes made that should improve future development.</dd>
-  			<dt>Security Updates</dt>
-  			<dd>- Security updates that remove known Electron vulnerabilities on desktop.</dd>
-  			<dd>- Security updates that improve resilience to XSS attacks.</dd>
+  			<dd>- Fixed UI bug with location search results.</dd>
+			<dd>- Fixed UI bug with hourly temperatures in portrait mode.</dd>
+			<dd>- County polygons now display correctly on radar.</dd>
+			<dd>- Fixed background task not restarting after update.</dd>
+			<dd>- Numerous back-end changes, including those made by @Djtpj.</dd>
 		</dl> 
 		<br><br>
 		`;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version1.0.2", "true");
+		window.localStorage.setItem("notice-version", version);
 	}
 	if (platform == "pwa"){
 		document.getElementById("settings-warning").hidden = false;
@@ -633,6 +634,14 @@ function syncFiles(){
 		NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 		NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("old-alerts", JSON.parse(localStorage.getItem("nws-alerts-old")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-alerts-cache", JSON.parse(localStorage.getItem("nws-alerts-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nominatim-storage", JSON.parse(localStorage.getItem("nominatim-storage")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-alerts-current", JSON.parse(localStorage.getItem("nws-alerts-current")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-hourly-forecast-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-forecast-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("nws-boundaries-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+		NativeStorage.setItem("notice-weatherAlerts", JSON.parse(localStorage.getItem("notice-weatherAlerts")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
 	}
 }
 
@@ -893,41 +902,42 @@ function getStatusForPos(nomObj){
 
 // Refreshes the alerts tab
 function refreshAlerts(){
-	checkIfOldAlerts()
-	var currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
-	var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
-	var a = 0;
-	var generatedCode = "";
-	while (a < currentAlerts.length){
-		if (currentAlerts[a] != null){
-			generatedCode += "<h2>" + currentAlerts[a]["properties"]["event"] + "</h2>"
-			generatedCode += "<h4>" + currentAlerts[a]["properties"]["headline"] + "</h4>"
-			generatedCode += "<h4>" + currentAlerts[a]["properties"]["areaDesc"] + "</h4>"
-			if (currentAlerts[a]["properties"]["instruction"] != null){
-				generatedCode += "<h4>" + currentAlerts[a]["properties"]["instruction"] + "</h4><br>";
+	checkIfOldAlerts(true, ()=>{
+		var currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
+		var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
+		var a = 0;
+		var generatedCode = "";
+		while (a < currentAlerts.length){
+			if (currentAlerts[a] != null){
+				generatedCode += "<h2>" + currentAlerts[a]["properties"]["event"] + "</h2>"
+				generatedCode += "<h4>" + currentAlerts[a]["properties"]["headline"] + "</h4>"
+				generatedCode += "<h4>" + currentAlerts[a]["properties"]["areaDesc"] + "</h4>"
+				if (currentAlerts[a]["properties"]["instruction"] != null){
+					generatedCode += "<h4>" + currentAlerts[a]["properties"]["instruction"] + "</h4><br>";
+				}
 			}
+			a++;
 		}
-		a++;
-	}
-	if (a == 0){
-		generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
-	}
-	document.getElementById("active-alert-list").innerHTML = generatedCode;
-	
-	generatedCode = "";
-	a = oldAlerts.length - 1;
-	while (a > -1){
-		if (oldAlerts[a] != null){
-			generatedCode += "<h2>" + oldAlerts[a]["properties"]["event"] + "</h2>"
-			generatedCode += "<h4>" + oldAlerts[a]["properties"]["headline"] + "</h4>"
-			generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
+		if (a == 0){
+			generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
 		}
-		a--;
-	}
-	if (oldAlerts.length == 0){
-		generatedCode = "<h2>You have no previously received alerts.</h2>"
-	}
-	document.getElementById("old-alert-list").innerHTML = generatedCode;
+		document.getElementById("active-alert-list").innerHTML = generatedCode;
+		
+		generatedCode = "";
+		a = oldAlerts.length - 1;
+		while (a > -1){
+			if (oldAlerts[a] != null){
+				generatedCode += "<h2>" + oldAlerts[a]["properties"]["event"] + "</h2>"
+				generatedCode += "<h4>" + oldAlerts[a]["properties"]["headline"] + "</h4>"
+				generatedCode += "<h4>" + oldAlerts[a]["properties"]["areaDesc"] + "</h4><br>"
+			}
+			a--;
+		}
+		if (oldAlerts.length == 0){
+			generatedCode = "<h2>You have no previously received alerts.</h2>"
+		}
+		document.getElementById("old-alert-list").innerHTML = generatedCode;
+	})
 }
 
 // Loads the information for an alert and displays it
@@ -1087,7 +1097,7 @@ function showNextIntro(){
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Everywhere You Care About"){
 			document.getElementById("welcome-title-native").innerHTML = "Privacy First";
-			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Minimal data is received by the National Weather Service and Open Street Map.";
+			document.getElementById("welcome-body-native").innerHTML = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Precise location data is only sent to the National Weather Service, Open-Meteo, and OpenStreetMap.<br>A full list of how your information is handled can be found in the privacy statement (located in settings.)";
 			document.getElementById("welcome-image-native").setAttribute("src", "img/privacy.svg");
 		}
 		else if (document.getElementById("welcome-title-native").innerHTML == "Privacy First"){
