@@ -37,7 +37,13 @@
           ]
         },
         "tar.gz",
-        "AppImage"
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
       ],
       "icon": "img/icon.png"
     },
