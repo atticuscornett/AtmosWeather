@@ -60,11 +60,10 @@ You can download stable versions from the releases on GitHub.
 ### GitHub Releases
 Some beta version builds will be added to GitHub releases.
 
-## Latest Builds (Unstable, Not Recommended)
-You can download the latest builds for individual platforms from the appropriate build locations for Cordova in the platforms folder or the dist folder inside of the electron folder for ElectronJS builds. These builds (especially Android builds, which may be partial builds) may be broken.
+
 
 ## Latest Code (Unstable, Not Recommended)
-By downloading the repository files, you can build the latest code on your machine using Cordova.
+By downloading the repository files, you can build the latest code on your machine using Cordova (for the Android version) or using Electron in the `electron` folder (for all desktop versions).
 
 # <a name="goals"></a>Project Goals
 ### Minimum Bloat
