@@ -14,26 +14,11 @@
   "license": "GPL-3.0 License",
   "devDependencies": {
     "@capacitor/cli": "^4.7.1",
-    "cordova-android": "^10.1.2",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-nativestorage": "github:TheCocoaProject/cordova-plugin-nativestorage"
-  },
-  "cordova": {
-    "platforms": [
-      "android",
-      "browser"
-    ],
-    "plugins": {
-      "cordova-plugin-file": {},
-      "cordova-plugin-geolocation": {
-        "GPS_REQUIRED": "true"
-      },
-      "cordova-plugin-nativestorage": {},
-      "cordova-plugin-device": {}
-    }
   },
   "dependencies": {
     "@capacitor/android": "^4.7.1",
