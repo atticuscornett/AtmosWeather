@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Atmos Weather</string>
+    <string name="title_activity_main">Atmos Weather</string>
+    <string name="package_name">io.atticusc.atmosweather</string>
+    <string name="custom_url_scheme">io.atticusc.atmosweather</string>
+</resources>

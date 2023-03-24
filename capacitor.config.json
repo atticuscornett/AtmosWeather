@@ -1,0 +1,6 @@
+{
+  "appId": "io.atticusc.atmosweather",
+  "appName": "Atmos Weather",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
