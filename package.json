@@ -25,6 +25,7 @@
     "@capacitor/core": "^4.7.1",
     "@capacitor/device": "^4.1.0",
     "@capacitor/geolocation": "4.1.0",
+    "@capacitor/preferences": "^4.0.2",
     "cordova": "^11.1.0"
   }
 }
