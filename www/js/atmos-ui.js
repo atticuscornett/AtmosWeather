@@ -6,14 +6,15 @@
 
 console.log("🌥⚡ Atmos Weather")
 
-// Initialize Cordova
-document.addEventListener('deviceready', function(){cordovaReady=true;}, false);
+// Initialize Capacitor
+cap.getLocation();
+cap.getDevice();
 
 // Initial Variable States
 // UPDATE
 var version = "1.1.0";
 var screenAt = "locations";
-var cordovaReady = false;
+var cordovaReady = true;
 var currentLat = false;
 var currentLong = false;
 var locationEnabled = true;
@@ -50,7 +51,7 @@ function showNotices(){
 	/* NOTE: Unlike other messages that do not show again after they are read,
 	this message will continue to pop up every time the website is accessed */
 	var platform = "unknown"
-	if (cordova.platformId == "browser"){
+	if (window.deviceInfo.platform == "web"){
 		// Running either electron version or online version
 		if (window && window.process && window.process.type){
 			console.log("Atmos Electron Version")
@@ -69,7 +70,7 @@ function showNotices(){
 		}
 	}
 	else{
-		if (cordova.platformId == "electron"){
+		if (window.deviceInfo.platform == "electron"){
 			if (navigator.platform.indexOf("Win") == 0){
 				console.log("Atmos for Windows")
 				platform = "desktop-windows"
@@ -85,7 +86,7 @@ function showNotices(){
 		}
 		else{
 			console.log("Atmos Mobile Version")
-			platform = cordova.platformId;
+			platform = window.deviceInfo.platform;
 		}
 	}
 	// Important Notice About Weather Alerts
@@ -157,7 +158,7 @@ function showNotices(){
 // Check the version of Atmos being run
 function getPlatform(){
 	var platform = "unknown"
-	if (cordova.platformId == "browser"){
+	if (window.deviceInfo.platform == "web"){
 		// Running either electron version or online version
 		if (window && window.process && window.process.type){
 			platform = "desktop";
@@ -167,7 +168,7 @@ function getPlatform(){
 		}
 	}
 	else{
-		if (cordova.platformId == "electron"){
+		if (window.deviceInfo.platform == "electron"){
 			if (navigator.platform.indexOf("Win") == 0){
 				platform = "desktop-windows"
 			}
@@ -179,7 +180,7 @@ function getPlatform(){
 			}
 		}
 		else{
-			platform = device.platform;
+			platform = window.deviceInfo.platform;
 		}
 	}
 	window.platform = platform;
