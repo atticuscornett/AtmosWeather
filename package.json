@@ -13,6 +13,7 @@
   "author": "Atticus Cornett <64325242+atticuscornett@users.noreply.github.com>",
   "license": "GPL-3.0 License",
   "devDependencies": {
+    "@capacitor/assets": "^2.0.4",
     "@capacitor/cli": "^4.7.1",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-file": "^7.0.0",
