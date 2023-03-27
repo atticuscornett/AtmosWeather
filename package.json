@@ -16,7 +16,6 @@
     "@capacitor/assets": "^2.0.4",
     "@capacitor/cli": "^4.7.1",
     "cordova-browser": "^6.0.0",
-    "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-nativestorage": "github:TheCocoaProject/cordova-plugin-nativestorage",
     "webpack-cli": "^5.0.1"
   },

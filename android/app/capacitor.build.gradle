@@ -11,7 +11,8 @@ apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
     implementation project(':capacitor-device')
     implementation project(':capacitor-geolocation')
-    implementation "androidx.webkit:webkit:1.4.0"
+    implementation project(':capacitor-preferences')
+
 }
 
 
