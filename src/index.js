@@ -21,7 +21,6 @@ export async function configPreferences(){
 }
 
 export async function syncPreferences(){
-    await Preferences.set({key:"Cheese", value: "burger"})
     await Preferences.set({key:"settings", value:JSON.parse(localStorage.getItem("atmos-settings"))});
     await Preferences.set({key:"location-names", value:JSON.parse(localStorage.getItem("weather-location-names"))});
     await Preferences.set({key:"location-cache", value:JSON.parse(localStorage.getItem("nws-location-cache"))});

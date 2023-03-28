@@ -59,6 +59,10 @@ public class BackgroundService extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         LocationManager locMan = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         SharedPreferences weatherLocations = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
+        Map<String, ?> allEntries = weatherLocations.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            System.out.println("map values" + entry.getKey() + ": " + entry.getValue().toString());
+        }
         try {
             JSONArray locationJSON = new JSONArray(weatherLocations.getString("locations", "[]"));
             JSONArray locationNameJSON = new JSONArray(weatherLocations.getString("location-names", "[]"));
@@ -79,7 +83,7 @@ public class BackgroundService extends BroadcastReceiver {
 
             Intent intentA = new Intent(context, BackgroundService.class);
 
-            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, 0);
+            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, PendingIntent.FLAG_IMMUTABLE);
             Calendar calendar = Calendar.getInstance();
 
             // Update more often on WiFi
