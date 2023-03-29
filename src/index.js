@@ -14,24 +14,19 @@ export async function getLocation(){
     window.currentLong = currentLoc.coords.longitude;
 }
 
-export async function configPreferences(){
-    await Preferences.configure({
-        group: "NativeStorage"
-    })
-}
-
 export async function syncPreferences(){
-    await Preferences.set({key:"settings", value:JSON.parse(localStorage.getItem("atmos-settings"))});
-    await Preferences.set({key:"location-names", value:JSON.parse(localStorage.getItem("weather-location-names"))});
-    await Preferences.set({key:"location-cache", value:JSON.parse(localStorage.getItem("nws-location-cache"))});
-    await Preferences.set({key:"old-alerts", value:JSON.parse(localStorage.getItem("nws-alerts-old"))});
-    await Preferences.set({key:"nws-alerts-cache", value:JSON.parse(localStorage.getItem("nws-alerts-cache"))});
-    await Preferences.set({key:"nominatim-storage", value:JSON.parse(localStorage.getItem("nominatim-storage"))});
-    await Preferences.set({key:"nws-alerts-current", value:JSON.parse(localStorage.getItem("nws-alerts-current"))});
-    await Preferences.set({key:"nws-hourly-forecast-cache", value:JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"))});
-    await Preferences.set({key:"nws-forecast-cache", value:JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"))});
-    await Preferences.set({key:"nws-boundaries-cache", value:JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"))});
-    await Preferences.set({key:"notice-weatherAlerts", value:JSON.parse(localStorage.getItem("notice-weatherAlerts"))});
-    await Preferences.set({key:"locations", value:JSON.parse(localStorage.getItem("weather-locations"))});
+    NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("old-alerts", JSON.parse(localStorage.getItem("nws-alerts-old")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("nws-alerts-cache", JSON.parse(localStorage.getItem("nws-alerts-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("nominatim-storage", JSON.parse(localStorage.getItem("nominatim-storage")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("nws-alerts-current", JSON.parse(localStorage.getItem("nws-alerts-current")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("nws-hourly-forecast-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("nws-forecast-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("nws-boundaries-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("notice-weatherAlerts", JSON.parse(localStorage.getItem("notice-weatherAlerts")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});
+
 	
 }

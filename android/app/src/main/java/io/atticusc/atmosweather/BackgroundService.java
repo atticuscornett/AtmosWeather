@@ -59,10 +59,6 @@ public class BackgroundService extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         LocationManager locMan = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         SharedPreferences weatherLocations = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
-        Map<String, ?> allEntries = weatherLocations.getAll();
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            System.out.println("map values" + entry.getKey() + ": " + entry.getValue().toString());
-        }
         try {
             JSONArray locationJSON = new JSONArray(weatherLocations.getString("locations", "[]"));
             JSONArray locationNameJSON = new JSONArray(weatherLocations.getString("location-names", "[]"));

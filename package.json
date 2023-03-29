@@ -15,7 +15,6 @@
   "devDependencies": {
     "@capacitor/assets": "^2.0.4",
     "@capacitor/cli": "^4.7.1",
-    "cordova-browser": "^6.0.0",
     "cordova-plugin-nativestorage": "github:TheCocoaProject/cordova-plugin-nativestorage",
     "webpack-cli": "^5.0.1"
   },
@@ -23,8 +22,6 @@
     "@capacitor/android": "^4.7.1",
     "@capacitor/core": "^4.7.1",
     "@capacitor/device": "^4.1.0",
-    "@capacitor/geolocation": "4.1.0",
-    "@capacitor/preferences": "^4.0.2",
-    "cordova": "^11.1.0"
+    "@capacitor/geolocation": "4.1.0"
   }
 }

@@ -9,7 +9,6 @@ console.log("🌥⚡ Atmos Weather")
 // Initialize Capacitor
 cap.getLocation();
 cap.getDevice();
-cap.configPreferences();
 
 // Initial Variable States
 // UPDATE
