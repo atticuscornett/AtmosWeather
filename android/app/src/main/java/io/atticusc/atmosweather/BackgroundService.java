@@ -104,7 +104,13 @@ public class BackgroundService extends BroadcastReceiver {
             if (getLocationNow == 0 && getLocationInBackground){
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     Criteria criteria = new Criteria();
-                    criteria.setAccuracy(Criteria.ACCURACY_FINE);
+                    // Use less power on WiFi
+                    if (checkNetworkStatus(context)){
+                        criteria.setPowerRequirement(Criteria.POWER_LOW);
+                    }
+                    else{
+                        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+                    }
                     locMan.requestSingleUpdate(criteria, location -> {
                         if (location != null) {
                             lastLat = Double.parseDouble(weatherLocations.getString("lastLat", "0.0"));
