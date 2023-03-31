@@ -8,6 +8,7 @@
 var radarData = {};
 var radarFrames = [];
 var radarLayers = [];
+var spcOutlookLayer;
 var radarTileSize = 256;
 var smoothRadarData = 1;
 var radarColorScheme = 4;
@@ -66,6 +67,16 @@ function initialize(api, kind) {
     radarFrames = [];
     radarLayers = [];
     animationPosition = 0;
+
+    spcOutlookLayer = L.esri
+        .dynamicMapLayer({
+          url: "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/"
+        });
+    spcOutlookLayer.setOpacity(0.4);
+    spcOutlookLayer.addTo(map2);
+    if (!settings["radar"]["spc-outlook"]){
+        spcOutlookLayer.remove();
+    }
 
     if (!api) {
         return;

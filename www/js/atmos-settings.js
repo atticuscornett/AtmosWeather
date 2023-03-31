@@ -17,7 +17,7 @@ setTimeout(function(){
 		atmosSettingsTemp = {
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
-			"radar":{"color-scheme":4, "satellite": false, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
+			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
 			"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 			"alert-types": {
 				"warnings":{
@@ -117,7 +117,7 @@ setTimeout(function(){
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
-		"radar":{"color-scheme":4, "satellite": false, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
+		"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
 		"alert-types": {
 			"warnings":{
 				"tornado": "alert",
@@ -306,6 +306,7 @@ function refreshSettings(){
 	// Radar Settings
 	document.getElementById("setting-radar-color-scheme").value = allSettings["radar"]["color-scheme"];
 	document.getElementById("setting-radar-satellite").checked = allSettings["radar"]["satellite"];
+	document.getElementById("setting-radar-show-outlook").checked = allSettings["radar"]["spc-outlook"];
 	document.getElementById("setting-radar-show-watches").checked = allSettings["radar"]["polygons"]["watch"];
 	document.getElementById("setting-radar-show-advisories").checked = allSettings["radar"]["polygons"]["advisories"];
 	document.getElementById("setting-radar-show-warnings").checked = allSettings["radar"]["polygons"]["warnings"];
@@ -364,6 +365,7 @@ function saveSettings(){
 
 	allSettings["radar"]["color-scheme"] = Number(document.getElementById("setting-radar-color-scheme").value);
 	allSettings["radar"]["satellite"] = document.getElementById("setting-radar-satellite").checked;
+	allSettings["radar"]["spc-outlook"] = document.getElementById("setting-radar-show-outlook").checked;
 	allSettings["radar"]["polygons"]["watch"] = document.getElementById("setting-radar-show-watches").checked;
 	allSettings["radar"]["polygons"]["advisories"] = document.getElementById("setting-radar-show-advisories").checked;
 	allSettings["radar"]["polygons"]["warnings"] = document.getElementById("setting-radar-show-warnings").checked;
