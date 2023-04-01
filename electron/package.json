@@ -1,0 +1,70 @@
+{
+  "name": "atmos-weather",
+  "version": "1.1.0",
+  "description": "A lightweight app for weather forecasts and alerts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "Atticus Cornett <64325242+atticuscornett@users.noreply.github.com>",
+  "license": "GPL-3.0 License",
+  "devDependencies": {
+    "electron": "^22.0.1",
+    "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "appId": "io.atticusc.atmosweather",
+    "productName": "Atmos Weather",
+    "icon": "img/icon.png",
+    "win": {
+      "target": "nsis",
+      "icon": "img/icon.png",
+      "publish": [
+        "github"
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64",
+            "armv7l"
+          ]
+        },
+        "tar.gz",
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "img/icon.png"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "img/icon.png"
+    }
+  },
+  "dependencies": {
+    "electron-updater": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atticuscornett/AtmosWeather.git"
+  }
+}

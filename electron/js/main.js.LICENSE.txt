@@ -1,0 +1,1 @@
+/*! Capacitor: https://capacitorjs.com/ - MIT License */

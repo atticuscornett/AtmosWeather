@@ -28,5 +28,6 @@ node_modules/
 /platforms/electron/build/win-unpacked/
 /electron/dist/win-unpacked
 /electron/dist/
+/electron/build/
 builder-debug.yml
 *.blockmap
