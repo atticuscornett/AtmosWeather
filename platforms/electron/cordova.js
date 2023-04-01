@@ -1,1 +1,0 @@
-// Used to make codebase between Cordova and Electron more compatible
