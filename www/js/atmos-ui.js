@@ -51,9 +51,9 @@ function showNotices(){
 	/* NOTE: Unlike other messages that do not show again after they are read,
 	this message will continue to pop up every time the website is accessed */
 	var platform = "unknown"
-	if (navigator.userAgent.includes("Electron")){
+	if (window.deviceInfo.platform == "web"){
 		// Running either electron version or online version
-		if (window && window.process && window.process.type){
+		if (navigator.userAgent.includes("Electron")){
 			console.log("Atmos Electron Version")
 			platform = "desktop";
 		}

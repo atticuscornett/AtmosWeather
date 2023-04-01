@@ -53,7 +53,7 @@ function showNotices(){
 	var platform = "unknown"
 	if (window.deviceInfo.platform == "web"){
 		// Running either electron version or online version
-		if (window && window.process && window.process.type){
+		if (navigator.userAgent.includes("Electron")){
 			console.log("Atmos Electron Version")
 			platform = "desktop";
 		}
@@ -160,7 +160,7 @@ function getPlatform(){
 	var platform = "unknown"
 	if (window.deviceInfo.platform == "web"){
 		// Running either electron version or online version
-		if (window && window.process && window.process.type){
+		if (navigator.userAgent.includes("Electron")){
 			platform = "desktop";
 		}
 		else{
