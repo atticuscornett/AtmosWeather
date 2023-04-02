@@ -22,6 +22,7 @@
     "@capacitor/android": "^4.7.1",
     "@capacitor/core": "^4.7.1",
     "@capacitor/device": "^4.1.0",
-    "@capacitor/geolocation": "4.1.0"
+    "@capacitor/geolocation": "4.1.0",
+    "@turf/turf": "^6.5.0"
   }
 }
