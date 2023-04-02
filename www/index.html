@@ -174,6 +174,15 @@
 							<button id="radar-animation-control" onclick="toggleRadarPlayback();">Pause ⏸️</button>
 						</div>
 					</div>
+					<div style="text-align: center;width:fit-content;display: inline-block;margin-right: 20px;margin-top:15px;" id="spc-select-container">
+						<label style="font-size:15px;">Weather Outlook Type</label>
+						<br>
+						<select id="spc-select" style="font-size: 15px;">
+							<option value="severe-outlook">Severe Weather Outlook</option>
+							<option value="fire-outlook">Fire Outlook</option>
+							<option value="hazards-outlook">Hazards Outlook</option>
+						</select>
+					</div>
 					<h3>Jump To Location</h3>
 					<div id="radar-locations">
 
@@ -224,7 +233,7 @@
 					<label for="setting-radar-show-warnings">Show warning polygons on radar</label>
 					<br>
 					<input class="box" type="checkbox" id="setting-radar-show-outlook" >
-					<label for="setting-radar-show-outlook">Show SPC severe weather outlook</label>
+					<label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label>
 					<br>
 					<input class="box" type="checkbox" id="setting-radar-satellite" >
 					<label for="setting-radar-satellite">Show satellite instead of radar</label>

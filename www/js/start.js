@@ -32,5 +32,20 @@ document.getElementById("location-search").addEventListener("keypress", function
       }
 });
 
+// Refresh radar when weather outlook changes
+document.getElementById("spc-select").onchange = () => {
+    let value = document.getElementById("spc-select").value;
+    if (value == "severe-outlook"){
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
+    }
+    else if (value == "fire-outlook"){
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/fire_weather/SPC_firewx/MapServer";
+    }
+    else{
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/hazards/cpc_weather_hazards/MapServer";
+    }
+    reloadOutlook();
+}
+
 // Refresh location data
 setTimeout(refreshLocations, 200);
