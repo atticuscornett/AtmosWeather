@@ -765,6 +765,9 @@ function refreshCurrentLocation(){
 															else{
 																image = "sunny";
 															}
+															if (a == 0){
+																document.getElementById("current-loc-icon").setAttribute("src", "img/"+image+".svg")
+															}
 															forecastTime = hourly[0][a]["startTime"];
 															forecastTime = parseInt(forecastTime.substr(11,2));
 															AMPM = "AM";
