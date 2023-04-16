@@ -47,5 +47,9 @@ document.getElementById("spc-select").onchange = () => {
     reloadOutlook();
 }
 
+// Save settings when a setting is changed
+document.getElementById("tab-settings").onchange = saveSettings;
+document.getElementById("tab-single-location-settings").onchange = saveLocationSettings;
+
 // Refresh location data
 setTimeout(refreshLocations, 200);

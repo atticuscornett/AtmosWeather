@@ -425,7 +425,7 @@ function navCode(screenTo){
 	}
 	if (screenTo == "settings"){
 		refreshSettings();
-		setTimeout(keepSaving, 10);
+		//setTimeout(keepSaving, 10);
 	}
 	if (screenAt == "settings"){
 		saveSettings();
