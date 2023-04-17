@@ -327,7 +327,7 @@ function refreshLocations(){
 								refreshAgain = true;
 								setTimeout(refreshLocations, 7000);
 							}
-							var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
+							var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;animation: loadAnim infinite 2s;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
 							document.getElementById("location-main").innerHTML += theDiv;
 						}
 						else{
