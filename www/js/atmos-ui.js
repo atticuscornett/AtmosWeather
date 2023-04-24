@@ -565,7 +565,7 @@ function loadMoreInfo(navName){
 								}, 7000)
 							}
 							generatedCode += extendedForecast;
-							generatedCode += "<button style='width:100%;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
+							generatedCode += "<button style='width:100%;cursor:pointer;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
 							document.getElementById("tab-" + navName).innerHTML = generatedCode + "</div>";
 						});
 					});
@@ -637,9 +637,12 @@ function syncFiles(){
 
 // Removes a location from the list observed
 function removeLocation(index){
-	
 	var theCache = JSON.parse(localStorage.getItem("weather-locations"));
 	var theOtherCache = JSON.parse(localStorage.getItem("weather-location-names"));
+	let name = theOtherCache[index];
+	let locDiv = document.getElementById("tab-locdat-"+name+"-"+index.toString());
+	// Disable the remove location button to prevent accidental double taps causing multiple locations to be removed.
+	locDiv.getElementsByTagName("button")[0].onclick = ()=>{};
 	theCache.splice(index, 1);
 	theOtherCache.splice(index, 1);
 	localStorage.setItem("weather-locations", JSON.stringify(theCache));

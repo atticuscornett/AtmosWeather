@@ -99,6 +99,7 @@ select{
 	height: 8%;
 	width: 100%;
 	background-color: white;
+	cursor: pointer;
 }
 
 #add-location{
