@@ -4,4 +4,7 @@
     <string name="title_activity_main">Atmos Weather</string>
     <string name="package_name">io.atticusc.atmosweather</string>
     <string name="custom_url_scheme">io.atticusc.atmosweather</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>

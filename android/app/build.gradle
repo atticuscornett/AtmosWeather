@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    buildFeatures {
+        viewBinding true
+    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "io.atticusc.atmosweather"
