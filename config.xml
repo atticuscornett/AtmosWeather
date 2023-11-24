@@ -9,6 +9,7 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 	<platform name="android">
+        <preference name="SplashMaintainAspectRatio" value="true"></preference>
         <preference name="AndroidXEnabled" value="true" />
 		<resource-file src="res/values/colors.xml" target="/app/src/main/res/values/colors.xml" />
         <icon background="@color/background" density="xxxhdpi" foreground="res/icon/android/xxxhdpi-foreground.png" />
