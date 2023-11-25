@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/future_icon" />
+                android:src="@drawable/loading_icon"/>
 
             <TextView
                 android:id="@+id/currentTempWidget"
@@ -30,8 +30,8 @@
                 android:layout_marginStart="10sp"
                 android:layout_weight="1"
                 android:text="-- °F"
-                android:textColor="#000000"
-                android:textSize="25sp" />
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="30sp" />
 
         </LinearLayout>
 
@@ -39,7 +39,8 @@
             android:id="@+id/lastUpdatedText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Last updated"
-            android:textAlignment="viewEnd" />
+            android:text="Updated --:--"
+            android:textAlignment="viewEnd"
+            android:textSize="10sp" />
     </LinearLayout>
 </RelativeLayout>
