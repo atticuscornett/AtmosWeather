@@ -15,7 +15,7 @@ public class WeatherBar extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = "Updated " + new SimpleDateFormat("HH:mm").format(new java.util.Date());;
+        CharSequence widgetText = "Updated " + new SimpleDateFormat("HH:mm").format(new java.util.Date());
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_bar);
         views.setTextViewText(R.id.lastUpdatedText, widgetText);
