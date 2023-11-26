@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
 
+
+    namespace 'io.atticusc.atmosweather'
     buildFeatures {
         viewBinding true
     }
