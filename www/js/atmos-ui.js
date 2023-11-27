@@ -742,7 +742,11 @@ function refreshCurrentLocation(){
 														a = 0;
 														var forecastTime;
 														var AMPM;
-														while (a < 12){
+
+														let timePeriods = [];
+														let tempPeriods = [];
+
+														while (a < 24){
 															sfor = hourly[0][a]["shortForecast"].toLowerCase();
 															if (a == 11 && window.screen.orientation.type.includes("landscape")){
 																longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
@@ -783,14 +787,38 @@ function refreshCurrentLocation(){
 															if (forecastTime == 0){
 																forecastTime = 12;
 															}
+
+															timePeriods.push(forecastTime.toString() + " " + AMPM);
+															tempPeriods.push(hourly[0][a]["temperature"]);
 															longHourForecast += "<img src='img/" + image + ".svg'>"
 															longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
 															longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
 															longHourForecast += "</center></div>"
 															a++;
 														}
+														Chart.defaults.font.size = 18;
+														Chart.defaults.font.family = "Secular One";
+														new Chart(document.getElementById("current-loc-hourly-chart"), {
+															type: 'line',
+															data: {
+																labels: timePeriods,
+																datasets: [{
+																	label: 'Forecasted Temperature',
+																	data: tempPeriods
+																}]
+															},
+															options: {
+																responsive: true,
+																maintainAspectRatio: false,
+																plugins: {
+																	legend: {
+																		display: false
+																	}
+																}
+															}
+														});
 														longHourForecast += "</div>";
-														document.getElementById("current-loc-hourly").innerHTML = longHourForecast;
+														//document.getElementById("current-loc-hourly").innerHTML = longHourForecast;
 														var extendedForecast = "";
 														for (let i of forecast[0]){
 															extendedForecast += "<details><summary>" + i["name"] + "</summary>" + i["detailedForecast"] + "</details>";
