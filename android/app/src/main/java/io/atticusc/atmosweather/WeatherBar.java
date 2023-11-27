@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,6 +20,8 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.atticusc.atmosweather.notifications.Toolbox;
 
 /**
  * Implementation of App Widget functionality.
@@ -44,13 +48,16 @@ public class WeatherBar extends AppWidgetProvider {
                         public void onResponse(String response) {
                             try {
                                 JSONObject forecastResponse = new JSONObject(response);
-                                int temp = forecastResponse.getJSONObject("properties").getJSONArray("periods").getJSONObject(0).getInt("temperature");
-                                CharSequence widgetText = new SimpleDateFormat("HH:mm").format(new java.util.Date());
+                                JSONObject currentPeriod = forecastResponse.getJSONObject("properties").getJSONArray("periods").getJSONObject(0);
+                                int temp = currentPeriod.getInt("temperature");
+                                String shortForecast = currentPeriod.getString("shortForecast");
+                                //CharSequence widgetText = new SimpleDateFormat("HH:mm").format(new java.util.Date());
                                 CharSequence tempText = temp + " °F";
                                 // Construct the RemoteViews object
                                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_bar);
-                                views.setTextViewText(R.id.lastUpdatedText, widgetText);
+                                views.setTextViewText(R.id.lastUpdatedText, shortForecast);
                                 views.setTextViewText(R.id.currentTempWidget, tempText);
+                                views.setImageViewResource(R.id.widgetWeatherIcon, Toolbox.DecideImageFromForecast(shortForecast));
 
                                 // Instruct the widget manager to update the widget
                                 appWidgetManager.updateAppWidget(appWidgetId, views);
