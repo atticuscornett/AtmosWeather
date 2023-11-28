@@ -325,8 +325,20 @@
 					<h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5>
 					<br>
 					<h1>Hourly Forecast</h1>
+					<input type="radio" id="current-loc-hourly-temp" name="current-loc-hourly" checked>
+					<label for="current-loc-hourly-temp">Temperature</label>
+					<input type="radio" id="current-loc-hourly-precip" name="current-loc-hourly">
+					<label for="current-loc-hourly-precip">Precipitation</label>
+					<input type="radio" id="current-loc-hourly-humid" name="current-loc-hourly">
+					<label for="current-loc-hourly-humid">Humidity</label>
 					<div style="position: relative; max-height: 50vh">
 						<canvas id="current-loc-hourly-chart"></canvas>
+					</div>
+					<div style="position: relative; max-height: 50vh">
+						<canvas id="current-loc-hourly-precip-chart"></canvas>
+					</div>
+					<div style="position: relative; max-height: 50vh">
+						<canvas id="current-loc-hourly-humid-chart"></canvas>
 					</div>
 					<div id="current-loc-hourly">
 

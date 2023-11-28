@@ -744,9 +744,12 @@ function refreshCurrentLocation(){
 
 														let timePeriods = [];
 														let tempPeriods = [];
+														let precipPeriods = [];
 														let imagePeriods = [];
-														let colorPeriods = [];
-														const colorGradient = chroma.scale(['purple', 'dodgerblue', 'lime', 'yellow', 'red']);
+														let tempColorPeriods = [];
+														let precipColorPeriods = [];
+														const tempColorGradient = chroma.scale(['purple', 'dodgerblue', 'lime', 'yellow', 'red']);
+														const precipColorGradient = chroma.scale(["white", "dodgerblue", "blue"]);
 														let lastImage = "";
 														let lastImageChange = -10;
 														let image;
@@ -798,13 +801,18 @@ function refreshCurrentLocation(){
 																imagePeriods.push(null);
 															}
 															timePeriods.push(forecastTime.toString() + " " + AMPM);
-															colorPeriods.push(colorGradient(hourly[0][a]["temperature"]/100).hex());
+															// Generate graph colors and data
+															tempColorPeriods.push(tempColorGradient(hourly[0][a]["temperature"]/100).hex());
 															tempPeriods.push(hourly[0][a]["temperature"]);
+															console.log("test")
+															precipColorPeriods.push(precipColorGradient(hourly[0][a]["probabilityOfPrecipitation"]["value"]/100).hex());
+															precipPeriods.push(hourly[0][a]["probabilityOfPrecipitation"]["value"]);
 															a++;
 														}
-														console.log(colorPeriods)
+														console.log("also test")
 														Chart.defaults.font.size = 18;
 														Chart.defaults.font.family = "Secular One";
+														// Create hourly temp chart
 														new Chart(document.getElementById("current-loc-hourly-chart"), {
 															type: 'line',
 															data: {
@@ -816,7 +824,7 @@ function refreshCurrentLocation(){
 																	pointHoverRadius: 20,
 																	pointHitRadius: 20,
 																	pointRadius: 7,
-																	backgroundColor: colorPeriods,
+																	backgroundColor: tempColorPeriods,
 																	fill: false,
 																	borderWidth: 5
 																}]
@@ -832,6 +840,49 @@ function refreshCurrentLocation(){
 																		callbacks: {
 																			label: (item) =>
 																				`${item.dataset.label}: ${item.formattedValue} °F`,
+																		},
+																	}
+																},
+																tension: 0.4
+															}
+														});
+														// Create hourly precipitation chart
+														new Chart(document.getElementById("current-loc-hourly-precip-chart"), {
+															type: 'bar',
+															data: {
+																labels: timePeriods,
+																datasets: [{
+																	label: 'Chance of Precipitation',
+																	data: precipPeriods,
+																	pointHoverRadius: 20,
+																	pointHitRadius: 20,
+																	pointRadius: 7,
+																	backgroundColor: precipColorPeriods,
+																	fill: false,
+																	borderWidth: 5
+																}]
+															},
+															options: {
+																responsive: true,
+																maintainAspectRatio: false,
+																scales: {
+																	yAxes: [{
+																		ticks: {
+																			beginAtZero: true,
+																			min: 0,
+																			max: 100,
+																			stepSize: 20
+																		}
+																	}]
+																},
+																plugins: {
+																	legend: {
+																		display: false
+																	},
+																	tooltip: {
+																		callbacks: {
+																			label: (item) =>
+																				`${item.dataset.label}: ${item.formattedValue}%`,
 																		},
 																	}
 																},
