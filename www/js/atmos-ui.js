@@ -745,7 +745,10 @@ function refreshCurrentLocation(){
 
 														let timePeriods = [];
 														let tempPeriods = [];
-
+														let imagePeriods = [];
+														let lastImage = "";
+														let lastImageChange = -10;
+														let image;
 														while (a < 24){
 															sfor = hourly[0][a]["shortForecast"].toLowerCase();
 															if (a == 11 && window.screen.orientation.type.includes("landscape")){
@@ -788,12 +791,23 @@ function refreshCurrentLocation(){
 																forecastTime = 12;
 															}
 
+															if (a > 0 && image !== lastImage && lastImageChange + 2 < a){
+																var colorScheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+																let imageObj = new Image();
+																imageObj.src = colorScheme === "dark" ? "img/"+image+".svg" : "img/"+image+"-adaptive.svg";
+																imagePeriods.push(imageObj);
+																lastImage = image;
+																lastImageChange = a;
+															}
+															else{
+																imagePeriods.push(null);
+															}
 															timePeriods.push(forecastTime.toString() + " " + AMPM);
 															tempPeriods.push(hourly[0][a]["temperature"]);
-															longHourForecast += "<img src='img/" + image + ".svg'>"
+															longHourForecast += "<img src='img/" + image + "-.svg'>"
 															longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
 															longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
-															longHourForecast += "</center></div>"
+															longHourForecast += "</center></div>";
 															a++;
 														}
 														Chart.defaults.font.size = 18;
@@ -803,8 +817,11 @@ function refreshCurrentLocation(){
 															data: {
 																labels: timePeriods,
 																datasets: [{
-																	label: 'Forecasted Temperature',
-																	data: tempPeriods
+																	label: 'Forecast Temperature',
+																	data: tempPeriods,
+																	pointStyle: imagePeriods,
+																	pointHoverRadius: 20,
+																	pointHitRadius: 20
 																}]
 															},
 															options: {
@@ -813,8 +830,15 @@ function refreshCurrentLocation(){
 																plugins: {
 																	legend: {
 																		display: false
+																	},
+																	tooltip: {
+																		callbacks: {
+																			label: (item) =>
+																				`${item.dataset.label}: ${item.formattedValue} °F`,
+																		},
 																	}
-																}
+																},
+																tension: 0.4
 															}
 														});
 														longHourForecast += "</div>";
