@@ -746,13 +746,17 @@ function refreshCurrentLocation(){
 														let tempPeriods = [];
 														let precipPeriods = [];
 														let humidityPeriods = [];
+														let windPeriods = [];
+														let windDirectionPeriods = [];
 														let imagePeriods = [];
 														let tempColorPeriods = [];
 														let precipColorPeriods = [];
 														let humidityColorPeriods = [];
+														let windColorPeriods = [];
 														const tempColorGradient = chroma.scale(['purple', 'dodgerblue', 'lime', 'yellow', 'red']);
 														const precipColorGradient = chroma.scale(["white", "dodgerblue", "blue"]);
 														const humidityColorGradient = chroma.scale(["white", "yellow"]);
+														const windSpeedGradient = chroma.scale(["white", "deeppink"]);
 														let lastImage = "";
 														let lastImageChange = -10;
 														let image;
@@ -811,6 +815,8 @@ function refreshCurrentLocation(){
 															precipPeriods.push(hourly[0][a]["probabilityOfPrecipitation"]["value"]);
 															humidityColorPeriods.push(humidityColorGradient(hourly[0][a]["relativeHumidity"]["value"]/100).hex());
 															humidityPeriods.push(hourly[0][a]["relativeHumidity"]["value"]);
+															windPeriods.push(Number(hourly[0][a]["windSpeed"].replace(" mph", "")));
+															windColorPeriods.push(windSpeedGradient(Number(hourly[0][a]["windSpeed"].replace(" mph", ""))/25).hex());
 															a++;
 														}
 														Chart.defaults.font.size = 18;
@@ -892,6 +898,7 @@ function refreshCurrentLocation(){
 																tension: 0.4
 															}
 														});
+														// Create hourly humidity chart
 														new Chart(document.getElementById("current-loc-hourly-humid-chart"), {
 															type: 'line',
 															data: {
@@ -928,6 +935,43 @@ function refreshCurrentLocation(){
 																		callbacks: {
 																			label: (item) =>
 																				`${item.dataset.label}: ${item.formattedValue}%`,
+																		},
+																	}
+																},
+																tension: 0.4
+															}
+														});
+														new Chart(document.getElementById("current-loc-hourly-wind-chart"), {
+															type: 'line',
+															data: {
+																labels: timePeriods,
+																datasets: [{
+																	label: 'Wind Speed',
+																	data: windPeriods,
+																	pointHoverRadius: 20,
+																	pointHitRadius: 20,
+																	pointRadius: 7,
+																	backgroundColor: windColorPeriods,
+																	fill: false,
+																	borderWidth: 5
+																}]
+															},
+															options: {
+																responsive: true,
+																maintainAspectRatio: false,
+																scales: {
+																	y: {
+																		beginAtZero: true
+																	}
+																},
+																plugins: {
+																	legend: {
+																		display: false
+																	},
+																	tooltip: {
+																		callbacks: {
+																			label: (item) =>
+																				`${item.dataset.label}: ${item.formattedValue} mph`,
 																		},
 																	}
 																},
