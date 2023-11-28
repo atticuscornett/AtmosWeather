@@ -738,7 +738,6 @@ function refreshCurrentLocation(){
 														document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
 														document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
 														var a = 0;
-														var longHourForecast = "<div class='hourly-container'>";
 														a = 0;
 														var forecastTime;
 														var AMPM;
@@ -753,12 +752,6 @@ function refreshCurrentLocation(){
 														let image;
 														while (a < 24){
 															sfor = hourly[0][a]["shortForecast"].toLowerCase();
-															if (a == 11 && window.screen.orientation.type.includes("landscape")){
-																longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
-															}
-															else{
-																longHourForecast += "<div class='forecast-temp'><center>";
-															}
 															if (sfor.includes("rain") || sfor.includes("drizzle")){
 																image = "rainy";
 															}
@@ -794,7 +787,7 @@ function refreshCurrentLocation(){
 															}
 
 															if (a > 0 && image !== lastImage && lastImageChange + 2 < a){
-																var colorScheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+																let colorScheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 																let imageObj = new Image();
 																imageObj.src = colorScheme === "dark" ? "img/"+image+".svg" : "img/"+image+"-adaptive.svg";
 																imagePeriods.push(imageObj);
@@ -807,10 +800,6 @@ function refreshCurrentLocation(){
 															timePeriods.push(forecastTime.toString() + " " + AMPM);
 															colorPeriods.push(colorGradient(hourly[0][a]["temperature"]/100).hex());
 															tempPeriods.push(hourly[0][a]["temperature"]);
-															longHourForecast += "<img src='img/" + image + "-.svg'>"
-															longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
-															longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
-															longHourForecast += "</center></div>";
 															a++;
 														}
 														console.log(colorPeriods)
@@ -849,8 +838,6 @@ function refreshCurrentLocation(){
 																tension: 0.4
 															}
 														});
-														longHourForecast += "</div>";
-														//document.getElementById("current-loc-hourly").innerHTML = longHourForecast;
 														var extendedForecast = "";
 														for (let i of forecast[0]){
 															extendedForecast += "<details><summary>" + i["name"] + "</summary>" + i["detailedForecast"] + "</details>";
