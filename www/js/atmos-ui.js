@@ -745,11 +745,14 @@ function refreshCurrentLocation(){
 														let timePeriods = [];
 														let tempPeriods = [];
 														let precipPeriods = [];
+														let humidityPeriods = [];
 														let imagePeriods = [];
 														let tempColorPeriods = [];
 														let precipColorPeriods = [];
+														let humidityColorPeriods = [];
 														const tempColorGradient = chroma.scale(['purple', 'dodgerblue', 'lime', 'yellow', 'red']);
 														const precipColorGradient = chroma.scale(["white", "dodgerblue", "blue"]);
+														const humidityColorGradient = chroma.scale(["white", "yellow"]);
 														let lastImage = "";
 														let lastImageChange = -10;
 														let image;
@@ -804,12 +807,12 @@ function refreshCurrentLocation(){
 															// Generate graph colors and data
 															tempColorPeriods.push(tempColorGradient(hourly[0][a]["temperature"]/100).hex());
 															tempPeriods.push(hourly[0][a]["temperature"]);
-															console.log("test")
 															precipColorPeriods.push(precipColorGradient(hourly[0][a]["probabilityOfPrecipitation"]["value"]/100).hex());
 															precipPeriods.push(hourly[0][a]["probabilityOfPrecipitation"]["value"]);
+															humidityColorPeriods.push(humidityColorGradient(hourly[0][a]["relativeHumidity"]["value"]/100).hex());
+															humidityPeriods.push(hourly[0][a]["relativeHumidity"]["value"]);
 															a++;
 														}
-														console.log("also test")
 														Chart.defaults.font.size = 18;
 														Chart.defaults.font.family = "Secular One";
 														// Create hourly temp chart
@@ -848,7 +851,7 @@ function refreshCurrentLocation(){
 														});
 														// Create hourly precipitation chart
 														new Chart(document.getElementById("current-loc-hourly-precip-chart"), {
-															type: 'bar',
+															type: 'line',
 															data: {
 																labels: timePeriods,
 																datasets: [{
@@ -866,14 +869,56 @@ function refreshCurrentLocation(){
 																responsive: true,
 																maintainAspectRatio: false,
 																scales: {
-																	yAxes: [{
+																	y: {
+																		beginAtZero: true,
+																		min: 0,
+																		max: 100,
 																		ticks: {
-																			beginAtZero: true,
-																			min: 0,
-																			max: 100,
 																			stepSize: 20
 																		}
-																	}]
+																	}
+																},
+																plugins: {
+																	legend: {
+																		display: false
+																	},
+																	tooltip: {
+																		callbacks: {
+																			label: (item) =>
+																				`${item.dataset.label}: ${item.formattedValue}%`,
+																		},
+																	}
+																},
+																tension: 0.4
+															}
+														});
+														new Chart(document.getElementById("current-loc-hourly-humid-chart"), {
+															type: 'line',
+															data: {
+																labels: timePeriods,
+																datasets: [{
+																	label: 'Relative Humidity',
+																	data: humidityPeriods,
+																	pointHoverRadius: 20,
+																	pointHitRadius: 20,
+																	pointRadius: 7,
+																	backgroundColor: humidityColorPeriods,
+																	fill: false,
+																	borderWidth: 5
+																}]
+															},
+															options: {
+																responsive: true,
+																maintainAspectRatio: false,
+																scales: {
+																	y: {
+																		beginAtZero: true,
+																		min: 0,
+																		max: 100,
+																		ticks: {
+																			stepSize: 20
+																		}
+																	}
 																},
 																plugins: {
 																	legend: {
