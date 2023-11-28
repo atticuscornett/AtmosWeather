@@ -746,6 +746,8 @@ function refreshCurrentLocation(){
 														let timePeriods = [];
 														let tempPeriods = [];
 														let imagePeriods = [];
+														let colorPeriods = [];
+														const colorGradient = chroma.scale(['purple', 'dodgerblue', 'lime', 'yellow', 'red']);
 														let lastImage = "";
 														let lastImageChange = -10;
 														let image;
@@ -803,6 +805,7 @@ function refreshCurrentLocation(){
 																imagePeriods.push(null);
 															}
 															timePeriods.push(forecastTime.toString() + " " + AMPM);
+															colorPeriods.push(colorGradient(hourly[0][a]["temperature"]/100).hex());
 															tempPeriods.push(hourly[0][a]["temperature"]);
 															longHourForecast += "<img src='img/" + image + "-.svg'>"
 															longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
@@ -810,6 +813,7 @@ function refreshCurrentLocation(){
 															longHourForecast += "</center></div>";
 															a++;
 														}
+														console.log(colorPeriods)
 														Chart.defaults.font.size = 18;
 														Chart.defaults.font.family = "Secular One";
 														new Chart(document.getElementById("current-loc-hourly-chart"), {
@@ -821,7 +825,11 @@ function refreshCurrentLocation(){
 																	data: tempPeriods,
 																	pointStyle: imagePeriods,
 																	pointHoverRadius: 20,
-																	pointHitRadius: 20
+																	pointHitRadius: 20,
+																	pointRadius: 7,
+																	backgroundColor: colorPeriods,
+																	fill: false,
+																	borderWidth: 5
 																}]
 															},
 															options: {
