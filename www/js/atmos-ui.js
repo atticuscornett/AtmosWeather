@@ -758,6 +758,8 @@ function refreshCurrentLocation(){
 														const humidityColorGradient = chroma.scale(["white", "yellow"]);
 														const windSpeedGradient = chroma.scale(["white", "deeppink"]);
 														let lastImage = "";
+														let lastWindDir = "";
+														let lastWindDirChange = -10;
 														let lastImageChange = -10;
 														let image;
 														while (a < 24){
@@ -806,6 +808,18 @@ function refreshCurrentLocation(){
 															}
 															else{
 																imagePeriods.push(null);
+															}
+															if (a > 0 && hourly[0][a]["windDirection"] !== lastWindDir){
+																let colorScheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+																let imageObj = new Image();
+																imageObj.src = colorScheme === "dark" ? "img/directions/"+hourly[0][a]["windDirection"]+".svg" : "img/directions/"+hourly[0][a]["windDirection"]+"-adaptive.svg";
+																windDirectionPeriods.push(imageObj);
+																lastWindDir = hourly[0][a]["windDirection"];
+																console.log(lastWindDir);
+																lastWindDirChange = a;
+															}
+															else{
+																windDirectionPeriods.push(null);
 															}
 															timePeriods.push(forecastTime.toString() + " " + AMPM);
 															// Generate graph colors and data
@@ -952,6 +966,7 @@ function refreshCurrentLocation(){
 																	pointHitRadius: 20,
 																	pointRadius: 7,
 																	backgroundColor: windColorPeriods,
+																	pointStyle: windDirectionPeriods,
 																	fill: false,
 																	borderWidth: 5
 																}]
