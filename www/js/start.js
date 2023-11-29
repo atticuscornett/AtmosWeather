@@ -51,5 +51,17 @@ document.getElementById("spc-select").onchange = () => {
 document.getElementById("tab-settings").onchange = saveSettings;
 document.getElementById("tab-single-location-settings").onchange = saveLocationSettings;
 
+document.getElementById("current-loc-hourly-select").onchange = switchGraphs;
+
+// Switch between hourly graphs
+function switchGraphs(e){
+    let targetPrefix = e.target.id.split("-")[0];
+    document.getElementById(targetPrefix + "-loc-hourly-temp-chart").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-precip-chart").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-humid-chart").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-wind-chart").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart").style.display = "block";
+}
+
 // Refresh location data
 setTimeout(refreshLocations, 200);

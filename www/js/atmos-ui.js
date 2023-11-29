@@ -815,7 +815,6 @@ function refreshCurrentLocation(){
 																imageObj.src = colorScheme === "dark" ? "img/directions/"+hourly[0][a]["windDirection"]+".svg" : "img/directions/"+hourly[0][a]["windDirection"]+"-adaptive.svg";
 																windDirectionPeriods.push(imageObj);
 																lastWindDir = hourly[0][a]["windDirection"];
-																console.log(lastWindDir);
 																lastWindDirChange = a;
 															}
 															else{
@@ -836,7 +835,7 @@ function refreshCurrentLocation(){
 														Chart.defaults.font.size = 18;
 														Chart.defaults.font.family = "Secular One";
 														// Create hourly temp chart
-														new Chart(document.getElementById("current-loc-hourly-chart"), {
+														new Chart(document.getElementById("current-loc-hourly-temp-chart"), {
 															type: 'line',
 															data: {
 																labels: timePeriods,
