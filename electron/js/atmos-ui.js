@@ -327,7 +327,7 @@ function refreshLocations(){
 								refreshAgain = true;
 								setTimeout(refreshLocations, 7000);
 							}
-							var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
+							var theDiv = '<div class="location ' + "error" + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;animation: loadAnim infinite 2s;" src="img/' + "error" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3>Loading location data...</h3></div></div><br>';
 							document.getElementById("location-main").innerHTML += theDiv;
 						}
 						else{
@@ -425,7 +425,7 @@ function navCode(screenTo){
 	}
 	if (screenTo == "settings"){
 		refreshSettings();
-		setTimeout(keepSaving, 10);
+		//setTimeout(keepSaving, 10);
 	}
 	if (screenAt == "settings"){
 		saveSettings();
@@ -485,6 +485,7 @@ function loadMoreInfo(navName){
 								generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
 							}
 							// Temperature Bar
+							let longHourForecast = "<h1>Hourly Forecast</h1>";
 							try{
 								generatedCode += '<div class="location noclick ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 								generatedCode += '<div class="clear-border"><h1>Air Quality Index (AQI)</h1><h2>';
@@ -493,61 +494,35 @@ function loadMoreInfo(navName){
 								let gauge = makeGauge(AQI, 0, 300);
 								generatedCode += gauge.outerHTML;
 								generatedCode += '</div><h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5><br>'
-								
-								var a = 0;
-								var longHourForecast = "<h1>Hourly Forecast</h1><div class='hourly-container'>";
-								a = 0;
-								var forecastTime;
-								var AMPM;
-								while (a < 12){
-									sfor = hourly[0][a]["shortForecast"].toLowerCase();
-									if (a == 11 && window.screen.orientation.type.includes("landscape")){
-										longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
-									}
-									else{
-										longHourForecast += "<div class='forecast-temp'><center>";
-									}
-									if (sfor.includes("rain") || sfor.includes("drizzle")){
-										image = "rainy";
-									}
-									else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
-										image = "stormy";
-									}
-									else if (sfor.includes("snow")){
-										image = "snowy";
-									}
-									else if (sfor.includes("wind")){
-										image = "windy";
-									}
-									else if (sfor.includes("cloud") || sfor.includes("fog")){
-										image = "cloudy";
-									}
-									else{
-										image = "sunny";
-									}
-									forecastTime = hourly[0][a]["startTime"];
-									forecastTime = parseInt(forecastTime.substr(11,2));
-									AMPM = "AM";
-									if (forecastTime > 11){
-										AMPM = "PM";
-									}
-									if (forecastTime > 12){
-										forecastTime -= 12;
-									}
-									if (forecastTime == 0){
-										forecastTime = 12;
-									}
-									longHourForecast += "<img src='img/" + image + ".svg'>"
-									longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
-									longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
-									longHourForecast += "</center></div>"
-									a++;
-								}
-								longHourForecast += "</div>";
+
+								clearCharts(index);
+								longHourForecast += `<div id="`+String(index)+`-loc-hourly-select">
+									<input type="radio" id="`+String(index)+`-loc-hourly-temp" name="`+String(index)+`-loc-hourly" value="temp" class="hourlySelector" checked>
+									<label for="`+String(index)+`-loc-hourly-temp" class="hourlySelectorLabel">Temperature</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-precip" name="`+String(index)+`-loc-hourly" value="precip" class="hourlySelector">
+									<label for="`+String(index)+`-loc-hourly-precip" class="hourlySelectorLabel">Precipitation</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-humid" name="`+String(index)+`-loc-hourly" value="humid" class="hourlySelector">
+									<label for="`+String(index)+`-loc-hourly-humid" class="hourlySelectorLabel">Humidity</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-wind" name="`+String(index)+`-loc-hourly" value="wind" class="hourlySelector">
+									<label for="`+String(index)+`-loc-hourly-wind" class="hourlySelectorLabel">Wind Speed</label>
+								</div>`
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-temp-chart-container'><canvas id='" + String(index) + "-loc-hourly-temp-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-precip-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-precip-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-humid-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-humid-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-wind-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-wind-chart'></canvas></div>";
+								// Wait for the DOM to be updated before making graphs
+								setTimeout(function(){
+									makeTempGraph(index, hourly[0]);
+									makePrecipGraph(index, hourly[0]);
+									makeHumidGraph(index, hourly[0]);
+									makeWindGraph(index, hourly[0]);
+									document.getElementById(String(index)+"-loc-hourly-select").onchange = switchGraphs;
+								}, 50);
 							}
 							catch (e){
-								var longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
+								longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
 							}
+
 							generatedCode += longHourForecast;
 							// Add detailed forecast at bottom
 							var extendedForecast = "<br><h1>NWS Forecast</h1><br>";
@@ -565,7 +540,7 @@ function loadMoreInfo(navName){
 								}, 7000)
 							}
 							generatedCode += extendedForecast;
-							generatedCode += "<button style='width:100%;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
+							generatedCode += "<button style='width:100%;cursor:pointer;background-color:darkslategray;color:white;border:none;border-radius:7px;font-size:20px;font-family:Secular One;' onclick='removeLocation(" + index.toString() + ");'>Remove This Location</button>"
 							document.getElementById("tab-" + navName).innerHTML = generatedCode + "</div>";
 						});
 					});
@@ -637,9 +612,12 @@ function syncFiles(){
 
 // Removes a location from the list observed
 function removeLocation(index){
-	
 	var theCache = JSON.parse(localStorage.getItem("weather-locations"));
 	var theOtherCache = JSON.parse(localStorage.getItem("weather-location-names"));
+	let name = theOtherCache[index];
+	let locDiv = document.getElementById("tab-locdat-"+name+"-"+index.toString());
+	// Disable the remove location button to prevent accidental double taps causing multiple locations to be removed.
+	locDiv.getElementsByTagName("button")[0].onclick = ()=>{};
 	theCache.splice(index, 1);
 	theOtherCache.splice(index, 1);
 	localStorage.setItem("weather-locations", JSON.stringify(theCache));
@@ -734,57 +712,18 @@ function refreshCurrentLocation(){
 														document.getElementById("current-loc-temp").innerHTML = hourlyForecast["temperature"] + "° F";
 														document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
 														document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
-														var a = 0;
-														var longHourForecast = "<div class='hourly-container'>";
-														a = 0;
-														var forecastTime;
-														var AMPM;
-														while (a < 12){
-															sfor = hourly[0][a]["shortForecast"].toLowerCase();
-															if (a == 11 && window.screen.orientation.type.includes("landscape")){
-																longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
-															}
-															else{
-																longHourForecast += "<div class='forecast-temp'><center>";
-															}
-															if (sfor.includes("rain") || sfor.includes("drizzle")){
-																image = "rainy";
-															}
-															else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
-																image = "stormy";
-															}
-															else if (sfor.includes("snow")){
-																image = "snowy";
-															}
-															else if (sfor.includes("wind")){
-																image = "windy";
-															}
-															else if (sfor.includes("cloud") || sfor.includes("fog")){
-																image = "cloudy";
-															}
-															else{
-																image = "sunny";
-															}
-															forecastTime = hourly[0][a]["startTime"];
-															forecastTime = parseInt(forecastTime.substr(11,2));
-															AMPM = "AM";
-															if (forecastTime > 11){
-																AMPM = "PM";
-															}
-															if (forecastTime > 12){
-																forecastTime -= 12;
-															}
-															if (forecastTime == 0){
-																forecastTime = 12;
-															}
-															longHourForecast += "<img src='img/" + image + ".svg'>"
-															longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
-															longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
-															longHourForecast += "</center></div>"
-															a++;
-														}
-														longHourForecast += "</div>";
-														document.getElementById("current-loc-hourly").innerHTML = longHourForecast;
+
+														Chart.defaults.font.size = 18;
+														Chart.defaults.font.family = "Secular One";
+														clearCharts("current");
+														// Create hourly temp chart
+														makeTempGraph("current", hourly[0]);
+														// Create hourly precipitation chart
+														makePrecipGraph("current", hourly[0]);
+														// Create hourly humidity chart
+														makeHumidGraph("current", hourly[0]);
+														// Create hourly wind chart
+														makeWindGraph("current", hourly[0]);
 														var extendedForecast = "";
 														for (let i of forecast[0]){
 															extendedForecast += "<details><summary>" + i["name"] + "</summary>" + i["detailedForecast"] + "</details>";

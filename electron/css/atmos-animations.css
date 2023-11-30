@@ -115,6 +115,15 @@
 	}
 }
 
+@keyframes loadAnim{
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
 /* Dark Mode Colors */
 @media (prefers-color-scheme: dark){
 	/* Logo Animations */

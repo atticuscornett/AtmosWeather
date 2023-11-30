@@ -32,5 +32,36 @@ document.getElementById("location-search").addEventListener("keypress", function
       }
 });
 
+// Refresh radar when weather outlook changes
+document.getElementById("spc-select").onchange = () => {
+    let value = document.getElementById("spc-select").value;
+    if (value == "severe-outlook"){
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
+    }
+    else if (value == "fire-outlook"){
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/fire_weather/SPC_firewx/MapServer";
+    }
+    else{
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/hazards/cpc_weather_hazards/MapServer";
+    }
+    reloadOutlook();
+}
+
+// Save settings when a setting is changed
+document.getElementById("tab-settings").onchange = saveSettings;
+document.getElementById("tab-single-location-settings").onchange = saveLocationSettings;
+
+document.getElementById("current-loc-hourly-select").onchange = switchGraphs;
+
+// Switch between hourly graphs
+function switchGraphs(e){
+    let targetPrefix = e.target.id.split("-")[0];
+    document.getElementById(targetPrefix + "-loc-hourly-temp-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-precip-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-humid-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-wind-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
+}
+
 // Refresh location data
 setTimeout(refreshLocations, 200);

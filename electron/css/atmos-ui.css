@@ -99,6 +99,7 @@ select{
 	height: 8%;
 	width: 100%;
 	background-color: white;
+	cursor: pointer;
 }
 
 #add-location{
@@ -171,6 +172,12 @@ select{
 	height: 4vh;
 	margin-top: 2vh;
 	cursor: pointer;
+}
+
+.weatherGraph{
+	position: relative;
+	max-height: 50vh;
+	min-height: 40vh;
 }
 
 .location{
@@ -283,6 +290,21 @@ select{
 .selected-nav{
 	background-color: #EEEEEE;
 	border-radius: 7px;
+}
+
+.hourlySelectorLabel {
+	cursor: pointer;
+	margin-right: 20px;
+	user-select: none;
+}
+
+.hourlySelector:checked + .hourlySelectorLabel {
+	text-decoration: underline solid;
+	font-weight: 700;
+}
+
+.hourlySelector {
+	display: none;
 }
 
 

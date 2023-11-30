@@ -403,14 +403,6 @@ function saveSettings(){
 	syncFiles()
 }
 
-// Keep saving settings until page is left
-function keepSaving(){
-	if (screenAt == "settings"){
-		saveSettings();
-		setTimeout(keepSaving, 250);
-	}
-}
-
 // Load the location settings page
 function loadLocationSettings(index){
 	populateSettingsPage(true);
@@ -492,7 +484,6 @@ function loadLocationSettings(index){
 		a++;
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(allSettings));
-	setTimeout(keepSavingForLocation, 1000);
 	navTo("single-location-settings");
 }
 
@@ -565,13 +556,6 @@ function saveLocationSettings(){
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(allSettings));
 	syncFiles();
-}
-
-function keepSavingForLocation(){
-	if (screenAt == "single-location-settings"){
-		saveLocationSettings()
-		setTimeout(keepSavingForLocation, 250);
-	}
 }
 
 // Find any keys that are present in the default that are missing in the current object and set to the default values (without changing present keys)

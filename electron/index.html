@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Atmos Weather</title>
-		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://unpkg.com/esri-leaflet-vector@4.0.0/ https://unpkg.com/esri-leaflet@3.0.10/ https://unpkg.com/leaflet@1.9.3/ https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com https://mapservices.weather.noaa.gov data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com https://mapservices.weather.noaa.gov;">
+		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self' https://cdn.jsdelivr.net/npm/chart.js;object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com https://mapservices.weather.noaa.gov data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com https://mapservices.weather.noaa.gov;">
 		<meta charset="utf-8" lang="en">
 		<link href="./img/favicon.svg" rel="icon" type="image/x-icon" />
 		
@@ -10,13 +10,17 @@
 		<link rel="stylesheet" href="./css/font-imports.css">
 		
 		<!-- Leaflet Map Plugin Import -->
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+		<link rel="stylesheet" href="./libraries/leaflet/leaflet.css"/>
+		<script src="./libraries/leaflet/leaflet.js"></script>
 		
 		<!-- Load Esri Leaflet from CDN -->
-		<script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+		<script src="./libraries/esri-leaflet/esri-leaflet.js"></script>
 
-		<script src="https://unpkg.com/esri-leaflet-vector@4.0.0/dist/esri-leaflet-vector.js" crossorigin=""></script>
+		<!-- Chroma.js Import -->
+		<script src="./libraries/chroma.min.js"></script>
+
+		<!-- Chart.js Import -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 		<!-- Logo Style and Animations -->
 		<link rel="stylesheet" href="./css/atmos-animations.css">
@@ -142,11 +146,6 @@
 					<h4>Information: IP Address (when app is open)</h4>
 					<h4>Why: RainViewer provides the radar imagery displayed on the radar page.</h4>
 					<br>
-					<h3><b>Unpkg</b></h3>
-					<h4>Domain(s): unpkg.com</h4>
-					<h4>Information: IP Address (when app is open)</h4>
-					<h4>Why: Unpkg serves the LeafletJS map library to Atmos and enables the display of alerts and radars.</h4>
-					<br>
 					<h3><b>Github Releases</b></h3>
 					<h4>Domain(s): github.com</h4>
 					<h4>Information: IP Address (when app is open)</h4>
@@ -173,6 +172,15 @@
 						<div style="text-align: center;width:fit-content;display: inline-block;margin-right: 10px;">
 							<button id="radar-animation-control" onclick="toggleRadarPlayback();">Pause ⏸️</button>
 						</div>
+					</div>
+					<div style="text-align: center;width:fit-content;display: inline-block;margin-right: 20px;margin-top:15px;" id="spc-select-container">
+						<label style="font-size:15px;">Weather Outlook Type</label>
+						<br>
+						<select id="spc-select" style="font-size: 15px;">
+							<option value="severe-outlook">Severe Weather Outlook</option>
+							<option value="fire-outlook">Fire Outlook</option>
+							<option value="hazards-outlook">Hazards Outlook</option>
+						</select>
 					</div>
 					<h3>Jump To Location</h3>
 					<div id="radar-locations">
@@ -224,7 +232,7 @@
 					<label for="setting-radar-show-warnings">Show warning polygons on radar</label>
 					<br>
 					<input class="box" type="checkbox" id="setting-radar-show-outlook" >
-					<label for="setting-radar-show-outlook">Show SPC severe weather outlook</label>
+					<label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label>
 					<br>
 					<input class="box" type="checkbox" id="setting-radar-satellite" >
 					<label for="setting-radar-satellite">Show satellite instead of radar</label>
@@ -299,7 +307,7 @@
 						</div>
 						<div class="location" id="current-loc-main-info">
 							<div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;">
-								<img style="vertical-align:center;" src="img/sunny.svg">
+								<img id="current-loc-icon" style="vertical-align:center;" src="img/sunny.svg">
 							</div>
 							<div style="display:inline-block;margin-left:8px;margin-right: 8px;">
 								<h1 id="current-loc-temp">Loading...</h1>
@@ -317,6 +325,28 @@
 					<h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5>
 					<br>
 					<h1>Hourly Forecast</h1>
+					<div id="current-loc-hourly-select">
+						<input type="radio" id="current-loc-hourly-temp" name="current-loc-hourly" value="temp" class="hourlySelector" checked>
+						<label for="current-loc-hourly-temp" class="hourlySelectorLabel">Temperature</label>
+						<input type="radio" id="current-loc-hourly-precip" name="current-loc-hourly" value="precip" class="hourlySelector">
+						<label for="current-loc-hourly-precip" class="hourlySelectorLabel">Precipitation</label>
+						<input type="radio" id="current-loc-hourly-humid" name="current-loc-hourly" value="humid" class="hourlySelector">
+						<label for="current-loc-hourly-humid" class="hourlySelectorLabel">Humidity</label>
+						<input type="radio" id="current-loc-hourly-wind" name="current-loc-hourly" value="wind" class="hourlySelector">
+						<label for="current-loc-hourly-wind" class="hourlySelectorLabel">Wind Speed</label>
+					</div>
+					<div class="weatherGraph" id="current-loc-hourly-temp-chart-container">
+						<canvas id="current-loc-hourly-temp-chart"></canvas>
+					</div>
+					<div class="weatherGraph" id="current-loc-hourly-precip-chart-container"  style="display:none">
+						<canvas id="current-loc-hourly-precip-chart"></canvas>
+					</div>
+					<div class="weatherGraph" id="current-loc-hourly-humid-chart-container"  style="display:none">
+						<canvas id="current-loc-hourly-humid-chart"></canvas>
+					</div>
+					<div class="weatherGraph" id="current-loc-hourly-wind-chart-container" style="display:none">
+						<canvas id="current-loc-hourly-wind-chart"></canvas>
+					</div>
 					<div id="current-loc-hourly">
 
 					</div>
@@ -414,6 +444,7 @@
 	
 	<!-- Import Functions -->
 	<script src="js/main.js"></script>
+	<script src="js/chart-management.js"></script>
 	<script src="js/atmos-ui.js"></script>
 	<script src="js/nominatim-api.js"></script>
 	<script src="js/nws-api.js"></script>
