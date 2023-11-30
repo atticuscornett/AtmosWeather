@@ -100,6 +100,7 @@ function makeTempGraph(location, data){
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: false,
             plugins: {
                 legend: {
                     display: false
@@ -168,6 +169,7 @@ function makePrecipGraph(location, data){
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: false,
             scales: {
                 y: {
                     beginAtZero: true,
@@ -246,6 +248,7 @@ function makeHumidGraph(location, data){
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: false,
             scales: {
                 y: {
                     beginAtZero: true,
@@ -342,6 +345,7 @@ function makeWindGraph(location, data){
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            animation: false,
             scales: {
                 y: {
                     beginAtZero: true

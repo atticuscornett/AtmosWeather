@@ -497,14 +497,14 @@ function loadMoreInfo(navName){
 
 								clearCharts(index);
 								longHourForecast += `<div id="`+String(index)+`-loc-hourly-select">
-									<input type="radio" id="`+String(index)+`-loc-hourly-temp" name="`+String(index)+`-loc-hourly" value="temp" checked>
-									<label for="`+String(index)+`-loc-hourly-temp">Temperature</label>
-									<input type="radio" id="`+String(index)+`-loc-hourly-precip" name="`+String(index)+`-loc-hourly" value="precip">
-									<label for="`+String(index)+`-loc-hourly-precip">Precipitation</label>
-									<input type="radio" id="`+String(index)+`-loc-hourly-humid" name="`+String(index)+`-loc-hourly" value="humid">
-									<label for="`+String(index)+`-loc-hourly-humid">Humidity</label>
-									<input type="radio" id="`+String(index)+`-loc-hourly-wind" name="`+String(index)+`-loc-hourly" value="wind">
-									<label for="`+String(index)+`-loc-hourly-wind">Wind Speed</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-temp" name="`+String(index)+`-loc-hourly" value="temp" class="hourlySelector" checked>
+									<label for="`+String(index)+`-loc-hourly-temp" class="hourlySelectorLabel">Temperature</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-precip" name="`+String(index)+`-loc-hourly" value="precip" class="hourlySelector">
+									<label for="`+String(index)+`-loc-hourly-precip" class="hourlySelectorLabel">Precipitation</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-humid" name="`+String(index)+`-loc-hourly" value="humid" class="hourlySelector">
+									<label for="`+String(index)+`-loc-hourly-humid" class="hourlySelectorLabel">Humidity</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-wind" name="`+String(index)+`-loc-hourly" value="wind" class="hourlySelector">
+									<label for="`+String(index)+`-loc-hourly-wind" class="hourlySelectorLabel">Wind Speed</label>
 								</div>`
 								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-temp-chart-container'><canvas id='" + String(index) + "-loc-hourly-temp-chart'></canvas></div>";
 								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-precip-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-precip-chart'></canvas></div>";
