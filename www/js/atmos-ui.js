@@ -496,17 +496,27 @@ function loadMoreInfo(navName){
 								generatedCode += '</div><h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5><br>'
 
 								clearCharts(index);
-								
+								longHourForecast += `<div id="`+String(index)+`-loc-hourly-select">
+									<input type="radio" id="`+String(index)+`-loc-hourly-temp" name="`+String(index)+`-loc-hourly" value="temp" checked>
+									<label for="`+String(index)+`-loc-hourly-temp">Temperature</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-precip" name="`+String(index)+`-loc-hourly" value="precip">
+									<label for="`+String(index)+`-loc-hourly-precip">Precipitation</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-humid" name="`+String(index)+`-loc-hourly" value="humid">
+									<label for="`+String(index)+`-loc-hourly-humid">Humidity</label>
+									<input type="radio" id="`+String(index)+`-loc-hourly-wind" name="`+String(index)+`-loc-hourly" value="wind">
+									<label for="`+String(index)+`-loc-hourly-wind">Wind Speed</label>
+								</div>`
 								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-temp-chart-container'><canvas id='" + String(index) + "-loc-hourly-temp-chart'></canvas></div>";
-								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-precip-chart-container'><canvas id='" + String(index) + "-loc-hourly-precip-chart'></canvas></div>";
-								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-humid-chart-container'><canvas id='" + String(index) + "-loc-hourly-humid-chart'></canvas></div>";
-								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-wind-chart-container'><canvas id='" + String(index) + "-loc-hourly-wind-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-precip-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-precip-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-humid-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-humid-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-wind-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-wind-chart'></canvas></div>";
 								// Wait for the DOM to be updated before making graphs
 								setTimeout(function(){
 									makeTempGraph(index, hourly[0]);
 									makePrecipGraph(index, hourly[0]);
 									makeHumidGraph(index, hourly[0]);
 									makeWindGraph(index, hourly[0]);
+									document.getElementById(String(index)+"-loc-hourly-select").onchange = switchGraphs;
 								}, 50);
 							}
 							catch (e){
