@@ -485,6 +485,7 @@ function loadMoreInfo(navName){
 								generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
 							}
 							// Temperature Bar
+							let longHourForecast = "<h1>Hourly Forecast</h1>";
 							try{
 								generatedCode += '<div class="location noclick ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 								generatedCode += '<div class="clear-border"><h1>Air Quality Index (AQI)</h1><h2>';
@@ -493,61 +494,25 @@ function loadMoreInfo(navName){
 								let gauge = makeGauge(AQI, 0, 300);
 								generatedCode += gauge.outerHTML;
 								generatedCode += '</div><h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5><br>'
+
+								clearCharts(index);
 								
-								var a = 0;
-								var longHourForecast = "<h1>Hourly Forecast</h1><div class='hourly-container'>";
-								a = 0;
-								var forecastTime;
-								var AMPM;
-								while (a < 12){
-									sfor = hourly[0][a]["shortForecast"].toLowerCase();
-									if (a == 11 && window.screen.orientation.type.includes("landscape")){
-										longHourForecast += "<div class='forecast-temp' style='margin-right:0px;'><center>";
-									}
-									else{
-										longHourForecast += "<div class='forecast-temp'><center>";
-									}
-									if (sfor.includes("rain") || sfor.includes("drizzle")){
-										image = "rainy";
-									}
-									else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
-										image = "stormy";
-									}
-									else if (sfor.includes("snow")){
-										image = "snowy";
-									}
-									else if (sfor.includes("wind")){
-										image = "windy";
-									}
-									else if (sfor.includes("cloud") || sfor.includes("fog")){
-										image = "cloudy";
-									}
-									else{
-										image = "sunny";
-									}
-									forecastTime = hourly[0][a]["startTime"];
-									forecastTime = parseInt(forecastTime.substr(11,2));
-									AMPM = "AM";
-									if (forecastTime > 11){
-										AMPM = "PM";
-									}
-									if (forecastTime > 12){
-										forecastTime -= 12;
-									}
-									if (forecastTime == 0){
-										forecastTime = 12;
-									}
-									longHourForecast += "<img src='img/" + image + ".svg'>"
-									longHourForecast += "<h2>" + hourly[0][a]["temperature"] + "° F</h2>";
-									longHourForecast += "<h4>" + forecastTime.toString() + " " + AMPM + "</h4>"
-									longHourForecast += "</center></div>"
-									a++;
-								}
-								longHourForecast += "</div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-temp-chart-container'><canvas id='" + String(index) + "-loc-hourly-temp-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-precip-chart-container'><canvas id='" + String(index) + "-loc-hourly-precip-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-humid-chart-container'><canvas id='" + String(index) + "-loc-hourly-humid-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-wind-chart-container'><canvas id='" + String(index) + "-loc-hourly-wind-chart'></canvas></div>";
+								// Wait for the DOM to be updated before making graphs
+								setTimeout(function(){
+									makeTempGraph(index, hourly[0]);
+									makePrecipGraph(index, hourly[0]);
+									makeHumidGraph(index, hourly[0]);
+									makeWindGraph(index, hourly[0]);
+								}, 50);
 							}
 							catch (e){
-								var longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
+								longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
 							}
+
 							generatedCode += longHourForecast;
 							// Add detailed forecast at bottom
 							var extendedForecast = "<br><h1>NWS Forecast</h1><br>";
@@ -740,6 +705,7 @@ function refreshCurrentLocation(){
 
 														Chart.defaults.font.size = 18;
 														Chart.defaults.font.family = "Secular One";
+														clearCharts("current");
 														// Create hourly temp chart
 														makeTempGraph("current", hourly[0]);
 														// Create hourly precipitation chart

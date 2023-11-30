@@ -302,6 +302,8 @@ function makeWindGraph(location, data){
 
         // Decide on wind direction icon
         if (a > 0 && data[a]["windDirection"] !== lastWindDir){
+            // Shorten wind direction to 2 letters
+            data[a]["windDirection"] = data[a]["windDirection"].substring(data[a]["windDirection"].length-2, data[a]["windDirection"].length);
             let colorScheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             let imageObj = new Image();
             imageObj.src = colorScheme === "dark" ? "img/directions/"+data[a]["windDirection"]+".svg" : "img/directions/"+data[a]["windDirection"]+"-adaptive.svg";

@@ -56,11 +56,11 @@ document.getElementById("current-loc-hourly-select").onchange = switchGraphs;
 // Switch between hourly graphs
 function switchGraphs(e){
     let targetPrefix = e.target.id.split("-")[0];
-    document.getElementById(targetPrefix + "-loc-hourly-temp-chart").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-precip-chart").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-humid-chart").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-wind-chart").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart").style.display = "block";
+    document.getElementById(targetPrefix + "-loc-hourly-temp-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-precip-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-humid-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-wind-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
 }
 
 // Refresh location data
