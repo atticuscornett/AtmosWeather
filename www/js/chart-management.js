@@ -62,7 +62,7 @@ function makeTempGraph(location, data){
         }
 
         if (a > 0 && image !== lastImage && lastImageChange + 2 < a){
-            let colorScheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            let colorScheme = window.appTheme;
             let imageObj = new Image();
             imageObj.src = colorScheme === "dark" ? "img/"+image+".svg" : "img/"+image+"-adaptive.svg";
             imagePeriods.push(imageObj);
@@ -307,7 +307,7 @@ function makeWindGraph(location, data){
         // Decide on wind direction icon
         if (a > 0 && data[a]["windDirection"] !== lastWindDir){
             // Shorten wind direction to 2 letters
-            let colorScheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            let colorScheme = window.appTheme;
             let imageObj = new Image();
             imageObj.src = colorScheme === "dark" ? "img/directions/"+data[a]["windDirection"]+".svg" : "img/directions/"+data[a]["windDirection"]+"-adaptive.svg";
             windDirectionPeriods.push(imageObj);
