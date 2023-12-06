@@ -1,5 +1,6 @@
 package io.atticusc.atmosweather;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -13,6 +14,7 @@ import java.util.Calendar;
 import io.atticusc.atmosweather.notifications.NotificationHandler;
 
 public class BootService extends BroadcastReceiver {
+    @SuppressLint("ScheduleExactAlarm")
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
@@ -28,7 +30,7 @@ public class BootService extends BroadcastReceiver {
             NotificationHandler.prepareNotificationChannel("notification", "Forecast Notifications", context);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intentA = new Intent(context, BackgroundService.class);
-            PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, 0);
+            PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, PendingIntent.FLAG_IMMUTABLE);
             Calendar c = Calendar.getInstance();
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
         }
