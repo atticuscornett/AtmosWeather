@@ -2,21 +2,33 @@
 
 /* Logo Animations */
 
+body {
+	--startColor: white;
+	--backgroundStart: black;
+	--backgroundEnd: hsla(0,0%,99%,1.00);
+}
+
+body.dark {
+	--startColor: black;
+	--backgroundStart: hsla(0,0%,99%,1.00);
+	--backgroundEnd: black;
+}
+
 @keyframes logoAnim{
 	0%{
 		font-size: 10000px;
 		padding-left: 100px;
 		padding-right: 100px;
-		color: white;
+		color: var(--startColor);
 	}
 	49%{
 		font-size: 30px;
 		padding-left: 100px;
 		padding-right: 100px;
-		color: white;
+		color: var(--startColor);
 	}
 	50%{
-		color: white;
+		color: var(--startColor);
 	}
 	100%{
 		padding-left: 10px;
@@ -27,10 +39,10 @@
 
 @keyframes logoBackgroundAnim{
 	0% {
-		background-color: black;
+		background-color: var(--backgroundStart);
 	}
 	100%{
-		background-color: hsla(0,0%,99%,1.00);
+		background-color: var(--backgroundEnd);
 	}
 }
 
@@ -60,13 +72,13 @@
 
 @keyframes otherAnim{
 	0%{
-		background-color: gray;
+		background-color: grey;
 	}
 	50%{
 		background-color: slategray;
 	}
 	100%{
-		background-color: gray;
+		background-color: grey;
 	}
 }
 
@@ -121,43 +133,6 @@
 	}
 	100%{
 		transform: rotate(360deg);
-	}
-}
-
-/* Dark Mode Colors */
-@media (prefers-color-scheme: dark){
-	/* Logo Animations */
-	
-	@keyframes logoAnim{
-		0%{
-			font-size: 10000px;
-			padding-left: 100px;
-			padding-right: 100px;
-			color: black;
-		}
-		49%{
-			font-size: 30px;
-			padding-left: 100px;
-			padding-right: 100px;
-			color: black;
-		}
-		50%{
-			color: black;
-		}
-		100%{
-			padding-left: 10px;
-			padding-right: 10px;
-			color: dodgerblue;
-		}
-	}
-	
-	@keyframes logoBackgroundAnim{
-		0% {
-			background-color: hsla(0,0%,99%,1.00);
-		}
-		100%{
-			background-color: black;
-		}
 	}
 }
 

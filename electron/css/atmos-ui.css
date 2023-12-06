@@ -217,7 +217,7 @@ select{
 }
 
 .other{
-	background-color: gray;
+	background-color: grey;
 	animation-name: otherAnim;
 	animation-iteration-count: infinite;
 	animation-duration: 5s;
@@ -335,17 +335,16 @@ select{
 }
 
 /* Dark Mode Colors */
-@media (prefers-color-scheme: dark){
-	body{
-		background-color: #222222;
-		color: white;
-	}
-	details{
+body.dark {
+	background-color: #222222;
+	color: white;
+
+	& details{
 		border: white solid;
 		border-radius: 7px;
 		box-shadow: 0px 0px 7px #898989;
 	}
-	details[open] summary{
+	& details[open] summary{
 		border-bottom: white solid;
 	}
 	#notice-window-container{
@@ -369,13 +368,13 @@ select{
 	#app-nav{
 		background-color: hsla(0,0%,15%,1.00);
 	}
-	.clear-border{
+	& .clear-border{
 		border: white solid;
 		border-radius: 7px;
 		box-shadow: 0px 0px 7px #898989;
 		padding: 0px 20px 20px 20px;
 	}
-	.selected-nav{
+	& .selected-nav{
 		background-color: #111111;
 		border-radius: 7px;
 	}

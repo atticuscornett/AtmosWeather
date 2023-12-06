@@ -347,7 +347,7 @@ body.dark {
 	& details[open] summary{
 		border-bottom: white solid;
 	}
-	& #notice-window-container{
+	#notice-window-container{
 		z-index: 99;
 		position: absolute;
 		background-color: #222222;
@@ -356,7 +356,7 @@ body.dark {
 		top: 0;
 		left: 0;
 	}
-	& #welcome-window-native{
+	#welcome-window-native{
 		z-index: 100;
 		position: absolute;
 		background-color: #222222;
@@ -365,7 +365,7 @@ body.dark {
 		top: 0;
 		left: 0;
 	}
-	& #app-nav{
+	#app-nav{
 		background-color: hsla(0,0%,15%,1.00);
 	}
 	& .clear-border{
