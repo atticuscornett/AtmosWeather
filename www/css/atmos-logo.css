@@ -22,7 +22,7 @@
 }
 
 /* Dark Mode Background */
-@media (prefers-color-scheme: dark){
+body.dark {
 	#weatherLogo{
 		color: white;
 	}
