@@ -12,7 +12,7 @@ cap.getDevice();
 
 // Initial Variable States
 // UPDATE
-var version = "1.1.0";
+var version = "2.0.0-beta.1";
 var screenAt = "locations";
 var cordovaReady = true;
 var currentLat = false;
@@ -127,23 +127,14 @@ function showNotices(){
 	// UPDATE
 	if (window.localStorage.getItem("notice-version") != version){
 		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v1.1.0 is here!</h2>
+		<h2>Atmos Weather v2.0.0-beta.1 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-			<dd>- Made UI much more responsive.</dd>
-			<dd>- Expandable forecasts show further into the future.</dd>
-			<dd>- Air quality is now available.
-			<dd>- Clearer and more detailed privacy statement in settings. (Suggested by @IzzySoft)</dd>
-			<dd>- Current screen is now indicated on navbar.</dd>
-			<dd>- Reduced battery usage on mobile data.</dd>
-			<dd>- Added support for 3 new event types.</dd>
-  			<dt>Bug Fixes Everywhere</dt>
-  			<dd>- Fixed UI bug with location search results.</dd>
-			<dd>- Fixed UI bug with hourly temperatures in portrait mode.</dd>
-			<dd>- County polygons now display correctly on radar.</dd>
-			<dd>- Fixed background task not restarting after update.</dd>
-			<dd>- Numerous back-end changes, including those made by @Djtpj.</dd>
+			<dd>- Numerous new features have been added to this beta.</dd>
+			<dd>- Full update notes will be available once out of beta.</dd>
+  			<dt>Bug Fixes</dt>
+			<dd>- Full update notes will be available once out of beta.</dd>
 		</dl> 
 		<br><br>
 		`;
