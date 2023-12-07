@@ -9,7 +9,7 @@ function refreshAppTheme(){
     }
     document.body.setAttribute("class", window.appTheme);
 }
-refreshAppTheme();
+setTimeout(refreshAppTheme, 100);
 
 // Fade out logo and handle notices after animation is done
 setTimeout(function(){
