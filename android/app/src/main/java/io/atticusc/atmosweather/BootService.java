@@ -8,6 +8,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 
 import java.util.Calendar;
 
@@ -32,7 +33,12 @@ public class BootService extends BroadcastReceiver {
             Intent intentA = new Intent(context, BackgroundService.class);
             PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, PendingIntent.FLAG_IMMUTABLE);
             Calendar c = Calendar.getInstance();
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+            }
+            else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+            }
         }
     }
 }
