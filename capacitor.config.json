@@ -1,0 +1,11 @@
+{
+  "appId": "io.atticusc.atmosweather",
+  "appName": "Atmos Weather",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+	"plugins": {
+    "SplashScreen": {
+      "androidScaleType": "CENTER_CROP",
+    }
+  }
+}

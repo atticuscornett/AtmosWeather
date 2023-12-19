@@ -15,9 +15,10 @@ setTimeout(function(){
 	}
 	if (thePlatform.includes("desktop")){
 		atmosSettingsTemp = {
+			"personalization": {"theme": "system"},
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
-			"radar":{"color-scheme":4, "satellite": false, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
+			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
 			"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 			"alert-types": {
 				"warnings":{
@@ -114,10 +115,11 @@ setTimeout(function(){
 	}
 	else{
 		atmosSettingsTemp = {
+			"personalization": {"theme": "system"},
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
-		"radar":{"color-scheme":4, "satellite": false, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
+		"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
 		"alert-types": {
 			"warnings":{
 				"tornado": "alert",
@@ -294,6 +296,9 @@ function populateSettingsPage(locationMode){
 function refreshSettings(){
 	populateSettingsPage(false);
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+
+	// Personalization Settings
+	document.getElementById("setting-app-theme").value = allSettings["personalization"]["theme"];
 	
 	// Location Settings
 	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
@@ -306,6 +311,7 @@ function refreshSettings(){
 	// Radar Settings
 	document.getElementById("setting-radar-color-scheme").value = allSettings["radar"]["color-scheme"];
 	document.getElementById("setting-radar-satellite").checked = allSettings["radar"]["satellite"];
+	document.getElementById("setting-radar-show-outlook").checked = allSettings["radar"]["spc-outlook"];
 	document.getElementById("setting-radar-show-watches").checked = allSettings["radar"]["polygons"]["watch"];
 	document.getElementById("setting-radar-show-advisories").checked = allSettings["radar"]["polygons"]["advisories"];
 	document.getElementById("setting-radar-show-warnings").checked = allSettings["radar"]["polygons"]["warnings"];
@@ -356,6 +362,9 @@ function refreshSettings(){
 // Save settings
 function saveSettings(){
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+
+	allSettings["personalization"]["theme"] = document.getElementById("setting-app-theme").value;
+
 	allSettings["location"]["weather"] = document.getElementById("setting-current-location").checked;
 	allSettings["location"]["alerts"] = document.getElementById("setting-current-location-alerts").checked;
 	
@@ -364,6 +373,7 @@ function saveSettings(){
 
 	allSettings["radar"]["color-scheme"] = Number(document.getElementById("setting-radar-color-scheme").value);
 	allSettings["radar"]["satellite"] = document.getElementById("setting-radar-satellite").checked;
+	allSettings["radar"]["spc-outlook"] = document.getElementById("setting-radar-show-outlook").checked;
 	allSettings["radar"]["polygons"]["watch"] = document.getElementById("setting-radar-show-watches").checked;
 	allSettings["radar"]["polygons"]["advisories"] = document.getElementById("setting-radar-show-advisories").checked;
 	allSettings["radar"]["polygons"]["warnings"] = document.getElementById("setting-radar-show-warnings").checked;
@@ -398,15 +408,8 @@ function saveSettings(){
 		a++;
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(allSettings))
-	syncFiles()
-}
-
-// Keep saving settings until page is left
-function keepSaving(){
-	if (screenAt == "settings"){
-		saveSettings();
-		setTimeout(keepSaving, 250);
-	}
+	refreshAppTheme();
+	syncFiles();
 }
 
 // Load the location settings page
@@ -490,7 +493,6 @@ function loadLocationSettings(index){
 		a++;
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(allSettings));
-	setTimeout(keepSavingForLocation, 1000);
 	navTo("single-location-settings");
 }
 
@@ -563,13 +565,6 @@ function saveLocationSettings(){
 	}
 	localStorage.setItem("atmos-settings", JSON.stringify(allSettings));
 	syncFiles();
-}
-
-function keepSavingForLocation(){
-	if (screenAt == "single-location-settings"){
-		saveLocationSettings()
-		setTimeout(keepSavingForLocation, 250);
-	}
 }
 
 // Find any keys that are present in the default that are missing in the current object and set to the default values (without changing present keys)

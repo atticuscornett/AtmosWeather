@@ -8,6 +8,7 @@
 var radarData = {};
 var radarFrames = [];
 var radarLayers = [];
+var spcOutlookLayer;
 var radarTileSize = 256;
 var smoothRadarData = 1;
 var radarColorScheme = 4;
@@ -19,6 +20,7 @@ var loadedTilesCount = 0;
 var animationPosition = 0;
 var lastPastFramePosition = -1;
 var playingRadar = true;
+var outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
 
 function loadRadarData(){
     var apiRequest = new XMLHttpRequest();
@@ -66,6 +68,25 @@ function initialize(api, kind) {
     radarFrames = [];
     radarLayers = [];
     animationPosition = 0;
+
+    if (spcOutlookLayer){
+        spcOutlookLayer.remove()
+    }
+
+    spcOutlookLayer = L.esri
+        .dynamicMapLayer({
+          url: outlookLink
+        });
+    spcOutlookLayer.setOpacity(0.4);
+    spcOutlookLayer.addTo(map2);
+    if (!settings["radar"]["spc-outlook"]){
+        spcOutlookLayer.remove();
+        document.getElementById("spc-select-container").style.display = "none";
+    }
+    else{
+        document.getElementById("spc-select-container").style.display = "inline-block";
+    }
+
 
     if (!api) {
         return;
@@ -221,4 +242,17 @@ function slowLoadPolygons(alerts, index){
     else{
         document.getElementById("polygon-load-count").hidden = true;
     }
+}
+
+function reloadOutlook(){
+    if (spcOutlookLayer){
+        spcOutlookLayer.remove()
+    }
+
+    spcOutlookLayer = L.esri
+        .dynamicMapLayer({
+          url: outlookLink
+        });
+    spcOutlookLayer.setOpacity(0.4);
+    spcOutlookLayer.addTo(map2);
 }

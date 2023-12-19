@@ -1,0 +1,7 @@
+{
+  "name": "io.atticusc.atmosweather",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Android.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme.AppWidgetContainer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/widgetWeatherIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5sp"
+            android:layout_weight="2"
+            android:scaleType="fitStart"
+            android:src="@drawable/loading_icon" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/currentTempWidget"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="30sp"
+                android:autoSizeMinTextSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:gravity=""
+                android:minWidth="50dp"
+                android:text="-- °F"
+                android:textAlignment="textEnd"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <TextView
+                android:id="@+id/lastUpdatedText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:autoSizeMaxTextSize="10sp"
+                android:autoSizeMinTextSize="4sp"
+                android:autoSizeTextType="uniform"
+                android:text="Updated --:--"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

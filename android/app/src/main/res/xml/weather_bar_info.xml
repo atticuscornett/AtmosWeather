@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/app_widget_description"
+    android:initialKeyguardLayout="@layout/weather_bar"
+    android:initialLayout="@layout/weather_bar"
+    android:minWidth="120dp"
+    android:minHeight="40dp"
+    android:previewImage="@drawable/widget_preview"
+    android:previewLayout="@layout/weather_bar"
+    android:resizeMode="horizontal"
+    android:targetCellWidth="2"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="900000"
+    android:widgetCategory="home_screen" />

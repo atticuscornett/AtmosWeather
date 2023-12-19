@@ -99,6 +99,7 @@ select{
 	height: 8%;
 	width: 100%;
 	background-color: white;
+	cursor: pointer;
 }
 
 #add-location{
@@ -157,6 +158,14 @@ select{
 	position: relative;
 }
 
+#loading-anim {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+}
+
 /* Class Styles */
 
 .tab-div{
@@ -171,6 +180,12 @@ select{
 	height: 4vh;
 	margin-top: 2vh;
 	cursor: pointer;
+}
+
+.weatherGraph{
+	position: relative;
+	max-height: 50vh;
+	min-height: 40vh;
 }
 
 .location{
@@ -210,7 +225,7 @@ select{
 }
 
 .other{
-	background-color: gray;
+	background-color: grey;
 	animation-name: otherAnim;
 	animation-iteration-count: infinite;
 	animation-duration: 5s;
@@ -285,6 +300,21 @@ select{
 	border-radius: 7px;
 }
 
+.hourlySelectorLabel {
+	cursor: pointer;
+	margin-right: 20px;
+	user-select: none;
+}
+
+.hourlySelector:checked + .hourlySelectorLabel {
+	text-decoration: underline solid;
+	font-weight: 700;
+}
+
+.hourlySelector {
+	display: none;
+}
+
 
 @media screen and (orientation:portrait) {
 	/* Fix issues on certain orientations */
@@ -313,17 +343,16 @@ select{
 }
 
 /* Dark Mode Colors */
-@media (prefers-color-scheme: dark){
-	body{
-		background-color: #222222;
-		color: white;
-	}
-	details{
+body.dark {
+	background-color: #222222;
+	color: white;
+
+	& details{
 		border: white solid;
 		border-radius: 7px;
 		box-shadow: 0px 0px 7px #898989;
 	}
-	details[open] summary{
+	& details[open] summary{
 		border-bottom: white solid;
 	}
 	#notice-window-container{
@@ -347,13 +376,13 @@ select{
 	#app-nav{
 		background-color: hsla(0,0%,15%,1.00);
 	}
-	.clear-border{
+	& .clear-border{
 		border: white solid;
 		border-radius: 7px;
 		box-shadow: 0px 0px 7px #898989;
 		padding: 0px 20px 20px 20px;
 	}
-	.selected-nav{
+	& .selected-nav{
 		background-color: #111111;
 		border-radius: 7px;
 	}
