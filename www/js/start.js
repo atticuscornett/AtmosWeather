@@ -78,3 +78,11 @@ function switchGraphs(e){
 
 // Refresh location data
 setTimeout(refreshLocations, 200);
+
+// Handle loading animation
+document.getElementById("loading-anim").hidden = true;
+window.loadingElements = 0;
+function checkLoading(){
+    document.getElementById("loading-anim").hidden = window.loadingElements <= 0;
+}
+setInterval(checkLoading, 100);
