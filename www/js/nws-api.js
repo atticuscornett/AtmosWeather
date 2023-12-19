@@ -74,7 +74,9 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 		}
 		else{
 			var hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
+			window.loadingElements++;
 			httpGetAsync(hourlyForecastLink, (hourlyForecast)=>{
+				window.loadingElements--;
 				try{
 					hourlyForecast = JSON.parse(hourlyForecast);
 					hourlyForecast = hourlyForecast["properties"]["periods"];
@@ -127,7 +129,9 @@ function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 		}
 		else{
 			var forecastLink = weatherGrid[0]["properties"]["forecast"]
+			window.loadingElements++;
 			JSONGetAsync(forecastLink, (forecast) => {
+				window.loadingElements--;
 				try{
 					forecast = forecast["properties"]["periods"];
 					theCache[weatherGrid[1]] = [forecast, time.getTime()];
@@ -204,7 +208,9 @@ function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 function getWeatherAlertsForPosAsync(lat, long, callback, extraReturn=null){
 	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
 	try{
+		window.loadingElements++;
 		JSONGetAsync("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString(), (theAlerts) =>{
+			window.loadingElements--;
 			theAlerts = theAlerts["features"];
 			if (extraReturn != null){
 				callback(theAlerts, extraReturn);
@@ -233,7 +239,9 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 		if (theCache.hasOwnProperty(pos)){
 			// Check if got alerts within last minute
 			if ((time.getTime() - theCache[pos][1]) > 60*1000){
+				window.loadingElements++;
 				JSONGetAsync("https://api.weather.gov/alerts/active?point=" + pos, (res) =>{
+					window.loadingElements--;
 				try{
 					theCache[pos] = [res["features"], time.getTime()]
 					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
@@ -265,7 +273,9 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 			}
 		}
 		else{
+			window.loadingElements++;
 			JSONGetAsync("https://api.weather.gov/alerts/active?point=" + pos, (res) =>{
+				window.loadingElements--;
 				try{
 					theCache[pos] = [res["features"], time.getTime()]
 					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
