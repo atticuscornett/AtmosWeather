@@ -1,3 +1,21 @@
+// UPDATE
+window.atmosVersion = "2.0.0-beta.2";
+window.atmosUpdated = "12-18-2023";
+window.atmosUpdateNotes = `
+		<h2>Atmos Weather v2.0.0-beta.2 is here!</h2>
+		<hr>
+		<dl style='font-family: Secular One;'>
+			<dt>New Features</dt>
+			<dd>- Numerous new features have been added to this beta.</dd>
+			<dd>- Full update notes will be available once out of beta.</dd>
+  			<dt>Bug Fixes</dt>
+			<dd>- Full update notes will be available once out of beta.</dd>
+		</dl> 
+		<br><br>
+		`;
+document.getElementById("atmos-app-version").innerHTML = "Version " + window.atmosVersion;
+document.getElementById("atmos-app-updated").innerHTML = "Updated on " + window.atmosUpdated;
+
 // Set global app theme
 function refreshAppTheme(){
     window.appTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';

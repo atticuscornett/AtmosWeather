@@ -11,8 +11,6 @@ cap.getLocation();
 cap.getDevice();
 
 // Initial Variable States
-// UPDATE
-var version = "2.0.0-beta.1";
 var screenAt = "locations";
 var cordovaReady = true;
 var currentLat = false;
@@ -112,11 +110,11 @@ function showNotices(){
 	}
 	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/update-details.json", (latest) => {
 		latest = latest["version"];
-		if (latest != version && !platform.includes("windows")){
+		if (latest != window.atmosVersion && !platform.includes("windows")){
 			document.getElementById("notice-window").innerHTML += `
 			<h2>An update is available!</h2>
 			<hr>
-			<h3>You are on an older version of Atmos Weather (` + version + `).<br>
+			<h3>You are on an older version of Atmos Weather (` + window.atmosVersion + `).<br>
 			A new version of Atmos Weather (` + latest +  `)
 			 can be downloaded <a href="https://atticuscornett.github.io/AtmosWeather" target="_blank">here</a>.<br>
 			Updates may include security upgrades, so it is important to keep your apps updated.</h3>
@@ -125,21 +123,10 @@ function showNotices(){
 		}
 	});
 	// UPDATE
-	if (window.localStorage.getItem("notice-version") != version){
-		document.getElementById("notice-window").innerHTML += `
-		<h2>Atmos Weather v2.0.0-beta.1 is here!</h2>
-		<hr>
-		<dl style='font-family: Secular One;'>
-			<dt>New Features</dt>
-			<dd>- Numerous new features have been added to this beta.</dd>
-			<dd>- Full update notes will be available once out of beta.</dd>
-  			<dt>Bug Fixes</dt>
-			<dd>- Full update notes will be available once out of beta.</dd>
-		</dl> 
-		<br><br>
-		`;
+	if (window.localStorage.getItem("notice-version") != window.atmosVersion){
+		document.getElementById("notice-window").innerHTML += window.atmosUpdateNotes;
 		document.getElementById("notice-window-container").hidden = false;
-		window.localStorage.setItem("notice-version", version);
+		window.localStorage.setItem("notice-version", window.atmosVersion);
 	}
 	if (platform == "pwa"){
 		document.getElementById("settings-warning").hidden = false;
