@@ -53,7 +53,15 @@ function showNotices(){
 		// Running either electron version or online version
 		if (navigator.userAgent.includes("Electron")){
 			console.log("Atmos Electron Version")
-			platform = "desktop";
+			if (navigator.platform.indexOf("Win") == 0){
+				platform = "desktop-windows"
+			}
+			else if (navigator.platform.indexOf("Mac") == 0){
+				platform = "desktop-mac"
+			}
+			else{
+				platform = "desktop-linux"
+			}
 		}
 		else{
 			console.log("Atmos Web Version")
@@ -107,6 +115,7 @@ function showNotices(){
 		<br><br>
 		`;
 		window.localStorage.setItem("notice-batteryOptimization", "true");
+		document.getElementById("notice-window-container").hidden = false;
 	}
 	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/update-details.json", (latest) => {
 		latest = latest["version"];
@@ -120,6 +129,7 @@ function showNotices(){
 			Updates may include security upgrades, so it is important to keep your apps updated.</h3>
 			<br><br>
 			`;
+			document.getElementById("notice-window-container").hidden = false;document.getElementById("notice-window-container").hidden = false
 		}
 	});
 	// UPDATE
@@ -139,7 +149,15 @@ function getPlatform(){
 	if (window.deviceInfo.platform == "web"){
 		// Running either electron version or online version
 		if (navigator.userAgent.includes("Electron")){
-			platform = "desktop";
+			if (navigator.platform.indexOf("Win") == 0){
+				platform = "desktop-windows"
+			}
+			else if (navigator.platform.indexOf("Mac") == 0){
+				platform = "desktop-mac"
+			}
+			else{
+				platform = "desktop-linux"
+			}
 		}
 		else{
 			platform = "pwa";

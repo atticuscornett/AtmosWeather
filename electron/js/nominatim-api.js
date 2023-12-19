@@ -34,8 +34,10 @@ function nomSearch(query, nomCallback){
 		nomCallback(theCache[query]);
 	}
 	else{
+		window.loadingElements++;
 		JSONGetAsync('https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(query) + "&format=json",
 		(res) => {
+			window.loadingElements--;
 			theCache[query] = res;
 			window.localStorage.setItem("nominatim-storage", JSON.stringify(theCache));
 			nomCallback(res);
