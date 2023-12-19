@@ -158,6 +158,14 @@ select{
 	position: relative;
 }
 
+#loading-anim {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+}
+
 /* Class Styles */
 
 .tab-div{
