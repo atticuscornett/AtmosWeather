@@ -1,6 +1,6 @@
 {
   "name": "atmos-weather",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0",
   "description": "A lightweight app for weather forecasts and alerts.",
   "main": "index.js",
   "scripts": {

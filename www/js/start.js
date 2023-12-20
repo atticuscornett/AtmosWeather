@@ -1,8 +1,8 @@
 // UPDATE
-window.atmosVersion = "2.0.0-beta.2";
-window.atmosUpdated = "12-18-2023";
+window.atmosVersion = "2.0.0";
+window.atmosUpdated = "12-19-2023";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.0.0-beta.2 is here!</h2>
+		<h2>Atmos Weather v2.0.0 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
