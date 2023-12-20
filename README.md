@@ -22,8 +22,6 @@ GitHub Actions
 
 [Major Issues](#issues)
 
-[Documentation](#documentation)
-
 [Development](#development)
 
 # Features
@@ -63,7 +61,7 @@ Some beta version builds will be added to GitHub releases.
 
 
 ## Latest Code (Unstable, Not Recommended)
-By downloading the repository files, you can build the latest code on your machine using Cordova (for the Android version) or using Electron in the `electron` folder (for all desktop versions).
+By downloading the repository files, you can build the latest code on your machine using CapacitorJS (for the Android version) or using Electron in the `electron` folder (for all desktop versions).
 
 # <a name="goals"></a>Project Goals
 ### Minimum Bloat
@@ -100,13 +98,9 @@ Some Linux distros lack the components to support electron notifications. There 
 
 Some Linux distros lack the components to support text to speech. This can be solved by the user manually installing text to speech components.
 
-# Documentation
-
-Most of the cross-platform Cordova codebase (found in the www folder) is well documented through comments, although more details may be desirable. At this time, however, there is insufficient documentation for much of the platform specific code (especially Android java files.) There are future plans to better document the code to make forking and contributing to this project easier.
-
 # Development
-Atmos Weather is written in HTML, CSS, JavaScript, and Java. Atmos Weather uses Apache Cordova to build for multiple platforms.
+Atmos Weather is written in HTML, CSS, JavaScript, and Java. Atmos Weather uses CapacitorJS to build for multiple platforms.
 
-Development plans and progress and be viewed on the Atmos Weather Notion Site: https://atticuscornett.notion.site/atticuscornett/00bc25c1bb07405d9bbe8c8c33ad195a
+Development plans and progress can be viewed on the Atmos Weather Notion Site: https://atticuscornett.notion.site/atticuscornett/00bc25c1bb07405d9bbe8c8c33ad195a
 
 ###### This project was originally created for the 2022 Congressional App Challenge.
