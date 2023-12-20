@@ -10,6 +10,7 @@ window.atmosUpdateNotes = `
 			<dd>- Radar shows outlooks from NOAA's Storm Prediction Center.</dd>
 			<dd>- Widgets now available on Android.</dd>
 			<dd>- Color theme can be switched in the app.</dd>
+			<dd>- Updated privacy statement can be viewed in settings.</dd>
   			<dt>Bug Fixes</dt>
 			<dd>- Battery optimizations on Android.</dd>
 			<dd>- Performance improvements.</dd>
