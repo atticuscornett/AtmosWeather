@@ -6,10 +6,15 @@ window.atmosUpdateNotes = `
 		<hr>
 		<dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
-			<dd>- Numerous new features have been added to this beta.</dd>
-			<dd>- Full update notes will be available once out of beta.</dd>
+			<dd>- Hourly forecasts have been completely overhauled and show new data.</dd>
+			<dd>- Radar shows outlooks from NOAA's Storm Prediction Center.</dd>
+			<dd>- Widgets now available on Android.</dd>
+			<dd>- Color theme can be switched in the app.</dd>
   			<dt>Bug Fixes</dt>
-			<dd>- Full update notes will be available once out of beta.</dd>
+			<dd>- Battery optimizations on Android.</dd>
+			<dd>- Performance improvements.</dd>
+			<dd>- Fixed bug when removing location.</dd>
+			<dd>- Updated packages for security.</dd>
 		</dl> 
 		<br><br>
 		`;
