@@ -7,7 +7,7 @@ window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One;'>
 			<dt>New Features</dt>
 			<dd>- Hourly forecasts have been completely overhauled and show new data.</dd>
-			<dd>- Radar shows outlooks from NOAA's storm prediction center.</dd>
+			<dd>- Radar shows outlooks from NOAA's Storm Prediction Center.</dd>
 			<dd>- Widgets now available on Android.</dd>
 			<dd>- Color theme can be switched in the app.</dd>
   			<dt>Bug Fixes</dt>
