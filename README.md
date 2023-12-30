@@ -8,6 +8,10 @@ Available for Windows, MacOS, Linux, and Android at the [Atmos Weather Website](
 ![GitHub last commit](https://img.shields.io/github/last-commit/atticuscornett/atmosweather)
 ![GitHub deployments](https://img.shields.io/github/deployments/atticuscornett/atmosweather/github-pages?label=github%20pages)
 
+Available for Android on IzzyOnDroid
+
+[![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/io.atticusc.atmosweather)](https://apt.izzysoft.de/fdroid/index/apk/io.atticusc.atmosweather)
+
 GitHub Actions
 
 [![Build for Linux](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml)
