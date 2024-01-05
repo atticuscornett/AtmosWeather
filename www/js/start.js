@@ -1,21 +1,13 @@
 // UPDATE
-window.atmosVersion = "2.0.0";
-window.atmosUpdated = "12-19-2023";
+window.atmosVersion = "2.0.1";
+window.atmosUpdated = "1-4-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.0.0 is here!</h2>
+		<h2>Atmos Weather v2.0.1 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
-			<dt>New Features</dt>
-			<dd>- Hourly forecasts have been completely overhauled and show new data.</dd>
-			<dd>- Radar shows outlooks from NOAA's Storm Prediction Center.</dd>
-			<dd>- Widgets now available on Android.</dd>
-			<dd>- Color theme can be switched in the app.</dd>
-			<dd>- Updated privacy statement can be viewed in settings.</dd>
   			<dt>Bug Fixes</dt>
-			<dd>- Battery optimizations on Android.</dd>
-			<dd>- Performance improvements.</dd>
-			<dd>- Fixed bug when removing location.</dd>
-			<dd>- Updated packages for security.</dd>
+			<dd>- Android widget optimization</dd>
+			<dd>- Removed proprietary Android component</dd>
 		</dl> 
 		<br><br>
 		`;
