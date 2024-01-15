@@ -50,6 +50,12 @@ public class MainActivity extends BridgeActivity {
 
         startBackgroundTask(pendingIntent, 5);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SCHEDULE_EXACT_ALARM) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SCHEDULE_EXACT_ALARM}, 1);
+            }
+        }
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             boolean locationInBackground = getLocationInBackgroundEnabled();
 
