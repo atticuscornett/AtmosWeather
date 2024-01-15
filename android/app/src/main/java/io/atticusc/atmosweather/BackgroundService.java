@@ -84,11 +84,25 @@ public class BackgroundService extends BroadcastReceiver {
             @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, PendingIntent.FLAG_IMMUTABLE);
             Calendar calendar = Calendar.getInstance();
 
+            boolean canScheduleAlarms = true;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                canScheduleAlarms = alarmManager.canScheduleExactAlarms();
+            }
+
             // Update more often on WiFi
-            if (checkNetworkStatus(context)) {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pentent);
-            } else {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 25000, pentent);
+            if (canScheduleAlarms){
+                if (checkNetworkStatus(context)) {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pentent);
+                } else {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 25000, pentent);
+                }
+            }
+            else {
+                if (checkNetworkStatus(context)) {
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pentent);
+                } else {
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 25000, pentent);
+                }
             }
 
             JSONObject jObj = new JSONObject(weatherLocations.getString("settings", ""));
