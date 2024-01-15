@@ -15,7 +15,6 @@ import java.util.Calendar;
 import io.atticusc.atmosweather.notifications.NotificationHandler;
 
 public class BootService extends BroadcastReceiver {
-    @SuppressLint("ScheduleExactAlarm")
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
@@ -33,11 +32,20 @@ public class BootService extends BroadcastReceiver {
             Intent intentA = new Intent(context, BackgroundService.class);
             PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, PendingIntent.FLAG_IMMUTABLE);
             Calendar c = Calendar.getInstance();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+            boolean canScheduleAlarms = true;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                canScheduleAlarms = alarmManager.canScheduleExactAlarms();
+            }
+            if (canScheduleAlarms){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+                }
+                else {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+                }
             }
             else {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
             }
         }
     }
