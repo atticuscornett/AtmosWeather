@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import androidx.core.app.ActivityCompat;
 
@@ -48,13 +49,18 @@ public class MainActivity extends BridgeActivity {
         // Cancel any duplicate alarms
         alarmManager.cancel(pendingIntent);
 
-        startBackgroundTask(pendingIntent, 5);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SCHEDULE_EXACT_ALARM) != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SCHEDULE_EXACT_ALARM}, 1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (!alarmManager.canScheduleExactAlarms()){
+                Intent alarmIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    this.startActivity(alarmIntent);
+                }
             }
         }
+
+        startBackgroundTask(pendingIntent, 5);
+
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             boolean locationInBackground = getLocationInBackgroundEnabled();
