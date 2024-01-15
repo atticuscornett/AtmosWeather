@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import androidx.core.app.ActivityCompat;
 
@@ -48,14 +49,30 @@ public class MainActivity extends BridgeActivity {
         // Cancel any duplicate alarms
         alarmManager.cancel(pendingIntent);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (!alarmManager.canScheduleExactAlarms()){
+                Intent alarmIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    this.startActivity(alarmIntent);
+                }
+            }
+        }
+
         startBackgroundTask(pendingIntent, 5);
+
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             boolean locationInBackground = getLocationInBackgroundEnabled();
 
             if (locationInBackground) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.POST_NOTIFICATIONS}, 1);
+                    }
+                    else {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
+                    }
                 }
             }
         }
@@ -83,7 +100,16 @@ public class MainActivity extends BridgeActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         Calendar calendar = Calendar.getInstance();
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (delaySeconds * 1000L), pendingIntent);
+        boolean canScheduleAlarms = true;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            canScheduleAlarms = alarmManager.canScheduleExactAlarms();
+        }
+        if (canScheduleAlarms){
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (delaySeconds * 1000L), pendingIntent);
+        }
+        else {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (delaySeconds * 1000L), pendingIntent);
+        }
     }
 
     private boolean isFirstRun() {
