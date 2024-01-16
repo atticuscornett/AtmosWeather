@@ -33,3 +33,4 @@ node_modules/
 /electron/build/
 builder-debug.yml
 *.blockmap
+/android/app/release/
