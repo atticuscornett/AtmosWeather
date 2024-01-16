@@ -1,13 +1,13 @@
 // UPDATE
-window.atmosVersion = "2.0.1";
-window.atmosUpdated = "1-4-2024";
+window.atmosVersion = "2.0.2";
+window.atmosUpdated = "1-15-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.0.1 is here!</h2>
+		<h2>Atmos Weather v2.0.2 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
   			<dt>Bug Fixes</dt>
-			<dd>- Android widget optimization</dd>
-			<dd>- Removed proprietary Android component</dd>
+			<dd>- Fixed crash on app start on Android 14</dd>
+			<dd>- Added notification request for Android</dd>
 		</dl> 
 		<br><br>
 		`;
