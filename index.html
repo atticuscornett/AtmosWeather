@@ -68,23 +68,6 @@
 		</style>
 	</head>
 	<body>
-		<div class="migration-header">
-			<h1>Important: Android Migration to Atmos Weather V2</h1>
-			<h2>Atmos Weather v2.0.0 is out now and brings big changes!</h2>
-			<h3>Atmos Weather v2 has a different app signature than previous versions, and this means that Android users
-				will have to reinstall Atmos Weather and re-add locations and settings to get the latest features.</h3>
-			<h3>This change does not affect desktop or web users.</h3>
-			<h3>For information about the signature change and proof of identity, <a href="https://github.com/atticuscornett/AtmosWeather/issues/14#issuecomment-1865611055">see this GitHub issue strand.</a></h3>
-			<h3>Apologies for any inconvenience this causes mobile users. This should be a one time issue that does
-				not affect future updates.
-			</h3>
-			<h3>Atmos v2 features a completely revamped hourly forecast page that now shows more metrics, such as
-				chance of precipitation. The radar page now features the ability the SPC outlooks for severe weather
-				and other hazards. Numerous other quality of life improvements have been made, including Android widgets
-				and an in-app theme switcher.
-			</h3>
-
-		</div>
 		<img src="logo.svg" style="width: 400px;">
 		<h1 class="gradient-title">The future of weather alerts is here.</h1>
 		<h2>Atmos Weather is the ultimate lightweight weather forecast and alert app.<br>
@@ -113,7 +96,7 @@
 				<h6>Requires modern browser.<br>Limited features.</h6>
 			</div>
 		</a>
-		<a href="https://github.com/atticuscornett/AtmosWeather/releases/latest/download/atmos-weather-windows.exe" target="_blank" style="color:white;text-decoration:none;">
+		<a id="download-win_x64" target="_blank" style="color:white;text-decoration:none;">
 			<div class="downloadButton">
 				<div id="windowsDown"  style="background-color: dodgerblue;vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
 					<h4 style="display: inline;height: 100%;margin-left:20px;">Windows</h4>
@@ -122,7 +105,7 @@
 				<h6>Requires Windows 10 or above.<br>Unsigned.</h6>
 			</div>
 		</a>
-		<a href="https://github.com/atticuscornett/AtmosWeather/releases/latest/download/atmos-weather-android.apk" target="_blank" style="color:white;text-decoration:none;">
+		<a id="download-android" target="_blank" style="color:white;text-decoration:none;">
 			<div class="downloadButton">
 				<div id="androidDown"  style="background-color: limegreen;vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
 					<h4 style="display: inline;height: 100%;margin-left:20px;">Android</h4>
@@ -142,29 +125,31 @@
 		</a>
 		<br>
 		<h3>macOS Builds</h3>
-		<h6>Intel-based Macs should use the x64 download. Apple silicon Macs (such as those with the M1 chip) should use the ARM download.</h6>
-		<a href="https://github.com/atticuscornett/AtmosWeather/releases/latest/download/atmos-weather-mac.dmg" target="_blank" style="color:white;text-decoration:none;">
+		<h6>Intel-based Macs should use the x64 download. Apple Silicon Macs (such as those with the M1 chip) should use the ARM download.
+		<br><a href="https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac" target="_blank">Mac Installation Help</a>
+		</h6>
+		<a id="download-mac_x64" target="_blank" style="color:white;text-decoration:none;">
 			<div class="downloadButton">
 				<div id="macDown"  style="background-color: blue;vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
 					<h4 style="display: inline;height: 100%;margin-left:20px;">macOS x64</h4>
 					<img src="webIcons/macos.svg" style="margin-left:10px;margin-right:20px;">
 				</div>
-				<h6>Unsigned and untested.<br><a href="https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac" target="_blank">Installation Help</a></h6>
+				<h6>Unsigned and untested.</h6>
 			</div>
 		</a>
-		<a href="https://github.com/atticuscornett/AtmosWeather/releases/latest/download/atmos-weather-mac-arm-silicon.dmg" target="_blank" style="color:white;text-decoration:none;">
+		<a id="download-mac_arm64" target="_blank" style="color:white;text-decoration:none;">
 			<div class="downloadButton">
 				<div id="macDown2"  style="background-color: blue;vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
 					<h4 style="display: inline;height: 100%;margin-left:20px;">macOS Silicon (arm64)</h4>
 					<img src="webIcons/macos.svg" style="margin-left:10px;margin-right:20px;">
 				</div>
-				<h6>Unsigned and untested.<br><a href="https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac" target="_blank">Installation Help</a></h6>
+				<h6>Unsigned and untested.</h6>
 			</div>
 		</a>
 		<br>
 		<h3>Linux Builds</h3>
 		<h6>Deb builds are for Debian-based distros, such as Debian, Ubuntu, Linux Mint, and Raspberry Pi OS.</h6>
-		<a href="https://github.com/atticuscornett/AtmosWeather/releases/latest/download/atmos-weather-linux-amd64.deb" target="_blank" style="color:white;text-decoration:none;">
+		<a id="download-deb_x64" target="_blank" style="color:white;text-decoration:none;">
 			<div class="downloadButton">
 				<div id="linuxDown"  style="background-color: purple;vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
 					<h4 style="display: inline;height: 100%;margin-left:20px;">Linux (deb) x64</h4>
@@ -173,7 +158,7 @@
 				<h6>Unsigned and untested.<br>.deb x64</h6>
 			</div>
 		</a>
-		<a href="https://github.com/atticuscornett/AtmosWeather/releases/latest/download/atmos-weather-linux-arm64.deb" target="_blank" style="color:white;text-decoration:none;">
+		<a id="download-deb_arm64" target="_blank" style="color:white;text-decoration:none;">
 			<div class="downloadButton">
 				<div id="linuxDown2"  style="background-color: purple;vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
 					<h4 style="display: inline;height: 100%;margin-left:20px;">Linux (deb) arm64</h4>
@@ -182,7 +167,7 @@
 				<h6>Unsigned and untested.<br>.deb arm64</h6>
 			</div>
 		</a>
-		<a href="https://github.com/atticuscornett/AtmosWeather/releases/latest/download/atmos-weather-linux-armv7l.deb" target="_blank" style="color:white;text-decoration:none;">
+		<a id="download-deb_armv7l" target="_blank" style="color:white;text-decoration:none;">
 			<div class="downloadButton">
 				<div id="linuxDown3"  style="background-color: purple;vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
 					<h4 style="display: inline;height: 100%;margin-left:20px;">Linux (deb) armv7l</h4>
@@ -191,7 +176,7 @@
 				<h6>Unsigned and untested.<br>.deb armv7l (32-bit RaspPi)</h6>
 			</div>
 		</a>
-		<a href="https://github.com/atticuscornett/AtmosWeather/releases/latest/download/atmos-weather-linux.tar.gz" target="_blank" style="color:white;text-decoration:none;">
+		<a id="download-tar" target="_blank" style="color:white;text-decoration:none;">
 			<div class="downloadButton">
 				<div id="linuxDown4"  style="background-color: peru;vertical-align: middle;align-content: center; display: flex;border:none;border-radius: 7px;cursor: pointer;">
 					<h4 style="display: inline;height: 100%;margin-left:20px;">Linux .tar.gz</h4>
@@ -222,37 +207,81 @@
 		<h1 class="gradient-title">Free + Lightweight</h1>
 		<h2>No ads, no subscription, and no bloatware.<br>How do we achieve this?<br>Atmos relies on free services and APIs, so there are no server costs.<br>It is maintained by volunteers.<br>No cost to us = No cost to you.</h2>
 		<script>
+			let releaseVersions = {};
+			let getLatestRelease = async () => {
+				let latestRelease = await fetch("https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest");
+				latestRelease = await latestRelease.json();
+				let releaseAssets = latestRelease.assets;
+				console.log(releaseAssets)
+
+				// Sort assets by type and architecture
+				for (let i = 0; i < releaseAssets.length; i++){
+					let thisAsset = releaseAssets[i];
+					if (thisAsset.name.endsWith(".exe")){
+						releaseVersions["win_x64"] = thisAsset;
+					}
+					else if (thisAsset.name.endsWith(".apk")){
+						releaseVersions["android"] = thisAsset;
+					}
+					else if (thisAsset.name.endsWith("arm64.dmg") || thisAsset.name.endsWith("silicon.dmg")){
+						releaseVersions["mac_arm64"] = thisAsset;
+					}
+					else if (thisAsset.name.endsWith(".dmg")){
+						releaseVersions["mac_x64"] = thisAsset;
+					}
+					else if (thisAsset.name.endsWith(".tar.gz")){
+						releaseVersions["tar"] = thisAsset;
+					}
+					else if (thisAsset.name.endsWith("amd64.deb")){
+						releaseVersions["deb_x64"] = thisAsset;
+					}
+					else if (thisAsset.name.endsWith("armv7l.deb")){
+						releaseVersions["deb_armv7l"] = thisAsset;
+					}
+					else if (thisAsset.name.endsWith("arm64.deb")){
+						releaseVersions["deb_arm64"] = thisAsset;
+					}
+				}
+
+				for (let key in releaseVersions){
+					let thisAsset = releaseVersions[key];
+					let downloadButton = document.getElementById("download-" + key);
+					downloadButton.setAttribute("href", thisAsset.browser_download_url);
+				}
+
+				document.getElementById("autodownload").setAttribute("href", releaseVersions[getBestDownload()].browser_download_url);
+			}
 			function getBestDownload(){
 				var nav = window.navigator.userAgent.toLocaleLowerCase();
 				if (nav.includes("win")){
-					return "atmos-weather-windows.exe";
+					return "win_x64";
 				}
 				else if (nav.includes("android") || navigator.platform.includes("Android")){
-					return "atmos-weather-android.apk";
+					return "android";
 				}
 				else if (nav.includes("mac") || navigator.platform.includes("Mac")){
 					if (nav.includes("arm")){
-						return "atmos-weather-mac-arm-silicon.dmg";
+						return "mac_arm64";
 					}
 					else{
-						return "atmos-weather-mac.dmg";
+						return "mac_x64";
 					}
 				}
 				else{
 					if (nav.includes("arm")){
 						if (nav.includes("armv7l")){
-							return "atmos-weather-linux-armv7l.deb";
+							return "deb_armv7l";
 						}
 						else{
-							return "atmos-weather-linux-arm64.deb";
+							return "deb_arm64";
 						}
 					}
 					else{
-						return "atmos-weather-linux-amd64.deb";
+						return "deb_x64";
 					}
 				}
 			}
-			document.getElementById("autodownload").setAttribute("href", "https://github.com/atticuscornett/AtmosWeather/releases/latest/download/" + getBestDownload());
+			getLatestRelease();
 		</script>
 	</body>
 </html>
