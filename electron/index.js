@@ -1,12 +1,12 @@
 const { app, BrowserWindow, Notification, Tray, Menu, net, dialog} = require('electron')
 const { autoUpdater } = require("electron-updater")
 const turf = require("@turf/turf")
-var win2 = null;
+const {checkPolygons} = require("./alert-checking");
+global.win2 = null;
 var weatherLocations;
 var locationNames;
 var locationCache;
 var settings;
-var notifiedAlerts = [];
 var cycleAt = 0;
 var lastNetworkCheck = true;
 let trayIcon = null;
@@ -153,23 +153,23 @@ setInterval(function(){
 	// Get app settings from window localStorage
 	win2.webContents.executeJavaScript('localStorage.getItem("weather-locations");', true)
 		.then(result => {
-			weatherLocations = JSON.parse(result);
+			global.weatherLocations = JSON.parse(result);
 	});
 	win2.webContents.executeJavaScript('localStorage.getItem("weather-location-names")', true)
 		.then(result =>{
-		locationNames = JSON.parse(result);
+		global.locationNames = JSON.parse(result);
 	});
 	win2.webContents.executeJavaScript('localStorage.getItem("nws-location-cache")', true)
 		.then(result =>{
-		locationCache = JSON.parse(result);
+		global.locationCache = JSON.parse(result);
 	});
 	win2.webContents.executeJavaScript('localStorage.getItem("atmos-settings")', true)
 		.then(result => {
-		settings = JSON.parse(result);
+		global.settings = JSON.parse(result);
 	});
 	win2.webContents.executeJavaScript('navigator.onLine', true)
 		.then(result => {
-		isOnline = result;
+		global.isOnline = result;
 	});
 	setTimeout(checkLocation, 100);
 	cycleAt++;
@@ -185,7 +185,7 @@ function checkLocation(){
 		cycleAt = 0;
 	}
 	if (locationNames.length > 0){
-		alertCheck("https://api.weather.gov/alerts/active?point=" + weatherLocations[cycleAt]["lat"] + "," + weatherLocations[cycleAt]["lon"]);
+		checkPolygons();
 	}
 	if (win2 == null){
 		win2 = new BrowserWindow({
@@ -271,7 +271,7 @@ function checkLocation(){
 	});
 }
 
-function loadAlertE(event, arg){
+global.loadAlertE = (event, arg) => {
 	try{
 		win2.webContents.executeJavaScript('stopAllAudio();', false);
 		win2.webContents.executeJavaScript('loadAlert("' + this.cycleAt.toString() + '-' + this.at.toString() +  '")', false);
@@ -288,381 +288,6 @@ function loadAlertE(event, arg){
 		win2.webContents.executeJavaScript('stopAllAudio();', false);
 		win2.webContents.executeJavaScript('loadAlert("' + this.cycleAt.toString() + '-' + this.at.toString() +  '")', false);
 		win2.show()
-	}
-	
-}
-
-// Check the location at for alerts
-function alertCheck(urlGet){
-	return;
-	var request = net.request(urlGet);
-	request.on("response", (response) => {
-		lastNetworkCheck = true;
-		response.on('data', (chunk) => {
-			if (!notifiedAlerts){
-				notifiedAlerts = [];
-			}
-			chunk = JSON.parse(chunk);
-			chunk = chunk["features"];
-			var at = 0;
-			let playedAlready = [];
-			while (at < chunk.length){
-				// Get Alert Settings
-				if (!notifiedAlerts.includes(chunk[at]["id"])){
-					console.log(locationNames[cycleAt])
-					var eventType = chunk[at]["properties"]["event"];
-					if (eventType.includes("Red Flag Warning")){
-						eventType = "Fire Weather Warning";
-					}
-					var notificationSetting = "soundnotification";
-					var notificationSound = settings["location-alerts"]["default-notification"];
-					var alertSound = settings["location-alerts"]["default-alert"];
-					eventType = eventType.toLowerCase().replaceAll(" ", "-");
-					if (eventType == "special-weather-statement"){
-						eventType = "special-weather-statement-advisory";
-					}
-					if (eventType == "severe-weather-statement"){
-						eventType = "severe-weather-statement-advisory";
-					}
-					if (eventType == "tropical-cyclone-statement"){
-						eventType = "tropical-cyclone-statement-advisory";
-					}
-					if (eventType == "hurricane-local-statement"){
-						eventType = "hurricane-local-statement-advisory";
-					}
-					if (eventType == "marine-weather-statement"){
-						eventType = "marine-weather-statement-advisory";
-					}
-					if (eventType == "rip-current-statement"){
-						eventType = "rip-current-statement-advisory";
-					}
-					if (eventType == "coastal-flood-statement"){
-						eventType = "coastal-flood-advisory";
-					}
-					if (eventType == "beach-hazards-statement"){
-						eventType = "beach-hazards-statement-advisory";
-					}
-					if (eventType == "hazardous-weather-outlook"){
-						eventType = "hazardous-weather-outlook-advisory";
-					}
-					if (eventType == "hydrologic-outlook"){
-						eventType = "hydrologic-outlook-advisory";
-					}
-					if (eventType == "air-quality-alert"){
-						eventType = "air-quality-warning";
-					}
-					console.log(eventType);
-					let tts = settings["location-alerts"]["tts-alerts"];
-					if (eventType.includes("warning")){
-						notificationSetting = settings["alert-types"]["warnings"][eventType.replace("-warning", "")];
-					}
-					else if (eventType.includes("watch")){
-						notificationSetting = settings["alert-types"]['watches'][eventType.replace("-watch", "")];
-					}
-					else{
-						notificationSetting = settings["alert-types"]["advisory"][eventType.replace("-advisory", "")];
-					}
-					// Check if has location specific settings
-					if (settings["per-location"][locationNames[cycleAt]] != undefined){
-						if (eventType.includes("warning")){
-							if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")] != undefined){
-								notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")];
-							}
-						}
-						else if (eventType.includes("watches")){
-							if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"] != undefined){
-								notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"][eventType.replace("-watch", "")];
-							}
-							notificationSetting = settings["alert-types"]["watches"][eventType.replace("-watch", "")];
-						}
-						else{
-							if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")] != undefined){
-								notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")];	
-							}
-						}
-						if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"] != undefined){
-							notificationSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"];
-						}
-						if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"] != undefined){
-							alertSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"];
-						}
-					}
-					if (notificationSetting == undefined){
-						notificationSetting = "soundnotification";
-					}
-					if (notificationSetting == "alert"){
-						if (settings["per-location"][locationNames[cycleAt]] != undefined){
-							if (settings["per-location"][locationNames[cycleAt]]["location-alerts"] != undefined){
-								if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"] != undefined){
-									tts = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"];
-								}
-							}
-						}
-						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
-						notif.show()
-						notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-						win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();allAudio.push(audio);", false);
-						notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
-						if (tts){
-							ttsTask(chunk[at]["properties"]["headline"] + ". " + chunk[at]["properties"]["description"].replaceAll("'", "\\'"));
-						}
-					}
-					else if (notificationSetting == "silentnotification"){
-						var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
-						notif.show()
-						notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-					}
-					else if (notificationSetting == "soundnotification"){
-						if (chunk[at]["properties"]["event"].toLowerCase().includes("watch")){
-							var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
-							notif.show()
-							notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-							notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
-						}
-						else{
-							var notif = new Notification({ title: chunk[at]["properties"]["event"] + " issued for " + locationNames[cycleAt], body: chunk[at]["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"});
-							notif.show()
-							notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-							notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
-						}
-						if (!playedAlready.includes(notificationSound)){
-							win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
-							playedAlready.push(notificationSound);
-						}
-					}
-					locationNames[cycleAt]
-					console.log(notificationSetting);
-					notifiedAlerts.push(chunk[at]["id"]);
-				}
-				at++;
-			}
-		})
-	})
-	request.on("error", (error)=>{
-		// Decide if should give offline notification (TODO - Add offline notification settings)
-		if (error.message == "net::ERR_NETWORK_IO_SUSPENDED"){
-			console.log("Computer is going to sleep.")
-		}
-		else{
-			if (lastNetworkCheck){
-				lastNetworkCheck = false;
-				console.log("Computer is now offline.")
-				new Notification({title: "Cannot give weather alerts.", body: "Atmos Weather could not successfully contact the NWS API. This is usually because you have no internet.", icon: __dirname + "/img/icon.png"}).show()
-			}
-		}
-	})
-	request.end();
-}
-
-function alertCheck2(location, alert, at, playedAlready){
-	let cycleAt = locationNames.indexOf(location);
-	console.log(cycleAt);
-	// Get Alert Settings
-	if (!notifiedAlerts.includes(alert["id"])){
-		var eventType = alert["properties"]["event"];
-		if (eventType.includes("Red Flag Warning")){
-			eventType = "Fire Weather Warning";
-		}
-		var notificationSetting = "soundnotification";
-		var notificationSound = settings["location-alerts"]["default-notification"];
-		var alertSound = settings["location-alerts"]["default-alert"];
-		eventType = eventType.toLowerCase().replaceAll(" ", "-");
-		if (eventType == "special-weather-statement"){
-			eventType = "special-weather-statement-advisory";
-		}
-		if (eventType == "severe-weather-statement"){
-			eventType = "severe-weather-statement-advisory";
-		}
-		if (eventType == "tropical-cyclone-statement"){
-			eventType = "tropical-cyclone-statement-advisory";
-		}
-		if (eventType == "hurricane-local-statement"){
-			eventType = "hurricane-local-statement-advisory";
-		}
-		if (eventType == "marine-weather-statement"){
-			eventType = "marine-weather-statement-advisory";
-		}
-		if (eventType == "rip-current-statement"){
-			eventType = "rip-current-statement-advisory";
-		}
-		if (eventType == "coastal-flood-statement"){
-			eventType = "coastal-flood-advisory";
-		}
-		if (eventType == "beach-hazards-statement"){
-			eventType = "beach-hazards-statement-advisory";
-		}
-		if (eventType == "hazardous-weather-outlook"){
-			eventType = "hazardous-weather-outlook-advisory";
-		}
-		if (eventType == "hydrologic-outlook"){
-			eventType = "hydrologic-outlook-advisory";
-		}
-		if (eventType == "air-quality-alert"){
-			eventType = "air-quality-warning";
-		}
-		console.log(eventType);
-		let tts = settings["location-alerts"]["tts-alerts"];
-		if (eventType.includes("warning")){
-			notificationSetting = settings["alert-types"]["warnings"][eventType.replace("-warning", "")];
-		}
-		else if (eventType.includes("watch")){
-			notificationSetting = settings["alert-types"]['watches'][eventType.replace("-watch", "")];
-		}
-		else{
-			notificationSetting = settings["alert-types"]["advisory"][eventType.replace("-advisory", "")];
-		}
-		// Check if has location specific settings
-		if (settings["per-location"][locationNames[cycleAt]] != undefined){
-			if (eventType.includes("warning")){
-				if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")] != undefined){
-					notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")];
-				}
-			}
-			else if (eventType.includes("watches")){
-				if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"] != undefined){
-					notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"][eventType.replace("-watch", "")];
-				}
-				notificationSetting = settings["alert-types"]["watches"][eventType.replace("-watch", "")];
-			}
-			else{
-				if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")] != undefined){
-					notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")];
-				}
-			}
-			if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"] != undefined){
-				notificationSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"];
-			}
-			if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"] != undefined){
-				alertSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"];
-			}
-		}
-		if (notificationSetting == undefined){
-			notificationSetting = "soundnotification";
-		}
-		if (notificationSetting == "alert"){
-			if (settings["per-location"][locationNames[cycleAt]] != undefined){
-				if (settings["per-location"][locationNames[cycleAt]]["location-alerts"] != undefined){
-					if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"] != undefined){
-						tts = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"];
-					}
-				}
-			}
-			var notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
-			notif.show()
-			notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-			win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();allAudio.push(audio);", false);
-			notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
-			if (tts){
-				ttsTask(alert["properties"]["headline"] + ". " + alert["properties"]["description"].replaceAll("'", "\\'"));
-			}
-		}
-		else if (notificationSetting == "silentnotification"){
-			var notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
-			notif.show()
-			notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-		}
-		else if (notificationSetting == "soundnotification"){
-			if (alert["properties"]["event"].toLowerCase().includes("watch")){
-				var notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
-				notif.show()
-				notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-				notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
-			}
-			else{
-				var notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"});
-				notif.show()
-				notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-				notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
-			}
-			if (!playedAlready.includes(notificationSound)){
-				win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
-				playedAlready.push(notificationSound);
-			}
-		}
-		locationNames[cycleAt]
-		console.log(notificationSetting);
-		notifiedAlerts.push(alert["id"]);
-	}
-}
-
-function ttsTask(toSay){
-	setTimeout(function(){
-		win2.webContents.executeJavaScript("stopAllAudio();", false);
-		toSay = toSay.replaceAll("\n", " ")
-		console.log(toSay);
-		win2.webContents.executeJavaScript("sayTTS('" +  toSay + "');", false);
-	}, 3000);
-}
-
-function getAllUGCCodes(){
-	let areaList = [];
-	console.log(JSON.stringify(locationNames));
-	for (let key of locationNames){
-		let location = JSON.parse(locationCache[key]);
-		let ugcCode = location["properties"]["county"];
-		let ugcCode2 = location["properties"]["forecastZone"];
-		let ugcCode3 = location["properties"]["fireWeatherZone"];
-		if (ugcCode !== undefined && areaList.includes(ugcCode.split("/").pop()) === false){
-			areaList.push(ugcCode.split("/").pop());
-		}
-		if (ugcCode2 !== undefined && areaList.includes(ugcCode2.split("/").pop()) === false){
-			areaList.push(ugcCode2.split("/").pop());
-		}
-		if (ugcCode3 !== undefined && areaList.includes(ugcCode3.split("/").pop()) === false){
-			areaList.push(ugcCode3.split("/").pop());
-		}
-	}
-	return areaList;
-}
-
-function areaAlertURL(){
-	let areaList = getAllUGCCodes();
-	return "https://api.weather.gov/alerts/active?zone=" + areaList.join(",");
-}
-
-function checkPolygons(){
-	fetch(areaAlertURL()).then(response => response.json()).then(data => {
-		console.log("Checking polygons.")
-		let alerts = data["features"];
-		for (let alert of alerts){
-			let playedAlready = [];
-			if (determineAlertLocation(alert) === null){
-				continue;
-			}
-			console.log(determineAlertLocation(alert));
-			alertCheck2(determineAlertLocation(alert), alert, 0, playedAlready);
-		}
-
-	});
-}
-
-function determineAlertLocation(alert){
-	if (alert["geometry"] !== null){
-		let polygon = alert["geometry"];
-		let i = 0;
-		for (let item of weatherLocations){
-			let point = turf.point([item["lon"], item["lat"]]);
-			if (turf.booleanPointInPolygon(point, polygon)){
-				return locationNames[i];
-			}
-			i++;
-		}
-		return null;
-	}
-	else {
-		let zones = alert["properties"]["affectedZones"];
-		for (let zone of zones){
-			for (let item of locationNames){
-				let location = JSON.parse(locationCache[item]);
-				let ugcCode = location["properties"]["county"];
-				let ugcCode2 = location["properties"]["forecastZone"];
-				let ugcCode3 = location["properties"]["fireWeatherZone"];
-				if (ugcCode === zone || ugcCode2 === zone || ugcCode3 === zone){
-					return item;
-				}
-			}
-		}
-		return null;
 	}
 }
 
