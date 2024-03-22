@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Notification, Tray, Menu, net, dialog} = require('electron')
 const { autoUpdater } = require("electron-updater")
+const turf = require("@turf/turf")
 var win2 = null;
 var weatherLocations;
 var locationNames;
@@ -461,8 +462,9 @@ function ttsTask(toSay){
 	}, 3000);
 }
 
-function getLocationUGCCodes(){
+function getAllUGCCodes(){
 	let areaList = [];
+	console.log(JSON.stringify(locationNames));
 	for (let key of locationNames){
 		let location = JSON.parse(locationCache[key]);
 		let ugcCode = location["properties"]["county"];
@@ -482,6 +484,47 @@ function getLocationUGCCodes(){
 }
 
 function areaAlertURL(){
-	let areaList = getLocationUGCCodes();
+	let areaList = getAllUGCCodes();
 	return "https://api.weather.gov/alerts/active?zone=" + areaList.join(",");
 }
+
+function checkPolygons(){
+	fetch(areaAlertURL()).then(response => response.json()).then(data => {
+		console.log("Checking polygons.")
+		let alerts = data["features"];
+		for (let alert of alerts){
+			console.log(determineAlertLocation(alert));
+		}
+
+	});
+}
+
+function determineAlertLocation(alert){
+	if (alert["geometry"] !== null){
+		let polygon = alert["geometry"];
+		for (let item of weatherLocations){
+			let point = turf.point([item["lon"], item["lat"]]);
+			if (turf.booleanPointInPolygon(point, polygon)){
+				return item["display_name"];
+			}
+		}
+		return null;
+	}
+	else {
+		let zones = alert["properties"]["affectedZones"];
+		for (let zone of zones){
+			for (let item of locationNames){
+				let location = JSON.parse(locationCache[item]);
+				let ugcCode = location["properties"]["county"];
+				let ugcCode2 = location["properties"]["forecastZone"];
+				let ugcCode3 = location["properties"]["fireWeatherZone"];
+				if (ugcCode === zone || ugcCode2 === zone || ugcCode3 === zone){
+					return item;
+				}
+			}
+		}
+		return null;
+	}
+}
+
+setInterval(checkPolygons, 10005);
