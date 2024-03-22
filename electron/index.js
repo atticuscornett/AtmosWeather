@@ -460,3 +460,28 @@ function ttsTask(toSay){
 		win2.webContents.executeJavaScript("sayTTS('" +  toSay + "');", false);
 	}, 3000);
 }
+
+function getLocationUGCCodes(){
+	let areaList = [];
+	for (let key of locationNames){
+		let location = JSON.parse(locationCache[key]);
+		let ugcCode = location["properties"]["county"];
+		let ugcCode2 = location["properties"]["forecastZone"];
+		let ugcCode3 = location["properties"]["fireWeatherZone"];
+		if (ugcCode !== undefined && areaList.includes(ugcCode.split("/").pop()) === false){
+			areaList.push(ugcCode.split("/").pop());
+		}
+		if (ugcCode2 !== undefined && areaList.includes(ugcCode2.split("/").pop()) === false){
+			areaList.push(ugcCode2.split("/").pop());
+		}
+		if (ugcCode3 !== undefined && areaList.includes(ugcCode3.split("/").pop()) === false){
+			areaList.push(ugcCode3.split("/").pop());
+		}
+	}
+	return areaList;
+}
+
+function areaAlertURL(){
+	let areaList = getLocationUGCCodes();
+	return "https://api.weather.gov/alerts/active?zone=" + areaList.join(",");
+}
