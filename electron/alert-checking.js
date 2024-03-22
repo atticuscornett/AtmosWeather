@@ -8,10 +8,10 @@ function alertCheck(location, alert, at, playedAlready){
     console.log(cycleAt);
     // Get Alert Settings
     if (!notifiedAlerts.includes(alert["id"])){
-        var eventType = alert["properties"]["event"];
-        var notificationSetting = "soundnotification";
-        var notificationSound = settings["location-alerts"]["default-notification"];
-        var alertSound = settings["location-alerts"]["default-alert"];
+        let eventType = alert["properties"]["event"];
+        let notificationSetting;
+        let notificationSound = settings["location-alerts"]["default-notification"];
+        let alertSound = settings["location-alerts"]["default-alert"];
         eventType = eventType.toLowerCase().replaceAll(" ", "-");
         eventType = transformEventType(eventType);
         console.log(eventType);
@@ -26,74 +26,75 @@ function alertCheck(location, alert, at, playedAlready){
             notificationSetting = settings["alert-types"]["advisory"][eventType.replace("-advisory", "")];
         }
         // Check if has location specific settings
-        if (settings["per-location"][locationNames[cycleAt]] != undefined){
+        if (settings["per-location"][locationNames[cycleAt]] !== undefined){
             if (eventType.includes("warning")){
-                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")] != undefined){
+                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")] !== undefined){
                     notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")];
                 }
             }
             else if (eventType.includes("watches")){
-                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"] != undefined){
+                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"] !== undefined){
                     notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"][eventType.replace("-watch", "")];
                 }
                 notificationSetting = settings["alert-types"]["watches"][eventType.replace("-watch", "")];
             }
             else{
-                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")] != undefined){
+                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")] !== undefined){
                     notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")];
                 }
             }
-            if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"] != undefined){
+            if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"] !== undefined){
                 notificationSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"];
             }
-            if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"] != undefined){
+            if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"] !== undefined){
                 alertSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-alert"];
             }
         }
-        if (notificationSetting == undefined){
+        if (notificationSetting === undefined){
             notificationSetting = "soundnotification";
         }
-        if (notificationSetting == "alert"){
-            if (settings["per-location"][locationNames[cycleAt]] != undefined){
-                if (settings["per-location"][locationNames[cycleAt]]["location-alerts"] != undefined){
-                    if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"] != undefined){
+
+        let notif;
+        if (notificationSetting === "alert"){
+            if (settings["per-location"][locationNames[cycleAt]] !== undefined){
+                if (settings["per-location"][locationNames[cycleAt]]["location-alerts"] !== undefined){
+                    if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"] !== undefined){
                         tts = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"];
                     }
                 }
             }
-            var notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
+            notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
             notif.show()
             notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
             win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();allAudio.push(audio);", false);
-            notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
+            notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
             if (tts){
                 ttsTask(alert["properties"]["headline"] + ". " + alert["properties"]["description"].replaceAll("'", "\\'"));
             }
         }
-        else if (notificationSetting == "silentnotification"){
-            var notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
+        else if (notificationSetting === "silentnotification"){
+            notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
             notif.show()
             notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
         }
-        else if (notificationSetting == "soundnotification"){
+        else if (notificationSetting === "soundnotification"){
             if (alert["properties"]["event"].toLowerCase().includes("watch")){
-                var notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
+                notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
                 notif.show()
                 notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-                notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
+                notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
             }
             else{
-                var notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"});
+                notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"});
                 notif.show()
                 notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
-                notif.on('close', (event, arg) => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
+                notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
             }
             if (!playedAlready.includes(notificationSound)){
                 win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
                 playedAlready.push(notificationSound);
             }
         }
-        locationNames[cycleAt]
         console.log(notificationSetting);
         notifiedAlerts.push(alert["id"]);
     }
@@ -178,13 +179,21 @@ function checkPolygons(){
     fetch(areaAlertURL()).then(response => response.json()).then(data => {
         console.log("Checking polygons.")
         let alerts = data["features"];
+        let alertsAtLocation = {};
         for (let alert of alerts){
             let playedAlready = [];
-            if (determineAlertLocation(alert) === null){
+            let alertAt = 0;
+            let alertLocation = determineAlertLocation(alert);
+            if (alertLocation === null){
                 continue;
             }
-            console.log(determineAlertLocation(alert));
-            alertCheck(determineAlertLocation(alert), alert, 0, playedAlready);
+            if (alertsAtLocation[alertLocation] !== undefined){
+                alertAt = alertsAtLocation[alertLocation];
+            }
+            console.log(alertLocation);
+            alertCheck(alertLocation, alert, alertAt, playedAlready);
+            alertAt++;
+            alertsAtLocation[alertLocation] = alertAt;
         }
 
     });
