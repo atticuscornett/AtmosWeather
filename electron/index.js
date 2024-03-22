@@ -271,10 +271,11 @@ function checkLocation(){
 	});
 }
 
-global.loadAlertE = (event, arg) => {
+global.loadAlertE = (details) => {
+	console.log(details)
 	try{
 		win2.webContents.executeJavaScript('stopAllAudio();', false);
-		win2.webContents.executeJavaScript('loadAlert("' + this.cycleAt.toString() + '-' + this.at.toString() +  '")', false);
+		win2.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
 		win2.show()
 	}
 	catch(err){
@@ -286,7 +287,7 @@ global.loadAlertE = (event, arg) => {
 		});
 		win2.loadFile('index.html')
 		win2.webContents.executeJavaScript('stopAllAudio();', false);
-		win2.webContents.executeJavaScript('loadAlert("' + this.cycleAt.toString() + '-' + this.at.toString() +  '")', false);
+		win2.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
 		win2.show()
 	}
 }

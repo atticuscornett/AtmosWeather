@@ -65,7 +65,7 @@ function alertCheck(location, alert, at, playedAlready){
             }
             notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
             notif.show()
-            notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
+            notif.on('click', loadAlertE.bind(null, {"cycleAt":cycleAt, "at":at}))
             win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();allAudio.push(audio);", false);
             notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
             if (tts){
@@ -75,19 +75,19 @@ function alertCheck(location, alert, at, playedAlready){
         else if (notificationSetting === "silentnotification"){
             notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
             notif.show()
-            notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
+            notif.on('click', loadAlertE.bind(null, {"cycleAt":cycleAt, "at":at}))
         }
         else if (notificationSetting === "soundnotification"){
             if (alert["properties"]["event"].toLowerCase().includes("watch")){
                 notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
                 notif.show()
-                notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
+                notif.on('click', loadAlertE.bind(null, {"cycleAt":cycleAt, "at":at}))
                 notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
             }
             else{
                 notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"});
                 notif.show()
-                notif.on('click', loadAlertE.bind({"cycleAt":cycleAt, "at":at}))
+                notif.on('click', loadAlertE.bind(null, {"cycleAt":cycleAt, "at":at}))
                 notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
             }
             if (!playedAlready.includes(notificationSound)){
