@@ -47,6 +47,8 @@ dependencies {
     implementation project(':capacitor-cordova-android-plugins')
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'org.locationtech.jts:jts-core:1.19.0'
+    implementation 'org.geotools:gt-geojson:31.0'
 }
 
 apply from: 'capacitor.build.gradle'
