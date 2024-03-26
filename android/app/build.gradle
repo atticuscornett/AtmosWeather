@@ -33,6 +33,9 @@ repositories {
     flatDir{
         dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
     }
+    maven {
+        url "https://repo.osgeo.org/repository/release/"
+    }
 }
 
 dependencies {
@@ -48,7 +51,8 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'org.locationtech.jts:jts-core:1.19.0'
-    implementation 'org.geotools:gt-geojson:31.0'
+    implementation 'org.geotools:gt-main:24.1'
+    implementation 'org.geotools:gt-geojson:24.1'
 }
 
 apply from: 'capacitor.build.gradle'
