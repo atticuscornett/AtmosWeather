@@ -36,7 +36,7 @@ public class JSONForecast {
 
             JSONArray locationNames = new JSONArray(sharedPreferences.getString("location-names", "[]"));
 
-            System.out.println(AlertGrabber.createAlertLink(locationCache, locationNames));
+            //System.out.println(BatchAlertRequest.createAlertLink(locationCache, locationNames));
 
             JSONObject locationData = new JSONObject(locationCache.getString(locationName));
 
