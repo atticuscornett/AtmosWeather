@@ -13,16 +13,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 public class BatchAlertListener implements Response.Listener<java.lang.String>{
-    private JSONObject alerts;
-    private Context context;
+    private final Context context;
     public BatchAlertListener(Context context){
         this.context = context;
     }
-    private static String determineAlertLocation(JSONObject alert, JSONArray locationNames, JSONArray weatherLocations, JSONObject locationCache) {
-        if (alert.has("geometry")){
+    private static String determineAlertLocation(JSONObject alert, JSONArray locationNames, JSONArray weatherLocations, JSONObject locationCache) throws JSONException {
+        if (alert.has("geometry") && !alert.isNull("geometry")){
+            System.out.println("Has geometry");
             try {
                 Feature alertFeature = Feature.fromJson(alert.toString());
                 Polygon alertGeometry = (Polygon) alertFeature.geometry();
@@ -43,7 +41,8 @@ public class BatchAlertListener implements Response.Listener<java.lang.String>{
                 for (int i = 0; i < zones.length(); i++) {
                     String zone = zones.getString(i);
                     for (int j = 0; j < locationNames.length(); j++) {
-                        JSONObject location = locationCache.getJSONObject(locationNames.getString(j));
+                        String locationName = locationNames.getString(j);
+                        JSONObject location = new JSONObject(locationCache.getString(locationName));
                         String countyUGC = "";
                         String forecastZoneUGC = "";
                         String fireWeatherZoneUGC = "";
@@ -66,7 +65,7 @@ public class BatchAlertListener implements Response.Listener<java.lang.String>{
                     }
                 }
             } catch (JSONException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
         return null;
@@ -75,10 +74,25 @@ public class BatchAlertListener implements Response.Listener<java.lang.String>{
     @Override
     public void onResponse(String response) {
         try {
-            alerts = new JSONObject(response);
-            System.out.println(alerts);
+            JSONObject jsonResponse = new JSONObject(response);
+            if (jsonResponse.has("features")){
+                JSONArray alerts = jsonResponse.getJSONArray("features");
+                SharedPreferences sharedPreferences = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
+                JSONObject locationCache = new JSONObject(sharedPreferences.getString("location-cache", "{}"));
+                JSONArray locationNames = new JSONArray(sharedPreferences.getString("location-names", "[]"));
+                JSONArray weatherLocations = new JSONArray(sharedPreferences.getString("weather-locations", "[]"));
+                for (int i = 0; i < alerts.length(); i++) {
+                    JSONObject alert = alerts.getJSONObject(i);
+                    String locationName = determineAlertLocation(alert, locationNames, weatherLocations, locationCache);
+                    if (locationName != null){
+
+                    }
+                    System.out.println(alert);
+                    System.out.println("Location: " + locationName);
+                }
+            }
         } catch (JSONException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }
