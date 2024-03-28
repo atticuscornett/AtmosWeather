@@ -24,7 +24,7 @@ public class NWSData {
             e.printStackTrace();
         }
 
-        queue.add(new AlertRequest(lat, lon, locationName, context));
+        //queue.add(new AlertRequest(lat, lon, locationName, context));
         queue.add(new BatchAlertRequest(locationCache, locationNames, context));
     }
 }

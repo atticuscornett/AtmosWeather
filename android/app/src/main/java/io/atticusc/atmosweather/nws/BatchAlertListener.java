@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.android.volley.Response;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.geojson.Polygon;
@@ -12,6 +14,11 @@ import com.mapbox.turf.TurfJoins;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import io.atticusc.atmosweather.InformWeather;
 
 public class BatchAlertListener implements Response.Listener<java.lang.String>{
     private final Context context;
@@ -85,7 +92,8 @@ public class BatchAlertListener implements Response.Listener<java.lang.String>{
                     JSONObject alert = alerts.getJSONObject(i);
                     String locationName = determineAlertLocation(alert, locationNames, weatherLocations, locationCache);
                     if (locationName != null){
-
+                        String[] alerted = getAlerts(sharedPreferences, locationName, alert);
+                        serializeAlerts(alerted, sharedPreferences);
                     }
                     System.out.println(alert);
                     System.out.println("Location: " + locationName);
@@ -94,5 +102,33 @@ public class BatchAlertListener implements Response.Listener<java.lang.String>{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private String[] getAlerts(SharedPreferences preferences, String locationName, JSONObject responseJson) throws JSONException {
+        ArrayList<String> results = new ArrayList<>();
+
+        JSONArray notifiedAlerts = new JSONArray(preferences.getString("alerted", "[]"));
+
+        for (int i = 0; i < notifiedAlerts.length(); i++) {
+            results.add(notifiedAlerts.getString(i));
+        }
+
+        JSONObject current = responseJson.getJSONObject("properties");
+
+        if (!results.contains(current.getString("@id"))) {
+            if (InformWeather.InformWeatherReturn(current.getString("event"), locationName, current.getString("description"), context)) {
+                results.add(current.getString("@id"));
+            }
+        }
+
+        return results.toArray(new String[0]);
+    }
+
+    private static void serializeAlerts(String[] alerts, SharedPreferences sharedPreferences) {
+        Gson gson = new Gson();
+        Type objType = new TypeToken<String[]>() {
+        }.getType();
+        String s = gson.toJson(alerts, objType);
+        sharedPreferences.edit().putString("alerted", s).apply();
     }
 }
