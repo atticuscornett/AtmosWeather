@@ -171,9 +171,12 @@ setInterval(function(){
 		.then(result => {
 		global.isOnline = result;
 	});
-	setTimeout(checkLocation, 100);
-	cycleAt++;
 }, 10000);
+
+setInterval(function(){
+	checkLocation();
+	cycleAt++;
+}, 30000);
 
 // Check the location for alerts
 function checkLocation(){
@@ -291,5 +294,3 @@ global.loadAlertE = (details) => {
 		win2.show()
 	}
 }
-
-setInterval(checkPolygons, 10005);
