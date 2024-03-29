@@ -37,15 +37,10 @@ public class BootService extends BroadcastReceiver {
                 canScheduleAlarms = alarmManager.canScheduleExactAlarms();
             }
             if (canScheduleAlarms){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
-                }
-                else {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
-                }
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, 600000, pentent);
             }
             else {
-                alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, 600000, pentent);
             }
         }
     }

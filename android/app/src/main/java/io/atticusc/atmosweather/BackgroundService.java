@@ -91,18 +91,10 @@ public class BackgroundService extends BroadcastReceiver {
 
             // Update more often on WiFi
             if (canScheduleAlarms){
-                if (checkNetworkStatus(context)) {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pentent);
-                } else {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 25000, pentent);
-                }
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 5000, 600000, pentent);
             }
             else {
-                if (checkNetworkStatus(context)) {
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pentent);
-                } else {
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 25000, pentent);
-                }
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 5000, 600000, pentent);
             }
 
             JSONObject jObj = new JSONObject(weatherLocations.getString("settings", ""));
