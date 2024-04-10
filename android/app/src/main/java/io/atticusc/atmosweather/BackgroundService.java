@@ -195,9 +195,11 @@ public class BackgroundService extends BroadcastReceiver {
                 }
             }
 
+            // Check location every 3 minutes
+
             getLocationNow++;
 
-            if (getLocationNow >= 8) {
+            if (getLocationNow >= 3) {
                 getLocationNow = 0;
             }
             weatherLocations.edit().putInt("locationchecktime", getLocationNow).apply();
