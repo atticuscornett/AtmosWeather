@@ -7,6 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class NWSData {
@@ -24,7 +25,14 @@ public class NWSData {
             e.printStackTrace();
         }
 
-        //queue.add(new AlertRequest(lat, lon, locationName, context));
         queue.add(new BatchAlertRequest(locationCache, locationNames, context));
+
+        // Notify about future storms
+        try {
+            JSONForecast forecast = new JSONForecast(sharedPreferences, locationName);
+            forecast.attemptNotify(context);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
