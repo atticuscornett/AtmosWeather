@@ -1,13 +1,13 @@
 // UPDATE
-window.atmosVersion = "2.0.2";
-window.atmosUpdated = "1-15-2024";
+window.atmosVersion = "2.1.0-beta.1";
+window.atmosUpdated = "4-10-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.0.2 is here!</h2>
+		<h2>Atmos Weather v2.1.0 (beta) is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
-  			<dt>Bug Fixes</dt>
-			<dd>- Fixed crash on app start on Android 14</dd>
-			<dd>- Added notification request for Android</dd>
+  			<dt>Updates</dt>
+			<dd>- See <a href="https://github.com/atticuscornett/AtmosWeather/discussions/19">this discussion</a> for update information.</dd>
+			<dd>- Full update notes will be added on release.</dd>
 		</dl> 
 		<br><br>
 		`;
