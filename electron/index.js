@@ -180,6 +180,8 @@ setInterval(function(){
 
 // Check the location for alerts
 function checkLocation(){
+	console.log(new Date().toString())
+	let locationNames = global.locationNames;
 	if (locationNames == undefined){
 		setTimeout(checkLocation, 200);
 		return;
