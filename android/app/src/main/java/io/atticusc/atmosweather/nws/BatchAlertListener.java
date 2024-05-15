@@ -5,18 +5,21 @@ import android.content.SharedPreferences;
 
 import com.android.volley.Response;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.Point;
-import com.mapbox.geojson.Polygon;
-import com.mapbox.turf.TurfJoins;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Polygon;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Map;
 
 import io.atticusc.atmosweather.InformWeather;
 
@@ -26,15 +29,51 @@ public class BatchAlertListener implements Response.Listener<java.lang.String>{
         this.context = context;
     }
     private static String determineAlertLocation(JSONObject alert, JSONArray locationNames, JSONArray weatherLocations, JSONObject locationCache) throws JSONException {
-        if (alert.has("geometry") && !alert.isNull("geometry")){
-            System.out.println("Has geometry");
+        boolean hasCompatibleGeometry = false;
+
+        // Check if alert is basic polygon
+        try {
+            if (alert.has("geometry") && !alert.isNull("geometry")){
+                if (alert.getJSONObject("geometry").has("type")
+                    && alert.getJSONObject("geometry").getString("type").equals("Polygon")){
+                    hasCompatibleGeometry = true;
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        if (hasCompatibleGeometry){
+            System.out.println("Has compatible geometry");
             try {
-                Feature alertFeature = Feature.fromJson(alert.toString());
-                Polygon alertGeometry = (Polygon) alertFeature.geometry();
+                GeometryFactory geometryFactory = new GeometryFactory();
+
+                // Get coordinates from GeoJSON
+                String geoJson = alert.getJSONObject("geometry").toString();
+                JsonObject jsonObject = JsonParser.parseString(geoJson).getAsJsonObject();
+                JsonArray coordinates = jsonObject.getAsJsonArray("coordinates").get(0).getAsJsonArray();
+
+                // Create a coordinate list from coordinates
+                Coordinate[] polygonCoordinates = new Coordinate[coordinates.size()];
+                for (int i = 0; i < coordinates.size(); i++) {
+                    JsonArray coordinate = coordinates.get(i).getAsJsonArray();
+                    double x = coordinate.get(0).getAsDouble();
+                    double y = coordinate.get(1).getAsDouble();
+                    polygonCoordinates[i] = new Coordinate(x, y);
+                }
+
+                // Create polygon from coordinate list
+                Polygon alertPolygon = geometryFactory.createPolygon(polygonCoordinates);
+
                 for (int i = 0; i < weatherLocations.length(); i++) {
                     JSONObject location = weatherLocations.getJSONObject(i);
-                    Point locationPoint = Point.fromLngLat(location.getDouble("lon"), location.getDouble("lat"));
-                    if (alertGeometry != null && TurfJoins.inside(locationPoint, alertGeometry)){
+
+                    // Create coordinate from location
+                    Coordinate locationPoint = new Coordinate(location.getDouble("lon"), location.getDouble("lat"));
+                    System.out.println("locationPoint:");
+                    System.out.println(geometryFactory.createPoint(locationPoint));
+                    if (alertPolygon != null && alertPolygon.contains(geometryFactory.createPoint(locationPoint))){
                         return locationNames.getString(i);
                     }
                 }
@@ -82,16 +121,22 @@ public class BatchAlertListener implements Response.Listener<java.lang.String>{
     public void onResponse(String response) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
+
+            // Check if response is valid
             if (jsonResponse.has("features")){
+                // Get required location information
                 JSONArray alerts = jsonResponse.getJSONArray("features");
                 SharedPreferences sharedPreferences = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
                 JSONObject locationCache = new JSONObject(sharedPreferences.getString("location-cache", "{}"));
                 JSONArray locationNames = new JSONArray(sharedPreferences.getString("location-names", "[]"));
-                JSONArray weatherLocations = new JSONArray(sharedPreferences.getString("weather-locations", "[]"));
+                JSONArray weatherLocations = new JSONArray(sharedPreferences.getString("locations", "[]"));
+
+                // Iterate through alerts and determine location
                 for (int i = 0; i < alerts.length(); i++) {
                     JSONObject alert = alerts.getJSONObject(i);
                     String locationName = determineAlertLocation(alert, locationNames, weatherLocations, locationCache);
                     if (locationName != null){
+                        // Alert user if necessary
                         String[] alerted = getAlerts(sharedPreferences, locationName, alert);
                         serializeAlerts(alerted, sharedPreferences);
                     }

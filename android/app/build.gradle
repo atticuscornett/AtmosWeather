@@ -38,8 +38,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-geojson:5.9.0-alpha.1'
-    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:5.9.0-alpha.1'
     implementation 'org.locationtech.jts:jts-core:1.19.0'
     implementation 'org.locationtech.jts:jts-io:1.19.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
