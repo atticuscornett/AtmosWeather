@@ -62,6 +62,25 @@ public class BackgroundService extends BroadcastReceiver {
         LocationManager locMan = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         SharedPreferences weatherLocations = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
         try {
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+            Intent intentA = new Intent(context, BackgroundService.class);
+
+            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, PendingIntent.FLAG_IMMUTABLE);
+            Calendar calendar = Calendar.getInstance();
+
+            boolean canScheduleAlarms = true;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+                canScheduleAlarms = alarmManager.canScheduleExactAlarms();
+            }
+
+            if (canScheduleAlarms) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (60*1000), pentent);
+            }
+            else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (60*1000), pentent);
+            }
+
             JSONArray locationJSON = new JSONArray(weatherLocations.getString("locations", "[]"));
             JSONArray locationNameJSON = new JSONArray(weatherLocations.getString("location-names", "[]"));
 
@@ -77,25 +96,6 @@ public class BackgroundService extends BroadcastReceiver {
             checkLocation += 1;
 
             weatherLocations.edit().putInt("nextcheck", checkLocation).apply();
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-            Intent intentA = new Intent(context, BackgroundService.class);
-
-            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, PendingIntent.FLAG_IMMUTABLE);
-            Calendar calendar = Calendar.getInstance();
-
-            boolean canScheduleAlarms = true;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-                canScheduleAlarms = alarmManager.canScheduleExactAlarms();
-            }
-
-            // Update more often on WiFi
-            if (canScheduleAlarms) {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (60*1000), pentent);
-            }
-            else {
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (60*1000), pentent);
-            }
 
             JSONObject jObj = new JSONObject(weatherLocations.getString("settings", ""));
             boolean getLocationInBackground = true;
