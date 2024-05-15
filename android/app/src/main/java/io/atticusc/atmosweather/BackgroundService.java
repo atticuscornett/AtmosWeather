@@ -90,19 +90,11 @@ public class BackgroundService extends BroadcastReceiver {
             }
 
             // Update more often on WiFi
-            if (canScheduleAlarms){
-                if (checkNetworkStatus(context)) {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pentent);
-                } else {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 25000, pentent);
-                }
+            if (canScheduleAlarms) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (60*1000), pentent);
             }
             else {
-                if (checkNetworkStatus(context)) {
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 10000, pentent);
-                } else {
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 25000, pentent);
-                }
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (60*1000), pentent);
             }
 
             JSONObject jObj = new JSONObject(weatherLocations.getString("settings", ""));
@@ -203,9 +195,11 @@ public class BackgroundService extends BroadcastReceiver {
                 }
             }
 
+            // Check location every 3 minutes
+
             getLocationNow++;
 
-            if (getLocationNow >= 8) {
+            if (getLocationNow >= 3) {
                 getLocationNow = 0;
             }
             weatherLocations.edit().putInt("locationchecktime", getLocationNow).apply();

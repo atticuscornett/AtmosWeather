@@ -42,8 +42,7 @@ public class BootService extends BroadcastReceiver {
                 }
                 else {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
-                }
-            }
+                }            }
             else {
                 alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 5000, pentent);
             }

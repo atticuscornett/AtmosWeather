@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +33,10 @@ public class JSONForecast {
         else{
             final String LOCATION_CACHE_KEY = "location-cache";
             JSONObject locationCache = new JSONObject(sharedPreferences.getString(LOCATION_CACHE_KEY, ""));
+
+            JSONArray locationNames = new JSONArray(sharedPreferences.getString("location-names", "[]"));
+
+            //System.out.println(BatchAlertRequest.createAlertLink(locationCache, locationNames));
 
             JSONObject locationData = new JSONObject(locationCache.getString(locationName));
 
