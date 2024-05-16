@@ -1,13 +1,17 @@
 // UPDATE
-window.atmosVersion = "2.1.0-beta.3";
-window.atmosUpdated = "5-15-2024";
+window.atmosVersion = "2.1.0";
+window.atmosUpdated = "5-16-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.1.0 (beta 3) is here!</h2>
+		<h2>Atmos Weather v2.1.0 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
   			<dt>Updates</dt>
-			<dd>- See <a href="https://github.com/atticuscornett/AtmosWeather/discussions/19">this discussion</a> for update information.</dd>
-			<dd>- Full update notes will be added on release.</dd>
+			<dd>- New and improved alerts system</dd>
+			<dd>- Settings navigation improvements</dd>
+			<dt>New Alert System</dt>
+			<dd>- More timely alerts with less battery usage</dd>
+			<dd>- Alerts are now received within a minute of being issued, regardless of number of locations</dd>
+			<dd>- Alert checks now happen less frequently, reducing battery usage</dd>
 		</dl> 
 		<br><br>
 		`;
