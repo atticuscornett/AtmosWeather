@@ -75,10 +75,12 @@ Most weather apps have too much bloat, largely in the form of overwhelming ads. 
 Weather alerts should be given in a timely manner. Ideally, alerts should be given within one minute of being published to the NWS API.
 
 ### Functionality
-Atmos Weather should provide all of the basic functions needed by users, as well as improve in areas that most weather apps and emergency alerts fall short, such as lack of information and customizability for weather alerts.
+Atmos Weather should provide all the basic functions needed by users, as well as improve in areas that most weather apps and emergency alerts fall short, such as lack of information and customizability for weather alerts.
 
 ### Privacy and Security
 Atmos Weather should not collect any user data beyond what is strictly necessary to provide functionality.
+Atmos Weather's privacy policy should be transparent and easy to understand. Atmos Weather's privacy statment
+can be viewed [here](https://atticuscornett.github.io/AtmosWeather/privacy.html).
 
 # <a name="issues"></a>Major Known Issues
 
