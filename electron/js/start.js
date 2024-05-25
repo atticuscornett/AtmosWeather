@@ -1,17 +1,14 @@
 // UPDATE
-window.atmosVersion = "2.1.0";
-window.atmosUpdated = "5-16-2024";
+window.atmosVersion = "2.1.1";
+window.atmosUpdated = "5-24-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.1.0 is here!</h2>
+		<h2>Atmos Weather v2.1.1 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
   			<dt>Updates</dt>
-			<dd>- New and improved alerts system</dd>
-			<dd>- Settings navigation improvements</dd>
-			<dt>New Alert System</dt>
-			<dd>- More timely alerts with less battery usage</dd>
-			<dd>- Alerts are now received within a minute of being issued, regardless of number of locations</dd>
-			<dd>- Alert checks now happen less frequently, reducing battery usage</dd>
+			<dd>- Updated privacy statement to explain what Android permissions are used for. (The privacy statement can be found in settings.)</dd>
+			<dd>- Removed unneeded Android permissions and metadata.</dd>
+			<dd>- Updated desktop packages.</dd>
 		</dl> 
 		<br><br>
 		`;
