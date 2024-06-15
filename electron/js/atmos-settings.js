@@ -300,6 +300,7 @@ function refreshSettings(){
 	// Personalization Settings
 	document.getElementById("setting-app-theme").value = allSettings["personalization"]["theme"];
 	document.getElementById("setting-page-transition-duration").value = allSettings["personalization"]["page-transition-duration"];
+	document.getElementById("setting-page-transition-duration-text").innerHTML = allSettings["personalization"]["page-transition-duration"].toString() + "ms";
 
 	// Location Settings
 	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
