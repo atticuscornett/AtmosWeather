@@ -226,15 +226,26 @@ function activateNavButtons(){
 
 // Navigate to another screen
 function navTo(screenTo){
-	document.getElementById("tab-" + screenAt).setAttribute("style", "animation: offLeft 2s;")
+	let mode = "none";
+	let duration = "2s";
+	let delay = 2000/4;
+	if (mode === "fast") {
+		duration = "1s";
+		delay = 1000/4;
+	}
+	if (mode === "none"){
+		duration = "0s";
+		delay = 0;
+	}
+	document.getElementById("tab-" + screenAt).setAttribute("style", "animation: offLeft " + duration + ";")
 	setTimeout(function(){
 		document.getElementById("tab-" + screenAt).setAttribute("style", "")
 		document.getElementById("tab-" + screenAt).hidden = true;
 		navCode(screenTo);
-		document.getElementById("tab-" + screenTo).setAttribute("style", "animation: onRight 2s;");
+		document.getElementById("tab-" + screenTo).setAttribute("style", "animation: onRight " + duration + ";");
 		document.getElementById("tab-" + screenTo).hidden = false;
 		screenAt = screenTo;
-	}, 500);
+	}, delay);
 }
 
 // Checks if the NWS weather API is available
