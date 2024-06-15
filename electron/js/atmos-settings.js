@@ -15,7 +15,7 @@ setTimeout(function(){
 	}
 	if (thePlatform.includes("desktop")){
 		atmosSettingsTemp = {
-			"personalization": {"theme": "system"},
+			"personalization": {"theme": "system", "page-transition-duration": 1500},
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
 			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
@@ -115,7 +115,7 @@ setTimeout(function(){
 	}
 	else{
 		atmosSettingsTemp = {
-			"personalization": {"theme": "system"},
+		"personalization": {"theme": "system", "page-transition-duration": 1500},
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
@@ -299,7 +299,8 @@ function refreshSettings(){
 
 	// Personalization Settings
 	document.getElementById("setting-app-theme").value = allSettings["personalization"]["theme"];
-	
+	document.getElementById("setting-page-transition-duration").value = allSettings["personalization"]["page-transition-duration"];
+
 	// Location Settings
 	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
 	document.getElementById("setting-current-location-alerts").checked = allSettings["location"]["alerts"];
@@ -364,6 +365,7 @@ function saveSettings(){
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 
 	allSettings["personalization"]["theme"] = document.getElementById("setting-app-theme").value;
+	allSettings["personalization"]["page-transition-duration"] = document.getElementById("setting-page-transition-duration").value;
 
 	allSettings["location"]["weather"] = document.getElementById("setting-current-location").checked;
 	allSettings["location"]["alerts"] = document.getElementById("setting-current-location-alerts").checked;
