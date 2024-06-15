@@ -62,6 +62,11 @@ document.getElementById("location-search").addEventListener("keypress", function
       }
 });
 
+// Refresh duration text on slider change
+document.getElementById("setting-page-transition-duration").onchange = () => {
+document.getElementById("setting-page-transition-duration-text").innerHTML = document.getElementById("setting-page-transition-duration").value + "ms";
+}
+
 // Refresh radar when weather outlook changes
 document.getElementById("spc-select").onchange = () => {
     let value = document.getElementById("spc-select").value;
