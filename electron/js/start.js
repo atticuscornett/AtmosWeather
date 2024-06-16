@@ -28,10 +28,21 @@ function refreshAppTheme(){
 }
 setTimeout(refreshAppTheme, 100);
 
-// Fade out logo and handle notices after animation is done
-setTimeout(function(){
-    showNotices();
-}, 4000);
+// Fade out logo and handle notices after animation is done or immediately if it's disabled
+let noticeTimeout = 0;
+if (localStorage.getItem("atmos-settings") !== null){
+    let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+    if (settings["personalization"]["atmos-logo"]){
+        setTimeout(function(){
+            showNotices();
+        }, 2000);
+    }
+    else {
+        document.getElementById("atmos-logo").hidden = true;
+        showNotices();
+    }
+}
+
 
 // Adds function to the navigation buttons (from atmos-ui.js)
 activateNavButtons();
@@ -61,6 +72,11 @@ document.getElementById("location-search").addEventListener("keypress", function
         document.getElementById("search-button").click();
       }
 });
+
+// Refresh duration text on slider change
+document.getElementById("setting-page-transition-duration").onchange = () => {
+document.getElementById("setting-page-transition-duration-text").innerHTML = document.getElementById("setting-page-transition-duration").value + "ms";
+}
 
 // Refresh radar when weather outlook changes
 document.getElementById("spc-select").onchange = () => {
