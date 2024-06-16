@@ -31,7 +31,7 @@ setTimeout(refreshAppTheme, 100);
 // Fade out logo and handle notices after animation is done
 setTimeout(function(){
     showNotices();
-}, 4000);
+}, 2000);
 
 // Adds function to the navigation buttons (from atmos-ui.js)
 activateNavButtons();
