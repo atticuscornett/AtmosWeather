@@ -9,13 +9,13 @@
 	height: 100%;
 	top: 0;
 	left: 0;
-	animation: logoBackgroundAnim 3s;
+	animation: logoBackgroundAnim 2s;
 }
 
 .logoletter{
 	font-family: Secular One;
 	display: inline;
-	animation: logoAnim 3s;
+	animation: logoAnim 2s;
 	padding-left: 10px;
 	padding-right: 10px;
 	color: dodgerblue;
@@ -35,6 +35,6 @@ body.dark {
 		height: 100%;
 		top: 0;
 		left: 0;
-		animation: logoBackgroundAnim 3s;
+		animation: logoBackgroundAnim 2s;
 	}
 }

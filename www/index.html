@@ -37,7 +37,7 @@
 				<h1 class="logoletter">m</h1>
 				<h1 class="logoletter">o</h1>
 				<h1 class="logoletter">s</h1>
-				<h3 style="text-align: center; animation: delayedFadeIn 3s; position: relative; bottom: 70px;font-family: Secular One;" id="weatherLogo">weather</h3>
+				<h3 style="text-align: center; animation: delayedFadeIn 2s; position: relative; bottom: 70px;font-family: Secular One;" id="weatherLogo">weather</h3>
 			</div>
 		</div>
 		<div id="welcome-window-native" hidden>
@@ -264,6 +264,14 @@
 						<option value="dark">Dark Theme</option>
 						<option value="light">Light Theme</option>
 					</select>
+					<br>
+					<label for="setting-page-transition-duration">Page Transition Duration</label>
+					<br>
+					<input type="range" min="0" max="3000" value="1500" step="100" id="setting-page-transition-duration">
+					<label id="setting-page-transition-duration-text">1500ms</label>
+					<br><br>
+					<input type="checkbox" id="setting-atmos-logo">
+					<label for="setting-atmos-logo">Show Atmos Weather logo on app open</label>
 					<hr>
 					<h2>Notifications</h2>
 					<input class="box" type="checkbox" id="setting-future-severe-notifications" checked>
