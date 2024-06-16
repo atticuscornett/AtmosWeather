@@ -1,14 +1,12 @@
 // UPDATE
-window.atmosVersion = "2.1.1";
-window.atmosUpdated = "5-24-2024";
+window.atmosVersion = "2.1.2-beta.1";
+window.atmosUpdated = "6-16-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.1.1 is here!</h2>
+		<h2>Atmos Weather v2.1.2-beta.1 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
   			<dt>Updates</dt>
-			<dd>- Updated privacy statement to explain what Android permissions are used for. (The privacy statement can be found in settings.)</dd>
-			<dd>- Removed unneeded Android permissions and metadata.</dd>
-			<dd>- Updated desktop packages.</dd>
+			<dd>- Updated will be added here upon the full release.</dd>
 		</dl> 
 		<br><br>
 		`;
