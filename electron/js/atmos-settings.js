@@ -15,7 +15,7 @@ setTimeout(function(){
 	}
 	if (thePlatform.includes("desktop")){
 		atmosSettingsTemp = {
-			"personalization": {"theme": "system", "page-transition-duration": 1500},
+			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false},
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
 			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
@@ -115,7 +115,7 @@ setTimeout(function(){
 	}
 	else{
 		atmosSettingsTemp = {
-		"personalization": {"theme": "system", "page-transition-duration": 1500},
+		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false},
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
@@ -301,6 +301,7 @@ function refreshSettings(){
 	document.getElementById("setting-app-theme").value = allSettings["personalization"]["theme"];
 	document.getElementById("setting-page-transition-duration").value = allSettings["personalization"]["page-transition-duration"];
 	document.getElementById("setting-page-transition-duration-text").innerHTML = allSettings["personalization"]["page-transition-duration"].toString() + "ms";
+	document.getElementById("setting-atmos-logo").checked = allSettings["personalization"]["atmos-logo"];
 
 	// Location Settings
 	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
@@ -367,6 +368,7 @@ function saveSettings(){
 
 	allSettings["personalization"]["theme"] = document.getElementById("setting-app-theme").value;
 	allSettings["personalization"]["page-transition-duration"] = document.getElementById("setting-page-transition-duration").value;
+	allSettings["personalization"]["atmos-logo"] = document.getElementById("setting-atmos-logo").checked;
 
 	allSettings["location"]["weather"] = document.getElementById("setting-current-location").checked;
 	allSettings["location"]["alerts"] = document.getElementById("setting-current-location-alerts").checked;
