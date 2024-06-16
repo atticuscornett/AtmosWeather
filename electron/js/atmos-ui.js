@@ -226,17 +226,15 @@ function activateNavButtons(){
 
 // Navigate to another screen
 function navTo(screenTo){
-	let mode = "none";
-	let duration = "2s";
-	let delay = 2000/4;
-	if (mode === "fast") {
-		duration = "1s";
-		delay = 1000/4;
+	let atmosSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	if (!atmosSettings["personalization"]){
+		atmosSettings["personalization"] = {};
 	}
-	if (mode === "none"){
-		duration = "0s";
-		delay = 0;
+	if (!atmosSettings["personalization"]["page-transition"]){
+		atmosSettings["personalization"]["page-transition"] = 1500;
 	}
+	let duration = atmosSettings["personalization"]["page-transition-duration"] + "ms";
+	let delay = atmosSettings["personalization"]["page-transition-duration"]/4;
 	document.getElementById("tab-" + screenAt).setAttribute("style", "animation: offLeft " + duration + ";")
 	setTimeout(function(){
 		document.getElementById("tab-" + screenAt).setAttribute("style", "")
