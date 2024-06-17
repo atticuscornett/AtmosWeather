@@ -1,4 +1,5 @@
 function getCurrentAQIForPositionAsync(lat, long, callback){
+    window.loadingElements++;
     fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + lat + "&longitude=" + long + "&hourly=us_aqi")
         .then(data => data.json())
         .then(data => {
@@ -7,11 +8,13 @@ function getCurrentAQIForPositionAsync(lat, long, callback){
             time = time.split(":");
             time = time[0] + ":00";
             let index = data["hourly"]["time"].indexOf(time);
+            window.loadingElements--;
             callback(data["hourly"]["us_aqi"][index]);
         })
 }
 
 function getCurrentAQIForNomAsync(nom, callback){
+    window.loadingElements++;
     fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + nom["lat"] + "&longitude=" + nom["lon"] + "&hourly=us_aqi")
         .then(data => data.json())
         .then(data => {
@@ -20,6 +23,7 @@ function getCurrentAQIForNomAsync(nom, callback){
             time = time.split(":");
             time = time[0] + ":00";
             let index = data["hourly"]["time"].indexOf(time);
+            window.loadingElements--;
             callback(data["hourly"]["us_aqi"][index]);
         })
 }

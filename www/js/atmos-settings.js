@@ -14,6 +14,7 @@ setTimeout(function(){
 		thePlatform = "other";
 	}
 	if (thePlatform.includes("desktop")){
+		document.getElementById("settings-device-location").hidden = true;
 		atmosSettingsTemp = {
 			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false},
 			"location": {"weather": false, "alerts": false},

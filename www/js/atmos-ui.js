@@ -468,6 +468,7 @@ function loadMoreInfo(navName){
 					activeAlertInfo = activeAlertInfo[0];
 					getStatusAsync(nomObj, (fullStatus) => {
 						getCurrentAQIForNomAsync(nomObj, (AQI) => {
+							window.loadingElements++;
 							generatedCode = "<h1>" + nomName + "</h1><br>";
 							// Bars at the top of page
 							generatedCode += '<div>'
@@ -522,6 +523,7 @@ function loadMoreInfo(navName){
 									makeHumidGraph(index, hourly[0]);
 									makeWindGraph(index, hourly[0]);
 									document.getElementById(String(index)+"-loc-hourly-select").onchange = switchGraphs;
+									window.loadingElements = 0;
 								}, 50);
 							}
 							catch (e){
@@ -837,10 +839,11 @@ function getStatusForPos(nomObj){
 // Refreshes the alerts tab
 function refreshAlerts(){
 	checkIfOldAlerts(true, ()=>{
-		var currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
-		var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
-		var a = 0;
-		var generatedCode = "";
+		let currentAlerts = JSON.parse(localStorage.getItem("nws-alerts-current"));
+		let oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"));
+		let a = 0;
+		let generatedCode = "";
+		let nonNullLength = 0;
 		while (a < currentAlerts.length){
 			if (currentAlerts[a] != null){
 				generatedCode += "<h2>" + currentAlerts[a]["properties"]["event"] + "</h2>"
@@ -849,10 +852,12 @@ function refreshAlerts(){
 				if (currentAlerts[a]["properties"]["instruction"] != null){
 					generatedCode += "<h4>" + currentAlerts[a]["properties"]["instruction"] + "</h4><br>";
 				}
+				nonNullLength++;
 			}
 			a++;
 		}
-		if (a == 0){
+
+		if (nonNullLength === 0){
 			generatedCode = "<h2>There are currently no active alerts for your locations.</h2>"
 		}
 		document.getElementById("active-alert-list").innerHTML = generatedCode;
