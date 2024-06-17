@@ -468,6 +468,7 @@ function loadMoreInfo(navName){
 					activeAlertInfo = activeAlertInfo[0];
 					getStatusAsync(nomObj, (fullStatus) => {
 						getCurrentAQIForNomAsync(nomObj, (AQI) => {
+							window.loadingElements++;
 							generatedCode = "<h1>" + nomName + "</h1><br>";
 							// Bars at the top of page
 							generatedCode += '<div>'
@@ -522,6 +523,7 @@ function loadMoreInfo(navName){
 									makeHumidGraph(index, hourly[0]);
 									makeWindGraph(index, hourly[0]);
 									document.getElementById(String(index)+"-loc-hourly-select").onchange = switchGraphs;
+									window.loadingElements = 0;
 								}, 50);
 							}
 							catch (e){
