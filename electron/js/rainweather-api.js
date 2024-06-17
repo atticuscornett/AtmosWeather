@@ -39,13 +39,23 @@ function loadRadarData(){
         genCode += "<h2 onclick='radarJumpTo(" + a.toString() + ");'><a href='#'>" + locationNames[a] + "</a></h2>"
         a++;
     }
-    if (genCode == ""){
-        genCode = "<h2>You don't have any locations yet!</h2>"
+    if (genCode === ""){
+        if (window.currentLat){
+            genCode = "<h2 onclick='radarJumpTo(-1);'>Current Location</h2>";
+        }
+        else{
+            genCode = "<h2>You don't have any locations yet!</h2>";
+        }
     }
     document.getElementById("radar-locations").innerHTML = genCode;
 }
 
 function radarJumpTo(index){
+    if (index === -1) {
+        map2.invalidateSize(true);
+        map2.setView([window.currentLat, window.currentLong], 12);
+        return;
+    }
     map2.invalidateSize(true);
     var locations = JSON.parse(localStorage.getItem("weather-locations"))
     map2.setView([parseFloat(locations[index]["lat"]), parseFloat(locations[index]["lon"])], 12)
