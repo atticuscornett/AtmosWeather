@@ -1,12 +1,19 @@
 // UPDATE
-window.atmosVersion = "2.1.2-beta.1";
-window.atmosUpdated = "6-16-2024";
+window.atmosVersion = "2.1.2";
+window.atmosUpdated = "6-17-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.1.2-beta.1 is here!</h2>
+		<h2>Atmos Weather v2.1.2 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
-  			<dt>Updates</dt>
-			<dd>- Updated will be added here upon the full release.</dd>
+  			<dt>New Features</dt>
+			<dd>- Jump to current location on the radar page.</dd>
+			<dd>- Page transition animation length is now customizable.</dd>
+			<dd>- Atmos Weather logo animation can now be disabled.</dd>
+			<dt>Bug Fixes</dt>
+			<dd>- Fixed issues with displaying weather outlooks.</dd>
+			<dd>- Fixed alerts page showing outdated information.</dd>
+			<dd>- Mobile specific settings no longer show on desktop.</dd>
+			<dd>- Fixed loading animation hiding too early.</dd>
 		</dl> 
 		<br><br>
 		`;
