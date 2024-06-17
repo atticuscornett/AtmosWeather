@@ -35,17 +35,15 @@ function loadRadarData(){
     var a = 0;
     var locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
     var genCode = "";
+    if (window.currentLat){
+        genCode = "<h2 onclick='radarJumpTo(-1);'>Current Location</h2>";
+    }
     while (a < locationNames.length){
         genCode += "<h2 onclick='radarJumpTo(" + a.toString() + ");'><a href='#'>" + locationNames[a] + "</a></h2>"
         a++;
     }
-    if (genCode === ""){
-        if (window.currentLat){
-            genCode = "<h2 onclick='radarJumpTo(-1);'>Current Location</h2>";
-        }
-        else{
-            genCode = "<h2>You don't have any locations yet!</h2>";
-        }
+    if (genCode === "" && !window.currentLat){
+        genCode = "<h2>You don't have any locations yet!</h2>";
     }
     document.getElementById("radar-locations").innerHTML = genCode;
 }
