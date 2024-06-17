@@ -36,7 +36,7 @@ function loadRadarData(){
     var locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
     var genCode = "";
     if (window.currentLat){
-        genCode = "<h2 onclick='radarJumpTo(-1);'>Current Location</h2>";
+        genCode = "<h2 onclick='radarJumpTo(-1);'><a href='#'>Current Location</a></h2>";
     }
     while (a < locationNames.length){
         genCode += "<h2 onclick='radarJumpTo(" + a.toString() + ");'><a href='#'>" + locationNames[a] + "</a></h2>"
