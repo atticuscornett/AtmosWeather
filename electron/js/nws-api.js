@@ -328,6 +328,7 @@ function checkIfOldAlerts(runFunction=false, functionToRun=null){
 	var allCurrent = [];
 	var cacheCurrent = JSON.parse(localStorage.getItem("nws-alerts-current"));
 	var moveToOld = [];
+	let locationsChecked = 0;
 	while (a < nomLocations.length){
 		getWeatherAlertsForNomAsync(nomLocations[a], (res, a) => {
 			allCurrent = allCurrent.concat(res[0]);
@@ -347,17 +348,27 @@ function checkIfOldAlerts(runFunction=false, functionToRun=null){
 					}
 					a++;
 				}
+
 				localStorage.setItem("nws-alerts-current", JSON.stringify(allCurrent));
 				var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"))
 				oldAlerts = oldAlerts.concat(moveToOld);
 				oldAlerts = oldAlerts.slice(-20);
 				localStorage.setItem("nws-alerts-old", JSON.stringify(oldAlerts));
 			}
+			locationsChecked++;
 		}, a);
 		a++;
 	}
 	if (runFunction){
-		functionToRun();
+		let interval = setInterval(() => {
+			if (locationsChecked === nomLocations.length){
+				clearInterval(interval);
+				if (functionToRun){
+					functionToRun();
+				}
+			}
+
+		}, 100);
 	}
 }
 
