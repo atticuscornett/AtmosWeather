@@ -21,6 +21,7 @@ var animationPosition = 0;
 var lastPastFramePosition = -1;
 var playingRadar = true;
 var outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
+let lastRenderedDynamic = "";
 
 function loadRadarData(){
     var apiRequest = new XMLHttpRequest();
@@ -87,6 +88,12 @@ function initialize(api, kind) {
         document.getElementById("spc-select-container").style.display = "inline-block";
     }
 
+    map2.on("moveend", ()=>{
+        if (settings["radar"]["spc-outlook"]){
+            redrawSPCOutlook();
+        }
+    });
+    redrawSPCOutlook();
 
     if (!api) {
         return;
@@ -152,6 +159,17 @@ function changeRadarPosition(position, preloadOnly, force) {
     var pastOrForecast = nextFrame.time > Date.now() / 1000 ? 'FORECAST' : 'PAST';
 
     document.getElementById("radar-time").innerHTML = pastOrForecast + ': ' + (new Date(nextFrame.time * 1000)).toString();
+}
+
+function redrawSPCOutlook(){
+    if (!spcOutlookLayer._currentImage || lastRenderedDynamic === spcOutlookLayer._currentImage._url){
+        document.getElementById("spc-outlook-loading").hidden = false;
+        spcOutlookLayer.redraw();
+        setTimeout(redrawSPCOutlook, 1000);
+        return;
+    }
+    document.getElementById("spc-outlook-loading").hidden = true;
+    lastRenderedDynamic = spcOutlookLayer._currentImage._url;
 }
 
 function addLayer(frame) {
@@ -255,4 +273,5 @@ function reloadOutlook(){
         });
     spcOutlookLayer.setOpacity(0.4);
     spcOutlookLayer.addTo(map2);
+    redrawSPCOutlook();
 }
