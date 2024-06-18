@@ -149,8 +149,8 @@ function makeDewpointGraph(location, data){
 
         timePeriods.push(forecastTime.toString() + " " + AMPM);
         // Generate graph colors and data
-        tempColorPeriods.push(tempColorGradient(data[a]["temperature"]/100).hex());
-        tempPeriods.push(data[a]["temperature"]);
+        tempColorPeriods.push(tempColorGradient(convertTempUnit(data[a]["dewpoint"]["value"], "C")/100).hex());
+        tempPeriods.push(convertTempUnit(data[a]["dewpoint"]["value"], "C"));
     }
 
     Chart.defaults.font.size = 18;
@@ -161,7 +161,7 @@ function makeDewpointGraph(location, data){
         data: {
             labels: timePeriods,
             datasets: [{
-                label: 'Forecast Temperature',
+                label: 'Dew Point',
                 data: tempPeriods,
                 pointHoverRadius: 20,
                 pointHitRadius: 20,
