@@ -28,6 +28,32 @@ function getCurrentAQIForNomAsync(nom, callback){
         })
 }
 
+function getAdditionalWeatherDataForPositionAsync(lat, long, callback){
+    window.loadingElements++;
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat
+        + "&longitude=" + long
+    /* Hourly parameters */    + "&hourly=apparent_temperature"
+    /* Unit settings */    + "&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch")
+        .then(data => data.json())
+        .then(data => {
+            window.loadingElements--;
+            callback(data);
+        })
+}
+
+function getAdditionalWeatherDataForNomAsync(nom, callback){
+    window.loadingElements++;
+    fetch("https://api.open-meteo.com/v1/forecast?latitude=" + nom["lat"]
+        + "&longitude=" + nom["lon"]
+        /* Hourly parameters */    + "&hourly=apparent_temperature"
+        /* Unit settings */    + "&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch")
+        .then(data => data.json())
+        .then(data => {
+            window.loadingElements--;
+            callback(data);
+        })
+}
+
 function getAQICategory(AQI){
     if (AQI > 300){
         return "Hazardous";
