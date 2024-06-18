@@ -111,6 +111,7 @@ function switchGraphs(e){
     document.getElementById(targetPrefix + "-loc-hourly-precip-chart-container").style.display = "none";
     document.getElementById(targetPrefix + "-loc-hourly-humid-chart-container").style.display = "none";
     document.getElementById(targetPrefix + "-loc-hourly-wind-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-dewpoint-chart-container").style.display = "none";
     document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
 }
 
