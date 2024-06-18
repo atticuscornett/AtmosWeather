@@ -518,7 +518,7 @@ function loadMoreInfo(navName){
 								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-precip-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-precip-chart'></canvas></div>";
 								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-humid-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-humid-chart'></canvas></div>";
 								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-wind-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-wind-chart'></canvas></div>";
-								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-dewpoint-chart-container'><canvas id='" + String(index) + "-loc-hourly-dewpoint-chart'></canvas></div>";
+								longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-dewpoint-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-dewpoint-chart'></canvas></div>";
 								// Wait for the DOM to be updated before making graphs
 								setTimeout(function(){
 									makeTempGraph(index, hourly[0]);
