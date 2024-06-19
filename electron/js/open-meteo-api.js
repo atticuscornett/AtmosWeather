@@ -56,6 +56,32 @@ function getAdditionalWeatherDataForNomAsync(nom, callback){
         })
 }
 
+function removeOldData(times, data){
+    let time = new Date();
+    let UTCHour = time.getUTCHours();
+    let newData;
+    let a = 0;
+    while (String(times[a]).endsWith(String(UTCHour) + ":00") === false){
+        newData = data.slice(a);
+        a++;
+    }
+    let newTimes = times.slice(a);
+    newTimes.map((time) => {
+        let timeString = new Date(time+"Z");
+        timeString = timeString.getHours();
+        let AMPM = "AM";
+        if (timeString > 12){
+            timeString -= 12;
+            AMPM = "PM";
+        }
+        if (timeString == 0){
+            timeString = 12;
+        }
+        return timeString + " " + AMPM;
+    })
+    return [newTimes, newData];
+}
+
 function getAQICategory(AQI){
     if (AQI > 300){
         return "Hazardous";
