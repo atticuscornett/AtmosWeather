@@ -395,15 +395,22 @@
 					<div id="current-loc-hourly-select">
 						<input type="radio" id="current-loc-hourly-temp" name="current-loc-hourly" value="temp" class="hourlySelector" checked>
 						<label for="current-loc-hourly-temp" class="hourlySelectorLabel">Temperature</label>
+						<input type="radio" id="current-loc-hourly-feels-like" name="current-loc-hourly" value="feels-like" class="hourlySelector">
+						<label for="current-loc-hourly-feels-like" class="hourlySelectorLabel">Feels Like</label>
 						<input type="radio" id="current-loc-hourly-precip" name="current-loc-hourly" value="precip" class="hourlySelector">
 						<label for="current-loc-hourly-precip" class="hourlySelectorLabel">Precipitation</label>
 						<input type="radio" id="current-loc-hourly-humid" name="current-loc-hourly" value="humid" class="hourlySelector">
 						<label for="current-loc-hourly-humid" class="hourlySelectorLabel">Humidity</label>
 						<input type="radio" id="current-loc-hourly-wind" name="current-loc-hourly" value="wind" class="hourlySelector">
 						<label for="current-loc-hourly-wind" class="hourlySelectorLabel">Wind Speed</label>
+						<input type="radio" id="current-loc-hourly-dewpoint" name="current-loc-hourly" value="dewpoint" class="hourlySelector">
+						<label for="current-loc-hourly-dewpoint" class="hourlySelectorLabel">Dew Point</label>
 					</div>
 					<div class="weatherGraph" id="current-loc-hourly-temp-chart-container">
 						<canvas id="current-loc-hourly-temp-chart"></canvas>
+					</div>
+					<div class="weatherGraph" id="current-loc-hourly-feels-like-chart-container"  style="display:none">
+						<canvas id="current-loc-hourly-feels-like-chart"></canvas>
 					</div>
 					<div class="weatherGraph" id="current-loc-hourly-precip-chart-container"  style="display:none">
 						<canvas id="current-loc-hourly-precip-chart"></canvas>
@@ -413,6 +420,9 @@
 					</div>
 					<div class="weatherGraph" id="current-loc-hourly-wind-chart-container" style="display:none">
 						<canvas id="current-loc-hourly-wind-chart"></canvas>
+					</div>
+					<div class="weatherGraph" id="current-loc-hourly-dewpoint-chart-container" style="display:none">
+						<canvas id="current-loc-hourly-dewpoint-chart"></canvas>
 					</div>
 					<div id="current-loc-hourly">
 
