@@ -1,7 +1,10 @@
 package io.atticusc.atmosweather;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import androidx.core.app.ActivityCompat;
 
@@ -22,15 +25,30 @@ public class PermissionManagementPlugin extends Plugin {
         boolean hasLocationPermission = ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
         boolean hasBackgroundLocationPermission;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             hasBackgroundLocationPermission = ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
         } else {
             hasBackgroundLocationPermission = true;
         }
 
+        boolean canScheduleExactAlarms;
+        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager.canScheduleExactAlarms()){
+                canScheduleExactAlarms = true;
+            }
+            else {
+                canScheduleExactAlarms = false;
+            }
+        }
+        else {
+            canScheduleExactAlarms = true;
+        }
+
         JSObject ret = new JSObject();
         ret.put("hasLocationPermission", hasLocationPermission);
         ret.put("hasBackgroundLocationPermission", hasBackgroundLocationPermission);
+        ret.put("canScheduleExactAlarms", canScheduleExactAlarms);
         call.resolve(ret);
     }
 }
