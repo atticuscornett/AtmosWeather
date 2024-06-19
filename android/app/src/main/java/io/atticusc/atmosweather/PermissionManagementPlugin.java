@@ -34,21 +34,26 @@ public class PermissionManagementPlugin extends Plugin {
         boolean canScheduleExactAlarms;
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (alarmManager.canScheduleExactAlarms()){
-                canScheduleExactAlarms = true;
-            }
-            else {
-                canScheduleExactAlarms = false;
-            }
+            canScheduleExactAlarms = alarmManager.canScheduleExactAlarms();
         }
         else {
             canScheduleExactAlarms = true;
+        }
+
+        boolean hasNotificationPermission;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            hasNotificationPermission = ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
+        }
+        else {
+            hasNotificationPermission = true;
         }
 
         JSObject ret = new JSObject();
         ret.put("hasLocationPermission", hasLocationPermission);
         ret.put("hasBackgroundLocationPermission", hasBackgroundLocationPermission);
         ret.put("canScheduleExactAlarms", canScheduleExactAlarms);
+        ret.put("hasNotificationPermission", hasNotificationPermission);
+
         call.resolve(ret);
     }
 }
