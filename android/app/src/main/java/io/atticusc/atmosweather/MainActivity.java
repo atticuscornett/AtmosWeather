@@ -31,6 +31,7 @@ public class MainActivity extends BridgeActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         registerPlugin(EchoPlugin.class);
+        registerPlugin(PermissionManagementPlugin.class);
         super.onCreate(savedInstanceState);
 
         prepareNotificationChannels();
