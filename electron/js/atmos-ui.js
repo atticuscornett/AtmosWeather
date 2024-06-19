@@ -523,6 +523,9 @@ function loadMoreInfo(navName){
 									longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-humid-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-humid-chart'></canvas></div>";
 									longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-wind-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-wind-chart'></canvas></div>";
 									longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-dewpoint-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-dewpoint-chart'></canvas></div>";
+									longHourForecast += "<h6>Feels Like temperature is provided by <a href='https://open-meteo.com/' target='_blank'>Open-Meteo</a></h6>";
+									let feelsLike = removeOldData(additionalData["hourly"]["time"], additionalData["hourly"]["apparent_temperature"]);
+
 									// Wait for the DOM to be updated before making graphs
 									setTimeout(function(){
 										makeTempGraph(index, hourly[0]);
@@ -530,6 +533,7 @@ function loadMoreInfo(navName){
 										makeHumidGraph(index, hourly[0]);
 										makeWindGraph(index, hourly[0]);
 										makeDewpointGraph(index, hourly[0]);
+										makeFeelsLikeGraph(index, feelsLike);
 										document.getElementById(String(index)+"-loc-hourly-select").onchange = switchGraphs;
 										window.loadingElements = 0;
 									}, 50);

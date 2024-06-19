@@ -79,6 +79,9 @@ function removeOldData(times, data){
         }
         return timeString + " " + AMPM;
     })
+
+    newData = newData.map((data) => Math.round(data));
+    
     return [newTimes, newData];
 }
 
