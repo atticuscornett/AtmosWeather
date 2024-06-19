@@ -1,18 +1,23 @@
 import '@capacitor/core';
 import { Device } from '@capacitor/device';
-import { Geolocation } from '@capacitor/geolocation';
+// import { Geolocation } from '@capacitor/geolocation';
 import { polygon, simplify, area} from '@turf/turf';
+import {registerPlugin} from "@capacitor/core";
 
 export async function getDevice(){
     window.deviceInfo = await Device.getInfo();
 
 }
 
-export async function getLocation(){
-    let currentLoc = await Geolocation.getCurrentPosition();
-    window.currentLat = currentLoc.coords.latitude;
-    window.currentLong = currentLoc.coords.longitude;
+export function getPlugin(plugin){
+	return registerPlugin(plugin);
 }
+
+// export async function getLocation(){
+//     let currentLoc = await Geolocation.getCurrentPosition();
+//     window.currentLat = currentLoc.coords.latitude;
+//     window.currentLong = currentLoc.coords.longitude;
+// }
 
 export async function syncPreferences(){
     NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(obj){console.log(error.exception);console.log(error.code);});

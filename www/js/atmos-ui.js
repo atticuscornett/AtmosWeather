@@ -7,8 +7,19 @@
 console.log("🌥⚡ Atmos Weather")
 
 // Initialize Capacitor
-cap.getLocation();
+navigator.geolocation.getCurrentPosition(function(position){
+	window.currentLat = position.coords.latitude;
+	window.currentLong = position.coords.longitude;
+});
 cap.getDevice();
+
+const Echo = cap.getPlugin("Echo");
+async function test(){
+	const { value } = await Echo.echo({ value: 'Hello World!' });
+	console.log('Response from native:', value);
+}
+
+test();
 
 // Initial Variable States
 var screenAt = "locations";
