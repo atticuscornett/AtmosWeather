@@ -733,6 +733,7 @@ function refreshCurrentLocation(){
 															document.getElementById("current-loc-alerts").innerHTML = generatedCode;
 															document.getElementById("current-loc-main-info").setAttribute("class", "location noclick " + status[0]);
 															document.getElementById("current-loc-temp").innerHTML = hourlyForecast["temperature"] + "° F";
+															document.getElementById("current-loc-feels-like").innerHTML = "Feels like " + Math.round(additionalData["current"]["apparent_temperature"]) + "° F";
 															document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
 															document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
 
