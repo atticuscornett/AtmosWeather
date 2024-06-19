@@ -21,9 +21,16 @@ public class PermissionManagementPlugin extends Plugin {
 
         boolean hasLocationPermission = ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
+        boolean hasBackgroundLocationPermission;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            hasBackgroundLocationPermission = ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        } else {
+            hasBackgroundLocationPermission = true;
+        }
+
         JSObject ret = new JSObject();
-        ret.put("value", value);
         ret.put("hasLocationPermission", hasLocationPermission);
+        ret.put("hasBackgroundLocationPermission", hasBackgroundLocationPermission);
         call.resolve(ret);
     }
 }
