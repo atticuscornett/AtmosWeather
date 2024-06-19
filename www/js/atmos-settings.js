@@ -591,3 +591,24 @@ function fixMissingKeys(defaultValues, currentValues){
 		return currentValues;
 	}
 }
+
+// Convert units to preference
+function convertTempUnit(temp, unit){
+	let userPreference = "F";
+	if (userPreference === "F"){
+		if (unit === "C"){
+			return (temp * 9/5) + 32;
+		}
+		else{
+			return temp;
+		}
+	}
+	else{
+		if (unit === "F"){
+			return (temp - 32) * 5/9;
+		}
+		else{
+			return temp;
+		}
+	}
+}

@@ -119,6 +119,140 @@ function makeTempGraph(location, data){
     return chart;
 }
 
+function makeDewpointGraph(location, data){
+    if (drawnCharts[String(location)] === undefined){
+        drawnCharts[String(location)] = [];
+    }
+
+    let forecastTime;
+    let AMPM;
+    let timePeriods = [];
+    let tempPeriods = [];
+    let tempColorPeriods = [];
+    const tempColorGradient = chroma.scale(['purple', 'dodgerblue', 'lime', 'yellow', 'red']);
+
+    for (let a = 0; a < 24; a++){
+
+        // Convert time to 12-hour format
+        forecastTime = data[a]["startTime"];
+        forecastTime = parseInt(forecastTime.substr(11,2));
+        AMPM = "AM";
+        if (forecastTime > 11){
+            AMPM = "PM";
+        }
+        if (forecastTime > 12){
+            forecastTime -= 12;
+        }
+        if (forecastTime == 0){
+            forecastTime = 12;
+        }
+
+        timePeriods.push(forecastTime.toString() + " " + AMPM);
+        // Generate graph colors and data
+        tempColorPeriods.push(tempColorGradient(convertTempUnit(data[a]["dewpoint"]["value"], "C")/100).hex());
+        tempPeriods.push(convertTempUnit(data[a]["dewpoint"]["value"], "C"));
+    }
+
+    Chart.defaults.font.size = 18;
+    Chart.defaults.font.family = "Secular One";
+
+    let chart = new Chart(document.getElementById(String(location) + "-loc-hourly-dewpoint-chart"), {
+        type: 'line',
+        data: {
+            labels: timePeriods,
+            datasets: [{
+                label: 'Dew Point',
+                data: tempPeriods,
+                pointHoverRadius: 20,
+                pointHitRadius: 20,
+                pointRadius: 7,
+                backgroundColor: tempColorPeriods,
+                fill: false,
+                borderWidth: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (item) =>
+                            `${item.dataset.label}: ${item.formattedValue} °F`,
+                    },
+                }
+            },
+            tension: 0.4
+        }
+    });
+    drawnCharts[String(location)].push(chart);
+    return chart;
+}
+
+function makeFeelsLikeGraph(location, data){
+    if (drawnCharts[String(location)] === undefined){
+        drawnCharts[String(location)] = [];
+    }
+
+    console.log(data)
+
+    let timePeriods = data[0].slice(0, 24);
+    let tempPeriods = [];
+    let tempColorPeriods = [];
+    const tempColorGradient = chroma.scale(['purple', 'dodgerblue', 'lime', 'yellow', 'red']);
+
+    for (let a = 0; a < 24; a++){
+        // Generate graph colors and data
+        tempColorPeriods.push(tempColorGradient(data[1][a]/100).hex());
+        tempPeriods.push(data[1][a]);
+    }
+
+    console.log(tempPeriods);
+
+    Chart.defaults.font.size = 18;
+    Chart.defaults.font.family = "Secular One";
+
+    let chart = new Chart(document.getElementById(String(location) + "-loc-hourly-feels-like-chart"), {
+        type: 'line',
+        data: {
+            labels: timePeriods,
+            datasets: [{
+                label: 'Feels Like',
+                data: tempPeriods,
+                pointHoverRadius: 20,
+                pointHitRadius: 20,
+                pointRadius: 7,
+                backgroundColor: tempColorPeriods,
+                fill: false,
+                borderWidth: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (item) =>
+                            `${item.dataset.label}: ${item.formattedValue} °F`,
+                    },
+                }
+            },
+            tension: 0.4
+        }
+    });
+    drawnCharts[String(location)].push(chart);
+    return chart;
+}
+
 function makePrecipGraph(location, data){
     let forecastTime;
     let AMPM;
