@@ -108,9 +108,11 @@ document.getElementById("current-loc-hourly-select").onchange = switchGraphs;
 function switchGraphs(e){
     let targetPrefix = e.target.id.split("-")[0];
     document.getElementById(targetPrefix + "-loc-hourly-temp-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-feels-like-chart-container").style.display = "none";
     document.getElementById(targetPrefix + "-loc-hourly-precip-chart-container").style.display = "none";
     document.getElementById(targetPrefix + "-loc-hourly-humid-chart-container").style.display = "none";
     document.getElementById(targetPrefix + "-loc-hourly-wind-chart-container").style.display = "none";
+    document.getElementById(targetPrefix + "-loc-hourly-dewpoint-chart-container").style.display = "none";
     document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
 }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<title>Atmos Weather</title>
-		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com https://mapservices.weather.noaa.gov data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com https://mapservices.weather.noaa.gov;">
+		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com https://mapservices.weather.noaa.gov data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com https://api.open-meteo.com https://mapservices.weather.noaa.gov;">
 		<meta charset="utf-8" lang="en">
 		<link href="./img/favicon.svg" rel="icon" type="image/x-icon" />
 		
@@ -149,9 +149,9 @@
 						<h4>Why: The National Weather Service provides the forecast information displayed in the app and provides weather alerts in the background.</h4>
 						<br>
 						<h3><b>Open-Meteo</b></h3>
-						<h4>Domain(s): air-quality-api.open-meteo.com</h4>
+						<h4>Domain(s): air-quality-api.open-meteo.com, api.open-meteo.com</h4>
 						<h4>Information: GPS Location (when app is open), Saved Locations (when app is open), IP Address (when app is open)</h4>
-						<h4>Why: Open-Meteo provides the AQI information displayed on location pages.</h4>
+						<h4>Why: Open-Meteo provides additional weather data (such as AQI and apparent temperature) displayed on location pages.</h4>
 						<br>
 						<h3><b>OpenStreetMap</b></h3>
 						<h4>Domain(s): tile.openstreetmap.org, nominatim.opensteetmap.org</h4>
@@ -378,6 +378,7 @@
 							</div>
 							<div style="display:inline-block;margin-left:8px;margin-right: 8px;">
 								<h1 id="current-loc-temp">Loading...</h1>
+								<h4 id="current-loc-feels-like">Loading...</h4>
 								<h3 id="current-loc-desc">Loading...</h3>
 							</div>
 						</div>
@@ -395,15 +396,22 @@
 					<div id="current-loc-hourly-select">
 						<input type="radio" id="current-loc-hourly-temp" name="current-loc-hourly" value="temp" class="hourlySelector" checked>
 						<label for="current-loc-hourly-temp" class="hourlySelectorLabel">Temperature</label>
+						<input type="radio" id="current-loc-hourly-feels-like" name="current-loc-hourly" value="feels-like" class="hourlySelector">
+						<label for="current-loc-hourly-feels-like" class="hourlySelectorLabel">Feels Like</label>
 						<input type="radio" id="current-loc-hourly-precip" name="current-loc-hourly" value="precip" class="hourlySelector">
 						<label for="current-loc-hourly-precip" class="hourlySelectorLabel">Precipitation</label>
 						<input type="radio" id="current-loc-hourly-humid" name="current-loc-hourly" value="humid" class="hourlySelector">
 						<label for="current-loc-hourly-humid" class="hourlySelectorLabel">Humidity</label>
 						<input type="radio" id="current-loc-hourly-wind" name="current-loc-hourly" value="wind" class="hourlySelector">
 						<label for="current-loc-hourly-wind" class="hourlySelectorLabel">Wind Speed</label>
+						<input type="radio" id="current-loc-hourly-dewpoint" name="current-loc-hourly" value="dewpoint" class="hourlySelector">
+						<label for="current-loc-hourly-dewpoint" class="hourlySelectorLabel">Dew Point</label>
 					</div>
 					<div class="weatherGraph" id="current-loc-hourly-temp-chart-container">
 						<canvas id="current-loc-hourly-temp-chart"></canvas>
+					</div>
+					<div class="weatherGraph" id="current-loc-hourly-feels-like-chart-container"  style="display:none">
+						<canvas id="current-loc-hourly-feels-like-chart"></canvas>
 					</div>
 					<div class="weatherGraph" id="current-loc-hourly-precip-chart-container"  style="display:none">
 						<canvas id="current-loc-hourly-precip-chart"></canvas>
@@ -413,6 +421,9 @@
 					</div>
 					<div class="weatherGraph" id="current-loc-hourly-wind-chart-container" style="display:none">
 						<canvas id="current-loc-hourly-wind-chart"></canvas>
+					</div>
+					<div class="weatherGraph" id="current-loc-hourly-dewpoint-chart-container" style="display:none">
+						<canvas id="current-loc-hourly-dewpoint-chart"></canvas>
 					</div>
 					<div id="current-loc-hourly">
 
