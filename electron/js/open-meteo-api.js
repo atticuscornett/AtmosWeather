@@ -62,11 +62,11 @@ function removeOldData(times, data){
     let newData;
     let a = 0;
     while (String(times[a]).endsWith(String(UTCHour) + ":00") === false){
-        newData = data.slice(a);
         a++;
     }
+    newData = data.slice(a);
     let newTimes = times.slice(a);
-    newTimes.map((time) => {
+    newTimes = newTimes.map((time) => {
         let timeString = new Date(time+"Z");
         timeString = timeString.getHours();
         let AMPM = "AM";
