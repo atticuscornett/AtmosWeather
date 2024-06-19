@@ -698,69 +698,78 @@ function refreshCurrentLocation(){
 													document.getElementById("currentLocData").innerHTML = info;
 													document.getElementById("currentLocTitle").innerHTML = "Current Location (" + currentLat.toString() + ", " + currentLong.toString() + ")";
 													getWeatherAlertsForPosAsync(currentLat, currentLong, (weatherAlerts) => {
-														var status = getStatusForPos(weatherAlerts);
-														if (status[0] == "noalerts"){
-															document.getElementById("currentLocDiv").setAttribute("class", "location currentloc");
-														}
-														else{
-															document.getElementById("currentLocDiv").setAttribute("class", "location " + status[0]);
-														}
-														var theWarnings = "";
-														var generatedCode = "";
-														var b = 0;
-														while (b < weatherAlerts.length){
-															theWarnings += "<a href='#' onclick='loadAlertForCurrent(" + String(b) + ")' style='color:white;'>" + weatherAlerts[b]["properties"]["event"] + "</a>&emsp;"
-															b++;
-														}
-														theWarnings += " (Tap for more info.)";
-														if (status[0] == "warning"){
-															generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active warnings!</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
-														}
-														if (status[0] == "watch"){
-															generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active watches.</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
-														}
-														if (status[0] == "other"){
-															theWarnings = theWarnings.replaceAll(",", ", ")
-															generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
-														}
-														if (generatedCode == ""){
-															document.getElementById("current-loc-alerts").hidden = true;
-														}
-														else{
-															document.getElementById("current-loc-alerts").hidden = false;
-														}
-														document.getElementById("current-loc-alerts").innerHTML = generatedCode;
-														document.getElementById("current-loc-main-info").setAttribute("class", "location noclick " + status[0]);
-														document.getElementById("current-loc-temp").innerHTML = hourlyForecast["temperature"] + "° F";
-														document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
-														document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
+														getAdditionalWeatherDataForPositionAsync(currentLat, currentLong, (additionalData) => {
+															var status = getStatusForPos(weatherAlerts);
+															if (status[0] == "noalerts"){
+																document.getElementById("currentLocDiv").setAttribute("class", "location currentloc");
+															}
+															else{
+																document.getElementById("currentLocDiv").setAttribute("class", "location " + status[0]);
+															}
+															var theWarnings = "";
+															var generatedCode = "";
+															var b = 0;
+															while (b < weatherAlerts.length){
+																theWarnings += "<a href='#' onclick='loadAlertForCurrent(" + String(b) + ")' style='color:white;'>" + weatherAlerts[b]["properties"]["event"] + "</a>&emsp;"
+																b++;
+															}
+															theWarnings += " (Tap for more info.)";
+															if (status[0] == "warning"){
+																generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active warnings!</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
+															}
+															if (status[0] == "watch"){
+																generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active watches.</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
+															}
+															if (status[0] == "other"){
+																theWarnings = theWarnings.replaceAll(",", ", ")
+																generatedCode += '<div class="location ' + status[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + '</h3></div></div><br>';
+															}
+															if (generatedCode == ""){
+																document.getElementById("current-loc-alerts").hidden = true;
+															}
+															else{
+																document.getElementById("current-loc-alerts").hidden = false;
+															}
+															document.getElementById("current-loc-alerts").innerHTML = generatedCode;
+															document.getElementById("current-loc-main-info").setAttribute("class", "location noclick " + status[0]);
+															document.getElementById("current-loc-temp").innerHTML = hourlyForecast["temperature"] + "° F";
+															document.getElementById("current-loc-feels-like").innerHTML = "Feels like " + Math.round(additionalData["current"]["apparent_temperature"]) + "° F";
+															document.getElementById("current-loc-desc").innerHTML = hourlyForecast["shortForecast"];
+															document.getElementById("currentLocDiv").setAttribute("onclick", "navTo('current-location-data')");
 
-														Chart.defaults.font.size = 18;
-														Chart.defaults.font.family = "Secular One";
-														clearCharts("current");
-														// Create hourly temp chart
-														makeTempGraph("current", hourly[0]);
-														// Create hourly precipitation chart
-														makePrecipGraph("current", hourly[0]);
-														// Create hourly humidity chart
-														makeHumidGraph("current", hourly[0]);
-														// Create hourly wind chart
-														makeWindGraph("current", hourly[0]);
-														var extendedForecast = "";
-														for (let i of forecast[0]){
-															extendedForecast += "<details><summary>" + i["name"] + "</summary>" + i["detailedForecast"] + "</details>";
-														}
-														document.getElementById("current-loc-nws").innerHTML = extendedForecast;
-														var theTime = new Date();
-														lastLocationCheck = theTime.getTime();
-														lastLocationInfo = info;
-														getCurrentAQIForPositionAsync(currentLat.toString(), currentLong.toString(), (AQI) => {
-															document.getElementById("current-loc-aqi").innerHTML = AQI.toString() + " (" + getAQICategory(AQI) + ")";
-															let gauge = makeGauge(AQI, 0, 300);
-															document.getElementById("current-loc-aqi-bar").firstChild.remove();
-															document.getElementById("current-loc-aqi-bar").appendChild(gauge);
+															let feelsLike = removeOldData(additionalData["hourly"]["time"], additionalData["hourly"]["apparent_temperature"]);
+
+															Chart.defaults.font.size = 18;
+															Chart.defaults.font.family = "Secular One";
+															clearCharts("current");
+															// Create hourly temp chart
+															makeTempGraph("current", hourly[0]);
+															// Create hourly precipitation chart
+															makePrecipGraph("current", hourly[0]);
+															// Create hourly humidity chart
+															makeHumidGraph("current", hourly[0]);
+															// Create hourly wind chart
+															makeWindGraph("current", hourly[0]);
+															// Create hourly dewpoint chart
+															makeDewpointGraph("current", hourly[0]);
+															// Create hourly feels like chart
+															makeFeelsLikeGraph("current", feelsLike);
+															var extendedForecast = "";
+															for (let i of forecast[0]){
+																extendedForecast += "<details><summary>" + i["name"] + "</summary>" + i["detailedForecast"] + "</details>";
+															}
+															document.getElementById("current-loc-nws").innerHTML = extendedForecast;
+															var theTime = new Date();
+															lastLocationCheck = theTime.getTime();
+															lastLocationInfo = info;
+															getCurrentAQIForPositionAsync(currentLat.toString(), currentLong.toString(), (AQI) => {
+																document.getElementById("current-loc-aqi").innerHTML = AQI.toString() + " (" + getAQICategory(AQI) + ")";
+																let gauge = makeGauge(AQI, 0, 300);
+																document.getElementById("current-loc-aqi-bar").firstChild.remove();
+																document.getElementById("current-loc-aqi-bar").appendChild(gauge);
+															});
 														});
-														});
+													});
 													}
 													catch(err){
 														document.getElementById("currentLocData").innerHTML = "Loading...";
