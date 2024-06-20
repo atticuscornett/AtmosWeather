@@ -51,14 +51,14 @@ public class MainActivity extends BridgeActivity {
         // Cancel any duplicate alarms
         alarmManager.cancel(pendingIntent);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (!alarmManager.canScheduleExactAlarms()){
-                Intent alarmIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    this.startActivity(alarmIntent);
-                }
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            if (!alarmManager.canScheduleExactAlarms()){
+//                Intent alarmIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+//                if (intent.resolveActivity(getPackageManager()) != null) {
+//                    this.startActivity(alarmIntent);
+//                }
+//            }
+//        }
 
         startBackgroundTask(pendingIntent, 5);
 

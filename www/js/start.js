@@ -142,6 +142,10 @@ document.getElementById("android-request-battery-exempt").onclick = () => {
     PermissionManagement.requestPermission({"permission":"battery-exempt"});
 }
 
+document.getElementById("android-request-exact-alarms").onclick = () => {
+    PermissionManagement.requestPermission({"permission":"exact-alarms"});
+}
+
 // Refresh location data
 setTimeout(refreshLocations, 200);
 

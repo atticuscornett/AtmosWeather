@@ -100,11 +100,14 @@ public class PermissionManagementPlugin extends Plugin {
                 String packageName = getContext().getPackageName();
                 intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                 intent.setData(Uri.parse("package:" + packageName));
-                if (intent.resolveActivity(getContext().getPackageManager()) != null) {
-                    getContext().startActivity(intent);
-                } else {
-                    System.out.println("No activity found to handle intent");
-                }
+                getContext().startActivity(intent);
+            }
+        }
+
+        if (Objects.equals(permission, "exact-alarms")){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                Intent alarmIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                getContext().startActivity(alarmIntent);
             }
         }
     }
