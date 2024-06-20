@@ -134,6 +134,14 @@ document.getElementById("android-request-background-location").onclick = () => {
     PermissionManagement.requestPermission({"permission":"background-location"});
 }
 
+document.getElementById("android-request-notifications").onclick = () => {
+    PermissionManagement.requestPermission({"permission":"notifications"});
+}
+
+document.getElementById("android-request-battery-exempt").onclick = () => {
+    PermissionManagement.requestPermission({"permission":"battery-exempt"});
+}
+
 // Refresh location data
 setTimeout(refreshLocations, 200);
 

@@ -355,6 +355,7 @@ select{
 
 #android-permission-container {
 	padding: 15px;
+	background-color: hsla(0,0%,99%,1.00);
 }
 
 /* Dark Mode Colors */
@@ -382,6 +383,10 @@ body.dark {
 	}
 
 	#android-permission-setup {
+		background-color: #222222;
+	}
+
+	#android-permission-container {
 		background-color: #222222;
 	}
 

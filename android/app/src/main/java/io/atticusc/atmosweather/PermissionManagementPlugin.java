@@ -93,13 +93,18 @@ public class PermissionManagementPlugin extends Plugin {
             }
         }
 
-        if (Objects.equals(permission, "battery-optimization")){
+        if (Objects.equals(permission, "battery-exempt")){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                System.out.println("lemon");
                 Intent intent = new Intent();
                 String packageName = getContext().getPackageName();
                 intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                 intent.setData(Uri.parse("package:" + packageName));
-                getContext().startActivity(intent);
+                if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                    getContext().startActivity(intent);
+                } else {
+                    System.out.println("No activity found to handle intent");
+                }
             }
         }
     }
