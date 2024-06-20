@@ -358,6 +358,22 @@ select{
 	background-color: hsla(0,0%,99%,1.00);
 }
 
+#android-permission-container details {
+	text-align: center;
+}
+
+.permission-button {
+	padding-left: 15px;
+	padding-right: 15px;
+	border: none;
+	background-color: rgba(34,55,91,0.88);
+	color: white;
+	font-family: Secular One;
+	font-size: 25px;
+	border-radius: 7px;
+	cursor: pointer;
+}
+
 /* Dark Mode Colors */
 body.dark {
 	background-color: #222222;
