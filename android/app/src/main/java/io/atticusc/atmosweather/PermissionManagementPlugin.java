@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.PowerManager;
 
 import androidx.core.app.ActivityCompat;
 
@@ -41,11 +42,20 @@ public class PermissionManagementPlugin extends Plugin {
         }
 
         boolean hasNotificationPermission;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             hasNotificationPermission = ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
         }
         else {
             hasNotificationPermission = true;
+        }
+
+        boolean hasBatteryOptimizationExemption;
+        PowerManager powerManager = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            hasBatteryOptimizationExemption = powerManager.isIgnoringBatteryOptimizations(getContext().getPackageName());
+        }
+        else {
+            hasBatteryOptimizationExemption = true;
         }
 
         JSObject ret = new JSObject();
@@ -53,6 +63,7 @@ public class PermissionManagementPlugin extends Plugin {
         ret.put("hasBackgroundLocationPermission", hasBackgroundLocationPermission);
         ret.put("canScheduleExactAlarms", canScheduleExactAlarms);
         ret.put("hasNotificationPermission", hasNotificationPermission);
+        ret.put("hasBatteryOptimizationExemption", hasBatteryOptimizationExemption);
 
         call.resolve(ret);
     }
