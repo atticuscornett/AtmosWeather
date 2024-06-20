@@ -54,6 +54,18 @@
 				<button id="welcome-button-native" onclick="showNextIntro();">Next</button>
 			</center>
 		</div>
+		<div id="android-permission-setup">
+			<div id="android-permission-container">
+				<h1>Android Permission Setup</h1>
+				<h3>Atmos Weather requires Android permissions to provide certain app functionality.</h3>
+				<h3>Review the permissions below</h3>
+				<details>
+					<summary id="android-background-permissions">Background Location Permissions</summary>
+					<h4>Atmos Weather requires background location permissions to provide weather alert notifications for your current location.</h4>
+					<button id="android-request-background-location">Request this permission</button>
+				</details>
+			</div>
+		</div>
 		<div id="notice-window-container" hidden>
 			<h1 style="margin-left:20px;color:dodgerblue;">a t m o s weather</h1>
 			<div id="notice-window" style="padding: 20px;">
