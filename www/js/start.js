@@ -119,6 +119,7 @@ function switchGraphs(e){
 // Initialize Capacitor plugins
 const Echo = cap.getPlugin("Echo");
 const PermissionManagement = cap.getPlugin("PermissionManagement");
+repeatPermCheck();
 
 async function test(){
     const { value } = await Echo.echo({ value: 'Hello World!' });

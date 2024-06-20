@@ -612,3 +612,24 @@ function convertTempUnit(temp, unit){
 		}
 	}
 }
+
+// Check permissions while permission window is open
+
+async function repeatPermCheck(){
+	const permissions = await PermissionManagement.checkPermissions();
+	document.getElementById("android-background-permissions").innerHTML = "Background Location "
+		+ (permissions["hasBackgroundLocationPermission"] ? "✅" : "⚠️");
+
+	document.getElementById("android-notification-permissions").innerHTML = "Notifications "
+		+ (permissions["hasNotificationPermission"] ? "✅" : "⚠️");
+
+	document.getElementById("android-battery-exempt-permissions").innerHTML = "Battery Exemptions "
+		+ (permissions["hasBatteryOptimizationPermission"] ? "✅" : "⚠️");
+
+	document.getElementById("android-exact-alarms-permissions").innerHTML = "Schedule Exact Alarms "
+		+ (permissions["canScheduleExactAlarms"] ? "✅" : "⚠️");
+
+	if (!document.getElementById("android-permission-setup").hidden){
+		setTimeout(repeatPermCheck, 300);
+	}
+}
