@@ -34,3 +34,4 @@ node_modules/
 builder-debug.yml
 *.blockmap
 /android/app/release/
+android/.idea/deploymentTargetSelector.xml

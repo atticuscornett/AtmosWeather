@@ -374,6 +374,10 @@ select{
 	cursor: pointer;
 }
 
+.permission-button:disabled {
+	background-color: grey;
+}
+
 /* Dark Mode Colors */
 body.dark {
 	background-color: #222222;
