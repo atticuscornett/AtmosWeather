@@ -13,18 +13,6 @@ navigator.geolocation.getCurrentPosition(function(position){
 });
 cap.getDevice();
 
-const Echo = cap.getPlugin("Echo");
-const PermissionManagement = cap.getPlugin("PermissionManagement");
-
-async function test(){
-	const { value } = await Echo.echo({ value: 'Hello World!' });
-	console.log('Response from native:', value);
-	const permissions = await PermissionManagement.checkPermissions();
-	console.log("Permissions: " + JSON.stringify(permissions))
-}
-
-test();
-
 // Initial Variable States
 var screenAt = "locations";
 var cordovaReady = true;

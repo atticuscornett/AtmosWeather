@@ -116,6 +116,24 @@ function switchGraphs(e){
     document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
 }
 
+// Initialize Capacitor plugins
+const Echo = cap.getPlugin("Echo");
+const PermissionManagement = cap.getPlugin("PermissionManagement");
+
+async function test(){
+    const { value } = await Echo.echo({ value: 'Hello World!' });
+    console.log('Response from native:', value);
+    const permissions = await PermissionManagement.checkPermissions();
+    console.log("Permissions: " + JSON.stringify(permissions))
+}
+
+test();
+
+// Setup permission request buttons
+document.getElementById("android-request-background-location").onclick = () => {
+    PermissionManagement.requestPermission({"permission":"background-location"});
+}
+
 // Refresh location data
 setTimeout(refreshLocations, 200);
 

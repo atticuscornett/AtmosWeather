@@ -1,11 +1,15 @@
 package io.atticusc.atmosweather;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
+import android.provider.Settings;
 
 import androidx.core.app.ActivityCompat;
 
@@ -15,6 +19,8 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
+
+import java.util.Objects;
 
 @CapacitorPlugin(name = "PermissionManagement")
 public class PermissionManagementPlugin extends Plugin {
@@ -64,5 +70,37 @@ public class PermissionManagementPlugin extends Plugin {
         ret.put("hasBatteryOptimizationExemption", hasBatteryOptimizationExemption);
 
         call.resolve(ret);
+    }
+
+    @SuppressLint("BatteryLife")
+    @PluginMethod()
+    public void requestPermission(PluginCall call){
+        String permission = call.getString("permission");
+        System.out.println("Permission request: " + permission);
+
+        if (Objects.equals(permission, "background-location")){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
+            }
+            else {
+                ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            }
+        }
+
+        if (Objects.equals(permission, "notifications")){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+        }
+
+        if (Objects.equals(permission, "battery-optimization")){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Intent intent = new Intent();
+                String packageName = getContext().getPackageName();
+                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setData(Uri.parse("package:" + packageName));
+                getContext().startActivity(intent);
+            }
+        }
     }
 }
