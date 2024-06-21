@@ -30,6 +30,8 @@ public class MainActivity extends BridgeActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        registerPlugin(EchoPlugin.class);
+        registerPlugin(PermissionManagementPlugin.class);
         super.onCreate(savedInstanceState);
 
         prepareNotificationChannels();
@@ -49,33 +51,33 @@ public class MainActivity extends BridgeActivity {
         // Cancel any duplicate alarms
         alarmManager.cancel(pendingIntent);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (!alarmManager.canScheduleExactAlarms()){
-                Intent alarmIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    this.startActivity(alarmIntent);
-                }
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//            if (!alarmManager.canScheduleExactAlarms()){
+//                Intent alarmIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+//                if (intent.resolveActivity(getPackageManager()) != null) {
+//                    this.startActivity(alarmIntent);
+//                }
+//            }
+//        }
 
         startBackgroundTask(pendingIntent, 5);
 
 
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            boolean locationInBackground = getLocationInBackgroundEnabled();
-
-            if (locationInBackground) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.POST_NOTIFICATIONS}, 1);
-                    }
-                    else {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
-                    }
-                }
-            }
-        }
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            boolean locationInBackground = getLocationInBackgroundEnabled();
+//
+//            if (locationInBackground) {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.POST_NOTIFICATIONS}, 1);
+//                    }
+//                    else {
+//                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, 1);
+//                    }
+//                }
+//            }
+//        }
     }
     private boolean getLocationInBackgroundEnabled() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);

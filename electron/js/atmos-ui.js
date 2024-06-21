@@ -7,7 +7,10 @@
 console.log("🌥⚡ Atmos Weather")
 
 // Initialize Capacitor
-cap.getLocation();
+navigator.geolocation.getCurrentPosition(function(position){
+	window.currentLat = position.coords.latitude;
+	window.currentLong = position.coords.longitude;
+});
 cap.getDevice();
 
 // Initial Variable States
@@ -35,6 +38,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	}).addTo(map);
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
+	if (window.platform === undefined){
+		setTimeout(showNotices, 150);
+		return;
+	}
 	if (!localStorage.getItem("run-before") && getPlatform() != "pwa"){
 		document.getElementById("welcome-window-native").hidden = false;
 		document.getElementById("atmos-logo").style = "animation: fadeOut 2s; animation-fill-mode: forwards;"
@@ -91,7 +98,7 @@ function showNotices(){
 			}
 		}
 		else{
-			console.log("Atmos Mobile Version")
+			console.log("Atmos Mobile Version - " + window.deviceInfo.platform)
 			platform = window.deviceInfo.platform;
 		}
 	}
@@ -106,17 +113,7 @@ function showNotices(){
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
-	// Warn users about issues with phone battery optimization
-	if (platform.toLocaleLowerCase() == "android" && !window.localStorage.getItem("notice-batteryOptimization")){
-		document.getElementById("notice-window").innerHTML += `
-		<h2>Battery Optimization & Data Warning</h2>
-		<hr>
-		<h3>Certain Android versions and phone models may limit the capabilities of Atmos Weather. Check the battery section of the app info for Atmos Weather and ensure that Atmos Weather is not optimized and that background power usage is allowed. If you do not disable background optimizations and enable background battery usage, Atmos Weather may not be able to give weather alerts in a timely manner. Although some devices may indicate that Atmos Weather is a heavy battery user, this is due to the fact that Atmos Weather frequently wakes up the device processor, and is not based on actual battery percentage used. Atmos Weather has not been observed to use more than 3% in an entire day of use. On devices with limited mobile data or data saver turned on, users may want to also enable background data usage to receive weather alerts when WiFi is unavailable.</h3>
-		<br><br>
-		`;
-		window.localStorage.setItem("notice-batteryOptimization", "true");
-		document.getElementById("notice-window-container").hidden = false;
-	}
+	
 	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/update-details.json", (latest) => {
 		latest = latest["version"];
 		if (latest != window.atmosVersion && !platform.includes("windows")){
@@ -1042,6 +1039,8 @@ function sayTTS(text){
 function showNextIntro(){
 	document.getElementById("fade-section").setAttribute("style", "animation: simpleFadeOut 0.5s; animation-fill-mode: forwards;");
 	setTimeout(function(){
+		document.getElementById("android-permission-setup").hidden = false;
+		repeatPermCheck();
 		document.getElementById("fade-section").setAttribute("style", "animation: simpleFadeIn 2s; animation-fill-mode: forwards;");
 		if (document.getElementById("welcome-title-native").innerHTML == "Welcome To Atmos Weather"){
 			document.getElementById("welcome-title-native").innerHTML = "Prepare For The Day Ahead";
@@ -1071,7 +1070,6 @@ function showNextIntro(){
 		else{
 			document.getElementById("welcome-window-native").setAttribute("style", "animation: simpleFadeOut 2s; animation-fill-mode: forwards;");
 			localStorage.setItem("run-before", "true");
-			showNotices();
 			setTimeout(function(){document.getElementById("welcome-window-native").hidden=true;}, 2000);
 		}
 		

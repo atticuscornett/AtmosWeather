@@ -35,19 +35,26 @@ setTimeout(refreshAppTheme, 100);
 
 // Fade out logo and handle notices after animation is done or immediately if it's disabled
 let noticeTimeout = 0;
-if (localStorage.getItem("atmos-settings") !== null){
-    let settings = JSON.parse(localStorage.getItem("atmos-settings"));
-    if (settings["personalization"]["atmos-logo"]){
-        setTimeout(function(){
+
+function noticeSetup() {
+    if (localStorage.getItem("atmos-settings") !== null) {
+        let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+        if (settings["personalization"]["atmos-logo"]) {
+            setTimeout(function () {
+                showNotices();
+            }, 2000);
+        } else {
+            document.getElementById("atmos-logo").hidden = true;
+            showNotices();
+        }
+    } else {
+        setTimeout(function () {
             showNotices();
         }, 2000);
     }
-    else {
-        document.getElementById("atmos-logo").hidden = true;
-        showNotices();
-    }
 }
 
+noticeSetup();
 
 // Adds function to the navigation buttons (from atmos-ui.js)
 activateNavButtons();
@@ -115,6 +122,48 @@ function switchGraphs(e){
     document.getElementById(targetPrefix + "-loc-hourly-dewpoint-chart-container").style.display = "none";
     document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
 }
+
+function setupAndroidPermissions(){
+    if (window.deviceInfo === undefined){
+        setTimeout(setupAndroidPermissions, 100);
+        return;
+    }
+    if (getPlatform() === "android"){
+        window.PermissionManagement = cap.getPlugin("PermissionManagement");
+        repeatPermCheck();
+
+        document.getElementById("android-permission-setting").hidden = false;
+        document.getElementById("android-permission-setting").onclick = () => {
+            document.getElementById("android-permission-setup").hidden = false;
+            setTimeout(repeatPermCheck, 20);
+        }
+
+        // Setup permission request buttons
+        document.getElementById("android-request-background-location").onclick = () => {
+            PermissionManagement.requestPermission({"permission":"background-location"});
+        }
+
+        document.getElementById("android-request-notifications").onclick = () => {
+            PermissionManagement.requestPermission({"permission":"notifications"});
+        }
+
+        document.getElementById("android-request-battery-exempt").onclick = () => {
+            PermissionManagement.requestPermission({"permission":"battery-exempt"});
+        }
+
+        document.getElementById("android-request-exact-alarms").onclick = () => {
+            PermissionManagement.requestPermission({"permission":"exact-alarms"});
+        }
+
+        document.getElementById("android-permission-dialog-close").onclick = () => {
+            document.getElementById("android-permission-setup").hidden = true;
+            showNotices();
+        }
+    }
+}
+
+// Initialize Capacitor plugins
+setupAndroidPermissions();
 
 // Refresh location data
 setTimeout(refreshLocations, 200);

@@ -54,6 +54,39 @@
 				<button id="welcome-button-native" onclick="showNextIntro();">Next</button>
 			</center>
 		</div>
+		<div id="android-permission-setup" hidden>
+			<div id="android-permission-container">
+				<h1>Android Permission Setup</h1>
+				<h3>Atmos Weather requires Android permissions to provide certain app functionality.</h3>
+				<h3>Review the permissions below and grant permissions to enable certain features.</h3>
+				<h3>This dialog can be opened any time from the settings page.</h3>
+				<details>
+					<summary id="android-background-permissions">Background Location</summary>
+					<h4>Atmos Weather uses background location permission to provide weather alert notifications for your current location.</h4>
+					<h4>Without this permission, Atmos Weather will be unable to give alerts for the current location or alerts if moving.</h4>
+					<button class="permission-button"  id="android-request-background-location">Grant this permission</button>
+				</details>
+				<details>
+					<summary id="android-notification-permissions">Notifications</summary>
+					<h4>Atmos Weather uses the notification permission to deliver weather alerts.</h4>
+					<h4>Without this permission, Atmos Weather cannot give weather alerts.</h4>
+					<button class="permission-button"  id="android-request-notifications">Grant this permission</button>
+				</details>
+				<details>
+					<summary id="android-battery-exempt-permissions">Battery Exemption</summary>
+					<h4>Atmos Weather uses a battery optimization exemption to run in the background even when the device is asleep.</h4>
+					<h4>Without this permission, Atmos Weather may stop running when your device falls asleep.</h4>
+					<button class="permission-button" id="android-request-battery-exempt">Grant this permission</button>
+				</details>
+				<details>
+					<summary id="android-exact-alarms-permissions">Schedule Exact Alarms</summary>
+					<h4>Atmos Weather uses the schedule exact alarm permission to run periodic weather checks in the background in a timely manner.</h4>
+					<h4>Without this permission, Atmos Weather cannot reliably give timely alerts.</h4>
+					<button class="permission-button" id="android-request-exact-alarms">Grant this permission</button>
+				</details>
+				<button class="permission-button" id="android-permission-dialog-close">Done</button>
+			</div>
+		</div>
 		<div id="notice-window-container" hidden>
 			<h1 style="margin-left:20px;color:dodgerblue;">a t m o s weather</h1>
 			<div id="notice-window" style="padding: 20px;">
@@ -191,6 +224,7 @@
 						and optimize background usage based on whether the device is using mobile data or Wi-Fi.<br>
 						<h3>Other Permissions</h3>
 						<code>POST_NOTIFICATIONS</code> is used to display notifications for weather alerts for devices running Android 13 or higher.<br>
+						<code>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</code> is used to request an exemption from battery optimizations to run in the background and ensure that weather alerts are given in a timely manner.<br>
 						<code>SCHEDULE_EXACT_ALARM</code> is used to periodically run weather alert checks in the background.
 						The alarms must be exact to ensure that alerts are given in a timely manner.<br>
 						<code>RECEIVE_BOOT_COMPLETED</code> is used to restart the weather alert checks after the device is rebooted.<br>
@@ -244,7 +278,7 @@
 				</div>
 				<div id="tab-settings" style="margin-right:20px;" class="tab-div" hidden>
 					<h1>Settings</h1>
-					<h6><a href="#" onClick="navTo('about')">About Atmos Weather</a>&emsp;<a href="#" onClick="navTo('privacy')">Privacy Statement</a></h6>
+					<h6><a href="#" onClick="navTo('about')">About Atmos Weather</a>&emsp;<a href="#" onClick="navTo('privacy')">Privacy Statement</a><br><a id="android-permission-setting" hidden href="#">Android Permissions</a></h6>
 					<h2 id="settings-warning" hidden>Some settings/features are not functional on the web version, including weather alerts.</h2>
 					<hr>
 					<div id="settings-device-location">
