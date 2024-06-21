@@ -47,6 +47,11 @@ if (localStorage.getItem("atmos-settings") !== null){
         showNotices();
     }
 }
+else {
+    setTimeout(function(){
+        showNotices();
+    }, 2000);
+}
 
 
 // Adds function to the navigation buttons (from atmos-ui.js)
