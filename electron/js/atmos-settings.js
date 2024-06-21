@@ -612,3 +612,32 @@ function convertTempUnit(temp, unit){
 		}
 	}
 }
+
+// Check permissions while permission window is open
+
+async function repeatPermCheck(){
+	const permissions = await PermissionManagement.checkPermissions();
+	document.getElementById("android-background-permissions").innerHTML = "Background Location "
+		+ (permissions["hasBackgroundLocationPermission"] ? "✅" : "⚠️");
+	document.getElementById("android-request-background-location").innerHTML = (permissions["hasBackgroundLocationPermission"] ? "Background Location Granted" : "Request Background Location");
+	document.getElementById("android-request-background-location").disabled = permissions["hasBackgroundLocationPermission"];
+
+	document.getElementById("android-notification-permissions").innerHTML = "Notifications "
+		+ (permissions["hasNotificationPermission"] ? "✅" : "⚠️");
+	document.getElementById("android-request-notifications").innerHTML = (permissions["hasNotificationPermission"] ? "Notifications Granted" : "Request Notifications");
+	document.getElementById("android-request-notifications").disabled = permissions["hasNotificationPermission"];
+
+	document.getElementById("android-battery-exempt-permissions").innerHTML = "Battery Exemptions "
+		+ (permissions["hasBatteryOptimizationPermission"] ? "✅" : "⚠️");
+	document.getElementById("android-request-battery-exempt").innerHTML = (permissions["hasBatteryOptimizationPermission"] ? "Battery Exemptions Granted" : "Request Battery Exemptions");
+	document.getElementById("android-request-battery-exempt").disabled = permissions["hasBatteryOptimizationPermission"];
+
+	document.getElementById("android-exact-alarms-permissions").innerHTML = "Schedule Exact Alarms "
+		+ (permissions["canScheduleExactAlarms"] ? "✅" : "⚠️");
+	document.getElementById("android-request-exact-alarms").innerHTML = (permissions["canScheduleExactAlarms"] ? "Exact Alarms Granted": "Request Exact Alarms");
+	document.getElementById("android-request-exact-alarms").disabled = permissions["canScheduleExactAlarms"];
+
+	if (!document.getElementById("android-permission-setup").hidden){
+		setTimeout(repeatPermCheck, 300);
+	}
+}
