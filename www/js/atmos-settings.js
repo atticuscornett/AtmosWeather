@@ -616,6 +616,9 @@ function convertTempUnit(temp, unit){
 // Check permissions while permission window is open
 
 async function repeatPermCheck(){
+	if (!document.getElementById("notice-window").hidden){
+		document.getElementById("notice-window").hidden = true;
+	}
 	const permissions = await PermissionManagement.checkPermissions();
 	document.getElementById("android-background-permissions").innerHTML = "Background Location "
 		+ (permissions["hasBackgroundLocationPermission"] ? "✅" : "⚠️");

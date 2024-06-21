@@ -150,6 +150,7 @@ function setupAndroidPermissions(){
 
         document.getElementById("android-permission-dialog-close").onclick = () => {
             document.getElementById("android-permission-setup").hidden = true;
+            showNotices();
         }
     }
 }
