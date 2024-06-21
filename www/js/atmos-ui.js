@@ -38,6 +38,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	}).addTo(map);
 // Decides if there are any notices to show, and if so, creates them and shows them
 function showNotices(){
+	if (window.platform === undefined){
+		setTimeout(showNotices, 150);
+		return;
+	}
 	if (!localStorage.getItem("run-before") && getPlatform() != "pwa"){
 		document.getElementById("welcome-window-native").hidden = false;
 		document.getElementById("atmos-logo").style = "animation: fadeOut 2s; animation-fill-mode: forwards;"
@@ -94,7 +98,7 @@ function showNotices(){
 			}
 		}
 		else{
-			console.log("Atmos Mobile Version")
+			console.log("Atmos Mobile Version - " + window.deviceInfo.platform)
 			platform = window.deviceInfo.platform;
 		}
 	}

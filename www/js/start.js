@@ -116,31 +116,46 @@ function switchGraphs(e){
     document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
 }
 
+function setupAndroidPermissions(){
+    if (window.deviceInfo === undefined){
+        setTimeout(setupAndroidPermissions, 100);
+        return;
+    }
+    if (getPlatform() === "android"){
+        window.PermissionManagement = cap.getPlugin("PermissionManagement");
+        repeatPermCheck();
+
+        document.getElementById("android-permission-setting").hidden = false;
+        document.getElementById("android-permission-setting").onclick = () => {
+            document.getElementById("android-permission-setup").hidden = false;
+            setTimeout(repeatPermCheck, 20);
+        }
+
+        // Setup permission request buttons
+        document.getElementById("android-request-background-location").onclick = () => {
+            PermissionManagement.requestPermission({"permission":"background-location"});
+        }
+
+        document.getElementById("android-request-notifications").onclick = () => {
+            PermissionManagement.requestPermission({"permission":"notifications"});
+        }
+
+        document.getElementById("android-request-battery-exempt").onclick = () => {
+            PermissionManagement.requestPermission({"permission":"battery-exempt"});
+        }
+
+        document.getElementById("android-request-exact-alarms").onclick = () => {
+            PermissionManagement.requestPermission({"permission":"exact-alarms"});
+        }
+
+        document.getElementById("android-permission-dialog-close").onclick = () => {
+            document.getElementById("android-permission-setup").hidden = true;
+        }
+    }
+}
+
 // Initialize Capacitor plugins
-const Echo = cap.getPlugin("Echo");
-const PermissionManagement = cap.getPlugin("PermissionManagement");
-repeatPermCheck();
-
-// Setup permission request buttons
-document.getElementById("android-request-background-location").onclick = () => {
-    PermissionManagement.requestPermission({"permission":"background-location"});
-}
-
-document.getElementById("android-request-notifications").onclick = () => {
-    PermissionManagement.requestPermission({"permission":"notifications"});
-}
-
-document.getElementById("android-request-battery-exempt").onclick = () => {
-    PermissionManagement.requestPermission({"permission":"battery-exempt"});
-}
-
-document.getElementById("android-request-exact-alarms").onclick = () => {
-    PermissionManagement.requestPermission({"permission":"exact-alarms"});
-}
-
-document.getElementById("android-permission-dialog-close").onclick = () => {
-    document.getElementById("android-permission-setup").hidden = true;
-}
+setupAndroidPermissions();
 
 // Refresh location data
 setTimeout(refreshLocations, 200);
