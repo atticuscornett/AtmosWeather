@@ -1045,6 +1045,8 @@ function sayTTS(text){
 function showNextIntro(){
 	document.getElementById("fade-section").setAttribute("style", "animation: simpleFadeOut 0.5s; animation-fill-mode: forwards;");
 	setTimeout(function(){
+		document.getElementById("android-permission-setup").hidden = false;
+		repeatPermCheck();
 		document.getElementById("fade-section").setAttribute("style", "animation: simpleFadeIn 2s; animation-fill-mode: forwards;");
 		if (document.getElementById("welcome-title-native").innerHTML == "Welcome To Atmos Weather"){
 			document.getElementById("welcome-title-native").innerHTML = "Prepare For The Day Ahead";

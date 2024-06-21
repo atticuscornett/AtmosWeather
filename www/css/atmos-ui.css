@@ -356,9 +356,6 @@ select{
 #android-permission-container {
 	padding: 15px;
 	background-color: hsla(0,0%,99%,1.00);
-}
-
-#android-permission-container details {
 	text-align: center;
 }
 

@@ -138,6 +138,10 @@ document.getElementById("android-request-exact-alarms").onclick = () => {
     PermissionManagement.requestPermission({"permission":"exact-alarms"});
 }
 
+document.getElementById("android-permission-dialog-close").onclick = () => {
+    document.getElementById("android-permission-setup").hidden = true;
+}
+
 // Refresh location data
 setTimeout(refreshLocations, 200);
 
