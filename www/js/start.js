@@ -35,24 +35,26 @@ setTimeout(refreshAppTheme, 100);
 
 // Fade out logo and handle notices after animation is done or immediately if it's disabled
 let noticeTimeout = 0;
-if (localStorage.getItem("atmos-settings") !== null){
-    let settings = JSON.parse(localStorage.getItem("atmos-settings"));
-    if (settings["personalization"]["atmos-logo"]){
-        setTimeout(function(){
+
+function noticeSetup() {
+    if (localStorage.getItem("atmos-settings") !== null) {
+        let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+        if (settings["personalization"]["atmos-logo"]) {
+            setTimeout(function () {
+                showNotices();
+            }, 2000);
+        } else {
+            document.getElementById("atmos-logo").hidden = true;
+            showNotices();
+        }
+    } else {
+        setTimeout(function () {
             showNotices();
         }, 2000);
     }
-    else {
-        document.getElementById("atmos-logo").hidden = true;
-        showNotices();
-    }
-}
-else {
-    setTimeout(function(){
-        showNotices();
-    }, 2000);
 }
 
+noticeSetup();
 
 // Adds function to the navigation buttons (from atmos-ui.js)
 activateNavButtons();

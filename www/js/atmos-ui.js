@@ -1080,7 +1080,6 @@ function showNextIntro(){
 		else{
 			document.getElementById("welcome-window-native").setAttribute("style", "animation: simpleFadeOut 2s; animation-fill-mode: forwards;");
 			localStorage.setItem("run-before", "true");
-			showNotices();
 			setTimeout(function(){document.getElementById("welcome-window-native").hidden=true;}, 2000);
 		}
 		
