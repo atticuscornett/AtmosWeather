@@ -69,16 +69,27 @@ public class BackgroundService extends BroadcastReceiver {
             @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pentent = PendingIntent.getBroadcast(context, 1, intentA, PendingIntent.FLAG_IMMUTABLE);
             Calendar calendar = Calendar.getInstance();
 
+            int alertCheckFrequency = 60;
+
+            try {
+                JSONObject settings = new JSONObject(weatherLocations.getString("settings", ""));
+                alertCheckFrequency = Integer.parseInt(settings.getJSONObject("location-alerts").getString("alert-check-frequency"));
+                System.out.println("Alert check frequency: " + alertCheckFrequency);
+            }
+            catch (Exception e){
+                System.out.println("Settings not found. Using default alert check frequency.");
+            }
+
             boolean canScheduleAlarms = true;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
                 canScheduleAlarms = alarmManager.canScheduleExactAlarms();
             }
 
             if (canScheduleAlarms) {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (60*1000), pentent);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (alertCheckFrequency * 1000L), pentent);
             }
             else {
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (60*1000), pentent);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + (alertCheckFrequency * 1000L), pentent);
             }
 
             JSONArray locationJSON = new JSONArray(weatherLocations.getString("locations", "[]"));

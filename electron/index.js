@@ -174,9 +174,25 @@ setInterval(function(){
 }, 10000);
 
 setInterval(function(){
+
+}, 30000);
+
+function alertCheckHandler(){
 	checkLocation();
 	cycleAt++;
-}, 30000);
+	let locationCheckFrequency = 30*1000;
+	if (global.settings !== undefined){
+		if (global.settings["location-alerts"] !== undefined){
+			if (global.settings["location-alerts"]["alert-check-frequency"] !== undefined){
+				locationCheckFrequency = Number(global.settings["location-alerts"]["alert-check-frequency"])*1000;
+			}
+		}
+	}
+	console.log("Check frequency: " + locationCheckFrequency)
+	setTimeout(alertCheckHandler, locationCheckFrequency);
+}
+
+alertCheckHandler();
 
 // Check the location for alerts
 function checkLocation(){

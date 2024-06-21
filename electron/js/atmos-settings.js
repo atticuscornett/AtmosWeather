@@ -20,7 +20,7 @@ setTimeout(function(){
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
 			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
-			"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
+			"location-alerts": {"tts-alerts": false, "alert-check-frequency": "30", "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 			"alert-types": {
 				"warnings":{
 					"tornado": "alert",
@@ -119,7 +119,7 @@ setTimeout(function(){
 		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false},
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
-		"location-alerts": {"tts-alerts": false, "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
+		"location-alerts": {"tts-alerts": false, "alert-check-frequency": "60", "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 		"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
 		"alert-types": {
 			"warnings":{
@@ -323,6 +323,7 @@ function refreshSettings(){
 	
 	// Alert Sound Settings
 	document.getElementById("setting-tts-alerts").checked = allSettings["location-alerts"]["tts-alerts"];
+	document.getElementById("setting-alert-check-frequency").value = allSettings["location-alerts"]["alert-check-frequency"];
 	document.getElementById("setting-default-sound-alert").value = allSettings["location-alerts"]["default-alert"];
 	document.getElementById("setting-default-sound-notification").value = allSettings["location-alerts"]["default-notification"];
 	
@@ -386,6 +387,7 @@ function saveSettings(){
 	allSettings["radar"]["polygons"]["high-res"] = document.getElementById("setting-radar-high-res").checked;
 	
 	allSettings["location-alerts"]["tts-alerts"] = document.getElementById("setting-tts-alerts").checked;
+	allSettings["location-alerts"]["alert-check-frequency"] = document.getElementById("setting-alert-check-frequency").value;
 	allSettings["location-alerts"]["default-alert"] = document.getElementById("setting-default-sound-alert").value;
 	allSettings["location-alerts"]["default-notification"] = document.getElementById("setting-default-sound-notification").value;
 	

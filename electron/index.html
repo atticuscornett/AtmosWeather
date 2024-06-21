@@ -354,6 +354,15 @@
 					<input class="box" type="checkbox" id="setting-tts-alerts" >
 					<label for="setting-tts-alerts">Read alerts with text to speech</label>
 					<br><br>
+					<label for="setting-alert-check-frequency">Alert Check Frequency</label>
+					<br>
+					<select id="setting-alert-check-frequency">
+						<option value="15">Every 15 seconds</option>
+						<option value="30">Every 30 seconds</option>
+						<option value="60">Every 1 minute</option>
+						<option value="120">Every 2 minutes</option>
+					</select>
+					<h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6>
 					<label for="setting-default-sound-alert">Default Alert Sound</label>
 					<br>
 					<select id="setting-default-sound-alert" onChange="playAlarmSoundMain();">
