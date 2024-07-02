@@ -2,6 +2,7 @@ const { app, BrowserWindow, Notification, Tray, Menu, net, dialog} = require('el
 const { autoUpdater } = require("electron-updater")
 const turf = require("@turf/turf")
 const {checkPolygons} = require("./alert-checking");
+const fs = require("fs");
 global.win2 = null;
 var weatherLocations;
 var locationNames;
@@ -34,15 +35,6 @@ if (!singleAppLock){
 	app.quit();
 }
 else{
-	// Run at system startup (TODO: Have a setting)
-	app.setLoginItemSettings({
-		openAtLogin: true
-	})
-	if (process.platform == "linux"){
-		// Make desktop file for startup on Linux
-		var fs = require("fs");
-		fs.writeFile('/home/' + require("os").userInfo().username + '/.config/autostart/atmos-weather.desktop','[Desktop Entry]\nName=Atmos Weather\nExec="/opt/Atmos Weather/atmos-weather" %U\nTerminal=false\nType=Application\nIcon=atmos-weather\nStartupWMClass=Atmos Weather\nComment=A lightweight app for weather forecasts and alerts.\nCategories=Utility;', function(err){console.log(err)})	
-	}
 	app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
 		if (win2 == null){
 			createWindow();
@@ -166,6 +158,7 @@ setInterval(function(){
 	win2.webContents.executeJavaScript('localStorage.getItem("atmos-settings")', true)
 		.then(result => {
 		global.settings = JSON.parse(result);
+		runAtStartup();
 	});
 	win2.webContents.executeJavaScript('navigator.onLine', true)
 		.then(result => {
@@ -173,9 +166,27 @@ setInterval(function(){
 	});
 }, 10000);
 
-setInterval(function(){
+function runAtStartup(){
+	let shouldRunAtStartup = true;
+	if (global.settings !== undefined){
+		if (global.settings["personalization"] !== undefined){
+			if (global.settings["personalization"]["run-startup"] !== undefined){
+				shouldRunAtStartup = global.settings["personalization"]["run-startup"];
+			}
+		}
+	}
 
-}, 30000);
+	console.log("Should run at startup: " + shouldRunAtStartup)
+
+	app.setLoginItemSettings({
+		openAtLogin: shouldRunAtStartup
+	})
+	if (process.platform === "linux" && shouldRunAtStartup){
+		// Make desktop file for startup on Linux
+		var fs = require("fs");
+		fs.writeFile('/home/' + require("os").userInfo().username + '/.config/autostart/atmos-weather.desktop','[Desktop Entry]\nName=Atmos Weather\nExec="/opt/Atmos Weather/atmos-weather" %U\nTerminal=false\nType=Application\nIcon=atmos-weather\nStartupWMClass=Atmos Weather\nComment=A lightweight app for weather forecasts and alerts.\nCategories=Utility;', function(err){console.log(err)})
+	}
+}
 
 function alertCheckHandler(){
 	checkLocation();

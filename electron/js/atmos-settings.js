@@ -16,7 +16,7 @@ setTimeout(function(){
 	if (thePlatform.includes("desktop")){
 		document.getElementById("settings-device-location").hidden = true;
 		atmosSettingsTemp = {
-			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false},
+			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false, "run-startup": true},
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
 			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
@@ -115,8 +115,9 @@ setTimeout(function(){
 		};
 	}
 	else{
+		document.getElementById("settings-startup").hidden = true;
 		atmosSettingsTemp = {
-		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false},
+		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false, "run-startup": false},
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"tts-alerts": false, "alert-check-frequency": "60", "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
@@ -296,13 +297,14 @@ function populateSettingsPage(locationMode){
 // Refresh settings tab
 function refreshSettings(){
 	populateSettingsPage(false);
-	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 
 	// Personalization Settings
 	document.getElementById("setting-app-theme").value = allSettings["personalization"]["theme"];
 	document.getElementById("setting-page-transition-duration").value = allSettings["personalization"]["page-transition-duration"];
 	document.getElementById("setting-page-transition-duration-text").innerHTML = allSettings["personalization"]["page-transition-duration"].toString() + "ms";
 	document.getElementById("setting-atmos-logo").checked = allSettings["personalization"]["atmos-logo"];
+	document.getElementById("setting-run-startup").checked = allSettings["personalization"]["run-startup"];
 
 	// Location Settings
 	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
@@ -366,11 +368,12 @@ function refreshSettings(){
 
 // Save settings
 function saveSettings(){
-	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 
 	allSettings["personalization"]["theme"] = document.getElementById("setting-app-theme").value;
 	allSettings["personalization"]["page-transition-duration"] = document.getElementById("setting-page-transition-duration").value;
 	allSettings["personalization"]["atmos-logo"] = document.getElementById("setting-atmos-logo").checked;
+	allSettings["personalization"]["run-startup"] = document.getElementById("setting-run-startup").checked;
 
 	allSettings["location"]["weather"] = document.getElementById("setting-current-location").checked;
 	allSettings["location"]["alerts"] = document.getElementById("setting-current-location-alerts").checked;
