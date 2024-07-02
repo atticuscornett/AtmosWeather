@@ -1,5 +1,5 @@
 // UPDATE
-window.atmosVersion = "2.1.2";
+window.atmosVersion = "2.1.3";
 window.atmosUpdated = "6-17-2024";
 window.atmosUpdateNotes = `
 		<h2>Atmos Weather v2.1.2 is here!</h2>

@@ -114,9 +114,20 @@ function showNotices(){
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
 	
-	JSONGetAsync("https://atticuscornett.github.io/AtmosWeather/update-details.json", (latest) => {
-		latest = latest["version"];
-		if (latest != window.atmosVersion && !platform.includes("windows")){
+	JSONGetAsync("https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest", (latest) => {
+
+		// Support tag names with and without the "v" prefix
+		if (latest["tag_name"][0] === "v"){
+			latest = latest["tag_name"].slice(1);
+		}
+		else{
+			latest = latest["tag_name"];
+		}
+
+		console.log("Current version: " + window.atmosVersion);
+		console.log("Latest version: " + latest);
+
+		if (latest !== window.atmosVersion && !platform.includes("windows")){
 			document.getElementById("notice-window").innerHTML += `
 			<h2>An update is available!</h2>
 			<hr>
@@ -130,12 +141,12 @@ function showNotices(){
 		}
 	});
 	// UPDATE
-	if (window.localStorage.getItem("notice-version") != window.atmosVersion){
+	if (window.localStorage.getItem("notice-version") !== window.atmosVersion){
 		document.getElementById("notice-window").innerHTML += window.atmosUpdateNotes;
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-version", window.atmosVersion);
 	}
-	if (platform == "pwa"){
+	if (platform === "pwa"){
 		document.getElementById("settings-warning").hidden = false;
 	}
 }
