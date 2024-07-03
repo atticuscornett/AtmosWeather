@@ -16,7 +16,7 @@ setTimeout(function(){
 	if (thePlatform.includes("desktop")){
 		document.getElementById("settings-device-location").hidden = true;
 		atmosSettingsTemp = {
-			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false, "run-startup": true},
+			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false, "run-startup": true, "update-notify": false},
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false},
 			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
@@ -117,7 +117,7 @@ setTimeout(function(){
 	else{
 		document.getElementById("settings-startup").hidden = true;
 		atmosSettingsTemp = {
-		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false, "run-startup": false},
+		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false, "run-startup": false, "update-notify": true},
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false},
 		"location-alerts": {"tts-alerts": false, "alert-check-frequency": "60", "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
@@ -305,6 +305,7 @@ function refreshSettings(){
 	document.getElementById("setting-page-transition-duration-text").innerHTML = allSettings["personalization"]["page-transition-duration"].toString() + "ms";
 	document.getElementById("setting-atmos-logo").checked = allSettings["personalization"]["atmos-logo"];
 	document.getElementById("setting-run-startup").checked = allSettings["personalization"]["run-startup"];
+	document.getElementById("setting-notify-updates").checked = allSettings["personalization"]["notify-updates"];
 
 	// Location Settings
 	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
@@ -374,6 +375,7 @@ function saveSettings(){
 	allSettings["personalization"]["page-transition-duration"] = document.getElementById("setting-page-transition-duration").value;
 	allSettings["personalization"]["atmos-logo"] = document.getElementById("setting-atmos-logo").checked;
 	allSettings["personalization"]["run-startup"] = document.getElementById("setting-run-startup").checked;
+	allSettings["personalization"]["notify-updates"] = document.getElementById("setting-notify-updates").checked;
 
 	allSettings["location"]["weather"] = document.getElementById("setting-current-location").checked;
 	allSettings["location"]["alerts"] = document.getElementById("setting-current-location-alerts").checked;

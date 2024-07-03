@@ -113,22 +113,37 @@ function showNotices(){
 		document.getElementById("notice-window-container").hidden = false;
 		window.localStorage.setItem("notice-weatherAlerts", "true");
 	}
-	
-	JSONGetAsync("https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest", (latest) => {
 
-		// Support tag names with and without the "v" prefix
-		if (latest["tag_name"][0] === "v"){
-			latest = latest["tag_name"].slice(1);
+	let notifyUpdates = true;
+
+	let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+
+	if (settings !== undefined){
+		if (settings["personalization"] !== undefined){
+			if (settings["personalization"]["notify-updates"] !== undefined){
+				notifyUpdates = settings["personalization"]["notify-updates"];
+			}
 		}
-		else{
-			latest = latest["tag_name"];
-		}
+	}
 
-		console.log("Current version: " + window.atmosVersion);
-		console.log("Latest version: " + latest);
+	// Check for updates if enabled
 
-		if (latest !== window.atmosVersion && !platform.includes("windows")){
-			document.getElementById("notice-window").innerHTML += `
+	if (notifyUpdates) {
+		JSONGetAsync("https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest", (latest) => {
+
+			// Support tag names with and without the "v" prefix
+			if (latest["tag_name"][0] === "v"){
+				latest = latest["tag_name"].slice(1);
+			}
+			else{
+				latest = latest["tag_name"];
+			}
+
+			console.log("Current version: " + window.atmosVersion);
+			console.log("Latest version: " + latest);
+
+			if (latest !== window.atmosVersion){
+				document.getElementById("notice-window").innerHTML += `
 			<h2>An update is available!</h2>
 			<hr>
 			<h3>You are on an older version of Atmos Weather (` + window.atmosVersion + `).<br>
@@ -137,10 +152,11 @@ function showNotices(){
 			Updates may include security upgrades, so it is important to keep your apps updated.</h3>
 			<br><br>
 			`;
-			document.getElementById("notice-window-container").hidden = false;document.getElementById("notice-window-container").hidden = false
-		}
-	});
-	// UPDATE
+				document.getElementById("notice-window-container").hidden = false;document.getElementById("notice-window-container").hidden = false
+			}
+		});
+	}
+
 	if (window.localStorage.getItem("notice-version") !== window.atmosVersion){
 		document.getElementById("notice-window").innerHTML += window.atmosUpdateNotes;
 		document.getElementById("notice-window-container").hidden = false;
