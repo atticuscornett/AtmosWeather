@@ -120,8 +120,8 @@ function showNotices(){
 
 	if (settings !== undefined){
 		if (settings["personalization"] !== undefined){
-			if (settings["personalization"]["notify-updates"] !== undefined){
-				notifyUpdates = settings["personalization"]["notify-updates"];
+			if (settings["personalization"]["update-notify"] !== undefined){
+				notifyUpdates = settings["personalization"]["update-notify"];
 			}
 		}
 	}
