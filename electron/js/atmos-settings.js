@@ -305,7 +305,7 @@ function refreshSettings(){
 	document.getElementById("setting-page-transition-duration-text").innerHTML = allSettings["personalization"]["page-transition-duration"].toString() + "ms";
 	document.getElementById("setting-atmos-logo").checked = allSettings["personalization"]["atmos-logo"];
 	document.getElementById("setting-run-startup").checked = allSettings["personalization"]["run-startup"];
-	document.getElementById("setting-notify-updates").checked = allSettings["personalization"]["notify-updates"];
+	document.getElementById("setting-notify-updates").checked = allSettings["personalization"]["update-notify"];
 
 	// Location Settings
 	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
@@ -375,7 +375,7 @@ function saveSettings(){
 	allSettings["personalization"]["page-transition-duration"] = document.getElementById("setting-page-transition-duration").value;
 	allSettings["personalization"]["atmos-logo"] = document.getElementById("setting-atmos-logo").checked;
 	allSettings["personalization"]["run-startup"] = document.getElementById("setting-run-startup").checked;
-	allSettings["personalization"]["notify-updates"] = document.getElementById("setting-notify-updates").checked;
+	allSettings["personalization"]["update-notify"] = document.getElementById("setting-notify-updates").checked;
 
 	allSettings["location"]["weather"] = document.getElementById("setting-current-location").checked;
 	allSettings["location"]["alerts"] = document.getElementById("setting-current-location-alerts").checked;
