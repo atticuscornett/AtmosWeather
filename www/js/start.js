@@ -1,19 +1,21 @@
 // UPDATE
-window.atmosVersion = "2.1.3";
-window.atmosUpdated = "6-17-2024";
+window.atmosVersion = "2.2.0";
+window.atmosUpdated = "7-4-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.1.2 is here!</h2>
+		<h2>Atmos Weather v2.2.0 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
   			<dt>New Features</dt>
-			<dd>- Jump to current location on the radar page.</dd>
-			<dd>- Page transition animation length is now customizable.</dd>
-			<dd>- Atmos Weather logo animation can now be disabled.</dd>
-			<dt>Bug Fixes</dt>
-			<dd>- Fixed issues with displaying weather outlooks.</dd>
-			<dd>- Fixed alerts page showing outdated information.</dd>
-			<dd>- Mobile specific settings no longer show on desktop.</dd>
-			<dd>- Fixed loading animation hiding too early.</dd>
+			<dd>- Added feels like temperature graph to forecast.</dd>
+			<dd>- Added current feels like temperature.</dd>
+			<dd>- Added dew point graph to forecast.</dd>
+			<dd>- Revamped Android permission setup for faster setup and clarity.</dd>
+			<dd>- Alert check frequency can now be adjusted.</dd>
+			<dd>- Added desktop startup setting.</dd>
+			<dt>Bug Fixes + Other</dt>
+			<dd>- Updated privacy statement. (This can be viewed in settings.)</dd>
+			<dd>- Fixed typos.</dd>
+			<dd>- Fix logo error on first open.</dd>
 		</dl> 
 		<br><br>
 		`;
