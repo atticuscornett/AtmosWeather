@@ -66,6 +66,15 @@ Some beta version builds will be added to GitHub releases.
 
 ## Latest Code (Unstable, Not Recommended)
 By downloading the repository files, you can build the latest code on your machine using CapacitorJS (for the Android version) or using Electron in the `electron` folder (for all desktop versions).
+Node and npm are required to build the latest code.
+
+To run Electron version:
+1. Download node libraries with `npm install`
+2. Run the app with `npm start`
+
+To run Android version:
+1. Sync the project with `npx cap sync`
+2. Build and run the app in Android Studio.
 
 # <a name="goals"></a>Project Goals
 ### Minimum Bloat
