@@ -635,9 +635,9 @@ async function repeatPermCheck(){
 	document.getElementById("android-request-notifications").disabled = permissions["hasNotificationPermission"];
 
 	document.getElementById("android-battery-exempt-permissions").innerHTML = "Battery Exemptions "
-		+ (permissions["hasBatteryOptimizationPermission"] ? "✅" : "⚠️");
-	document.getElementById("android-request-battery-exempt").innerHTML = (permissions["hasBatteryOptimizationPermission"] ? "Battery Exemptions Granted" : "Request Battery Exemptions");
-	document.getElementById("android-request-battery-exempt").disabled = permissions["hasBatteryOptimizationPermission"];
+		+ (permissions["hasBatteryOptimizationExemption"] ? "✅" : "⚠️");
+	document.getElementById("android-request-battery-exempt").innerHTML = (permissions["hasBatteryOptimizationExemption"] ? "Battery Exemptions Granted" : "Request Battery Exemptions");
+	document.getElementById("android-request-battery-exempt").disabled = permissions["hasBatteryOptimizationExemption"];
 
 	document.getElementById("android-exact-alarms-permissions").innerHTML = "Schedule Exact Alarms "
 		+ (permissions["canScheduleExactAlarms"] ? "✅" : "⚠️");
