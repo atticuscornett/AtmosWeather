@@ -1066,8 +1066,6 @@ function sayTTS(text){
 function showNextIntro(){
 	document.getElementById("fade-section").setAttribute("style", "animation: simpleFadeOut 0.5s; animation-fill-mode: forwards;");
 	setTimeout(function(){
-		document.getElementById("android-permission-setup").hidden = false;
-		repeatPermCheck();
 		document.getElementById("fade-section").setAttribute("style", "animation: simpleFadeIn 2s; animation-fill-mode: forwards;");
 		if (document.getElementById("welcome-title-native").innerHTML == "Welcome To Atmos Weather"){
 			document.getElementById("welcome-title-native").innerHTML = "Prepare For The Day Ahead";
@@ -1097,7 +1095,11 @@ function showNextIntro(){
 		else{
 			document.getElementById("welcome-window-native").setAttribute("style", "animation: simpleFadeOut 2s; animation-fill-mode: forwards;");
 			localStorage.setItem("run-before", "true");
-			setTimeout(function(){document.getElementById("welcome-window-native").hidden=true;}, 2000);
+			setTimeout(function(){
+				document.getElementById("android-permission-setup").hidden = false;
+				repeatPermCheck();
+				document.getElementById("welcome-window-native").hidden=true;
+				}, 2000);
 		}
 		
 	}, 750);
