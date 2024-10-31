@@ -82,6 +82,7 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 					hourlyForecast = hourlyForecast["properties"]["periods"];
 					theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
 					localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
+					syncFiles();
 					document.getElementById("offlineError").hidden = true;
 					if (extraReturn != null){
 						hourlyCallback(theCache[weatherGrid[1]], extraReturn);
@@ -136,6 +137,7 @@ function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 					forecast = forecast["properties"]["periods"];
 					theCache[weatherGrid[1]] = [forecast, time.getTime()];
 					localStorage.setItem("nws-forecast-cache", JSON.stringify(theCache));
+					syncFiles();
 					document.getElementById("offlineError").hidden = true;
 					if (extraReturn != null){
 						forecastCallback(theCache[weatherGrid[1]], extraReturn);
@@ -245,6 +247,7 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 				try{
 					theCache[pos] = [res["features"], time.getTime()]
 					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
+					syncFiles();
 					addToActiveAlertsCheck(theCache[pos]);
 					if (extraReturn != null){
 						nomCallback(theCache[pos], extraReturn);
@@ -279,6 +282,7 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 				try{
 					theCache[pos] = [res["features"], time.getTime()]
 					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
+					syncFiles();
 					addToActiveAlertsCheck(theCache[pos]);
 					if (extraReturn != null){
 						nomCallback(theCache[pos], extraReturn);
@@ -319,6 +323,7 @@ function addToActiveAlertsCheck(alerts){
 		a++;
 	}
 	localStorage.setItem("nws-alerts-current", JSON.stringify(theCache))
+	syncFiles();
 }
 
 // Checks if weather alerts should be moved from current to old
@@ -354,6 +359,7 @@ function checkIfOldAlerts(runFunction=false, functionToRun=null){
 				oldAlerts = oldAlerts.concat(moveToOld);
 				oldAlerts = oldAlerts.slice(-20);
 				localStorage.setItem("nws-alerts-old", JSON.stringify(oldAlerts));
+				syncFiles();
 			}
 			locationsChecked++;
 		}, a);
@@ -467,6 +473,7 @@ function getAllActiveAlertsAsync(callback){
 					callback(theCache[pos]);
 			});
 		}
+		syncFiles();
 	}
 	catch(err){
 		console.log("Error");
