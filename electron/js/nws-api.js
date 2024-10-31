@@ -18,7 +18,7 @@ if (!localStorage.getItem("nws-location-cache")){
 	localStorage.setItem("nws-alerts-old", "[]");
 	localStorage.setItem("nws-alerts-current", "[]");	
 }
-if (!localStorage.setItem("nws-boundaries-cache", "{}")){
+if (!localStorage.getItem("nws-boundaries-cache")){
 	localStorage.setItem("nws-boundaries-cache", "{}");
 }
 
