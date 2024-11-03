@@ -1,21 +1,15 @@
 // UPDATE
-window.atmosVersion = "2.2.0";
-window.atmosUpdated = "7-4-2024";
+window.atmosVersion = "2.2.1";
+window.atmosUpdated = "11-2-2024";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.2.0 is here!</h2>
+		<h2>Atmos Weather v2.2.1 is here!</h2>
 		<hr>
 		<dl style='font-family: Secular One;'>
-  			<dt>New Features</dt>
-			<dd>- Added feels like temperature graph to forecast.</dd>
-			<dd>- Added current feels like temperature.</dd>
-			<dd>- Added dew point graph to forecast.</dd>
-			<dd>- Revamped Android permission setup for faster setup and clarity.</dd>
-			<dd>- Alert check frequency can now be adjusted.</dd>
-			<dd>- Added desktop startup setting.</dd>
-			<dt>Bug Fixes + Other</dt>
-			<dd>- Updated privacy statement. (This can be viewed in settings.)</dd>
-			<dd>- Fixed typos.</dd>
-			<dd>- Fix logo error on first open.</dd>
+			<dt>Bug Fixes</dt>
+			<dd>- Fixed wind speed graph bug.</dd>
+			<dd>- Fixed battery optimization permission UI bug.</dd>
+			<dd>- Fixed permission window repeatedly showing on first installation.</dd>
+			<dd>- Updated packages.</dd>
 		</dl> 
 		<br><br>
 		`;
