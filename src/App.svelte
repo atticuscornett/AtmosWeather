@@ -1,11 +1,10 @@
 <script>
-	export let name;
+	import AtmosLogo from "./Components/AtmosLogo.svelte";
+
+    document.body.classList.add(prompt("Dark Mode?") === "true" ? "dark" : "light");
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<AtmosLogo />
 
 <style>
 	main {

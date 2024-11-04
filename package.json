@@ -6,7 +6,8 @@
   "main": "atmos-ui.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "android-sync": "webpack && npx cap sync"
   },
   "keywords": [
     "ecosystem:cordova"
