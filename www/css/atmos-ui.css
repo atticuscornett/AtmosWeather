@@ -58,16 +58,6 @@ select{
 
 /* UI Component Styles */
 
-#notice-window-container{
-	z-index: 99;
-	position: absolute;
-	background-color: white;
-	width: 100%;
-	min-height: 100%;
-	top: 0;
-	left: 0;
-}
-
 #welcome-window-native{
 	z-index: 99;
 	position: absolute;
@@ -387,16 +377,6 @@ body.dark {
 	}
 	& details[open] summary{
 		border-bottom: white solid;
-	}
-
-	#notice-window-container{
-		z-index: 98;
-		position: absolute;
-		background-color: #222222;
-		width: 100%;
-		min-height: 100%;
-		top: 0;
-		left: 0;
 	}
 
 	#android-permission-setup {

@@ -1,5 +1,7 @@
 <script>
-
+	window.hideLogo = () => {
+		document.getElementById("atmos-logo").classList.add("fade");
+	}
 </script>
 
 <div id="atmos-logo">
@@ -30,6 +32,10 @@
         bottom: 70px;
         font-family: Secular One, sans-serif;
     }
+
+	.fade {
+		animation: fadeOut 2s; animation-fill-mode: forwards;
+	}
 
 	@keyframes logoAnim{
 		0%{
