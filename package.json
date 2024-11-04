@@ -17,7 +17,12 @@
     "@capacitor/assets": "^3.0.4",
     "@capacitor/cli": "^5.0.0",
     "cordova-plugin-nativestorage": "github:TheCocoaProject/cordova-plugin-nativestorage",
-    "webpack-cli": "^5.0.1"
+    "webpack-cli": "^5.0.1",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.0",
+    "svelte": "^4.0.0",
+    "svelte-loader": "^3.1.9"
   },
   "dependencies": {
     "@capacitor/android": "^5.0.0",
