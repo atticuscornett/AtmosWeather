@@ -1,10 +1,6 @@
 /*!******************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/global.css ***!
   \******************************************************************/
-body.dark #app-nav{
-	background-color: hsla(0,0%,15%,1.00);
-}
-
 body {
 	background-color: hsla(0,0%,99%,1.00);
 }
@@ -56,6 +52,15 @@ select{
 	font-family: Lexend Deca, sans-serif;
 	font-size: 23px;
 	margin-bottom: 8px;
+}
+
+body.dark details{
+	border: white solid;
+	border-radius: 7px;
+	box-shadow: 0px 0px 7px #898989;
+}
+body.dark details[open] summary{
+	border-bottom: white solid;
 }
 
 /*# sourceMappingURL=bundle.css.map*/

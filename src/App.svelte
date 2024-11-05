@@ -41,4 +41,8 @@
         cursor: pointer;
         display: flex;
     }
+
+    :global(body.dark) #app-nav{
+         background-color: hsla(0,0%,15%,1.00);
+     }
 </style>

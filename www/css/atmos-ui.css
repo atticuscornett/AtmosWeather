@@ -282,15 +282,6 @@ body.dark {
 	background-color: #222222;
 	color: white;
 
-	& details{
-		border: white solid;
-		border-radius: 7px;
-		box-shadow: 0px 0px 7px #898989;
-	}
-	& details[open] summary{
-		border-bottom: white solid;
-	}
-
 	#android-permission-setup {
 		background-color: #222222;
 	}
