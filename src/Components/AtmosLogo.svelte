@@ -1,10 +1,11 @@
 <script>
+	let logoFade = $state(false);
 	window.hideLogo = () => {
-		document.getElementById("atmos-logo").classList.add("fade");
+		logoFade = true;
 	}
 </script>
 
-<div id="atmos-logo">
+<div id="atmos-logo" class={logoFade ? "fade" : ""}>
     <div class="logo-container">
         <h1 class="logoLetter">a</h1>
 		<h1 class="logoLetter">t</h1>
@@ -33,8 +34,8 @@
         font-family: Secular One, sans-serif;
     }
 
-	.fade {
-		animation: fadeOut 2s; animation-fill-mode: forwards;
+	#atmos-logo.fade {
+		animation: fadeOut 2s; animation-fill-mode: forwards !important;
 	}
 
 	@keyframes logoAnim{
