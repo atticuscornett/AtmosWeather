@@ -6,6 +6,14 @@
 
     let selected = $state("location");
     let page = $state("about");
+
+    $effect(() =>{
+        page = selected;
+    });
+
+    window.goPage = (goTo) => {
+        page = goTo;
+    }
 </script>
 
 <AtmosLogo />
@@ -13,7 +21,7 @@
 <div id="app">
     <MainApp bind:page={page} />
     <div id="app-nav">
-        <NavButton navName="location" bind:selected={selected} />
+        <NavButton navName="locations" bind:selected={selected} />
         <NavButton navName="alerts" bind:selected={selected} />
         <NavButton navName="radar" bind:selected={selected} />
         <NavButton navName="settings" bind:selected={selected} />

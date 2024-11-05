@@ -2,7 +2,7 @@
     let { navName, selected = $bindable() } = $props();
 </script>
 
-<div id="{navName}-nav" class={selected === navName ? "selected-nav" : ""}>
+<div id="{navName}-nav" class={selected === navName ? "selected-nav" : ""} onclick={selected=navName}>
     <img src="img/{navName}.svg" class="nav-icon" alt={navName}>
 </div>
 
