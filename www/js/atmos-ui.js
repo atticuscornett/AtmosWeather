@@ -74,47 +74,6 @@ function getPlatform(){
 	return platform;
 }
 
-// Initialize Buttons for index.html
-function activateNavButtons(){
-	document.getElementById("location-nav").className = "selected-nav";
-	document.getElementById("location-nav").onclick = function (){
-		if (screenAt != "locations"){
-			document.getElementById("location-nav").className = "selected-nav";
-			document.getElementById("alerts-nav").className = "";
-			document.getElementById("radar-nav").className = "";
-			document.getElementById("settings-nav").className = "";
-			navTo("locations");
-		}
-	};
-	document.getElementById("alerts-nav").onclick = function (){
-		if (screenAt != "alerts"){
-			document.getElementById("location-nav").className = "";
-			document.getElementById("alerts-nav").className = "selected-nav";
-			document.getElementById("radar-nav").className = "";
-			document.getElementById("settings-nav").className = "";
-			navTo("alerts");
-		}
-	};
-	document.getElementById("radar-nav").onclick = function (){
-		if (screenAt != "radar"){
-			document.getElementById("location-nav").className = "";
-			document.getElementById("alerts-nav").className = "";
-			document.getElementById("radar-nav").className = "selected-nav";
-			document.getElementById("settings-nav").className = "";
-			navTo("radar");
-		}
-	};
-	document.getElementById("settings-nav").onclick = function (){
-		if (screenAt != "settings"){
-			document.getElementById("location-nav").className = "";
-			document.getElementById("alerts-nav").className = "";
-			document.getElementById("radar-nav").className = "";
-			document.getElementById("settings-nav").className = "selected-nav";
-			navTo("settings");
-		}
-	};
-}
-
 // Navigate to another screen
 function navTo(screenTo){
 	let atmosSettings = JSON.parse(localStorage.getItem("atmos-settings"));

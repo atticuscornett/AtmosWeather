@@ -300,36 +300,11 @@ function refreshSettings(){
 	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 
 	// Personalization Settings
-	document.getElementById("setting-app-theme").value = allSettings["personalization"]["theme"];
-	document.getElementById("setting-page-transition-duration").value = allSettings["personalization"]["page-transition-duration"];
-	document.getElementById("setting-page-transition-duration-text").innerHTML = allSettings["personalization"]["page-transition-duration"].toString() + "ms";
-	document.getElementById("setting-atmos-logo").checked = allSettings["personalization"]["atmos-logo"];
-	document.getElementById("setting-run-startup").checked = allSettings["personalization"]["run-startup"];
-	document.getElementById("setting-notify-updates").checked = allSettings["personalization"]["update-notify"];
 
-	// Location Settings
-	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
-	document.getElementById("setting-current-location-alerts").checked = allSettings["location"]["alerts"];
-	
 	// Notification Settings
-	document.getElementById("setting-future-severe-notifications").checked = allSettings["notifications"]["severe-future"];
-	document.getElementById("setting-future-storm-notifications").checked = allSettings["notifications"]["rain-future"];
-
 	// Radar Settings
-	document.getElementById("setting-radar-color-scheme").value = allSettings["radar"]["color-scheme"];
-	document.getElementById("setting-radar-satellite").checked = allSettings["radar"]["satellite"];
-	document.getElementById("setting-radar-show-outlook").checked = allSettings["radar"]["spc-outlook"];
-	document.getElementById("setting-radar-show-watches").checked = allSettings["radar"]["polygons"]["watch"];
-	document.getElementById("setting-radar-show-advisories").checked = allSettings["radar"]["polygons"]["advisories"];
-	document.getElementById("setting-radar-show-warnings").checked = allSettings["radar"]["polygons"]["warnings"];
-	document.getElementById("setting-radar-high-res").checked = allSettings["radar"]["polygons"]["high-res"];
 	
 	// Alert Sound Settings
-	document.getElementById("setting-tts-alerts").checked = allSettings["location-alerts"]["tts-alerts"];
-	document.getElementById("setting-alert-check-frequency").value = allSettings["location-alerts"]["alert-check-frequency"];
-	document.getElementById("setting-default-sound-alert").value = allSettings["location-alerts"]["default-alert"];
-	document.getElementById("setting-default-sound-notification").value = allSettings["location-alerts"]["default-notification"];
-	
 	var a = 0;
 	
 	// Load Warning Settings

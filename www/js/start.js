@@ -49,7 +49,6 @@ function noticeSetup() {
 noticeSetup();
 
 // Adds function to the navigation buttons (from atmos-ui.js)
-activateNavButtons();
 // Check status of NWS API periodically (from atmos-ui.js)
 setInterval(async () => {
       const result = await checkAPIstatus();

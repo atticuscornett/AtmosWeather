@@ -167,139 +167,7 @@
 <!--					</div>-->
 <!--				</div>-->
 <!--				<div id="tab-settings" style="margin-right:20px;" class="tab-div" hidden>-->
-<!--					<h1>Settings</h1>-->
-<!--					<h6><a href="#" onClick="navTo('about')">About Atmos Weather</a>&emsp;<a href="#" onClick="navTo('privacy')">Privacy Statement</a><br><a id="android-permission-setting" hidden href="#">Android Permissions</a></h6>-->
-<!--					<h2 id="settings-warning" hidden>Some settings/features are not functional on the web version, including weather alerts.</h2>-->
-<!--					<hr>-->
-<!--					<div id="settings-device-location">-->
-<!--						<h2>Device Location</h2>-->
-<!--						<h6>Settings related to use of your GPS location.</h6>-->
-<!--						<input class="box" type="checkbox" id="setting-current-location" checked>-->
-<!--						<label for="setting-current-location">Give Weather for Current Location</label>-->
-<!--						<br>-->
-<!--						<input class="box" type="checkbox" id="setting-current-location-alerts" checked>-->
-<!--						<label for="setting-current-location-alerts">Give Alerts for Current Location</label>-->
-<!--						<hr>-->
-<!--					</div>-->
-<!--					<h2>Personalization</h2>-->
-<!--					<label for="setting-app-theme">App Theme</label>-->
-<!--					<br>-->
-<!--					<select id="setting-app-theme">-->
-<!--						<option value="system">System Default</option>-->
-<!--						<option value="dark">Dark Theme</option>-->
-<!--						<option value="light">Light Theme</option>-->
-<!--					</select>-->
-<!--					<br>-->
-<!--					<label for="setting-page-transition-duration">Page Transition Duration</label>-->
-<!--					<br>-->
-<!--					<input type="range" min="0" max="3000" value="1500" step="100" id="setting-page-transition-duration">-->
-<!--					<label id="setting-page-transition-duration-text">1500ms</label>-->
-<!--					<br><br>-->
-<!--					<input class="box" type="checkbox" id="setting-atmos-logo">-->
-<!--					<label for="setting-atmos-logo">Show Atmos Weather logo on app open</label>-->
-<!--					<br>-->
-<!--					<div id="settings-startup">-->
-<!--						<input class="box" type="checkbox" id="setting-run-startup">-->
-<!--						<label for="setting-run-startup">Run Atmos Weather in background on startup</label>-->
-<!--					</div>-->
-<!--					<input class="box" type="checkbox" id="setting-notify-updates">-->
-<!--					<label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label>-->
-<!--					<hr>-->
-<!--					<h2>Notifications</h2>-->
-<!--					<input class="box" type="checkbox" id="setting-future-severe-notifications" checked>-->
-<!--					<label for="setting-future-severe-notifications">Get notifications for forecast future severe weather</label>-->
-<!--					<br>-->
-<!--					<input class="box" type="checkbox" id="setting-future-storm-notifications" >-->
-<!--					<label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label>-->
-<!--					<hr>-->
-<!--					<h2>Radar</h2>-->
-<!--					<h6>Radar powered by RainViewer API.</h6>-->
-<!--					<input class="box" type="checkbox" id="setting-radar-show-watches" >-->
-<!--					<label for="setting-radar-show-watches">Show watch polygons on radar</label>-->
-<!--					<br>-->
-<!--					<input class="box" type="checkbox" id="setting-radar-show-advisories" >-->
-<!--					<label for="setting-radar-show-advisories">Show advisory polygons on radar</label>-->
-<!--					<br>-->
-<!--					<input class="box" type="checkbox" id="setting-radar-show-warnings" >-->
-<!--					<label for="setting-radar-show-warnings">Show warning polygons on radar</label>-->
-<!--					<br>-->
-<!--					<input class="box" type="checkbox" id="setting-radar-show-outlook" >-->
-<!--					<label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label>-->
-<!--					<br>-->
-<!--					<input class="box" type="checkbox" id="setting-radar-satellite" >-->
-<!--					<label for="setting-radar-satellite">Show satellite instead of radar</label>-->
-<!--					<br>-->
-<!--					<input class="box" type="checkbox" id="setting-radar-high-res" >-->
-<!--					<label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label>-->
-<!--					<br><br>-->
-<!--					<label for="setting-radar-color-scheme">Radar Color Scheme</label>-->
-<!--					<br>-->
-<!--					<select id="setting-radar-color-scheme">-->
-<!--						<option value="0">Black & White</option>-->
-<!--						<option value="1">Original</option>-->
-<!--						<option value="2">Universal Blue</option>-->
-<!--						<option value="3">TITAN</option>-->
-<!--						<option value="4">TWC</option>-->
-<!--						<option value="5">Meteored</option>-->
-<!--						<option value="6">NEXRAD Level III</option>-->
-<!--						<option value="7">Rainbow</option>-->
-<!--						<option value="8">Dark Sky</option>-->
-<!--					</select>-->
-<!--					<hr>-->
-<!--					<h2>Location Alerts</h2>-->
-<!--					<h6>Choose the level of alerts for different locations.</h6>-->
-<!--					<input class="box" type="checkbox" id="setting-tts-alerts" >-->
-<!--					<label for="setting-tts-alerts">Read alerts with text to speech</label>-->
-<!--					<br><br>-->
-<!--					<label for="setting-alert-check-frequency">Alert Check Frequency</label>-->
-<!--					<br>-->
-<!--					<select id="setting-alert-check-frequency">-->
-<!--						<option value="15">Every 15 seconds</option>-->
-<!--						<option value="30">Every 30 seconds</option>-->
-<!--						<option value="60">Every 1 minute</option>-->
-<!--						<option value="120">Every 2 minutes</option>-->
-<!--					</select>-->
-<!--					<h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6>-->
-<!--					<label for="setting-default-sound-alert">Default Alert Sound</label>-->
-<!--					<br>-->
-<!--					<select id="setting-default-sound-alert" onChange="playAlarmSoundMain();">-->
-<!--						<option value="readynow">ReadyNow Warning</option>-->
-<!--						<option value="suremind">SureMind Warning</option>-->
-<!--						<option value="alternatingtones">Alternating Tones</option>-->
-<!--						<option value="simplebeeps">Simple Beeps</option>-->
-<!--					</select>-->
-<!--					<br>-->
-<!--					<label for="setting-default-sound-notification">Default Notification Sound</label>-->
-<!--					<br>-->
-<!--					<select id="setting-default-sound-notification" onChange="playNotificationSoundMain();">-->
-<!--						<option value="readynow">ReadyNow Watch</option>-->
-<!--						<option value="suremind">SureMind Watch</option>-->
-<!--						<option value="alternatingtones">Alternating Tones</option>-->
-<!--						<option value="simplebeeps">Simple Beeps</option>-->
-<!--					</select>-->
-<!--					<div id="location-settings-div">-->
-<!--					</div>-->
-<!--					<hr>-->
-<!--					<h2>Alert Types</h2>-->
-<!--					<h6>Choose the level of alerts for different types of events. Overridden if location priority is lower.<br>Alert if moving alerts you if the app detects you are in a vehicle.<br>If location permission is not allowed, will always alert.</h6>-->
-<!--					<details>-->
-<!--						<summary>Warnings</summary>-->
-<!--						<div id="settings-warnings-list">-->
 
-<!--						</div>-->
-<!--					</details>-->
-<!--					<details>-->
-<!--						<summary>Watches</summary>-->
-<!--						<div id="settings-watches-list">-->
-
-<!--						</div>-->
-<!--					</details>-->
-<!--					<details>-->
-<!--						<summary>Advisories/Other</summary>-->
-<!--						<div id="settings-advisory-list">-->
-
-<!--						</div>-->
-<!--					</details>-->
 <!--				</div>-->
 <!--				-->
 <!--				&lt;!&ndash; Programmatically Generated Tabs &ndash;&gt;-->
@@ -438,24 +306,6 @@
 <!--					</div>-->
 <!--				</div>-->
 <!--			</div>-->
-<!--			&lt;!&ndash; App Navigation Bar &ndash;&gt;-->
-<!--			<div id="app-nav">-->
-<!--				<div style="position: absolute; left:25%; width: 25%; height: 8%;" id="alerts-nav">-->
-<!--					<center>-->
-<!--						<img src="img/alerts.svg" class="nav-icon">-->
-<!--					</center>-->
-<!--				</div>-->
-<!--				<div style="position: absolute; left:50%; width: 25%; height: 8%;" id="radar-nav">-->
-<!--					<center>-->
-<!--						<img src="img/radar.svg" class="nav-icon">-->
-<!--					</center>-->
-<!--				</div>-->
-<!--				<div style="position: absolute; left:75%; width: 25%; height: 8%;" id="settings-nav">-->
-<!--					<center>-->
-<!--						<img src="img/settings.svg" class="nav-icon">-->
-<!--					</center>-->
-<!--				</div>-->
-<!--			</div>-->
 <!--		</div>-->
 <!--		-->
 <!--	</body>-->
@@ -496,4 +346,5 @@
 
 	<script src="js/nominatim-api.js"></script>
 	<script src="js/start.js"></script>
+	<script src="js/atmos-settings.js"></script>
 </html>

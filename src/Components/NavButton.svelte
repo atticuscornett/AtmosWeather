@@ -1,8 +1,13 @@
 <script>
-    let { navName, selected = $bindable() } = $props();
+    let { navName, selected = $bindable(), page = $bindable() } = $props();
+
+    let navigate = () => {
+        selected = navName;
+        page = navName;
+    }
 </script>
 
-<div id="{navName}-nav" class={selected === navName ? "selected-nav" : ""} onclick={selected=navName}>
+<div id="{navName}-nav" class={selected === navName ? "selected-nav" : ""} onclick={navigate}>
     <img src="img/{navName}.svg" class="nav-icon" alt={navName}>
 </div>
 
