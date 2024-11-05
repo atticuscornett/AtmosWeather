@@ -1,69 +1,61 @@
 /*!******************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/global.css ***!
   \******************************************************************/
-html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+body.dark #app-nav{
+	background-color: hsla(0,0%,15%,1.00);
 }
 
 body {
-	color: #333;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	background-color: hsla(0,0%,99%,1.00);
 }
 
-a {
-	color: rgb(0,100,200);
-	text-decoration: none;
+body.dark {
+	background-color: #222222;
+	color: white;
 }
 
-a:hover {
-	text-decoration: underline;
+h1 {
+	font-family: Secular One, sans-serif;
 }
 
-a:visited {
-	color: rgb(0,80,160);
+h2, h3, h4, h5, h6 {
+	font-family: Lexend Deca, sans-serif;
 }
 
-label {
-	display: block;
+details{
+	font-family: Secular One;
+	font-size: 20px;
+	border: black solid;
+	padding: 10px;
+	border-radius: 7px;
+	margin-bottom: 15px;
+	box-shadow: 0px 0px 7px #898989;
 }
 
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+details[open] summary{
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: black solid;
 }
 
-input:disabled {
-	color: #ccc;
+summary{
+	cursor: pointer;
+	font-size: 25px;
 }
 
-button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
+a{
+	color: dodgerblue;
 }
 
-button:disabled {
-	color: #999;
+label{
+	font-family: Lexend Deca, sans-serif;
+	font-size: 25px;
 }
 
-button:not(:disabled):active {
-	background-color: #ddd;
+select{
+	font-family: Lexend Deca, sans-serif;
+	font-size: 23px;
+	margin-bottom: 8px;
 }
-
-button:focus {
-	border-color: #666;
-}
-
 
 /*# sourceMappingURL=bundle.css.map*/

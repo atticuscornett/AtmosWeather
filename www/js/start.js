@@ -1,6 +1,6 @@
 // UPDATE
-window.atmosVersion = "2.2.1";
-window.atmosUpdated = "11-2-2024";
+window.atmosVersion = "3.0.0-prealpha";
+window.atmosUpdated = "11-5-2024";
 window.atmosUpdateTitle = "Atmos Weather v2.2.1 is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One;'>
@@ -11,8 +11,6 @@ window.atmosUpdateNotes = `
 			<dd>- Updated packages.</dd>
 		</dl> 
 		`;
-document.getElementById("atmos-app-version").innerHTML = "Version " + window.atmosVersion;
-document.getElementById("atmos-app-updated").innerHTML = "Updated on " + window.atmosUpdated;
 
 // Set global app theme
 function refreshAppTheme(){

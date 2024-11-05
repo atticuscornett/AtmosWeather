@@ -8,54 +8,6 @@ NOTHING YET:
 
 /* Tag Styles */
 
-body{
-	background-color: hsla(0,0%,99%,1.00);
-}
-
-h1{
-	font-family: Secular One;
-}
-
-h2, h3, h4, h5, h6{
-	font-family: Lexend Deca;
-}
-
-details{
-	font-family: Secular One;
-	font-size: 20px;
-	border: black solid;
-	padding: 10px;
-	border-radius: 7px;
-	margin-bottom: 15px;
-	box-shadow: 0px 0px 7px #898989;
-}
-
-details[open] summary{
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-	border-bottom: black solid;
-}
-
-summary{
-	cursor: pointer;
-	font-size: 25px;
-}
-
-a{
-	color: dodgerblue;
-}
-
-label{
-	font-family: Lexend Deca;
-	font-size: 25px;
-}
-
-select{
-	font-family: Lexend Deca;
-	font-size: 23px;
-	margin-bottom: 8px;
-}
-
 /* UI Component Styles */
 
 #welcome-window-native{
@@ -67,13 +19,6 @@ select{
 	top: 0;
 	left: 0;
 	color: white;
-}
-
-#main-app{
-	height: 92%;
-	width: 100%;
-	padding: 0;
-	overflow-x: hidden;
 }
 
 #add-location{
@@ -142,13 +87,7 @@ select{
 
 /* Class Styles */
 
-.tab-div{
-	height: 92%;
-	border: none;
-	position: relative;
-	margin-left: 20px;
-	margin-right: 20px;
-}
+
 
 .weatherGraph{
 	position: relative;

@@ -2,14 +2,15 @@
 	import AtmosLogo from "./Components/AtmosLogo.svelte";
     import NoticeWindow from "./Components/NoticeWindow.svelte";
     import NavButton from "./Components/NavButton.svelte";
+    import MainApp from "./Layout/MainApp.svelte";
 
     let selected = $state("location");
 </script>
 
 <AtmosLogo />
 <NoticeWindow />
-
 <div id="app">
+    <MainApp />
     <div id="app-nav">
         <NavButton navName="location" bind:selected={selected} />
         <NavButton navName="alerts" bind:selected={selected} />
@@ -34,22 +35,5 @@
         background-color: white;
         cursor: pointer;
         display: flex;
-    }
-
-    :global(body.dark) #app-nav{
-        background-color: hsla(0,0%,15%,1.00);
-    }
-
-    :global(body.dark) {
-        background-color: #222222;
-        color: white;
-    }
-
-    :global(h1){
-            font-family: Secular One, sans-serif;
-    }
-
-    :global(h2, h3, h4, h5, h6){
-        font-family: Lexend Deca, sans-serif;
     }
 </style>

@@ -97,7 +97,7 @@
 			{#each notices as notice, i}
 				<h2>{noticeTitles[i]}</h2>
 				<hr>
-				{@html notice}
+				<h3>{@html notice}</h3>
 				<br><br>
 			{/each}
 		</div>
