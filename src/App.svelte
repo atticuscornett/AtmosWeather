@@ -5,12 +5,13 @@
     import MainApp from "./Layout/MainApp.svelte";
 
     let selected = $state("location");
+    let page = $state("about");
 </script>
 
 <AtmosLogo />
 <NoticeWindow />
 <div id="app">
-    <MainApp />
+    <MainApp bind:page={page} />
     <div id="app-nav">
         <NavButton navName="location" bind:selected={selected} />
         <NavButton navName="alerts" bind:selected={selected} />

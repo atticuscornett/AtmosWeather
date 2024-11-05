@@ -1,8 +1,10 @@
 <script>
     import TabSlot from "../Layout/TabSlot.svelte";
+
+    let { page = $bindable() } = $props();
 </script>
 
-<TabSlot>
+<TabSlot name="about" bind:page={page}>
     <h1>About Atmos Weather</h1>
     <h3 id="atmos-app-version">Version {window.atmosVersion}</h3>
     <h3 id="atmos-app-updated">Updated on {window.atmosUpdated}</h3>

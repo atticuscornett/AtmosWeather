@@ -785,11 +785,11 @@ App[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/App.sve
 
 
 
-var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<!> <!> <div id="app" class="svelte-15smg88"><!> <div id="app-nav" class="svelte-15smg88"><!> <!> <!> <!></div></div>`, 1), App[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[12, 0, [[14, 4]]]]);
+var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<!> <!> <div id="app" class="svelte-15smg88"><!> <div id="app-nav" class="svelte-15smg88"><!> <!> <!> <!></div></div>`, 1), App[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[13, 0, [[15, 4]]]]);
 
 const $$css = {
 	hash: "svelte-15smg88",
-	code: "\n    #app.svelte-15smg88 {\n        z-index: 1;\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n    }\n\n    #app-nav.svelte-15smg88{\n        height: 8%;\n        width: 100%;\n        background-color: white;\n        cursor: pointer;\n        display: flex;\n    }\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQXBwLnN2ZWx0ZSIsInNvdXJjZXMiOlsiQXBwLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuXHRpbXBvcnQgQXRtb3NMb2dvIGZyb20gXCIuL0NvbXBvbmVudHMvQXRtb3NMb2dvLnN2ZWx0ZVwiO1xuICAgIGltcG9ydCBOb3RpY2VXaW5kb3cgZnJvbSBcIi4vQ29tcG9uZW50cy9Ob3RpY2VXaW5kb3cuc3ZlbHRlXCI7XG4gICAgaW1wb3J0IE5hdkJ1dHRvbiBmcm9tIFwiLi9Db21wb25lbnRzL05hdkJ1dHRvbi5zdmVsdGVcIjtcbiAgICBpbXBvcnQgTWFpbkFwcCBmcm9tIFwiLi9MYXlvdXQvTWFpbkFwcC5zdmVsdGVcIjtcblxuICAgIGxldCBzZWxlY3RlZCA9ICRzdGF0ZShcImxvY2F0aW9uXCIpO1xuPC9zY3JpcHQ+XG5cbjxBdG1vc0xvZ28gLz5cbjxOb3RpY2VXaW5kb3cgLz5cbjxkaXYgaWQ9XCJhcHBcIj5cbiAgICA8TWFpbkFwcCAvPlxuICAgIDxkaXYgaWQ9XCJhcHAtbmF2XCI+XG4gICAgICAgIDxOYXZCdXR0b24gbmF2TmFtZT1cImxvY2F0aW9uXCIgYmluZDpzZWxlY3RlZD17c2VsZWN0ZWR9IC8+XG4gICAgICAgIDxOYXZCdXR0b24gbmF2TmFtZT1cImFsZXJ0c1wiIGJpbmQ6c2VsZWN0ZWQ9e3NlbGVjdGVkfSAvPlxuICAgICAgICA8TmF2QnV0dG9uIG5hdk5hbWU9XCJyYWRhclwiIGJpbmQ6c2VsZWN0ZWQ9e3NlbGVjdGVkfSAvPlxuICAgICAgICA8TmF2QnV0dG9uIG5hdk5hbWU9XCJzZXR0aW5nc1wiIGJpbmQ6c2VsZWN0ZWQ9e3NlbGVjdGVkfSAvPlxuICAgIDwvZGl2PlxuPC9kaXY+XG5cbjxzdHlsZT5cbiAgICAjYXBwIHtcbiAgICAgICAgei1pbmRleDogMTtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICB0b3A6IDA7XG4gICAgICAgIGxlZnQ6IDA7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgfVxuXG4gICAgI2FwcC1uYXZ7XG4gICAgICAgIGhlaWdodDogOCU7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgIH1cbjwvc3R5bGU+XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBcUJPO0FBQ1AsSUFBSSxtQkFBSSxDQUFDO0FBQ1QsUUFBUSxVQUFVO0FBQ2xCLFFBQVEsa0JBQWtCO0FBQzFCLFFBQVEsTUFBTTtBQUNkLFFBQVEsT0FBTztBQUNmLFFBQVEsV0FBVztBQUNuQixRQUFRLFlBQVk7QUFDcEIsS0FBSztBQUNMO0FBQ0EsSUFBSSx1QkFBUTtBQUNaLFFBQVEsVUFBVTtBQUNsQixRQUFRLFdBQVc7QUFDbkIsUUFBUSx1QkFBdUI7QUFDL0IsUUFBUSxlQUFlO0FBQ3ZCLFFBQVEsYUFBYTtBQUNyQixLQUFLOyJ9 */"
+	code: "\n    #app.svelte-15smg88 {\n        z-index: 1;\n        position: absolute;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n    }\n\n    #app-nav.svelte-15smg88{\n        height: 8%;\n        width: 100%;\n        background-color: white;\n        cursor: pointer;\n        display: flex;\n    }\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQXBwLnN2ZWx0ZSIsInNvdXJjZXMiOlsiQXBwLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuXHRpbXBvcnQgQXRtb3NMb2dvIGZyb20gXCIuL0NvbXBvbmVudHMvQXRtb3NMb2dvLnN2ZWx0ZVwiO1xuICAgIGltcG9ydCBOb3RpY2VXaW5kb3cgZnJvbSBcIi4vQ29tcG9uZW50cy9Ob3RpY2VXaW5kb3cuc3ZlbHRlXCI7XG4gICAgaW1wb3J0IE5hdkJ1dHRvbiBmcm9tIFwiLi9Db21wb25lbnRzL05hdkJ1dHRvbi5zdmVsdGVcIjtcbiAgICBpbXBvcnQgTWFpbkFwcCBmcm9tIFwiLi9MYXlvdXQvTWFpbkFwcC5zdmVsdGVcIjtcblxuICAgIGxldCBzZWxlY3RlZCA9ICRzdGF0ZShcImxvY2F0aW9uXCIpO1xuICAgIGxldCBwYWdlID0gJHN0YXRlKFwiYWJvdXRcIik7XG48L3NjcmlwdD5cblxuPEF0bW9zTG9nbyAvPlxuPE5vdGljZVdpbmRvdyAvPlxuPGRpdiBpZD1cImFwcFwiPlxuICAgIDxNYWluQXBwIGJpbmQ6cGFnZT17cGFnZX0gLz5cbiAgICA8ZGl2IGlkPVwiYXBwLW5hdlwiPlxuICAgICAgICA8TmF2QnV0dG9uIG5hdk5hbWU9XCJsb2NhdGlvblwiIGJpbmQ6c2VsZWN0ZWQ9e3NlbGVjdGVkfSAvPlxuICAgICAgICA8TmF2QnV0dG9uIG5hdk5hbWU9XCJhbGVydHNcIiBiaW5kOnNlbGVjdGVkPXtzZWxlY3RlZH0gLz5cbiAgICAgICAgPE5hdkJ1dHRvbiBuYXZOYW1lPVwicmFkYXJcIiBiaW5kOnNlbGVjdGVkPXtzZWxlY3RlZH0gLz5cbiAgICAgICAgPE5hdkJ1dHRvbiBuYXZOYW1lPVwic2V0dGluZ3NcIiBiaW5kOnNlbGVjdGVkPXtzZWxlY3RlZH0gLz5cbiAgICA8L2Rpdj5cbjwvZGl2PlxuXG48c3R5bGU+XG4gICAgI2FwcCB7XG4gICAgICAgIHotaW5kZXg6IDE7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgdG9wOiAwO1xuICAgICAgICBsZWZ0OiAwO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgIH1cblxuICAgICNhcHAtbmF2e1xuICAgICAgICBoZWlnaHQ6IDglO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICB9XG48L3N0eWxlPlxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQXNCTztBQUNQLElBQUksbUJBQUksQ0FBQztBQUNULFFBQVEsVUFBVTtBQUNsQixRQUFRLGtCQUFrQjtBQUMxQixRQUFRLE1BQU07QUFDZCxRQUFRLE9BQU87QUFDZixRQUFRLFdBQVc7QUFDbkIsUUFBUSxZQUFZO0FBQ3BCLEtBQUs7QUFDTDtBQUNBLElBQUksdUJBQVE7QUFDWixRQUFRLFVBQVU7QUFDbEIsUUFBUSxXQUFXO0FBQ25CLFFBQVEsdUJBQXVCO0FBQy9CLFFBQVEsZUFBZTtBQUN2QixRQUFRLGFBQWE7QUFDckIsS0FBSzsifQ== */"
 };
 
 function App($$anchor, $$props) {
@@ -799,6 +799,7 @@ function App($$anchor, $$props) {
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, [], [], App);
 
 	let selected = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state("location");
+	let page = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state("about");
 	var fragment = root();
 	var node = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment);
 
@@ -811,7 +812,18 @@ function App($$anchor, $$props) {
 	var div = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_1, 2);
 	var node_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div);
 
-	(0,_Layout_MainApp_svelte__WEBPACK_IMPORTED_MODULE_5__["default"])(node_2, {});
+	{
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_owner_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(page), _Layout_MainApp_svelte__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+		(0,_Layout_MainApp_svelte__WEBPACK_IMPORTED_MODULE_5__["default"])(node_2, {
+			get page() {
+				return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(page);
+			},
+			set page($$value) {
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(page, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.proxy($$value, null, page));
+			}
+		});
+	}
 
 	var div_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_2, 2);
 	var node_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div_1);
@@ -1202,6 +1214,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal_disclose_version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal/disclose-version */ "./node_modules/svelte/src/internal/disclose-version.js");
 /* harmony import */ var svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte/internal/client */ "./node_modules/svelte/src/internal/client/index.js");
 /* harmony import */ var _Pages_AboutPage_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Pages/AboutPage.svelte */ "./src/Pages/AboutPage.svelte");
+/* harmony import */ var _Pages_PrivacyPage_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Pages/PrivacyPage.svelte */ "./src/Pages/PrivacyPage.svelte");
 
 
 svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_start();
@@ -1210,22 +1223,52 @@ MainApp[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/Lay
 
 
 
-var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div id="main-app" class="svelte-1osfzdi"><br> <!></div>`), MainApp[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[5, 0, [[6, 4]]]]);
+
+var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div id="main-app" class="svelte-1osfzdi"><br> <!> <!></div>`), MainApp[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[8, 0, [[9, 4]]]]);
 
 const $$css = {
 	hash: "svelte-1osfzdi",
-	code: "\r\n    #main-app.svelte-1osfzdi{\r\n        height: 92%;\r\n        width: 100%;\r\n        padding: 0;\r\n        overflow-x: hidden;\r\n    }\r\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFpbkFwcC5zdmVsdGUiLCJzb3VyY2VzIjpbIk1haW5BcHAuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgICBpbXBvcnQgQWJvdXRQYWdlIGZyb20gXCIuLi9QYWdlcy9BYm91dFBhZ2Uuc3ZlbHRlXCI7XHJcbjwvc2NyaXB0PlxyXG5cclxuPGRpdiBpZD1cIm1haW4tYXBwXCI+XHJcbiAgICA8YnI+XHJcbiAgICA8QWJvdXRQYWdlIC8+XHJcbjwvZGl2PlxyXG5cclxuPHN0eWxlPlxyXG4gICAgI21haW4tYXBwe1xyXG4gICAgICAgIGhlaWdodDogOTIlO1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIHBhZGRpbmc6IDA7XHJcbiAgICAgICAgb3ZlcmZsb3cteDogaGlkZGVuO1xyXG4gICAgfVxyXG48L3N0eWxlPiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFTTztBQUNQLElBQUksd0JBQVM7QUFDYixRQUFRLFdBQVc7QUFDbkIsUUFBUSxXQUFXO0FBQ25CLFFBQVEsVUFBVTtBQUNsQixRQUFRLGtCQUFrQjtBQUMxQixLQUFLOyJ9 */"
+	code: "\r\n    #main-app.svelte-1osfzdi{\r\n        height: 92%;\r\n        width: 100%;\r\n        padding: 0;\r\n        overflow-x: hidden;\r\n    }\r\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFpbkFwcC5zdmVsdGUiLCJzb3VyY2VzIjpbIk1haW5BcHAuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgICBpbXBvcnQgQWJvdXRQYWdlIGZyb20gXCIuLi9QYWdlcy9BYm91dFBhZ2Uuc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgUHJpdmFjeVBhZ2UgZnJvbSBcIi4uL1BhZ2VzL1ByaXZhY3lQYWdlLnN2ZWx0ZVwiO1xyXG5cclxuICAgIGxldCB7IHBhZ2UgPSAkYmluZGFibGUoKSB9ID0gJHByb3BzKCk7XHJcbjwvc2NyaXB0PlxyXG5cclxuPGRpdiBpZD1cIm1haW4tYXBwXCI+XHJcbiAgICA8YnI+XHJcbiAgICA8QWJvdXRQYWdlIGJpbmQ6cGFnZT17cGFnZX0vPlxyXG4gICAgPFByaXZhY3lQYWdlIGJpbmQ6cGFnZT17cGFnZX0vPlxyXG48L2Rpdj5cclxuXHJcbjxzdHlsZT5cclxuICAgICNtYWluLWFwcHtcclxuICAgICAgICBoZWlnaHQ6IDkyJTtcclxuICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICBwYWRkaW5nOiAwO1xyXG4gICAgICAgIG92ZXJmbG93LXg6IGhpZGRlbjtcclxuICAgIH1cclxuPC9zdHlsZT4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBYU87QUFDUCxJQUFJLHdCQUFTO0FBQ2IsUUFBUSxXQUFXO0FBQ25CLFFBQVEsV0FBVztBQUNuQixRQUFRLFVBQVU7QUFDbEIsUUFBUSxrQkFBa0I7QUFDMUIsS0FBSzsifQ== */"
 };
 
 function MainApp($$anchor, $$props) {
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.check_target(new.target);
-	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, false, MainApp);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, true, MainApp);
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append_styles($$anchor, $$css);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, ["page"], [], MainApp);
 
+	let page = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.prop($$props, "page", 15);
 	var div = root();
 	var node = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div), 2);
 
-	(0,_Pages_AboutPage_svelte__WEBPACK_IMPORTED_MODULE_2__["default"])(node, {});
+	{
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_owner_effect(page, _Pages_AboutPage_svelte__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+		(0,_Pages_AboutPage_svelte__WEBPACK_IMPORTED_MODULE_2__["default"])(node, {
+			get page() {
+				return page();
+			},
+			set page($$value) {
+				page($$value);
+			}
+		});
+	}
+
+	var node_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node, 2);
+
+	{
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_owner_effect(page, _Pages_PrivacyPage_svelte__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+		(0,_Pages_PrivacyPage_svelte__WEBPACK_IMPORTED_MODULE_3__["default"])(node_1, {
+			get page() {
+				return page();
+			},
+			set page($$value) {
+				page($$value);
+			}
+		});
+	}
+
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div);
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, div);
 	return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.pop({ ...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.legacy_api() });
@@ -1254,23 +1297,84 @@ TabSlot[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/Lay
 
 
 
-var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div class="tab-div svelte-14ppy7m"><!></div>`), TabSlot[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[1, 0]]);
+var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div class="tab-div svelte-14ppy7m"><!></div>`), TabSlot[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[47, 0]]);
 
 const $$css = {
 	hash: "svelte-14ppy7m",
-	code: "\r\n    .tab-div.svelte-14ppy7m{\r\n        height: 92%;\r\n        border: none;\r\n        position: relative;\r\n        margin-left: 20px;\r\n        margin-right: 20px;\r\n    }\r\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGFiU2xvdC5zdmVsdGUiLCJzb3VyY2VzIjpbIlRhYlNsb3Quc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxkaXYgY2xhc3M9XCJ0YWItZGl2XCI+XHJcbiAgICA8c2xvdD48L3Nsb3Q+XHJcbjwvZGl2PlxyXG5cclxuPHN0eWxlPlxyXG4gICAgLnRhYi1kaXZ7XHJcbiAgICAgICAgaGVpZ2h0OiA5MiU7XHJcbiAgICAgICAgYm9yZGVyOiBub25lO1xyXG4gICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgICAgICBtYXJnaW4tbGVmdDogMjBweDtcclxuICAgICAgICBtYXJnaW4tcmlnaHQ6IDIwcHg7XHJcbiAgICB9XHJcbjwvc3R5bGU+Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUlPO0FBQ1AsSUFBSSx1QkFBUTtBQUNaLFFBQVEsV0FBVztBQUNuQixRQUFRLFlBQVk7QUFDcEIsUUFBUSxrQkFBa0I7QUFDMUIsUUFBUSxpQkFBaUI7QUFDekIsUUFBUSxrQkFBa0I7QUFDMUIsS0FBSzsifQ== */"
+	code: "\r\n    .tab-div.svelte-14ppy7m{\r\n        height: 92%;\r\n        border: none;\r\n        position: relative;\r\n        margin-left: 20px;\r\n        margin-right: 20px;\r\n    }\r\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVGFiU2xvdC5zdmVsdGUiLCJzb3VyY2VzIjpbIlRhYlNsb3Quc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgICBsZXQgeyBjaGlsZHJlbiwgbmFtZSwgcGFnZSA9ICRiaW5kYWJsZSgpLCBvbk9wZW4sIG9uQ2xvc2UgfSA9ICRwcm9wcygpO1xyXG5cclxuICAgICRlZmZlY3QoKCkgPT4ge1xyXG4gICAgICAgIGxldCBhdG1vc1NldHRpbmdzID0gSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShcImF0bW9zLXNldHRpbmdzXCIpKTtcclxuICAgICAgICBpZiAoIWF0bW9zU2V0dGluZ3Mpe1xyXG4gICAgICAgICAgICBhdG1vc1NldHRpbmdzID0ge307XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGlmICghYXRtb3NTZXR0aW5nc1tcInBlcnNvbmFsaXphdGlvblwiXSl7XHJcbiAgICAgICAgICAgIGF0bW9zU2V0dGluZ3NbXCJwZXJzb25hbGl6YXRpb25cIl0gPSB7fTtcclxuICAgICAgICB9XHJcbiAgICAgICAgaWYgKCFhdG1vc1NldHRpbmdzW1wicGVyc29uYWxpemF0aW9uXCJdW1wicGFnZS10cmFuc2l0aW9uLWR1cmF0aW9uXCJdKXtcclxuICAgICAgICAgICAgYXRtb3NTZXR0aW5nc1tcInBlcnNvbmFsaXphdGlvblwiXVtcInBhZ2UtdHJhbnNpdGlvbi1kdXJhdGlvblwiXSA9IDE1MDA7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGNvbnNvbGUubG9nKGF0bW9zU2V0dGluZ3MpO1xyXG4gICAgICAgIGxldCBkdXJhdGlvbiA9IGF0bW9zU2V0dGluZ3NbXCJwZXJzb25hbGl6YXRpb25cIl1bXCJwYWdlLXRyYW5zaXRpb24tZHVyYXRpb25cIl0gKyBcIm1zXCI7XHJcbiAgICAgICAgbGV0IGRlbGF5ID0gYXRtb3NTZXR0aW5nc1tcInBlcnNvbmFsaXphdGlvblwiXVtcInBhZ2UtdHJhbnNpdGlvbi1kdXJhdGlvblwiXS80O1xyXG4gICAgICAgIGNvbnNvbGUubG9nKGR1cmF0aW9uKTtcclxuXHJcbiAgICAgICAgaWYgKHBhZ2UgPT09IG5hbWUpIHtcclxuICAgICAgICAgICAgLy8gQW5pbWF0ZSBvbnRvIHNjcmVlbiBhZnRlciBkZWxheVxyXG4gICAgICAgICAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInRhYi1cIiArIG5hbWUpLnN0eWxlLmFuaW1hdGlvbiA9IGBvblJpZ2h0ICR7ZHVyYXRpb259YDtcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwidGFiLVwiICsgbmFtZSkuaGlkZGVuID0gZmFsc2U7XHJcblxyXG4gICAgICAgICAgICAgICAgLy8gUnVuIHBhZ2Ugb3BlbiBmdW5jdGlvblxyXG4gICAgICAgICAgICAgICAgaWYgKG9uT3Blbikge1xyXG4gICAgICAgICAgICAgICAgICAgIG9uT3BlbigpO1xyXG4gICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICB9LCBkZWxheSk7XHJcbiAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgLy8gQW5pbWF0ZSBvZmYgdGhlIHNjcmVlblxyXG4gICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInRhYi1cIiArIG5hbWUpLnN0eWxlLmFuaW1hdGlvbiA9IGBvZmZMZWZ0ICR7ZHVyYXRpb259YDtcclxuXHJcbiAgICAgICAgICAgIHNldFRpbWVvdXQoZnVuY3Rpb24oKXtcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwidGFiLVwiICsgbmFtZSkuc3R5bGUuYW5pbWF0aW9uID0gXCJcIjtcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwidGFiLVwiICsgbmFtZSkuaGlkZGVuID0gdHJ1ZTtcclxuXHJcbiAgICAgICAgICAgICAgICBpZiAob25DbG9zZSkge1xyXG4gICAgICAgICAgICAgICAgICAgIG9uQ2xvc2UoKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfSwgZGVsYXkpO1xyXG4gICAgICAgIH1cclxuICAgIH0pO1xyXG48L3NjcmlwdD5cclxuXHJcbjxkaXYgY2xhc3M9XCJ0YWItZGl2XCIgaWQ9XCJ0YWIte25hbWV9XCIgaGlkZGVuPXtuYW1lICE9PSBcImFib3V0XCJ9PlxyXG4gICAge0ByZW5kZXIgY2hpbGRyZW4oKX1cclxuPC9kaXY+XHJcblxyXG48c3R5bGU+XHJcbiAgICAudGFiLWRpdntcclxuICAgICAgICBoZWlnaHQ6IDkyJTtcclxuICAgICAgICBib3JkZXI6IG5vbmU7XHJcbiAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiAyMHB4O1xyXG4gICAgICAgIG1hcmdpbi1yaWdodDogMjBweDtcclxuICAgIH1cclxuPC9zdHlsZT4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBa0RPO0FBQ1AsSUFBSSx1QkFBUTtBQUNaLFFBQVEsV0FBVztBQUNuQixRQUFRLFlBQVk7QUFDcEIsUUFBUSxrQkFBa0I7QUFDMUIsUUFBUSxpQkFBaUI7QUFDekIsUUFBUSxrQkFBa0I7QUFDMUIsS0FBSzsifQ== */"
 };
 
 function TabSlot($$anchor, $$props) {
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.check_target(new.target);
-	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, false, TabSlot);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, true, TabSlot);
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append_styles($$anchor, $$css);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, ["page"], [], TabSlot);
+
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.user_effect(() => {
+		let atmosSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+
+		if (!atmosSettings) {
+			atmosSettings = {};
+		}
+
+		if (!atmosSettings["personalization"]) {
+			atmosSettings["personalization"] = {};
+		}
+
+		if (!atmosSettings["personalization"]["page-transition-duration"]) {
+			atmosSettings["personalization"]["page-transition-duration"] = 1500;
+		}
+
+		console.log(...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.log_if_contains_state("log", atmosSettings));
+
+		let duration = atmosSettings["personalization"]["page-transition-duration"] + "ms";
+		let delay = atmosSettings["personalization"]["page-transition-duration"] / 4;
+
+		console.log(...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.log_if_contains_state("log", duration));
+
+		if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals($$props.page, $$props.name)) {
+			// Animate onto screen after delay
+			setTimeout(
+				function () {
+					document.getElementById("tab-" + $$props.name).style.animation = `onRight ${duration}`;
+					document.getElementById("tab-" + $$props.name).hidden = false;
+
+					// Run page open function
+					if ($$props.onOpen) {
+						$$props.onOpen();
+					}
+				},
+				delay
+			);
+		} else {
+			// Animate off the screen
+			document.getElementById("tab-" + $$props.name).style.animation = `offLeft ${duration}`;
+
+			setTimeout(
+				function () {
+					document.getElementById("tab-" + $$props.name).style.animation = "";
+					document.getElementById("tab-" + $$props.name).hidden = true;
+
+					if ($$props.onClose) {
+						$$props.onClose();
+					}
+				},
+				delay
+			);
+		}
+	});
 
 	var div = root();
 	var node = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div);
 
-	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.slot(node, $$props, "default", {}, null);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.snippet(node, () => $$props.children);
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div);
+
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => {
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_attribute(div, "id", `tab-${$$props.name ?? ""}`);
+		div.hidden = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals($$props.name, "about", false);
+	});
+
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, div);
 	return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.pop({ ...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.legacy_api() });
 }
@@ -1301,14 +1405,12 @@ AboutPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/P
 
 
 var root_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<h1>About Atmos Weather</h1> <h3 id="atmos-app-version"></h3> <h3 id="atmos-app-updated"></h3> <h6>Written by Atticus Cornett and <a href="https://github.com/atticuscornett/AtmosWeather/graphs/contributors" target="_blank">contributors</a></h6> <hr> <h2>Resources</h2> <h3><a href="https://tablericons.com/" target="_blank">Tabler Icons</a></h3> <h3><a href="https://cordova.apache.org/" target="_blank">Apache Cordova</a></h3> <h3><a href="https://github.com/TheCocoaProject/cordova-plugin-nativestorage" target="_blank">Cordova NativeStorage Plugin</a></h3> <h3><a href="https://fonts.google.com/" target="_blank">Google Fonts</a></h3> <h3><a href="https://nominatim.org/" target="_blank">OSM Nominatim</a></h3> <h3><a href="https://www.weather.gov/documentation/services-web-api" target="_blank">NWS API</a></h3> <h3><a href="https://open-meteo.com/" target="_blank">Open-Meteo API</a></h3> <h3><a href="https://leafletjs.com/index.html" target="_blank">LeafletJS</a></h3> <h3><a href="https://www.electronjs.org/" target="_blank">ElectronJS</a></h3> <h3><a href="https://www.rainviewer.com/api.html" target="_blank">RainViewer</a></h3> <h3><a href="https://storyset.com/people" target="_blank">People illustrations by Storyset</a></h3>`, 1), AboutPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
-	[6, 4],
-	[7, 4],
 	[8, 4],
-	[9, 4, [[9, 39]]],
+	[9, 4],
 	[10, 4],
-	[11, 4],
-	[12, 4, [[12, 8]]],
-	[13, 4, [[13, 8]]],
+	[11, 4, [[11, 39]]],
+	[12, 4],
+	[13, 4],
 	[14, 4, [[14, 8]]],
 	[15, 4, [[15, 8]]],
 	[16, 4, [[16, 8]]],
@@ -1317,33 +1419,201 @@ var root_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(s
 	[19, 4, [[19, 8]]],
 	[20, 4, [[20, 8]]],
 	[21, 4, [[21, 8]]],
-	[22, 4, [[22, 8]]]
+	[22, 4, [[22, 8]]],
+	[23, 4, [[23, 8]]],
+	[24, 4, [[24, 8]]]
 ]);
 
 function AboutPage($$anchor, $$props) {
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.check_target(new.target);
-	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, false, AboutPage);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, true, AboutPage);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, ["page"], [], AboutPage);
 
-	(0,_Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__["default"])($$anchor, {
-		children: svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.wrap_snippet(AboutPage, ($$anchor, $$slotProps) => {
-			var fragment_1 = root_1();
-			var h3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_1), 2);
+	let page = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.prop($$props, "page", 15);
 
-			h3.textContent = `Version ${window.atmosVersion ?? ""}`;
+	{
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_owner_effect(page, _Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
-			var h3_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h3, 2);
+		(0,_Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__["default"])($$anchor, {
+			name: "about",
+			get page() {
+				return page();
+			},
+			set page($$value) {
+				page($$value);
+			},
+			children: svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.wrap_snippet(AboutPage, ($$anchor, $$slotProps) => {
+				var fragment_1 = root_1();
+				var h3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_1), 2);
 
-			h3_1.textContent = `Updated on ${window.atmosUpdated ?? ""}`;
-			svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(28);
-			svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_1);
-		}),
-		$$slots: { default: true }
-	});
+				h3.textContent = `Version ${window.atmosVersion ?? ""}`;
+
+				var h3_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h3, 2);
+
+				h3_1.textContent = `Updated on ${window.atmosUpdated ?? ""}`;
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(28);
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_1);
+			}),
+			$$slots: { default: true }
+		});
+	}
 
 	return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.pop({ ...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.legacy_api() });
 }
 
 svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_end(AboutPage);
+
+/***/ }),
+
+/***/ "./src/Pages/PrivacyPage.svelte":
+/*!**************************************!*\
+  !*** ./src/Pages/PrivacyPage.svelte ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PrivacyPage)
+/* harmony export */ });
+/* harmony import */ var svelte_internal_disclose_version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal/disclose-version */ "./node_modules/svelte/src/internal/disclose-version.js");
+/* harmony import */ var svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte/internal/client */ "./node_modules/svelte/src/internal/client/index.js");
+/* harmony import */ var _Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Layout/TabSlot.svelte */ "./src/Layout/TabSlot.svelte");
+
+
+svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_start();
+PrivacyPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/Pages/PrivacyPage.svelte";
+
+
+
+
+var root_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(
+		`<h1>Privacy Statement</h1> <hr> <h2>Atmos Weather takes privacy very seriously and only uses data that is necessary to provide you with convenient, accurate weather information.</h2> <br> <details><summary>Privacy Commitment</summary> Atmos Weather is committed to protecting user privacy and never using data for more than what is
+        strictly necessary to provide weather information and alerts. Atmos Weather aims to always be
+        transparent about what data is collected and how it is used. Atmos Weather is open source and the
+        source can be found at https://github.com/atticuscornett/AtmosWeather. If you have any questions,
+        concerns, or suggestions, please reach out via GitHub issues.</details> <details><summary>User Data Usage</summary> Atmos Weather does not collect any user data for tracking or advertising purposes.<br> Atmos Weather connects to several APIs to provide weather information and alerts.<br> The following is a list of all the services used to power Atmos Weather and what information they receive:<br> <h3><b>National Weather Service API</b></h3> <h4>Domain(s): api.weather.gov</h4> <h4>Information: GPS Location (when app is open and in background), Saved Locations (when app is open and in background), IP Address (when app is open and in background)</h4> <h4>Why: The National Weather Service provides the forecast information displayed in the app and provides weather alerts in the background.</h4> <br> <h3><b>Open-Meteo</b></h3> <h4>Domain(s): air-quality-api.open-meteo.com, api.open-meteo.com</h4> <h4>Information: GPS Location (when app is open), Saved Locations (when app is open), IP Address (when app is open)</h4> <h4>Why: Open-Meteo provides additional weather data (such as AQI and apparent temperature) displayed on location pages.</h4> <br> <h3><b>OpenStreetMap</b></h3> <h4>Domain(s): tile.openstreetmap.org, nominatim.opensteetmap.org</h4> <h4>Information: Location Searches (when app is open), IP Address (when app is open)</h4> <h4>Why: OpenStreetMap's Nominatim API powers the location search feature and OpenStreetMap's tile servers provide the map tiles used for the radar and alerts.</h4> <br> <h3><b>RainViewer</b></h3> <h4>Domain(s): tilecache.rainviewer.com</h4> <h4>Information: IP Address (when app is open)</h4> <h4>Why: RainViewer provides the radar imagery displayed on the radar page.</h4> <br> <h3><b>NOAA Map Services</b></h3> <h4>Domain(s): mapservices.weather.noaa.gov</h4> <h4>Information: IP Address (when app is open)</h4> <h4>Why: NOAA provides the SPC outlooks that are displayed on the radar page.</h4> <br> <h3><b>GitHub Releases</b></h3> <h4>Domain(s): github.com, api.github.com</h4> <h4>Information: IP Address (when app is open)</h4> <h4>Why: Used to check for updates (on mobile) and to automatically download and update to the latest version of Atmos Weather (on desktop).</h4> <br> <h3><b>Atmos Weather GitHub Site</b></h3> <h4>Domain(s): atticuscornett.github.io</h4> <h4>Information: IP Address (when app is open)</h4> <h4>Why: The Atmos Weather site hosts county polygon shapes that are displayed on maps.</h4></details> <details><summary>Android Permissions</summary> Atmos Weather for Android uses the following permissions:<br> <h3>Location Permissions</h3> <code>ACCESS_COARSE_LOCATION</code> is used to get the user's approximate location for weather information and alerts.<br> <code>ACCESS_FINE_LOCATION</code> is used to get the user's location for weather information and alerts with greater precision.<br> <code>ACCESS_BACKGROUND_LOCATION</code> is used to get the user's location in the background for weather alerts at the current position.<br> <h3>Network Permissions</h3> <code>INTERNET</code> is used to connect to the internet to get weather information and alerts.<br> <code>ACCESS_NETWORK_STATE</code> is used to check if the device is connected to the internet
+        and optimize background usage based on whether the device is using mobile data or Wi-Fi.<br> <h3>Other Permissions</h3> <code>POST_NOTIFICATIONS</code> is used to display notifications for weather alerts for devices running Android 13 or higher.<br> <code>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</code> is used to request an exemption from battery optimizations to run in the background and ensure that weather alerts are given in a timely manner.<br> <code>SCHEDULE_EXACT_ALARM</code> is used to periodically run weather alert checks in the background.
+        The alarms must be exact to ensure that alerts are given in a timely manner.<br> <code>RECEIVE_BOOT_COMPLETED</code> is used to restart the weather alert checks after the device is rebooted.<br> <code>DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION</code> is automatically added by the Android build process
+        for apps with broadcast receivers targeting Android 13 or higher.</details>`,
+		1
+	),
+	PrivacyPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME],
+	[
+		[8, 4],
+		[9, 4],
+		[10, 4],
+		[12, 4],
+		[13, 4, [[14, 8]]],
+		[
+			21,
+			4,
+			[
+				[22, 8],
+				[23, 90],
+				[24, 89],
+				[25, 114],
+				[26, 8, [[26, 12]]],
+				[27, 8],
+				[28, 8],
+				[29, 8],
+				[30, 8],
+				[31, 8, [[31, 12]]],
+				[32, 8],
+				[33, 8],
+				[34, 8],
+				[35, 8],
+				[36, 8, [[36, 12]]],
+				[37, 8],
+				[38, 8],
+				[39, 8],
+				[40, 8],
+				[41, 8, [[41, 12]]],
+				[42, 8],
+				[43, 8],
+				[44, 8],
+				[45, 8],
+				[46, 8, [[46, 12]]],
+				[47, 8],
+				[48, 8],
+				[49, 8],
+				[50, 8],
+				[51, 8, [[51, 12]]],
+				[52, 8],
+				[53, 8],
+				[54, 8],
+				[55, 8],
+				[56, 8, [[56, 12]]],
+				[57, 8],
+				[58, 8],
+				[59, 8]
+			]
+		],
+		[
+			61,
+			4,
+			[
+				[62, 8],
+				[63, 65],
+				[64, 8],
+				[65, 8],
+				[65, 126],
+				[66, 8],
+				[66, 135],
+				[67, 8],
+				[67, 144],
+				[68, 8],
+				[69, 8],
+				[69, 103],
+				[70, 8],
+				[71, 96],
+				[72, 8],
+				[73, 8],
+				[73, 133],
+				[74, 8],
+				[74, 202],
+				[75, 8],
+				[76, 84],
+				[77, 8],
+				[77, 117],
+				[78, 8]
+			]
+		]
+	]
+);
+
+function PrivacyPage($$anchor, $$props) {
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.check_target(new.target);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, true, PrivacyPage);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, ["page"], [], PrivacyPage);
+
+	let page = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.prop($$props, "page", 15);
+
+	{
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_owner_effect(page, _Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+		(0,_Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__["default"])($$anchor, {
+			name: "privacy",
+			get page() {
+				return page();
+			},
+			set page($$value) {
+				page($$value);
+			},
+			children: svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.wrap_snippet(PrivacyPage, ($$anchor, $$slotProps) => {
+				var fragment_1 = root_1();
+
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(12);
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_1);
+			}),
+			$$slots: { default: true }
+		});
+	}
+
+	return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.pop({ ...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.legacy_api() });
+}
+
+svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_end(PrivacyPage);
 
 /***/ }),
 
