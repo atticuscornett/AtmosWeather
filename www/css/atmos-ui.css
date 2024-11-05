@@ -69,27 +69,11 @@ select{
 	color: white;
 }
 
-#app{
-	z-index: 1;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-
 #main-app{
 	height: 92%;
 	width: 100%;
 	padding: 0;
 	overflow-x: hidden;
-}
-
-#app-nav{
-	height: 8%;
-	width: 100%;
-	background-color: white;
-	cursor: pointer;
 }
 
 #add-location{
@@ -164,12 +148,6 @@ select{
 	position: relative;
 	margin-left: 20px;
 	margin-right: 20px;
-}
-
-.nav-icon{
-	height: 4vh;
-	margin-top: 2vh;
-	cursor: pointer;
 }
 
 .weatherGraph{
@@ -285,11 +263,6 @@ select{
 	padding: 0px 20px 20px 20px;
 }
 
-.selected-nav{
-	background-color: #EEEEEE;
-	border-radius: 7px;
-}
-
 .hourlySelectorLabel {
 	cursor: pointer;
 	margin-right: 20px;
@@ -402,18 +375,10 @@ body.dark {
 	.android-setup {
 		width: calc(100vw - 30px);
 	}
-
-	#app-nav{
-		background-color: hsla(0,0%,15%,1.00);
-	}
 	& .clear-border{
 		border: white solid;
 		border-radius: 7px;
 		box-shadow: 0px 0px 7px #898989;
 		padding: 0px 20px 20px 20px;
-	}
-	& .selected-nav{
-		background-color: #111111;
-		border-radius: 7px;
 	}
 }

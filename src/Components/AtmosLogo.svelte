@@ -35,7 +35,8 @@
     }
 
 	#atmos-logo.fade {
-		animation: fadeOut 2s; animation-fill-mode: forwards !important;
+		animation: fadeOut 2s !important;
+		animation-fill-mode: forwards !important;
 	}
 
 	@keyframes logoAnim{
@@ -97,6 +98,11 @@
 			top: 0;
 			left: 0;
 			animation: logoBackgroundAnim 2s;
+	}
+
+	:global(body.dark) #atmos-logo.fade {
+		animation: fadeOut 2s !important;
+		animation-fill-mode: forwards !important;
 	}
 
 </style>
