@@ -62,5 +62,105 @@ button:focus {
 	border-color: #666;
 }
 
-.logo-container.svelte-x5fwy6{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);white-space:nowrap;font-size:30px}#weatherLogo.svelte-x5fwy6{text-align:center;animation:delayedFadeIn 2s;position:relative;bottom:70px;font-family:Secular One, sans-serif}@keyframes svelte-x5fwy6-logoAnim{0%{font-size:10000px;padding-left:100px;padding-right:100px;color:var(--startColor)}49%{font-size:30px;padding-left:100px;padding-right:100px;color:var(--startColor)}50%{color:var(--startColor)}100%{padding-left:10px;padding-right:10px;color:dodgerblue}}#atmos-logo.svelte-x5fwy6{z-index:999;position:absolute;overflow:hidden;background-color:hsla(0,0%,99%,1.00);width:100%;height:100%;top:0;left:0;animation:logoBackgroundAnim 2s}.logoLetter.svelte-x5fwy6{font-family:Secular One, sans-serif;display:inline;animation:svelte-x5fwy6-logoAnim 2s;padding-left:10px;padding-right:10px;color:dodgerblue}body.dark #weatherLogo.svelte-x5fwy6{color:white}body.dark #atmos-logo.svelte-x5fwy6{z-index:999;position:absolute;overflow:hidden;background-color:black;width:100%;height:100%;top:0;left:0;animation:logoBackgroundAnim 2s}
-@media(min-width: 640px){}
+
+    .logo-container.svelte-x5fwy6{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+        font-size: 30px;
+    }
+
+    #weatherLogo.svelte-x5fwy6 {
+        text-align: center;
+        animation: delayedFadeIn 2s;
+        position: relative;
+        bottom: 70px;
+        font-family: Secular One, sans-serif;
+    }
+
+	/* (unused) .fade {
+		animation: fadeOut 2s; animation-fill-mode: forwards;
+	}*/
+
+	@keyframes svelte-x5fwy6-logoAnim{
+		0%{
+			font-size: 10000px;
+			padding-left: 100px;
+			padding-right: 100px;
+			color: var(--startColor);
+		}
+		49%{
+			font-size: 30px;
+			padding-left: 100px;
+			padding-right: 100px;
+			color: var(--startColor);
+		}
+		50%{
+			color: var(--startColor);
+		}
+		100%{
+			padding-left: 10px;
+			padding-right: 10px;
+			color: dodgerblue;
+		}
+	}
+
+	#atmos-logo.svelte-x5fwy6{
+		z-index: 999;
+		position: absolute;
+		overflow: hidden;
+		background-color: hsla(0,0%,99%,1.00);
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		animation: logoBackgroundAnim 2s;
+	}
+
+	.logoLetter.svelte-x5fwy6{
+		font-family: Secular One, sans-serif;
+		display: inline;
+		animation: svelte-x5fwy6-logoAnim 2s;
+		padding-left: 10px;
+		padding-right: 10px;
+		color: dodgerblue;
+	}
+
+	/* Dark Mode Background */
+	body.dark #weatherLogo.svelte-x5fwy6 {
+			color: white;
+	}
+
+	body.dark #atmos-logo.svelte-x5fwy6{
+			z-index: 999;
+			position: absolute;
+			overflow: hidden;
+			background-color: black;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			animation: logoBackgroundAnim 2s;
+	}
+
+	/* (unused) main {
+		text-align: center;
+		padding: 1em;
+		max-width: 240px;
+		margin: 0 auto;
+	}*/
+
+	/* (unused) h1 {
+		color: #ff3e00;
+		text-transform: uppercase;
+		font-size: 4em;
+		font-weight: 100;
+	}*/
+
+	@media (min-width: 640px) {
+		/* (unused) main {
+			max-width: none;
+		}*/
+	}
