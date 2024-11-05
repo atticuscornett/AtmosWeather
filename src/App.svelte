@@ -1,10 +1,12 @@
 <script>
 	import AtmosLogo from "./Components/AtmosLogo.svelte";
+    import NoticeWindow from "./Components/NoticeWindow.svelte";
 
-    document.body.classList.add(prompt("Dark Mode?") === "true" ? "dark" : "light");
+    document.body.classList.add(prompt("Dark") === "true" ? "dark" : "light");
 </script>
 
 <AtmosLogo />
+<NoticeWindow />
 
 <style>
 	main {

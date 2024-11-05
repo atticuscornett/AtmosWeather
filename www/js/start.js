@@ -1,9 +1,8 @@
 // UPDATE
 window.atmosVersion = "2.2.1";
 window.atmosUpdated = "11-2-2024";
+window.atmosUpdateTitle = "Atmos Weather v2.2.1 is here!";
 window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.2.1 is here!</h2>
-		<hr>
 		<dl style='font-family: Secular One;'>
 			<dt>Bug Fixes</dt>
 			<dd>- Fixed wind speed graph bug.</dd>
@@ -11,7 +10,6 @@ window.atmosUpdateNotes = `
 			<dd>- Fixed permission window repeatedly showing on first installation.</dd>
 			<dd>- Updated packages.</dd>
 		</dl> 
-		<br><br>
 		`;
 document.getElementById("atmos-app-version").innerHTML = "Version " + window.atmosVersion;
 document.getElementById("atmos-app-updated").innerHTML = "Updated on " + window.atmosUpdated;
