@@ -1702,7 +1702,7 @@ SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "sr
 
 var root_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<h2>Some settings/features are not functional on the web version, including weather alerts.</h2>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[42, 8]]);
 
-var root_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div><div id="settings-device-location"><h2>Device Location</h2> <h6>Settings related to use of your GPS location.</h6> <input class="box" type="checkbox" id="setting-current-location"> <label for="setting-current-location">Give Weather for Current Location</label> <br> <input class="box" type="checkbox" id="setting-current-location-alerts"> <label for="setting-current-location-alerts">Give Alerts for Current Location</label> <hr></div> <h2>Personalization</h2> <label for="setting-app-theme">App Theme</label> <br> <select id="setting-app-theme"><option>System Default</option><option>Dark Theme</option><option>Light Theme</option></select> <br> <label for="setting-page-transition-duration">Page Transition Duration</label> <br> <input type="range" min="0" max="3000" step="100" id="setting-page-transition-duration"> <label id="setting-page-transition-duration-text" for="setting-page-transition-duration"> </label> <br><br> <input class="box" type="checkbox" id="setting-atmos-logo"> <label for="setting-atmos-logo">Show Atmos Weather logo on app open</label> <br> <div id="settings-startup"><input class="box" type="checkbox" id="setting-run-startup"> <label for="setting-run-startup">Run Atmos Weather in background on startup</label></div> <input class="box" type="checkbox" id="setting-notify-updates"> <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label> <hr> <h2>Notifications</h2> <input class="box" type="checkbox" id="setting-future-severe-notifications"> <label for="setting-future-severe-notifications">Get notifications for forecast future severe weather</label> <br> <input class="box" type="checkbox" id="setting-future-storm-notifications"> <label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label> <hr> <h2>Radar</h2> <h6>Radar powered by RainViewer API.</h6> <input class="box" type="checkbox" id="setting-radar-show-watches"> <label for="setting-radar-show-watches">Show watch polygons on radar</label> <br> <input class="box" type="checkbox" id="setting-radar-show-advisories"> <label for="setting-radar-show-advisories">Show advisory polygons on radar</label> <br> <input class="box" type="checkbox" id="setting-radar-show-warnings"> <label for="setting-radar-show-warnings">Show warning polygons on radar</label> <br> <input class="box" type="checkbox" id="setting-radar-show-outlook"> <label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label> <br> <input class="box" type="checkbox" id="setting-radar-satellite"> <label for="setting-radar-satellite">Show satellite instead of radar</label> <br> <input class="box" type="checkbox" id="setting-radar-high-res"> <label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label> <br><br> <label for="setting-radar-color-scheme">Radar Color Scheme</label> <br> <select id="setting-radar-color-scheme"><option>Black & White</option><option>Original</option><option>Universal Blue</option><option>TITAN</option><option>TWC</option><option>Meteored</option><option>NEXRAD Level III</option><option>Rainbow</option><option>Dark Sky</option></select> <hr> <h2>Location Alerts</h2> <h6>Choose the level of alerts for different locations.</h6> <input class="box" type="checkbox" id="setting-tts-alerts"> <label for="setting-tts-alerts">Read alerts with text to speech</label> <br><br> <label for="setting-alert-check-frequency">Alert Check Frequency</label> <br> <select id="setting-alert-check-frequency"><option>Every 15 seconds</option><option>Every 30 seconds</option><option>Every 1 minute</option><option>Every 2 minutes</option></select> <h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6> <label for="setting-default-sound-alert">Default Alert Sound</label> <br>        <div id="location-settings-div"></div> <hr> <h2>Alert Types</h2> <h6>Choose the level of alerts for different types of events. Overridden if location priority is lower.<br>Alert if moving alerts you if the app detects you are in a vehicle.<br>If location permission is not allowed, will always alert.</h6> <details><summary>Warnings</summary> <div id="settings-warnings-list"></div></details> <details><summary>Watches</summary> <div id="settings-watches-list"></div></details> <details><summary>Advisories/Other</summary> <div id="settings-advisory-list"></div></details></div>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
+var root_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div><div id="settings-device-location"><h2>Device Location</h2> <h6>Settings related to use of your GPS location.</h6> <input class="box" type="checkbox" id="setting-current-location"> <label for="setting-current-location">Give Weather for Current Location</label> <br> <input class="box" type="checkbox" id="setting-current-location-alerts"> <label for="setting-current-location-alerts">Give Alerts for Current Location</label> <hr></div> <h2>Personalization</h2> <label for="setting-app-theme">App Theme</label> <br> <select id="setting-app-theme"><option>System Default</option><option>Dark Theme</option><option>Light Theme</option></select> <br> <label for="setting-page-transition-duration">Page Transition Duration</label> <br> <input type="range" min="0" max="3000" step="100" id="setting-page-transition-duration"> <label id="setting-page-transition-duration-text" for="setting-page-transition-duration"> </label> <br><br> <input class="box" type="checkbox" id="setting-atmos-logo"> <label for="setting-atmos-logo">Show Atmos Weather logo on app open</label> <br> <div id="settings-startup"><input class="box" type="checkbox" id="setting-run-startup"> <label for="setting-run-startup">Run Atmos Weather in background on startup</label></div> <input class="box" type="checkbox" id="setting-notify-updates"> <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label> <hr> <h2>Notifications</h2> <input class="box" type="checkbox" id="setting-future-severe-notifications"> <label for="setting-future-severe-notifications">Get notifications for forecast future severe weather</label> <br> <input class="box" type="checkbox" id="setting-future-storm-notifications"> <label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label> <hr> <h2>Radar</h2> <h6>Radar powered by RainViewer API.</h6> <input class="box" type="checkbox" id="setting-radar-show-watches"> <label for="setting-radar-show-watches">Show watch polygons on radar</label> <br> <input class="box" type="checkbox" id="setting-radar-show-advisories"> <label for="setting-radar-show-advisories">Show advisory polygons on radar</label> <br> <input class="box" type="checkbox" id="setting-radar-show-warnings"> <label for="setting-radar-show-warnings">Show warning polygons on radar</label> <br> <input class="box" type="checkbox" id="setting-radar-show-outlook"> <label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label> <br> <input class="box" type="checkbox" id="setting-radar-satellite"> <label for="setting-radar-satellite">Show satellite instead of radar</label> <br> <input class="box" type="checkbox" id="setting-radar-high-res"> <label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label> <br><br> <label for="setting-radar-color-scheme">Radar Color Scheme</label> <br> <select id="setting-radar-color-scheme"><option>Black & White</option><option>Original</option><option>Universal Blue</option><option>TITAN</option><option>TWC</option><option>Meteored</option><option>NEXRAD Level III</option><option>Rainbow</option><option>Dark Sky</option></select> <hr> <h2>Location Alerts</h2> <h6>Choose the level of alerts for different locations.</h6> <input class="box" type="checkbox" id="setting-tts-alerts"> <label for="setting-tts-alerts">Read alerts with text to speech</label> <br><br> <label for="setting-alert-check-frequency">Alert Check Frequency</label> <br> <select id="setting-alert-check-frequency"><option>Every 15 seconds</option><option>Every 30 seconds</option><option>Every 1 minute</option><option>Every 2 minutes</option></select> <h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6> <label for="setting-default-sound-alert">Default Alert Sound</label> <br> <select id="setting-default-sound-alert"><option>ReadyNow Warning</option><option>SureMind Warning</option><option>Alternating Tones</option><option>Simple Beeps</option></select> <br> <label for="setting-default-sound-notification">Default Notification Sound</label> <br> <select id="setting-default-sound-notification"><option>ReadyNow Watch</option><option>SureMind Watch</option><option>Alternating Tones</option><option>Simple Beeps</option></select> <div id="location-settings-div"></div> <hr> <h2>Alert Types</h2> <h6>Choose the level of alerts for different types of events. Overridden if location priority is lower.<br>Alert if moving alerts you if the app detects you are in a vehicle.<br>If location permission is not allowed, will always alert.</h6> <details><summary>Warnings</summary> <div id="settings-warnings-list"></div></details> <details><summary>Watches</summary> <div id="settings-watches-list"></div></details> <details><summary>Advisories/Other</summary> <div id="settings-advisory-list"></div></details></div>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
 	[
 		47,
 		8,
@@ -1810,6 +1810,29 @@ var root_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(s
 			[138, 8],
 			[139, 8],
 			[140, 8],
+			[
+				141,
+				8,
+				[
+					[142, 12],
+					[143, 12],
+					[144, 12],
+					[145, 12]
+				]
+			],
+			[147, 8],
+			[148, 8],
+			[149, 8],
+			[
+				150,
+				8,
+				[
+					[151, 12],
+					[152, 12],
+					[153, 12],
+					[154, 12]
+				]
+			],
 			[156, 8],
 			[158, 8],
 			[159, 8],
@@ -2088,7 +2111,51 @@ function SettingsPage($$anchor, $$props) {
 					option_15.value = null == (option_15.__value = "120") ? "" : "120";
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_2);
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding("bind:value={allSettings[\"location-alerts\"][\"alert-check-frequency\"]}", () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "alert-check-frequency", 132, 51);
-					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(20);
+
+					var select_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_2, 8);
+
+					select_3.__change = playAlarmSoundMain;
+
+					var option_16 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_3);
+
+					option_16.value = null == (option_16.__value = "readynow") ? "" : "readynow";
+
+					var option_17 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_16);
+
+					option_17.value = null == (option_17.__value = "suremind") ? "" : "suremind";
+
+					var option_18 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_17);
+
+					option_18.value = null == (option_18.__value = "alternatingtones") ? "" : "alternatingtones";
+
+					var option_19 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_18);
+
+					option_19.value = null == (option_19.__value = "simplebeeps") ? "" : "simplebeeps";
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_3);
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding("bind:value={allSettings[\"location-alerts\"][\"default-alert\"]}", () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "default-alert", 141, 79);
+
+					var select_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_3, 8);
+
+					select_4.__change = playAlarmSoundMain;
+
+					var option_20 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_4);
+
+					option_20.value = null == (option_20.__value = "readynow") ? "" : "readynow";
+
+					var option_21 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_20);
+
+					option_21.value = null == (option_21.__value = "suremind") ? "" : "suremind";
+
+					var option_22 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_21);
+
+					option_22.value = null == (option_22.__value = "alternatingtones") ? "" : "alternatingtones";
+
+					var option_23 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_22);
+
+					option_23.value = null == (option_23.__value = "simplebeeps") ? "" : "simplebeeps";
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_4);
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding("bind:value={allSettings[\"location-alerts\"][\"default-notification\"]}", () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "default-notification", 150, 86);
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(14);
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div);
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text, `${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["page-transition-duration"] ?? ""}ms`));
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["weather"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["weather"] = $$value);
@@ -2109,6 +2176,8 @@ function SettingsPage($$anchor, $$props) {
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_1, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["color-scheme"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["color-scheme"] = $$value);
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_14, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["tts-alerts"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["tts-alerts"] = $$value);
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_2, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["alert-check-frequency"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["alert-check-frequency"] = $$value);
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_3, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-alert"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-alert"] = $$value);
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_4, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-notification"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-notification"] = $$value);
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, div);
 				});
 

@@ -138,21 +138,21 @@
         <h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6>
         <label for="setting-default-sound-alert">Default Alert Sound</label>
         <br>
-    <!--    <select id="setting-default-sound-alert" onchange={playAlarmSoundMain} bind:value={allSettings["location-alerts"]["default-alert"]}>-->
-    <!--        <option value="readynow">ReadyNow Warning</option>-->
-    <!--        <option value="suremind">SureMind Warning</option>-->
-    <!--        <option value="alternatingtones">Alternating Tones</option>-->
-    <!--        <option value="simplebeeps">Simple Beeps</option>-->
-    <!--    </select>-->
-    <!--    <br>-->
-    <!--    <label for="setting-default-sound-notification">Default Notification Sound</label>-->
-    <!--    <br>-->
-    <!--    <select id="setting-default-sound-notification" onchange={playAlarmSoundMain} bind:value={allSettings["location-alerts"]["default-notification"]}>-->
-    <!--        <option value="readynow">ReadyNow Watch</option>-->
-    <!--        <option value="suremind">SureMind Watch</option>-->
-    <!--        <option value="alternatingtones">Alternating Tones</option>-->
-    <!--        <option value="simplebeeps">Simple Beeps</option>-->
-    <!--    </select>-->
+        <select id="setting-default-sound-alert" onchange={playAlarmSoundMain} bind:value={allSettings["location-alerts"]["default-alert"]}>
+            <option value="readynow">ReadyNow Warning</option>
+            <option value="suremind">SureMind Warning</option>
+            <option value="alternatingtones">Alternating Tones</option>
+            <option value="simplebeeps">Simple Beeps</option>
+        </select>
+        <br>
+        <label for="setting-default-sound-notification">Default Notification Sound</label>
+        <br>
+        <select id="setting-default-sound-notification" onchange={playAlarmSoundMain} bind:value={allSettings["location-alerts"]["default-notification"]}>
+            <option value="readynow">ReadyNow Watch</option>
+            <option value="suremind">SureMind Watch</option>
+            <option value="alternatingtones">Alternating Tones</option>
+            <option value="simplebeeps">Simple Beeps</option>
+        </select>
         <div id="location-settings-div">
         </div>
         <hr>
