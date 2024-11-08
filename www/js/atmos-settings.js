@@ -14,7 +14,7 @@ setTimeout(function(){
 		thePlatform = "other";
 	}
 	if (thePlatform.includes("desktop")){
-		document.getElementById("settings-device-location").hidden = true;
+		//document.getElementById("settings-device-location").hidden = true;
 		atmosSettingsTemp = {
 			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false, "run-startup": true, "update-notify": false},
 			"location": {"weather": false, "alerts": false},
@@ -115,7 +115,7 @@ setTimeout(function(){
 		};
 	}
 	else{
-		document.getElementById("settings-startup").hidden = true;
+		//document.getElementById("settings-startup").hidden = true;
 		atmosSettingsTemp = {
 		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false, "run-startup": false, "update-notify": true},
 		"location": {"weather": true, "alerts": true},

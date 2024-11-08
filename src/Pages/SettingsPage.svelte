@@ -19,6 +19,15 @@
         settingsSave["radar"]["color-scheme"] = Number(settingsSave["radar"]["color-scheme"]);
         //localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
     }
+
+    function ensureSettingsSet(){
+        allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+        if (!allSettings){
+            setTimeout(ensureSettingsSet, 100);
+        }
+    }
+
+    ensureSettingsSet();
 </script>
 
 <TabSlot name="settings" bind:page={page} onOpen={refreshSettings}>
@@ -34,7 +43,8 @@
     {/if}
 
     <hr>
-    <div onchange={saveSettings}>
+    {#if allSettings}
+        <div onchange={saveSettings}>
         <div id="settings-device-location">
             <h2>Device Location</h2>
             <h6>Settings related to use of your GPS location.</h6>
@@ -167,4 +177,5 @@
             </div>
         </details>
     </div>
+    {/if}
 </TabSlot>
