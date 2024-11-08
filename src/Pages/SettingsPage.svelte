@@ -5,25 +5,41 @@
 
     let allSettings = $state(JSON.parse(localStorage.getItem("atmos-settings")));
 
-    let webVersionWarning = $state(false);
+    let platform = $state(false);
+    let webVersionWarning = $derived(platform === "pwa");
+    let isDesktop = $derived(platform && platform.includes("desktop"));
 
     function refreshSettings() {
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-        webVersionWarning = window.platform;
         allSettings["radar"]["color-scheme"] = String(allSettings["radar"]["color-scheme"]);
+        platform = window.platform;
     }
 
     function saveSettings() {
         console.log(allSettings);
         let settingsSave = structuredClone($state.snapshot(allSettings));
         settingsSave["radar"]["color-scheme"] = Number(settingsSave["radar"]["color-scheme"]);
-        //localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
+        localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
     }
 
     function ensureSettingsSet(){
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         if (!allSettings){
             setTimeout(ensureSettingsSet, 100);
+        }
+    }
+
+    function formatTitle(title, ending){
+        title = title.split("-");
+        for (let i in title){
+            title[i] = title[i][0].toUpperCase() + title[i].substring(1)
+        }
+        title = title.join(" ");
+        if (title.includes("Outlook") || title.includes("Statement")){
+            return title;
+        }
+        else{
+            return title + " " + ending;
         }
     }
 
@@ -74,10 +90,10 @@
         <input class="box" type="checkbox" id="setting-atmos-logo" bind:checked={allSettings["personalization"]["atmos-logo"]}>
         <label for="setting-atmos-logo">Show Atmos Weather logo on app open</label>
         <br>
-        <div id="settings-startup">
+        {#if isDesktop}
             <input class="box" type="checkbox" id="setting-run-startup" bind:checked={allSettings["personalization"]["run-startup"]}>
             <label for="setting-run-startup">Run Atmos Weather in background on startup</label>
-        </div>
+        {/if}
         <input class="box" type="checkbox" id="setting-notify-updates" bind:checked={allSettings["personalization"]["update-notify"]}>
         <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label>
         <hr>
@@ -161,19 +177,58 @@
         <details>
             <summary>Warnings</summary>
             <div id="settings-warnings-list">
-
+                {#each Object.entries(allSettings["alert-types"]["warnings"]) as [key, value]}
+                    <label for="setting-warning-{key}">{formatTitle(key, "Warning")}</label>
+                    <br>
+                    <select bind:value={allSettings["alert-types"]["warnings"][key]}>
+                        <option value="alert">Alert</option>
+                        {#if !isDesktop}
+                            <option value="alertmove">Alert if moving</option>
+                        {/if}
+                        <option value="soundnotification">Sound Notification</option>
+                        <option value="silentnotification">Silent Notification</option>
+                        <option value="nothing">Nothing</option>
+                    </select>
+                    <br>
+                {/each}
             </div>
         </details>
         <details>
             <summary>Watches</summary>
             <div id="settings-watches-list">
-
+                {#each Object.entries(allSettings["alert-types"]["watches"]) as [key, value]}
+                    <label for="setting-watch-{key}">{formatTitle(key, "Watch")}</label>
+                    <br>
+                    <select bind:value={allSettings["alert-types"]["watches"][key]}>
+                        <option value="alert">Alert</option>
+                        {#if !isDesktop}
+                            <option value="alertmove">Alert if moving</option>
+                        {/if}
+                        <option value="soundnotification">Sound Notification</option>
+                        <option value="silentnotification">Silent Notification</option>
+                        <option value="nothing">Nothing</option>
+                    </select>
+                    <br>
+                {/each}
             </div>
         </details>
         <details>
             <summary>Advisories/Other</summary>
             <div id="settings-advisory-list">
-
+                {#each Object.entries(allSettings["alert-types"]["advisory"]) as [key, value]}
+                    <label for="setting-watch-{key}">{formatTitle(key, "Advisory")}</label>
+                    <br>
+                    <select bind:value={allSettings["alert-types"]["advisory"][key]}>
+                        <option value="alert">Alert</option>
+                        {#if !isDesktop}
+                            <option value="alertmove">Alert if moving</option>
+                        {/if}
+                        <option value="soundnotification">Sound Notification</option>
+                        <option value="silentnotification">Silent Notification</option>
+                        <option value="nothing">Nothing</option>
+                    </select>
+                    <br>
+                {/each}
             </div>
         </details>
     </div>
