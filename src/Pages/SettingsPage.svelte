@@ -20,6 +20,7 @@
         let settingsSave = structuredClone($state.snapshot(allSettings));
         settingsSave["radar"]["color-scheme"] = Number(settingsSave["radar"]["color-scheme"]);
         localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
+        refreshAppTheme();
     }
 
     function ensureSettingsSet(){

@@ -10,6 +10,18 @@
     window.goPage = (goTo) => {
         page = goTo;
     }
+
+    window.refreshAppTheme = () => {
+        window.appTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        let currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+        if (currentSettings["personalization"]){
+            if (currentSettings["personalization"]["theme"] !== "system"){
+                window.appTheme = currentSettings["personalization"]["theme"];
+            }
+        }
+        document.body.setAttribute("class", window.appTheme);
+    }
+    setTimeout(refreshAppTheme, 100);
 </script>
 
 <AtmosLogo />
