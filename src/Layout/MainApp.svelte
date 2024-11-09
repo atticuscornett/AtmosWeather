@@ -2,6 +2,7 @@
     import AboutPage from "../Pages/AboutPage.svelte";
     import PrivacyPage from "../Pages/PrivacyPage.svelte";
     import SettingsPage from "../Pages/SettingsPage.svelte";
+    import LocationsPage from "../Pages/LocationsPage.svelte";
 
     let { page = $bindable() } = $props();
 </script>
@@ -9,6 +10,7 @@
 <div id="main-app">
     <br>
     <AboutPage bind:page={page}/>
+    <LocationsPage bind:page={page}/>
     <PrivacyPage bind:page={page}/>
     <SettingsPage bind:page={page}/>
 </div>

@@ -21,6 +21,7 @@
         settingsSave["radar"]["color-scheme"] = Number(settingsSave["radar"]["color-scheme"]);
         localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
         refreshAppTheme();
+        window.locationEnabled = allSettings["location"]["weather"];
     }
 
     function ensureSettingsSet(){

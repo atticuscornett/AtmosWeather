@@ -21,22 +21,6 @@ NOTHING YET:
 	color: white;
 }
 
-#add-location{
-	position: fixed;
-	z-index: 99;
-	bottom: 10%;
-	padding-left: 15px;
-	padding-right: 15px;
-	border: none;
-	background-color: rgba(34,55,91,0.88);
-	color: white;
-	font-family: Secular One;
-	font-size: 25px;
-	border-radius: 7px;
-	cursor: pointer;
-	box-shadow: 0px 0px 7px #898989;
-}
-
 #welcome-button-native{
 	border: none;
 	background-color: dodgerblue;
@@ -70,7 +54,7 @@ NOTHING YET:
 	border-radius: 7px;
 	cursor: pointer;
 	border: none;
-	font-family: Secular One;
+	font-family: Secular One, sans-serif;
 }
 
 #current-loc-aqi-bar{
@@ -111,10 +95,6 @@ NOTHING YET:
 
 .noalerts{
 	background-color: dodgerblue;
-}
-
-.error{
-	background-color: darkslategray;
 }
 
 .watch{

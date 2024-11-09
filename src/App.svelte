@@ -4,8 +4,8 @@
     import NavButton from "./Components/NavButton.svelte";
     import MainApp from "./Layout/MainApp.svelte";
 
-    let selected = $state("location");
-    let page = $state("about");
+    let selected = $state("locations");
+    let page = $state("locations");
 
     window.goPage = (goTo) => {
         page = goTo;

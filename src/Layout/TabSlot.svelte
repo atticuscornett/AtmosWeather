@@ -44,7 +44,7 @@
     });
 </script>
 
-<div class="tab-div" id="tab-{name}" hidden={name !== "about"}>
+<div class="tab-div" id="tab-{name}" hidden={name !== "locations"}>
     {@render children()}
 </div>
 

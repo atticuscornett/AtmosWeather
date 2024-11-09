@@ -106,15 +106,6 @@ body.dark {
 	}
 }
 
-@keyframes loadAnim{
-	0%{
-		transform: rotate(0deg);
-	}
-	100%{
-		transform: rotate(360deg);
-	}
-}
-
 @keyframes simpleFadeOut{
 	0%{
 		opacity: 1.0;
