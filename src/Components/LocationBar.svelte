@@ -122,7 +122,7 @@
    }
 
    .error{
-       background-color: darkslategray;
+       background-color: darkslategray !important;
    }
 
    .errorImg {

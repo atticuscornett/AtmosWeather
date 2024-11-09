@@ -12,7 +12,14 @@ window.atmosUpdateNotes = `
 		</dl> 
 		`;
 
-// Set global app theme
+window.syncFiles = () => {
+    // if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa")){
+    //     cap.syncPreferences();
+    // }
+    // TODO: Implement sync
+    console.log("FIX THIS");
+}
+
 
 // Fade out logo and handle notices after animation is done or immediately if it's disabled
 let noticeTimeout = 0;
@@ -57,13 +64,6 @@ setTimeout(async () => {
         document.getElementById("offlineError").hidden = true;
     }
 }, 100);
-
-// Allow Enter key on search
-document.getElementById("location-search").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        document.getElementById("search-button").click();
-      }
-});
 
 // Refresh duration text on slider change
 document.getElementById("setting-page-transition-duration").onchange = () => {

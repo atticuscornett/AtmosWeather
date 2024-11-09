@@ -6,7 +6,7 @@
 
     let nomLocations = $state(JSON.parse(localStorage.getItem("weather-locations")));
     let nomLocationNames = $state(JSON.parse(localStorage.getItem("weather-location-names")));
-    let setting = $state(JSON.parse(localStorage.getItem("atmos-settings")));
+    let settings = $state(JSON.parse(localStorage.getItem("atmos-settings")));
     let showCurrentLocation = $state(window.locationEnabled);
 
     let alertLocations = $state([]);
@@ -14,9 +14,17 @@
     let mainLocations = $state([]);
 
     let refreshLocations = () => {
+        alertLocations = [];
+        otherLocations = [];
+        mainLocations = [];
+
         showCurrentLocation = window.locationEnabled;
+        nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
+        nomLocationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+        settings = JSON.parse(localStorage.getItem("atmos-settings"));
+
         for (let i = 0; i < nomLocations.length; i++){
-            nomToWeatherGridAsync(nomLocations[i], (nomRes, i) => {
+            nomToWeatherGridAsync(nomLocations[i], (nomRes) => {
                 getHourlyForecastAsync(nomRes, (hourly) => {
                     getStatusAsync(nomLocations[i], (fullStatus) => {
                         let alertStatus = fullStatus[0];
@@ -46,8 +54,6 @@
             });
         }
     }
-
-    $effect(refreshLocations);
 </script>
 
 <TabSlot name="locations" bind:page={page} onOpen={refreshLocations}>

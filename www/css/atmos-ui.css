@@ -31,11 +31,6 @@ NOTHING YET:
 	cursor: pointer;
 }
 
-#location-search{
-	font-size: 30px;
-	width: 50%;
-}
-
 #fade-section{
 	margin-left: 20px;
 	margin-right: 20px;
@@ -93,31 +88,6 @@ NOTHING YET:
 	box-shadow: 0px 0px 7px #898989;
 }
 
-.noalerts{
-	background-color: dodgerblue;
-}
-
-.watch{
-	background-color: darkgoldenrod;
-	animation-name: watchAnim;
-	animation-iteration-count: infinite;
-	animation-duration: 5s;
-}
-
-.warning{
-	background-color: darkred;
-	animation-name: warningAnim;
-	animation-iteration-count: infinite;
-	animation-duration: 2s;
-}
-
-.other{
-	background-color: grey;
-	animation-name: otherAnim;
-	animation-iteration-count: infinite;
-	animation-duration: 5s;
-}
-
 .currentloc{
 	background-color: cadetblue;
 }
@@ -135,17 +105,6 @@ NOTHING YET:
 	margin-right:20px;
 	margin-bottom:20px;
 	border-radius:7px;
-}
-
-.searchResult{
-	display: flex;
-	align-items: center;
-	background-color: dodgerblue;
-	color: white;
-	border: none;
-	border-radius: 7px;
-	padding: 20px 0;
-	cursor: pointer;
 }
 
 .box{

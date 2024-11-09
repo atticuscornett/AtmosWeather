@@ -3,6 +3,7 @@
     import PrivacyPage from "../Pages/PrivacyPage.svelte";
     import SettingsPage from "../Pages/SettingsPage.svelte";
     import LocationsPage from "../Pages/LocationsPage.svelte";
+    import SearchPage from "../Pages/SearchPage.svelte";
 
     let { page = $bindable() } = $props();
 </script>
@@ -13,6 +14,7 @@
     <LocationsPage bind:page={page}/>
     <PrivacyPage bind:page={page}/>
     <SettingsPage bind:page={page}/>
+    <SearchPage bind:page={page}/>
 </div>
 
 <style>

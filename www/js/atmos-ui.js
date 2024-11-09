@@ -107,48 +107,9 @@ const checkAPIstatus = async () => {
 };
 
 // Runs Nominatim search and shows results on add location tab
-function locationSearch(){
-	document.getElementById("search-results").innerHTML = "";
-	var theSearch = document.getElementById("location-search").value;
-	nomSearch(theSearch,
-		(searchOutput) => {
-			var searchResults = nomItemsToNames(searchOutput);
-			var noRep = [];
-			var a = 0;
-			while (a < searchResults.length){
-				if (searchOutput[a]["display_name"].includes("United States") && !noRep.includes(searchResults[a])){
-					document.getElementById("search-results").innerHTML += '<div id="searchRes' + a.toString() + '" class="searchResult" onclick="selectResult(this.id)"><img src="img/location-pin.svg" style="float:left; vertical-align: text-bottom;width: 35px;margin-left: 10px;"><h1 style="margin-left: 40px;">' + searchResults[a] + '</h1></div><br>';
-					noRep.push(searchResults[a])
-				}
-				a++;
-				
-			}
-			if (document.getElementById("search-results").innerHTML == ""){
-				document.getElementById("search-results").innerHTML = "<h1>Couldn't find that location!</h1>";
-			}
-		});	
-}
 
 // Add the selected location to the database
-function selectResult(id){
-	var theSearch = document.getElementById("location-search").value;
-	id = id.replace("searchRes", "")
-	id = parseInt(id);
-	nomSearch(theSearch, (searchRes) => {
-		var name = nomItemsToNames(searchRes)[id];
-		var searchOutput = searchRes[id];
-		var tempJSON = JSON.parse(localStorage.getItem("weather-locations"));
-		var tempJSON2 = JSON.parse(localStorage.getItem("weather-location-names"));
-		if (!tempJSON2.includes(name)){
-			tempJSON.push(searchOutput);
-			tempJSON2.push(name)
-			localStorage.setItem("weather-locations", JSON.stringify(tempJSON));
-			localStorage.setItem("weather-location-names", JSON.stringify(tempJSON2));
-		}
-		syncFiles();
-		navTo("locations");
-	});
-}
+
 
 // Refreshes the information on the locations page
 function refreshLocations(){
@@ -423,57 +384,7 @@ function loadMoreInfo(navName){
 }
 
 // Check if a location is under any watches, warnings, etc.
-function getStatusAsync(nomObj, callback, extraReturn=null){
-	var warnings = 0;
-	var watches = 0;
-	var other = 0;
-	getWeatherAlertsForNomAsync(nomObj, (weatherAlerts) => {
-		weatherAlerts = weatherAlerts[0];
-		var a = 0;
-		var warningsList = [];
-		var watchesList = [];
-		var otherList = [];
-		var statList = [];
-		// Count the number of watches and warnings
-		while (a < weatherAlerts.length){
-			if (weatherAlerts[a]["properties"]["event"].toLowerCase().includes("watch")){
-				watchesList.push(weatherAlerts[a]["properties"]["event"]);
-				watches++;
-			}
-			else if (weatherAlerts[a]["properties"]["event"].toLowerCase().includes("warning")){
-				warningsList.push(weatherAlerts[a]["properties"]["event"]);
-				warnings++;
-			}
-			else{
-				other++;
-				otherList.push(weatherAlerts[a]["properties"]["event"]);
-			}
-			a++;
-		}
-		statList = warningsList;
-		statList = statList.concat(watchesList);
-		statList = statList.concat(otherList);
-		let toReturn;
-		if (warnings > 0){
-			toReturn = ["warning", warnings, watches, other, statList];
-		}
-		else if (watches > 0){
-			toReturn = ["watch", warnings, watches, other, statList];
-		}
-		else if (other > 0){
-			toReturn =  ["other", warnings, watches, other, statList];
-		}
-		else{
-			toReturn = ["noalerts", warnings, watches, other, statList];
-		}
-		if (extraReturn != null){
-			callback(toReturn, extraReturn);
-		}
-		else{
-			callback(toReturn);
-		}
-	});
-}
+
 
 // Sync with native code
 function syncFiles(){

@@ -63,4 +63,29 @@ body.dark details[open] summary{
 	border-bottom: white solid;
 }
 
+.noalerts{
+	background-color: dodgerblue !important;
+}
+
+.watch{
+	background-color: darkgoldenrod !important;
+	animation-name: watchAnim !important;
+	animation-iteration-count: infinite !important;
+	animation-duration: 5s !important;
+}
+
+.warning{
+	background-color: darkred !important;
+	animation-name: warningAnim;
+	animation-iteration-count: infinite !important;
+	animation-duration: 2s !important;
+}
+
+.other{
+	background-color: grey !important;
+	animation-name: otherAnim;
+	animation-iteration-count: infinite !important;
+	animation-duration: 5s !important;
+}
+
 /*# sourceMappingURL=bundle.css.map*/
