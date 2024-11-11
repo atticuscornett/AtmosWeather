@@ -4,6 +4,7 @@
     import HumidityGraph from "../Graphs/HumidityGraph.svelte";
     import WindGraph from "../Graphs/WindGraph.svelte";
     import DewpointGraph from "../Graphs/DewpointGraph.svelte";
+    import FeelsLikeGraph from "../Graphs/FeelsLikeGraph.svelte";
 
     let { locationData } = $props();
 
@@ -29,4 +30,5 @@
     <HumidityGraph uniqueName="hourly" locationData={locationData} />
     <WindGraph uniqueName="hourly" locationData={locationData} />
     <DewpointGraph uniqueName="hourly" locationData={locationData} />
+    <FeelsLikeGraph uniqueName="hourly" locationData={locationData} />
 </div>

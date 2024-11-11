@@ -139,6 +139,10 @@
             };
         }
 
+        if (title === "Feels Like"){
+            console.log(chartConfig);
+        }
+
         let chart = new Chart(document.getElementById(String(location) + "-loc-"+title+uniqueName+"-chart"),
             chartConfig);
     })

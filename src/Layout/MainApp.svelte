@@ -8,6 +8,8 @@
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
+
+    $inspect(weatherDataDictionary);
 </script>
 
 <div id="main-app">

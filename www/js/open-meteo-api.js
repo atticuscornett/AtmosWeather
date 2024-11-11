@@ -63,6 +63,9 @@ function removeOldData(times, data){
     let a = 0;
     while (String(times[a]).endsWith(String(UTCHour) + ":00") === false){
         a++;
+        if (a > 50){
+            break;
+        }
     }
     newData = data.slice(a);
     let newTimes = times.slice(a);
