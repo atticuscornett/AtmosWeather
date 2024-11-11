@@ -84,24 +84,3 @@ function removeOldData(times, data){
     
     return [newTimes, newData];
 }
-
-function getAQICategory(AQI){
-    if (AQI > 300){
-        return "Hazardous";
-    }
-    else if (AQI > 200){
-        return "Very Unhealthy";
-    }
-    else if (AQI > 150){
-        return "Unhealthy";
-    }
-    else if (AQI > 100){
-        return "Unhealthy for sensitive groups";
-    }
-    else if (AQI > 50){
-        return "Moderate";
-    }
-    else{
-        return "Good";
-    }
-}

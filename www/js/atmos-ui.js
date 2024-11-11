@@ -287,12 +287,6 @@ function loadMoreInfo(navName){
 								// Temperature Bar
 								let longHourForecast = "<h1>Hourly Forecast</h1>";
 								try{
-									generatedCode += '<div class="clear-border"><h1>Air Quality Index (AQI)</h1><h2>';
-									generatedCode += AQI.toString() + " (" + getAQICategory(AQI) + ")";
-									generatedCode += '</h2>';
-									let gauge = makeGauge(AQI, 0, 300);
-									generatedCode += gauge.outerHTML;
-									generatedCode += '</div><h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5><br>'
 
 									clearCharts(index);
 									longHourForecast += `<div id="`+String(index)+`-loc-hourly-select">

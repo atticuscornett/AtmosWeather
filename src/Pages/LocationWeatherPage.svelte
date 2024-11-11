@@ -2,6 +2,7 @@
     import TabSlot from "../Layout/TabSlot.svelte";
     import AlertBar from "../Components/LocationWidgets/AlertBar.svelte";
     import LocationAtAGlance from "../Components/LocationWidgets/LocationAtAGlance.svelte";
+    import AirQualityIndex from "../Components/LocationWidgets/AirQualityIndex.svelte";
 
     let { locationData, page=$bindable() } = $props();
 
@@ -18,5 +19,6 @@
     {#if locationData.hourly[0]}
         <AlertBar locationData={locationData} bind:page={page} />
         <LocationAtAGlance locationData={locationData} bind:page={page} />
+        <AirQualityIndex locationData={locationData} />
     {/if}
 </TabSlot>

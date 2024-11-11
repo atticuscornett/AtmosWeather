@@ -42,6 +42,11 @@
                             weatherDataDictionary[nomLocationNames[i]] = locationData;
                         });
 
+                        getCurrentAQIForNomAsync(nomLocations[i], (AQI) => {
+                            locationData.AQI = AQI;
+                            weatherDataDictionary[nomLocationNames[i]] = locationData;
+                        });
+
                         weatherDataDictionary[nomLocationNames[i]] = locationData;
                         console.log(weatherDataDictionary);
 
