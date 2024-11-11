@@ -2,6 +2,10 @@
     let { children, name, page = $bindable(), onOpen, onClose } = $props();
 
     $effect(() => {
+        console.log("page name - " + name);
+        console.log("current page - " + page);
+
+
         let atmosSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         if (!atmosSettings){
             atmosSettings = {};

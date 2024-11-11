@@ -35,48 +35,6 @@
             }
         }
     });
-
-    // if (nomLocations.length > 0){
-    //     if (locationEnabled){
-    //         document.getElementById("location-main").innerHTML = '<div class="location ' + "currentloc" + '" id="currentLocDiv"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + "current-location" + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2 id="currentLocTitle">' + "Current Location" + '</h2><h3 id="currentLocData">Loading information...</h3></div></div><br>';
-    //     }
-    //     else{
-    //         document.getElementById("location-main").innerHTML = "";
-    //     }
-    //     var a = 0;
-    //     while (a < nomLocations.length){
-    //         nomToWeatherGridAsync(nomLocations[a], (nomRes, a) => {
-    //             getHourlyForecastAsync(nomRes, (hourly) => {
-    //                 getStatusAsync(nomLocations[a], (fullStatus) => {
-    //                     var alertStatus = fullStatus[0];
-    //                     var image = "sunny";
-    //                     if (!hourly[0]){
-    //                         if (!refreshAgain){
-    //                             refreshAgain = true;
-    //                             setTimeout(refreshLocations, 7000);
-    //                         }
-    //                         document.getElementById("location-main").innerHTML += theDiv;
-    //                     }
-    //                     else{
-    //
-    //                         var theDiv = '<div class="location ' + alertStatus + '" onclick="navTo(\'locdat-' + nomLocationNames[a] + '-' + a.toString() + '\')"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right:8px;"><h2>' + nomLocationNames[a] + '</h2><h3 style="margin-right:8px;">' + info + '&emsp;(Tap for more info.)</h3></div></div><br>';
-    //                         if (alertStatus == "warning"){
-    //                             document.getElementById("location-w-alert").innerHTML += theDiv;
-    //                         }
-    //                         else if (alertStatus == "watch" || alertStatus == "other"){
-    //                             document.getElementById("location-w-other").innerHTML += theDiv;
-    //                         }
-    //                         else{
-    //                             document.getElementById("location-main").innerHTML += theDiv;
-    //                         }
-    //                         document.getElementById("location-data").innerHTML += "<div id='tab-locdat-" + nomLocationNames[a] + '-' + a.toString() + "' class='tab-div' hidden><h1>" + nomLocationNames[a] + "</h1></div>";
-    //                     }
-    //                 });
-    //             });
-    //         }, a);
-    //         a++;
-    //     }
-    // }
 </script>
 
 {#if !locationData.hourly[0]}

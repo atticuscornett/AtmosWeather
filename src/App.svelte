@@ -21,6 +21,7 @@
         }
         document.body.setAttribute("class", window.appTheme);
     }
+
     setTimeout(refreshAppTheme, 100);
 </script>
 

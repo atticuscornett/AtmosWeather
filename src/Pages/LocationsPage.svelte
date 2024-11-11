@@ -2,7 +2,7 @@
     import TabSlot from "../Layout/TabSlot.svelte";
     import LocationBar from "../Components/LocationBar.svelte";
 
-    let { page = $bindable() } = $props();
+    let { page = $bindable(), weatherDataDictionary = $bindable() } = $props();
 
     let nomLocations = $state(JSON.parse(localStorage.getItem("weather-locations")));
     let nomLocationNames = $state(JSON.parse(localStorage.getItem("weather-location-names")));
@@ -35,6 +35,9 @@
                             fullStatus: fullStatus,
                             hourly: hourly
                         }
+
+                        weatherDataDictionary[nomLocationNames[i]] = locationData;
+                        console.log(weatherDataDictionary);
 
                         if (!hourly[0]){
                             setTimeout(refreshLocations, 7000);
