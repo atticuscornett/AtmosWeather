@@ -1017,6 +1017,69 @@ svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_end(AtmosLogo);
 
 /***/ }),
 
+/***/ "./src/Components/Graphs/HumidityGraph.svelte":
+/*!****************************************************!*\
+  !*** ./src/Components/Graphs/HumidityGraph.svelte ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ HumidityGraph)
+/* harmony export */ });
+/* harmony import */ var svelte_internal_disclose_version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal/disclose-version */ "./node_modules/svelte/src/internal/disclose-version.js");
+/* harmony import */ var svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte/internal/client */ "./node_modules/svelte/src/internal/client/index.js");
+/* harmony import */ var _WeatherGraph_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./WeatherGraph.svelte */ "./src/Components/Graphs/WeatherGraph.svelte");
+
+
+svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_start();
+HumidityGraph[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/Components/Graphs/HumidityGraph.svelte";
+
+
+
+
+function HumidityGraph($$anchor, $$props) {
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.check_target(new.target);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, true, HumidityGraph);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, [], [], HumidityGraph);
+
+	let chartList = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.derived(() => $$props.locationData["hourly"][0]);
+	const precipColorGradient = chroma.scale(["white", "yellow"]);
+	let labelCallback = (item) => `${item.dataset.label}: ${item.formattedValue}%`;
+
+	let imageCallback = (data, i) => {
+		return "";
+	};
+
+	let gradientCallback = (data, i) => data[i]["relativeHumidity"]["value"] / 100;
+	let dataCallback = (data, i) => data[i]["relativeHumidity"]["value"];
+
+	(0,_WeatherGraph_svelte__WEBPACK_IMPORTED_MODULE_2__["default"])($$anchor, {
+		get chartList() {
+			return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(chartList);
+		},
+		title: "Relative Humidity",
+		get location() {
+			return $$props.locationData.name;
+		},
+		colorGradient: precipColorGradient,
+		labelCallback,
+		iconCallback: imageCallback,
+		gradientCallback,
+		dataCallback,
+		get uniqueName() {
+			return $$props.uniqueName;
+		},
+		scale: true
+	});
+
+	return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.pop({ ...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.legacy_api() });
+}
+
+svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_end(HumidityGraph);
+
+/***/ }),
+
 /***/ "./src/Components/Graphs/PrecipitationGraph.svelte":
 /*!*********************************************************!*\
   !*** ./src/Components/Graphs/PrecipitationGraph.svelte ***!
@@ -1888,6 +1951,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte/internal/client */ "./node_modules/svelte/src/internal/client/index.js");
 /* harmony import */ var _Graphs_TemperatureGraph_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Graphs/TemperatureGraph.svelte */ "./src/Components/Graphs/TemperatureGraph.svelte");
 /* harmony import */ var _Graphs_PrecipitationGraph_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Graphs/PrecipitationGraph.svelte */ "./src/Components/Graphs/PrecipitationGraph.svelte");
+/* harmony import */ var _Graphs_HumidityGraph_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Graphs/HumidityGraph.svelte */ "./src/Components/Graphs/HumidityGraph.svelte");
 
 
 svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_start();
@@ -1897,12 +1961,12 @@ MultiGraph[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/
 
 
 
-var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div><input type="radio" value="temp" class="hourlySelector" checked> <label class="hourlySelectorLabel">Temperature</label> <input type="radio" value="feels-like" class="hourlySelector"> <label class="hourlySelectorLabel">Feels Like</label> <input type="radio" value="precip" class="hourlySelector"> <label class="hourlySelectorLabel">Precipitation</label> <input type="radio" value="humid" class="hourlySelector"> <label class="hourlySelectorLabel">Humidity</label> <input type="radio" value="wind" class="hourlySelector"> <label class="hourlySelectorLabel">Wind Speed</label> <input type="radio" value="dewpoint" class="hourlySelector"> <label class="hourlySelectorLabel">Dew Point</label> <!> <!></div>`), MultiGraph[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
+
+var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div><input type="radio" value="temp" class="hourlySelector" checked> <label class="hourlySelectorLabel">Temperature</label> <input type="radio" value="feels-like" class="hourlySelector"> <label class="hourlySelectorLabel">Feels Like</label> <input type="radio" value="precip" class="hourlySelector"> <label class="hourlySelectorLabel">Precipitation</label> <input type="radio" value="humid" class="hourlySelector"> <label class="hourlySelectorLabel">Humidity</label> <input type="radio" value="wind" class="hourlySelector"> <label class="hourlySelectorLabel">Wind Speed</label> <input type="radio" value="dewpoint" class="hourlySelector"> <label class="hourlySelectorLabel">Dew Point</label> <!> <!> <!></div>`), MultiGraph[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
 	[
-		10,
+		11,
 		0,
 		[
-			[11, 4],
 			[12, 4],
 			[13, 4],
 			[14, 4],
@@ -1913,7 +1977,8 @@ var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(sve
 			[19, 4],
 			[20, 4],
 			[21, 4],
-			[22, 4]
+			[22, 4],
+			[23, 4]
 		]
 	]
 ]);
@@ -1952,6 +2017,15 @@ function MultiGraph($$anchor, $$props) {
 	var node_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node, 2);
 
 	(0,_Graphs_PrecipitationGraph_svelte__WEBPACK_IMPORTED_MODULE_3__["default"])(node_1, {
+		uniqueName: "hourly",
+		get locationData() {
+			return $$props.locationData;
+		}
+	});
+
+	var node_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_1, 2);
+
+	(0,_Graphs_HumidityGraph_svelte__WEBPACK_IMPORTED_MODULE_4__["default"])(node_2, {
 		uniqueName: "hourly",
 		get locationData() {
 			return $$props.locationData;
