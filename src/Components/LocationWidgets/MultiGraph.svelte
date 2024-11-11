@@ -1,5 +1,6 @@
 <script>
     import TemperatureGraph from "../Graphs/TemperatureGraph.svelte";
+    import PrecipitationGraph from "../Graphs/PrecipitationGraph.svelte";
 
     let { locationData } = $props();
 
@@ -21,4 +22,5 @@
     <label for="{name}-loc-hourly-dewpoint" class="hourlySelectorLabel">Dew Point</label>
 
     <TemperatureGraph uniqueName="hourly" locationData={locationData} />
+    <PrecipitationGraph uniqueName="hourly" locationData={locationData} />
 </div>

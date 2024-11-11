@@ -1,5 +1,6 @@
 <script>
-    let { chartList, title, location, colorGradient, labelCallback, iconCallback, gradientCallback, dataCallback, uniqueName } = $props();
+    let { chartList, title, location, colorGradient,
+        labelCallback, iconCallback, gradientCallback, dataCallback, scale=false, uniqueName } = $props();
 
     let thisChart;
 
@@ -115,6 +116,19 @@
 
         if (image !== ""){
             chartConfig.data.datasets[0].pointStyle = imagePeriods;
+        }
+
+        if (scale){
+            chartConfig.options.scales = {
+                y: {
+                    beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                        stepSize: 20
+                    }
+                }
+            };
         }
 
         let chart = new Chart(document.getElementById(String(location) + "-loc-"+title+uniqueName+"-chart"),
