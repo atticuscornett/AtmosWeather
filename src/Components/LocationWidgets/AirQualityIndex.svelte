@@ -51,6 +51,7 @@
         </div>
         <h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5>
     </div>
+    <br>
 {/if}
 
 <style>

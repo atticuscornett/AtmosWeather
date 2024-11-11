@@ -35,5 +35,5 @@
 
     </WeatherGraph>
 {:else}
-    <h1>Loading OpenMeteo data...</h1>
+    <h2>Loading OpenMeteo data...</h2>
 {/if}

@@ -288,13 +288,6 @@ function loadMoreInfo(navName){
 								let longHourForecast = "<h1>Hourly Forecast</h1>";
 								try{
 
-									clearCharts(index);
-									longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-feels-like-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-feels-like-chart'></canvas></div>";
-									longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-precip-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-precip-chart'></canvas></div>";
-									longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-humid-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-humid-chart'></canvas></div>";
-									longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-wind-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-wind-chart'></canvas></div>";
-									longHourForecast += "<div class='weatherGraph' id='" + String(index) + "-loc-hourly-dewpoint-chart-container' style='display:none;'><canvas id='" + String(index) + "-loc-hourly-dewpoint-chart'></canvas></div>";
-									longHourForecast += "<h6>Feels Like temperature is provided by <a href='https://open-meteo.com/' target='_blank'>Open-Meteo</a></h6>";
 									let feelsLike = removeOldData(additionalData["hourly"]["time"], additionalData["hourly"]["apparent_temperature"]);
 
 									// Wait for the DOM to be updated before making graphs

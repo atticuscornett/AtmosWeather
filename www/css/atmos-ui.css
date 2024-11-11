@@ -109,20 +109,7 @@ NOTHING YET:
 
 
 
-.hourlySelectorLabel {
-	cursor: pointer;
-	margin-right: 20px;
-	user-select: none;
-}
 
-.hourlySelector:checked + .hourlySelectorLabel {
-	text-decoration: underline solid;
-	font-weight: 700;
-}
-
-.hourlySelector {
-	display: none;
-}
 
 
 @media screen and (orientation:portrait) {
