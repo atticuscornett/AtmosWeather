@@ -60,26 +60,26 @@ body.dark details[open] summary{
 	border-bottom: white solid;
 }
 
-.noalerts{
+.noalerts.noalerts{
 	background-color: dodgerblue !important;
 }
 
-.watch{
-	background-color: darkgoldenrod !important;
+.watch.watch{
+	background-color: darkgoldenrod;
 	animation-name: watchAnim !important;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
 }
 
-.warning{
-	background-color: darkred !important;
+.warning.warning{
+	background-color: darkred;
 	animation-name: warningAnim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 2s !important;
 }
 
-.other{
-	background-color: grey !important;
+.other.other{
+	background-color: grey;
 	animation-name: otherAnim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
