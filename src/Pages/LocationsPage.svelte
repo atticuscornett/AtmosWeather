@@ -40,6 +40,11 @@
                             alerts: weatherAlerts
                         }
 
+                        getForecastAsync(nomRes, (forecast) => {
+                            locationData.forecast = forecast;
+                            weatherDataDictionary[nomLocationNames[i]] = locationData;
+                        });
+
                         getAdditionalWeatherDataForNomAsync(nomLocations[i], (additionalData) => {
                             locationData.openMeteoData = additionalData;
                             weatherDataDictionary[nomLocationNames[i]] = locationData;
