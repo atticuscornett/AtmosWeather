@@ -303,7 +303,6 @@ function loadMoreInfo(navName){
 									}, 50);
 								}
 								catch (e){
-									longHourForecast = "<h2>There is no currently available short forecast for this location. This may be due to extreme hazardous conditions or NWS API errors.";
 									console.log(e)
 									window.loadingElements = 0;
 								}

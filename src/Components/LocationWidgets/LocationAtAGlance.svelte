@@ -46,7 +46,14 @@
         {#if locationData.openMeteoData}
             <h4>Feels like {Math.round(locationData.openMeteoData["current"]["apparent_temperature"])}° F</h4>
         {/if}
-        <h3>{locationData.hourly[0][0]["shortForecast"]}</h3>
+        {#if locationData.hourly[0][0]["shortForecast"]}
+            <h3>{locationData.hourly[0][0]["shortForecast"]}</h3>
+            {:else}
+            <h3>
+                There is no currently available short forecast for this location.
+                This may be due to extreme hazardous conditions or NWS API errors.
+            </h3>
+        {/if}
     </div>
 </div>
 <br>
