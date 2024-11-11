@@ -22,17 +22,6 @@
             else if (shortForecast.includes("cloud") || shortForecast.includes("fog")){
                 image = "cloudy";
             }
-
-            if (locationData.alert === "warning"){
-                image = "warning";
-                info = locationData.fullStatus[1].toString() + " warning(s) and " + locationData.fullStatus[2].toString() + " watch(es)";
-            }
-            if (locationData.alert === "watch"){
-                info = locationData.fullStatus[2].toString() + " watch(es)";
-            }
-            if (locationData.alert === "other"){
-                info = "Weather statements in effect";
-            }
         }
     });
 </script>
