@@ -1,6 +1,6 @@
 <script>
     let { chartList, title, location, colorGradient,
-        labelCallback, iconCallback, gradientCallback, dataCallback, scale=false, uniqueName } = $props();
+        labelCallback, iconCallback, gradientCallback, dataCallback, scale=false, startAtZero=false, uniqueName } = $props();
 
     let thisChart;
 
@@ -116,6 +116,14 @@
 
         if (image !== ""){
             chartConfig.data.datasets[0].pointStyle = imagePeriods;
+        }
+
+        if (startAtZero){
+            chartConfig.options.scales = {
+                y: {
+                    beginAtZero: true
+                }
+            };
         }
 
         if (scale){

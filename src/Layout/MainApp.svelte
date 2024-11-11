@@ -8,10 +8,6 @@
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
-
-    $effect(() => {
-        console.log("page opened - " + page);
-    });
 </script>
 
 <div id="main-app">

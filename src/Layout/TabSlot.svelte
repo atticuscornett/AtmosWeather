@@ -2,10 +2,6 @@
     let { children, name, page = $bindable(), onOpen, onClose } = $props();
 
     $effect(() => {
-        console.log("page name - " + name);
-        console.log("current page - " + page);
-
-
         let atmosSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         if (!atmosSettings){
             atmosSettings = {};
@@ -16,10 +12,9 @@
         if (!atmosSettings["personalization"]["page-transition-duration"]){
             atmosSettings["personalization"]["page-transition-duration"] = 1500;
         }
-        console.log(atmosSettings);
+
         let duration = atmosSettings["personalization"]["page-transition-duration"] + "ms";
         let delay = atmosSettings["personalization"]["page-transition-duration"]/4;
-        console.log(duration);
 
         if (page === name) {
             // Animate onto screen after delay

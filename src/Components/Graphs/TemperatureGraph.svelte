@@ -10,7 +10,6 @@
     let labelCallback = (item) =>`${item.dataset.label}: ${item.formattedValue} °F`;
 
     let imageCallback = (data, i) => {
-        console.log(data)
         let image;
         let sfor = data[i]["shortForecast"].toLowerCase();
         if (sfor.includes("rain") || sfor.includes("drizzle")){
