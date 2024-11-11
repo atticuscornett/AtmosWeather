@@ -284,24 +284,6 @@ function loadMoreInfo(navName){
 								generatedCode = "<h1>" + nomName + "</h1><br>";
 								// Bars at the top of page
 								generatedCode += '<div>'
-								// Weather Alert Bar
-								var theWarnings = "";
-								var b = 0;
-								while (b < activeAlertInfo.length){
-									theWarnings += "<a href='#' style='color:white;' onclick='loadAlert(\"" + index.toString() + "-" + b +  "\")'>" + activeAlertInfo[b]["properties"]["event"] + "</a>&emsp;"
-									b++;
-								}
-
-								if (fullStatus[0] == "warning"){
-									generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/warning.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active warnings!</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
-								}
-								if (fullStatus[0] == "watch"){
-									generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active watches.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
-								}
-								if (fullStatus[0] == "other"){
-									theWarnings = theWarnings.replaceAll(",", ", ")
-									generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
-								}
 								// Temperature Bar
 								let longHourForecast = "<h1>Hourly Forecast</h1>";
 								try{

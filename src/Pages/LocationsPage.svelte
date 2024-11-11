@@ -26,15 +26,20 @@
         for (let i = 0; i < nomLocations.length; i++){
             nomToWeatherGridAsync(nomLocations[i], (nomRes) => {
                 getHourlyForecastAsync(nomRes, (hourly) => {
-                    getStatusAsync(nomLocations[i], (fullStatus) => {
+                    getStatusAsync(nomLocations[i], (fullStatus, weatherAlerts) => {
                         let alertStatus = fullStatus[0];
 
                         let locationData = {
                             name: nomLocationNames[i],
                             alert: alertStatus,
                             fullStatus: fullStatus,
-                            hourly: hourly
+                            hourly: hourly,
+                            alerts: weatherAlerts
                         }
+
+                        // getAdditionalWeatherDataForNomAsync(nomLocations[i], (additionalData) => {
+                        //     locationData.additionalData = additionalData;
+                        // });
 
                         weatherDataDictionary[nomLocationNames[i]] = locationData;
                         console.log(weatherDataDictionary);

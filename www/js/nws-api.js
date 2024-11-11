@@ -152,10 +152,10 @@ function getStatusAsync(nomObj, callback, extraReturn=null){
 			toReturn = ["noalerts", warnings, watches, other, statList];
 		}
 		if (extraReturn != null){
-			callback(toReturn, extraReturn);
+			callback(toReturn, extraReturn, weatherAlerts);
 		}
 		else{
-			callback(toReturn);
+			callback(toReturn, weatherAlerts);
 		}
 	});
 }
