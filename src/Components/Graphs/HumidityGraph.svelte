@@ -5,7 +5,7 @@
 
     let chartList = $derived(locationData["hourly"][0]);
 
-    const precipColorGradient = chroma.scale(["white", "yellow"]);
+    const humidColorGradient = chroma.scale(["white", "yellow"]);
 
     let labelCallback = (item) =>`${item.dataset.label}: ${item.formattedValue}%`;
 
@@ -19,7 +19,7 @@
 </script>
 
 <WeatherGraph chartList={chartList} title="Relative Humidity"
-    location={locationData.name} colorGradient={precipColorGradient} labelCallback={labelCallback}
+    location={locationData.name} colorGradient={humidColorGradient} labelCallback={labelCallback}
     iconCallback={imageCallback} gradientCallback={gradientCallback} dataCallback={dataCallback}
     uniqueName={uniqueName} scale={true}>
 

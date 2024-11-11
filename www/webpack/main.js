@@ -1017,6 +1017,76 @@ svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_end(AtmosLogo);
 
 /***/ }),
 
+/***/ "./src/Components/Graphs/DewpointGraph.svelte":
+/*!****************************************************!*\
+  !*** ./src/Components/Graphs/DewpointGraph.svelte ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DewpointGraph)
+/* harmony export */ });
+/* harmony import */ var svelte_internal_disclose_version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal/disclose-version */ "./node_modules/svelte/src/internal/disclose-version.js");
+/* harmony import */ var svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte/internal/client */ "./node_modules/svelte/src/internal/client/index.js");
+/* harmony import */ var _WeatherGraph_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./WeatherGraph.svelte */ "./src/Components/Graphs/WeatherGraph.svelte");
+
+
+svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_start();
+DewpointGraph[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/Components/Graphs/DewpointGraph.svelte";
+
+
+
+
+function DewpointGraph($$anchor, $$props) {
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.check_target(new.target);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, true, DewpointGraph);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, [], [], DewpointGraph);
+
+	let chartList = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.derived(() => $$props.locationData["hourly"][0]);
+
+	const precipColorGradient = chroma.scale([
+		'purple',
+		'dodgerblue',
+		'lime',
+		'yellow',
+		'red'
+	]);
+
+	let labelCallback = (item) => `${item.dataset.label}: ${item.formattedValue} °F`;
+
+	let imageCallback = (data, i) => {
+		return "";
+	};
+
+	let gradientCallback = (data, i) => convertTempUnit(data[i]["dewpoint"]["value"], "C") / 100;
+	let dataCallback = (data, i) => convertTempUnit(data[i]["dewpoint"]["value"], "C");
+
+	(0,_WeatherGraph_svelte__WEBPACK_IMPORTED_MODULE_2__["default"])($$anchor, {
+		get chartList() {
+			return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(chartList);
+		},
+		title: "Dew Point",
+		get location() {
+			return $$props.locationData.name;
+		},
+		colorGradient: precipColorGradient,
+		labelCallback,
+		iconCallback: imageCallback,
+		gradientCallback,
+		dataCallback,
+		get uniqueName() {
+			return $$props.uniqueName;
+		}
+	});
+
+	return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.pop({ ...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.legacy_api() });
+}
+
+svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_end(DewpointGraph);
+
+/***/ }),
+
 /***/ "./src/Components/Graphs/HumidityGraph.svelte":
 /*!****************************************************!*\
   !*** ./src/Components/Graphs/HumidityGraph.svelte ***!
@@ -1044,7 +1114,7 @@ function HumidityGraph($$anchor, $$props) {
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, [], [], HumidityGraph);
 
 	let chartList = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.derived(() => $$props.locationData["hourly"][0]);
-	const precipColorGradient = chroma.scale(["white", "yellow"]);
+	const humidColorGradient = chroma.scale(["white", "yellow"]);
 	let labelCallback = (item) => `${item.dataset.label}: ${item.formattedValue}%`;
 
 	let imageCallback = (data, i) => {
@@ -1062,7 +1132,7 @@ function HumidityGraph($$anchor, $$props) {
 		get location() {
 			return $$props.locationData.name;
 		},
-		colorGradient: precipColorGradient,
+		colorGradient: humidColorGradient,
 		labelCallback,
 		iconCallback: imageCallback,
 		gradientCallback,
@@ -1438,7 +1508,7 @@ function WindGraph($$anchor, $$props) {
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, [], [], WindGraph);
 
 	let chartList = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.derived(() => $$props.locationData["hourly"][0]);
-	const tempColorGradient = chroma.scale(["white", "deeppink"]);
+	const windColorGradient = chroma.scale(["white", "deeppink"]);
 	let labelCallback = (item) => `${item.dataset.label}: ${item.formattedValue} mph`;
 	let lastImage = "";
 
@@ -1462,7 +1532,7 @@ function WindGraph($$anchor, $$props) {
 		get location() {
 			return $$props.locationData.name;
 		},
-		colorGradient: tempColorGradient,
+		colorGradient: windColorGradient,
 		labelCallback,
 		iconCallback: imageCallback,
 		gradientCallback,
@@ -2026,6 +2096,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Graphs_PrecipitationGraph_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Graphs/PrecipitationGraph.svelte */ "./src/Components/Graphs/PrecipitationGraph.svelte");
 /* harmony import */ var _Graphs_HumidityGraph_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Graphs/HumidityGraph.svelte */ "./src/Components/Graphs/HumidityGraph.svelte");
 /* harmony import */ var _Graphs_WindGraph_svelte__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Graphs/WindGraph.svelte */ "./src/Components/Graphs/WindGraph.svelte");
+/* harmony import */ var _Graphs_DewpointGraph_svelte__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Graphs/DewpointGraph.svelte */ "./src/Components/Graphs/DewpointGraph.svelte");
 
 
 svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_start();
@@ -2037,12 +2108,12 @@ MultiGraph[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/
 
 
 
-var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div><input type="radio" value="temp" class="hourlySelector" checked> <label class="hourlySelectorLabel">Temperature</label> <input type="radio" value="feels-like" class="hourlySelector"> <label class="hourlySelectorLabel">Feels Like</label> <input type="radio" value="precip" class="hourlySelector"> <label class="hourlySelectorLabel">Precipitation</label> <input type="radio" value="humid" class="hourlySelector"> <label class="hourlySelectorLabel">Humidity</label> <input type="radio" value="wind" class="hourlySelector"> <label class="hourlySelectorLabel">Wind Speed</label> <input type="radio" value="dewpoint" class="hourlySelector"> <label class="hourlySelectorLabel">Dew Point</label> <!> <!> <!> <!></div>`), MultiGraph[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
+
+var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div><input type="radio" value="temp" class="hourlySelector" checked> <label class="hourlySelectorLabel">Temperature</label> <input type="radio" value="feels-like" class="hourlySelector"> <label class="hourlySelectorLabel">Feels Like</label> <input type="radio" value="precip" class="hourlySelector"> <label class="hourlySelectorLabel">Precipitation</label> <input type="radio" value="humid" class="hourlySelector"> <label class="hourlySelectorLabel">Humidity</label> <input type="radio" value="wind" class="hourlySelector"> <label class="hourlySelectorLabel">Wind Speed</label> <input type="radio" value="dewpoint" class="hourlySelector"> <label class="hourlySelectorLabel">Dew Point</label> <!> <!> <!> <!> <!></div>`), MultiGraph[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
 	[
-		12,
+		13,
 		0,
 		[
-			[13, 4],
 			[14, 4],
 			[15, 4],
 			[16, 4],
@@ -2053,7 +2124,8 @@ var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(sve
 			[21, 4],
 			[22, 4],
 			[23, 4],
-			[24, 4]
+			[24, 4],
+			[25, 4]
 		]
 	]
 ]);
@@ -2110,6 +2182,15 @@ function MultiGraph($$anchor, $$props) {
 	var node_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_2, 2);
 
 	(0,_Graphs_WindGraph_svelte__WEBPACK_IMPORTED_MODULE_5__["default"])(node_3, {
+		uniqueName: "hourly",
+		get locationData() {
+			return $$props.locationData;
+		}
+	});
+
+	var node_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_3, 2);
+
+	(0,_Graphs_DewpointGraph_svelte__WEBPACK_IMPORTED_MODULE_6__["default"])(node_4, {
 		uniqueName: "hourly",
 		get locationData() {
 			return $$props.locationData;

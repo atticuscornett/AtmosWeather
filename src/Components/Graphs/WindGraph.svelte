@@ -5,7 +5,7 @@
 
     let chartList = $derived(locationData["hourly"][0]);
 
-    const tempColorGradient = chroma.scale(["white", "deeppink"]);
+    const windColorGradient = chroma.scale(["white", "deeppink"]);
 
     let labelCallback = (item) =>`${item.dataset.label}: ${item.formattedValue} mph`;
 
@@ -25,7 +25,7 @@
 </script>
 
 <WeatherGraph chartList={chartList} title="Wind Speed"
-    location={locationData.name} colorGradient={tempColorGradient} labelCallback={labelCallback}
+    location={locationData.name} colorGradient={windColorGradient} labelCallback={labelCallback}
     iconCallback={imageCallback} gradientCallback={gradientCallback} dataCallback={dataCallback}
     uniqueName={uniqueName} startAtZero={true}>
 
