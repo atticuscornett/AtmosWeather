@@ -1,5 +1,5 @@
 <script>
-    let { locationData, page=$bindable() } = $props();
+    let { locationData, page=$bindable(), alertSelection=$bindable() } = $props();
 
     let status = $derived(locationData.fullStatus[0]);
     let alerts = $derived(locationData.alerts);
@@ -23,7 +23,10 @@
 
             <h3>
                 {#each alerts as alert, i}
-                    <a href='#' onclick={()=>{page = "alert-"+ locationData.name + "-" + i}}>
+                    <a href='#' onclick={()=>{
+                        page = "alert-view";
+                        alertSelection={name: locationData.name, id: i};
+                    }}>
                         {alert["properties"]["event"]}
                     </a>
                     &emsp;

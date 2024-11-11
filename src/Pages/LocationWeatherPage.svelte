@@ -6,7 +6,7 @@
     import MultiGraph from "../Components/LocationWidgets/MultiGraph.svelte";
     import LongNWSForecast from "../Components/LocationWidgets/LongNWSForecast.svelte";
 
-    let { locationData, page=$bindable() } = $props();
+    let { locationData, page=$bindable(), alertSelection = $bindable() } = $props();
 
     $effect(() => {
         console.log("locationData");
@@ -35,7 +35,7 @@
 
     <!-- Wait for weather data -->
     {#if locationData.hourly[0]}
-        <AlertBar locationData={locationData} bind:page={page} />
+        <AlertBar locationData={locationData} bind:page={page} bind:alertSelection={alertSelection}/>
         <LocationAtAGlance locationData={locationData} bind:page={page} />
         <AirQualityIndex locationData={locationData} />
         <MultiGraph locationData={locationData} />
