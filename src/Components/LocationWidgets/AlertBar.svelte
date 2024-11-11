@@ -1,26 +1,8 @@
 <script>
     let { locationData, page=$bindable() } = $props();
 
-    let status = $derived(locationData.fullStatus[0])
-    let alerts = $derived(locationData.alerts)
-
-    // Weather Alert Bar
-    // var theWarnings = "";
-    // var b = 0;
-    // while (b < activeAlertInfo.length){
-    //     theWarnings += "&emsp;"
-    //     b++;
-    // }
-    //
-    // if (fullStatus[0] == "warning"){
-    // }
-    // if (fullStatus[0] == "watch"){
-    //     generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active watches.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
-    // }
-    // if (fullStatus[0] == "other"){
-    //     theWarnings = theWarnings.replaceAll(",", ", ")
-    //     generatedCode += '<div class="location ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/watch.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>This location has active weather statements.</h1><h3 style="margin-right:8px;">' + theWarnings + ' (Tap for more.)</h3></div></div><br>';
-    // }
+    let status = $derived(locationData.fullStatus[0]);
+    let alerts = $derived(locationData.alerts);
 </script>
 
 {#if status !== "noalerts"}

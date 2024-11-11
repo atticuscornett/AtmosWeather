@@ -1,6 +1,7 @@
 <script>
     import TabSlot from "../Layout/TabSlot.svelte";
     import AlertBar from "../Components/LocationWidgets/AlertBar.svelte";
+    import LocationAtAGlance from "../Components/LocationWidgets/LocationAtAGlance.svelte";
 
     let { locationData, page=$bindable() } = $props();
 
@@ -12,5 +13,10 @@
 <TabSlot name="location-{locationData.name}" bind:page={page}>
     <h1>{locationData.name}</h1>
     <br>
-    <AlertBar locationData={locationData} bind:page={page} />
+
+    <!-- Wait for weather data -->
+    {#if locationData.hourly[0]}
+        <AlertBar locationData={locationData} bind:page={page} />
+        <LocationAtAGlance locationData={locationData} bind:page={page} />
+    {/if}
 </TabSlot>

@@ -37,9 +37,10 @@
                             alerts: weatherAlerts
                         }
 
-                        // getAdditionalWeatherDataForNomAsync(nomLocations[i], (additionalData) => {
-                        //     locationData.additionalData = additionalData;
-                        // });
+                        getAdditionalWeatherDataForNomAsync(nomLocations[i], (additionalData) => {
+                            locationData.openMeteoData = additionalData;
+                            weatherDataDictionary[nomLocationNames[i]] = locationData;
+                        });
 
                         weatherDataDictionary[nomLocationNames[i]] = locationData;
                         console.log(weatherDataDictionary);

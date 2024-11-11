@@ -287,7 +287,6 @@ function loadMoreInfo(navName){
 								// Temperature Bar
 								let longHourForecast = "<h1>Hourly Forecast</h1>";
 								try{
-									generatedCode += '<div class="location noclick ' + fullStatus[0] + '"><div style="display: inline-block;height: inherit;vertical-align: top;margin-top:20px;"><img style="vertical-align:center;" src="img/' + image + '.svg"></div><div style="display:inline-block;margin-left:8px;margin-right: 8px;"><h1>' + hourly[0][0]["temperature"].toString() + '° F</h1><h4>Feels like ' + Math.round(additionalData["current"]["apparent_temperature"]) + '° F</h4><h3>' + hourly[0][0]["shortForecast"] + '</h3></div></div><br>';
 									generatedCode += '<div class="clear-border"><h1>Air Quality Index (AQI)</h1><h2>';
 									generatedCode += AQI.toString() + " (" + getAQICategory(AQI) + ")";
 									generatedCode += '</h2>';
