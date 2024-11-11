@@ -3,6 +3,7 @@
     import AlertBar from "../Components/LocationWidgets/AlertBar.svelte";
     import LocationAtAGlance from "../Components/LocationWidgets/LocationAtAGlance.svelte";
     import AirQualityIndex from "../Components/LocationWidgets/AirQualityIndex.svelte";
+    import MultiGraph from "../Components/LocationWidgets/MultiGraph.svelte";
 
     let { locationData, page=$bindable() } = $props();
 
@@ -20,5 +21,6 @@
         <AlertBar locationData={locationData} bind:page={page} />
         <LocationAtAGlance locationData={locationData} bind:page={page} />
         <AirQualityIndex locationData={locationData} />
+        <MultiGraph locationData={locationData} />
     {/if}
 </TabSlot>

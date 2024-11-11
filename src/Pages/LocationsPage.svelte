@@ -14,6 +14,9 @@
     let mainLocations = $state([]);
 
     let refreshLocations = () => {
+        if (page !== "locations"){
+            return;
+        }
         alertLocations = [];
         otherLocations = [];
         mainLocations = [];

@@ -68,11 +68,7 @@ NOTHING YET:
 
 
 
-.weatherGraph{
-	position: relative;
-	max-height: 50vh;
-	min-height: 40vh;
-}
+
 
 .location{
 	background-color: blue;
