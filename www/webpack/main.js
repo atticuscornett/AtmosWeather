@@ -2736,6 +2736,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pages_SearchPage_svelte__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Pages/SearchPage.svelte */ "./src/Pages/SearchPage.svelte");
 /* harmony import */ var _Pages_LocationWeatherPage_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Pages/LocationWeatherPage.svelte */ "./src/Pages/LocationWeatherPage.svelte");
 /* harmony import */ var _Pages_LocationAlertPage_svelte__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Pages/LocationAlertPage.svelte */ "./src/Pages/LocationAlertPage.svelte");
+/* harmony import */ var _Pages_AlertsPage_svelte__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Pages/AlertsPage.svelte */ "./src/Pages/AlertsPage.svelte");
 
 
 svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_start();
@@ -2750,11 +2751,12 @@ MainApp[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/Lay
 
 
 
-var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div id="main-app" class="svelte-1osfzdi"><br> <!> <!> <!> <!> <!> <!> <!></div>`), MainApp[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[17, 0, [[18, 4]]]]);
+
+var root = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<div id="main-app" class="svelte-1osfzdi"><br> <!> <!> <!> <!> <!> <!> <!> <!></div>`), MainApp[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[18, 0, [[19, 4]]]]);
 
 const $$css = {
 	hash: "svelte-1osfzdi",
-	code: "\r\n    #main-app.svelte-1osfzdi{\r\n        height: 92%;\r\n        width: 100%;\r\n        padding: 0;\r\n        overflow-x: hidden;\r\n    }\r\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFpbkFwcC5zdmVsdGUiLCJzb3VyY2VzIjpbIk1haW5BcHAuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgICBpbXBvcnQgQWJvdXRQYWdlIGZyb20gXCIuLi9QYWdlcy9BYm91dFBhZ2Uuc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgUHJpdmFjeVBhZ2UgZnJvbSBcIi4uL1BhZ2VzL1ByaXZhY3lQYWdlLnN2ZWx0ZVwiO1xyXG4gICAgaW1wb3J0IFNldHRpbmdzUGFnZSBmcm9tIFwiLi4vUGFnZXMvU2V0dGluZ3NQYWdlLnN2ZWx0ZVwiO1xyXG4gICAgaW1wb3J0IExvY2F0aW9uc1BhZ2UgZnJvbSBcIi4uL1BhZ2VzL0xvY2F0aW9uc1BhZ2Uuc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgU2VhcmNoUGFnZSBmcm9tIFwiLi4vUGFnZXMvU2VhcmNoUGFnZS5zdmVsdGVcIjtcclxuICAgIGltcG9ydCBMb2NhdGlvbldlYXRoZXJQYWdlIGZyb20gXCIuLi9QYWdlcy9Mb2NhdGlvbldlYXRoZXJQYWdlLnN2ZWx0ZVwiO1xyXG4gICAgaW1wb3J0IExvY2F0aW9uQWxlcnRQYWdlIGZyb20gXCIuLi9QYWdlcy9Mb2NhdGlvbkFsZXJ0UGFnZS5zdmVsdGVcIjtcclxuXHJcbiAgICBsZXQgeyBwYWdlID0gJGJpbmRhYmxlKCkgfSA9ICRwcm9wcygpO1xyXG4gICAgbGV0IHdlYXRoZXJEYXRhRGljdGlvbmFyeSA9ICRzdGF0ZSh7fSk7XHJcbiAgICBsZXQgYWxlcnRTZWxlY3Rpb24gPSAkc3RhdGUoe30pO1xyXG5cclxuICAgICRpbnNwZWN0KHdlYXRoZXJEYXRhRGljdGlvbmFyeSk7XHJcbjwvc2NyaXB0PlxyXG5cclxuPGRpdiBpZD1cIm1haW4tYXBwXCI+XHJcbiAgICA8YnI+XHJcbiAgICA8QWJvdXRQYWdlIGJpbmQ6cGFnZT17cGFnZX0vPlxyXG4gICAgPExvY2F0aW9uc1BhZ2UgYmluZDpwYWdlPXtwYWdlfSBiaW5kOndlYXRoZXJEYXRhRGljdGlvbmFyeT17d2VhdGhlckRhdGFEaWN0aW9uYXJ5fSAvPlxyXG4gICAgPFByaXZhY3lQYWdlIGJpbmQ6cGFnZT17cGFnZX0vPlxyXG4gICAgPFNldHRpbmdzUGFnZSBiaW5kOnBhZ2U9e3BhZ2V9Lz5cclxuICAgIDxTZWFyY2hQYWdlIGJpbmQ6cGFnZT17cGFnZX0vPlxyXG5cclxuICAgIHsjaWYgYWxlcnRTZWxlY3Rpb24ubmFtZX1cclxuICAgIDxMb2NhdGlvbkFsZXJ0UGFnZSBiaW5kOnBhZ2U9e3BhZ2V9IGxvY2F0aW9uRGF0YT17d2VhdGhlckRhdGFEaWN0aW9uYXJ5W2FsZXJ0U2VsZWN0aW9uLm5hbWVdfVxyXG4gICAgICAgICAgICAgICAgICAgICAgIGFsZXJ0SUQ9e2FsZXJ0U2VsZWN0aW9uLmlkfS8+XHJcbiAgICB7L2lmfVxyXG5cclxuICAgIHsjZWFjaCBPYmplY3QuZW50cmllcyh3ZWF0aGVyRGF0YURpY3Rpb25hcnkpIGFzIFtrZXksIHZhbHVlXX1cclxuICAgICAgICA8TG9jYXRpb25XZWF0aGVyUGFnZSBsb2NhdGlvbkRhdGE9e3ZhbHVlfSBiaW5kOnBhZ2U9e3BhZ2V9IGJpbmQ6YWxlcnRTZWxlY3Rpb249e2FsZXJ0U2VsZWN0aW9ufS8+XHJcbiAgICB7L2VhY2h9XHJcbjwvZGl2PlxyXG5cclxuPHN0eWxlPlxyXG4gICAgI21haW4tYXBwe1xyXG4gICAgICAgIGhlaWdodDogOTIlO1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIHBhZGRpbmc6IDA7XHJcbiAgICAgICAgb3ZlcmZsb3cteDogaGlkZGVuO1xyXG4gICAgfVxyXG48L3N0eWxlPiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFrQ087QUFDUCxJQUFJLHdCQUFTO0FBQ2IsUUFBUSxXQUFXO0FBQ25CLFFBQVEsV0FBVztBQUNuQixRQUFRLFVBQVU7QUFDbEIsUUFBUSxrQkFBa0I7QUFDMUIsS0FBSzsifQ== */"
+	code: "\r\n    #main-app.svelte-1osfzdi{\r\n        height: 92%;\r\n        width: 100%;\r\n        padding: 0;\r\n        overflow-x: hidden;\r\n    }\r\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFpbkFwcC5zdmVsdGUiLCJzb3VyY2VzIjpbIk1haW5BcHAuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgICBpbXBvcnQgQWJvdXRQYWdlIGZyb20gXCIuLi9QYWdlcy9BYm91dFBhZ2Uuc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgUHJpdmFjeVBhZ2UgZnJvbSBcIi4uL1BhZ2VzL1ByaXZhY3lQYWdlLnN2ZWx0ZVwiO1xyXG4gICAgaW1wb3J0IFNldHRpbmdzUGFnZSBmcm9tIFwiLi4vUGFnZXMvU2V0dGluZ3NQYWdlLnN2ZWx0ZVwiO1xyXG4gICAgaW1wb3J0IExvY2F0aW9uc1BhZ2UgZnJvbSBcIi4uL1BhZ2VzL0xvY2F0aW9uc1BhZ2Uuc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgU2VhcmNoUGFnZSBmcm9tIFwiLi4vUGFnZXMvU2VhcmNoUGFnZS5zdmVsdGVcIjtcclxuICAgIGltcG9ydCBMb2NhdGlvbldlYXRoZXJQYWdlIGZyb20gXCIuLi9QYWdlcy9Mb2NhdGlvbldlYXRoZXJQYWdlLnN2ZWx0ZVwiO1xyXG4gICAgaW1wb3J0IExvY2F0aW9uQWxlcnRQYWdlIGZyb20gXCIuLi9QYWdlcy9Mb2NhdGlvbkFsZXJ0UGFnZS5zdmVsdGVcIjtcclxuICAgIGltcG9ydCBBbGVydHNQYWdlIGZyb20gXCIuLi9QYWdlcy9BbGVydHNQYWdlLnN2ZWx0ZVwiO1xyXG5cclxuICAgIGxldCB7IHBhZ2UgPSAkYmluZGFibGUoKSB9ID0gJHByb3BzKCk7XHJcbiAgICBsZXQgd2VhdGhlckRhdGFEaWN0aW9uYXJ5ID0gJHN0YXRlKHt9KTtcclxuICAgIGxldCBhbGVydFNlbGVjdGlvbiA9ICRzdGF0ZSh7fSk7XHJcblxyXG4gICAgJGluc3BlY3Qod2VhdGhlckRhdGFEaWN0aW9uYXJ5KTtcclxuPC9zY3JpcHQ+XHJcblxyXG48ZGl2IGlkPVwibWFpbi1hcHBcIj5cclxuICAgIDxicj5cclxuICAgIDxBYm91dFBhZ2UgYmluZDpwYWdlPXtwYWdlfS8+XHJcbiAgICA8TG9jYXRpb25zUGFnZSBiaW5kOnBhZ2U9e3BhZ2V9IGJpbmQ6d2VhdGhlckRhdGFEaWN0aW9uYXJ5PXt3ZWF0aGVyRGF0YURpY3Rpb25hcnl9IC8+XHJcbiAgICA8UHJpdmFjeVBhZ2UgYmluZDpwYWdlPXtwYWdlfS8+XHJcbiAgICA8U2V0dGluZ3NQYWdlIGJpbmQ6cGFnZT17cGFnZX0vPlxyXG4gICAgPFNlYXJjaFBhZ2UgYmluZDpwYWdlPXtwYWdlfS8+XHJcbiAgICA8QWxlcnRzUGFnZSBiaW5kOnBhZ2U9e3BhZ2V9Lz5cclxuXHJcbiAgICB7I2lmIGFsZXJ0U2VsZWN0aW9uLm5hbWV9XHJcbiAgICA8TG9jYXRpb25BbGVydFBhZ2UgYmluZDpwYWdlPXtwYWdlfSBsb2NhdGlvbkRhdGE9e3dlYXRoZXJEYXRhRGljdGlvbmFyeVthbGVydFNlbGVjdGlvbi5uYW1lXX1cclxuICAgICAgICAgICAgICAgICAgICAgICBhbGVydElEPXthbGVydFNlbGVjdGlvbi5pZH0vPlxyXG4gICAgey9pZn1cclxuXHJcbiAgICB7I2VhY2ggT2JqZWN0LmVudHJpZXMod2VhdGhlckRhdGFEaWN0aW9uYXJ5KSBhcyBba2V5LCB2YWx1ZV19XHJcbiAgICAgICAgPExvY2F0aW9uV2VhdGhlclBhZ2UgbG9jYXRpb25EYXRhPXt2YWx1ZX0gYmluZDpwYWdlPXtwYWdlfSBiaW5kOmFsZXJ0U2VsZWN0aW9uPXthbGVydFNlbGVjdGlvbn0vPlxyXG4gICAgey9lYWNofVxyXG48L2Rpdj5cclxuXHJcbjxzdHlsZT5cclxuICAgICNtYWluLWFwcHtcclxuICAgICAgICBoZWlnaHQ6IDkyJTtcclxuICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICBwYWRkaW5nOiAwO1xyXG4gICAgICAgIG92ZXJmbG93LXg6IGhpZGRlbjtcclxuICAgIH1cclxuPC9zdHlsZT4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBb0NPO0FBQ1AsSUFBSSx3QkFBUztBQUNiLFFBQVEsV0FBVztBQUNuQixRQUFRLFdBQVc7QUFDbkIsUUFBUSxVQUFVO0FBQ2xCLFFBQVEsa0JBQWtCO0FBQzFCLEtBQUs7In0= */"
 };
 
 function MainApp($$anchor, $$props) {
@@ -2854,7 +2856,22 @@ function MainApp($$anchor, $$props) {
 
 	var node_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_4, 2);
 
-	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_5, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alertSelection).name, ($$anchor) => {
+	{
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_owner_effect(page, _Pages_AlertsPage_svelte__WEBPACK_IMPORTED_MODULE_9__["default"]);
+
+		(0,_Pages_AlertsPage_svelte__WEBPACK_IMPORTED_MODULE_9__["default"])(node_5, {
+			get page() {
+				return page();
+			},
+			set page($$value) {
+				page($$value);
+			}
+		});
+	}
+
+	var node_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_5, 2);
+
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_6, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alertSelection).name, ($$anchor) => {
 		{
 			svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_owner_effect(page, _Pages_LocationAlertPage_svelte__WEBPACK_IMPORTED_MODULE_8__["default"]);
 
@@ -2875,9 +2892,9 @@ function MainApp($$anchor, $$props) {
 		}
 	});
 
-	var node_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_5, 2);
+	var node_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_6, 2);
 
-	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(node_6, 17, () => Object.entries(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(weatherDataDictionary)), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, $$item) => {
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(node_7, 17, () => Object.entries(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(weatherDataDictionary)), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, $$item) => {
 		let key = () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get($$item)[0];
 
 		key();
@@ -3099,6 +3116,219 @@ function AboutPage($$anchor, $$props) {
 }
 
 svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_end(AboutPage);
+
+/***/ }),
+
+/***/ "./src/Pages/AlertsPage.svelte":
+/*!*************************************!*\
+  !*** ./src/Pages/AlertsPage.svelte ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AlertsPage)
+/* harmony export */ });
+/* harmony import */ var svelte_internal_disclose_version__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal/disclose-version */ "./node_modules/svelte/src/internal/disclose-version.js");
+/* harmony import */ var svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte/internal/client */ "./node_modules/svelte/src/internal/client/index.js");
+/* harmony import */ var _Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Layout/TabSlot.svelte */ "./src/Layout/TabSlot.svelte");
+
+
+svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_start();
+AlertsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME] = "src/Pages/AlertsPage.svelte";
+
+
+
+
+var root_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<h4> </h4>`), AlertsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[40, 24]]);
+
+var root_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<h2> </h2> <h4> </h4> <h4> </h4> <!> <br>`, 1), AlertsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
+	[35, 20],
+	[36, 20],
+	[37, 20],
+	[42, 20]
+]);
+
+var root_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<h2>There are currently no active alerts for your locations.</h2>`), AlertsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[47, 16]]);
+
+var root_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<h2> </h2> <h4> </h4> <h4> </h4> <br>`, 1), AlertsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
+	[55, 16],
+	[56, 16],
+	[57, 16],
+	[58, 16]
+]);
+
+var root_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<h2>You have no previously received alerts.</h2>`), AlertsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[62, 16]]);
+
+var root_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template(`<h1>Alerts</h1> <br> <div id="alerts-main"><h2>Currently Active</h2> <hr> <div id="active-alert-list"><!> <!></div> <br> <h2>Previously Received</h2> <hr> <div id="old-alert-list"><!> <!> <br></div></div> <br>`, 1), AlertsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
+	[26, 4],
+	[27, 4],
+	[
+		29,
+		4,
+		[
+			[30, 8],
+			[31, 8],
+			[32, 8],
+			[50, 8],
+			[51, 8],
+			[52, 8],
+			[53, 8, [[64, 12]]]
+		]
+	],
+	[67, 4]
+]);
+
+function AlertsPage($$anchor, $$props) {
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.check_target(new.target);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.push($$props, true, AlertsPage);
+	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_prop_bindings($$props, ["page"], [], AlertsPage);
+
+	let page = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.prop($$props, "page", 15);
+	let currentAlerts = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.proxy([]));
+	let oldAlerts = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.proxy([]));
+	let nonNullLength = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state(0);
+
+	function refreshAlerts() {
+		checkIfOldAlerts(true, () => {
+			svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(currentAlerts, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.proxy(JSON.parse(localStorage.getItem("nws-alerts-current")), null, currentAlerts));
+			svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(oldAlerts, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.proxy(JSON.parse(localStorage.getItem("nws-alerts-old")), null, oldAlerts));
+			svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(nonNullLength, 0);
+
+			for (let i = 0; i < svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(currentAlerts).length; (i += 1) - 1) {
+				if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.equals(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(currentAlerts)[i], null, false)) {
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(nonNullLength, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(nonNullLength) + 1);
+				}
+			}
+		});
+	}
+
+	{
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_owner_effect(page, _Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+		(0,_Layout_TabSlot_svelte__WEBPACK_IMPORTED_MODULE_2__["default"])($$anchor, {
+			name: "alerts",
+			get page() {
+				return page();
+			},
+			set page($$value) {
+				page($$value);
+			},
+			onOpen: refreshAlerts,
+			children: svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.wrap_snippet(AlertsPage, ($$anchor, $$slotProps) => {
+				var fragment_1 = root_1();
+				var div = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_1), 4);
+				var div_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div), 4);
+				var node = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div_1);
+
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(node, 17, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(currentAlerts), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, alert) => {
+					var fragment_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.comment();
+					var node_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_2);
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_1, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert), null, false), ($$anchor) => {
+						var fragment_3 = root_3();
+						var h2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_3);
+						var text = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h2, true);
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h2);
+
+						var h4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h2, 2);
+						var text_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h4, true);
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h4);
+
+						var h4_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h4, 2);
+						var text_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h4_1, true);
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h4_1);
+
+						var node_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h4_1, 2);
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_2, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert)["properties"]["instruction"], ($$anchor) => {
+							var h4_2 = root_4();
+							var text_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h4_2, true);
+
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h4_2);
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_3, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert)["properties"]["instruction"]));
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, h4_2);
+						});
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => {
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert)["properties"]["event"]);
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_1, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert)["properties"]["headline"]);
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_2, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert)["properties"]["areaDesc"]);
+						});
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_3);
+					});
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_2);
+				});
+
+				var node_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node, 2);
+
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_3, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(nonNullLength), 0), ($$anchor) => {
+					var h2_1 = root_5();
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, h2_1);
+				});
+
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_1);
+
+				var div_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(div_1, 8);
+				var node_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div_2);
+
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(node_4, 17, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(oldAlerts).slice().reverse(), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, alert) => {
+					var fragment_4 = root_6();
+					var h2_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_4);
+					var text_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h2_2, true);
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h2_2);
+
+					var h4_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h2_2, 2);
+					var text_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h4_3, true);
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h4_3);
+
+					var h4_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h4_3, 2);
+					var text_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h4_4, true);
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h4_4);
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => {
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_4, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert)["properties"]["event"]);
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_5, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert)["properties"]["headline"]);
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_6, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(alert)["properties"]["areaDesc"]);
+					});
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_4);
+				});
+
+				var node_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_4, 2);
+
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_5, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(oldAlerts).length, 0), ($$anchor) => {
+					var h2_3 = root_7();
+
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, h2_3);
+				});
+
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_2);
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div);
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_1);
+			}),
+			$$slots: { default: true }
+		});
+	}
+
+	return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.pop({ ...svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.legacy_api() });
+}
+
+svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.mark_module_end(AlertsPage);
 
 /***/ }),
 
