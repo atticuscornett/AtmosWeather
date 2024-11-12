@@ -13,7 +13,7 @@
     let otherLocations = $state([]);
     let mainLocations = $state([]);
 
-    let refreshLocations = () => {
+    let refreshLocations = async () => {
         if (page !== "locations"){
             return;
         }
@@ -40,7 +40,8 @@
                             alerts: weatherAlerts
                         }
 
-                        getForecastAsync(nomRes, (forecast) => {
+                        setTimeout(()=>{
+                            getForecastAsync(nomRes, (forecast) => {
                             locationData.forecast = forecast;
                             weatherDataDictionary[nomLocationNames[i]] = locationData;
                         });
@@ -53,7 +54,7 @@
                         getCurrentAQIForNomAsync(nomLocations[i], (AQI) => {
                             locationData.AQI = AQI;
                             weatherDataDictionary[nomLocationNames[i]] = locationData;
-                        });
+                        });}, Math.random()*250);
 
                         weatherDataDictionary[nomLocationNames[i]] = locationData;
                         console.log(weatherDataDictionary);

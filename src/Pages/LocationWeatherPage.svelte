@@ -8,11 +8,6 @@
 
     let { locationData, page=$bindable(), alertSelection = $bindable() } = $props();
 
-    $effect(() => {
-        console.log("locationData");
-        console.log(locationData);
-    })
-
     function removeLocation(){
         let locations = JSON.parse(localStorage.getItem("weather-locations"));
         let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
