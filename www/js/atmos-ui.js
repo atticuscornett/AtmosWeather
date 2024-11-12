@@ -632,19 +632,7 @@ function loadAlertForCurrent(alertObj){
 	});
 }
 
-// Clears polygons from the LeafletJS alert map
-function clearMap() {
-    for(i in map._layers) {
-        if(map._layers[i]._path != undefined) {
-            try {
-                map.removeLayer(map._layers[i]);
-            }
-            catch(e) {
-                console.log("Error removing " + e + map._layers[i]);
-            }
-        }
-    }
-}
+
 
 
 // Cycles through the native welcome screen slides
