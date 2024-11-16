@@ -1,7 +1,7 @@
 <script>
     let { locationData, page=$bindable(), alertSelection=$bindable() } = $props();
 
-    let status = $derived(locationData.fullStatus[0]);
+    let status = $derived(locationData.alert);
     let alerts = $derived(locationData.alerts);
 </script>
 

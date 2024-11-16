@@ -262,27 +262,33 @@ function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 
 function getWeatherAlertsForPosAsync(lat, long, callback, extraReturn=null){
 	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
-	try{
-		window.loadingElements++;
-		JSONGetAsync("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString(), (theAlerts) =>{
-			window.loadingElements--;
-			theAlerts = theAlerts["features"];
-			if (extraReturn != null){
-				callback(theAlerts, extraReturn);
-			}
-			else{
-				callback(theAlerts);
-			}
-		});
-	}
-	catch(err){
-		if (extraReturn != null){
-			callback(false, extraReturn);
-		}
-		else{
-			callback(false);
-		}
-	}
+	getWeatherAlertsForNomAsync({"lat": lat, "lon": long}, callback, extraReturn);
+	// return;
+	// try{
+	// 	window.loadingElements++;
+	// 	JSONGetAsync("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString(), (theAlerts) =>{
+	// 		window.loadingElements--;
+	// 		console.error(theAlerts);
+	// 		theAlerts = theAlerts["features"];
+	//
+	// 		if (therAlerts)
+	// 		if (extraReturn != null){
+	// 			callback(theAlerts, extraReturn);
+	// 		}
+	// 		else{
+	// 			console.error("The alerts" + theAlerts);
+	// 			callback(theAlerts);
+	// 		}
+	// 	});
+	// }
+	// catch(err){
+	// 	if (extraReturn != null){
+	// 		callback(false, extraReturn);
+	// 	}
+	// 	else{
+	// 		callback(false);
+	// 	}
+	// }
 }
 
 // Gets active weather alerts for a nominatim object

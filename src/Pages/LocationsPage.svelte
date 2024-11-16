@@ -13,6 +13,19 @@
     let otherLocations = $state([]);
     let mainLocations = $state([]);
 
+    let currentLocationStatus = $state("loading");
+    let currentLocationData = $state({});
+
+    let refreshQueued = false;
+
+    let queueRefresh = () => {
+        if (!refreshQueued){
+            refreshQueued = true;
+            setTimeout(refreshLocations, 5000);
+            setTimeout(()=>{refreshQueued = false;}, 5000);
+        }
+    }
+
     let refreshLocations = async () => {
         if (page !== "locations"){
             return;
@@ -21,10 +34,68 @@
         otherLocations = [];
         mainLocations = [];
 
-        showCurrentLocation = window.locationEnabled;
         nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
         nomLocationNames = JSON.parse(localStorage.getItem("weather-location-names"));
         settings = JSON.parse(localStorage.getItem("atmos-settings"));
+        showCurrentLocation = settings["location"]["weather"];
+
+        if (showCurrentLocation){
+            weatherDataDictionary["Current Location"] = {"name": "Current Location", "hourly": []};
+            getCurrentLocation(() => {
+                if (window.currentLat) {
+                    setTimeout(getWeatherAlertsForPosAsync(window.currentLat, window.currentLong, (alerts) => {
+                        let status = "noalerts";
+
+                        if (alerts.length > 0){
+                            status = "other";
+                        }
+
+                        for (let i = 0; i < alerts.length; i++){
+                            if (alerts[i]["properties"]["event"].toLowerCase().includes("warning")){
+                                status = "warning";
+                            }
+                        }
+
+                        currentLocationStatus = status;
+
+                        currentLocationData = {
+                            name: "Current Location",
+                            alert: status,
+                            alerts: alerts
+                        }
+
+                        JSONGetAsync("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString(),
+                            (weatherGrid) => {
+                                let  hourlyForecastLink = weatherGrid["properties"]["forecastHourly"];
+                                JSONGetAsync(hourlyForecastLink, (hourlyForecast) => {
+                                    try {
+                                        currentLocationData.hourly = [hourlyForecast["properties"]["periods"]];
+                                        weatherDataDictionary["Current Location"] = currentLocationData;
+                                        if (status === "warning"){
+                                            alertLocations.unshift(currentLocationData);
+                                        }
+                                        else if (status === "other"){
+                                            otherLocations.unshift(currentLocationData);
+                                        }
+                                        else{
+                                            mainLocations.unshift(currentLocationData);
+                                        }
+                                        JSONGetAsync(weatherGrid["properties"]["forecast"], (jsonReturn) => {
+                                        })
+                                    } catch (e) {
+                                        queueRefresh();
+                                    }
+                                    console.error(alerts);
+                                })});
+
+                    }), 50);
+                }
+                else {
+                    weatherDataDictionary["Current Location"].denied = true;
+                    mainLocations.unshift(weatherDataDictionary["Current Location"]);
+                }
+            });
+        }
 
         for (let i = 0; i < nomLocations.length; i++){
             nomToWeatherGridAsync(nomLocations[i], (nomRes) => {
@@ -60,7 +131,7 @@
                         console.log(weatherDataDictionary);
 
                         if (!hourly[0]){
-                            setTimeout(refreshLocations, 7000);
+                            queueRefresh();
                         }
 
                         if (alertStatus === "warning"){
@@ -76,22 +147,35 @@
                 });
             });
         }
+
     }
 </script>
 
 <TabSlot name="locations" bind:page={page} onOpen={refreshLocations}>
     <h1>Locations</h1>
     <div id="alert-locations">
+        {#if currentLocationStatus === "warning"}
+            <LocationBar bind:page={page} />
+        {/if}
+
         {#each alertLocations as locationData}
             <LocationBar locationData={locationData} bind:page={page} />
         {/each}
     </div>
     <div id="other-locations">
+        {#if currentLocationStatus === "other"}
+            <LocationBar bind:page={page} />
+        {/if}
+
         {#each otherLocations as locationData}
             <LocationBar locationData={locationData} bind:page={page} />
         {/each}
     </div>
     <div id="main-locations">
+        {#if currentLocationStatus === "noalerts"}
+            <LocationBar bind:page={page} />
+        {/if}
+
         {#if nomLocations.length === 0 && !showCurrentLocation}
             <div class="location"><h2>You have no locations.</h2></div>
         {/if}

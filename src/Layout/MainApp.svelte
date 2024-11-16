@@ -13,6 +13,46 @@
     let alertSelection = $state({});
 
     $inspect(weatherDataDictionary);
+
+    window.currentLat = false;
+    window.currentLong = false;
+    window.lastLocationGrab = 0;
+
+    window.getCurrentLocation = (callback=null) =>{
+        if (navigator.geolocation){
+            if (Date.now() - lastLocationGrab < 60000){
+                if (callback){
+                    callback(currentLat, currentLong);
+                }
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(function(coordObj){
+                currentLat = coordObj.coords.latitude;
+                currentLong = coordObj.coords.longitude;
+
+                lastLocationGrab = Date.now();
+
+                if (callback){
+                    callback(currentLat, currentLong);
+                }
+            }, function(error){
+                currentLat = false;
+                currentLong = false;
+                if (callback) {
+                    callback(false, false);
+                }
+            })
+        }
+        else{
+            callback(false, false);
+            console.log("Geolocation is not available.")
+        }
+
+
+    }
+
+    getCurrentLocation();
 </script>
 
 <div id="main-app">

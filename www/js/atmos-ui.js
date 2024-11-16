@@ -276,20 +276,7 @@ function removeLocation(index){
 }
 
 // Tries to get the current location of the user
-function getCurrentLocation(){
-	if (navigator.geolocation){
-		navigator.geolocation.getCurrentPosition(function(coordObj){
-			currentLat = coordObj.coords.latitude;
-			currentLong = coordObj.coords.longitude;
-		}, function(error){
-			currentLat = false;
-			currentLong = false;
-		})
-	}
-	else{
-		console.log("Geolocation is not available.")
-	}
-}
+
 
 // Gets the current location, the passes to function
 function getLocationWithFunction(success, error){
@@ -532,57 +519,6 @@ function refreshAlerts(){
 }
 
 // Loads the information for an alert and displays it
-function loadAlert(alertID){
-	clearMap();
-	var theSplit = alertID.split("-");
-	var locationIndex = parseInt(theSplit[0]);
-	var alertIndex = parseInt(theSplit[1]);
-	var theLocation = JSON.parse(localStorage.getItem("weather-locations"))[locationIndex];
-	getWeatherAlertsForNomAsync(theLocation, (theAlert) => {
-		theAlert = theAlert[0][alertIndex];
-		getPolyBoundariesAsync(theAlert, (alertBoundaries) => {
-			document.getElementById("weather-alert-title").innerHTML = theAlert["properties"]["headline"];
-			var divCode = "<h2>Areas Affected</h2>"
-			divCode += "<h3>" + theAlert["properties"]["areaDesc"] + "</h3>"
-			if (theAlert["properties"]["instruction"] != null){
-				divCode += "<h2>Instructions</h2>"
-				divCode += "<h3>" + theAlert["properties"]["instruction"] + "</h3>"
-			}
-			divCode += "<h2>Details</h2>"
-			var theDetails = theAlert["properties"]["description"]
-			theDetails = theDetails.replaceAll("\n\n", "<br><br>");
-			theDetails = theDetails.replaceAll("\n", " ");
-			theDetails = theDetails.replaceAll("* ", "");
-			theDetails = theDetails.replaceAll("...", " - ");
-			theDetails = theDetails.replaceAll("- -", "-")
-			divCode += "<h3>" + theDetails + "</h3>"
-			document.getElementById("alert-details").innerHTML = divCode;
-			var styling;
-			if (theAlert["properties"]["event"].toLowerCase().includes("warning")){
-				styling = {"color":"red"};
-			}
-			else if (theAlert["properties"]["event"].toLowerCase().includes("watch")){
-				styling = {"color":"yellow"};
-			}
-			else{
-				styling = {"color":"blue"};
-			}
-			console.log(alertBoundaries);
-			navTo("alert-display")
-			setTimeout(function(){
-				let polygon = L.geoJSON(alertBoundaries, {style:styling});
-				polygon.addTo(map);
-				console.log(alertBoundaries);
-				console.log(polygon);
-				map.invalidateSize(true)
-				setTimeout(function(){
-					map.fitBounds(polygon.getBounds());
-				}, 1000);
-			}, 1000)
-		});
-	})
-}
-
 function loadAlertForCurrent(alertObj){
 	clearMap();
 	// var theSplit = alertID.split("-");

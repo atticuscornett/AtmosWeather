@@ -4,6 +4,7 @@
     let shortForecast = $state(false);
     let info = $state(false);
     let image = $state("sunny");
+    let barClass = $state("noalerts");
 
     $effect(() => {
         if (locationData.hourly[0]){
@@ -23,12 +24,32 @@
                 image = "cloudy";
             }
 
+            barClass = locationData.alert;
+
+            if (locationData.name === "Current Location"){
+                image = "current-location";
+
+                if (locationData.alert === "noalerts"){
+                    barClass = "currentloc";
+                }
+            }
+
             if (locationData.alert === "warning"){
                 image = "warning";
-                info = locationData.fullStatus[1].toString() + " warning(s) and " + locationData.fullStatus[2].toString() + " watch(es)";
+                if (locationData.name !== "Current Location"){
+                    info = locationData.fullStatus[1].toString() + " warning(s) and " + locationData.fullStatus[2].toString() + " watch(es)";
+                }
+                else{
+                    info = "A warning is in effect for your location.";
+                }
             }
             if (locationData.alert === "watch"){
-                info = locationData.fullStatus[2].toString() + " watch(es)";
+                if (locationData.name !== "Current Location"){
+                    info = locationData.fullStatus[2].toString() + " watch(es)";
+                }
+                else{
+                    info = "A watch is in effect for your location.";
+                }
             }
             if (locationData.alert === "other"){
                 info = "Weather statements in effect";
@@ -38,20 +59,33 @@
 </script>
 
 {#if !locationData.hourly[0]}
-    <div class="location error">
-        <div class="imgContainer">
-            <img class="errorImg" alt="Location Error" src="img/error.svg">
+    {#if locationData.name === "Current Location" && locationData.denied}
+        <div class="location currentloc">
+            <div class="imgContainer">
+                <img alt="Location" src="img/current-location.svg">
+            </div>
+            <div class="locationView">
+                <h2>{locationData.name}</h2>
+                <h3>Please allow location permission or disable this in app settings.</h3>
+            </div>
         </div>
-        <div class="locationView">
-            <h2>{locationData.name}</h2>
-            <h3>Loading location data...</h3>
+        <br>
+    {:else}
+        <div class="location error">
+            <div class="imgContainer">
+                <img class="errorImg" alt="Location Error" src="img/error.svg">
+            </div>
+            <div class="locationView">
+                <h2>{locationData.name}</h2>
+                <h3>Loading location data...</h3>
+            </div>
         </div>
-    </div>
-    <br>
+        <br>
+    {/if}
 {:else}
-    <div class="location {locationData.alert}" onclick={page = "location-" + locationData.name}>
+    <div class="location {barClass}" onclick={page = "location-" + locationData.name}>
         <div class="imgContainer">
-            <img style="vertical-align:center;" src="img/{image}.svg">
+            <img alt="Weather Status - {image}" src="img/{image}.svg">
         </div>
         <div class="locationView">
             <h2>{locationData.name}</h2>
@@ -82,6 +116,11 @@
    .error{
        background-color: darkslategray !important;
    }
+
+    .currentloc {
+        background-color: cadetblue !important;
+    }
+
 
    .errorImg {
        vertical-align: center;

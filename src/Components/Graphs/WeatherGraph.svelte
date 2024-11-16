@@ -112,8 +112,6 @@
             }
         };
 
-        console.log(chartConfig);
-
         if (image !== ""){
             chartConfig.data.datasets[0].pointStyle = imagePeriods;
         }
