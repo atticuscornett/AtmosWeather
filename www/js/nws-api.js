@@ -262,7 +262,9 @@ function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 
 function getWeatherAlertsForPosAsync(lat, long, callback, extraReturn=null){
 	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
-	getWeatherAlertsForNomAsync({"lat": lat, "lon": long}, callback, extraReturn);
+	getWeatherAlertsForNomAsync({"lat": lat, "lon": long}, (alerts)=>{
+		callback(alerts[0]);
+	}, extraReturn);
 	// return;
 	// try{
 	// 	window.loadingElements++;
@@ -348,6 +350,7 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 						nomCallback(theCache[pos], extraReturn);
 					}
 					else{
+						console.log(theCache[pos]);
 						nomCallback(theCache[pos]);
 					}
 				}

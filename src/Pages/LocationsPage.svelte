@@ -81,7 +81,18 @@
                                             mainLocations.unshift(currentLocationData);
                                         }
                                         JSONGetAsync(weatherGrid["properties"]["forecast"], (jsonReturn) => {
+                                            weatherDataDictionary["Current Location"]["forecast"] = [jsonReturn["properties"]["periods"]];
                                         })
+
+                                        getCurrentAQIForPositionAsync(currentLat, currentLong, (AQI) => {
+                                            weatherDataDictionary["Current Location"].AQI = AQI;
+                                        });
+
+                                        getAdditionalWeatherDataForPositionAsync(currentLat, currentLong, (openMeteo) => {
+                                            weatherDataDictionary["Current Location"].openMeteoData = openMeteo;
+                                        });
+
+                                        console.log(weatherDataDictionary);
                                     } catch (e) {
                                         queueRefresh();
                                     }
@@ -128,7 +139,6 @@
                         });}, Math.random()*250);
 
                         weatherDataDictionary[nomLocationNames[i]] = locationData;
-                        console.log(weatherDataDictionary);
 
                         if (!hourly[0]){
                             queueRefresh();
