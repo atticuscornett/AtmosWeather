@@ -9,7 +9,7 @@
         if (!atmosSettings["personalization"]){
             atmosSettings["personalization"] = {};
         }
-        if (!atmosSettings["personalization"]["page-transition-duration"]){
+        if (atmosSettings["personalization"]["page-transition-duration"] === undefined){
             atmosSettings["personalization"]["page-transition-duration"] = 1500;
         }
 
