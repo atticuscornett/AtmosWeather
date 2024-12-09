@@ -7,6 +7,7 @@
     import LocationWeatherPage from "../Pages/LocationWeatherPage.svelte";
     import LocationAlertPage from "../Pages/LocationAlertPage.svelte";
     import AlertsPage from "../Pages/AlertsPage.svelte";
+    import RadarPage from "../Pages/RadarPage.svelte";
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
@@ -63,6 +64,7 @@
     <SettingsPage bind:page={page}/>
     <SearchPage bind:page={page}/>
     <AlertsPage bind:page={page}/>
+    <RadarPage bind:page={page}/>
 
     {#if alertSelection.name}
     <LocationAlertPage bind:page={page} locationData={weatherDataDictionary[alertSelection.name]}
