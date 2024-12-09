@@ -1,4 +1,6 @@
 // UPDATE
+
+
 window.atmosVersion = "3.0.0-prealpha";
 window.atmosUpdated = "11-5-2024";
 window.atmosUpdateTitle = "Atmos Weather v2.2.1 is here!";
@@ -13,11 +15,57 @@ window.atmosUpdateNotes = `
 		`;
 
 window.syncFiles = () => {
-    // if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa")){
-    //     cap.syncPreferences();
-    // }
-    // TODO: Implement sync
-    console.log("FIX THIS");
+    if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa") && !getPlatform().includes("unknown")) {
+        cap.syncPreferences();
+    }
+}
+
+function getDeviceInfo(){
+    try {
+        cap.getDevice();
+    }
+    catch {
+        setTimeout(getDeviceInfo, 100);
+    }
+}
+
+getDeviceInfo();
+
+function getPlatform(){
+    if (!window.deviceInfo){
+        return "unknown";
+    }
+    else {
+        let platform = "unknown";
+        if (window.deviceInfo.platform == "web") {
+            // Running either electron version or online version
+            if (navigator.userAgent.includes("Electron")) {
+                if (navigator.platform.indexOf("Win") == 0) {
+                    platform = "desktop-windows"
+                } else if (navigator.platform.indexOf("Mac") == 0) {
+                    platform = "desktop-mac"
+                } else {
+                    platform = "desktop-linux"
+                }
+            } else {
+                platform = "pwa";
+            }
+        } else {
+            if (window.deviceInfo.platform == "electron") {
+                if (navigator.platform.indexOf("Win") == 0) {
+                    platform = "desktop-windows"
+                } else if (navigator.platform.indexOf("Mac") == 0) {
+                    platform = "desktop-mac"
+                } else {
+                    platform = "desktop-linux"
+                }
+            } else {
+                platform = window.deviceInfo.platform;
+            }
+        }
+        window.platform = platform;
+        return platform;
+    }
 }
 
 

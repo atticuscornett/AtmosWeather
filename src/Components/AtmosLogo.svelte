@@ -3,6 +3,22 @@
 	window.hideLogo = () => {
 		logoFade = true;
 	}
+
+	try {
+		let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+		if (settings["personalization"]["atmos-logo"] === false){
+			showNotices()
+		}
+	}
+	catch {
+		showNotices()
+	}
+
+	setTimeout(() => {
+		showNotices();
+	}, 2300);
+
+
 </script>
 
 <div id="atmos-logo" class={logoFade ? "fade" : ""}>

@@ -8,7 +8,7 @@
     }
 
 	window.showNotices = () => {
-		if (window.platform === undefined){
+		if (window.platform === undefined || window.platform === "unknown"){
 			setTimeout(showNotices, 150);
 			return;
 		}

@@ -11,7 +11,6 @@ navigator.geolocation.getCurrentPosition(function(position){
 	window.currentLat = position.coords.latitude;
 	window.currentLong = position.coords.longitude;
 });
-cap.getDevice();
 
 // Initial Variable States
 var screenAt = "locations";
@@ -35,44 +34,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Decides if there are any notices to show, and if so, creates them and shows them
 
 // Check the version of Atmos being run
-function getPlatform(){
-	var platform = "unknown"
-	if (window.deviceInfo.platform == "web"){
-		// Running either electron version or online version
-		if (navigator.userAgent.includes("Electron")){
-			if (navigator.platform.indexOf("Win") == 0){
-				platform = "desktop-windows"
-			}
-			else if (navigator.platform.indexOf("Mac") == 0){
-				platform = "desktop-mac"
-			}
-			else{
-				platform = "desktop-linux"
-			}
-		}
-		else{
-			platform = "pwa";
-		}
-	}
-	else{
-		if (window.deviceInfo.platform == "electron"){
-			if (navigator.platform.indexOf("Win") == 0){
-				platform = "desktop-windows"
-			}
-			else if (navigator.platform.indexOf("Mac") == 0){
-				platform = "desktop-mac"
-			}
-			else{
-				platform = "desktop-linux"
-			}
-		}
-		else{
-			platform = window.deviceInfo.platform;
-		}
-	}
-	window.platform = platform;
-	return platform;
-}
 
 // Navigate to another screen
 function navTo(screenTo){
