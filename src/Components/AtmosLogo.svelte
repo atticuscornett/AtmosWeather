@@ -4,19 +4,21 @@
 		logoFade = true;
 	}
 
-	try {
-		let settings = JSON.parse(localStorage.getItem("atmos-settings"));
-		if (settings["personalization"]["atmos-logo"] === false){
-			showNotices()
+	setTimeout(() =>{
+		try {
+			let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+			if (settings["personalization"]["atmos-logo"] === false){
+				showNotices()
+			}
 		}
-	}
-	catch {
-		showNotices()
-	}
+		catch (e){
+			setTimeout(() => {
+				showNotices();
+			}, 4000);
+			console.error(e);
+		}
+	}, 100)
 
-	setTimeout(() => {
-		showNotices();
-	}, 2300);
 
 
 </script>
