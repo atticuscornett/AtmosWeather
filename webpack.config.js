@@ -2,7 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 //const mode = process.env.NODE_ENV || 'development';
-const mode = 'development';
+const mode = 'production';
 const prod = mode === 'production';
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
         }
     },
     entry: {
-        'build/bundle': ['./src/main.js', "./src/index.js"]
+        'build/bundle': ['./src/main.js', "./src/index.js", "./src"]
     },
     resolve: {
         extensions: ['.mjs', '.js', '.svelte'],

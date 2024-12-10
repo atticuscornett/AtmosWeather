@@ -8,15 +8,18 @@
     }
 
 	window.showNotices = () => {
+		console.log("Ballin!");
 		if (window.platform === undefined || window.platform === "unknown"){
 			setTimeout(showNotices, 150);
 			return;
 		}
 		if (!localStorage.getItem("run-before") && window.platform != "pwa"){
-			document.getElementById("welcome-window-native").hidden = false;
+			//ToDo: Add a welcome window
+			//document.getElementById("welcome-window-native").hidden = false;
 			hideLogo();
 			return;
 		}
+		console.log("Hello gamer.");
 		hideLogo();
 		// Check if running the web browser version
 		/* NOTE: Unlike other messages that do not show again after they are read,

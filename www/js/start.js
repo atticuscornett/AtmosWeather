@@ -23,6 +23,7 @@ window.syncFiles = () => {
 function getDeviceInfo(){
     try {
         cap.getDevice();
+        setTimeout(getPlatform, 100);
     }
     catch {
         setTimeout(getDeviceInfo, 100);

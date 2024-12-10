@@ -10,6 +10,11 @@
 			if (settings["personalization"]["atmos-logo"] === false){
 				showNotices()
 			}
+			else {
+				setTimeout(() => {
+					showNotices();
+				}, 4000);
+			}
 		}
 		catch (e){
 			setTimeout(() => {
