@@ -1,12 +1,12 @@
 import '@capacitor/core';
-import { Device } from '@capacitor/device';
+//import { Device } from '@capacitor/device';
 // import { Geolocation } from '@capacitor/geolocation';
 //import { polygon, simplify, area} from '@turf/turf';
-import {registerPlugin} from "@capacitor/core";
+import {Capacitor, registerPlugin} from "@capacitor/core";
 
 export async function getDevice(){
-    window.deviceInfo = await Device.getInfo();
-
+	window.deviceInfo = {};
+	window.deviceInfo.platform = Capacitor.getPlatform();
 }
 
 export function getPlugin(plugin){
