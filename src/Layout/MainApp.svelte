@@ -9,6 +9,7 @@
     import AlertsPage from "../Pages/AlertsPage.svelte";
     import RadarPage from "../Pages/RadarPage.svelte";
     import LocationSettingsPage from "../Pages/LocationSettingsPage.svelte";
+    import AndroidPermissionPopup from "../Components/AndroidPermissionPopup.svelte";
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
@@ -79,6 +80,8 @@
     {#each Object.entries(weatherDataDictionary) as [key, value]}
         <LocationSettingsPage locationData={value} bind:page={page} bind:alertSelection={alertSelection}/>
     {/each}
+
+    <AndroidPermissionPopup />
 </div>
 
 <style>

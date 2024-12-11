@@ -9,6 +9,7 @@
     let platform = $state(false);
     let webVersionWarning = $derived(platform === "pwa");
     let isDesktop = $derived(platform && platform.includes("desktop"));
+    let isAndroid = $derived(platform && platform.includes("android"));
 
     function refreshSettings() {
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
@@ -65,8 +66,12 @@
     <h1>Settings</h1>
     <h6>
         <a href="#" onclick={page = "about"}>About Atmos Weather</a>
-        &emsp;<a href="#" onclick={page="privacy"}>Privacy Statement</a>
-        <br><a id="android-permission-setting" hidden href="#">Android Permissions</a>
+        &emsp;
+        <a href="#" onclick={page="privacy"}>Privacy Statement</a>
+        <br>
+        {#if isAndroid}
+            <a onclick={showPermissionDialog} href="#">Android Permissions</a>
+        {/if}
     </h6>
 
     {#if webVersionWarning}

@@ -8,7 +8,6 @@
     }
 
 	window.showNotices = () => {
-		console.log("Ballin!");
 		if (window.platform === undefined || window.platform === "unknown"){
 			setTimeout(showNotices, 150);
 			return;
@@ -51,6 +50,7 @@
 		}
 
 		// Check for updates if enabled
+		console.log("Notify updates?? " + notifyUpdates);
 
 		if (notifyUpdates) {
 			JSONGetAsync("https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest", (latest) => {

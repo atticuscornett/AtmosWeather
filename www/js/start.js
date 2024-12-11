@@ -1,23 +1,11 @@
 // UPDATE
-setTimeout(() => {
-    console.log("testing the waters here");
-    window.PermissionManagement = cap.getPlugin("PermissionManagement");
-    console.log("waters tested");
-}, 1000);
-
-setTimeout(() => {
-    console.log(Capacitor)
-})
-
-setInterval(async () => {
-    if (window.platform === "android"){
-        console.log("Permission?")
-        console.log(JSON.stringify(await window.PermissionManagement.checkPermissions()));
-    }
-}, 2000);
+setTimeout(() => {window.PermissionManagement = cap.getPlugin("PermissionManagement")
+    setTimeout(showPermissionDialog, 1000);
+}, 100);
 
 
-window.atmosVersion = "3.0.0-prealpha";
+
+window.atmosVersion = "3.0.0-prealpha.1";
 window.atmosUpdated = "11-5-2024";
 window.atmosUpdateTitle = "Atmos Weather v2.2.1 is here!";
 window.atmosUpdateNotes = `
@@ -106,78 +94,6 @@ setTimeout(async () => {
     }
 }, 100);
 
-// Refresh duration text on slider change
-document.getElementById("setting-page-transition-duration").onchange = () => {
-document.getElementById("setting-page-transition-duration-text").innerHTML = Number(document.getElementById("setting-page-transition-duration").value) + "ms";
-}
-
-// Refresh radar when weather outlook changes
-document.getElementById("spc-select").onchange = () => {
-
-}
-
-// Save settings when a setting is changed
-document.getElementById("tab-settings").onchange = saveSettings;
-document.getElementById("tab-single-location-settings").onchange = saveLocationSettings;
-
-document.getElementById("current-loc-hourly-select").onchange = switchGraphs;
-
-// Switch between hourly graphs
-function switchGraphs(e){
-    let targetPrefix = e.target.id.split("-")[0];
-    document.getElementById(targetPrefix + "-loc-hourly-temp-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-feels-like-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-precip-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-humid-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-wind-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-dewpoint-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
-}
-
-function setupAndroidPermissions(){
-    if (window.deviceInfo === undefined){
-        setTimeout(setupAndroidPermissions, 100);
-        return;
-    }
-    if (getPlatform() === "android"){
-        window.PermissionManagement = cap.getPlugin("PermissionManagement");
-        repeatPermCheck();
-
-        document.getElementById("android-permission-setting").hidden = false;
-        document.getElementById("android-permission-setting").onclick = () => {
-            document.getElementById("android-permission-setup").hidden = false;
-            setTimeout(repeatPermCheck, 20);
-        }
-
-        // Setup permission request buttons
-        document.getElementById("android-request-background-location").onclick = () => {
-            PermissionManagement.requestPermission({"permission":"background-location"});
-        }
-
-        document.getElementById("android-request-notifications").onclick = () => {
-            PermissionManagement.requestPermission({"permission":"notifications"});
-        }
-
-        document.getElementById("android-request-battery-exempt").onclick = () => {
-            PermissionManagement.requestPermission({"permission":"battery-exempt"});
-        }
-
-        document.getElementById("android-request-exact-alarms").onclick = () => {
-            PermissionManagement.requestPermission({"permission":"exact-alarms"});
-        }
-
-        document.getElementById("android-permission-dialog-close").onclick = () => {
-            document.getElementById("android-permission-setup").hidden = true;
-            showNotices();
-        }
-    }
-}
-
-// Initialize Capacitor plugins
-setupAndroidPermissions();
-
-// Refresh location data
-setTimeout(refreshLocations, 200);
 
 // Handle loading animation
 document.getElementById("loading-anim").hidden = true;

@@ -126,51 +126,13 @@ NOTHING YET:
 	}
 }
 
-#android-permission-setup{
-	z-index: 99;
-	position: absolute;
-	background-color: hsla(0,0%,99%,1.00);
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	padding: 0;
-}
 
-#android-permission-container {
-	padding: 15px;
-	background-color: hsla(0,0%,99%,1.00);
-	text-align: center;
-}
-
-.permission-button {
-	padding-left: 15px;
-	padding-right: 15px;
-	border: none;
-	background-color: rgba(34,55,91,0.88);
-	color: white;
-	font-family: Secular One;
-	font-size: 25px;
-	border-radius: 7px;
-	cursor: pointer;
-}
-
-.permission-button:disabled {
-	background-color: grey;
-}
 
 /* Dark Mode Colors */
 body.dark {
 	background-color: #222222;
 	color: white;
 
-	#android-permission-setup {
-		background-color: #222222;
-	}
-
-	#android-permission-container {
-		background-color: #222222;
-	}
 
 	#welcome-window-native{
 		z-index: 100;
@@ -181,7 +143,6 @@ body.dark {
 		top: 0;
 		left: 0;
 	}
-
 
 
 	.android-setup {
