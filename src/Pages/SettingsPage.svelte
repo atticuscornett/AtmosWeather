@@ -4,6 +4,7 @@
     let { page = $bindable() } = $props();
 
     let allSettings = $state(JSON.parse(localStorage.getItem("atmos-settings")));
+    let locationNames = $state(JSON.parse(localStorage.getItem("weather-location-names")));
 
     let platform = $state(false);
     let webVersionWarning = $derived(platform === "pwa");
@@ -13,6 +14,18 @@
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         allSettings["radar"]["color-scheme"] = String(allSettings["radar"]["color-scheme"]);
         platform = window.platform;
+        locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+        console.log(locationNames)
+    }
+
+    function playAlarmSoundMain(){
+        let audio = new Audio('audio/' + allSettings["location-alerts"]["default-alert"] + 'alarm.mp3');
+        audio.play();
+    }
+
+    function playNotificationSoundMain(){
+        let audio = new Audio('audio/' + allSettings["location-alerts"]["default-notification"] + 'notification.mp3');
+        audio.play();
     }
 
     function saveSettings() {
@@ -165,13 +178,16 @@
         <br>
         <label for="setting-default-sound-notification">Default Notification Sound</label>
         <br>
-        <select id="setting-default-sound-notification" onchange={playAlarmSoundMain} bind:value={allSettings["location-alerts"]["default-notification"]}>
+        <select id="setting-default-sound-notification" onchange={playNotificationSoundMain} bind:value={allSettings["location-alerts"]["default-notification"]}>
             <option value="readynow">ReadyNow Watch</option>
             <option value="suremind">SureMind Watch</option>
             <option value="alternatingtones">Alternating Tones</option>
             <option value="simplebeeps">Simple Beeps</option>
         </select>
         <div id="location-settings-div">
+            {#each locationNames as name, i}
+                <h2><a href='#' onclick={()=>{page = "settings-" + name}}>{name} Alert Settings</a></h2>
+            {/each}
         </div>
         <hr>
         <h2>Alert Types</h2>

@@ -8,6 +8,7 @@
     import LocationAlertPage from "../Pages/LocationAlertPage.svelte";
     import AlertsPage from "../Pages/AlertsPage.svelte";
     import RadarPage from "../Pages/RadarPage.svelte";
+    import LocationSettingsPage from "../Pages/LocationSettingsPage.svelte";
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
@@ -73,6 +74,10 @@
 
     {#each Object.entries(weatherDataDictionary) as [key, value]}
         <LocationWeatherPage locationData={value} bind:page={page} bind:alertSelection={alertSelection}/>
+    {/each}
+
+    {#each Object.entries(weatherDataDictionary) as [key, value]}
+        <LocationSettingsPage locationData={value} bind:page={page} bind:alertSelection={alertSelection}/>
     {/each}
 </div>
 
