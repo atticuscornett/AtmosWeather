@@ -35,7 +35,9 @@
         <AirQualityIndex locationData={locationData} />
         <MultiGraph locationData={locationData} />
         <LongNWSForecast locationData={locationData} />
-        <button onclick={removeLocation}>Remove This Location</button>
+        {#if locationData.name !== "Current Location"}
+            <button onclick={removeLocation}>Remove This Location</button>
+        {/if}
     {/if}
 </TabSlot>
 
