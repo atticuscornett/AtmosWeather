@@ -1,4 +1,20 @@
 // UPDATE
+setTimeout(() => {
+    console.log("testing the waters here");
+    window.PermissionManagement = cap.getPlugin("PermissionManagement");
+    console.log("waters tested");
+}, 1000);
+
+setTimeout(() => {
+    console.log(Capacitor)
+})
+
+setInterval(async () => {
+    if (window.platform === "android"){
+        console.log("Permission?")
+        console.log(JSON.stringify(await window.PermissionManagement.checkPermissions()));
+    }
+}, 2000);
 
 
 window.atmosVersion = "3.0.0-prealpha";
@@ -68,30 +84,6 @@ function getPlatform(){
         return platform;
     }
 }
-
-
-// Fade out logo and handle notices after animation is done or immediately if it's disabled
-let noticeTimeout = 0;
-
-function noticeSetup() {
-    if (localStorage.getItem("atmos-settings") !== null) {
-        let settings = JSON.parse(localStorage.getItem("atmos-settings"));
-        if (settings["personalization"]["atmos-logo"]) {
-            setTimeout(function () {
-                showNotices();
-            }, 2000);
-        } else {
-            document.getElementById("atmos-logo").hidden = true;
-            showNotices();
-        }
-    } else {
-        setTimeout(function () {
-            showNotices();
-        }, 2000);
-    }
-}
-
-noticeSetup();
 
 // Adds function to the navigation buttons (from atmos-ui.js)
 // Check status of NWS API periodically (from atmos-ui.js)

@@ -5,7 +5,10 @@
   "bundledWebRuntime": false,
 	"plugins": {
     "SplashScreen": {
-      "androidScaleType": "CENTER_CROP",
+      "androidScaleType": "CENTER_CROP"
     }
+  },
+  "server": {
+    "androidScheme": "http"
   }
 }
