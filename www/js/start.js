@@ -1,6 +1,6 @@
 // UPDATE
-setTimeout(() => {window.PermissionManagement = cap.getPlugin("PermissionManagement")
-    setTimeout(showPermissionDialog, 1000);
+setTimeout(() => {
+    window.PermissionManagement = cap.getPlugin("PermissionManagement")
 }, 100);
 
 

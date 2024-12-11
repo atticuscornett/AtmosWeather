@@ -615,6 +615,52 @@ body.dark details[open] summary{
         background-color: #222222;
     }
 
+    #atmos-logo-welcome.svelte-1skrz51 {
+        max-width: 75%;
+        max-height: 10vh;
+    }
+
+	body.dark #welcome-window-native.svelte-1skrz51{
+		z-index: 100;
+		position: absolute;
+		background-color: #222222;
+		min-width: 100%;
+		min-height: 100%;
+		top: 0;
+		left: 0;
+	}
+
+	#welcome-window-native.svelte-1skrz51{
+		z-index: 99;
+		position: absolute;
+		background-color: black;
+		min-width: 100%;
+		min-height: 100%;
+		top: 0;
+		left: 0;
+		color: white;
+	}
+
+	#welcome-button-native.svelte-1skrz51{
+		border: none;
+		background-color: dodgerblue;
+		color: white;
+		font-family: Secular One, sans-serif;
+		font-size: 25px;
+		border-radius: 7px;
+		cursor: pointer;
+	}
+
+	#welcome-image-native.svelte-1skrz51{
+		max-height: 50vh;
+		max-width: 100vh;
+	}
+
+	h3.svelte-1skrz51 {
+		margin-right: 25px;
+		margin-left: 25px;
+	}
+
     #main-app.svelte-1osfzdi{
         height: 92%;
         width: 100%;

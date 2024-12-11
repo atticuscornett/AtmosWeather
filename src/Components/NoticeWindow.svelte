@@ -12,9 +12,8 @@
 			setTimeout(showNotices, 150);
 			return;
 		}
-		if (!localStorage.getItem("run-before") && window.platform != "pwa"){
-			//ToDo: Add a welcome window
-			//document.getElementById("welcome-window-native").hidden = false;
+		if (!localStorage.getItem("run-before") && window.platform !== "pwa"){
+			showNativeWelcome();
 			hideLogo();
 			return;
 		}

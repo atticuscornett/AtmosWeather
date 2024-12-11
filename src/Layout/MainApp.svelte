@@ -10,6 +10,7 @@
     import RadarPage from "../Pages/RadarPage.svelte";
     import LocationSettingsPage from "../Pages/LocationSettingsPage.svelte";
     import AndroidPermissionPopup from "../Components/AndroidPermissionPopup.svelte";
+    import WelcomeWindow from "../Components/WelcomeWindow.svelte";
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
@@ -82,6 +83,7 @@
     {/each}
 
     <AndroidPermissionPopup />
+    <WelcomeWindow />
 </div>
 
 <style>
