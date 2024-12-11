@@ -7,7 +7,7 @@ android {
     buildFeatures {
         viewBinding true
     }
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "io.atticusc.atmosweather"
         minSdkVersion rootProject.ext.minSdkVersion
