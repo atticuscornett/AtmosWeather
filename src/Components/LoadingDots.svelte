@@ -1,15 +1,23 @@
 <script>
-    let showLoading = false;
+    let loadingKeys = $state([]);
 
-    window.loadingElements = 0;
+    window.addLoadingKey = (key, maxTime=5000) => {
+        if(loadingKeys.includes(key)) return;
+        loadingKeys.push(key);
+        setTimeout(() => {
+            removeLoadingKey(key);
+        }, maxTime);
+    }
 
-    setInterval(checkLoading, 100);
-    function checkLoading(){
-        showLoading = window.loadingElements > 0;
+    window.removeLoadingKey = (key) => {
+        let loadingIndex = loadingKeys.indexOf(key);
+        if(loadingIndex > -1){
+            loadingKeys.splice(loadingIndex, 1);
+        }
     }
 </script>
 
-{#if showLoading}
+{#if loadingKeys.length > 0}
     <div id="loading-anim">
         <!-- Loading Animation from loading.io -->
         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>

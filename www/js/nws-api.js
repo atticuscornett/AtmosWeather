@@ -74,9 +74,9 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 		}
 		else{
 			var hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
-			window.loadingElements++;
+			addLoadingKey(hourlyForecastLink);
 			httpGetAsync(hourlyForecastLink, (hourlyForecast)=>{
-				window.loadingElements--;
+				removeLoadingKey(hourlyForecastLink);
 				try{
 					hourlyForecast = JSON.parse(hourlyForecast);
 					hourlyForecast = hourlyForecast["properties"]["periods"];
@@ -183,9 +183,9 @@ function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 		}
 		else{
 			var forecastLink = weatherGrid[0]["properties"]["forecast"]
-			window.loadingElements++;
+			addLoadingKey(forecastLink);
 			JSONGetAsync(forecastLink, (forecast) => {
-				window.loadingElements--;
+				removeLoadingKey(forecastLink);
 				try{
 					forecast = forecast["properties"]["periods"];
 					theCache[weatherGrid[1]] = [forecast, time.getTime()];
@@ -302,9 +302,9 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 		if (theCache.hasOwnProperty(pos)){
 			// Check if got alerts within last minute
 			if ((time.getTime() - theCache[pos][1]) > 60*1000){
-				window.loadingElements++;
+				addLoadingKey("nws-alerts" + pos);
 				JSONGetAsync("https://api.weather.gov/alerts/active?point=" + pos, (res) =>{
-					window.loadingElements--;
+					removeLoadingKey("nws-alerts" + pos);
 				try{
 					theCache[pos] = [res["features"], time.getTime()]
 					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
@@ -338,9 +338,9 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 			}
 		}
 		else{
-			window.loadingElements++;
+			addLoadingKey("nws-alerts" + pos);
 			JSONGetAsync("https://api.weather.gov/alerts/active?point=" + pos, (res) =>{
-				window.loadingElements--;
+				removeLoadingKey("nws-alerts" + pos);
 				try{
 					theCache[pos] = [res["features"], time.getTime()]
 					localStorage.setItem("nws-alerts-cache", JSON.stringify(theCache));
