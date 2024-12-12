@@ -8,7 +8,12 @@ if (!window.localStorage.getItem("nominatim-storage")){
 	window.localStorage.setItem("nominatim-storage", "{}");
 }
 
-// Get String and convert to JSON asynchronously
+/**
+ * Fetches JSON data from a given URL asynchronously.
+ *
+ * @param {string} urlGet - The URL to fetch data from.
+ * @param {function} callback - The callback function to handle the response or error.
+ */
 function JSONGetAsync(urlGet, callback){
 	fetch(urlGet)
 		.then((response) => response.json())
@@ -16,20 +21,34 @@ function JSONGetAsync(urlGet, callback){
 		.catch((err) => callback(err));
 }
 
+/**
+ * Fetches text data from a given URL asynchronously.
+ *
+ * @param {string} urlGet - The URL to fetch data from.
+ * @param {function} callback - The callback function to handle the response.
+ */
 function httpGetAsync(urlGet, callback){
 	fetch(urlGet)
 		.then((response) => response.text())
 		.then(callback);
 }
-// Check if location in cache and if not, check nominatim
+
+
+/**
+ * Searches for a location using the Nominatim API and caches the result.
+ *
+ * @param {string} query - The search query for the location.
+ * @param {function} nomCallback - The callback function to handle the response.
+ */
 function nomSearch(query, nomCallback){
 	// Format query to standard
 	query = query.replace(/,/g, " ")
 	query = query.replace(/ {2}/g, " ");
 	query = query.replace(/ {2}/g, " ");
 	query = query.toLowerCase();
-	var theCache = JSON.parse(window.localStorage.getItem("nominatim-storage"));
-	
+	let theCache = JSON.parse(window.localStorage.getItem("nominatim-storage"));
+
+	// Check if query is in cache
 	if (theCache.hasOwnProperty(query)){
 		nomCallback(theCache[query]);
 	}
@@ -45,19 +64,24 @@ function nomSearch(query, nomCallback){
 	}
 }
 
-// Get City Names From Object List
+/**
+ * Converts a list of Nominatim items to a list of city names.
+ *
+ * @param {Array} items - The list of Nominatim items.
+ * @returns {Array} - The list of city names.
+ */
 function nomItemsToNames(items){
-	var a = 0;
-	var theList = [];
-	var temp;
+	let a = 0;
+	let nameList = [];
+	let temp;
 	while (a < items.length){
 		temp = items[a]["display_name"];
 		temp = temp.split(", ");
 		temp = temp[0] + ", " + temp[1] + ", " + temp[2];
 		temp = temp.replaceAll("undefined, ", "");
 		temp = temp.replaceAll(", undefined", "");
-		theList.push(temp)
+		nameList.push(temp)
 		a++;
 	}
-	return theList;
+	return nameList;
 }
