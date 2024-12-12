@@ -101,4 +101,21 @@ window.loadingElements = 0;
 function checkLoading(){
     document.getElementById("loading-anim").hidden = window.loadingElements <= 0;
 }
+
+const checkAPIstatus = async () => {
+    try {
+        const online = await fetch("https://api.weather.gov");
+        return online.status >= 200 && online.status < 300;
+    } catch (err) {
+        return false;
+    }
+};
+
+// Sync with native code
+function syncFiles(){
+    if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa")){
+        cap.syncPreferences();
+    }
+}
+
 setInterval(checkLoading, 100);
