@@ -1,129 +1,9 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--	<head>-->
-<!--		<title>Atmos Weather</title>-->
-<!--		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com https://mapservices.weather.noaa.gov data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com https://api.open-meteo.com https://mapservices.weather.noaa.gov https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest;">-->
-<!--		<meta charset="utf-8" lang="en">-->
-<!--		<link href="./img/favicon.svg" rel="icon" type="image/x-icon" />-->
-<!--		-->
-<!--		&lt;!&ndash; Font Import &ndash;&gt;-->
-<!--		<link rel="stylesheet" href="./css/font-imports.css">-->
-<!--		-->
-<!--		&lt;!&ndash; Leaflet Map Plugin Import &ndash;&gt;-->
-<!--		<link rel="stylesheet" href="./libraries/leaflet/leaflet.css"/>-->
-<!--		<script src="./libraries/leaflet/leaflet.js"></script>-->
-<!--		-->
-<!--		&lt;!&ndash; Load Esri Leaflet from CDN &ndash;&gt;-->
-<!--		<script src="./libraries/esri-leaflet/esri-leaflet.js"></script>-->
-
-<!--		&lt;!&ndash; Chroma.js Import &ndash;&gt;-->
-<!--		<script src="./libraries/chroma.min.js"></script>-->
-
-<!--		&lt;!&ndash; Chart.js Import &ndash;&gt;-->
-<!--		<script src="./libraries/chart.js"></script>-->
-
-<!--		&lt;!&ndash; Logo Style and Animations &ndash;&gt;-->
-<!--		<link rel="stylesheet" href="./css/atmos-animations.css">-->
-<!--		<link rel="stylesheet" href="./css/atmos-ui.css">-->
-<!--		<link rel="stylesheet" href="./css/atmos-logo.css">-->
-<!--		-->
-<!--		-->
-<!--	</head>-->
-<!--	<body class="dark">-->
-<!--		<div id="welcome-window-native" hidden>-->
-<!--			<center>-->
-<!--				<br>-->
-<!--				<img src="img/logo.svg" style="max-width: 75%;max-height: 10vh;">-->
-<!--			</center>-->
-<!--			<center id="fade-section">-->
-<!--				<br>-->
-<!--				<img id="welcome-image-native" src="img/sunny-day.svg">-->
-<!--				<h1 id="welcome-title-native">Welcome To Atmos Weather</h1>-->
-<!--				<h3 id="welcome-body-native">Atmos Weather is the ultimate lightweight weather forecast and alert program.</h3>-->
-<!--				<br>-->
-<!--				<button id="welcome-button-native" onclick="showNextIntro();">Next</button>-->
-<!--			</center>-->
-<!--		</div>-->
-<!--		<div id="android-permission-setup" hidden>-->
-<!--			<div id="android-permission-container">-->
-<!--				<h1>Android Permission Setup</h1>-->
-<!--				<h3>Atmos Weather requires Android permissions to provide certain app functionality.</h3>-->
-<!--				<h3>Review the permissions below and grant permissions to enable certain features.</h3>-->
-<!--				<h3>This dialog can be opened any time from the settings page.</h3>-->
-<!--				<details>-->
-<!--					<summary id="android-background-permissions">Background Location</summary>-->
-<!--					<h4>Atmos Weather uses background location permission to provide weather alert notifications for your current location.</h4>-->
-<!--					<h4>Without this permission, Atmos Weather will be unable to give alerts for the current location or alerts if moving.</h4>-->
-<!--					<button class="permission-button"  id="android-request-background-location">Grant this permission</button>-->
-<!--				</details>-->
-<!--				<details>-->
-<!--					<summary id="android-notification-permissions">Notifications</summary>-->
-<!--					<h4>Atmos Weather uses the notification permission to deliver weather alerts.</h4>-->
-<!--					<h4>Without this permission, Atmos Weather cannot give weather alerts.</h4>-->
-<!--					<button class="permission-button"  id="android-request-notifications">Grant this permission</button>-->
-<!--				</details>-->
-<!--				<details>-->
-<!--					<summary id="android-battery-exempt-permissions">Battery Exemption</summary>-->
-<!--					<h4>Atmos Weather uses a battery optimization exemption to run in the background even when the device is asleep.</h4>-->
-<!--					<h4>Without this permission, Atmos Weather may stop running when your device falls asleep.</h4>-->
-<!--					<button class="permission-button" id="android-request-battery-exempt">Grant this permission</button>-->
-<!--				</details>-->
-<!--				<details>-->
-<!--					<summary id="android-exact-alarms-permissions">Schedule Exact Alarms</summary>-->
-<!--					<h4>Atmos Weather uses the schedule exact alarm permission to run periodic weather checks in the background in a timely manner.</h4>-->
-<!--					<h4>Without this permission, Atmos Weather cannot reliably give timely alerts.</h4>-->
-<!--					<button class="permission-button" id="android-request-exact-alarms">Grant this permission</button>-->
-<!--				</details>-->
-<!--				<button class="permission-button" id="android-permission-dialog-close">Done</button>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		<div id="loading-anim">-->
-<!--			&lt;!&ndash; Loading Animation from loading.io &ndash;&gt;-->
-<!--			<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>-->
-<!--		</div>-->
-<!--		<div id="app">-->
-<!--			<div id="main-app">-->
-<!--				&lt;!&ndash; Offline Alert &ndash;&gt;-->
-<!--				<div class="location error" id="offlineError" hidden>-->
-<!--					<div style="display: inline-block;height: inherit;vertical-align: top;margin-top:35px;">-->
-<!--						<img style="vertical-align:center;" src="img/internet.svg">-->
-<!--					</div>-->
-<!--					<div style="display:inline-block;margin-left:8px;"><h2>Are you offline?</h2><h3>Can't connect to the NWS API right now!</h3></div>-->
-<!--				</div>-->
-<!--				<br>-->
-<!--				&lt;!&ndash; App Tabs &ndash;&gt;-->
-<!--				&lt;!&ndash; Default Tab &ndash;&gt;-->
-
-<!--				</div>-->
-<!--				-->
-<!--				&lt;!&ndash; Programmatically Generated Tabs &ndash;&gt;-->
-<!--				<div id="location-data">-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--		-->
-<!--	</body>-->
-<!--	-->
-<!--	&lt;!&ndash; Javascript &ndash;&gt;-->
-<!--	-->
-<!--	&lt;!&ndash; Import Functions &ndash;&gt;-->
-<!--	<script src="js/main.js"></script>-->
-<!--	<script src="js/chart-management.js"></script>-->
-<!--	<script src="js/atmos-ui.js"></script>-->
-<!--	<script src="js/nominatim-api.js"></script>-->
-<!--	<script src="js/nws-api.js"></script>-->
-<!--	<script src="js/electron-code.js"></script>-->
-<!--	<script src="js/atmos-settings.js"></script>-->
-<!--	<script src="js/rainweather-api.js"></script>-->
-<!--	<script src="js/open-meteo-api.js"></script>-->
-<!--	<script src="js/start.js"></script>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset='utf-8'>
 		<meta name='viewport' content='width=device-width,initial-scale=1'>
+		<meta http-equiv="Content-Security-Policy" content="default-src https://api.weather.gov https://api.rainviewer.com https://atticuscornett.github.io 'unsafe-eval' 'unsafe-inline' 'self';object-src 'none';img-src 'self' https://*.tile.openstreetmap.org https://tilecache.rainviewer.com https://mapservices.weather.noaa.gov data:;connect-src https://atticuscornett.github.io https://api.rainviewer.com https://api.weather.gov https://nominatim.openstreetmap.org https://air-quality-api.open-meteo.com https://api.open-meteo.com https://mapservices.weather.noaa.gov https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest;">
 
 		<title>Atmos Weather</title>
 
@@ -156,6 +36,7 @@
 	<script src="js/start.js"></script>
 	<script src="js/atmos-settings.js"></script>
 	<script src="js/audio-functions.js"></script>
+	<script src="js/electron-code.js"></script>
 	<script src="js/nws-api.js"></script>
 	<script src="js/open-meteo-api.js"></script>
 	<script src="js/rainweather-api.js"></script>

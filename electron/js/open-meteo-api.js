@@ -63,6 +63,9 @@ function removeOldData(times, data){
     let a = 0;
     while (String(times[a]).endsWith(String(UTCHour) + ":00") === false){
         a++;
+        if (a > 50){
+            break;
+        }
     }
     newData = data.slice(a);
     let newTimes = times.slice(a);
@@ -83,25 +86,4 @@ function removeOldData(times, data){
     newData = newData.map((data) => Math.round(data));
     
     return [newTimes, newData];
-}
-
-function getAQICategory(AQI){
-    if (AQI > 300){
-        return "Hazardous";
-    }
-    else if (AQI > 200){
-        return "Very Unhealthy";
-    }
-    else if (AQI > 150){
-        return "Unhealthy";
-    }
-    else if (AQI > 100){
-        return "Unhealthy for sensitive groups";
-    }
-    else if (AQI > 50){
-        return "Moderate";
-    }
-    else{
-        return "Good";
-    }
 }

@@ -6,15 +6,18 @@ setTimeout(() => {
 
 
 window.atmosVersion = "3.0.0-prealpha.1";
-window.atmosUpdated = "11-5-2024";
-window.atmosUpdateTitle = "Atmos Weather v2.2.1 is here!";
+window.atmosUpdated = "12-11-2024";
+window.atmosUpdateTitle = "Atmos Weather v3.0.0-prealpha.1 is here!";
 window.atmosUpdateNotes = `
-		<dl style='font-family: Secular One;'>
-			<dt>Bug Fixes</dt>
-			<dd>- Fixed wind speed graph bug.</dd>
-			<dd>- Fixed battery optimization permission UI bug.</dd>
-			<dd>- Fixed permission window repeatedly showing on first installation.</dd>
-			<dd>- Updated packages.</dd>
+		<dl style='font-family: Secular One, sans-serif;'>
+		    <dt>This is a prealpha release!</dt>
+		    <dd>- Release notes will be made available for the full release.</dd>
+		    <dd>- Please report any bugs you find to the Atmos Weather GitHub repo.</dd>
+<!--			<dt>Bug Fixes</dt>-->
+<!--			<dd>- Fixed wind speed graph bug.</dd>-->
+<!--			<dd>- Fixed battery optimization permission UI bug.</dd>-->
+<!--			<dd>- Fixed permission window repeatedly showing on first installation.</dd>-->
+<!--			<dd>- Updated packages.</dd>-->
 		</dl> 
 		`;
 

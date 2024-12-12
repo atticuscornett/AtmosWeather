@@ -1,173 +1,109 @@
 // UPDATE
-window.atmosVersion = "2.2.1";
-window.atmosUpdated = "11-2-2024";
-window.atmosUpdateNotes = `
-		<h2>Atmos Weather v2.2.1 is here!</h2>
-		<hr>
-		<dl style='font-family: Secular One;'>
-			<dt>Bug Fixes</dt>
-			<dd>- Fixed wind speed graph bug.</dd>
-			<dd>- Fixed battery optimization permission UI bug.</dd>
-			<dd>- Fixed permission window repeatedly showing on first installation.</dd>
-			<dd>- Updated packages.</dd>
-		</dl> 
-		<br><br>
-		`;
-document.getElementById("atmos-app-version").innerHTML = "Version " + window.atmosVersion;
-document.getElementById("atmos-app-updated").innerHTML = "Updated on " + window.atmosUpdated;
-
-// Set global app theme
-function refreshAppTheme(){
-    window.appTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    let currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-    if (currentSettings["personalization"]){
-        if (currentSettings["personalization"]["theme"] !== "system"){
-            window.appTheme = currentSettings["personalization"]["theme"];
-        }
-    }
-    document.body.setAttribute("class", window.appTheme);
-}
-setTimeout(refreshAppTheme, 100);
-
-// Fade out logo and handle notices after animation is done or immediately if it's disabled
-let noticeTimeout = 0;
-
-function noticeSetup() {
-    if (localStorage.getItem("atmos-settings") !== null) {
-        let settings = JSON.parse(localStorage.getItem("atmos-settings"));
-        if (settings["personalization"]["atmos-logo"]) {
-            setTimeout(function () {
-                showNotices();
-            }, 2000);
-        } else {
-            document.getElementById("atmos-logo").hidden = true;
-            showNotices();
-        }
-    } else {
-        setTimeout(function () {
-            showNotices();
-        }, 2000);
-    }
-}
-
-noticeSetup();
-
-// Adds function to the navigation buttons (from atmos-ui.js)
-activateNavButtons();
-// Check status of NWS API periodically (from atmos-ui.js)
-setInterval(async () => {
-      const result = await checkAPIstatus();
-      if (!result){
-        document.getElementById("offlineError").hidden = false;
-    }
-    else{
-        document.getElementById("offlineError").hidden = true;
-    }
-}, 60000);
-setTimeout(async () => {
-      const result = await checkAPIstatus();
-      if (!result){
-        document.getElementById("offlineError").hidden = false;
-    }
-    else{
-        document.getElementById("offlineError").hidden = true;
-    }
+setTimeout(() => {
+    window.PermissionManagement = cap.getPlugin("PermissionManagement")
 }, 100);
 
-// Allow Enter key on search
-document.getElementById("location-search").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        document.getElementById("search-button").click();
-      }
-});
 
-// Refresh duration text on slider change
-document.getElementById("setting-page-transition-duration").onchange = () => {
-document.getElementById("setting-page-transition-duration-text").innerHTML = Number(document.getElementById("setting-page-transition-duration").value) + "ms";
-}
 
-// Refresh radar when weather outlook changes
-document.getElementById("spc-select").onchange = () => {
-    let value = document.getElementById("spc-select").value;
-    if (value == "severe-outlook"){
-        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
-    }
-    else if (value == "fire-outlook"){
-        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/fire_weather/SPC_firewx/MapServer";
-    }
-    else{
-        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/hazards/cpc_weather_hazards/MapServer";
-    }
-    reloadOutlook();
-}
+window.atmosVersion = "3.0.0-prealpha.1";
+window.atmosUpdated = "12-11-2024";
+window.atmosUpdateTitle = "Atmos Weather v3.0.0-prealpha.1 is here!";
+window.atmosUpdateNotes = `
+		<dl style='font-family: Secular One, sans-serif;'>
+		    <dt>This is a prealpha release!</dt>
+		    <dd>- Release notes will be made available for the full release.</dd>
+		    <dd>- Please report any bugs you find to the Atmos Weather GitHub repo.</dd>
+<!--			<dt>Bug Fixes</dt>-->
+<!--			<dd>- Fixed wind speed graph bug.</dd>-->
+<!--			<dd>- Fixed battery optimization permission UI bug.</dd>-->
+<!--			<dd>- Fixed permission window repeatedly showing on first installation.</dd>-->
+<!--			<dd>- Updated packages.</dd>-->
+		</dl> 
+		`;
 
-// Save settings when a setting is changed
-document.getElementById("tab-settings").onchange = saveSettings;
-document.getElementById("tab-single-location-settings").onchange = saveLocationSettings;
-
-document.getElementById("current-loc-hourly-select").onchange = switchGraphs;
-
-// Switch between hourly graphs
-function switchGraphs(e){
-    let targetPrefix = e.target.id.split("-")[0];
-    document.getElementById(targetPrefix + "-loc-hourly-temp-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-feels-like-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-precip-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-humid-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-wind-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-dewpoint-chart-container").style.display = "none";
-    document.getElementById(targetPrefix + "-loc-hourly-" + e.target.value + "-chart-container").style.display = "block";
-}
-
-function setupAndroidPermissions(){
-    if (window.deviceInfo === undefined){
-        setTimeout(setupAndroidPermissions, 100);
-        return;
-    }
-    if (getPlatform() === "android"){
-        window.PermissionManagement = cap.getPlugin("PermissionManagement");
-        repeatPermCheck();
-
-        document.getElementById("android-permission-setting").hidden = false;
-        document.getElementById("android-permission-setting").onclick = () => {
-            document.getElementById("android-permission-setup").hidden = false;
-            setTimeout(repeatPermCheck, 20);
-        }
-
-        // Setup permission request buttons
-        document.getElementById("android-request-background-location").onclick = () => {
-            PermissionManagement.requestPermission({"permission":"background-location"});
-        }
-
-        document.getElementById("android-request-notifications").onclick = () => {
-            PermissionManagement.requestPermission({"permission":"notifications"});
-        }
-
-        document.getElementById("android-request-battery-exempt").onclick = () => {
-            PermissionManagement.requestPermission({"permission":"battery-exempt"});
-        }
-
-        document.getElementById("android-request-exact-alarms").onclick = () => {
-            PermissionManagement.requestPermission({"permission":"exact-alarms"});
-        }
-
-        document.getElementById("android-permission-dialog-close").onclick = () => {
-            document.getElementById("android-permission-setup").hidden = true;
-            showNotices();
-        }
+window.syncFiles = () => {
+    if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa") && !getPlatform().includes("unknown")) {
+        cap.syncPreferences();
     }
 }
 
-// Initialize Capacitor plugins
-setupAndroidPermissions();
+function getDeviceInfo(){
+    try {
+        cap.getDevice();
+        setTimeout(getPlatform, 100);
+    }
+    catch {
+        setTimeout(getDeviceInfo, 100);
+    }
+}
 
-// Refresh location data
-setTimeout(refreshLocations, 200);
+getDeviceInfo();
+
+function getPlatform(){
+    if (!window.deviceInfo){
+        return "unknown";
+    }
+    else {
+        let platform = "unknown";
+        if (window.deviceInfo.platform == "web") {
+            // Running either electron version or online version
+            if (navigator.userAgent.includes("Electron")) {
+                if (navigator.platform.indexOf("Win") == 0) {
+                    platform = "desktop-windows"
+                } else if (navigator.platform.indexOf("Mac") == 0) {
+                    platform = "desktop-mac"
+                } else {
+                    platform = "desktop-linux"
+                }
+            } else {
+                platform = "pwa";
+            }
+        } else {
+            if (window.deviceInfo.platform == "electron") {
+                if (navigator.platform.indexOf("Win") == 0) {
+                    platform = "desktop-windows"
+                } else if (navigator.platform.indexOf("Mac") == 0) {
+                    platform = "desktop-mac"
+                } else {
+                    platform = "desktop-linux"
+                }
+            } else {
+                platform = window.deviceInfo.platform;
+            }
+        }
+        window.platform = platform;
+        return platform;
+    }
+}
+
+const checkAPIstatus = async () => {
+    try {
+        const online = await fetch("https://api.weather.gov");
+        return online.status >= 200 && online.status < 300;
+    } catch (err) {
+        return false;
+    }
+};
+
+
+// Adds function to the navigation buttons (from atmos-ui.js)
+// Check status of NWS API periodically (from atmos-ui.js)
+setInterval(async () => {
+    setNWSAvailable(await checkAPIstatus());
+}, 60000);
+setTimeout(async () => {
+    setNWSAvailable(await checkAPIstatus());
+}, 100);
+
 
 // Handle loading animation
-document.getElementById("loading-anim").hidden = true;
 window.loadingElements = 0;
-function checkLoading(){
-    document.getElementById("loading-anim").hidden = window.loadingElements <= 0;
+
+
+// Sync with native code
+function syncFiles(){
+    if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa")){
+        cap.syncPreferences();
+    }
 }
-setInterval(checkLoading, 100);
+
