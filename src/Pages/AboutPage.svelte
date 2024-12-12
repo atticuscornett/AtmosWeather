@@ -12,7 +12,8 @@
     <hr>
     <h2>Resources</h2>
     <h3><a href="https://tablericons.com/" target="_blank">Tabler Icons</a></h3>
-    <h3><a href="https://cordova.apache.org/" target="_blank">Apache Cordova</a></h3>
+    <h3><a href="https://capacitorjs.com/" target="_blank">CapacitorJS</a></h3>
+    <h3><a href="https://svelte.dev/" target="_blank">Svelte</a></h3>
     <h3><a href="https://github.com/TheCocoaProject/cordova-plugin-nativestorage" target="_blank">Cordova NativeStorage Plugin</a></h3>
     <h3><a href="https://fonts.google.com/" target="_blank">Google Fonts</a></h3>
     <h3><a href="https://nominatim.org/" target="_blank">OSM Nominatim</a></h3>
