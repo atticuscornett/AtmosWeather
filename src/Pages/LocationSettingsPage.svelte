@@ -11,8 +11,9 @@
     let isDesktop = $derived(platform && platform.includes("desktop"));
     let locationSettings = $state(generateSettings());
 
+    // Generates the settings object for the location
     function generateSettings(){
-        console.log("Generating settings");
+        // Checks if a location-specific setting exists, and if not, uses the global setting
         let settings = {"notifications":{}, "location-alerts":{}, "alert-types":{"warnings":{}, "watches":{}, "advisory":{}}};
         settings["notifications"]["severe-future"] = getSettingsForLocation(["notifications", "severe-future"]);
         settings["notifications"]["rain-future"] = getSettingsForLocation(["notifications", "rain-future"]);
@@ -35,29 +36,41 @@
         for (let i = 0; i < advisoryTypes.length; i++){
             settings["alert-types"]["advisory"][advisoryTypes[i]] = getSettingsForLocation(["alert-types", "advisory", advisoryTypes[i]]);
         }
-        console.log("Generated settings :");
-        console.log(settings);
+
         return settings;
     }
 
+    // Refreshes the settings object for the location
     function refreshSettings() {
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         allSettings["radar"]["color-scheme"] = String(allSettings["radar"]["color-scheme"]);
+
         platform = window.platform;
         locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+
         locationSettings = generateSettings();
-        console.log(locationSettings);
     }
 
+    // Plays the default alarm sound for the location
     function playAlarmSoundLocation(){
         let audio = new Audio('audio/' + locationSettings["location-alerts"]["default-alert"] + 'alarm.mp3');
         audio.play();
     }
+
+    // Plays the default notification sound for the location
     function playNotificationSoundLocation(){
         let audio = new Audio('audio/' + locationSettings["location-alerts"]["default-notification"] + 'notification.mp3');
         audio.play();
     }
 
+
+    /**
+     * Retrieves the settings for a specific location based on the provided properties.
+     * If the settings for the location do not exist, it initializes them with default values.
+     *
+     * @param {Array} properties - An array of property names to retrieve the settings for.
+     * @returns {Object|null} - The settings object for the specified location or the global settings if not found.
+     */
     function getSettingsForLocation(properties){
         let settingResult = allSettings;
 
@@ -78,6 +91,13 @@
         }
     }
 
+    /**
+     * Retrieves the value of a nested property from an object based on the provided array of property names.
+     *
+     * @param {Array} properties - An array of property names to retrieve the nested value.
+     * @param {Object} obj - The object from which to retrieve the nested value.
+     * @returns {Object|null} - The value of the nested property or null if any property in the path does not exist.
+     */
     function getKeys(properties, obj){
         let object = structuredClone($state.snapshot(obj));
         for (let i = 0; i < properties.length; i++){
@@ -91,12 +111,14 @@
         return object;
     }
 
+    // Saves the settings for the location to local storage
     function saveSettings() {
-        console.log(allSettings);
+        // Copy settings into a new object to avoid reference issues
         let settingsSave = structuredClone($state.snapshot(allSettings));
         settingsSave["radar"]["color-scheme"] = Number(settingsSave["radar"]["color-scheme"]);
         refreshAppTheme();
 
+        // Check if the location settings differ from the global settings and save the differences
         let notificationSettings = {};
         for (let i in locationSettings["notifications"]){
             if (locationSettings["notifications"][i] !== allSettings["notifications"][i]){
@@ -146,6 +168,8 @@
         localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
     }
 
+
+    // Ensures the settings object is set
     function ensureSettingsSet(){
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         if (!allSettings){
@@ -156,6 +180,13 @@
         }
     }
 
+    /**
+     * Formats a title by capitalizing the first letter of each word and appending an ending if necessary.
+     *
+     * @param {string} title - The title to format, with words separated by hyphens.
+     * @param {string} ending - The ending to append to the title if it does not contain "Outlook" or "Statement".
+     * @returns {string} - The formatted title.
+     */
     function formatTitle(title, ending){
         title = title.split("-");
         for (let i in title){
