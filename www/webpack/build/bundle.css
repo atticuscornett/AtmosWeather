@@ -661,11 +661,45 @@ body.dark details[open] summary{
 		margin-left: 25px;
 	}
 
-    #main-app.svelte-1osfzdi{
+    #main-app.svelte-odqco0{
         height: 92%;
         width: 100%;
         padding: 0;
         overflow-x: hidden;
+    }
+
+    #offlineErrorChild.svelte-odqco0 {
+        display: inline-block;
+        height: inherit;
+        vertical-align: top;
+        margin-top:35px;
+    }
+
+    img.svelte-odqco0 {
+        vertical-align: center;
+    }
+
+    #offlineText.svelte-odqco0 {
+        display:inline-block;
+        margin-left:8px;
+    }
+
+    .error.svelte-odqco0{
+        background-color: darkslategray !important;
+    }
+
+    .location.svelte-odqco0{
+        background-color: blue;
+        color: white;
+        border-radius: 7px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 20px;
+        -webkit-box-sizing: border-box;
+        -mox-box-sizing: border-box;
+        box-sizing: border-box;
+        cursor: pointer;
+        box-shadow: 0 0 7px #898989;
     }
 
     #app.svelte-bsdlm3 {

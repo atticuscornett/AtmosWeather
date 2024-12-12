@@ -73,25 +73,23 @@ function getPlatform(){
     }
 }
 
+const checkAPIstatus = async () => {
+    try {
+        const online = await fetch("https://api.weather.gov");
+        return online.status >= 200 && online.status < 300;
+    } catch (err) {
+        return false;
+    }
+};
+
+
 // Adds function to the navigation buttons (from atmos-ui.js)
 // Check status of NWS API periodically (from atmos-ui.js)
 setInterval(async () => {
-      const result = await checkAPIstatus();
-      if (!result){
-        document.getElementById("offlineError").hidden = false;
-    }
-    else{
-        document.getElementById("offlineError").hidden = true;
-    }
+    setNWSAvailable(await checkAPIstatus());
 }, 60000);
 setTimeout(async () => {
-      const result = await checkAPIstatus();
-      if (!result){
-        document.getElementById("offlineError").hidden = false;
-    }
-    else{
-        document.getElementById("offlineError").hidden = true;
-    }
+    setNWSAvailable(await checkAPIstatus());
 }, 100);
 
 
@@ -101,15 +99,6 @@ window.loadingElements = 0;
 function checkLoading(){
     document.getElementById("loading-anim").hidden = window.loadingElements <= 0;
 }
-
-const checkAPIstatus = async () => {
-    try {
-        const online = await fetch("https://api.weather.gov");
-        return online.status >= 200 && online.status < 300;
-    } catch (err) {
-        return false;
-    }
-};
 
 // Sync with native code
 function syncFiles(){

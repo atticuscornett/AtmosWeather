@@ -83,7 +83,7 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 					theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
 					localStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(theCache));
 					syncFiles();
-					document.getElementById("offlineError").hidden = true;
+					setNWSAvailable(true);
 					if (extraReturn != null){
 						hourlyCallback(theCache[weatherGrid[1]], extraReturn);
 					}
@@ -191,7 +191,7 @@ function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 					theCache[weatherGrid[1]] = [forecast, time.getTime()];
 					localStorage.setItem("nws-forecast-cache", JSON.stringify(theCache));
 					syncFiles();
-					document.getElementById("offlineError").hidden = true;
+					setNWSAvailable(true);
 					if (extraReturn != null){
 						forecastCallback(theCache[weatherGrid[1]], extraReturn);
 					}

@@ -56,10 +56,25 @@
 
     }
 
+    let nwsAvailable = $state(true);
+
+    window.setNWSAvailable = (value) => {
+        nwsAvailable = value;
+    }
+
     getCurrentLocation();
 </script>
 
+
 <div id="main-app">
+    {#if !nwsAvailable}
+        <div class="location error" id="offlineError">
+            <div id="offlineErrorChild">
+                <img src="img/internet.svg">
+            </div>
+            <div id="offlineText"><h2>Are you offline?</h2><h3>Can't connect to the NWS API right now!</h3></div>
+        </div>
+    {/if}
     <br>
     <AboutPage bind:page={page}/>
     <LocationsPage bind:page={page} bind:weatherDataDictionary={weatherDataDictionary} />
@@ -92,5 +107,39 @@
         width: 100%;
         padding: 0;
         overflow-x: hidden;
+    }
+
+    #offlineErrorChild {
+        display: inline-block;
+        height: inherit;
+        vertical-align: top;
+        margin-top:35px;
+    }
+
+    img {
+        vertical-align: center;
+    }
+
+    #offlineText {
+        display:inline-block;
+        margin-left:8px;
+    }
+
+    .error{
+        background-color: darkslategray !important;
+    }
+
+    .location{
+        background-color: blue;
+        color: white;
+        border-radius: 7px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 20px;
+        -webkit-box-sizing: border-box;
+        -mox-box-sizing: border-box;
+        box-sizing: border-box;
+        cursor: pointer;
+        box-shadow: 0 0 7px #898989;
     }
 </style>
