@@ -94,11 +94,8 @@ setTimeout(async () => {
 
 
 // Handle loading animation
-document.getElementById("loading-anim").hidden = true;
 window.loadingElements = 0;
-function checkLoading(){
-    document.getElementById("loading-anim").hidden = window.loadingElements <= 0;
-}
+
 
 // Sync with native code
 function syncFiles(){
@@ -107,4 +104,3 @@ function syncFiles(){
     }
 }
 
-setInterval(checkLoading, 100);

@@ -11,6 +11,7 @@
     import LocationSettingsPage from "../Pages/LocationSettingsPage.svelte";
     import AndroidPermissionPopup from "../Components/AndroidPermissionPopup.svelte";
     import WelcomeWindow from "../Components/WelcomeWindow.svelte";
+    import LoadingDots from "../Components/LoadingDots.svelte";
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
@@ -99,6 +100,7 @@
 
     <AndroidPermissionPopup />
     <WelcomeWindow />
+    <LoadingDots />
 </div>
 
 <style>

@@ -661,6 +661,73 @@ body.dark details[open] summary{
 		margin-left: 25px;
 	}
 
+
+    #loading-anim.svelte-dps6pz {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+    }
+
+    /* Loader by loading.io */
+
+    .lds-ellipsis.svelte-dps6pz {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+    .lds-ellipsis.svelte-dps6pz div:where(.svelte-dps6pz) {
+        position: absolute;
+        top: 33px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: #186bbf;
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .lds-ellipsis.svelte-dps6pz div:where(.svelte-dps6pz):nth-child(1) {
+        left: 8px;
+        animation: svelte-dps6pz-lds-ellipsis1 0.6s infinite;
+    }
+    .lds-ellipsis.svelte-dps6pz div:where(.svelte-dps6pz):nth-child(2) {
+        left: 8px;
+        animation: svelte-dps6pz-lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis.svelte-dps6pz div:where(.svelte-dps6pz):nth-child(3) {
+        left: 32px;
+        animation: svelte-dps6pz-lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis.svelte-dps6pz div:where(.svelte-dps6pz):nth-child(4) {
+        left: 56px;
+        animation: svelte-dps6pz-lds-ellipsis3 0.6s infinite;
+    }
+    @keyframes svelte-dps6pz-lds-ellipsis1 {
+        0% {
+            transform: scale(0);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    @keyframes svelte-dps6pz-lds-ellipsis3 {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(0);
+        }
+    }
+    @keyframes svelte-dps6pz-lds-ellipsis2 {
+        0% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(24px, 0);
+        }
+    }
+
     #main-app.svelte-odqco0{
         height: 92%;
         width: 100%;
