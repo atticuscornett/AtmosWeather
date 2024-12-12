@@ -4,6 +4,8 @@
 
     let { locationData, alertID, page=$bindable() } = $props();
     let map;
+
+    // Initializes the LeafletJS alert map with OpenStreetMap tiles
     onMount(()=>{
         map = L.map('alert-map').setView([33.543682, -86.8104], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -16,12 +18,12 @@
 
     $effect(() => {
         if (locationData.alerts){
-            clearMap()
+            clearMap();
 
             if (locationData.alerts[alertID]){
-                console.log(locationData.alerts[alertID]);
                 alert = locationData.alerts[alertID];
 
+                // Formats the alert details for display
                 let details = alert["properties"]["description"];
                 details = details.replaceAll("\n\n", "<br><br>");
                 details = details.replaceAll("\n", " ");
@@ -31,6 +33,7 @@
                 details = details.split("<br><br>");
                 alert["properties"]["descriptionSplit"] = details;
 
+                // Styles the alert polygon based on the event type
                 let styling;
                 if (alert["properties"]["event"].toLowerCase().includes("warning")){
                     styling = {"color":"red"};
@@ -42,6 +45,7 @@
                     styling = {"color":"blue"};
                 }
 
+                // Adds the alert polygon to the LeafletJS alert map
                 getPolyBoundariesAsync(alert, (alertBoundaries)=>{
                     setTimeout(function(){
                         let polygon = L.geoJSON(alertBoundaries, {style:styling});
@@ -70,64 +74,31 @@
         }
     }
 
-    function loadAlert(alertID){
-        clearMap();
-        getPolyBoundariesAsync(alertData, (alertBoundaries) => {
-            document.getElementById("weather-alert-title").innerHTML = theAlert["properties"]["headline"];
-            var divCode = "<h2>Areas Affected</h2>"
-            divCode += "<h3>" + theAlert["properties"]["areaDesc"] + "</h3>"
-            if (theAlert["properties"]["instruction"] != null){
-                divCode += "<h2>Instructions</h2>"
-                divCode += "<h3>" + theAlert["properties"]["instruction"] + "</h3>"
-            }
-            divCode += "<h2>Details</h2>"
-            var theDetails = theAlert["properties"]["description"]
-            theDetails = theDetails.replaceAll("\n\n", "<br><br>");
-            theDetails = theDetails.replaceAll("\n", " ");
-            theDetails = theDetails.replaceAll("* ", "");
-            theDetails = theDetails.replaceAll("...", " - ");
-            theDetails = theDetails.replaceAll("- -", "-")
-            divCode += "<h3>" + theDetails + "</h3>"
-            document.getElementById("alert-details").innerHTML = divCode;
-
-            console.log(alertBoundaries);
-            navTo("alert-display")
-            setTimeout(function(){
-                let polygon = L.geoJSON(alertBoundaries, {style:styling});
-                polygon.addTo(map);
-                console.log(alertBoundaries);
-                console.log(polygon);
-                map.invalidateSize(true)
-                setTimeout(function(){
-                    map.fitBounds(polygon.getBounds());
-                }, 1000);
-            }, 1000)
-        });
-
-    }
 </script>
 
 <TabSlot name="alert-view" bind:page={page}>
     {#if alert}
         <h1 id="weather-alert-title">{alert["properties"]["headline"]}</h1>
     {/if}
+
     <div id="alert-map">
     </div>
+
     {#if alert}
-    <div id="alert-details">
-        <h2>Areas Affected</h2>
-        <h3>{alert["properties"]["areaDesc"]}</h3>
+        <div id="alert-details">
+            <h2>Areas Affected</h2>
+            <h3>{alert["properties"]["areaDesc"]}</h3>
 
-        {#if alert["properties"]["instruction"]}
-            <h2>Instructions</h2>
-            <h3>{alert["properties"]["instruction"]}</h3>
-        {/if}
+            {#if alert["properties"]["instruction"]}
+                <h2>Instructions</h2>
+                <h3>{alert["properties"]["instruction"]}</h3>
+            {/if}
 
-        <h2>Details</h2>
-        {#each alert["properties"]["descriptionSplit"] as detail}
-            <h3>{detail}</h3>
-        {/each}
-    </div>
+            <h2>Details</h2>
+            {#each alert["properties"]["descriptionSplit"] as detail}
+                <h3>{detail}</h3>
+            {/each}
+        </div>
     {/if}
 </TabSlot>
 
