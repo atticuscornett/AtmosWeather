@@ -65,16 +65,7 @@ Some beta version builds will be added to GitHub releases.
 
 
 ## Latest Code (Unstable, Not Recommended)
-By downloading the repository files, you can build the latest code on your machine using CapacitorJS (for the Android version) or using Electron in the `electron` folder (for all desktop versions).
-Node and npm are required to build the latest code.
-
-To run Electron version:
-1. Download node libraries with `npm install`
-2. Run the app with `npm start`
-
-To run Android version:
-1. Sync the project with `npx cap sync`
-2. Build and run the app in Android Studio.
+By downloading the repository files, you can build the latest code on your machine by following the instructions in the Development section.
 
 # <a name="goals"></a>Project Goals
 ### Minimum Bloat
@@ -97,14 +88,6 @@ can be viewed [here](https://atticuscornett.github.io/AtmosWeather/privacy.html)
 
 Because it uses the National Weather Service API, Atmos Weather only supports locations in the US.
 
-### Battery Warning On Certain Samsung Models
-
-Samsung marks Atmos Weather as a high battery user, because it wakes up the phone often to check for weather alerts.
-This can mean automatic throttling of weather checks, leading to late alerts.
-Despite this warning, Atmos Weather has not been observed to use more than 1-2% a day on these models.
-At the moment, the only solution is to allow background battery usage and disable battery optimizing for the app.
-This solves the negative performance impacts, but does not get rid of the warning.
-
 ### Notifications Don't Work On Some Linux Distros
 
 Some Linux distros lack the components to support electron notifications. There is no current workaround for this issue known to me.
@@ -114,7 +97,52 @@ Some Linux distros lack the components to support electron notifications. There 
 Some Linux distros lack the components to support text to speech. This can be solved by the user manually installing text to speech components.
 
 # Development
-Atmos Weather is written in HTML, CSS, JavaScript, and Java. Atmos Weather uses CapacitorJS to build for multiple platforms.
+Atmos Weather is primarily written in Svelte, JavaScript, and Java.
+There are three versions of Atmos Weather: Android, Web, and Desktop.
+The three versions share common code for the UI
+but have different code for the backend and platform-specific features.
+
+### Environment Setup
+1. Install Node.js and npm
+2. Run `npm install` in the root directory to install the necessary libraries.
+3. Run `npm install` in the `electron` directory to install the necessary libraries for the desktop version.
+4. Run `npm run watch` in the root directory to continuously build the web version.
+
+### Web
+New features should be written for the web version first, then copied and implemented for the other versions.
+The web version code is the UI base shared between the desktop and Android versions.
+As the majority of the code is shared between the three versions,
+updates often only need to be made to the web version and then copied to the other versions without modification.
+
+The Svelte code for the web version is in the `src` folder.
+All non-Svelte code (such as JavaScript libraries and media) are in the `www` folder.
+
+To view the web version, run `npm run watch` to build and open `www/index.html` in a browser.
+
+### Desktop
+The desktop version is built using Electron.
+The Electron code is in the `electron` folder.
+The Electron code is a wrapper around the web version with additional code for platform-specific features.
+It is built for Windows, macOS, and Linux.
+
+Before working on the desktop version, be sure to copy the code in the `www` folder to the `electron` folder.
+(The `src` folder does not have to be copied, as the Svelte code is built into the `www` folder.)
+
+To run the desktop version, run `npm start` in the `electron` folder.
+
+### Android
+The Android version is built using CapacitorJS, Java, and Android Studio.
+The Android code is in the `android` folder.
+Like the desktop version,
+the Android version is a wrapper around the web version with additional code for platform-specific features.
+
+Before working on the Android version, be sure to sync the Android version with the web version using `npx cap sync`.
+This will automatically copy the web version code to the Android version.
+
+To run the Android version, open the `android` folder in Android Studio and run the app on an emulator or physical device.
+
+
+
 
 Development plans and progress can be viewed on the Atmos Weather Notion Site: https://atticuscornett.notion.site/atticuscornett/00bc25c1bb07405d9bbe8c8c33ad195a
 
