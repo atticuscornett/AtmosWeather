@@ -17,7 +17,6 @@
 			hideLogo();
 			return;
 		}
-		console.log("Hello gamer.");
 		hideLogo();
 		// Check if running the web browser version
 		/* NOTE: Unlike other messages that do not show again after they are read,
@@ -49,7 +48,6 @@
 		}
 
 		// Check for updates if enabled
-		console.log("Notify updates?? " + notifyUpdates);
 
 		if (notifyUpdates) {
 			JSONGetAsync("https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest", (latest) => {
@@ -75,8 +73,6 @@
 
 					showNotice = true;
 				}
-				console.log(notices);
-				console.log(noticeTitles);
 			});
 		}
 
@@ -86,7 +82,6 @@
 			showNotice = true;
 			window.localStorage.setItem("notice-version", window.atmosVersion);
 		}
-		console.log(showNotice)
 	}
 </script>
 

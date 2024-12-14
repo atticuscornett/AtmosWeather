@@ -92,11 +92,9 @@
                                             weatherDataDictionary["Current Location"].openMeteoData = openMeteo;
                                         });
 
-                                        console.log(weatherDataDictionary);
                                     } catch (e) {
                                         queueRefresh();
                                     }
-                                    console.error(alerts);
                                 })});
 
                     }), 50);
