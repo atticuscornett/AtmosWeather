@@ -4,10 +4,10 @@
 */
 
 // Keep downloaded polygons until page reload.
-var tempPolyCache = {};
-var tempPolyFireCache = {}
-var tempPolyCountyCache = {}
-var missed = [];
+let tempPolyCache = {};
+let tempPolyFireCache = {}
+let tempPolyCountyCache = {}
+let missed = [];
 
 // Set up empty storage
 if (!localStorage.getItem("nws-location-cache")){
@@ -22,10 +22,16 @@ if (!localStorage.getItem("nws-boundaries-cache")){
 	localStorage.setItem("nws-boundaries-cache", "{}");
 }
 
-// Convert a Nominatim object into a weather grid object
+/**
+ * Converts a Nominatim object into a weather grid object.
+ *
+ * @param {Object} nomObj - The Nominatim object containing location information.
+ * @param {Function} nomCallback - The callback function to handle the weather grid object.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function nomToWeatherGridAsync(nomObj, nomCallback, extraReturn=null){
-	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
-	var temp;
+	let theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
+	let temp;
 	temp = nomObj["display_name"];
 	temp = temp.split(", ");
 	temp = temp[0] + ", " + temp[1] + ", " + temp[2];
@@ -52,13 +58,19 @@ function nomToWeatherGridAsync(nomObj, nomCallback, extraReturn=null){
 	}
 }
 
-// Get hourly forecast information from weather grid returned by above function
+/**
+ * Fetches the hourly forecast asynchronously.
+ *
+ * @param {Object} weatherGrid - The weather grid object containing forecast link information.
+ * @param {Function} hourlyCallback - The callback function to handle the hourly forecast data.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
-	try{
-		var theCache = JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"));
-		var useCache = false;
-		var time = new Date();
-		// Check if has forecast from last five minutes
+	try {
+		let theCache = JSON.parse(localStorage.getItem("nws-hourly-forecast-cache"));
+		let useCache = false;
+		let time = new Date();
+		// Check if cache has forecast from last five minutes
 		if (theCache.hasOwnProperty(weatherGrid[1])){
 			if ((time.getTime() - theCache[weatherGrid[1]][1]) < 300*1000){
 				useCache = true;
@@ -73,11 +85,11 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 			}
 		}
 		else{
-			var hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
+			let hourlyForecastLink = weatherGrid[0]["properties"]["forecastHourly"]
 			addLoadingKey(hourlyForecastLink);
 			httpGetAsync(hourlyForecastLink, (hourlyForecast)=>{
 				removeLoadingKey(hourlyForecastLink);
-				try{
+				try {
 					hourlyForecast = JSON.parse(hourlyForecast);
 					hourlyForecast = hourlyForecast["properties"]["periods"];
 					theCache[weatherGrid[1]] = [hourlyForecast, time.getTime()];
@@ -107,18 +119,24 @@ function getHourlyForecastAsync(weatherGrid, hourlyCallback, extraReturn=null){
 	}
 }
 
+/**
+ * Retrieves the status of weather alerts for a given Nominatim object.
+ *
+ * @param {Object} nomObj - The Nominatim object containing location information.
+ * @param {Function} callback - The callback function to handle the status of weather alerts.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getStatusAsync(nomObj, callback, extraReturn=null){
-	var warnings = 0;
-	var watches = 0;
-	var other = 0;
+	let warnings = 0;
+	let watches = 0;
+	let other = 0;
 	getWeatherAlertsForNomAsync(nomObj, (weatherAlerts) => {
-		console.log(weatherAlerts);
 		weatherAlerts = weatherAlerts[0];
-		var a = 0;
-		var warningsList = [];
-		var watchesList = [];
-		var otherList = [];
-		var statList = [];
+		let a = 0;
+		let warningsList = [];
+		let watchesList = [];
+		let otherList = [];
+		let statList = [];
 		// Count the number of watches and warnings
 		while (a < weatherAlerts.length){
 			if (weatherAlerts[a]["properties"]["event"].toLowerCase().includes("watch")){
@@ -160,7 +178,13 @@ function getStatusAsync(nomObj, callback, extraReturn=null){
 	});
 }
 
-// Get full forecast information
+/**
+ * Fetches the full forecast information asynchronously.
+ *
+ * @param {Object} weatherGrid - The weather grid object containing forecast link information.
+ * @param {Function} forecastCallback - The callback function to handle the forecast data.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 	try{
 		var theCache = JSON.parse(localStorage.getItem("nws-forecast-cache"));
@@ -221,84 +245,32 @@ function getForecastAsync(weatherGrid, forecastCallback, extraReturn=null){
 	
 }
 
-// // Get hourly for current location (requires prior successful run of getCurrentLocation [atmos-ui.js])
-// function getHourlyGeoAsync(callback, extraReturn=null){
-// 	if (!currentLat){
-// 		if (extraReturn != null){
-// 			callback(false, extraReturn);
-// 		}
-// 		else{
-// 			callback(false);
-// 		}
-// 	}
-// 	JSONGetAsync("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString(), (weatherAlert) => {
-// 		var hourlyForecastLink = weatherGrid["properties"]["forecastHourly"]
-// 		JSONGetAsync(hourlyForecastLink, (hourlyForecast) => {
-// 			hourlyForecast = hourlyForecast["properties"]["periods"];
-// 			if (extraReturn != null){
-// 				callback(hourlyForecast, extraReturn);
-// 			}
-// 			else{
-// 				callback(hourlyForecast);
-// 			}
-// 		})
-// 	});
-// }
-
-
-// // Get full forecast of current location (requires prior successful run of getCurrentLocation [atmos-ui.js])
-// function getForecastGeo(){
-// 	if (!currentLat){
-// 		return false;
-// 	}
-// 	var weatherGrid = JSONGet("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString());
-// 	var forecastLink = weatherGrid["properties"]["forecast"]
-// 	var forecast = JSON.parse(httpGet(forecastLink));
-// 	forecast = forecast["properties"]["periods"];
-// 	return forecast;
-// }
-
-// Gets active weather alerts for a location
-
+/**
+ * Gets active weather alerts for a location specified by latitude and longitude.
+ *
+ * @param {number} lat - The latitude of the location.
+ * @param {number} long - The longitude of the location.
+ * @param {Function} callback - The callback function to handle the weather alerts.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getWeatherAlertsForPosAsync(lat, long, callback, extraReturn=null){
-	var theCache = JSON.parse(localStorage.getItem("nws-location-cache"));
 	getWeatherAlertsForNomAsync({"lat": lat, "lon": long}, (alerts)=>{
 		callback(alerts[0]);
 	}, extraReturn);
-	// return;
-	// try{
-	// 	window.loadingElements++;
-	// 	JSONGetAsync("https://api.weather.gov/alerts/active?point=" + lat.toString() + "," + long.toString(), (theAlerts) =>{
-	// 		window.loadingElements--;
-	// 		console.error(theAlerts);
-	// 		theAlerts = theAlerts["features"];
-	//
-	// 		if (therAlerts)
-	// 		if (extraReturn != null){
-	// 			callback(theAlerts, extraReturn);
-	// 		}
-	// 		else{
-	// 			console.error("The alerts" + theAlerts);
-	// 			callback(theAlerts);
-	// 		}
-	// 	});
-	// }
-	// catch(err){
-	// 	if (extraReturn != null){
-	// 		callback(false, extraReturn);
-	// 	}
-	// 	else{
-	// 		callback(false);
-	// 	}
-	// }
 }
 
-// Gets active weather alerts for a nominatim object
+/**
+ * Gets weather alerts for a given Nominatim object asynchronously.
+ *
+ * @param {Object} nomObj - The Nominatim object containing location information.
+ * @param {Function} nomCallback - The callback function to handle the weather alerts.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 	try{
-		var pos = nomObj["lat"].toString() + "," + nomObj["lon"].toString();
-		var theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
-		var time = new Date();
+		let pos = nomObj["lat"].toString() + "," + nomObj["lon"].toString();
+		let theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
+		let time = new Date();
 		if (theCache.hasOwnProperty(pos)){
 			// Check if got alerts within last minute
 			if ((time.getTime() - theCache[pos][1]) > 60*1000){
@@ -350,7 +322,6 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 						nomCallback(theCache[pos], extraReturn);
 					}
 					else{
-						console.log(theCache[pos]);
 						nomCallback(theCache[pos]);
 					}
 				}
@@ -377,10 +348,14 @@ function getWeatherAlertsForNomAsync(nomObj, nomCallback, extraReturn=null){
 	}
 }
 
-// Checks if weather alert should be added to the active alerts
+/**
+ * Checks if weather alerts should be added to the active alerts.
+ *
+ * @param {Array} alerts - An array of weather alerts to check.
+ */
 function addToActiveAlertsCheck(alerts){
-	var theCache = JSON.parse(localStorage.getItem("nws-alerts-current"));
-	var a = 0;
+	let theCache = JSON.parse(localStorage.getItem("nws-alerts-current"));
+	let a = 0;
 	while (a < alerts.length){
 		if (!theCache.includes(alerts[a][0])){
 			theCache.push(alerts[a][0]);
@@ -391,20 +366,25 @@ function addToActiveAlertsCheck(alerts){
 	syncFiles();
 }
 
-// Checks if weather alerts should be moved from current to old
+/**
+ * Checks if weather alerts should be moved from current to old.
+ *
+ * @param {boolean} [runFunction=false] - Whether to run a function after checking alerts.
+ * @param {Function} [functionToRun=null] - The function to run after checking alerts.
+ */
 function checkIfOldAlerts(runFunction=false, functionToRun=null){
-	var nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
-	var a = 0;
-	var allCurrent = [];
-	var cacheCurrent = JSON.parse(localStorage.getItem("nws-alerts-current"));
-	var moveToOld = [];
+	let nomLocations = JSON.parse(localStorage.getItem("weather-locations"));
+	let a = 0;
+	let allCurrent = [];
+	let cacheCurrent = JSON.parse(localStorage.getItem("nws-alerts-current"));
+	let moveToOld = [];
 	let locationsChecked = 0;
 	while (a < nomLocations.length){
 		getWeatherAlertsForNomAsync(nomLocations[a], (res, a) => {
 			allCurrent = allCurrent.concat(res[0]);
-			if (a == nomLocations.length - 1){
+			if (a === nomLocations.length - 1){
 				a = 0;
-				var ids = [];
+				let ids = [];
 				while (a < allCurrent.length){
 					ids.push(allCurrent[a]["id"])
 					a++;
@@ -420,7 +400,7 @@ function checkIfOldAlerts(runFunction=false, functionToRun=null){
 				}
 
 				localStorage.setItem("nws-alerts-current", JSON.stringify(allCurrent));
-				var oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"))
+				let oldAlerts = JSON.parse(localStorage.getItem("nws-alerts-old"))
 				oldAlerts = oldAlerts.concat(moveToOld);
 				oldAlerts = oldAlerts.slice(-20);
 				localStorage.setItem("nws-alerts-old", JSON.stringify(oldAlerts));
@@ -443,27 +423,20 @@ function checkIfOldAlerts(runFunction=false, functionToRun=null){
 	}
 }
 
-// Changes list of coords from longitude, latitude to latitude, longitude
-function fixNWSCoords(oldCoords){
-	var fixedCoords = [];
-	var a = 0;
-	var temp;
-	while (a < oldCoords.length){
-		temp = [oldCoords[a][1], oldCoords[a][0]];
-		fixedCoords.push(temp);
-		a++;
-	}
-	return fixedCoords;
-}
-
-// Gets the polygon boundary of weather alerts
+/**
+ * Gets the polygon boundary of weather alerts.
+ *
+ * @param {Object} weatherAlert - The weather alert object containing affected zones.
+ * @param {Function} callback - The callback function to handle the polygon boundaries.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getPolyBoundariesAsync(weatherAlert, callback, extraReturn=null){
 	if (weatherAlert["geometry"] == null){
-		var theCache = JSON.parse(localStorage.getItem("nws-boundaries-cache"));
-		var forecastZone;
-		var a = 0;
-		var zonesGeo = []
-		var theBoundaries;
+		let theCache = JSON.parse(localStorage.getItem("nws-boundaries-cache"));
+		let forecastZone;
+		let a = 0;
+		let zonesGeo = []
+		let theBoundaries;
 		let called = 0;
 		let calledDone = 0;
 		while (a < weatherAlert["properties"]["affectedZones"].length){
@@ -512,14 +485,18 @@ function getPolyBoundariesAsync(weatherAlert, callback, extraReturn=null){
 	}
 }
 
-// Gets all active weather alerts
+/**
+ * Fetches all active weather alerts asynchronously.
+ *
+ * @param {Function} callback - The callback function to handle the active weather alerts.
+ */
 function getAllActiveAlertsAsync(callback){
 	try{
-		var pos = "9999,9999";
-		var theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
-		var time = new Date();
+		let pos = "9999,9999";
+		let theCache = JSON.parse(localStorage.getItem("nws-alerts-cache"));
+		let time = new Date();
 		if (theCache.hasOwnProperty(pos)){
-			// Check if got alerts within last minute
+			// Check if got alerts within the last minute
 			if ((time.getTime() - theCache[pos][1]) > 60*1000){
 				JSONGetAsync("https://api.weather.gov/alerts/active", (res) => {
 					theCache[pos] = [res["features"], time.getTime()]
@@ -547,9 +524,16 @@ function getAllActiveAlertsAsync(callback){
 	}
 }
 
-// Get polygon for forecast zone
+/**
+ * Gets the polygon boundary for a forecast zone asynchronously.
+ *
+ * @param {string} forecastZone - The forecast zone identifier.
+ * @param {Function} callback - The callback function to handle the polygon boundary data.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getForecastZonePolyAsync(forecastZone, callback, extraReturn=null){
 	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	let areaData;
 	if (forecastZone.includes("fire")){
 		getFireZonePolyAsync(forecastZone, (res) => {
 			if (extraReturn != null){
@@ -572,17 +556,17 @@ function getForecastZonePolyAsync(forecastZone, callback, extraReturn=null){
 		})
 		return;
 	}
-	var zoneCode = forecastZone.substring(39);
-	var zoneNum = Number(zoneCode.substring(3));
-	var zoneId = zoneCode.substring(0,2);
-	var eo = "odd";
-	if (zoneNum % 2 == 0){
+	let zoneCode = forecastZone.substring(39);
+	let zoneNum = Number(zoneCode.substring(3));
+	let zoneId = zoneCode.substring(0,2);
+	let eo = "odd";
+	if (zoneNum % 2 === 0){
 		eo = "even"
 	}
 	if (allSettings["radar"]["polygons"]["high-res"]){
 		eo += "-highres";
 	}
-	var fullCode = zoneId + "-" + eo;
+	let fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyCache){
 		areaData = tempPolyCache[fullCode];
 		if (zoneCode in areaData){
@@ -641,24 +625,31 @@ function getForecastZonePolyAsync(forecastZone, callback, extraReturn=null){
 	}
 }
 
-// Get polygon for fire forecast zone
+/**
+ * Gets the polygon boundary for a fire forecast zone asynchronously.
+ *
+ * @param {string} forecastZone - The forecast zone identifier.
+ * @param {Function} callback - The callback function to handle the polygon boundary data.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
 	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-	var zoneCode = forecastZone.substring(35);
-	var zoneNum = Number(zoneCode.substring(3));
-	var zoneId = zoneCode.substring(0,2);
-	var eo = "odd";
-	if (zoneNum % 2 == 0){
+	let zoneCode = forecastZone.substring(35);
+	let zoneNum = Number(zoneCode.substring(3));
+	let zoneId = zoneCode.substring(0,2);
+	let eo = "odd";
+	let areaData;
+	if (zoneNum % 2 === 0){
 		eo = "even"
 	}
 	if (allSettings["radar"]["polygons"]["high-res"]){
 		eo += "-highres";
 	}
-	var fullCode = zoneId + "-" + eo;
+	let fullCode = zoneId + "-" + eo;
 	if (fullCode in tempPolyFireCache){
 		areaData = tempPolyFireCache[fullCode];
 		if (zoneCode in areaData){
-			if (callback != null){
+			if (extraReturn != null){
 				callback(areaData[zoneCode], extraReturn);
 			}
 			else{
@@ -667,7 +658,7 @@ function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
 			
 		}
 		else{
-			if (callback != null){
+			if (extraReturn != null){
 				callback(false, extraReturn);
 			}
 			else{
@@ -685,7 +676,7 @@ function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
 					areaData = {};
 				}
 				if (zoneCode in areaData){
-					if (callback != null){
+					if (extraReturn != null){
 						callback(areaData[zoneCode], extraReturn);
 					}
 					else{
@@ -694,7 +685,7 @@ function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
 					
 				}
 				else{
-					if (callback != null){
+					if (extraReturn != null){
 						callback(false, extraReturn);
 					}
 					else{
@@ -710,21 +701,28 @@ function getFireZonePolyAsync(forecastZone, callback, extraReturn=null){
 	}
 }
 
-// Get polygon for fire forecast zone
+/**
+ * Gets the polygon boundary for a county forecast zone asynchronously.
+ *
+ * @param {string} forecastZone - The forecast zone identifier.
+ * @param {Function} callback - The callback function to handle the polygon boundary data.
+ * @param {any} [extraReturn=null] - Additional data to return with the callback.
+ */
 function getCountyPolyAsync(forecastZone, callback, extraReturn=null){
 	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-	var zoneCode = forecastZone.substring(37);
-	var zoneNum = Number(zoneCode.substring(3));
-	var zoneId = zoneCode.substring(0,2);
-	var eo = "";
+	let zoneCode = forecastZone.substring(37);
+	let zoneNum = Number(zoneCode.substring(3));
+	let zoneId = zoneCode.substring(0,2);
+	let eo = "";
 	if (allSettings["radar"]["polygons"]["high-res"]){
 		eo = "-highres";
 	}
-	var fullCode = zoneId + eo;
+	let fullCode = zoneId + eo;
+	let areaData;
 	if (fullCode in tempPolyCountyCache){
 		areaData = tempPolyCountyCache[fullCode];
 		if (zoneCode in areaData){
-			if (callback != null){
+			if (extraReturn != null){
 				callback(areaData[zoneCode], extraReturn);
 			}
 			else{
@@ -733,7 +731,7 @@ function getCountyPolyAsync(forecastZone, callback, extraReturn=null){
 			
 		}
 		else{
-			if (callback != null){
+			if (extraReturn != null){
 				callback(false, extraReturn);
 			}
 			else{
@@ -751,7 +749,7 @@ function getCountyPolyAsync(forecastZone, callback, extraReturn=null){
 					areaData = {};
 				}
 				if (zoneCode in areaData){
-					if (callback != null){
+					if (extraReturn != null){
 						callback(areaData[zoneCode], extraReturn);
 					}
 					else{
@@ -760,7 +758,7 @@ function getCountyPolyAsync(forecastZone, callback, extraReturn=null){
 					
 				}
 				else{
-					if (callback != null){
+					if (extraReturn != null){
 						callback(false, extraReturn);
 					}
 					else{
@@ -776,7 +774,12 @@ function getCountyPolyAsync(forecastZone, callback, extraReturn=null){
 	}
 }
 
-// Sort events for radar display
+/**
+ * Sorts a list of weather alerts by event type for radar display.
+ *
+ * @param {Array} alertsList - The list of weather alerts to be sorted.
+ * @returns {Array} The sorted list of weather alerts.
+ */
 function sortByEventType(alertsList){
 	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 	var a = 0;
