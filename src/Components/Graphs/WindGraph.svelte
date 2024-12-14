@@ -13,8 +13,12 @@
 
     let imageCallback = (data, i) => {
         if (data[i]["windDirection"] !== "") {
-            lastImage = "directions/"+data[i]["windDirection"];
-            return "directions/"+data[i]["windDirection"];
+            let windDirection = data[i]["windDirection"];
+            if (windDirection.length > 2) {
+                windDirection = windDirection.substring(1, 3);
+            }
+            lastImage = "directions/"+windDirection;
+            return "directions/"+windDirection;
         }
         return lastImage;
     }
