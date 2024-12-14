@@ -21,6 +21,7 @@ window.atmosUpdateNotes = `
 		</dl> 
 		`;
 
+// Sync files with native code
 window.syncFiles = () => {
     if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa") && !getPlatform().includes("unknown")) {
         cap.syncPreferences();
@@ -39,6 +40,7 @@ function getDeviceInfo(){
 
 getDeviceInfo();
 
+// Returns the platform that Atmos Weather is running on
 function getPlatform(){
     if (!window.deviceInfo){
         return "unknown";
@@ -94,16 +96,3 @@ setInterval(async () => {
 setTimeout(async () => {
     setNWSAvailable(await checkAPIstatus());
 }, 100);
-
-
-// Handle loading animation
-window.loadingElements = 0;
-
-
-// Sync with native code
-function syncFiles(){
-    if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa")){
-        cap.syncPreferences();
-    }
-}
-
