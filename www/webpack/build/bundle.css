@@ -506,6 +506,17 @@ body.dark details[open] summary{
         display: none;
     }
 
+    .widgetRow.svelte-xrblxu {
+        display: flex;
+        overflow: auto;
+        margin-bottom: 10px;
+    }
+
+    .widgetContainer.svelte-xrblxu {
+        flex: 1;
+        margin-right: 10px;
+    }
+
     button.svelte-fiu7fd {
         width:100%;
         cursor:pointer;

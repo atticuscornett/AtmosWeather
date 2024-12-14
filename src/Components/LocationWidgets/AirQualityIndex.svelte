@@ -1,5 +1,6 @@
 <script>
     let { locationData } = $props();
+    let randomId = Math.round(Math.random()*1000000);
 
     let AQICategory = $state(null);
     $effect(() => {
@@ -14,7 +15,7 @@
             else{
                 leftAmount = "calc(" + leftAmount + "% + 3.5px)";
             }
-            document.getElementById("location-"+locationData.name+"-AQI").style.left = leftAmount;
+            document.getElementById("location-"+locationData.name+"-AQI" + randomId).style.left = leftAmount;
             AQICategory = getAQICategory(locationData.AQI);
         }
     })
@@ -47,7 +48,7 @@
         <h2>{locationData.AQI} ({AQICategory})</h2>
         <div class="gauge-container">
             <div class="gauge-background"></div>
-            <div class="gauge-marker" id={"location-"+locationData.name+"-AQI"}></div>
+            <div class="gauge-marker" id={"location-"+locationData.name+"-AQI" + randomId}></div>
         </div>
         <h5>Air Quality Data from <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></h5>
     </div>

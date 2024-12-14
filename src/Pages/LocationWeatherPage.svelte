@@ -5,6 +5,7 @@
     import AirQualityIndex from "../Components/LocationWidgets/AirQualityIndex.svelte";
     import MultiGraph from "../Components/LocationWidgets/MultiGraph.svelte";
     import LongNWSForecast from "../Components/LocationWidgets/LongNWSForecast.svelte";
+    import WidgetRow from "../Components/WidgetRow.svelte";
 
     let { locationData, page=$bindable(), alertSelection = $bindable() } = $props();
 
@@ -23,6 +24,8 @@
         localStorage.setItem("weather-location-names", JSON.stringify(locationNames));
         page = "locations";
     }
+
+    let widgetLayout = [["LocationAtAGlance"], ["AirQualityIndex"], ["MultiGraph"], ["LongNWSForecast"], ["MultiGraph"]];
 </script>
 <TabSlot name="location-{locationData.name}" bind:page={page}>
     <h1>{locationData.name}</h1>
@@ -31,10 +34,9 @@
     <!-- Wait for weather data -->
     {#if locationData.hourly[0]}
         <AlertBar locationData={locationData} bind:page={page} bind:alertSelection={alertSelection}/>
-        <LocationAtAGlance locationData={locationData} bind:page={page} />
-        <AirQualityIndex locationData={locationData} />
-        <MultiGraph locationData={locationData} />
-        <LongNWSForecast locationData={locationData} />
+        {#each widgetLayout as widgetRow}
+            <WidgetRow locationData={locationData} widgets={widgetRow} bind:page={page}/>
+        {/each}
         {#if locationData.name !== "Current Location"}
             <button onclick={removeLocation}>Remove This Location</button>
         {/if}

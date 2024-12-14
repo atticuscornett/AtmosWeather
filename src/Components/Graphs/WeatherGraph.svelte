@@ -3,9 +3,10 @@
         labelCallback, iconCallback, gradientCallback, dataCallback, scale=false, startAtZero=false, uniqueName } = $props();
 
     let thisChart;
+    let randomId = Math.round(Math.random()*1000000);
 
     $effect(() => {
-        thisChart = Chart.getChart(String(location) + "-loc-"+title+uniqueName+"-chart");
+        thisChart = Chart.getChart(String(location) + "-loc-"+title+uniqueName+randomId+"-chart");
         if (thisChart){
             thisChart.destroy();
         }
@@ -141,13 +142,13 @@
             console.log(chartConfig);
         }
 
-        let chart = new Chart(document.getElementById(String(location) + "-loc-"+title+uniqueName+"-chart"),
+        let chart = new Chart(document.getElementById(String(location) + "-loc-"+title+uniqueName+randomId+"-chart"),
             chartConfig);
     })
 </script>
 
 <div class='weatherGraph' >
-    <canvas id={location + "-loc-" + title + uniqueName+"-chart"}></canvas>
+    <canvas id={location + "-loc-" + title + uniqueName + randomId + "-chart"}></canvas>
 </div>
 
 <style>
