@@ -3,12 +3,13 @@
 	Handles the setting up and storing of app settings
 */
 
-// Initializes settings and updates settings on new version
+// Initializes settings and updates settings on update
 setTimeout(function(){
 	// Get default settings for platform
-	var atmosSettingsTemp;
+	let atmosSettingsTemp;
+	let thePlatform;
 	try{
-		var thePlatform = getPlatform();
+		thePlatform = getPlatform();
 	}
 	catch(err){
 		thePlatform = "other";
@@ -215,7 +216,7 @@ setTimeout(function(){
 		"per-location": {}
 	};
 	}
-	var currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	let currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 
 	// Set missing settings values to the default
 	localStorage.setItem("atmos-settings", JSON.stringify(fixMissingKeys(atmosSettingsTemp, currentSettings)));
@@ -250,8 +251,8 @@ function fixMissingKeys(defaultValues, currentValues){
 		return currentValues;
 	}
 	else{
-		var keysToCheck = Object.keys(defaultValues);
-		var a = 0;
+		let keysToCheck = Object.keys(defaultValues);
+		let a = 0;
 		while (a < keysToCheck.length){
 			currentValues[keysToCheck[a]] = fixMissingKeys(defaultValues[keysToCheck[a]], currentValues[keysToCheck[a]]);
 			a++;
@@ -278,34 +279,5 @@ function convertTempUnit(temp, unit){
 		else{
 			return temp;
 		}
-	}
-}
-
-// Check permissions while permission window is open
-
-async function repeatPermCheck(){
-	const permissions = await PermissionManagement.checkPermissions();
-	document.getElementById("android-background-permissions").innerHTML = "Background Location "
-		+ (permissions["hasBackgroundLocationPermission"] ? "✅" : "⚠️");
-	document.getElementById("android-request-background-location").innerHTML = (permissions["hasBackgroundLocationPermission"] ? "Background Location Granted" : "Request Background Location");
-	document.getElementById("android-request-background-location").disabled = permissions["hasBackgroundLocationPermission"];
-
-	document.getElementById("android-notification-permissions").innerHTML = "Notifications "
-		+ (permissions["hasNotificationPermission"] ? "✅" : "⚠️");
-	document.getElementById("android-request-notifications").innerHTML = (permissions["hasNotificationPermission"] ? "Notifications Granted" : "Request Notifications");
-	document.getElementById("android-request-notifications").disabled = permissions["hasNotificationPermission"];
-
-	document.getElementById("android-battery-exempt-permissions").innerHTML = "Battery Exemptions "
-		+ (permissions["hasBatteryOptimizationExemption"] ? "✅" : "⚠️");
-	document.getElementById("android-request-battery-exempt").innerHTML = (permissions["hasBatteryOptimizationExemption"] ? "Battery Exemptions Granted" : "Request Battery Exemptions");
-	document.getElementById("android-request-battery-exempt").disabled = permissions["hasBatteryOptimizationExemption"];
-
-	document.getElementById("android-exact-alarms-permissions").innerHTML = "Schedule Exact Alarms "
-		+ (permissions["canScheduleExactAlarms"] ? "✅" : "⚠️");
-	document.getElementById("android-request-exact-alarms").innerHTML = (permissions["canScheduleExactAlarms"] ? "Exact Alarms Granted": "Request Exact Alarms");
-	document.getElementById("android-request-exact-alarms").disabled = permissions["canScheduleExactAlarms"];
-
-	if (!document.getElementById("android-permission-setup").hidden){
-		setTimeout(repeatPermCheck, 300);
 	}
 }
