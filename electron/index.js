@@ -307,8 +307,8 @@ global.loadAlertE = (details) => {
 	console.log(details)
 	try{
 		win2.webContents.executeJavaScript('stopAllAudio();', false);
-		win2.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
 		win2.show()
+		win2.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
 	}
 	catch(err){
 		win2 = new BrowserWindow({
@@ -319,7 +319,7 @@ global.loadAlertE = (details) => {
 		});
 		win2.loadFile('index.html')
 		win2.webContents.executeJavaScript('stopAllAudio();', false);
-		win2.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
 		win2.show()
+		win2.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
 	}
 }

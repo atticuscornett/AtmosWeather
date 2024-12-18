@@ -3,18 +3,19 @@
 	Handles the setting up and storing of app settings
 */
 
-// Initializes settings and updates settings on new version
+// Initializes settings and updates settings on update
 setTimeout(function(){
 	// Get default settings for platform
-	var atmosSettingsTemp;
+	let atmosSettingsTemp;
+	let thePlatform;
 	try{
-		var thePlatform = getPlatform();
+		thePlatform = getPlatform();
 	}
 	catch(err){
 		thePlatform = "other";
 	}
 	if (thePlatform.includes("desktop")){
-		document.getElementById("settings-device-location").hidden = true;
+		//document.getElementById("settings-device-location").hidden = true;
 		atmosSettingsTemp = {
 			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false, "run-startup": true, "update-notify": false},
 			"location": {"weather": false, "alerts": false},
@@ -115,7 +116,7 @@ setTimeout(function(){
 		};
 	}
 	else{
-		document.getElementById("settings-startup").hidden = true;
+		//document.getElementById("settings-startup").hidden = true;
 		atmosSettingsTemp = {
 		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false, "run-startup": false, "update-notify": true},
 		"location": {"weather": true, "alerts": true},
@@ -215,7 +216,7 @@ setTimeout(function(){
 		"per-location": {}
 	};
 	}
-	var currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	let currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 
 	// Set missing settings values to the default
 	localStorage.setItem("atmos-settings", JSON.stringify(fixMissingKeys(atmosSettingsTemp, currentSettings)));
@@ -241,345 +242,6 @@ function formatTitle(title, ending){
 	}
 }
 
-// Add settings options to the settings page
-function populateSettingsPage(locationMode){
-	let modifier = locationMode ? "-location" : "";
-	let types = ["Warning", "Watch", "Advisory"]
-	let types2 = ["warnings", "watches", "advisory"]
-	try{
-		var thePlatform = getPlatform();
-	}
-	catch(err){
-		thePlatform = "other";
-	}
-	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-	for (type in types){
-		document.getElementById("settings-" + types2[type] + "-list" + modifier).innerHTML = "";
-		let docFragment = document.createDocumentFragment();
-		for (let i in allSettings["alert-types"][types2[type]]){
-			let line = document.createElement("label");
-			line.innerText = formatTitle(i, types[type]);
-			line.setAttribute("for", "setting-" + i + "-" + types[type].toLowerCase() + modifier);
-			docFragment.appendChild(line);
-			docFragment.appendChild(document.createElement("br"));
-			let select = document.createElement("select");
-			select.setAttribute("id", "setting-" + i + "-" + types[type].toLowerCase() + modifier);
-			let option = document.createElement("option");
-			option.innerHTML = "Alert";
-			option.setAttribute("value", "alert");
-			select.appendChild(option);
-			if (!thePlatform.includes("desktop")){
-				option = document.createElement("option");
-				option.innerHTML = "Alert if moving";
-				option.setAttribute("value", "alertmove");
-				select.appendChild(option);
-			}
-			option = document.createElement("option");
-			option.innerHTML = "Sound Notification";
-			option.setAttribute("value", "soundnotification");
-			select.appendChild(option);
-			option = document.createElement("option");
-			option.innerHTML = "Silent Notification";
-			option.setAttribute("value", "silentnotification");
-			select.appendChild(option);
-			option = document.createElement("option");
-			option.innerHTML = "Nothing";
-			option.setAttribute("value", "nothing");
-			select.appendChild(option);
-			docFragment.appendChild(select);
-			docFragment.appendChild(document.createElement("br"));
-		}
-		document.getElementById("settings-" + types2[type] + "-list" + modifier).appendChild(docFragment);
-	}
-	
-}
-
-// Refresh settings tab
-function refreshSettings(){
-	populateSettingsPage(false);
-	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-
-	// Personalization Settings
-	document.getElementById("setting-app-theme").value = allSettings["personalization"]["theme"];
-	document.getElementById("setting-page-transition-duration").value = allSettings["personalization"]["page-transition-duration"];
-	document.getElementById("setting-page-transition-duration-text").innerHTML = allSettings["personalization"]["page-transition-duration"].toString() + "ms";
-	document.getElementById("setting-atmos-logo").checked = allSettings["personalization"]["atmos-logo"];
-	document.getElementById("setting-run-startup").checked = allSettings["personalization"]["run-startup"];
-	document.getElementById("setting-notify-updates").checked = allSettings["personalization"]["update-notify"];
-
-	// Location Settings
-	document.getElementById("setting-current-location").checked = allSettings["location"]["weather"];
-	document.getElementById("setting-current-location-alerts").checked = allSettings["location"]["alerts"];
-	
-	// Notification Settings
-	document.getElementById("setting-future-severe-notifications").checked = allSettings["notifications"]["severe-future"];
-	document.getElementById("setting-future-storm-notifications").checked = allSettings["notifications"]["rain-future"];
-
-	// Radar Settings
-	document.getElementById("setting-radar-color-scheme").value = allSettings["radar"]["color-scheme"];
-	document.getElementById("setting-radar-satellite").checked = allSettings["radar"]["satellite"];
-	document.getElementById("setting-radar-show-outlook").checked = allSettings["radar"]["spc-outlook"];
-	document.getElementById("setting-radar-show-watches").checked = allSettings["radar"]["polygons"]["watch"];
-	document.getElementById("setting-radar-show-advisories").checked = allSettings["radar"]["polygons"]["advisories"];
-	document.getElementById("setting-radar-show-warnings").checked = allSettings["radar"]["polygons"]["warnings"];
-	document.getElementById("setting-radar-high-res").checked = allSettings["radar"]["polygons"]["high-res"];
-	
-	// Alert Sound Settings
-	document.getElementById("setting-tts-alerts").checked = allSettings["location-alerts"]["tts-alerts"];
-	document.getElementById("setting-alert-check-frequency").value = allSettings["location-alerts"]["alert-check-frequency"];
-	document.getElementById("setting-default-sound-alert").value = allSettings["location-alerts"]["default-alert"];
-	document.getElementById("setting-default-sound-notification").value = allSettings["location-alerts"]["default-notification"];
-	
-	var a = 0;
-	
-	// Load Warning Settings
-	var warningTypes = Object.keys(allSettings["alert-types"]["warnings"]);
-	while (a < warningTypes.length){
-		document.getElementById("setting-" + warningTypes[a] + "-warning").value = allSettings["alert-types"]["warnings"][warningTypes[a]];
-		a++;
-	}
-	
-	// Load Watch Settings
-	var watchTypes = Object.keys(allSettings["alert-types"]["watches"])
-	a = 0;
-	while (a < watchTypes.length){
-		document.getElementById("setting-" + watchTypes[a] + "-watch").value = allSettings["alert-types"]["watches"][watchTypes[a]]
-		a++;
-	}
-	
-	// Load Advisory Settings
-	var advisoryTypes = Object.keys(allSettings["alert-types"]["advisory"])
-	a = 0;
-	while (a < advisoryTypes.length){
-		document.getElementById("setting-" + advisoryTypes[a] + "-advisory").value = allSettings["alert-types"]["advisory"][advisoryTypes[a]];
-		a++;
-	}
-	
-	// Load Location Specific Settings
-	var allLocations = JSON.parse(localStorage.getItem("weather-locations"));
-	var locationNames = nomItemsToNames(allLocations);
-	a = 0;
-	document.getElementById("location-settings-div").innerHTML = "";
-	while (a < allLocations.length){
-		document.getElementById("location-settings-div").innerHTML += "<h2><a href='#' onclick='loadLocationSettings(" + a.toString() + ")'>" + locationNames[a] + " Alert Settings</a></h2>";
-		a++;
-	}
-	
-}
-
-// Save settings
-function saveSettings(){
-	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-
-	allSettings["personalization"]["theme"] = document.getElementById("setting-app-theme").value;
-	allSettings["personalization"]["page-transition-duration"] = document.getElementById("setting-page-transition-duration").value;
-	allSettings["personalization"]["atmos-logo"] = document.getElementById("setting-atmos-logo").checked;
-	allSettings["personalization"]["run-startup"] = document.getElementById("setting-run-startup").checked;
-	allSettings["personalization"]["update-notify"] = document.getElementById("setting-notify-updates").checked;
-
-	allSettings["location"]["weather"] = document.getElementById("setting-current-location").checked;
-	allSettings["location"]["alerts"] = document.getElementById("setting-current-location-alerts").checked;
-	
-	allSettings["notifications"]["severe-future"] = document.getElementById("setting-future-severe-notifications").checked;
-	allSettings["notifications"]["rain-future"] = document.getElementById("setting-future-storm-notifications").checked;
-
-	allSettings["radar"]["color-scheme"] = Number(document.getElementById("setting-radar-color-scheme").value);
-	allSettings["radar"]["satellite"] = document.getElementById("setting-radar-satellite").checked;
-	allSettings["radar"]["spc-outlook"] = document.getElementById("setting-radar-show-outlook").checked;
-	allSettings["radar"]["polygons"]["watch"] = document.getElementById("setting-radar-show-watches").checked;
-	allSettings["radar"]["polygons"]["advisories"] = document.getElementById("setting-radar-show-advisories").checked;
-	allSettings["radar"]["polygons"]["warnings"] = document.getElementById("setting-radar-show-warnings").checked;
-	allSettings["radar"]["polygons"]["high-res"] = document.getElementById("setting-radar-high-res").checked;
-	
-	allSettings["location-alerts"]["tts-alerts"] = document.getElementById("setting-tts-alerts").checked;
-	allSettings["location-alerts"]["alert-check-frequency"] = document.getElementById("setting-alert-check-frequency").value;
-	allSettings["location-alerts"]["default-alert"] = document.getElementById("setting-default-sound-alert").value;
-	allSettings["location-alerts"]["default-notification"] = document.getElementById("setting-default-sound-notification").value;
-	
-	var a = 0;
-	
-	// Save Warning Settings
-	var warningTypes = Object.keys(allSettings["alert-types"]["warnings"]);
-	while (a < warningTypes.length){
-		allSettings["alert-types"]["warnings"][warningTypes[a]] = document.getElementById("setting-" + warningTypes[a] + "-warning").value;
-		a++;
-	}
-	
-	// Load Watch Settings
-	var watchTypes = Object.keys(allSettings["alert-types"]["watches"])
-	a = 0;
-	while (a < watchTypes.length){
-		allSettings["alert-types"]["watches"][watchTypes[a]] = document.getElementById("setting-" + watchTypes[a] + "-watch").value;
-		a++;
-	}
-	
-	// Load Advisory Settings
-	var advisoryTypes = Object.keys(allSettings["alert-types"]["advisory"])
-	a = 0;
-	while (a < advisoryTypes.length){
-		allSettings["alert-types"]["advisory"][advisoryTypes[a]] =document.getElementById("setting-" + advisoryTypes[a] + "-advisory").value;
-		a++;
-	}
-	localStorage.setItem("atmos-settings", JSON.stringify(allSettings))
-	refreshAppTheme();
-	syncFiles();
-}
-
-// Load the location settings page
-function loadLocationSettings(index){
-	populateSettingsPage(true);
-	window.settingsIndex = index;
-	var locations = JSON.parse(localStorage.getItem("weather-locations"));
-	var names = nomItemsToNames(locations);
-	document.getElementById("single-location-settings-title").innerHTML = "Alert Settings for " + names[index];
-	var names = nomItemsToNames(locations);
-	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-	if (!allSettings["per-location"].hasOwnProperty(names[window.settingsIndex])){
-		allSettings["per-location"][names[window.settingsIndex]] = {"notifications":{}, "location-alerts":{}, "alert-types":{"warnings":{}, "watches":{}, "advisory":{}}};
-	}
-	var theName = names[window.settingsIndex];
-	// Check if location has non-default setting, otherwise show default
-	if (allSettings["per-location"][theName]["notifications"].hasOwnProperty("severe-future")){
-		document.getElementById("setting-future-severe-notifications-location").checked = allSettings["per-location"][theName]["notifications"]["severe-future"];
-	}
-	else{
-		document.getElementById("setting-future-severe-notifications-location").checked = allSettings["notifications"]["severe-future"];
-	}
-	if (allSettings["per-location"][theName]["notifications"].hasOwnProperty("rain-future")){
-		document.getElementById("setting-future-storm-notifications-location").checked = allSettings["per-location"][theName]["notifications"]["rain-future"];
-	}
-	else{
-		document.getElementById("setting-future-storm-notifications-location").checked = allSettings["notifications"]["rain-future"];
-	}
-	if (allSettings["per-location"][theName]["location-alerts"].hasOwnProperty("tts-alerts")){
-		document.getElementById("setting-tts-alerts-location").checked = allSettings["per-location"][theName]["location-alerts"]["tts-alerts"]	
-	}
-	else{
-		document.getElementById("setting-tts-alerts-location").checked = allSettings["location-alerts"]["tts-alerts"]
-	}
-	if (allSettings["per-location"][theName]["location-alerts"].hasOwnProperty("default-alert")){
-		document.getElementById("setting-default-sound-alert-location").value = allSettings["per-location"][theName]["location-alerts"]["default-alert"]	
-	}
-	else{
-		document.getElementById("setting-default-sound-alert-location").value = allSettings["location-alerts"]["default-alert"]
-	}
-	if (allSettings["per-location"][theName]["location-alerts"].hasOwnProperty("default-notification")){
-		document.getElementById("setting-default-sound-notification-location").value = allSettings["per-location"][theName]["location-alerts"]["default-notification"]	
-	}
-	else{
-		document.getElementById("setting-default-sound-notification-location").value = allSettings["location-alerts"]["default-notification"]
-	}
-	var a = 0;
-	var warningTypes = Object.keys(allSettings["alert-types"]["warnings"]);
-	while (a < warningTypes.length){
-		if (allSettings["per-location"][theName]["alert-types"]["warnings"].hasOwnProperty(warningTypes[a])){
-			document.getElementById("setting-" + warningTypes[a] + "-warning-location").value = allSettings["per-location"][theName]["alert-types"]["warnings"][warningTypes[a]];
-		}
-		else{
-			document.getElementById("setting-" + warningTypes[a] + "-warning-location").value = allSettings["alert-types"]["warnings"][warningTypes[a]];
-		}
-		
-		a++;
-	}
-	a = 0;
-	var watchTypes = Object.keys(allSettings["alert-types"]["watches"]);
-	while (a < watchTypes.length){
-		if (allSettings["per-location"][theName]["alert-types"]["watches"].hasOwnProperty(watchTypes[a])){
-			document.getElementById("setting-" + watchTypes[a] + "-watch-location").value = allSettings["per-location"][theName]["alert-types"]["watches"][watchTypes[a]];
-		}
-		else{
-			document.getElementById("setting-" + watchTypes[a] + "-watch-location").value = allSettings["alert-types"]["watches"][watchTypes[a]];
-		}
-		
-		a++;
-	}
-	a = 0;
-	var advisoryTypes = Object.keys(allSettings["alert-types"]["advisory"]);
-	while (a < advisoryTypes.length){
-		if (allSettings["per-location"][theName]["alert-types"]["advisory"].hasOwnProperty(advisoryTypes[a])){
-			document.getElementById("setting-" + advisoryTypes[a] + "-advisory-location").value = allSettings["per-location"][theName]["alert-types"]["advisory"][advisoryTypes[a]];
-		}
-		else{
-			document.getElementById("setting-" + advisoryTypes[a] + "-advisory-location").value = allSettings["alert-types"]["advisory"][advisoryTypes[a]];
-		}
-		
-		a++;
-	}
-	localStorage.setItem("atmos-settings", JSON.stringify(allSettings));
-	navTo("single-location-settings");
-}
-
-function saveLocationSettings(){
-	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-	var name = nomItemsToNames(JSON.parse(localStorage.getItem("weather-locations")))[window.settingsIndex];
-	// Check if setting for location not equal default, if not default, change and save, if default, delete key
-	if (document.getElementById("setting-future-severe-notifications-location").checked != allSettings["notifications"]["severe-future"]){
-		allSettings["per-location"][name]["notifications"]["severe-future"] = document.getElementById("setting-future-severe-notifications-location").checked;
-	}
-	else{
-		delete allSettings["per-location"][name]["notifications"]["severe-future"];
-	}
-	if (document.getElementById("setting-future-storm-notifications-location").checked != allSettings["notifications"]["rain-future"]){
-		allSettings["per-location"][name]["notifications"]["rain-future"] = document.getElementById("setting-future-storm-notifications-location").checked;
-	}
-	else{
-		delete allSettings["per-location"][name]["notifications"]["rain-future"]
-	}
-	if (document.getElementById("setting-tts-alerts-location").checked != allSettings["location-alerts"]["tts-alerts"]){
-		allSettings["per-location"][name]["location-alerts"]["tts-alerts"] = document.getElementById("setting-tts-alerts-location").checked;
-	}
-	else{
-		delete allSettings["per-location"][name]["location-alerts"]["tts-alerts"];
-	}
-	if (document.getElementById("setting-default-sound-alert-location").value != allSettings["location-alerts"]["default-alert"]){
-		allSettings["per-location"][name]["location-alerts"]["default-alert"] = document.getElementById("setting-default-sound-alert-location").value;
-	}
-	else{
-		delete allSettings["per-location"][name]["location-alerts"]["default-alert"];
-	}
-	if (document.getElementById("setting-default-sound-notification-location").value != allSettings["location-alerts"]["default-notification"]){
-		allSettings["per-location"][name]["location-alerts"]["default-notification"] = document.getElementById("setting-default-sound-notification-location").value;
-	}
-	else{
-		delete allSettings["per-location"][name]["location-alerts"]["default-notification"];
-	}
-	var a = 0;
-	var warningTypes = Object.keys(allSettings["alert-types"]["warnings"]);
-	while (a < warningTypes.length){
-		if (document.getElementById("setting-" + warningTypes[a] + "-warning-location").value != allSettings["alert-types"]["warnings"][warningTypes[a]]){
-			 allSettings["per-location"][name]["alert-types"]["warnings"][warningTypes[a]] = document.getElementById("setting-" + warningTypes[a] + "-warning-location").value;
-		}
-		else{
-			delete allSettings["per-location"][name]["alert-types"]["warnings"][warningTypes[a]];
-		}
-		a++;
-	}
-	a = 0;
-	var watchTypes = Object.keys(allSettings["alert-types"]["watches"]);
-	while (a < watchTypes.length){
-		if (document.getElementById("setting-" + watchTypes[a] + "-watch-location").value != allSettings["alert-types"]["watches"][watchTypes[a]]){
-			 allSettings["per-location"][name]["alert-types"]["watches"][watchTypes[a]] = document.getElementById("setting-" + watchTypes[a] + "-watch-location").value;
-		}
-		else{
-			delete allSettings["per-location"][name]["alert-types"]["watches"][watchTypes[a]]
-		}
-		a++;
-	}
-	a = 0;
-	var advisoryTypes = Object.keys(allSettings["alert-types"]["advisory"]);
-	while (a < advisoryTypes.length){
-		if (document.getElementById("setting-" + advisoryTypes[a] + "-advisory-location").value != allSettings["alert-types"]["advisory"][advisoryTypes[a]]){
-			 allSettings["per-location"][name]["alert-types"]["advisory"][advisoryTypes[a]] = document.getElementById("setting-" + advisoryTypes[a] + "-advisory-location").value;
-		}
-		else{
-			delete allSettings["per-location"][name]["alert-types"]["advisory"][advisoryTypes[a]]
-		}
-		a++;
-	}
-	localStorage.setItem("atmos-settings", JSON.stringify(allSettings));
-	syncFiles();
-}
-
 // Find any keys that are present in the default that are missing in the current object and set to the default values (without changing present keys)
 function fixMissingKeys(defaultValues, currentValues){
 	if (currentValues == undefined){
@@ -589,8 +251,8 @@ function fixMissingKeys(defaultValues, currentValues){
 		return currentValues;
 	}
 	else{
-		var keysToCheck = Object.keys(defaultValues);
-		var a = 0;
+		let keysToCheck = Object.keys(defaultValues);
+		let a = 0;
 		while (a < keysToCheck.length){
 			currentValues[keysToCheck[a]] = fixMissingKeys(defaultValues[keysToCheck[a]], currentValues[keysToCheck[a]]);
 			a++;
@@ -617,34 +279,5 @@ function convertTempUnit(temp, unit){
 		else{
 			return temp;
 		}
-	}
-}
-
-// Check permissions while permission window is open
-
-async function repeatPermCheck(){
-	const permissions = await PermissionManagement.checkPermissions();
-	document.getElementById("android-background-permissions").innerHTML = "Background Location "
-		+ (permissions["hasBackgroundLocationPermission"] ? "✅" : "⚠️");
-	document.getElementById("android-request-background-location").innerHTML = (permissions["hasBackgroundLocationPermission"] ? "Background Location Granted" : "Request Background Location");
-	document.getElementById("android-request-background-location").disabled = permissions["hasBackgroundLocationPermission"];
-
-	document.getElementById("android-notification-permissions").innerHTML = "Notifications "
-		+ (permissions["hasNotificationPermission"] ? "✅" : "⚠️");
-	document.getElementById("android-request-notifications").innerHTML = (permissions["hasNotificationPermission"] ? "Notifications Granted" : "Request Notifications");
-	document.getElementById("android-request-notifications").disabled = permissions["hasNotificationPermission"];
-
-	document.getElementById("android-battery-exempt-permissions").innerHTML = "Battery Exemptions "
-		+ (permissions["hasBatteryOptimizationExemption"] ? "✅" : "⚠️");
-	document.getElementById("android-request-battery-exempt").innerHTML = (permissions["hasBatteryOptimizationExemption"] ? "Battery Exemptions Granted" : "Request Battery Exemptions");
-	document.getElementById("android-request-battery-exempt").disabled = permissions["hasBatteryOptimizationExemption"];
-
-	document.getElementById("android-exact-alarms-permissions").innerHTML = "Schedule Exact Alarms "
-		+ (permissions["canScheduleExactAlarms"] ? "✅" : "⚠️");
-	document.getElementById("android-request-exact-alarms").innerHTML = (permissions["canScheduleExactAlarms"] ? "Exact Alarms Granted": "Request Exact Alarms");
-	document.getElementById("android-request-exact-alarms").disabled = permissions["canScheduleExactAlarms"];
-
-	if (!document.getElementById("android-permission-setup").hidden){
-		setTimeout(repeatPermCheck, 300);
 	}
 }

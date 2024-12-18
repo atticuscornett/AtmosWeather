@@ -5,26 +5,36 @@
     https://github.com/rainviewer/rainviewer-api-example/blob/master/rainviewer-api-example.html
 */
 
-var radarData = {};
-var radarFrames = [];
-var radarLayers = [];
-var spcOutlookLayer;
-var radarTileSize = 256;
-var smoothRadarData = 1;
-var radarColorScheme = 4;
-var radarSnowColors = 1;
-var radarAnimPos = 0;
-var radarKind = "radar";
-var loadingTilesCount = 0;
-var loadedTilesCount = 0;
-var animationPosition = 0;
-var lastPastFramePosition = -1;
-var playingRadar = true;
-var outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
+let radarData = {};
+let radarFrames = [];
+let radarLayers = [];
+let spcOutlookLayer;
+let radarTileSize = 256;
+let smoothRadarData = 1;
+let radarColorScheme = 4;
+let radarSnowColors = 1;
+let radarAnimPos = 0;
+let radarKind = "radar";
+let loadingTilesCount = 0;
+let loadedTilesCount = 0;
+let animationPosition = 0;
+let lastPastFramePosition = -1;
+let playingRadar = true;
+let outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
 let lastRenderedDynamic = "";
+let radarMap;
+let screenAt;
+
+function passScreen(screen){
+    screenAt = screen;
+}
+
+function passRadarMap(map){
+    radarMap = map;
+}
 
 function loadRadarData(){
-    var apiRequest = new XMLHttpRequest();
+    let apiRequest = new XMLHttpRequest();
     apiRequest.open("GET", "https://api.rainviewer.com/public/weather-maps.json", true);
     apiRequest.onload = function(e) {
         // store the API response for re-use purposes in memory
@@ -32,35 +42,21 @@ function loadRadarData(){
         initialize(radarData, radarKind);
     };
     apiRequest.send();
-    var a = 0;
-    var locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
-    var genCode = "";
-    if (window.currentLat){
-        genCode = "<h2 onclick='radarJumpTo(-1);'><a href='#'>Current Location</a></h2>";
-    }
-    while (a < locationNames.length){
-        genCode += "<h2 onclick='radarJumpTo(" + a.toString() + ");'><a href='#'>" + locationNames[a] + "</a></h2>"
-        a++;
-    }
-    if (genCode === "" && !window.currentLat){
-        genCode = "<h2>You don't have any locations yet!</h2>";
-    }
-    document.getElementById("radar-locations").innerHTML = genCode;
 }
 
 function radarJumpTo(index){
     if (index === -1) {
-        map2.invalidateSize(true);
-        map2.setView([window.currentLat, window.currentLong], 12);
+        radarMap.invalidateSize(true);
+        radarMap.setView([window.currentLat, window.currentLong], 12);
         return;
     }
-    map2.invalidateSize(true);
-    var locations = JSON.parse(localStorage.getItem("weather-locations"))
-    map2.setView([parseFloat(locations[index]["lat"]), parseFloat(locations[index]["lon"])], 12)
+    radarMap.invalidateSize(true);
+    let locations = JSON.parse(localStorage.getItem("weather-locations"))
+    radarMap.setView([parseFloat(locations[index]["lat"]), parseFloat(locations[index]["lon"])], 12)
 }
 
 function initialize(api, kind) {
-    var settings = JSON.parse(localStorage.getItem("atmos-settings"));
+    let settings = JSON.parse(localStorage.getItem("atmos-settings"));
     radarColorScheme = settings["radar"]["color-scheme"];
     if (settings["radar"]["satellite"]){
         radarKind = "satellite";
@@ -71,8 +67,8 @@ function initialize(api, kind) {
         kind = "radar";
     }
     // remove all already added tiled layers
-    for (var i in radarLayers) {
-        map2.removeLayer(radarLayers[i]);
+    for (let i in radarLayers) {
+        radarMap.removeLayer(radarLayers[i]);
     }
     radarFrames = [];
     radarLayers = [];
@@ -87,7 +83,7 @@ function initialize(api, kind) {
           url: outlookLink
         });
     spcOutlookLayer.setOpacity(0.4);
-    spcOutlookLayer.addTo(map2);
+    spcOutlookLayer.addTo(radarMap);
     if (!settings["radar"]["spc-outlook"]){
         spcOutlookLayer.remove();
         document.getElementById("spc-select-container").style.display = "none";
@@ -96,7 +92,7 @@ function initialize(api, kind) {
         document.getElementById("spc-select-container").style.display = "inline-block";
     }
 
-    map2.on("moveend", ()=>{
+    radarMap.on("moveend", ()=>{
         if (settings["radar"]["spc-outlook"]){
             redrawSPCOutlook();
         }
@@ -125,7 +121,7 @@ function initialize(api, kind) {
 }
 
 function showFrame(nextPosition, force) {
-    var preloadingDirection = nextPosition - animationPosition > 0 ? 1 : -1;
+    let preloadingDirection = nextPosition - animationPosition > 0 ? 1 : -1;
 
     changeRadarPosition(nextPosition, false, force);
 
@@ -145,8 +141,8 @@ function changeRadarPosition(position, preloadOnly, force) {
         position += radarFrames.length;
     }
 
-    var currentFrame = radarFrames[animationPosition];
-    var nextFrame = radarFrames[position];
+    let currentFrame = radarFrames[animationPosition];
+    let nextFrame = radarFrames[position];
 
     addLayer(nextFrame);
 
@@ -164,7 +160,7 @@ function changeRadarPosition(position, preloadOnly, force) {
     radarLayers[nextFrame.path].setOpacity(Number(document.getElementById("radar-opacity").value)/100);
 
 
-    var pastOrForecast = nextFrame.time > Date.now() / 1000 ? 'FORECAST' : 'PAST';
+    let pastOrForecast = nextFrame.time > Date.now() / 1000 ? 'FORECAST' : 'PAST';
 
     document.getElementById("radar-time").innerHTML = pastOrForecast + ': ' + (new Date(nextFrame.time * 1000)).toString();
 }
@@ -182,11 +178,11 @@ function redrawSPCOutlook(){
 
 function addLayer(frame) {
     if (!radarLayers[frame.path]) {
-        var colorScheme = radarKind == 'satellite' ? 0 : radarColorScheme;
-        var smooth = radarKind == 'satellite' ? 0 : smoothRadarData;
-        var snow = radarKind == 'satellite' ? 0 : radarSnowColors;
+        let colorScheme = radarKind == 'satellite' ? 0 : radarColorScheme;
+        let smooth = radarKind == 'satellite' ? 0 : smoothRadarData;
+        let snow = radarKind == 'satellite' ? 0 : radarSnowColors;
 
-        var source = new L.TileLayer(radarData.host + frame.path + '/' + radarTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.png', {
+        let source = new L.TileLayer(radarData.host + frame.path + '/' + radarTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.png', {
             tileSize: 256,
             zIndex: frame.time
         });
@@ -198,8 +194,8 @@ function addLayer(frame) {
         source.setOpacity(Number(document.getElementById("radar-opacity").value)/100);
         radarLayers[frame.path] = source;
     }
-    if (!map2.hasLayer(radarLayers[frame.path])) {
-        map2.addLayer(radarLayers[frame.path]);
+    if (!radarMap.hasLayer(radarLayers[frame.path])) {
+        radarMap.addLayer(radarLayers[frame.path]);
     }
 }
 
@@ -239,10 +235,10 @@ function slowLoadPolygons(alerts, index){
     if (screenAt != "radar"){
         return;
     }
-    var a = index;
+    let a = index;
     while(a < index + 10 && a < alerts[0].length){
-        var styling = {"color":"blue"};
-        var eventLowered = alerts[0][a]["properties"]["event"].toLowerCase();
+        let styling = {"color":"blue"};
+        let eventLowered = alerts[0][a]["properties"]["event"].toLowerCase();
         if (eventLowered.includes("warning")){
             styling = {"color":"red"};
         }
@@ -253,9 +249,9 @@ function slowLoadPolygons(alerts, index){
             a++;
             continue;
         }
-        var x = 0;
-        var alertBoundaries = getPolyBoundariesAsync(alerts[0][a], (alertBoundaries, a) => {
-            polygon = L.geoJSON(alertBoundaries, {style:styling}).addTo(map2);
+        let x = 0;
+        let alertBoundaries = getPolyBoundariesAsync(alerts[0][a], (alertBoundaries, a) => {
+            polygon = L.geoJSON(alertBoundaries, {style:styling}).addTo(radarMap);
             polygon.bindPopup(alerts[0][a]["properties"]["headline"]);
         }, a);
         a++;
@@ -280,6 +276,20 @@ function reloadOutlook(){
           url: outlookLink
         });
     spcOutlookLayer.setOpacity(0.4);
-    spcOutlookLayer.addTo(map2);
+    spcOutlookLayer.addTo(radarMap);
     redrawSPCOutlook();
+}
+
+function changeWeatherOutlook(){
+    let value = document.getElementById("spc-select").value;
+    if (value == "severe-outlook"){
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
+    }
+    else if (value == "fire-outlook"){
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/fire_weather/SPC_firewx/MapServer";
+    }
+    else{
+        outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/hazards/cpc_weather_hazards/MapServer";
+    }
+    reloadOutlook();
 }

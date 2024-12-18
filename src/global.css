@@ -1,0 +1,86 @@
+body {
+	background-color: hsla(0,0%,99%,1.00);
+}
+
+body.dark {
+	background-color: #222222;
+	color: white;
+}
+
+h1 {
+	font-family: Secular One, sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+	font-family: Lexend Deca, sans-serif;
+}
+
+details{
+	font-family: Secular One;
+	font-size: 20px;
+	border: black solid;
+	padding: 10px;
+	border-radius: 7px;
+	margin-bottom: 15px;
+	box-shadow: 0px 0px 7px #898989;
+}
+
+details[open] summary{
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: black solid;
+}
+
+summary{
+	cursor: pointer;
+	font-size: 25px;
+}
+
+a{
+	color: dodgerblue;
+}
+
+label{
+	font-family: Lexend Deca, sans-serif;
+	font-size: 25px;
+}
+
+select{
+	font-family: Lexend Deca, sans-serif;
+	font-size: 23px;
+	margin-bottom: 8px;
+}
+
+body.dark details{
+	border: white solid;
+	border-radius: 7px;
+	box-shadow: 0px 0px 7px #898989;
+}
+body.dark details[open] summary{
+	border-bottom: white solid;
+}
+
+.noalerts.noalerts{
+	background-color: dodgerblue !important;
+}
+
+.watch.watch{
+	background-color: darkgoldenrod;
+	animation-name: watchAnim !important;
+	animation-iteration-count: infinite !important;
+	animation-duration: 5s !important;
+}
+
+.warning.warning{
+	background-color: darkred;
+	animation-name: warningAnim;
+	animation-iteration-count: infinite !important;
+	animation-duration: 2s !important;
+}
+
+.other.other{
+	background-color: grey;
+	animation-name: otherAnim;
+	animation-iteration-count: infinite !important;
+	animation-duration: 5s !important;
+}
