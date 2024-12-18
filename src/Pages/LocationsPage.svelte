@@ -43,7 +43,7 @@
             weatherDataDictionary["Current Location"] = {"name": "Current Location", "hourly": []};
             getCurrentLocation(() => {
                 if (window.currentLat) {
-                    setTimeout(getWeatherAlertsForPosAsync(window.currentLat, window.currentLong, (alerts) => {
+                    setTimeout(getWeatherAlertsForPosAsync.bind(null, window.currentLat, window.currentLong, (alerts) => {
                         let status = "noalerts";
 
                         if (alerts.length > 0){
