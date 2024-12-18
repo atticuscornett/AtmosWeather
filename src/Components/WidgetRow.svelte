@@ -3,8 +3,15 @@
     import AirQualityIndex from "./LocationWidgets/AirQualityIndex.svelte";
     import MultiGraph from "./LocationWidgets/MultiGraph.svelte";
     import LongNWSForecast from "./LocationWidgets/LongNWSForecast.svelte";
+    import WidgetPicker from "./WidgetPicker.svelte";
 
-    let { locationData, widgets, page=$bindable() } = $props();
+    let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
+
+    let addingWidget = $state(false);
+
+    function removeWidgetRow(){
+        widgetLayout.splice(rowIndex, 1);
+    }
 </script>
 
 
@@ -25,6 +32,14 @@
             {/if}
         </div>
     {/each}
+    {#if editing}
+        <button onclick={()=>{addingWidget=true;}}>Add Widget</button>
+        <button onclick={removeWidgetRow}>Remove Row</button>
+    {/if}
+    {#if addingWidget}
+        <WidgetPicker bind:addingWidget={addingWidget} widgetRow={rowIndex} bind:widgetLayout={widgetLayout} />
+    {/if}
+
 </div>
 
 <style>

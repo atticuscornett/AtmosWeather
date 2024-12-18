@@ -5,6 +5,8 @@
 
     let { locationData, page=$bindable(), alertSelection = $bindable() } = $props();
 
+    let editing = $state(false);
+
     function removeLocation(){
         let locations = JSON.parse(localStorage.getItem("weather-locations"));
         let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
@@ -21,7 +23,15 @@
         page = "locations";
     }
 
-    let widgetLayout = [["LocationAtAGlance"], ["AirQualityIndex"], ["MultiGraph"], ["LongNWSForecast"], ["MultiGraph"]];
+    function addRow(rowIndex){
+        widgetLayout.splice(rowIndex + 1, 0, []);
+    }
+
+    function toggleEdit(){
+        editing = !editing;
+    }
+
+    let widgetLayout = $state([["LocationAtAGlance"], ["AirQualityIndex"], ["MultiGraph"], ["LongNWSForecast"], ["MultiGraph"]]);
 </script>
 <TabSlot name="location-{locationData.name}" bind:page={page}>
     <h1>{locationData.name}</h1>
@@ -30,9 +40,20 @@
     <!-- Wait for weather data -->
     {#if locationData.hourly[0]}
         <AlertBar locationData={locationData} bind:page={page} bind:alertSelection={alertSelection}/>
-        {#each widgetLayout as widgetRow}
-            <WidgetRow locationData={locationData} widgets={widgetRow} bind:page={page}/>
+        {#each widgetLayout as widgetRow, i}
+            <WidgetRow locationData={locationData} widgets={widgetRow} editing={editing} bind:page={page} rowIndex={i} bind:widgetLayout={widgetLayout}/>
+            {#if editing}
+                <button onclick={addRow.bind(null, i)}>Add Row</button>
+            {/if}
         {/each}
+
+        {#if widgetLayout.length === 0 && editing}
+            <button onclick={addRow.bind(null, -1)}>Add Row</button>
+        {/if}
+
+        <button onclick={toggleEdit}>Edit this page</button>
+        <br>
+
         {#if locationData.name !== "Current Location"}
             <button onclick={removeLocation}>Remove This Location</button>
         {/if}
