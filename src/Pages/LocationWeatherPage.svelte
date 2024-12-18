@@ -1,10 +1,6 @@
 <script>
     import TabSlot from "../Layout/TabSlot.svelte";
     import AlertBar from "../Components/LocationWidgets/AlertBar.svelte";
-    import LocationAtAGlance from "../Components/LocationWidgets/LocationAtAGlance.svelte";
-    import AirQualityIndex from "../Components/LocationWidgets/AirQualityIndex.svelte";
-    import MultiGraph from "../Components/LocationWidgets/MultiGraph.svelte";
-    import LongNWSForecast from "../Components/LocationWidgets/LongNWSForecast.svelte";
     import WidgetRow from "../Components/WidgetRow.svelte";
 
     let { locationData, page=$bindable(), alertSelection = $bindable() } = $props();
