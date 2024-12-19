@@ -1,7 +1,7 @@
 <script>
     import LocationAtAGlance from "./LocationWidgets/LocationAtAGlance.svelte";
     import AirQualityIndex from "./LocationWidgets/AirQualityIndex.svelte";
-    import MultiGraph from "./LocationWidgets/MultiGraph.svelte";
+    import GraphSwitcher from "./LocationWidgets/GraphSwitcher.svelte";
     import LongNWSForecast from "./LocationWidgets/LongNWSForecast.svelte";
     import WidgetPicker from "./WidgetPicker.svelte";
 
@@ -24,8 +24,8 @@
             {#if widget === "AirQualityIndex"}
                 <AirQualityIndex locationData={locationData} />
             {/if}
-            {#if widget === "MultiGraph"}
-                <MultiGraph locationData={locationData} />
+            {#if widget === "GraphSwitcher"}
+                <GraphSwitcher locationData={locationData} />
             {/if}
             {#if widget === "LongNWSForecast"}
                 <LongNWSForecast locationData={locationData} />

@@ -31,7 +31,7 @@
         editing = !editing;
     }
 
-    let widgetLayout = $state([["LocationAtAGlance"], ["AirQualityIndex"], ["MultiGraph"], ["LongNWSForecast"], ["MultiGraph"]]);
+    let widgetLayout = $state([["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]]);
 </script>
 <TabSlot name="location-{locationData.name}" bind:page={page}>
     <h1>{locationData.name}</h1>

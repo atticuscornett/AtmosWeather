@@ -506,7 +506,7 @@ body.dark details[open] summary{
         display: none;
     }
 
-    .gray-background.svelte-e69rzt {
+    .gray-background.svelte-1n304p3 {
         background-color: rgba(0,0,0,0.5);
         position: fixed;
         top: 0;
@@ -516,7 +516,7 @@ body.dark details[open] summary{
         z-index: 100;
     }
 
-    .popup-container.svelte-e69rzt {
+    .popup-container.svelte-1n304p3 {
         background-color: white;
         width: 80%;
         max-height: 80vh;
@@ -527,6 +527,10 @@ body.dark details[open] summary{
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    body.dark .popup-container.svelte-1n304p3{
+        background-color: #111111;
     }
 
     .widgetRow.svelte-xrblxu {

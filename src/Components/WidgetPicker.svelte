@@ -1,17 +1,47 @@
 <script>
     let { addingWidget=$bindable(), widgetRow, widgetLayout = $bindable()} = $props();
 
-    function addWidget(widget){
-        widgetLayout[widgetRow].push(widget);
+    function addWidget(e){
+        widgetLayout[widgetRow].push(e.target.value);
         addingWidget = false;
+        e.stopPropagation();
+    }
+
+    function cancel(){
+        addingWidget = false;
+    }
+
+    function stopPropagation(e){
+        e.stopPropagation();
     }
 </script>
 
-<div class="gray-background">
+<div class="gray-background" onclick={cancel}>
     <div class="popup-container">
-        <h1>Widgets</h1>
+        <h1>Add Widget</h1>
+        <details onclick={stopPropagation}>
+            <summary>General</summary>
+            <button onclick={addWidget} value="LocationAtAGlance">Location At A Glance</button>
+            <button onclick={addWidget} value="LongNWSForecast">NWS Full-text Forecast</button>
+        </details>
 
-        <button onclick={addWidget.bind(null, "MultiGraph")}>Multi-graph</button>
+        <details onclick={stopPropagation}>
+            <summary>Advanced</summary>
+        </details>
+
+        <details onclick={stopPropagation}>
+            <summary>15-minute Forecasts</summary>
+        </details>
+
+        <details onclick={stopPropagation}>
+            <summary>Graphs</summary>
+            <button onclick={addWidget} value="GraphSwitcher">Graph Switcher</button>
+        </details>
+
+        <details onclick={stopPropagation}>
+            <summary>Air Quality</summary>
+            <button onclick={addWidget} value="AirQualityIndex">Air Quality Index</button>
+        </details>
     </div>
 </div>
 
@@ -37,6 +67,10 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    :global(body.dark) .popup-container{
+        background-color: #111111;
     }
 
 </style>
