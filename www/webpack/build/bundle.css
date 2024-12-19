@@ -364,32 +364,32 @@ body.dark details[open] summary{
         width: 50%;
     }
 
-    .imgContainer.svelte-jptsuy {
+    .imgContainer.svelte-1fuk6rb {
         display: inline-block;
         height: inherit;
         vertical-align: top;
         margin-top:20px;
     }
 
-    .alertContainer.svelte-jptsuy {
+    .alertContainer.svelte-1fuk6rb {
         display:inline-block;
         margin-left:8px;
         margin-right: 8px;
     }
 
-    img.svelte-jptsuy {
+    img.svelte-1fuk6rb {
         vertical-align:center;
     }
 
-    h3.svelte-jptsuy {
+    h3.svelte-1fuk6rb {
         margin-right:8px;
     }
 
-    a.svelte-jptsuy {
+    a.svelte-1fuk6rb {
         color: white;
     }
 
-    .location.svelte-jptsuy{
+    .location.svelte-1fuk6rb{
         background-color: blue;
         color: white;
         border-radius: 7px;
@@ -401,6 +401,7 @@ body.dark details[open] summary{
         box-sizing: border-box;
         cursor: pointer;
         box-shadow: 0 0 7px #898989;
+        margin-right: 10px;
     }
 
 

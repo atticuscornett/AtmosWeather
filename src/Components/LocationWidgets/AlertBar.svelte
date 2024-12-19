@@ -75,5 +75,6 @@
         box-sizing: border-box;
         cursor: pointer;
         box-shadow: 0 0 7px #898989;
+        margin-right: 10px;
     }
 </style>
