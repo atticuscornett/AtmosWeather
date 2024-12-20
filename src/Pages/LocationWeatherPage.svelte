@@ -66,7 +66,7 @@
     {#if locationData.hourly[0]}
         <AlertBar locationData={locationData} bind:page={page} bind:alertSelection={alertSelection}/>
         {#each widgetLayout as widgetRow, i}
-            <WidgetRow locationData={locationData} widgets={widgetRow} editing={editing} bind:page={page} rowIndex={i} bind:widgetLayout={widgetLayout}/>
+            <WidgetRow bind:locationData={locationData} widgets={widgetRow} editing={editing} bind:page={page} rowIndex={i} bind:widgetLayout={widgetLayout}/>
             {#if editing}
                 <button onclick={addRow.bind(null, i)} class="largerMargin">Add Row</button>
             {/if}

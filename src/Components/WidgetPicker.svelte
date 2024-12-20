@@ -1,11 +1,16 @@
 <script>
-    let { addingWidget=$bindable(), widgetRow, widgetLayout = $bindable()} = $props();
+    let { addingWidget=$bindable(), widgetRow, locationData=$bindable(), widgetLayout = $bindable()} = $props();
 
     function addWidget(e){
         widgetLayout[widgetRow].push(e.target.value);
         addingWidget = false;
         e.stopPropagation();
+        getAdditionalWeatherDataForNomAsync(locationData.nominatim, (additionalData)=>{
+            locationData.openMeteoData = additionalData;
+        }, widgetLayout)
     }
+
+
 
     function cancel(){
         addingWidget = false;
@@ -36,6 +41,7 @@
         <details>
             <summary>Graphs</summary>
             <button onclick={addWidget} value="GraphSwitcher">Graph Switcher</button>
+            <button onclick={addWidget} value="CAPEGraph">CAPE Forecast</button>
         </details>
 
         <details>

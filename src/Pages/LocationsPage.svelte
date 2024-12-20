@@ -144,7 +144,8 @@
                             alert: alertStatus,
                             fullStatus: fullStatus,
                             hourly: hourly,
-                            alerts: weatherAlerts
+                            alerts: weatherAlerts,
+                            nominatim: nomLocations[i]
                         }
 
                         setTimeout(()=>{
@@ -156,7 +157,7 @@
                         getAdditionalWeatherDataForNomAsync(nomLocations[i], (additionalData) => {
                             locationData.openMeteoData = additionalData;
                             weatherDataDictionary[nomLocationNames[i]] = locationData;
-                        });
+                        }, getWidgetsForLocation(nomLocationNames[i]));
 
                         getCurrentAQIForNomAsync(nomLocations[i], (AQI) => {
                             locationData.AQI = AQI;
@@ -184,6 +185,8 @@
         }
 
     }
+
+
 </script>
 
 <TabSlot name="locations" bind:page={page} onOpen={refreshLocations}>

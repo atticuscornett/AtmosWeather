@@ -49,19 +49,10 @@ function getCurrentAQIForNomAsync(nom, callback){
  * @param {number} lat - The latitude of the location.
  * @param {number} long - The longitude of the location.
  * @param {function} callback - The callback function to handle the weather data.
+ * @param {Array} [widgets=[]] - An optional array of widgets to that require the additional weather data.
  */
-function getAdditionalWeatherDataForPositionAsync(lat, long, callback){
-    addLoadingKey("additionalWeather" + lat + long);
-    fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat
-        + "&longitude=" + long
-        /* Current parameters */ + "&current=apparent_temperature"
-        /* Hourly parameters */ + "&hourly=apparent_temperature"
-        /* Unit settings */ + "&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch")
-        .then(data => data.json())
-        .then(data => {
-            removeLoadingKey("additionalWeather" + lat + long);
-            callback(data);
-        })
+function getAdditionalWeatherDataForPositionAsync(lat, long, callback, widgets=[]){
+    getAdditionalWeatherDataForNomAsync({"lat": lat, "lon": long}, callback, widgets);
 }
 
 /**
@@ -71,13 +62,31 @@ function getAdditionalWeatherDataForPositionAsync(lat, long, callback){
  * @param {number} nom.lat - The latitude of the location.
  * @param {number} nom.lon - The longitude of the location.
  * @param {function} callback - The callback function to handle the weather data.
+ * @param {Array} [widgets=[]] - An optional array of widgets to that require the additional weather data.
  */
-function getAdditionalWeatherDataForNomAsync(nom, callback){
+function getAdditionalWeatherDataForNomAsync(nom, callback, widgets=[]){
+    let currentParams = ["apparent_temperature"];
+    let hourlyParams = ["apparent_temperature"];
+
+    for (let i of widgets){
+        if (i.includes("CAPEGraph")){
+            hourlyParams.push("cape");
+        }
+    }
+
+    let minutely_15 = [];
+
+    let minutely_15_string = "&minutely_15=" + minutely_15.join(",");
+    if (minutely_15 === []){
+        minutely_15_string = "";
+    }
+
     addLoadingKey("additionalWeather" + nom["lat"] + nom["lon"]);
     fetch("https://api.open-meteo.com/v1/forecast?latitude=" + nom["lat"]
         + "&longitude=" + nom["lon"]
-        /* Current parameters */ + "&current=apparent_temperature"
-        /* Hourly parameters */ + "&hourly=apparent_temperature"
+        /* Current parameters */ + "&current=" + currentParams.join(",")
+        /* Hourly parameters */ + "&hourly=" + hourlyParams.join(",")
+        /* 15-Minutely parameters */ + minutely_15_string
         /* Unit settings */ + "&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch")
         .then(data => data.json())
         .then(data => {

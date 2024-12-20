@@ -4,6 +4,7 @@
     import GraphSwitcher from "./LocationWidgets/GraphSwitcher.svelte";
     import LongNWSForecast from "./LocationWidgets/LongNWSForecast.svelte";
     import WidgetPicker from "./WidgetPicker.svelte";
+    import CapeGraph from "./Graphs/CapeGraph.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -30,6 +31,9 @@
             {#if widget === "LongNWSForecast"}
                 <LongNWSForecast locationData={locationData} />
             {/if}
+            {#if widget === "CAPEGraph"}
+                <CapeGraph locationData={locationData} uniqueName="CAPE-{locationData.name}"/>
+            {/if}
         </div>
     {/each}
     {#if editing}
@@ -37,7 +41,7 @@
         <button class="editButton" onclick={removeWidgetRow}>Remove Row</button>
     {/if}
     {#if addingWidget}
-        <WidgetPicker bind:addingWidget={addingWidget} widgetRow={rowIndex} bind:widgetLayout={widgetLayout} />
+        <WidgetPicker bind:addingWidget={addingWidget} widgetRow={rowIndex} bind:widgetLayout={widgetLayout} bind:locationData={locationData} />
     {/if}
 
 </div>
