@@ -16,6 +16,8 @@
     let currentLocationStatus = $state("loading");
     let currentLocationData = $state({});
 
+    let widgetDictionary = $state({});
+
     let refreshQueued = false;
 
     let queueRefresh = () => {
@@ -26,10 +28,35 @@
         }
     }
 
+    let refreshWidgets = () => {
+        if (localStorage.getItem("widgets") === null){
+            localStorage.setItem("widgets", "{}");
+        }
+
+        let widgets = JSON.parse(localStorage.getItem("widgets"));
+
+        if (widgets["default"] === undefined){
+            widgets["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]];
+        }
+
+        widgetDictionary = widgets;
+    }
+
+    let getWidgetsForLocation = (location) => {
+        if (widgetDictionary[location] === undefined){
+            return widgetDictionary["default"];
+        }
+
+        return widgetDictionary[location];
+    }
+
     let refreshLocations = async () => {
         if (page !== "locations"){
             return;
         }
+
+        refreshWidgets();
+
         alertLocations = [];
         otherLocations = [];
         mainLocations = [];

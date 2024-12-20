@@ -6,6 +6,7 @@
     let { locationData, page=$bindable(), alertSelection = $bindable() } = $props();
 
     let editing = $state(false);
+    let widgets;
 
     function removeLocation(){
         let locations = JSON.parse(localStorage.getItem("weather-locations"));
@@ -28,12 +29,36 @@
     }
 
     function toggleEdit(){
+        if (editing){
+            widgets[locationData.name] = widgetLayout;
+            localStorage.setItem("widgets", JSON.stringify(widgets));
+        }
+
         editing = !editing;
     }
 
     let widgetLayout = $state([["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]]);
+
+    function refreshWidgets(){
+        if (localStorage.getItem("widgets") === null){
+            localStorage.setItem("widgets", "{}");
+        }
+
+        widgets = JSON.parse(localStorage.getItem("widgets"));
+
+        if (widgets["default"] === undefined){
+            widgets["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]];
+        }
+
+        if (widgets[locationData.name] === undefined){
+            widgets[locationData.name] = widgets["default"];
+        }
+
+        widgetLayout = widgets[locationData.name];
+    }
+
 </script>
-<TabSlot name="location-{locationData.name}" bind:page={page}>
+<TabSlot name="location-{locationData.name}" bind:page={page} onOpen={refreshWidgets}>
     <h1>{locationData.name}</h1>
     <br>
 
