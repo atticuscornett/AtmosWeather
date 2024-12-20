@@ -33,8 +33,8 @@
         </div>
     {/each}
     {#if editing}
-        <button onclick={()=>{addingWidget=true;}}>Add Widget</button>
-        <button onclick={removeWidgetRow}>Remove Row</button>
+        <button class="editButton" onclick={()=>{addingWidget=true;}}>Add Widget</button>
+        <button class="editButton" onclick={removeWidgetRow}>Remove Row</button>
     {/if}
     {#if addingWidget}
         <WidgetPicker bind:addingWidget={addingWidget} widgetRow={rowIndex} bind:widgetLayout={widgetLayout} />
@@ -50,7 +50,22 @@
     }
 
     .widgetContainer {
-        flex: 1;
+        flex: 10;
         margin-right: 10px;
+    }
+
+    .editButton {
+        margin-bottom: 10px;
+        flex: 0.5;
+        min-width: auto;
+        background-color: darkslategray;
+        border: white dashed 5px;
+        margin-right: 10px;
+        border-radius: 7px;
+        color: white;
+        font-weight: bold;
+        min-height: 75px;
+        cursor: pointer;
+
     }
 </style>

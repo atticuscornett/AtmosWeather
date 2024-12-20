@@ -43,12 +43,12 @@
         {#each widgetLayout as widgetRow, i}
             <WidgetRow locationData={locationData} widgets={widgetRow} editing={editing} bind:page={page} rowIndex={i} bind:widgetLayout={widgetLayout}/>
             {#if editing}
-                <button onclick={addRow.bind(null, i)}>Add Row</button>
+                <button onclick={addRow.bind(null, i)} class="largerMargin">Add Row</button>
             {/if}
         {/each}
 
         {#if widgetLayout.length === 0 && editing}
-            <button onclick={addRow.bind(null, -1)}>Add Row</button>
+            <button onclick={addRow.bind(null, -1)} class="largerMargin">Add Row</button>
         {/if}
 
         <button onclick={toggleEdit}>Edit this page</button>
@@ -72,5 +72,9 @@
         font-family: Secular One, sans-serif;
         margin-top: 7px;
         margin-bottom: 7px;
+    }
+
+    .largerMargin {
+        margin-bottom: 30px;
     }
 </style>

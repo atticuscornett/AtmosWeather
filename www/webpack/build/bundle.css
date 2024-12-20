@@ -534,18 +534,33 @@ body.dark details[open] summary{
         background-color: #111111;
     }
 
-    .widgetRow.svelte-xrblxu {
+    .widgetRow.svelte-18wecqf {
         display: flex;
         overflow: auto;
         margin-bottom: 10px;
     }
 
-    .widgetContainer.svelte-xrblxu {
-        flex: 1;
+    .widgetContainer.svelte-18wecqf {
+        flex: 10;
         margin-right: 10px;
     }
 
-    button.svelte-3d3kwj {
+    .editButton.svelte-18wecqf {
+        margin-bottom: 10px;
+        flex: 0.5;
+        min-width: auto;
+        background-color: darkslategray;
+        border: white dashed 5px;
+        margin-right: 10px;
+        border-radius: 7px;
+        color: white;
+        font-weight: bold;
+        min-height: 75px;
+        cursor: pointer;
+
+    }
+
+    button.svelte-1p1zga {
         width: 100%;
         cursor: pointer;
         background-color: darkslategray;
@@ -556,6 +571,10 @@ body.dark details[open] summary{
         font-family: Secular One, sans-serif;
         margin-top: 7px;
         margin-bottom: 7px;
+    }
+
+    .largerMargin.svelte-1p1zga {
+        margin-bottom: 30px;
     }
 
     h1.svelte-wbf13c {
