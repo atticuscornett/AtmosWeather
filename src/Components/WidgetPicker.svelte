@@ -17,28 +17,28 @@
 </script>
 
 <div class="gray-background" onclick={cancel}>
-    <div class="popup-container">
+    <div class="popup-container" onclick={stopPropagation}>
         <h1>Add Widget</h1>
-        <details onclick={stopPropagation}>
+        <details>
             <summary>General</summary>
             <button onclick={addWidget} value="LocationAtAGlance">Location At A Glance</button>
             <button onclick={addWidget} value="LongNWSForecast">NWS Full-text Forecast</button>
         </details>
 
-        <details onclick={stopPropagation}>
+        <details>
             <summary>Advanced</summary>
         </details>
 
-        <details onclick={stopPropagation}>
+        <details>
             <summary>15-minute Forecasts</summary>
         </details>
 
-        <details onclick={stopPropagation}>
+        <details>
             <summary>Graphs</summary>
             <button onclick={addWidget} value="GraphSwitcher">Graph Switcher</button>
         </details>
 
-        <details onclick={stopPropagation}>
+        <details>
             <summary>Air Quality</summary>
             <button onclick={addWidget} value="AirQualityIndex">Air Quality Index</button>
         </details>
@@ -67,10 +67,24 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        overflow: auto;
     }
 
     :global(body.dark) .popup-container{
         background-color: #111111;
+    }
+
+    button {
+        width: 100%;
+        cursor: pointer;
+        background-color: darkslategray;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        font-size: 20px;
+        font-family: Secular One, sans-serif;
+        margin-top: 7px;
+        margin-bottom: 7px;
     }
 
 </style>

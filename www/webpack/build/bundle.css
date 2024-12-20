@@ -507,7 +507,7 @@ body.dark details[open] summary{
         display: none;
     }
 
-    .gray-background.svelte-1n304p3 {
+    .gray-background.svelte-1vllmdr {
         background-color: rgba(0,0,0,0.5);
         position: fixed;
         top: 0;
@@ -517,7 +517,7 @@ body.dark details[open] summary{
         z-index: 100;
     }
 
-    .popup-container.svelte-1n304p3 {
+    .popup-container.svelte-1vllmdr {
         background-color: white;
         width: 80%;
         max-height: 80vh;
@@ -528,10 +528,24 @@ body.dark details[open] summary{
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        overflow: auto;
     }
 
-    body.dark .popup-container.svelte-1n304p3{
+    body.dark .popup-container.svelte-1vllmdr{
         background-color: #111111;
+    }
+
+    button.svelte-1vllmdr {
+        width: 100%;
+        cursor: pointer;
+        background-color: darkslategray;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        font-size: 20px;
+        font-family: Secular One, sans-serif;
+        margin-top: 7px;
+        margin-bottom: 7px;
     }
 
     .widgetRow.svelte-18wecqf {

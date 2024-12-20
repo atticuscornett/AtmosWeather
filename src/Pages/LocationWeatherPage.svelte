@@ -51,7 +51,7 @@
             <button onclick={addRow.bind(null, -1)} class="largerMargin">Add Row</button>
         {/if}
 
-        <button onclick={toggleEdit}>Edit this page</button>
+        <button onclick={toggleEdit}>{editing ? "Save changes" : "Edit this page"}</button>
         <br>
 
         {#if locationData.name !== "Current Location"}
