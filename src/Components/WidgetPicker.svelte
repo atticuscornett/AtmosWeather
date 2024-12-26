@@ -36,6 +36,7 @@
 
         <details>
             <summary>15-minute Forecasts</summary>
+            <button onclick={addWidget} value="Next15Minutes">Next 15 Minutes</button>
         </details>
 
         <details>

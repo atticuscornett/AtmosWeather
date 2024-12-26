@@ -5,6 +5,7 @@
     import LongNWSForecast from "./LocationWidgets/LongNWSForecast.svelte";
     import WidgetPicker from "./WidgetPicker.svelte";
     import CapeGraph from "./Graphs/CapeGraph.svelte";
+    import Next15Minutes from "./LocationWidgets/Next15Minutes.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -34,6 +35,10 @@
             {#if widget === "CAPEGraph"}
                 <CapeGraph locationData={locationData} uniqueName="CAPE-{locationData.name}"/>
             {/if}
+            {#if widget === "Next15Minutes"}
+                <Next15Minutes locationData={locationData} />
+            {/if}
+
         </div>
     {/each}
     {#if editing}

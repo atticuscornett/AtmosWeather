@@ -23,7 +23,7 @@
         }
         return currentCape[i]/2500;
     }
-
+    
     let dataCallback = (data, i) => currentCape[i];
 </script>
 

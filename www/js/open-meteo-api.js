@@ -75,6 +75,17 @@ function getAdditionalWeatherDataForNomAsync(nom, callback, widgets=[]){
     }
 
     let minutely_15 = [];
+    for (let i of widgets){
+        if (i.includes("Next15Minutes")){
+            minutely_15.push("temperature_2m")
+            minutely_15.push("apparent_temperature");
+            minutely_15.push("precipitation");
+            minutely_15.push("wind_speed_10m");
+            minutely_15.push("wind_gusts_10m");
+            minutely_15.push("visibility");
+        }
+    }
+
 
     let minutely_15_string = "&minutely_15=" + minutely_15.join(",");
     if (minutely_15 === []){
@@ -132,4 +143,65 @@ function removeOldData(times, data){
     newData = newData.map((data) => Math.round(data));
     
     return [newTimes, newData];
+}
+
+function removeOldData15Minutely(times, data){
+    let time = new Date();
+    let UTCHour = time.getUTCHours();
+    let UTCMinute = time.getUTCMinutes();
+
+    if (UTCMinute < 15){
+        UTCMinute = 0;
+    }
+    else if (UTCMinute < 30){
+        UTCMinute = 15;
+    }
+    else if (UTCMinute < 45){
+        UTCMinute = 30;
+    }
+    else{
+        UTCMinute = 45;
+    }
+
+    let UTCMinuteString = String(UTCMinute);
+    if (UTCMinuteString.length === 1){
+        UTCMinuteString = "0" + UTCMinuteString;
+    }
+
+    while (String(times[0]).endsWith(String(UTCHour) + ":" + UTCMinuteString) === false){
+        times.shift();
+        data.shift();
+    }
+
+    console.log("Decided best time to start is " + times[0]);
+
+    let newTimes = times.slice(0, 4);
+    let newData = data.slice(0, 4);
+
+    newTimes = newTimes.map((time) => {
+        let timeString = new Date(time+"Z");
+        timeString = timeString.getHours();
+        let AMPM = "AM";
+        if (timeString > 12){
+            timeString -= 12;
+            AMPM = "PM";
+        }
+        if (timeString == 0){
+            timeString = 12;
+        }
+        return timeString + " " + AMPM;
+    })
+
+    newData = newData.map((data) => Math.round(data));
+
+    return [newTimes, newData];
+}
+
+function ftToDistanceString(feet){
+    if (feet < 3000){
+        return Math.round(feet) + " ft";
+    }
+    else{
+        return (Math.round((feet/5280) * 10) / 10) + " mi";
+    }
 }
