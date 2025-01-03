@@ -134,7 +134,7 @@
         }
 
         for (let i = 0; i < nomLocations.length; i++){
-            nomToWeatherGridAsync(nomLocations[i], (nomRes) => {
+            setTimeout(nomToWeatherGridAsync.bind(null, nomLocations[i], (nomRes) => {
                 getHourlyForecastAsync(nomRes, (hourly) => {
                     getStatusAsync(nomLocations[i], (fullStatus, weatherAlerts) => {
                         let alertStatus = fullStatus[0];
@@ -150,19 +150,19 @@
 
                         setTimeout(()=>{
                             getForecastAsync(nomRes, (forecast) => {
-                            locationData.forecast = forecast;
-                            weatherDataDictionary[nomLocationNames[i]] = locationData;
-                        });
+                                locationData.forecast = forecast;
+                                weatherDataDictionary[nomLocationNames[i]] = locationData;
+                            });
 
-                        getAdditionalWeatherDataForNomAsync(nomLocations[i], (additionalData) => {
-                            locationData.openMeteoData = additionalData;
-                            weatherDataDictionary[nomLocationNames[i]] = locationData;
-                        }, getWidgetsForLocation(nomLocationNames[i]));
+                            getAdditionalWeatherDataForNomAsync(nomLocations[i], (additionalData) => {
+                                locationData.openMeteoData = additionalData;
+                                weatherDataDictionary[nomLocationNames[i]] = locationData;
+                            }, getWidgetsForLocation(nomLocationNames[i]));
 
-                        getCurrentAQIForNomAsync(nomLocations[i], (AQI) => {
-                            locationData.AQI = AQI;
-                            weatherDataDictionary[nomLocationNames[i]] = locationData;
-                        });}, Math.random()*250);
+                            getCurrentAQIForNomAsync(nomLocations[i], (AQI) => {
+                                locationData.AQI = AQI;
+                                weatherDataDictionary[nomLocationNames[i]] = locationData;
+                            });}, Math.random()*250);
 
                         weatherDataDictionary[nomLocationNames[i]] = locationData;
 
@@ -181,7 +181,8 @@
                         }
                     });
                 });
-            });
+            }),
+                Math.round(Math.random()*10000));
         }
 
     }

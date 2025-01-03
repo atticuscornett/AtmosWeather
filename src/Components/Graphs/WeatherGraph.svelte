@@ -23,26 +23,6 @@
         let image;
 
         for (let i = 0; i < 24; i++){
-            // Decide on weather icon
-            // sfor = data[a]["shortForecast"].toLowerCase();
-            // if (sfor.includes("rain") || sfor.includes("drizzle")){
-            //     image = "rainy";
-            // }
-            // else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
-            //     image = "stormy";
-            // }
-            // else if (sfor.includes("snow")){
-            //     image = "snowy";
-            // }
-            // else if (sfor.includes("wind")){
-            //     image = "windy";
-            // }
-            // else if (sfor.includes("cloud") || sfor.includes("fog")){
-            //     image = "cloudy";
-            // }
-            // else{
-            //     image = "sunny";
-            // }
 
             image = iconCallback(chartList, i);
 
@@ -142,8 +122,11 @@
             console.log(chartConfig);
         }
 
-        let chart = new Chart(document.getElementById(String(location) + "-loc-"+title+uniqueName+randomId+"-chart"),
-            chartConfig);
+        // Wait a random amount of time to prevent all graphs from loading at once
+        setTimeout(() => {
+            let chart = new Chart(document.getElementById(String(location) + "-loc-"+title+uniqueName+randomId+"-chart"),
+                chartConfig);
+        }, Math.round(Math.random()*3000));
     })
 </script>
 

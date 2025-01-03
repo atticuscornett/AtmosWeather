@@ -172,9 +172,7 @@ function removeOldData15Minutely(times, data){
         times.shift();
         data.shift();
     }
-
-    console.log("Decided best time to start is " + times[0]);
-
+    
     let newTimes = times.slice(0, 4);
     let newData = data.slice(0, 4);
 
