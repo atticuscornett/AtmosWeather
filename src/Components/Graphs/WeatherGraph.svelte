@@ -122,11 +122,8 @@
             console.log(chartConfig);
         }
 
-        // Wait a random amount of time to prevent all graphs from loading at once
-        setTimeout(() => {
-            let chart = new Chart(document.getElementById(String(location) + "-loc-"+title+uniqueName+randomId+"-chart"),
-                chartConfig);
-        }, Math.round(Math.random()*3000));
+        let chart = new Chart(document.getElementById(String(location) + "-loc-"+title+uniqueName+randomId+"-chart"),
+            chartConfig);
     })
 </script>
 

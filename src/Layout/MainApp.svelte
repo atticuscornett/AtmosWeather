@@ -12,6 +12,7 @@
     import AndroidPermissionPopup from "../Components/AndroidPermissionPopup.svelte";
     import WelcomeWindow from "../Components/WelcomeWindow.svelte";
     import LoadingDots from "../Components/LoadingDots.svelte";
+    import DeferRendering from "../Components/DeferRendering.svelte";
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
@@ -91,7 +92,9 @@
     {/if}
 
     {#each Object.entries(weatherDataDictionary) as [key, value]}
-        <LocationWeatherPage locationData={value} bind:page={page} bind:alertSelection={alertSelection}/>
+        <DeferRendering>
+            <LocationWeatherPage locationData={value} bind:page={page} bind:alertSelection={alertSelection}/>
+        </DeferRendering>
     {/each}
 
     {#each Object.entries(weatherDataDictionary) as [key, value]}
