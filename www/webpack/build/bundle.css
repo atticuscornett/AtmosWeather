@@ -603,18 +603,57 @@ body.dark details[open] summary{
         color: white;
     }
 
-    .widgetRow.svelte-18wecqf {
+    .text-holder.svelte-cfysft {
+        display: inline-block;
+    }
+
+    .spaced-holder.svelte-cfysft {
+        margin-right: 40px;
+    }
+
+    h4.svelte-cfysft {
+        width: fit-content;
+        margin-bottom: 0;
+    }
+
+    h3.svelte-cfysft {
+        margin-bottom: 0;
+    }
+
+    h2.svelte-cfysft {
+        margin-bottom: 0;
+    }
+
+    .centerContainer.svelte-cfysft {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: 100%;
+        color: white;
+        flex-direction: column;
+        padding-bottom: 15px;
+    }
+
+    img.svelte-cfysft {
+        margin-top: 10px;
+    }
+
+    .widgetRow.svelte-nsogae {
         display: flex;
         overflow: auto;
         margin-bottom: 10px;
     }
 
-    .widgetContainer.svelte-18wecqf {
+    .widgetContainer.svelte-nsogae {
         flex: 10;
         margin-right: 10px;
+        height: fit-content;
     }
 
-    .editButton.svelte-18wecqf {
+    .editButton.svelte-nsogae {
         margin-bottom: 10px;
         flex: 0.5;
         min-width: auto;

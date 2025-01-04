@@ -7,6 +7,7 @@
     import CapeGraph from "./Graphs/CapeGraph.svelte";
     import Next15Minutes from "./LocationWidgets/Next15Minutes.svelte";
     import SunriseSunset from "./LocationWidgets/SunriseSunset.svelte";
+    import AQIBreakdown from "./LocationWidgets/AQIBreakdown.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -42,6 +43,9 @@
                 {#if widget === "SunriseSunset"}
                     <SunriseSunset locationData={locationData} />
                 {/if}
+                {#if widget === "AQIBreakdown"}
+                    <AQIBreakdown locationData={locationData} />
+                {/if}
 
             </div>
         {/each}
@@ -65,6 +69,7 @@
     .widgetContainer {
         flex: 10;
         margin-right: 10px;
+        height: fit-content;
     }
 
     .editButton {

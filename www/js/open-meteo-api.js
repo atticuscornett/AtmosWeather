@@ -6,18 +6,7 @@
  * @param {function} callback - The callback function to handle the AQI data.
  */
 function getCurrentAQIForPositionAsync(lat, long, callback){
-    addLoadingKey("currentAQI" + lat + long);
-    fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + lat + "&longitude=" + long + "&hourly=us_aqi")
-        .then(data => data.json())
-        .then(data => {
-            let time = new Date();
-            time = time.toISOString();
-            time = time.split(":");
-            time = time[0] + ":00";
-            let index = data["hourly"]["time"].indexOf(time);
-            removeLoadingKey("currentAQI" + lat + long);
-            callback(data["hourly"]["us_aqi"][index]);
-        })
+    getCurrentAQIForNomAsync({"lat": lat, "lon": long}, callback);
 }
 
 /**
@@ -27,10 +16,26 @@ function getCurrentAQIForPositionAsync(lat, long, callback){
  * @param {number} nom.lat - The latitude of the location.
  * @param {number} nom.lon - The longitude of the location.
  * @param {function} callback - The callback function to handle the AQI data.
+ * @param {Array} [widgets=[]] - An optional array of widgets to that require the additional weather data.
  */
-function getCurrentAQIForNomAsync(nom, callback){
+function getCurrentAQIForNomAsync(nom, callback, widgets=[]){
     addLoadingKey("currentAQI" + nom["lat"] + nom["lon"]);
-    fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + nom["lat"] + "&longitude=" + nom["lon"] + "&hourly=us_aqi")
+
+    let hourlyParams = ["us_aqi"];
+
+    for (let i of widgets){
+        if (i.includes("AQIBreakdown")){
+            hourlyParams.push("pm10");
+            hourlyParams.push("pm2_5");
+            hourlyParams.push("ozone");
+            hourlyParams.push("carbon_monoxide");
+            hourlyParams.push("nitrogen_dioxide");
+            hourlyParams.push("sulphur_dioxide");
+        }
+    }
+
+    fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + nom["lat"] + "&longitude=" + nom["lon"] +
+        "&hourly=" + hourlyParams.join(","))
         .then(data => data.json())
         .then(data => {
             let time = new Date();
@@ -39,7 +44,7 @@ function getCurrentAQIForNomAsync(nom, callback){
             time = time[0] + ":00";
             let index = data["hourly"]["time"].indexOf(time);
             removeLoadingKey("currentAQI" + nom["lat"] + nom["lon"]);
-            callback(data["hourly"]["us_aqi"][index]);
+            callback(data, index);
         })
 }
 

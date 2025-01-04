@@ -111,9 +111,11 @@
                                             weatherDataDictionary["Current Location"]["forecast"] = [jsonReturn["properties"]["periods"]];
                                         })
 
-                                        getCurrentAQIForPositionAsync(currentLat, currentLong, (AQI) => {
-                                            weatherDataDictionary["Current Location"].AQI = AQI;
-                                        });
+                                        getCurrentAQIForPositionAsync(currentLat, currentLong, (AQI, currentTimeIndex) => {
+                                            weatherDataDictionary["Current Location"].AQI = AQI["hourly"]["us_aqi"][currentTimeIndex];
+                                            weatherDataDictionary["Current Location"].AirQualityAPIIndex = currentTimeIndex;
+                                            weatherDataDictionary["Current Location"].AirQualityAPI = AQI;
+                                        }, getWidgetsForLocation("Current Location"));
 
                                         getAdditionalWeatherDataForPositionAsync(currentLat, currentLong, (openMeteo) => {
                                             weatherDataDictionary["Current Location"].openMeteoData = openMeteo;
@@ -159,10 +161,18 @@
                                 weatherDataDictionary[nomLocationNames[i]] = locationData;
                             }, getWidgetsForLocation(nomLocationNames[i]));
 
-                            getCurrentAQIForNomAsync(nomLocations[i], (AQI) => {
-                                locationData.AQI = AQI;
+                            getCurrentAQIForNomAsync(nomLocations[i], (AQI, currentTimeIndex) => {
+                                locationData.AQI = AQI["hourly"]["us_aqi"][currentTimeIndex];
+                                locationData.AirQualityAPIIndex = currentTimeIndex;
+                                locationData.AirQualityAPI = AQI;
                                 weatherDataDictionary[nomLocationNames[i]] = locationData;
-                            });}, Math.random()*250);
+                            }, getWidgetsForLocation(nomLocationNames[i]));}, Math.random()*250);
+
+                        getCurrentAQIForPositionAsync(currentLat, currentLong, (AQI, currentTimeIndex) => {
+                            weatherDataDictionary["Current Location"].AQI = AQI["hourly"]["us_aqi"][currentTimeIndex];
+                            weatherDataDictionary["Current Location"].AirQualityAPIIndex = currentTimeIndex;
+                            weatherDataDictionary["Current Location"].AirQualityAPI = AQI;
+                        });
 
                         weatherDataDictionary[nomLocationNames[i]] = locationData;
 

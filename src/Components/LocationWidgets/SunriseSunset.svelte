@@ -48,6 +48,7 @@
     <div class="text-holder">
         <h4>Sunrise: {sunrise}</h4>
         <h4>Sunset: {sunset}</h4>
+        <h6>Times given in device time zone.</h6>
     </div>
 </div>
 
