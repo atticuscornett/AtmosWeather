@@ -579,6 +579,30 @@ body.dark details[open] summary{
         padding: 0 20px 0 20px;
     }
 
+    .text-holder.svelte-1qguobg {
+        display: inline-block;
+    }
+
+    img.svelte-1qguobg {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    h4.svelte-1qguobg {
+        width: fit-content;
+    }
+
+    .centerContainer.svelte-1qguobg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: calc(100% - 15px);
+        color: white;
+    }
+
     .widgetRow.svelte-18wecqf {
         display: flex;
         overflow: auto;

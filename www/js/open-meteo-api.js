@@ -86,10 +86,23 @@ function getAdditionalWeatherDataForNomAsync(nom, callback, widgets=[]){
         }
     }
 
+    let daily = [];
+    for (let i of widgets){
+        if (i.includes("SunriseSunset")){
+            daily.push("sunrise");
+            daily.push("sunset");
+        }
+    }
+
 
     let minutely_15_string = "&minutely_15=" + minutely_15.join(",");
     if (minutely_15 === []){
         minutely_15_string = "";
+    }
+
+    let daily_string = "&daily=" + daily.join(",");
+    if (daily === []){
+        daily_string = "";
     }
 
     addLoadingKey("additionalWeather" + nom["lat"] + nom["lon"]);
@@ -98,6 +111,7 @@ function getAdditionalWeatherDataForNomAsync(nom, callback, widgets=[]){
         /* Current parameters */ + "&current=" + currentParams.join(",")
         /* Hourly parameters */ + "&hourly=" + hourlyParams.join(",")
         /* 15-Minutely parameters */ + minutely_15_string
+        /* Daily parameters */ + daily_string
         /* Unit settings */ + "&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch")
         .then(data => data.json())
         .then(data => {

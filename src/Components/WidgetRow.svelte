@@ -6,6 +6,7 @@
     import WidgetPicker from "./WidgetPicker.svelte";
     import CapeGraph from "./Graphs/CapeGraph.svelte";
     import Next15Minutes from "./LocationWidgets/Next15Minutes.svelte";
+    import SunriseSunset from "./LocationWidgets/SunriseSunset.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -37,6 +38,9 @@
                 {/if}
                 {#if widget === "Next15Minutes"}
                     <Next15Minutes locationData={locationData} />
+                {/if}
+                {#if widget === "SunriseSunset"}
+                    <SunriseSunset locationData={locationData} />
                 {/if}
 
             </div>
