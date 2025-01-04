@@ -16,40 +16,40 @@
     }
 </script>
 
+{#if widgets.length !== 1 || !widgets[0].includes("Template:")}
+    <div class="widgetRow">
+        {#each widgets as widget}
+            <div class="widgetContainer">
+                {#if widget === "LocationAtAGlance"}
+                    <LocationAtAGlance locationData={locationData} bind:page={page} />
+                {/if}
+                {#if widget === "AirQualityIndex"}
+                    <AirQualityIndex locationData={locationData} />
+                {/if}
+                {#if widget === "GraphSwitcher"}
+                    <GraphSwitcher locationData={locationData} />
+                {/if}
+                {#if widget === "LongNWSForecast"}
+                    <LongNWSForecast locationData={locationData} />
+                {/if}
+                {#if widget === "CAPEGraph"}
+                    <CapeGraph locationData={locationData} uniqueName="CAPE-{locationData.name}"/>
+                {/if}
+                {#if widget === "Next15Minutes"}
+                    <Next15Minutes locationData={locationData} />
+                {/if}
 
-<div class="widgetRow">
-    {#each widgets as widget}
-        <div class="widgetContainer">
-            {#if widget === "LocationAtAGlance"}
-                <LocationAtAGlance locationData={locationData} bind:page={page} />
-            {/if}
-            {#if widget === "AirQualityIndex"}
-                <AirQualityIndex locationData={locationData} />
-            {/if}
-            {#if widget === "GraphSwitcher"}
-                <GraphSwitcher locationData={locationData} />
-            {/if}
-            {#if widget === "LongNWSForecast"}
-                <LongNWSForecast locationData={locationData} />
-            {/if}
-            {#if widget === "CAPEGraph"}
-                <CapeGraph locationData={locationData} uniqueName="CAPE-{locationData.name}"/>
-            {/if}
-            {#if widget === "Next15Minutes"}
-                <Next15Minutes locationData={locationData} />
-            {/if}
-
-        </div>
-    {/each}
-    {#if editing}
-        <button class="editButton" onclick={()=>{addingWidget=true;}}>Add Widget</button>
-        <button class="editButton" onclick={removeWidgetRow}>Remove Row</button>
-    {/if}
-    {#if addingWidget}
-        <WidgetPicker bind:addingWidget={addingWidget} widgetRow={rowIndex} bind:widgetLayout={widgetLayout} bind:locationData={locationData} />
-    {/if}
-
-</div>
+            </div>
+        {/each}
+        {#if editing}
+            <button class="editButton" onclick={()=>{addingWidget=true;}}>Add Widget</button>
+            <button class="editButton" onclick={removeWidgetRow}>Remove Row</button>
+        {/if}
+        {#if addingWidget}
+            <WidgetPicker bind:addingWidget={addingWidget} widgetRow={rowIndex} bind:widgetLayout={widgetLayout} bind:locationData={locationData} />
+        {/if}
+    </div>
+{/if}
 
 <style>
     .widgetRow {

@@ -2,11 +2,13 @@
     import TabSlot from "../Layout/TabSlot.svelte";
     import AlertBar from "../Components/LocationWidgets/AlertBar.svelte";
     import WidgetRow from "../Components/WidgetRow.svelte";
+    import TemplatePicker from "../Components/TemplatePicker.svelte";
 
     let { locationData, page=$bindable(), alertSelection = $bindable() } = $props();
 
     let editing = $state(false);
-    let widgets;
+    let widgets = $state();
+    let addingTemplate = $state(false);
 
     function removeLocation(){
         let locations = JSON.parse(localStorage.getItem("weather-locations"));
@@ -31,6 +33,12 @@
     function toggleEdit(){
         if (editing){
             widgets[locationData.name] = widgetLayout;
+
+            if (widgetLayout[widgetLayout.length - 1].length === 1
+                && widgetLayout[widgetLayout.length - 1][0].includes("Template:")){
+                widgets[locationData.name] = [widgetLayout[widgetLayout.length - 1][0]];
+            }
+
             localStorage.setItem("widgets", JSON.stringify(widgets));
         }
 
@@ -51,10 +59,21 @@
         }
 
         if (widgets[locationData.name] === undefined){
-            widgets[locationData.name] = widgets["default"];
+            widgets[locationData.name] = ["Template:default"];
+        }
+
+        let templates = {
+            default: widgets["default"]
         }
 
         widgetLayout = widgets[locationData.name];
+
+        // If the widget layout is a template, replace it with the template's layout.
+        if (widgetLayout[0].includes("Template:")){
+            let templateCode = widgetLayout[0];
+            widgetLayout = templates[templateCode.replace("Template:", "")];
+            widgetLayout.push([templateCode]);
+        }
     }
 
 </script>
@@ -76,7 +95,18 @@
             <button onclick={addRow.bind(null, -1)} class="largerMargin">Add Row</button>
         {/if}
 
-        <button onclick={toggleEdit}>{editing ? "Save changes" : "Edit this page"}</button>
+        {#if editing}
+            <button onclick={()=>{addingTemplate=true;}}>Use a Template</button>
+        {/if}
+
+        {#if addingTemplate}
+            <TemplatePicker bind:addingTemplate={addingTemplate}
+                            bind:widgets={widgets} bind:locationData={locationData}
+                            bind:widgetLayout={widgetLayout}
+                            refreshWidgets={refreshWidgets}/>
+        {/if}
+
+        <button onclick={toggleEdit}>{editing ? "Save Changes" : "Edit This Page"}</button>
         <br>
 
         {#if locationData.name !== "Current Location"}
