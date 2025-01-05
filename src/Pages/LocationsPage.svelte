@@ -196,6 +196,7 @@
         }
 
     }
+    window.refreshLocations = refreshLocations;
 
 
 </script>
