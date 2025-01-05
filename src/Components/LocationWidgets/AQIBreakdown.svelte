@@ -4,13 +4,11 @@
     let isDataReady = $state(false);
 
     let checkDataReady = () => {
-        if (locationData.AirQualityAPI &&
+        isDataReady = locationData.AirQualityAPI &&
             locationData.AirQualityAPI["hourly"] &&
-            locationData.AirQualityAPI["hourly"]["pm2_5"]){
-            isDataReady = true;
-        }
+            locationData.AirQualityAPI["hourly"]["pm2_5"];
         console.log(locationData);
-        console.log(isDataReady)
+        console.log(isDataReady);
     }
 
     $effect(() => {
@@ -22,7 +20,12 @@
     <img src="img/windy.svg" alt="Air Quality" style="width: 50px; height: 50px;">
     <h2>AQI Breakdown</h2>
     <h3>AQI: {locationData.AQI}</h3>
-    {#if isDataReady}
+    <!-- Check if the data is ready -->
+    {#if
+        locationData.AirQualityAPI &&
+        locationData.AirQualityAPI["hourly"] &&
+        locationData.AirQualityAPI["hourly"]["pm2_5"]
+    }
         <div>
             <div class="text-holder spaced-holder">
                     <h4>Ozone: {locationData.AirQualityAPI["hourly"]["ozone"][locationData.AirQualityAPIIndex]} μg/m3</h4>

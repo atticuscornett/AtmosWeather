@@ -364,32 +364,32 @@ body.dark details[open] summary{
         width: 50%;
     }
 
-    .imgContainer.svelte-jptsuy {
+    .imgContainer.svelte-1fuk6rb {
         display: inline-block;
         height: inherit;
         vertical-align: top;
         margin-top:20px;
     }
 
-    .alertContainer.svelte-jptsuy {
+    .alertContainer.svelte-1fuk6rb {
         display:inline-block;
         margin-left:8px;
         margin-right: 8px;
     }
 
-    img.svelte-jptsuy {
+    img.svelte-1fuk6rb {
         vertical-align:center;
     }
 
-    h3.svelte-jptsuy {
+    h3.svelte-1fuk6rb {
         margin-right:8px;
     }
 
-    a.svelte-jptsuy {
+    a.svelte-1fuk6rb {
         color: white;
     }
 
-    .location.svelte-jptsuy{
+    .location.svelte-1fuk6rb{
         background-color: blue;
         color: white;
         border-radius: 7px;
@@ -401,6 +401,7 @@ body.dark details[open] summary{
         box-sizing: border-box;
         cursor: pointer;
         box-shadow: 0 0 7px #898989;
+        margin-right: 10px;
     }
 
 
@@ -506,14 +507,223 @@ body.dark details[open] summary{
         display: none;
     }
 
-    button.svelte-fiu7fd {
-        width:100%;
-        cursor:pointer;
-        background-color:darkslategray;
-        color:white;border:none;
-        border-radius:7px;
-        font-size:20px;
-        font-family:Secular One, sans-serif;
+    .gray-background.svelte-1vllmdr {
+        background-color: rgba(0,0,0,0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+    }
+
+    .popup-container.svelte-1vllmdr {
+        background-color: white;
+        width: 80%;
+        max-height: 80vh;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: auto;
+    }
+
+    body.dark .popup-container.svelte-1vllmdr{
+        background-color: #111111;
+    }
+
+    button.svelte-1vllmdr {
+        width: 100%;
+        cursor: pointer;
+        background-color: darkslategray;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        font-size: 20px;
+        font-family: Secular One, sans-serif;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
+    .column.svelte-169h7ai {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .widgetOutline.svelte-169h7ai {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+    }
+
+    h2.svelte-169h7ai {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .clear-border.svelte-169h7ai{
+        border: black solid;
+        border-radius: 7px;
+        box-shadow: 0 0 7px #898989;
+        padding: 0 20px 0 20px;
+    }
+
+    body.dark .clear-border.svelte-169h7ai{
+        border: white solid;
+        border-radius: 7px;
+        box-shadow: 0 0 7px #898989;
+        padding: 0 20px 0 20px;
+    }
+
+    .text-holder.svelte-1qguobg {
+        display: inline-block;
+    }
+
+    img.svelte-1qguobg {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    h4.svelte-1qguobg {
+        width: fit-content;
+    }
+
+    .centerContainer.svelte-1qguobg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: calc(100% - 15px);
+        color: white;
+    }
+
+    .text-holder.svelte-cfysft {
+        display: inline-block;
+    }
+
+    .spaced-holder.svelte-cfysft {
+        margin-right: 40px;
+    }
+
+    h4.svelte-cfysft {
+        width: fit-content;
+        margin-bottom: 0;
+    }
+
+    h3.svelte-cfysft {
+        margin-bottom: 0;
+    }
+
+    h2.svelte-cfysft {
+        margin-bottom: 0;
+    }
+
+    .centerContainer.svelte-cfysft {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: 100%;
+        color: white;
+        flex-direction: column;
+        padding-bottom: 15px;
+    }
+
+    img.svelte-cfysft {
+        margin-top: 10px;
+    }
+
+    .widgetRow.svelte-nsogae {
+        display: flex;
+        overflow: auto;
+        margin-bottom: 10px;
+    }
+
+    .widgetContainer.svelte-nsogae {
+        flex: 10;
+        margin-right: 10px;
+        height: fit-content;
+    }
+
+    .editButton.svelte-nsogae {
+        margin-bottom: 10px;
+        flex: 0.5;
+        min-width: auto;
+        background-color: darkslategray;
+        border: white dashed 5px;
+        margin-right: 10px;
+        border-radius: 7px;
+        color: white;
+        font-weight: bold;
+        min-height: 75px;
+        cursor: pointer;
+
+    }
+
+    .gray-background.svelte-1vllmdr {
+        background-color: rgba(0,0,0,0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+    }
+
+    .popup-container.svelte-1vllmdr {
+        background-color: white;
+        width: 80%;
+        max-height: 80vh;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: auto;
+    }
+
+    body.dark .popup-container.svelte-1vllmdr{
+        background-color: #111111;
+    }
+
+    button.svelte-1vllmdr {
+        width: 100%;
+        cursor: pointer;
+        background-color: darkslategray;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        font-size: 20px;
+        font-family: Secular One, sans-serif;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
+    button.svelte-1p1zga {
+        width: 100%;
+        cursor: pointer;
+        background-color: darkslategray;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        font-size: 20px;
+        font-family: Secular One, sans-serif;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
+    .largerMargin.svelte-1p1zga {
+        margin-bottom: 30px;
     }
 
     h1.svelte-wbf13c {

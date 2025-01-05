@@ -6,6 +6,9 @@
  * @param {function} callback - The callback function to handle the AQI data.
  */
 function getCurrentAQIForPositionAsync(lat, long, callback){
+    if (lat === false || long === false){
+        return;
+    }
     getCurrentAQIForNomAsync({"lat": lat, "lon": long}, callback);
 }
 
