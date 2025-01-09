@@ -9,6 +9,7 @@
     import SunriseSunset from "./LocationWidgets/SunriseSunset.svelte";
     import AQIBreakdown from "./LocationWidgets/AQIBreakdown.svelte";
     import WeekAtAGlance from "./LocationWidgets/WeekAtAGlance.svelte";
+    import AllPollutants from "./LocationWidgets/AllPollutants.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -49,6 +50,9 @@
                 {/if}
                 {#if widget === "WeekAtAGlance"}
                     <WeekAtAGlance locationData={locationData} />
+                {/if}
+                {#if widget === "AllPollutants"}
+                    <AllPollutants locationData={locationData} />
                 {/if}
 
             </div>

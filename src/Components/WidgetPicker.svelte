@@ -51,6 +51,7 @@
             <summary>Air Quality</summary>
             <button onclick={addWidget} value="AirQualityIndex">Air Quality Index</button>
             <button onclick={addWidget} value="AQIBreakdown">Air Quality Breakdown</button>
+            <button onclick={addWidget} value="AllPollutants">All Pollutants</button>
         </details>
     </div>
 </div>

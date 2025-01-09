@@ -127,6 +127,7 @@
         display: flex;
         justify-content: space-around;
         overflow-x: auto;
+        margin-bottom: 15px;
     }
 
     .daily-look {

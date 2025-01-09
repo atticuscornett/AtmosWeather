@@ -39,7 +39,16 @@
                 widgets[locationData.name] = [widgetLayout[widgetLayout.length - 1][0]];
             }
 
+            widgets["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]];
+
             localStorage.setItem("widgets", JSON.stringify(widgets));
+        }
+        else {
+            // Disable template upon editing
+            if (widgetLayout[widgetLayout.length - 1].length === 1
+                && widgetLayout[widgetLayout.length - 1][0].includes("Template:")){
+                widgetLayout.pop();
+            }
         }
 
         editing = !editing;
@@ -68,6 +77,8 @@
 
         widgetLayout = widgets[locationData.name];
 
+        localStorage.setItem("widgets", JSON.stringify(widgets));
+
         // If the widget layout is a template, replace it with the template's layout.
         if (widgetLayout[0].includes("Template:")){
             let templateCode = widgetLayout[0];
@@ -86,7 +97,7 @@
         <AlertBar locationData={locationData} bind:page={page} bind:alertSelection={alertSelection}/>
         {#each widgetLayout as widgetRow, i}
             <WidgetRow bind:locationData={locationData} widgets={widgetRow} editing={editing} bind:page={page} rowIndex={i} bind:widgetLayout={widgetLayout}/>
-            {#if editing}
+            {#if editing && (widgetRow.length !== 1 || !widgetRow[0].includes("Template:"))}
                 <button onclick={addRow.bind(null, i)} class="largerMargin">Add Row</button>
             {/if}
         {/each}
