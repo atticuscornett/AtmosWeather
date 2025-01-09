@@ -7,7 +7,6 @@
         localStorage.setItem("widgets", JSON.stringify(widgets));
 
         addingTemplate = false;
-        editing = false;
         e.stopPropagation();
         refreshWidgets();
         toggleEdit();
