@@ -1,14 +1,16 @@
 <script>
     let { addingTemplate=$bindable(), locationData=$bindable(), widgets = $bindable(),
-        widgetLayout, refreshWidgets} = $props();
+        widgetLayout, refreshWidgets, toggleEdit} = $props();
 
     function selectTemplate(e){
         widgets[locationData.name] = ["Template:" + e.target.value];
         localStorage.setItem("widgets", JSON.stringify(widgets));
 
         addingTemplate = false;
+        editing = false;
         e.stopPropagation();
         refreshWidgets();
+        toggleEdit();
 
         setTimeout(() => {
             getAdditionalWeatherDataForNomAsync(locationData.nominatim, (additionalData)=>{

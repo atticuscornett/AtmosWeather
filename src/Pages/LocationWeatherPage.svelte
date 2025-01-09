@@ -114,6 +114,7 @@
             <TemplatePicker bind:addingTemplate={addingTemplate}
                             bind:widgets={widgets} bind:locationData={locationData}
                             bind:widgetLayout={widgetLayout}
+                            bind:toggleEdit={toggleEdit}
                             refreshWidgets={refreshWidgets}/>
         {/if}
 
