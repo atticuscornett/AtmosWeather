@@ -27,6 +27,7 @@
         <details>
             <summary>General</summary>
             <button onclick={addWidget} value="LocationAtAGlance">Location At A Glance</button>
+            <button onclick={addWidget} value="WeekAtAGlance">Week At A Glance</button>
             <button onclick={addWidget} value="LongNWSForecast">NWS Full-text Forecast</button>
             <button onclick={addWidget} value="SunriseSunset">Sunrise/Sunset</button>
         </details>

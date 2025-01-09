@@ -8,6 +8,7 @@
     import Next15Minutes from "./LocationWidgets/Next15Minutes.svelte";
     import SunriseSunset from "./LocationWidgets/SunriseSunset.svelte";
     import AQIBreakdown from "./LocationWidgets/AQIBreakdown.svelte";
+    import WeekAtAGlance from "./LocationWidgets/WeekAtAGlance.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -45,6 +46,9 @@
                 {/if}
                 {#if widget === "AQIBreakdown"}
                     <AQIBreakdown locationData={locationData} />
+                {/if}
+                {#if widget === "WeekAtAGlance"}
+                    <WeekAtAGlance locationData={locationData} />
                 {/if}
 
             </div>
