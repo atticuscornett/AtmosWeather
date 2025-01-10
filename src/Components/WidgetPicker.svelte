@@ -44,7 +44,13 @@
         <details>
             <summary>Graphs</summary>
             <button onclick={addWidget} value="GraphSwitcher">Graph Switcher</button>
-            <button onclick={addWidget} value="CAPEGraph">CAPE Forecast</button>
+            <button onclick={addWidget} value="TemperatureGraph">Temperature/Condition Graph</button>
+            <button onclick={addWidget} value="PrecipitationGraph">Precipitation Graph</button>
+            <button onclick={addWidget} value="WindGraph">Wind Graph</button>
+            <button onclick={addWidget} value="HumidityGraph">Humidity Graph</button>
+            <button onclick={addWidget} value="DewpointGraph">Dew Point Graph</button>
+            <button onclick={addWidget} value="FeelsLikeGraph">Feels Like Graph</button>
+            <button onclick={addWidget} value="CAPEGraph">CAPE Graph</button>
         </details>
 
         <details>

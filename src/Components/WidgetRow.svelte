@@ -10,6 +10,12 @@
     import AQIBreakdown from "./LocationWidgets/AQIBreakdown.svelte";
     import WeekAtAGlance from "./LocationWidgets/WeekAtAGlance.svelte";
     import AllPollutants from "./LocationWidgets/AllPollutants.svelte";
+    import TemperatureGraph from "./Graphs/TemperatureGraph.svelte";
+    import PrecipitationGraph from "./Graphs/PrecipitationGraph.svelte";
+    import WindGraph from "./Graphs/WindGraph.svelte";
+    import HumidityGraph from "./Graphs/HumidityGraph.svelte";
+    import DewpointGraph from "./Graphs/DewpointGraph.svelte";
+    import FeelsLikeGraph from "./Graphs/FeelsLikeGraph.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -54,7 +60,30 @@
                 {#if widget === "AllPollutants"}
                     <AllPollutants locationData={locationData} />
                 {/if}
-
+                {#if widget === "TemperatureGraph"}
+                    <h2>Temperature Forecast</h2>
+                    <TemperatureGraph uniqueName="graphWidget" locationData={locationData} />
+                {/if}
+                {#if widget === "PrecipitationGraph"}
+                    <h2>Precipitation Forecast</h2>
+                    <PrecipitationGraph uniqueName="graphWidget" locationData={locationData} />
+                {/if}
+                {#if widget === "WindGraph"}
+                    <h2>Wind Forecast</h2>
+                    <WindGraph uniqueName="graphWidget" locationData={locationData} />
+                {/if}
+                {#if widget === "HumidityGraph"}
+                    <h2>Humidity Forecast</h2>
+                    <HumidityGraph uniqueName="graphWidget" locationData={locationData} />
+                {/if}
+                {#if widget === "DewpointGraph"}
+                    <h2>Dew Point Forecast</h2>
+                    <DewpointGraph uniqueName="graphWidget" locationData={locationData} />
+                {/if}
+                {#if widget === "FeelsLikeGraph"}
+                    <h2>Feels Like Forecast</h2>
+                    <FeelsLikeGraph uniqueName="graphWidget" locationData={locationData} />
+                {/if}
             </div>
         {/each}
         {#if editing}
