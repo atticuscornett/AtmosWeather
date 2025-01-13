@@ -16,6 +16,7 @@
     import HumidityGraph from "./Graphs/HumidityGraph.svelte";
     import DewpointGraph from "./Graphs/DewpointGraph.svelte";
     import FeelsLikeGraph from "./Graphs/FeelsLikeGraph.svelte";
+    import AQINext3Days from "./LocationWidgets/AQINext3Days.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -83,6 +84,9 @@
                 {#if widget === "FeelsLikeGraph"}
                     <h2>Feels Like Forecast</h2>
                     <FeelsLikeGraph uniqueName="graphWidget" locationData={locationData} />
+                {/if}
+                {#if widget === "AQINext3Days"}
+                    <AQINext3Days locationData={locationData} />
                 {/if}
             </div>
         {/each}

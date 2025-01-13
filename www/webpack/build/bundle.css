@@ -704,6 +704,21 @@ body.dark details[open] summary{
         margin-top: 10px;
     }
 
+    .centerContainer.svelte-105udsc {
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: 100%;
+        color: white;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    h1.svelte-105udsc {
+        padding-top: 1px;
+    }
+
     .widgetRow.svelte-nsogae {
         display: flex;
         overflow: auto;
