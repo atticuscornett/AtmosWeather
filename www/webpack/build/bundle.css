@@ -730,6 +730,24 @@ body.dark details[open] summary{
         padding-bottom: 15px;
     }
 
+    div.svelte-1t969oa {
+        min-height: 350px;
+        border-radius: 7px;
+    }
+
+    button.svelte-1t969oa {
+        width: 100%;
+        background-color: darkslategray;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 20px;
+        font-family: Secular One, sans-serif;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
     .widgetRow.svelte-nsogae {
         display: flex;
         overflow: auto;

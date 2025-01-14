@@ -18,6 +18,7 @@
     import FeelsLikeGraph from "./Graphs/FeelsLikeGraph.svelte";
     import AQINext3Days from "./LocationWidgets/AQINext3Days.svelte";
     import UVIndex from "./LocationWidgets/UVIndex.svelte";
+    import RadarGlance from "./LocationWidgets/RadarGlance.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -91,6 +92,9 @@
                 {/if}
                 {#if widget === "UVIndex"}
                     <UVIndex locationData={locationData} />
+                {/if}
+                {#if widget === "RadarGlance"}
+                    <RadarGlance locationData={locationData} bind:page={page}/>
                 {/if}
             </div>
         {/each}
