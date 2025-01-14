@@ -35,6 +35,24 @@ function getCurrentAQIForNomAsync(nom, callback, widgets=[]){
             hourlyParams.push("nitrogen_dioxide");
             hourlyParams.push("sulphur_dioxide");
         }
+
+        if (i.includes("AllPollutants")){
+            hourlyParams.push("pm10");
+            hourlyParams.push("pm2_5");
+            hourlyParams.push("ozone");
+            hourlyParams.push("carbon_monoxide");
+            hourlyParams.push("nitrogen_dioxide");
+            hourlyParams.push("sulphur_dioxide");
+            hourlyParams.push("carbon_dioxide");
+            hourlyParams.push("dust");
+            hourlyParams.push("methane");
+            hourlyParams.push("formaldehyde");
+            hourlyParams.push("glyoxal");
+            hourlyParams.push("sea_salt_aerosol");
+            hourlyParams.push("nitrogen_monoxide");
+            hourlyParams.push("peroxyacyl_nitrates")
+
+        }
     }
 
     fetch("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + nom["lat"] + "&longitude=" + nom["lon"] +
@@ -79,6 +97,11 @@ function getAdditionalWeatherDataForNomAsync(nom, callback, widgets=[]){
     for (let i of widgets){
         if (i.includes("CAPEGraph")){
             hourlyParams.push("cape");
+        }
+
+        if (i.includes("UVIndex")){
+            hourlyParams.push("uv_index");
+            hourlyParams.push("uv_index_clear_sky");
         }
     }
 

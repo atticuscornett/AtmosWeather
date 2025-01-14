@@ -641,6 +641,113 @@ body.dark details[open] summary{
         margin-top: 10px;
     }
 
+    .look-container.svelte-101f7iy {
+        display: flex;
+        justify-content: space-around;
+        overflow-x: auto;
+        margin-bottom: 15px;
+    }
+
+    .daily-look.svelte-101f7iy {
+        display: inline-block;
+        margin-right: 20px;
+        border: black 5px solid;
+        border-radius: 7px;
+        flex: 0 0 0;
+        text-align: center;
+        padding: 15px;
+    }
+
+    body.dark .daily-look.svelte-101f7iy {
+        border: white 5px solid;
+    }
+
+    h3.svelte-101f7iy, h4.svelte-101f7iy, h5.svelte-101f7iy {
+        margin-bottom: 0;
+    }
+
+    .text-holder.svelte-cfysft {
+        display: inline-block;
+    }
+
+    .spaced-holder.svelte-cfysft {
+        margin-right: 40px;
+    }
+
+    h4.svelte-cfysft {
+        width: fit-content;
+        margin-bottom: 0;
+    }
+
+    h3.svelte-cfysft {
+        margin-bottom: 0;
+    }
+
+    h2.svelte-cfysft {
+        margin-bottom: 0;
+    }
+
+    .centerContainer.svelte-cfysft {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: 100%;
+        color: white;
+        flex-direction: column;
+        padding-bottom: 15px;
+    }
+
+    img.svelte-cfysft {
+        margin-top: 10px;
+    }
+
+    .centerContainer.svelte-105udsc {
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: 100%;
+        color: white;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    h1.svelte-105udsc {
+        padding-top: 1px;
+    }
+
+    div.svelte-1b8zk1t {
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: 100%;
+        color: white;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    div.svelte-1t969oa {
+        min-height: 350px;
+        border-radius: 7px;
+    }
+
+    button.svelte-1t969oa {
+        width: 100%;
+        background-color: darkslategray;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 20px;
+        font-family: Secular One, sans-serif;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
     .widgetRow.svelte-nsogae {
         display: flex;
         overflow: auto;
