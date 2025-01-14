@@ -98,6 +98,11 @@ function getAdditionalWeatherDataForNomAsync(nom, callback, widgets=[]){
         if (i.includes("CAPEGraph")){
             hourlyParams.push("cape");
         }
+
+        if (i.includes("UVIndex")){
+            hourlyParams.push("uv_index");
+            hourlyParams.push("uv_index_clear_sky");
+        }
     }
 
     let minutely_15 = [];

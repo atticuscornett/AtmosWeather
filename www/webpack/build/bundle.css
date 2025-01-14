@@ -719,6 +719,17 @@ body.dark details[open] summary{
         padding-top: 1px;
     }
 
+    div.svelte-1b8zk1t {
+        background: #555;
+        border-radius: 7px;
+        margin-bottom: 15px;
+        height: 100%;
+        color: white;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
     .widgetRow.svelte-nsogae {
         display: flex;
         overflow: auto;
