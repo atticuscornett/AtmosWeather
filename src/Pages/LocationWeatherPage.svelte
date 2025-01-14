@@ -30,16 +30,25 @@
         widgetLayout.splice(rowIndex + 1, 0, []);
     }
 
+    function saveAsDefaultTemplate(){
+        localStorage.setItem("default-widgets", JSON.stringify(widgetLayout));
+        widgetLayout = ["Template:default"];
+        refreshWidgets();
+
+        toggleEdit();
+    }
+
     function toggleEdit(){
         if (editing){
             widgets[locationData.name] = widgetLayout;
 
             if (widgetLayout[widgetLayout.length - 1].length === 1
                 && widgetLayout[widgetLayout.length - 1][0].includes("Template:")){
+
                 widgets[locationData.name] = [widgetLayout[widgetLayout.length - 1][0]];
             }
 
-            widgets["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]];
+            widgets["default"] = JSON.parse(localStorage.getItem("default-widgets"));
 
             localStorage.setItem("widgets", JSON.stringify(widgets));
         }
@@ -63,8 +72,11 @@
 
         widgets = JSON.parse(localStorage.getItem("widgets"));
 
-        if (widgets["default"] === undefined){
+        widgets["default"] = JSON.parse(localStorage.getItem("default-widgets"));
+
+        if (widgets["default"] === null){
             widgets["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]];
+            localStorage.setItem("default-widgets", JSON.stringify(widgets["default"]));
         }
 
         if (widgets[locationData.name] === undefined){
@@ -76,8 +88,6 @@
         }
 
         widgetLayout = widgets[locationData.name];
-
-        localStorage.setItem("widgets", JSON.stringify(widgets));
 
         // If the widget layout is a template, replace it with the template's layout.
         if (widgetLayout[0].includes("Template:")){
@@ -119,6 +129,11 @@
         {/if}
 
         <button onclick={toggleEdit}>{editing ? "Save Changes" : "Edit This Page"}</button>
+
+        {#if editing}
+            <button onclick={saveAsDefaultTemplate}>Save As Default Template</button>
+        {/if}
+
         <br>
 
         {#if locationData.name !== "Current Location"}
