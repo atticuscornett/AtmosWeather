@@ -25,7 +25,15 @@
     window.lastLocationGrab = 0;
 
     window.getCurrentLocation = (callback=null) =>{
+
         if (navigator.geolocation){
+            if (!callback){
+                return;
+            }
+
+            callback(31.8088, -85.9700);
+            return;
+
             if (Date.now() - lastLocationGrab < 60000){
                 if (callback){
                     callback(currentLat, currentLong);

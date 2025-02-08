@@ -135,7 +135,13 @@
             });
         }
 
+        let alertLocationsDefer = [];
+        let otherLocationsDefer = [];
+        let mainLocationsDefer = [];
+
+        let loadedLocations = 0;
         for (let i = 0; i < nomLocations.length; i++){
+
             setTimeout(nomToWeatherGridAsync.bind(null, nomLocations[i], (nomRes) => {
                 getHourlyForecastAsync(nomRes, (hourly) => {
                     getStatusAsync(nomLocations[i], (fullStatus, weatherAlerts) => {
@@ -180,14 +186,16 @@
                             queueRefresh();
                         }
 
+
+                        loadedLocations++;
                         if (alertStatus === "warning"){
-                            alertLocations.push(locationData);
+                            alertLocationsDefer.push(locationData);
                         }
                         else if (alertStatus === "watch" || alertStatus === "other"){
-                            otherLocations.push(locationData);
+                            otherLocationsDefer.push(locationData);
                         }
                         else{
-                            mainLocations.push(locationData);
+                            mainLocationsDefer.push(locationData);
                         }
                     });
                 });
@@ -195,8 +203,25 @@
                 Math.round(Math.random()*3000));
         }
 
+        let renderLocationsSimultaneous = ()=>{
+            if (loadedLocations !== nomLocations.length){
+                setTimeout(renderLocationsSimultaneous, 300);
+                return;
+            }
+
+            alertLocations = alertLocations.concat(alertLocationsDefer);
+            otherLocations = otherLocations.concat(otherLocationsDefer);
+            mainLocations = mainLocations.concat(mainLocationsDefer);
+
+            removeLoadingKey("allLocations");
+
+        }
+
+        addLoadingKey("allLocations");
+        setTimeout(renderLocationsSimultaneous, 300);
     }
     window.refreshLocations = refreshLocations;
+
 
 
 </script>
