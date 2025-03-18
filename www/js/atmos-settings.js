@@ -228,6 +228,33 @@ setTimeout(function(){
 	localStorage.setItem("atmos-settings", JSON.stringify(fixMissingKeys(atmosSettingsTemp, currentSettings)));
 }, 100);
 
+
+function checkExistentSettings(){
+	for (let i of hazardPriority){
+		let hazardLower = i.toLowerCase();
+		hazardLower = hazardLower.replaceAll(" ", "-");
+
+		let hazardType = "advisory";
+		if (hazardLower.includes("warning")){
+			hazardType = "warnings";
+			hazardLower = hazardLower.replace("-warning", "");
+		}
+		else if (hazardLower.includes("watch")){
+			hazardType = "watches";
+			hazardLower = hazardLower.replace("-watch", "");
+		}
+		else {
+			hazardType = "advisory";
+			hazardLower = hazardLower.replace("-advisory", "");
+		}
+
+		let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+		if (!settings["alert-types"][hazardType][hazardLower]){
+			console.log(i + " is missing from settings");
+		}
+	}
+}
+
 // Initialize Locations
 if (!localStorage.getItem("weather-locations")){
 	localStorage.setItem("weather-locations", "[]");
