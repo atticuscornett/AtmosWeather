@@ -5,6 +5,9 @@
 
     let allSettings = $state(JSON.parse(localStorage.getItem("atmos-settings")));
     let locationNames = $state(JSON.parse(localStorage.getItem("weather-location-names")));
+    let orderedWarnings = $state([]);
+    let orderedWatches = $state([]);
+    let orderedAdvisories = $state([]);
 
     let platform = $state(false);
     let webVersionWarning = $derived(platform === "pwa");
@@ -38,8 +41,62 @@
         window.locationEnabled = allSettings["location"]["weather"];
     }
 
+    function getWarningsInOrder(){
+        let warnings = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (formatKey.includes("warning")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-warning", "");
+                if (allSettings["alert-types"]["warnings"][formatKey]){
+                    warnings.push(formatKey);
+                }
+            }
+        }
+
+        console.log(warnings);
+        return warnings;
+    }
+
+    function getWatchesInOrder(){
+        let watches = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (formatKey.includes("watch")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-watch", "");
+                if (allSettings["alert-types"]["watches"][formatKey]){
+                    watches.push(formatKey);
+                }
+            }
+        }
+
+        return watches;
+    }
+
+    function getAdvisoriesInOrder(){
+        let advisories = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (!formatKey.includes("watch") && !formatKey.includes("warning")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-advisory", "");
+                console.log(formatKey);
+                if (allSettings["alert-types"]["advisory"][formatKey]){
+                    advisories.push(formatKey);
+                }
+            }
+        }
+
+        return advisories;
+    }
+
     function ensureSettingsSet(){
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+        orderedWarnings = getWarningsInOrder();
+        orderedWatches = getWatchesInOrder();
+        orderedAdvisories = getAdvisoriesInOrder();
+
         if (!allSettings){
             setTimeout(ensureSettingsSet, 100);
         }
@@ -200,7 +257,7 @@
         <details>
             <summary>Warnings</summary>
             <div id="settings-warnings-list">
-                {#each Object.entries(allSettings["alert-types"]["warnings"]) as [key, value]}
+                {#each orderedWarnings as key}
                     <label for="setting-warning-{key}">{formatTitle(key, "Warning")}</label>
                     <br>
                     <select bind:value={allSettings["alert-types"]["warnings"][key]}>
@@ -219,7 +276,7 @@
         <details>
             <summary>Watches</summary>
             <div id="settings-watches-list">
-                {#each Object.entries(allSettings["alert-types"]["watches"]) as [key, value]}
+                {#each orderedWatches as key}
                     <label for="setting-watch-{key}">{formatTitle(key, "Watch")}</label>
                     <br>
                     <select bind:value={allSettings["alert-types"]["watches"][key]}>
@@ -238,7 +295,7 @@
         <details>
             <summary>Advisories/Other</summary>
             <div id="settings-advisory-list">
-                {#each Object.entries(allSettings["alert-types"]["advisory"]) as [key, value]}
+                {#each orderedAdvisories as key}
                     <label for="setting-watch-{key}">{formatTitle(key, "Advisory")}</label>
                     <br>
                     <select bind:value={allSettings["alert-types"]["advisory"][key]}>
