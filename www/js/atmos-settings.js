@@ -62,7 +62,12 @@ setTimeout(function(){
 					"civil-danger": "alert",
 					"nuclear-power-plant": "alert",
 					"radiological-hazard": "alert",
-					"hazardous-materials": "alert"
+					"hazardous-materials": "alert",
+					"law-enforcement": "alert",
+					"typhoon": "alert",
+					"blowing-dust": "alert",
+					"earthquake": "alert",
+					"volcano": "alert"
 				},
 				"watches":{
 					"tornado": "soundnotification",
@@ -171,7 +176,12 @@ setTimeout(function(){
 				"civil-danger": "alert",
 				"nuclear-power-plant": "alert",
 				"radiological-hazard": "alert",
-				"hazardous-materials": "alert"
+				"hazardous-materials": "alert",
+				"law-enforcement": "alert",
+				"typhoon": "alert",
+				"blowing-dust": "alert",
+				"earthquake": "alert",
+				"volcano": "alert"
 			},
 			"watches":{
 				"tornado": "soundnotification",
