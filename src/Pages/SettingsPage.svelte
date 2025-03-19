@@ -93,12 +93,15 @@
 
     function ensureSettingsSet(){
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-        orderedWarnings = getWarningsInOrder();
-        orderedWatches = getWatchesInOrder();
-        orderedAdvisories = getAdvisoriesInOrder();
 
         if (!allSettings){
             setTimeout(ensureSettingsSet, 100);
+        }
+        else {
+            orderedWarnings = getWarningsInOrder();
+            orderedWatches = getWatchesInOrder();
+            orderedAdvisories = getAdvisoriesInOrder();
+            setInterval(ensureSettingsSet, 1000*60);
         }
     }
 
