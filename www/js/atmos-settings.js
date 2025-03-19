@@ -67,7 +67,11 @@ setTimeout(function(){
 					"typhoon": "alert",
 					"blowing-dust": "alert",
 					"earthquake": "alert",
-					"volcano": "alert"
+					"volcano": "alert",
+					"ashfall": "alert",
+					"high-surf": "soundnotification",
+					"extreme-heat": "soundnotification",
+					"red-flag": "soundnotification"
 				},
 				"watches":{
 					"tornado": "soundnotification",
@@ -181,7 +185,11 @@ setTimeout(function(){
 				"typhoon": "alert",
 				"blowing-dust": "alert",
 				"earthquake": "alert",
-				"volcano": "alert"
+				"volcano": "alert",
+				"ashfall": "alert",
+				"high-surf": "soundnotification",
+				"extreme-heat": "soundnotification",
+				"red-flag": "soundnotification"
 			},
 			"watches":{
 				"tornado": "soundnotification",

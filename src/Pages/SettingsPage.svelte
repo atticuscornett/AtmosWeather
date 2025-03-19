@@ -54,7 +54,6 @@
             }
         }
 
-        console.log(warnings);
         return warnings;
     }
 
@@ -81,7 +80,6 @@
             if (!formatKey.includes("watch") && !formatKey.includes("warning")){
                 formatKey = formatKey.replaceAll(" ", "-");
                 formatKey = formatKey.replace("-advisory", "");
-                console.log(formatKey);
                 if (allSettings["alert-types"]["advisory"][formatKey]){
                     advisories.push(formatKey);
                 }
