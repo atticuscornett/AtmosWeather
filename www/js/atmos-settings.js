@@ -94,7 +94,12 @@ setTimeout(function(){
 					"hazardous-seas": "soundnotification",
 					"freeze": "soundnotification",
 					"hard-freeze": "soundnotification",
-					"wind-chill": "soundnotification"
+					"wind-chill": "soundnotification",
+					"tsunami": "alert",
+					"hurricane-force-wind": "soundnotification",
+					"typhoon": "soundnotification",
+					"extreme-heat": "soundnotification",
+					"gale": "soundnotification"
 				},
 				"advisory":{
 					"wind": "soundnotification",
@@ -212,7 +217,12 @@ setTimeout(function(){
 				"hazardous-seas": "soundnotification",
 				"freeze": "soundnotification",
 				"hard-freeze": "soundnotification",
-				"wind-chill": "soundnotification"
+				"wind-chill": "soundnotification",
+				"tsunami": "alert",
+				"hurricane-force-wind": "soundnotification",
+				"typhoon": "soundnotification",
+				"extreme-heat": "soundnotification",
+				"gale": "soundnotification"
 			},
 			"advisory":{
 				"wind": "soundnotification",
