@@ -131,7 +131,16 @@ setTimeout(function(){
 					"low-water": "soundnotification",
 					"blowing-dust": "soundnotification",
 					"freezing-spray": "soundnotification",
-					"hydrologic-outlook": "soundnotification"
+					"hydrologic-outlook": "soundnotification",
+					"flash-flood-statement": "soundnotification",
+					"evacuation-immediate": "alert",
+					"civil-emergency-message": "alert",
+					"ashfall": "soundnotification",
+					"flood-statement": "soundnotification",
+					"tropical-cyclone-local-statement": "soundnotification",
+					"avalanche": "soundnotification",
+					"dense-smoke": "soundnotification",
+					"local-area-emergency": "alert"
 				}
 			},
 			"per-location": {}
@@ -254,7 +263,16 @@ setTimeout(function(){
 				"low-water": "soundnotification",
 				"blowing-dust": "soundnotification",
 				"freezing-spray": "soundnotification",
-				"hydrologic-outlook": "soundnotification"
+				"hydrologic-outlook": "soundnotification",
+				"flash-flood-statement": "soundnotification",
+				"evacuation-immediate": "alert",
+				"civil-emergency-message": "alert",
+				"ashfall": "soundnotification",
+				"flood-statement": "soundnotification",
+				"tropical-cyclone-local-statement": "soundnotification",
+				"avalanche": "soundnotification",
+				"dense-smoke": "soundnotification",
+				"local-area-emergency": "alert"
 			}
 		},
 		"per-location": {}
@@ -305,7 +323,10 @@ function formatTitle(title, ending){
 		title[i] = title[i][0].toUpperCase() + title[i].substring(1)
 	}
 	title = title.join(" ");
-	if (title.includes("Outlook") || title.includes("Statement")){
+	if (title.includes("Outlook") || title.includes("Statement") ||
+		title.includes("Immediate") || title.includes("Outage") ||
+		title.includes("Alert") || title.includes("Danger") ||
+		title.includes("Emergency") || title.includes("Forecast") || title.includes("Message")){
 		return title;
 	}
 	else{

@@ -109,7 +109,10 @@
             title[i] = title[i][0].toUpperCase() + title[i].substring(1)
         }
         title = title.join(" ");
-        if (title.includes("Outlook") || title.includes("Statement")){
+        if (title.includes("Outlook") || title.includes("Statement") ||
+            title.includes("Immediate") || title.includes("Outage") ||
+            title.includes("Alert") || title.includes("Danger") ||
+            title.includes("Emergency") || title.includes("Forecast") || title.includes("Message")){
             return title;
         }
         else{
