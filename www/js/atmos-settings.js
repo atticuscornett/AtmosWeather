@@ -99,7 +99,8 @@ setTimeout(function(){
 					"hurricane-force-wind": "soundnotification",
 					"typhoon": "soundnotification",
 					"extreme-heat": "soundnotification",
-					"gale": "soundnotification"
+					"gale": "soundnotification",
+					"heavy-freezing-spray": "soundnotification"
 				},
 				"advisory":{
 					"wind": "soundnotification",
@@ -140,7 +141,16 @@ setTimeout(function(){
 					"tropical-cyclone-local-statement": "soundnotification",
 					"avalanche": "soundnotification",
 					"dense-smoke": "soundnotification",
-					"local-area-emergency": "alert"
+					"local-area-emergency": "alert",
+					"extreme-fire-danger": "soundnotification",
+					"911-telephone-outage": "alert",
+					"coastal-flood-statement": "soundnotification",
+					"lakeshore-flood-statement": "soundnotification",
+					"air-quality-alert": "soundnotification",
+					"short-term-forecast": "soundnotification",
+					"administrative-message": "soundnotification",
+					"child-abduction-emergency": "soundnotification",
+					"blue-alert": "alert"
 				}
 			},
 			"per-location": {}
@@ -231,7 +241,8 @@ setTimeout(function(){
 				"hurricane-force-wind": "soundnotification",
 				"typhoon": "soundnotification",
 				"extreme-heat": "soundnotification",
-				"gale": "soundnotification"
+				"gale": "soundnotification",
+				"heavy-freezing-spray": "soundnotification"
 			},
 			"advisory":{
 				"wind": "soundnotification",
@@ -272,7 +283,16 @@ setTimeout(function(){
 				"tropical-cyclone-local-statement": "soundnotification",
 				"avalanche": "soundnotification",
 				"dense-smoke": "soundnotification",
-				"local-area-emergency": "alert"
+				"local-area-emergency": "alert",
+				"extreme-fire-danger": "soundnotification",
+				"911-telephone-outage": "alert",
+				"coastal-flood-statement": "soundnotification",
+				"lakeshore-flood-statement": "soundnotification",
+				"air-quality-alert": "soundnotification",
+				"short-term-forecast": "soundnotification",
+				"administrative-message": "soundnotification",
+				"child-abduction-emergency": "soundnotification",
+				"blue-alert": "alert"
 			}
 		},
 		"per-location": {}
