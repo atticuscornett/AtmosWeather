@@ -118,7 +118,6 @@
     .widgetContainer {
         flex: 10;
         margin-right: 10px;
-        height: fit-content;
     }
 
     .editButton {

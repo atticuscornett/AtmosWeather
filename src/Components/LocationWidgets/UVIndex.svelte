@@ -46,8 +46,6 @@
     div {
         background: #555;
         border-radius: 7px;
-        margin-bottom: 15px;
-        height: 100%;
         color: white;
         text-align: center;
         padding-top: 15px;

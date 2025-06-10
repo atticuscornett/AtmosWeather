@@ -73,7 +73,7 @@
         background: #555;
         border-radius: 7px;
         margin-bottom: 15px;
-        height: calc(100% - 15px);
         color: white;
+        height: 100%;
     }
 </style>
