@@ -236,7 +236,7 @@ function checkLocation(){
 			if (result != dateString){
 				var severeNotification =  settings["notifications"]["severe-future"];
 				var rainNotification = settings["notifications"]["rain-future"];
-				if (settings["per-location"][locationNames[cycleAt]] != undefined){
+				if (settings["per-location"][locationNames[cycleAt]]){
 					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"] != undefined){
 						severeNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"];
 					}

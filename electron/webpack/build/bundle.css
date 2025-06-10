@@ -507,17 +507,17 @@ body.dark details[open] summary{
         display: none;
     }
 
-    .gray-background.svelte-1vllmdr {
+    .gray-background.svelte-16vkadp {
         background-color: rgba(0,0,0,0.5);
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 100;
+        z-index: 999;
     }
 
-    .popup-container.svelte-1vllmdr {
+    .popup-container.svelte-16vkadp {
         background-color: white;
         width: 80%;
         max-height: 80vh;
@@ -531,11 +531,11 @@ body.dark details[open] summary{
         overflow: auto;
     }
 
-    body.dark .popup-container.svelte-1vllmdr{
+    body.dark .popup-container.svelte-16vkadp{
         background-color: #111111;
     }
 
-    button.svelte-1vllmdr {
+    button.svelte-16vkadp {
         width: 100%;
         cursor: pointer;
         background-color: darkslategray;
@@ -579,28 +579,28 @@ body.dark details[open] summary{
         padding: 0 20px 0 20px;
     }
 
-    .text-holder.svelte-1qguobg {
+    .text-holder.svelte-1lv9yed {
         display: inline-block;
     }
 
-    img.svelte-1qguobg {
+    img.svelte-1lv9yed {
         display: inline-block;
         margin-right: 10px;
     }
 
-    h4.svelte-1qguobg {
+    h4.svelte-1lv9yed {
         width: fit-content;
     }
 
-    .centerContainer.svelte-1qguobg {
+    .centerContainer.svelte-1lv9yed {
         display: flex;
         justify-content: center;
         align-items: center;
         background: #555;
         border-radius: 7px;
         margin-bottom: 15px;
-        height: calc(100% - 15px);
         color: white;
+        height: 100%;
     }
 
     .text-holder.svelte-cfysft {
@@ -719,11 +719,9 @@ body.dark details[open] summary{
         padding-top: 1px;
     }
 
-    div.svelte-1b8zk1t {
+    div.svelte-13sphys {
         background: #555;
         border-radius: 7px;
-        margin-bottom: 15px;
-        height: 100%;
         color: white;
         text-align: center;
         padding-top: 15px;
@@ -748,19 +746,18 @@ body.dark details[open] summary{
         margin-bottom: 7px;
     }
 
-    .widgetRow.svelte-nsogae {
+    .widgetRow.svelte-18wecqf {
         display: flex;
         overflow: auto;
         margin-bottom: 10px;
     }
 
-    .widgetContainer.svelte-nsogae {
+    .widgetContainer.svelte-18wecqf {
         flex: 10;
         margin-right: 10px;
-        height: fit-content;
     }
 
-    .editButton.svelte-nsogae {
+    .editButton.svelte-18wecqf {
         margin-bottom: 10px;
         flex: 0.5;
         min-width: auto;

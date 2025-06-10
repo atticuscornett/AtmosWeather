@@ -94,7 +94,13 @@ setTimeout(function(){
 					"hazardous-seas": "soundnotification",
 					"freeze": "soundnotification",
 					"hard-freeze": "soundnotification",
-					"wind-chill": "soundnotification"
+					"wind-chill": "soundnotification",
+					"tsunami": "alert",
+					"hurricane-force-wind": "soundnotification",
+					"typhoon": "soundnotification",
+					"extreme-heat": "soundnotification",
+					"gale": "soundnotification",
+					"heavy-freezing-spray": "soundnotification"
 				},
 				"advisory":{
 					"wind": "soundnotification",
@@ -126,7 +132,25 @@ setTimeout(function(){
 					"low-water": "soundnotification",
 					"blowing-dust": "soundnotification",
 					"freezing-spray": "soundnotification",
-					"hydrologic-outlook": "soundnotification"
+					"hydrologic-outlook": "soundnotification",
+					"flash-flood-statement": "soundnotification",
+					"evacuation-immediate": "alert",
+					"civil-emergency-message": "alert",
+					"ashfall": "soundnotification",
+					"flood-statement": "soundnotification",
+					"tropical-cyclone-local-statement": "soundnotification",
+					"avalanche": "soundnotification",
+					"dense-smoke": "soundnotification",
+					"local-area-emergency": "alert",
+					"extreme-fire-danger": "soundnotification",
+					"911-telephone-outage": "alert",
+					"coastal-flood-statement": "soundnotification",
+					"lakeshore-flood-statement": "soundnotification",
+					"air-quality-alert": "soundnotification",
+					"short-term-forecast": "soundnotification",
+					"administrative-message": "soundnotification",
+					"child-abduction-emergency": "soundnotification",
+					"blue-alert": "alert"
 				}
 			},
 			"per-location": {}
@@ -212,7 +236,13 @@ setTimeout(function(){
 				"hazardous-seas": "soundnotification",
 				"freeze": "soundnotification",
 				"hard-freeze": "soundnotification",
-				"wind-chill": "soundnotification"
+				"wind-chill": "soundnotification",
+				"tsunami": "alert",
+				"hurricane-force-wind": "soundnotification",
+				"typhoon": "soundnotification",
+				"extreme-heat": "soundnotification",
+				"gale": "soundnotification",
+				"heavy-freezing-spray": "soundnotification"
 			},
 			"advisory":{
 				"wind": "soundnotification",
@@ -244,7 +274,25 @@ setTimeout(function(){
 				"low-water": "soundnotification",
 				"blowing-dust": "soundnotification",
 				"freezing-spray": "soundnotification",
-				"hydrologic-outlook": "soundnotification"
+				"hydrologic-outlook": "soundnotification",
+				"flash-flood-statement": "soundnotification",
+				"evacuation-immediate": "alert",
+				"civil-emergency-message": "alert",
+				"ashfall": "soundnotification",
+				"flood-statement": "soundnotification",
+				"tropical-cyclone-local-statement": "soundnotification",
+				"avalanche": "soundnotification",
+				"dense-smoke": "soundnotification",
+				"local-area-emergency": "alert",
+				"extreme-fire-danger": "soundnotification",
+				"911-telephone-outage": "alert",
+				"coastal-flood-statement": "soundnotification",
+				"lakeshore-flood-statement": "soundnotification",
+				"air-quality-alert": "soundnotification",
+				"short-term-forecast": "soundnotification",
+				"administrative-message": "soundnotification",
+				"child-abduction-emergency": "soundnotification",
+				"blue-alert": "alert"
 			}
 		},
 		"per-location": {}
@@ -295,7 +343,10 @@ function formatTitle(title, ending){
 		title[i] = title[i][0].toUpperCase() + title[i].substring(1)
 	}
 	title = title.join(" ");
-	if (title.includes("Outlook") || title.includes("Statement")){
+	if (title.includes("Outlook") || title.includes("Statement") ||
+		title.includes("Immediate") || title.includes("Outage") ||
+		title.includes("Alert") || title.includes("Danger") ||
+		title.includes("Emergency") || title.includes("Forecast") || title.includes("Message")){
 		return title;
 	}
 	else{

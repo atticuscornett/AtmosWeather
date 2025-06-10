@@ -12,8 +12,8 @@
   "author": "Atticus Cornett <64325242+atticuscornett@users.noreply.github.com>",
   "license": "GPL-3.0 License",
   "devDependencies": {
-    "electron": "^29.1.0",
-    "electron-builder": "^24.13.3"
+    "electron": "^36.4.0",
+    "electron-builder": "^26.0.12"
   },
   "build": {
     "appId": "io.atticusc.atmosweather",
