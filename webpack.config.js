@@ -2,7 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 //const mode = process.env.NODE_ENV || 'development';
-const mode = 'production';
+const mode = 'development';
 const prod = mode === 'production';
 
 module.exports = {

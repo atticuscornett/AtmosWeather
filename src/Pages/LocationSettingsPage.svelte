@@ -1,5 +1,6 @@
 <script>
     import TabSlot from "../Layout/TabSlot.svelte";
+    import {onMount} from "svelte";
 
     let { page = $bindable(), locationData } = $props();
 
@@ -9,7 +10,8 @@
     let platform = $state(false);
     let webVersionWarning = $derived(platform === "pwa");
     let isDesktop = $derived(platform && platform.includes("desktop"));
-    let locationSettings = $state(generateSettings());
+    let locationSettings = $state({});
+    let settingsLoaded = $state(false);
 
     // Generates the settings object for the location
     function generateSettings(){
@@ -42,6 +44,7 @@
 
     // Refreshes the settings object for the location
     function refreshSettings() {
+        ensureSettingsSet();
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         allSettings["radar"]["color-scheme"] = String(allSettings["radar"]["color-scheme"]);
 
@@ -49,6 +52,7 @@
         locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
 
         locationSettings = generateSettings();
+        settingsLoaded = true;
     }
 
     // Plays the default alarm sound for the location
@@ -200,11 +204,10 @@
             return title + " " + ending;
         }
     }
-
-    ensureSettingsSet();
 </script>
 
 <TabSlot name="settings-{locationData.name}" bind:page={page} onOpen={refreshSettings}>
+    {#if settingsLoaded}
     <h1>Alert Settings for {locationData.name}</h1>
     {#if webVersionWarning}
         <h2>Some settings/features are not functional on the web version, including weather alerts.</h2>
@@ -301,5 +304,6 @@
             </div>
         </details>
     </div>
+    {/if}
     {/if}
 </TabSlot>
