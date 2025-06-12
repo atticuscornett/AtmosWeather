@@ -22709,23 +22709,23 @@ function removeLocation(_, locationData, page) {
 	page("locations");
 }
 
-var root_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="largerMargin svelte-1p1zga">Add Row</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[111, 16]]);
-var root_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<!> <!>`, 1), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], []);
-var root_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="largerMargin svelte-1p1zga">Add Row</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[116, 12]]);
+var root_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="largerMargin svelte-1p1zga">Add Row</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[115, 16]]);
+var root_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<!> <!>`, 1), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], []);
+var root_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="largerMargin svelte-1p1zga">Add Row</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[120, 12]]);
 
 var on_click = (__1, addingTemplate) => {
 	svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(addingTemplate, true);
 };
 
-var root_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="svelte-1p1zga">Use a Template</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[120, 12]]);
-var root_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="svelte-1p1zga">Save As Default Template</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[134, 12]]);
-var root_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="svelte-1p1zga">Remove This Location</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[140, 12]]);
-var root_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<!> <!> <!> <!> <!> <button class="svelte-1p1zga"> </button> <!> <br/> <!>`, 1), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[131, 8], [137, 8]]);
-var root_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<h1> </h1> <br/> <!>`, 1), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[102, 4], [103, 4]]);
+var root_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="svelte-1p1zga">Use a Template</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[124, 12]]);
+var root_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="svelte-1p1zga">Save As Default Template</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[138, 12]]);
+var root_10 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<button class="svelte-1p1zga">Remove This Location</button>`), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[144, 12]]);
+var root_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<!> <!> <!> <!> <!> <button class="svelte-1p1zga"> </button> <!> <br/> <!>`, 1), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[135, 8], [141, 8]]);
+var root_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<h1> </h1> <br/> <!>`, 1), LocationWeatherPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[106, 4], [107, 4]]);
 
 const $$css = {
 	hash: 'svelte-1p1zga',
-	code: '\r\n    button.svelte-1p1zga {\r\n        width: 100%;\r\n        cursor: pointer;\r\n        background-color: darkslategray;\r\n        color: white;\r\n        border: none;\r\n        border-radius: 7px;\r\n        font-size: 20px;\r\n        font-family: Secular One, sans-serif;\r\n        margin-top: 7px;\r\n        margin-bottom: 7px;\r\n    }\r\n\r\n    .largerMargin.svelte-1p1zga {\r\n        margin-bottom: 30px;\r\n    }\r\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTG9jYXRpb25XZWF0aGVyUGFnZS5zdmVsdGUiLCJzb3VyY2VzIjpbIkxvY2F0aW9uV2VhdGhlclBhZ2Uuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgICBpbXBvcnQgVGFiU2xvdCBmcm9tIFwiLi4vTGF5b3V0L1RhYlNsb3Quc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgQWxlcnRCYXIgZnJvbSBcIi4uL0NvbXBvbmVudHMvTG9jYXRpb25XaWRnZXRzL0FsZXJ0QmFyLnN2ZWx0ZVwiO1xyXG4gICAgaW1wb3J0IFdpZGdldFJvdyBmcm9tIFwiLi4vQ29tcG9uZW50cy9XaWRnZXRSb3cuc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgVGVtcGxhdGVQaWNrZXIgZnJvbSBcIi4uL0NvbXBvbmVudHMvVGVtcGxhdGVQaWNrZXIuc3ZlbHRlXCI7XHJcblxyXG4gICAgbGV0IHsgbG9jYXRpb25EYXRhLCBwYWdlPSRiaW5kYWJsZSgpLCBhbGVydFNlbGVjdGlvbiA9ICRiaW5kYWJsZSgpIH0gPSAkcHJvcHMoKTtcclxuXHJcbiAgICBsZXQgZWRpdGluZyA9ICRzdGF0ZShmYWxzZSk7XHJcbiAgICBsZXQgd2lkZ2V0cyA9ICRzdGF0ZSgpO1xyXG4gICAgbGV0IGFkZGluZ1RlbXBsYXRlID0gJHN0YXRlKGZhbHNlKTtcclxuXHJcbiAgICBmdW5jdGlvbiByZW1vdmVMb2NhdGlvbigpe1xyXG4gICAgICAgIGxldCBsb2NhdGlvbnMgPSBKU09OLnBhcnNlKGxvY2FsU3RvcmFnZS5nZXRJdGVtKFwid2VhdGhlci1sb2NhdGlvbnNcIikpO1xyXG4gICAgICAgIGxldCBsb2NhdGlvbk5hbWVzID0gSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShcIndlYXRoZXItbG9jYXRpb24tbmFtZXNcIikpO1xyXG4gICAgICAgIGxldCBuYW1lID0gbG9jYXRpb25EYXRhLm5hbWU7XHJcbiAgICAgICAgLy8gRGlzYWJsZSB0aGUgcmVtb3ZlIGxvY2F0aW9uIGJ1dHRvbiB0byBwcmV2ZW50IGFjY2lkZW50YWwgZG91YmxlIHRhcHMgY2F1c2luZyBtdWx0aXBsZSBsb2NhdGlvbnMgdG8gYmUgcmVtb3ZlZC5cclxuICAgICAgICBsZXQgaW5kZXggPSBsb2NhdGlvbk5hbWVzLmluZGV4T2YobmFtZSk7XHJcbiAgICAgICAgaWYgKGluZGV4ID09PSAtMSl7XHJcbiAgICAgICAgICAgIHJldHVybjtcclxuICAgICAgICB9XHJcbiAgICAgICAgbG9jYXRpb25OYW1lcy5zcGxpY2UoaW5kZXgsIDEpO1xyXG4gICAgICAgIGxvY2F0aW9ucy5zcGxpY2UoaW5kZXgsIDEpO1xyXG4gICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwid2VhdGhlci1sb2NhdGlvbnNcIiwgSlNPTi5zdHJpbmdpZnkobG9jYXRpb25zKSk7XHJcbiAgICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJ3ZWF0aGVyLWxvY2F0aW9uLW5hbWVzXCIsIEpTT04uc3RyaW5naWZ5KGxvY2F0aW9uTmFtZXMpKTtcclxuICAgICAgICBwYWdlID0gXCJsb2NhdGlvbnNcIjtcclxuICAgIH1cclxuXHJcbiAgICBmdW5jdGlvbiBhZGRSb3cocm93SW5kZXgpe1xyXG4gICAgICAgIHdpZGdldExheW91dC5zcGxpY2Uocm93SW5kZXggKyAxLCAwLCBbXSk7XHJcbiAgICB9XHJcblxyXG4gICAgZnVuY3Rpb24gc2F2ZUFzRGVmYXVsdFRlbXBsYXRlKCl7XHJcbiAgICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJkZWZhdWx0LXdpZGdldHNcIiwgSlNPTi5zdHJpbmdpZnkod2lkZ2V0TGF5b3V0KSk7XHJcbiAgICAgICAgd2lkZ2V0TGF5b3V0ID0gW1wiVGVtcGxhdGU6ZGVmYXVsdFwiXTtcclxuICAgICAgICByZWZyZXNoV2lkZ2V0cygpO1xyXG5cclxuICAgICAgICB0b2dnbGVFZGl0KCk7XHJcbiAgICB9XHJcblxyXG4gICAgZnVuY3Rpb24gdG9nZ2xlRWRpdCgpe1xyXG4gICAgICAgIGlmIChlZGl0aW5nKXtcclxuICAgICAgICAgICAgd2lkZ2V0c1tsb2NhdGlvbkRhdGEubmFtZV0gPSB3aWRnZXRMYXlvdXQ7XHJcblxyXG4gICAgICAgICAgICBpZiAod2lkZ2V0TGF5b3V0W3dpZGdldExheW91dC5sZW5ndGggLSAxXS5sZW5ndGggPT09IDFcclxuICAgICAgICAgICAgICAgICYmIHdpZGdldExheW91dFt3aWRnZXRMYXlvdXQubGVuZ3RoIC0gMV1bMF0uaW5jbHVkZXMoXCJUZW1wbGF0ZTpcIikpe1xyXG5cclxuICAgICAgICAgICAgICAgIHdpZGdldHNbbG9jYXRpb25EYXRhLm5hbWVdID0gW3dpZGdldExheW91dFt3aWRnZXRMYXlvdXQubGVuZ3RoIC0gMV1bMF1dO1xyXG4gICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICB3aWRnZXRzW1wiZGVmYXVsdFwiXSA9IEpTT04ucGFyc2UobG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJkZWZhdWx0LXdpZGdldHNcIikpO1xyXG5cclxuICAgICAgICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJ3aWRnZXRzXCIsIEpTT04uc3RyaW5naWZ5KHdpZGdldHMpKTtcclxuICAgICAgICB9XHJcbiAgICAgICAgZWxzZSB7XHJcbiAgICAgICAgICAgIC8vIERpc2FibGUgdGVtcGxhdGUgdXBvbiBlZGl0aW5nXHJcbiAgICAgICAgICAgIGlmICh3aWRnZXRMYXlvdXRbd2lkZ2V0TGF5b3V0Lmxlbmd0aCAtIDFdLmxlbmd0aCA9PT0gMVxyXG4gICAgICAgICAgICAgICAgJiYgd2lkZ2V0TGF5b3V0W3dpZGdldExheW91dC5sZW5ndGggLSAxXVswXS5pbmNsdWRlcyhcIlRlbXBsYXRlOlwiKSl7XHJcbiAgICAgICAgICAgICAgICB3aWRnZXRMYXlvdXQucG9wKCk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIGVkaXRpbmcgPSAhZWRpdGluZztcclxuICAgIH1cclxuXHJcbiAgICBsZXQgd2lkZ2V0TGF5b3V0ID0gJHN0YXRlKFtbXCJMb2NhdGlvbkF0QUdsYW5jZVwiXSwgW1wiQWlyUXVhbGl0eUluZGV4XCJdLCBbXCJHcmFwaFN3aXRjaGVyXCJdLCBbXCJMb25nTldTRm9yZWNhc3RcIl1dKTtcclxuXHJcbiAgICBmdW5jdGlvbiByZWZyZXNoV2lkZ2V0cygpe1xyXG4gICAgICAgIGlmIChsb2NhbFN0b3JhZ2UuZ2V0SXRlbShcIndpZGdldHNcIikgPT09IG51bGwpe1xyXG4gICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShcIndpZGdldHNcIiwgXCJ7fVwiKTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIHdpZGdldHMgPSBKU09OLnBhcnNlKGxvY2FsU3RvcmFnZS5nZXRJdGVtKFwid2lkZ2V0c1wiKSk7XHJcblxyXG4gICAgICAgIHdpZGdldHNbXCJkZWZhdWx0XCJdID0gSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShcImRlZmF1bHQtd2lkZ2V0c1wiKSk7XHJcblxyXG4gICAgICAgIGlmICh3aWRnZXRzW1wiZGVmYXVsdFwiXSA9PT0gbnVsbCl7XHJcbiAgICAgICAgICAgIHdpZGdldHNbXCJkZWZhdWx0XCJdID0gW1tcIkxvY2F0aW9uQXRBR2xhbmNlXCJdLCBbXCJBaXJRdWFsaXR5SW5kZXhcIl0sIFtcIkdyYXBoU3dpdGNoZXJcIl0sIFtcIkxvbmdOV1NGb3JlY2FzdFwiXV07XHJcbiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwiZGVmYXVsdC13aWRnZXRzXCIsIEpTT04uc3RyaW5naWZ5KHdpZGdldHNbXCJkZWZhdWx0XCJdKSk7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBpZiAod2lkZ2V0c1tsb2NhdGlvbkRhdGEubmFtZV0gPT09IHVuZGVmaW5lZCl7XHJcbiAgICAgICAgICAgIHdpZGdldHNbbG9jYXRpb25EYXRhLm5hbWVdID0gW1wiVGVtcGxhdGU6ZGVmYXVsdFwiXTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIGxldCB0ZW1wbGF0ZXMgPSB7XHJcbiAgICAgICAgICAgIGRlZmF1bHQ6IHdpZGdldHNbXCJkZWZhdWx0XCJdXHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICB3aWRnZXRMYXlvdXQgPSB3aWRnZXRzW2xvY2F0aW9uRGF0YS5uYW1lXTtcclxuXHJcbiAgICAgICAgLy8gSWYgdGhlIHdpZGdldCBsYXlvdXQgaXMgYSB0ZW1wbGF0ZSwgcmVwbGFjZSBpdCB3aXRoIHRoZSB0ZW1wbGF0ZSdzIGxheW91dC5cclxuICAgICAgICBpZiAod2lkZ2V0TGF5b3V0WzBdLmluY2x1ZGVzKFwiVGVtcGxhdGU6XCIpKXtcclxuICAgICAgICAgICAgbGV0IHRlbXBsYXRlQ29kZSA9IHdpZGdldExheW91dFswXTtcclxuICAgICAgICAgICAgd2lkZ2V0TGF5b3V0ID0gdGVtcGxhdGVzW3RlbXBsYXRlQ29kZS5yZXBsYWNlKFwiVGVtcGxhdGU6XCIsIFwiXCIpXTtcclxuICAgICAgICAgICAgd2lkZ2V0TGF5b3V0LnB1c2goW3RlbXBsYXRlQ29kZV0pO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuXHJcbjwvc2NyaXB0PlxyXG48VGFiU2xvdCBuYW1lPVwibG9jYXRpb24te2xvY2F0aW9uRGF0YS5uYW1lfVwiIGJpbmQ6cGFnZT17cGFnZX0gb25PcGVuPXtyZWZyZXNoV2lkZ2V0c30+XHJcbiAgICA8aDE+e2xvY2F0aW9uRGF0YS5uYW1lfTwvaDE+XHJcbiAgICA8YnI+XHJcblxyXG4gICAgPCEtLSBXYWl0IGZvciB3ZWF0aGVyIGRhdGEgLS0+XHJcbiAgICB7I2lmIGxvY2F0aW9uRGF0YS5ob3VybHlbMF19XHJcbiAgICAgICAgPEFsZXJ0QmFyIGxvY2F0aW9uRGF0YT17bG9jYXRpb25EYXRhfSBiaW5kOnBhZ2U9e3BhZ2V9IGJpbmQ6YWxlcnRTZWxlY3Rpb249e2FsZXJ0U2VsZWN0aW9ufS8+XHJcbiAgICAgICAgeyNlYWNoIHdpZGdldExheW91dCBhcyB3aWRnZXRSb3csIGl9XHJcbiAgICAgICAgICAgIDxXaWRnZXRSb3cgYmluZDpsb2NhdGlvbkRhdGE9e2xvY2F0aW9uRGF0YX0gd2lkZ2V0cz17d2lkZ2V0Um93fSBlZGl0aW5nPXtlZGl0aW5nfSBiaW5kOnBhZ2U9e3BhZ2V9IHJvd0luZGV4PXtpfSBiaW5kOndpZGdldExheW91dD17d2lkZ2V0TGF5b3V0fS8+XHJcbiAgICAgICAgICAgIHsjaWYgZWRpdGluZyAmJiAod2lkZ2V0Um93Lmxlbmd0aCAhPT0gMSB8fCAhd2lkZ2V0Um93WzBdLmluY2x1ZGVzKFwiVGVtcGxhdGU6XCIpKX1cclxuICAgICAgICAgICAgICAgIDxidXR0b24gb25jbGljaz17YWRkUm93LmJpbmQobnVsbCwgaSl9IGNsYXNzPVwibGFyZ2VyTWFyZ2luXCI+QWRkIFJvdzwvYnV0dG9uPlxyXG4gICAgICAgICAgICB7L2lmfVxyXG4gICAgICAgIHsvZWFjaH1cclxuXHJcbiAgICAgICAgeyNpZiB3aWRnZXRMYXlvdXQubGVuZ3RoID09PSAwICYmIGVkaXRpbmd9XHJcbiAgICAgICAgICAgIDxidXR0b24gb25jbGljaz17YWRkUm93LmJpbmQobnVsbCwgLTEpfSBjbGFzcz1cImxhcmdlck1hcmdpblwiPkFkZCBSb3c8L2J1dHRvbj5cclxuICAgICAgICB7L2lmfVxyXG5cclxuICAgICAgICB7I2lmIGVkaXRpbmd9XHJcbiAgICAgICAgICAgIDxidXR0b24gb25jbGljaz17KCk9PnthZGRpbmdUZW1wbGF0ZT10cnVlO319PlVzZSBhIFRlbXBsYXRlPC9idXR0b24+XHJcbiAgICAgICAgey9pZn1cclxuXHJcbiAgICAgICAgeyNpZiBhZGRpbmdUZW1wbGF0ZX1cclxuICAgICAgICAgICAgPFRlbXBsYXRlUGlja2VyIGJpbmQ6YWRkaW5nVGVtcGxhdGU9e2FkZGluZ1RlbXBsYXRlfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgYmluZDp3aWRnZXRzPXt3aWRnZXRzfSBiaW5kOmxvY2F0aW9uRGF0YT17bG9jYXRpb25EYXRhfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgYmluZDp3aWRnZXRMYXlvdXQ9e3dpZGdldExheW91dH1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJpbmQ6dG9nZ2xlRWRpdD17dG9nZ2xlRWRpdH1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlZnJlc2hXaWRnZXRzPXtyZWZyZXNoV2lkZ2V0c30vPlxyXG4gICAgICAgIHsvaWZ9XHJcblxyXG4gICAgICAgIDxidXR0b24gb25jbGljaz17dG9nZ2xlRWRpdH0+e2VkaXRpbmcgPyBcIlNhdmUgQ2hhbmdlc1wiIDogXCJFZGl0IFRoaXMgUGFnZVwifTwvYnV0dG9uPlxyXG5cclxuICAgICAgICB7I2lmIGVkaXRpbmd9XHJcbiAgICAgICAgICAgIDxidXR0b24gb25jbGljaz17c2F2ZUFzRGVmYXVsdFRlbXBsYXRlfT5TYXZlIEFzIERlZmF1bHQgVGVtcGxhdGU8L2J1dHRvbj5cclxuICAgICAgICB7L2lmfVxyXG5cclxuICAgICAgICA8YnI+XHJcblxyXG4gICAgICAgIHsjaWYgbG9jYXRpb25EYXRhLm5hbWUgIT09IFwiQ3VycmVudCBMb2NhdGlvblwifVxyXG4gICAgICAgICAgICA8YnV0dG9uIG9uY2xpY2s9e3JlbW92ZUxvY2F0aW9ufT5SZW1vdmUgVGhpcyBMb2NhdGlvbjwvYnV0dG9uPlxyXG4gICAgICAgIHsvaWZ9XHJcbiAgICB7L2lmfVxyXG48L1RhYlNsb3Q+XHJcblxyXG48c3R5bGU+XHJcbiAgICBidXR0b24ge1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiBkYXJrc2xhdGVncmF5O1xyXG4gICAgICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgICAgICBib3JkZXI6IG5vbmU7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogN3B4O1xyXG4gICAgICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICAgICAgICBmb250LWZhbWlseTogU2VjdWxhciBPbmUsIHNhbnMtc2VyaWY7XHJcbiAgICAgICAgbWFyZ2luLXRvcDogN3B4O1xyXG4gICAgICAgIG1hcmdpbi1ib3R0b206IDdweDtcclxuICAgIH1cclxuXHJcbiAgICAubGFyZ2VyTWFyZ2luIHtcclxuICAgICAgICBtYXJnaW4tYm90dG9tOiAzMHB4O1xyXG4gICAgfVxyXG48L3N0eWxlPiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFnSk87QUFDUCxJQUFJLG9CQUFNLENBQUM7QUFDWCxRQUFRLFdBQVc7QUFDbkIsUUFBUSxlQUFlO0FBQ3ZCLFFBQVEsK0JBQStCO0FBQ3ZDLFFBQVEsWUFBWTtBQUNwQixRQUFRLFlBQVk7QUFDcEIsUUFBUSxrQkFBa0I7QUFDMUIsUUFBUSxlQUFlO0FBQ3ZCLFFBQVEsb0NBQW9DO0FBQzVDLFFBQVEsZUFBZTtBQUN2QixRQUFRLGtCQUFrQjtBQUMxQixLQUFLO0FBQ0w7QUFDQSxJQUFJLDJCQUFhLENBQUM7QUFDbEIsUUFBUSxtQkFBbUI7QUFDM0IsS0FBSzsifQ== */'
+	code: '\r\n    button.svelte-1p1zga {\r\n        width: 100%;\r\n        cursor: pointer;\r\n        background-color: darkslategray;\r\n        color: white;\r\n        border: none;\r\n        border-radius: 7px;\r\n        font-size: 20px;\r\n        font-family: Secular One, sans-serif;\r\n        margin-top: 7px;\r\n        margin-bottom: 7px;\r\n    }\r\n\r\n    .largerMargin.svelte-1p1zga {\r\n        margin-bottom: 30px;\r\n    }\r\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTG9jYXRpb25XZWF0aGVyUGFnZS5zdmVsdGUiLCJzb3VyY2VzIjpbIkxvY2F0aW9uV2VhdGhlclBhZ2Uuc3ZlbHRlIl0sInNvdXJjZXNDb250ZW50IjpbIjxzY3JpcHQ+XHJcbiAgICBpbXBvcnQgVGFiU2xvdCBmcm9tIFwiLi4vTGF5b3V0L1RhYlNsb3Quc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgQWxlcnRCYXIgZnJvbSBcIi4uL0NvbXBvbmVudHMvTG9jYXRpb25XaWRnZXRzL0FsZXJ0QmFyLnN2ZWx0ZVwiO1xyXG4gICAgaW1wb3J0IFdpZGdldFJvdyBmcm9tIFwiLi4vQ29tcG9uZW50cy9XaWRnZXRSb3cuc3ZlbHRlXCI7XHJcbiAgICBpbXBvcnQgVGVtcGxhdGVQaWNrZXIgZnJvbSBcIi4uL0NvbXBvbmVudHMvVGVtcGxhdGVQaWNrZXIuc3ZlbHRlXCI7XHJcblxyXG4gICAgbGV0IHsgbG9jYXRpb25EYXRhLCBwYWdlPSRiaW5kYWJsZSgpLCBhbGVydFNlbGVjdGlvbiA9ICRiaW5kYWJsZSgpIH0gPSAkcHJvcHMoKTtcclxuXHJcbiAgICBsZXQgZWRpdGluZyA9ICRzdGF0ZShmYWxzZSk7XHJcbiAgICBsZXQgd2lkZ2V0cyA9ICRzdGF0ZSgpO1xyXG4gICAgbGV0IGFkZGluZ1RlbXBsYXRlID0gJHN0YXRlKGZhbHNlKTtcclxuICAgIGxldCByZWFkeVRvTG9hZCA9ICRzdGF0ZShmYWxzZSk7XHJcblxyXG4gICAgZnVuY3Rpb24gcmVtb3ZlTG9jYXRpb24oKXtcclxuICAgICAgICBsZXQgbG9jYXRpb25zID0gSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShcIndlYXRoZXItbG9jYXRpb25zXCIpKTtcclxuICAgICAgICBsZXQgbG9jYXRpb25OYW1lcyA9IEpTT04ucGFyc2UobG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJ3ZWF0aGVyLWxvY2F0aW9uLW5hbWVzXCIpKTtcclxuICAgICAgICBsZXQgbmFtZSA9IGxvY2F0aW9uRGF0YS5uYW1lO1xyXG4gICAgICAgIC8vIERpc2FibGUgdGhlIHJlbW92ZSBsb2NhdGlvbiBidXR0b24gdG8gcHJldmVudCBhY2NpZGVudGFsIGRvdWJsZSB0YXBzIGNhdXNpbmcgbXVsdGlwbGUgbG9jYXRpb25zIHRvIGJlIHJlbW92ZWQuXHJcbiAgICAgICAgbGV0IGluZGV4ID0gbG9jYXRpb25OYW1lcy5pbmRleE9mKG5hbWUpO1xyXG4gICAgICAgIGlmIChpbmRleCA9PT0gLTEpe1xyXG4gICAgICAgICAgICByZXR1cm47XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGxvY2F0aW9uTmFtZXMuc3BsaWNlKGluZGV4LCAxKTtcclxuICAgICAgICBsb2NhdGlvbnMuc3BsaWNlKGluZGV4LCAxKTtcclxuICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShcIndlYXRoZXItbG9jYXRpb25zXCIsIEpTT04uc3RyaW5naWZ5KGxvY2F0aW9ucykpO1xyXG4gICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwid2VhdGhlci1sb2NhdGlvbi1uYW1lc1wiLCBKU09OLnN0cmluZ2lmeShsb2NhdGlvbk5hbWVzKSk7XHJcbiAgICAgICAgcGFnZSA9IFwibG9jYXRpb25zXCI7XHJcbiAgICB9XHJcblxyXG4gICAgZnVuY3Rpb24gYWRkUm93KHJvd0luZGV4KXtcclxuICAgICAgICB3aWRnZXRMYXlvdXQuc3BsaWNlKHJvd0luZGV4ICsgMSwgMCwgW10pO1xyXG4gICAgfVxyXG5cclxuICAgIGZ1bmN0aW9uIHNhdmVBc0RlZmF1bHRUZW1wbGF0ZSgpe1xyXG4gICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwiZGVmYXVsdC13aWRnZXRzXCIsIEpTT04uc3RyaW5naWZ5KHdpZGdldExheW91dCkpO1xyXG4gICAgICAgIHdpZGdldExheW91dCA9IFtcIlRlbXBsYXRlOmRlZmF1bHRcIl07XHJcbiAgICAgICAgcmVmcmVzaFdpZGdldHMoKTtcclxuXHJcbiAgICAgICAgdG9nZ2xlRWRpdCgpO1xyXG4gICAgfVxyXG5cclxuICAgIGZ1bmN0aW9uIHRvZ2dsZUVkaXQoKXtcclxuICAgICAgICBpZiAoZWRpdGluZyl7XHJcbiAgICAgICAgICAgIHdpZGdldHNbbG9jYXRpb25EYXRhLm5hbWVdID0gd2lkZ2V0TGF5b3V0O1xyXG5cclxuICAgICAgICAgICAgaWYgKHdpZGdldExheW91dFt3aWRnZXRMYXlvdXQubGVuZ3RoIC0gMV0ubGVuZ3RoID09PSAxXHJcbiAgICAgICAgICAgICAgICAmJiB3aWRnZXRMYXlvdXRbd2lkZ2V0TGF5b3V0Lmxlbmd0aCAtIDFdWzBdLmluY2x1ZGVzKFwiVGVtcGxhdGU6XCIpKXtcclxuXHJcbiAgICAgICAgICAgICAgICB3aWRnZXRzW2xvY2F0aW9uRGF0YS5uYW1lXSA9IFt3aWRnZXRMYXlvdXRbd2lkZ2V0TGF5b3V0Lmxlbmd0aCAtIDFdWzBdXTtcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgd2lkZ2V0c1tcImRlZmF1bHRcIl0gPSBKU09OLnBhcnNlKGxvY2FsU3RvcmFnZS5nZXRJdGVtKFwiZGVmYXVsdC13aWRnZXRzXCIpKTtcclxuXHJcbiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwid2lkZ2V0c1wiLCBKU09OLnN0cmluZ2lmeSh3aWRnZXRzKSk7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGVsc2Uge1xyXG4gICAgICAgICAgICAvLyBEaXNhYmxlIHRlbXBsYXRlIHVwb24gZWRpdGluZ1xyXG4gICAgICAgICAgICBpZiAod2lkZ2V0TGF5b3V0W3dpZGdldExheW91dC5sZW5ndGggLSAxXS5sZW5ndGggPT09IDFcclxuICAgICAgICAgICAgICAgICYmIHdpZGdldExheW91dFt3aWRnZXRMYXlvdXQubGVuZ3RoIC0gMV1bMF0uaW5jbHVkZXMoXCJUZW1wbGF0ZTpcIikpe1xyXG4gICAgICAgICAgICAgICAgd2lkZ2V0TGF5b3V0LnBvcCgpO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBlZGl0aW5nID0gIWVkaXRpbmc7XHJcbiAgICB9XHJcblxyXG4gICAgbGV0IHdpZGdldExheW91dCA9ICRzdGF0ZShbW1wiTG9jYXRpb25BdEFHbGFuY2VcIl0sIFtcIkFpclF1YWxpdHlJbmRleFwiXSwgW1wiR3JhcGhTd2l0Y2hlclwiXSwgW1wiTG9uZ05XU0ZvcmVjYXN0XCJdXSk7XHJcblxyXG4gICAgZnVuY3Rpb24gcmVmcmVzaFdpZGdldHMoKXtcclxuICAgICAgICBpZiAobG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJ3aWRnZXRzXCIpID09PSBudWxsKXtcclxuICAgICAgICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJ3aWRnZXRzXCIsIFwie31cIik7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICB3aWRnZXRzID0gSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShcIndpZGdldHNcIikpO1xyXG5cclxuICAgICAgICB3aWRnZXRzW1wiZGVmYXVsdFwiXSA9IEpTT04ucGFyc2UobG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJkZWZhdWx0LXdpZGdldHNcIikpO1xyXG5cclxuICAgICAgICBpZiAod2lkZ2V0c1tcImRlZmF1bHRcIl0gPT09IG51bGwpe1xyXG4gICAgICAgICAgICB3aWRnZXRzW1wiZGVmYXVsdFwiXSA9IFtbXCJMb2NhdGlvbkF0QUdsYW5jZVwiXSwgW1wiQWlyUXVhbGl0eUluZGV4XCJdLCBbXCJHcmFwaFN3aXRjaGVyXCJdLCBbXCJMb25nTldTRm9yZWNhc3RcIl1dO1xyXG4gICAgICAgICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShcImRlZmF1bHQtd2lkZ2V0c1wiLCBKU09OLnN0cmluZ2lmeSh3aWRnZXRzW1wiZGVmYXVsdFwiXSkpO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgaWYgKHdpZGdldHNbbG9jYXRpb25EYXRhLm5hbWVdID09PSB1bmRlZmluZWQpe1xyXG4gICAgICAgICAgICB3aWRnZXRzW2xvY2F0aW9uRGF0YS5uYW1lXSA9IFtcIlRlbXBsYXRlOmRlZmF1bHRcIl07XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBsZXQgdGVtcGxhdGVzID0ge1xyXG4gICAgICAgICAgICBkZWZhdWx0OiB3aWRnZXRzW1wiZGVmYXVsdFwiXVxyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgd2lkZ2V0TGF5b3V0ID0gd2lkZ2V0c1tsb2NhdGlvbkRhdGEubmFtZV07XHJcblxyXG4gICAgICAgIC8vIElmIHRoZSB3aWRnZXQgbGF5b3V0IGlzIGEgdGVtcGxhdGUsIHJlcGxhY2UgaXQgd2l0aCB0aGUgdGVtcGxhdGUncyBsYXlvdXQuXHJcbiAgICAgICAgaWYgKHdpZGdldExheW91dFswXS5pbmNsdWRlcyhcIlRlbXBsYXRlOlwiKSl7XHJcbiAgICAgICAgICAgIGxldCB0ZW1wbGF0ZUNvZGUgPSB3aWRnZXRMYXlvdXRbMF07XHJcbiAgICAgICAgICAgIHdpZGdldExheW91dCA9IHRlbXBsYXRlc1t0ZW1wbGF0ZUNvZGUucmVwbGFjZShcIlRlbXBsYXRlOlwiLCBcIlwiKV07XHJcbiAgICAgICAgICAgIHdpZGdldExheW91dC5wdXNoKFt0ZW1wbGF0ZUNvZGVdKTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIHJlYWR5VG9Mb2FkID0gdHJ1ZTtcclxuICAgIH1cclxuXHJcbjwvc2NyaXB0PlxyXG48VGFiU2xvdCBuYW1lPVwibG9jYXRpb24te2xvY2F0aW9uRGF0YS5uYW1lfVwiIGJpbmQ6cGFnZT17cGFnZX0gb25PcGVuPXtyZWZyZXNoV2lkZ2V0c30+XHJcbiAgICB7I2lmIHJlYWR5VG9Mb2FkfVxyXG4gICAgPGgxPntsb2NhdGlvbkRhdGEubmFtZX08L2gxPlxyXG4gICAgPGJyPlxyXG5cclxuICAgIDwhLS0gV2FpdCBmb3Igd2VhdGhlciBkYXRhIC0tPlxyXG4gICAgeyNpZiBsb2NhdGlvbkRhdGEuaG91cmx5WzBdfVxyXG4gICAgICAgIDxBbGVydEJhciBsb2NhdGlvbkRhdGE9e2xvY2F0aW9uRGF0YX0gYmluZDpwYWdlPXtwYWdlfSBiaW5kOmFsZXJ0U2VsZWN0aW9uPXthbGVydFNlbGVjdGlvbn0vPlxyXG4gICAgICAgIHsjZWFjaCB3aWRnZXRMYXlvdXQgYXMgd2lkZ2V0Um93LCBpfVxyXG4gICAgICAgICAgICA8V2lkZ2V0Um93IGJpbmQ6bG9jYXRpb25EYXRhPXtsb2NhdGlvbkRhdGF9IHdpZGdldHM9e3dpZGdldFJvd30gZWRpdGluZz17ZWRpdGluZ30gYmluZDpwYWdlPXtwYWdlfSByb3dJbmRleD17aX0gYmluZDp3aWRnZXRMYXlvdXQ9e3dpZGdldExheW91dH0vPlxyXG4gICAgICAgICAgICB7I2lmIGVkaXRpbmcgJiYgKHdpZGdldFJvdy5sZW5ndGggIT09IDEgfHwgIXdpZGdldFJvd1swXS5pbmNsdWRlcyhcIlRlbXBsYXRlOlwiKSl9XHJcbiAgICAgICAgICAgICAgICA8YnV0dG9uIG9uY2xpY2s9e2FkZFJvdy5iaW5kKG51bGwsIGkpfSBjbGFzcz1cImxhcmdlck1hcmdpblwiPkFkZCBSb3c8L2J1dHRvbj5cclxuICAgICAgICAgICAgey9pZn1cclxuICAgICAgICB7L2VhY2h9XHJcblxyXG4gICAgICAgIHsjaWYgd2lkZ2V0TGF5b3V0Lmxlbmd0aCA9PT0gMCAmJiBlZGl0aW5nfVxyXG4gICAgICAgICAgICA8YnV0dG9uIG9uY2xpY2s9e2FkZFJvdy5iaW5kKG51bGwsIC0xKX0gY2xhc3M9XCJsYXJnZXJNYXJnaW5cIj5BZGQgUm93PC9idXR0b24+XHJcbiAgICAgICAgey9pZn1cclxuXHJcbiAgICAgICAgeyNpZiBlZGl0aW5nfVxyXG4gICAgICAgICAgICA8YnV0dG9uIG9uY2xpY2s9eygpPT57YWRkaW5nVGVtcGxhdGU9dHJ1ZTt9fT5Vc2UgYSBUZW1wbGF0ZTwvYnV0dG9uPlxyXG4gICAgICAgIHsvaWZ9XHJcblxyXG4gICAgICAgIHsjaWYgYWRkaW5nVGVtcGxhdGV9XHJcbiAgICAgICAgICAgIDxUZW1wbGF0ZVBpY2tlciBiaW5kOmFkZGluZ1RlbXBsYXRlPXthZGRpbmdUZW1wbGF0ZX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJpbmQ6d2lkZ2V0cz17d2lkZ2V0c30gYmluZDpsb2NhdGlvbkRhdGE9e2xvY2F0aW9uRGF0YX1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJpbmQ6d2lkZ2V0TGF5b3V0PXt3aWRnZXRMYXlvdXR9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBiaW5kOnRvZ2dsZUVkaXQ9e3RvZ2dsZUVkaXR9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWZyZXNoV2lkZ2V0cz17cmVmcmVzaFdpZGdldHN9Lz5cclxuICAgICAgICB7L2lmfVxyXG5cclxuICAgICAgICA8YnV0dG9uIG9uY2xpY2s9e3RvZ2dsZUVkaXR9PntlZGl0aW5nID8gXCJTYXZlIENoYW5nZXNcIiA6IFwiRWRpdCBUaGlzIFBhZ2VcIn08L2J1dHRvbj5cclxuXHJcbiAgICAgICAgeyNpZiBlZGl0aW5nfVxyXG4gICAgICAgICAgICA8YnV0dG9uIG9uY2xpY2s9e3NhdmVBc0RlZmF1bHRUZW1wbGF0ZX0+U2F2ZSBBcyBEZWZhdWx0IFRlbXBsYXRlPC9idXR0b24+XHJcbiAgICAgICAgey9pZn1cclxuXHJcbiAgICAgICAgPGJyPlxyXG5cclxuICAgICAgICB7I2lmIGxvY2F0aW9uRGF0YS5uYW1lICE9PSBcIkN1cnJlbnQgTG9jYXRpb25cIn1cclxuICAgICAgICAgICAgPGJ1dHRvbiBvbmNsaWNrPXtyZW1vdmVMb2NhdGlvbn0+UmVtb3ZlIFRoaXMgTG9jYXRpb248L2J1dHRvbj5cclxuICAgICAgICB7L2lmfVxyXG4gICAgey9pZn1cclxuICAgIHsvaWZ9XHJcbjwvVGFiU2xvdD5cclxuXHJcbjxzdHlsZT5cclxuICAgIGJ1dHRvbiB7XHJcbiAgICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IGRhcmtzbGF0ZWdyYXk7XHJcbiAgICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgICAgIGJvcmRlcjogbm9uZTtcclxuICAgICAgICBib3JkZXItcmFkaXVzOiA3cHg7XHJcbiAgICAgICAgZm9udC1zaXplOiAyMHB4O1xyXG4gICAgICAgIGZvbnQtZmFtaWx5OiBTZWN1bGFyIE9uZSwgc2Fucy1zZXJpZjtcclxuICAgICAgICBtYXJnaW4tdG9wOiA3cHg7XHJcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogN3B4O1xyXG4gICAgfVxyXG5cclxuICAgIC5sYXJnZXJNYXJnaW4ge1xyXG4gICAgICAgIG1hcmdpbi1ib3R0b206IDMwcHg7XHJcbiAgICB9XHJcbjwvc3R5bGU+Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQXFKTztBQUNQLElBQUksb0JBQU0sQ0FBQztBQUNYLFFBQVEsV0FBVztBQUNuQixRQUFRLGVBQWU7QUFDdkIsUUFBUSwrQkFBK0I7QUFDdkMsUUFBUSxZQUFZO0FBQ3BCLFFBQVEsWUFBWTtBQUNwQixRQUFRLGtCQUFrQjtBQUMxQixRQUFRLGVBQWU7QUFDdkIsUUFBUSxvQ0FBb0M7QUFDNUMsUUFBUSxlQUFlO0FBQ3ZCLFFBQVEsa0JBQWtCO0FBQzFCLEtBQUs7QUFDTDtBQUNBLElBQUksMkJBQWEsQ0FBQztBQUNsQixRQUFRLG1CQUFtQjtBQUMzQixLQUFLOyJ9 */'
 };
 
 function LocationWeatherPage($$anchor, $$props) {
@@ -22743,6 +22743,7 @@ function LocationWeatherPage($$anchor, $$props) {
 	let editing = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state(false);
 	let widgets = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state(void 0);
 	let addingTemplate = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state(false);
+	let readyToLoad = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.state(false);
 
 	function addRow(rowIndex) {
 		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout).splice(rowIndex + 1, 0, []);
@@ -22818,6 +22819,8 @@ function LocationWeatherPage($$anchor, $$props) {
 			svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(widgetLayout, templates[templateCode.replace("Template:", "")], true);
 			svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout).push([templateCode]);
 		}
+
+		svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(readyToLoad, true);
 	}
 
 	{
@@ -22835,235 +22838,248 @@ function LocationWeatherPage($$anchor, $$props) {
 				page($$value);
 			},
 			children: svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.wrap_snippet(LocationWeatherPage, ($$anchor, $$slotProps) => {
-				var fragment_1 = root_1();
-				var h1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_1);
-				var text = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h1, true);
-
-				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h1);
-
-				var node = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h1, 4);
+				var fragment_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.comment();
+				var node = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_1);
 
 				{
-					var consequent_6 = ($$anchor) => {
+					var consequent_7 = ($$anchor) => {
 						var fragment_2 = root_2();
-						var node_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_2);
+						var h1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_2);
+						var text = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h1, true);
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h1);
+
+						var node_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h1, 4);
 
 						{
-							$$ownership_validator.binding('page', _Components_LocationWidgets_AlertBar_svelte__WEBPACK_IMPORTED_MODULE_3__["default"], page);
-							$$ownership_validator.binding('alertSelection', _Components_LocationWidgets_AlertBar_svelte__WEBPACK_IMPORTED_MODULE_3__["default"], alertSelection);
+							var consequent_6 = ($$anchor) => {
+								var fragment_3 = root_3();
+								var node_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_3);
 
-							(0,_Components_LocationWidgets_AlertBar_svelte__WEBPACK_IMPORTED_MODULE_3__["default"])(node_1, {
-								get locationData() {
-									return locationData();
-								},
-								get page() {
-									return page();
-								},
-								set page($$value) {
-									page($$value);
-								},
-								get alertSelection() {
-									return alertSelection();
-								},
-								set alertSelection($$value) {
-									alertSelection($$value);
-								}
-							});
-						}
-
-						var node_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_1, 2);
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(node_2, 17, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, widgetRow, i) => {
-							var fragment_3 = root_3();
-							var node_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_3);
-
-							{
-								$$ownership_validator.binding('locationData', _Components_WidgetRow_svelte__WEBPACK_IMPORTED_MODULE_4__["default"], locationData);
-								$$ownership_validator.binding('page', _Components_WidgetRow_svelte__WEBPACK_IMPORTED_MODULE_4__["default"], page);
-
-								(0,_Components_WidgetRow_svelte__WEBPACK_IMPORTED_MODULE_4__["default"])(node_3, {
-									get widgets() {
-										return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetRow);
-									},
-									get editing() {
-										return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing);
-									},
-									rowIndex: i,
-									get locationData() {
-										return locationData();
-									},
-									set locationData($$value) {
-										locationData($$value);
-									},
-									get page() {
-										return page();
-									},
-									set page($$value) {
-										page($$value);
-									},
-									get widgetLayout() {
-										return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout);
-									},
-									set widgetLayout($$value) {
-										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(widgetLayout, $$value, true);
-									}
-								});
-							}
-
-							var node_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_3, 2);
-
-							{
-								var consequent = ($$anchor) => {
-									var button = root_4();
-									var event_handler = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.derived(() => addRow.bind(null, i));
-
-									button.__click = function (...$$args) {
-										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(event_handler), this, $$args, LocationWeatherPage, [111, 33], true);
-									};
-
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button);
-								};
-
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_4, ($$render) => {
-									if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing) && (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetRow).length, 1, false) || !svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetRow)[0].includes("Template:"))) $$render(consequent);
-								});
-							}
-
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_3);
-						});
-
-						var node_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_2, 2);
-
-						{
-							var consequent_1 = ($$anchor) => {
-								var button_1 = root_5();
-								var event_handler_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.derived(() => addRow.bind(null, -1));
-
-								button_1.__click = function (...$$args) {
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(event_handler_1), this, $$args, LocationWeatherPage, [116, 29], true);
-								};
-
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button_1);
-							};
-
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_5, ($$render) => {
-								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout).length, 0) && svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing)) $$render(consequent_1);
-							});
-						}
-
-						var node_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_5, 2);
-
-						{
-							var consequent_2 = ($$anchor) => {
-								var button_2 = root_6();
-
-								button_2.__click = [on_click, addingTemplate];
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button_2);
-							};
-
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_6, ($$render) => {
-								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing)) $$render(consequent_2);
-							});
-						}
-
-						var node_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_6, 2);
-
-						{
-							var consequent_3 = ($$anchor) => {
 								{
-									$$ownership_validator.binding('locationData', _Components_TemplatePicker_svelte__WEBPACK_IMPORTED_MODULE_5__["default"], locationData);
+									$$ownership_validator.binding('page', _Components_LocationWidgets_AlertBar_svelte__WEBPACK_IMPORTED_MODULE_3__["default"], page);
+									$$ownership_validator.binding('alertSelection', _Components_LocationWidgets_AlertBar_svelte__WEBPACK_IMPORTED_MODULE_3__["default"], alertSelection);
 
-									(0,_Components_TemplatePicker_svelte__WEBPACK_IMPORTED_MODULE_5__["default"])($$anchor, {
-										refreshWidgets,
-										get addingTemplate() {
-											return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(addingTemplate);
-										},
-										set addingTemplate($$value) {
-											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(addingTemplate, $$value, true);
-										},
-										get widgets() {
-											return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgets);
-										},
-										set widgets($$value) {
-											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(widgets, $$value, true);
-										},
+									(0,_Components_LocationWidgets_AlertBar_svelte__WEBPACK_IMPORTED_MODULE_3__["default"])(node_2, {
 										get locationData() {
 											return locationData();
 										},
-										set locationData($$value) {
-											locationData($$value);
+										get page() {
+											return page();
 										},
-										get widgetLayout() {
-											return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout);
+										set page($$value) {
+											page($$value);
 										},
-										set widgetLayout($$value) {
-											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(widgetLayout, $$value, true);
+										get alertSelection() {
+											return alertSelection();
 										},
-										get toggleEdit() {
-											return toggleEdit;
-										},
-										set toggleEdit($$value) {
-											toggleEdit = $$value;
+										set alertSelection($$value) {
+											alertSelection($$value);
 										}
 									});
 								}
+
+								var node_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_2, 2);
+
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(node_3, 17, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, widgetRow, i) => {
+									var fragment_4 = root_4();
+									var node_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_4);
+
+									{
+										$$ownership_validator.binding('locationData', _Components_WidgetRow_svelte__WEBPACK_IMPORTED_MODULE_4__["default"], locationData);
+										$$ownership_validator.binding('page', _Components_WidgetRow_svelte__WEBPACK_IMPORTED_MODULE_4__["default"], page);
+
+										(0,_Components_WidgetRow_svelte__WEBPACK_IMPORTED_MODULE_4__["default"])(node_4, {
+											get widgets() {
+												return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetRow);
+											},
+											get editing() {
+												return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing);
+											},
+											rowIndex: i,
+											get locationData() {
+												return locationData();
+											},
+											set locationData($$value) {
+												locationData($$value);
+											},
+											get page() {
+												return page();
+											},
+											set page($$value) {
+												page($$value);
+											},
+											get widgetLayout() {
+												return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout);
+											},
+											set widgetLayout($$value) {
+												svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(widgetLayout, $$value, true);
+											}
+										});
+									}
+
+									var node_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_4, 2);
+
+									{
+										var consequent = ($$anchor) => {
+											var button = root_5();
+											var event_handler = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.derived(() => addRow.bind(null, i));
+
+											button.__click = function (...$$args) {
+												svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(event_handler), this, $$args, LocationWeatherPage, [115, 33], true);
+											};
+
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button);
+										};
+
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_5, ($$render) => {
+											if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing) && (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetRow).length, 1, false) || !svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetRow)[0].includes("Template:"))) $$render(consequent);
+										});
+									}
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_4);
+								});
+
+								var node_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_3, 2);
+
+								{
+									var consequent_1 = ($$anchor) => {
+										var button_1 = root_6();
+										var event_handler_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.derived(() => addRow.bind(null, -1));
+
+										button_1.__click = function (...$$args) {
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(event_handler_1), this, $$args, LocationWeatherPage, [120, 29], true);
+										};
+
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button_1);
+									};
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_6, ($$render) => {
+										if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout).length, 0) && svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing)) $$render(consequent_1);
+									});
+								}
+
+								var node_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_6, 2);
+
+								{
+									var consequent_2 = ($$anchor) => {
+										var button_2 = root_7();
+
+										button_2.__click = [on_click, addingTemplate];
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button_2);
+									};
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_7, ($$render) => {
+										if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing)) $$render(consequent_2);
+									});
+								}
+
+								var node_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_7, 2);
+
+								{
+									var consequent_3 = ($$anchor) => {
+										{
+											$$ownership_validator.binding('locationData', _Components_TemplatePicker_svelte__WEBPACK_IMPORTED_MODULE_5__["default"], locationData);
+
+											(0,_Components_TemplatePicker_svelte__WEBPACK_IMPORTED_MODULE_5__["default"])($$anchor, {
+												refreshWidgets,
+												get addingTemplate() {
+													return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(addingTemplate);
+												},
+												set addingTemplate($$value) {
+													svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(addingTemplate, $$value, true);
+												},
+												get widgets() {
+													return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgets);
+												},
+												set widgets($$value) {
+													svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(widgets, $$value, true);
+												},
+												get locationData() {
+													return locationData();
+												},
+												set locationData($$value) {
+													locationData($$value);
+												},
+												get widgetLayout() {
+													return svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(widgetLayout);
+												},
+												set widgetLayout($$value) {
+													svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set(widgetLayout, $$value, true);
+												},
+												get toggleEdit() {
+													return toggleEdit;
+												},
+												set toggleEdit($$value) {
+													toggleEdit = $$value;
+												}
+											});
+										}
+									};
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_8, ($$render) => {
+										if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(addingTemplate)) $$render(consequent_3);
+									});
+								}
+
+								var button_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_8, 2);
+
+								button_3.__click = function (...$$args) {
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => toggleEdit, this, $$args, LocationWeatherPage, [135, 25]);
+								};
+
+								var text_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(button_3, true);
+
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(button_3);
+
+								var node_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(button_3, 2);
+
+								{
+									var consequent_4 = ($$anchor) => {
+										var button_4 = root_9();
+
+										button_4.__click = saveAsDefaultTemplate;
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button_4);
+									};
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_9, ($$render) => {
+										if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing)) $$render(consequent_4);
+									});
+								}
+
+								var node_10 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_9, 4);
+
+								{
+									var consequent_5 = ($$anchor) => {
+										var button_5 = root_10();
+
+										button_5.__click = [removeLocation, locationData, page];
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button_5);
+									};
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_10, ($$render) => {
+										if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(locationData().name, "Current Location", false)) $$render(consequent_5);
+									});
+								}
+
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_1, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing) ? "Save Changes" : "Edit This Page"));
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_3);
 							};
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_7, ($$render) => {
-								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(addingTemplate)) $$render(consequent_3);
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_1, ($$render) => {
+								if (locationData().hourly[0]) $$render(consequent_6);
 							});
 						}
 
-						var button_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_7, 2);
-
-						button_3.__click = function (...$$args) {
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => toggleEdit, this, $$args, LocationWeatherPage, [131, 25]);
-						};
-
-						var text_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(button_3, true);
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(button_3);
-
-						var node_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(button_3, 2);
-
-						{
-							var consequent_4 = ($$anchor) => {
-								var button_4 = root_8();
-
-								button_4.__click = saveAsDefaultTemplate;
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button_4);
-							};
-
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_8, ($$render) => {
-								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing)) $$render(consequent_4);
-							});
-						}
-
-						var node_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_8, 4);
-
-						{
-							var consequent_5 = ($$anchor) => {
-								var button_5 = root_9();
-
-								button_5.__click = [removeLocation, locationData, page];
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, button_5);
-							};
-
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_9, ($$render) => {
-								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(locationData().name, "Current Location", false)) $$render(consequent_5);
-							});
-						}
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_1, svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(editing) ? "Save Changes" : "Edit This Page"));
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text, locationData().name));
 						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_2);
 					};
 
 					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node, ($$render) => {
-						if (locationData().hourly[0]) $$render(consequent_6);
+						if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(readyToLoad)) $$render(consequent_7);
 					});
 				}
 
-				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text, locationData().name));
 				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_1);
 			}),
 			$$slots: { default: true }
@@ -24267,107 +24283,106 @@ function playNotificationSoundMain(__1, allSettings) {
 	audio.play();
 }
 
-var root_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<a href="#">Android Permissions</a>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[134, 12]]);
-var root_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<h2>Some settings/features are not functional on the web version, including weather alerts.</h2>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[139, 8]]);
-var root_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<input class="box" type="checkbox" id="setting-run-startup"/> <label for="setting-run-startup">Run Atmos Weather in background on startup</label>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[175, 12], [176, 12]]);
+var root_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<a href="#">Android Permissions</a>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[135, 12]]);
+var root_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<h2>Some settings/features are not functional on the web version, including weather alerts.</h2>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[140, 8]]);
+var root_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<input class="box" type="checkbox" id="setting-run-startup"/> <label for="setting-run-startup">Run Atmos Weather in background on startup</label>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[176, 12], [177, 12]]);
 
 var on_click = (__2, page, name) => {
 	page("settings-" + svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(name));
 };
 
-var root_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<h2><a href="#"> </a></h2>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[255, 16, [[255, 20]]]]);
-var root_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<option>Alert if moving</option>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[270, 28]]);
+var root_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<h2><a href="#"> </a></h2>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[256, 16, [[256, 20]]]]);
+var root_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<option>Alert if moving</option>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[271, 28]]);
 
-var root_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<label> </label> <br/> <select><option>Alert</option><!><option>Sound Notification</option><option>Silent Notification</option><option>Nothing</option></select> <br/>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
-	[265, 20],
+var root_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<label> </label> <br/> <select><option>Alert</option><!><option>Sound Notification</option><option>Silent Notification</option><option>Nothing</option></select> <br/>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
 	[266, 20],
+	[267, 20],
 	[
-		267,
+		268,
 		20,
 		[
-			[268, 24],
-			[272, 24],
+			[269, 24],
 			[273, 24],
-			[274, 24]
+			[274, 24],
+			[275, 24]
 		]
 	],
-	[276, 20]
+	[277, 20]
 ]);
 
-var root_10 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<option>Alert if moving</option>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[289, 28]]);
+var root_11 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<option>Alert if moving</option>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[290, 28]]);
 
-var root_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<label> </label> <br/> <select><option>Alert</option><!><option>Sound Notification</option><option>Silent Notification</option><option>Nothing</option></select> <br/>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
-	[284, 20],
+var root_10 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<label> </label> <br/> <select><option>Alert</option><!><option>Sound Notification</option><option>Silent Notification</option><option>Nothing</option></select> <br/>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
 	[285, 20],
+	[286, 20],
 	[
-		286,
+		287,
 		20,
 		[
-			[287, 24],
-			[291, 24],
+			[288, 24],
 			[292, 24],
-			[293, 24]
+			[293, 24],
+			[294, 24]
 		]
 	],
-	[295, 20]
+	[296, 20]
 ]);
 
-var root_12 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<option>Alert if moving</option>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[308, 28]]);
+var root_13 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<option>Alert if moving</option>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [[309, 28]]);
 
-var root_11 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<label> </label> <br/> <select><option>Alert</option><!><option>Sound Notification</option><option>Silent Notification</option><option>Nothing</option></select> <br/>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
-	[303, 20],
+var root_12 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<label> </label> <br/> <select><option>Alert</option><!><option>Sound Notification</option><option>Silent Notification</option><option>Nothing</option></select> <br/>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
 	[304, 20],
+	[305, 20],
 	[
-		305,
+		306,
 		20,
 		[
-			[306, 24],
-			[310, 24],
+			[307, 24],
 			[311, 24],
-			[312, 24]
+			[312, 24],
+			[313, 24]
 		]
 	],
-	[314, 20]
+	[315, 20]
 ]);
 
-var root_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<div><div id="settings-device-location"><h2>Device Location</h2> <h6>Settings related to use of your GPS location.</h6> <input class="box" type="checkbox" id="setting-current-location"/> <label for="setting-current-location">Give Weather for Current Location</label> <br/> <input class="box" type="checkbox" id="setting-current-location-alerts"/> <label for="setting-current-location-alerts">Give Alerts for Current Location</label> <hr/></div> <h2>Personalization</h2> <label for="setting-app-theme">App Theme</label> <br/> <select id="setting-app-theme"><option>System Default</option><option>Dark Theme</option><option>Light Theme</option></select> <br/> <label for="setting-page-transition-duration">Page Transition Duration</label> <br/> <input type="range" min="0" max="3000" step="100" id="setting-page-transition-duration"/> <label id="setting-page-transition-duration-text" for="setting-page-transition-duration"> </label> <br/><br/> <input class="box" type="checkbox" id="setting-atmos-logo"/> <label for="setting-atmos-logo">Show Atmos Weather logo on app open</label> <br/> <!> <input class="box" type="checkbox" id="setting-notify-updates"/> <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label> <hr/> <h2>Notifications</h2> <input class="box" type="checkbox" id="setting-future-severe-notifications"/> <label for="setting-future-severe-notifications">Get notifications for forecast future severe weather</label> <br/> <input class="box" type="checkbox" id="setting-future-storm-notifications"/> <label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label> <hr/> <h2>Radar</h2> <h6>Radar powered by RainViewer API.</h6> <input class="box" type="checkbox" id="setting-radar-show-watches"/> <label for="setting-radar-show-watches">Show watch polygons on radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-show-advisories"/> <label for="setting-radar-show-advisories">Show advisory polygons on radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-show-warnings"/> <label for="setting-radar-show-warnings">Show warning polygons on radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-show-outlook"/> <label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-satellite"/> <label for="setting-radar-satellite">Show satellite instead of radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-high-res"/> <label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label> <br/><br/> <label for="setting-radar-color-scheme">Radar Color Scheme</label> <br/> <select id="setting-radar-color-scheme"><option>Black & White</option><option>Original</option><option>Universal Blue</option><option>TITAN</option><option>TWC</option><option>Meteored</option><option>NEXRAD Level III</option><option>Rainbow</option><option>Dark Sky</option></select> <hr/> <h2>Location Alerts</h2> <h6>Choose the level of alerts for different locations.</h6> <input class="box" type="checkbox" id="setting-tts-alerts"/> <label for="setting-tts-alerts">Read alerts with text to speech</label> <br/><br/> <label for="setting-alert-check-frequency">Alert Check Frequency</label> <br/> <select id="setting-alert-check-frequency"><option>Every 15 seconds</option><option>Every 30 seconds</option><option>Every 1 minute</option><option>Every 2 minutes</option></select> <h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6> <label for="setting-default-sound-alert">Default Alert Sound</label> <br/> <select id="setting-default-sound-alert"><option>ReadyNow Warning</option><option>SureMind Warning</option><option>Alternating Tones</option><option>Simple Beeps</option></select> <br/> <label for="setting-default-sound-notification">Default Notification Sound</label> <br/> <select id="setting-default-sound-notification"><option>ReadyNow Watch</option><option>SureMind Watch</option><option>Alternating Tones</option><option>Simple Beeps</option></select> <div id="location-settings-div"></div> <hr/> <h2>Alert Types</h2> <h6>Choose the level of alerts for different types of events. Overridden if location priority is lower.<br/>Alert if moving alerts you if the app detects you are in a vehicle.<br/>If location permission is not allowed, will always alert.</h6> <details><summary>Warnings</summary> <div id="settings-warnings-list"></div></details> <details><summary>Watches</summary> <div id="settings-watches-list"></div></details> <details><summary>Advisories/Other</summary> <div id="settings-advisory-list"></div></details></div>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
+var root_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<div><div id="settings-device-location"><h2>Device Location</h2> <h6>Settings related to use of your GPS location.</h6> <input class="box" type="checkbox" id="setting-current-location"/> <label for="setting-current-location">Give Weather for Current Location</label> <br/> <input class="box" type="checkbox" id="setting-current-location-alerts"/> <label for="setting-current-location-alerts">Give Alerts for Current Location</label> <hr/></div> <h2>Personalization</h2> <label for="setting-app-theme">App Theme</label> <br/> <select id="setting-app-theme"><option>System Default</option><option>Dark Theme</option><option>Light Theme</option></select> <br/> <label for="setting-page-transition-duration">Page Transition Duration</label> <br/> <input type="range" min="0" max="3000" step="100" id="setting-page-transition-duration"/> <label id="setting-page-transition-duration-text" for="setting-page-transition-duration"> </label> <br/><br/> <input class="box" type="checkbox" id="setting-atmos-logo"/> <label for="setting-atmos-logo">Show Atmos Weather logo on app open</label> <br/> <!> <input class="box" type="checkbox" id="setting-notify-updates"/> <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label> <hr/> <h2>Notifications</h2> <input class="box" type="checkbox" id="setting-future-severe-notifications"/> <label for="setting-future-severe-notifications">Get notifications for forecast future severe weather</label> <br/> <input class="box" type="checkbox" id="setting-future-storm-notifications"/> <label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label> <hr/> <h2>Radar</h2> <h6>Radar powered by RainViewer API.</h6> <input class="box" type="checkbox" id="setting-radar-show-watches"/> <label for="setting-radar-show-watches">Show watch polygons on radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-show-advisories"/> <label for="setting-radar-show-advisories">Show advisory polygons on radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-show-warnings"/> <label for="setting-radar-show-warnings">Show warning polygons on radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-show-outlook"/> <label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-satellite"/> <label for="setting-radar-satellite">Show satellite instead of radar</label> <br/> <input class="box" type="checkbox" id="setting-radar-high-res"/> <label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label> <br/><br/> <label for="setting-radar-color-scheme">Radar Color Scheme</label> <br/> <select id="setting-radar-color-scheme"><option>Black & White</option><option>Original</option><option>Universal Blue</option><option>TITAN</option><option>TWC</option><option>Meteored</option><option>NEXRAD Level III</option><option>Rainbow</option><option>Dark Sky</option></select> <hr/> <h2>Location Alerts</h2> <h6>Choose the level of alerts for different locations.</h6> <input class="box" type="checkbox" id="setting-tts-alerts"/> <label for="setting-tts-alerts">Read alerts with text to speech</label> <br/><br/> <label for="setting-alert-check-frequency">Alert Check Frequency</label> <br/> <select id="setting-alert-check-frequency"><option>Every 15 seconds</option><option>Every 30 seconds</option><option>Every 1 minute</option><option>Every 2 minutes</option></select> <h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6> <label for="setting-default-sound-alert">Default Alert Sound</label> <br/> <select id="setting-default-sound-alert"><option>ReadyNow Warning</option><option>SureMind Warning</option><option>Alternating Tones</option><option>Simple Beeps</option></select> <br/> <label for="setting-default-sound-notification">Default Notification Sound</label> <br/> <select id="setting-default-sound-notification"><option>ReadyNow Watch</option><option>SureMind Watch</option><option>Alternating Tones</option><option>Simple Beeps</option></select> <div id="location-settings-div"></div> <hr/> <h2>Alert Types</h2> <h6>Choose the level of alerts for different types of events. Overridden if location priority is lower.<br/>Alert if moving alerts you if the app detects you are in a vehicle.<br/>If location permission is not allowed, will always alert.</h6> <details><summary>Warnings</summary> <div id="settings-warnings-list"></div></details> <details><summary>Watches</summary> <div id="settings-watches-list"></div></details> <details><summary>Advisories/Other</summary> <div id="settings-advisory-list"></div></details></div>`), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
 	[
-		144,
+		145,
 		8,
 		[
 			[
-				145,
+				146,
 				8,
 				[
-					[146, 12],
 					[147, 12],
 					[148, 12],
 					[149, 12],
 					[150, 12],
 					[151, 12],
 					[152, 12],
-					[153, 12]
+					[153, 12],
+					[154, 12]
 				]
 			],
-			[155, 8],
 			[156, 8],
 			[157, 8],
+			[158, 8],
 			[
-				158,
+				159,
 				8,
-				[[159, 12], [160, 12], [161, 12]]
+				[[160, 12], [161, 12], [162, 12]]
 			],
-			[163, 8],
 			[164, 8],
 			[165, 8],
 			[166, 8],
 			[167, 8],
-			[170, 8],
-			[170, 12],
+			[168, 8],
 			[171, 8],
+			[171, 12],
 			[172, 8],
 			[173, 8],
-			[178, 8],
+			[174, 8],
 			[179, 8],
 			[180, 8],
 			[181, 8],
@@ -24397,14 +24412,14 @@ var root_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(s
 			[205, 8],
 			[206, 8],
 			[207, 8],
-			[207, 12],
 			[208, 8],
+			[208, 12],
 			[209, 8],
+			[210, 8],
 			[
-				210,
+				211,
 				8,
 				[
-					[211, 12],
 					[212, 12],
 					[213, 12],
 					[214, 12],
@@ -24412,73 +24427,74 @@ var root_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(s
 					[216, 12],
 					[217, 12],
 					[218, 12],
-					[219, 12]
+					[219, 12],
+					[220, 12]
 				]
 			],
-			[221, 8],
 			[222, 8],
 			[223, 8],
 			[224, 8],
 			[225, 8],
 			[226, 8],
-			[226, 12],
 			[227, 8],
+			[227, 12],
 			[228, 8],
+			[229, 8],
 			[
-				229,
+				230,
 				8,
 				[
-					[230, 12],
 					[231, 12],
 					[232, 12],
-					[233, 12]
+					[233, 12],
+					[234, 12]
 				]
 			],
-			[235, 8],
 			[236, 8],
 			[237, 8],
+			[238, 8],
 			[
-				238,
+				239,
 				8,
 				[
-					[239, 12],
 					[240, 12],
 					[241, 12],
-					[242, 12]
+					[242, 12],
+					[243, 12]
 				]
 			],
-			[244, 8],
 			[245, 8],
 			[246, 8],
+			[247, 8],
 			[
-				247,
+				248,
 				8,
 				[
-					[248, 12],
 					[249, 12],
 					[250, 12],
-					[251, 12]
+					[251, 12],
+					[252, 12]
 				]
 			],
-			[253, 8],
-			[258, 8],
+			[254, 8],
 			[259, 8],
-			[260, 8, [[260, 111], [260, 182]]],
-			[261, 8, [[262, 12], [263, 12]]],
-			[280, 8, [[281, 12], [282, 12]]],
-			[299, 8, [[300, 12], [301, 12]]]
+			[260, 8],
+			[261, 8, [[261, 111], [261, 182]]],
+			[262, 8, [[263, 12], [264, 12]]],
+			[281, 8, [[282, 12], [283, 12]]],
+			[300, 8, [[301, 12], [302, 12]]]
 		]
 	]
 ]);
 
-var root_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<h1>Settings</h1> <h6><a href="#">About Atmos Weather</a> &emsp; <a href="#">Privacy Statement</a> <br/> <!></h6> <!> <hr/> <!>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
-	[127, 4],
+var root_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.add_locations(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.from_html(`<h1>Settings</h1> <h6><a href="#">About Atmos Weather</a> &emsp; <a href="#">Privacy Statement</a> <br/> <!></h6> <!> <hr/> <!>`, 1), SettingsPage[svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.FILENAME], [
+	[128, 4],
 	[
-		128,
+		129,
 		4,
-		[[129, 8], [131, 8], [132, 8]]
+		[[130, 8], [132, 8], [133, 8]]
 	],
-	[142, 4]
+	[143, 4]
 ]);
 
 function SettingsPage($$anchor, $$props) {
@@ -24617,503 +24633,516 @@ function SettingsPage($$anchor, $$props) {
 				page($$value);
 			},
 			children: svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.wrap_snippet(SettingsPage, ($$anchor, $$slotProps) => {
-				var fragment_1 = root_1();
-				var h6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_1), 2);
-				var a = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h6);
-
-				a.__click = function (...$$args) {
-					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => page("about"), this, $$args, SettingsPage, [129, 29], true);
-				};
-
-				var a_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(a, 2);
-
-				a_1.__click = function (...$$args) {
-					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => page("privacy"), this, $$args, SettingsPage, [131, 29], true);
-				};
-
-				var node = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(a_1, 4);
+				var fragment_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.comment();
+				var node = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_1);
 
 				{
-					var consequent = ($$anchor) => {
-						var a_2 = root_2();
+					var consequent_7 = ($$anchor) => {
+						var fragment_2 = root_2();
+						var h6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_2), 2);
+						var a = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h6);
 
-						a_2.__click = function (...$$args) {
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => showPermissionDialog, this, $$args, SettingsPage, [134, 24]);
+						a.__click = function (...$$args) {
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => page("about"), this, $$args, SettingsPage, [130, 29], true);
 						};
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, a_2);
-					};
+						var a_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(a, 2);
 
-					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node, ($$render) => {
-						if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isAndroid)) $$render(consequent);
-					});
-				}
+						a_1.__click = function (...$$args) {
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => page("privacy"), this, $$args, SettingsPage, [132, 29], true);
+						};
 
-				svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h6);
-
-				var node_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h6, 2);
-
-				{
-					var consequent_1 = ($$anchor) => {
-						var h2 = root_3();
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, h2);
-					};
-
-					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_1, ($$render) => {
-						if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(webVersionWarning)) $$render(consequent_1);
-					});
-				}
-
-				var node_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_1, 4);
-
-				{
-					var consequent_6 = ($$anchor) => {
-						var div = root_4();
-
-						div.__change = saveSettings;
-
-						var div_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div);
-						var input = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div_1), 4);
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["location"]["weather"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"], () => "weather", 148, 77);
-
-						var input_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input, 6);
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_1);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["location"]["alerts"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"], () => "alerts", 151, 84);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(4);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_1);
-
-						var select = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(div_1, 8);
-						var option = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select);
-
-						option.value = option.__value = 'system';
-
-						var option_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option);
-
-						option_1.value = option_1.__value = 'dark';
-
-						var option_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_1);
-
-						option_2.value = option_2.__value = 'light';
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["personalization"]["theme"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "theme", 158, 39);
-
-						var input_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select, 8);
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_2);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["personalization"]["page-transition-duration"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "page-transition-duration", 166, 96);
-
-						var label = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_2, 2);
-						var text = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(label);
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(label);
-
-						var input_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(label, 5);
-
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_3);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["personalization"]["atmos-logo"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "atmos-logo", 171, 67);
-
-						var node_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_3, 6);
+						var node_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(a_1, 4);
 
 						{
-							var consequent_2 = ($$anchor) => {
-								var fragment_2 = root_5();
-								var input_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_2);
+							var consequent = ($$anchor) => {
+								var a_2 = root_3();
 
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_4);
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["personalization"]["run-startup"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "run-startup", 175, 72);
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_4, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["run-startup"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["run-startup"] = $$value);
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_2);
+								a_2.__click = function (...$$args) {
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.apply(() => showPermissionDialog, this, $$args, SettingsPage, [135, 24]);
+								};
+
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, a_2);
 							};
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_3, ($$render) => {
-								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isDesktop)) $$render(consequent_2);
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_1, ($$render) => {
+								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isAndroid)) $$render(consequent);
 							});
 						}
 
-						var input_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_3, 2);
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h6);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_5);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["personalization"]["update-notify"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "update-notify", 178, 71);
+						var node_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(h6, 2);
 
-						var input_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_5, 8);
+						{
+							var consequent_1 = ($$anchor) => {
+								var h2 = root_4();
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_6);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["notifications"]["severe-future"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"], () => "severe-future", 182, 84);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, h2);
+							};
 
-						var input_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_6, 6);
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_2, ($$render) => {
+								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(webVersionWarning)) $$render(consequent_1);
+							});
+						}
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_7);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["notifications"]["rain-future"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"], () => "rain-future", 185, 83);
+						var node_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_2, 4);
 
-						var input_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_7, 10);
+						{
+							var consequent_6 = ($$anchor) => {
+								var div = root_5();
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_8);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["polygons"]["watch"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"], () => "watch", 190, 75);
+								div.__change = saveSettings;
 
-						var input_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_8, 6);
+								var div_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div);
+								var input = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(div_1), 4);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_9);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["polygons"]["advisories"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"], () => "advisories", 193, 78);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["location"]["weather"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"], () => "weather", 149, 77);
 
-						var input_10 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_9, 6);
+								var input_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input, 6);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_10);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["polygons"]["warnings"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"], () => "warnings", 196, 76);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_1);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["location"]["alerts"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"], () => "alerts", 152, 84);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(4);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_1);
 
-						var input_11 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_10, 6);
+								var select = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(div_1, 8);
+								var option = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_11);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["spc-outlook"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"], () => "spc-outlook", 199, 75);
+								option.value = option.__value = 'system';
 
-						var input_12 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_11, 6);
+								var option_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_12);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["satellite"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"], () => "satellite", 202, 72);
+								option_1.value = option_1.__value = 'dark';
 
-						var input_13 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_12, 6);
+								var option_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_1);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_13);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["polygons"]["high-res"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"], () => "high-res", 205, 71);
+								option_2.value = option_2.__value = 'light';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["personalization"]["theme"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "theme", 159, 39);
 
-						var select_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_13, 11);
-						var option_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_1);
+								var input_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select, 8);
 
-						option_3.value = option_3.__value = '0';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_2);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["personalization"]["page-transition-duration"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "page-transition-duration", 167, 96);
 
-						var option_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_3);
+								var label = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_2, 2);
+								var text = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(label);
 
-						option_4.value = option_4.__value = '1';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(label);
 
-						var option_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_4);
+								var input_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(label, 5);
 
-						option_5.value = option_5.__value = '2';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_3);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["personalization"]["atmos-logo"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "atmos-logo", 172, 67);
 
-						var option_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_5);
+								var node_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_3, 6);
 
-						option_6.value = option_6.__value = '3';
+								{
+									var consequent_2 = ($$anchor) => {
+										var fragment_3 = root_6();
+										var input_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_3);
 
-						var option_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_6);
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_4);
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["personalization"]["run-startup"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "run-startup", 176, 72);
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_4, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["run-startup"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["run-startup"] = $$value);
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_3);
+									};
 
-						option_7.value = option_7.__value = '4';
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_4, ($$render) => {
+										if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isDesktop)) $$render(consequent_2);
+									});
+								}
 
-						var option_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_7);
+								var input_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_4, 2);
 
-						option_8.value = option_8.__value = '5';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_5);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["personalization"]["update-notify"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"], () => "update-notify", 179, 71);
 
-						var option_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_8);
+								var input_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_5, 8);
 
-						option_9.value = option_9.__value = '6';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_6);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["notifications"]["severe-future"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"], () => "severe-future", 183, 84);
 
-						var option_10 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_9);
+								var input_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_6, 6);
 
-						option_10.value = option_10.__value = '7';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_7);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["notifications"]["rain-future"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"], () => "rain-future", 186, 83);
 
-						var option_11 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_10);
+								var input_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_7, 10);
 
-						option_11.value = option_11.__value = '8';
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_1);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["radar"]["color-scheme"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"], () => "color-scheme", 210, 48);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_8);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["polygons"]["watch"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"], () => "watch", 191, 75);
 
-						var input_14 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_1, 8);
+								var input_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_8, 6);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_14);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["location-alerts"]["tts-alerts"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "tts-alerts", 224, 67);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_9);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["polygons"]["advisories"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"], () => "advisories", 194, 78);
 
-						var select_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_14, 11);
-						var option_12 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_2);
+								var input_10 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_9, 6);
 
-						option_12.value = option_12.__value = '15';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_10);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["polygons"]["warnings"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"], () => "warnings", 197, 76);
 
-						var option_13 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_12);
+								var input_11 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_10, 6);
 
-						option_13.value = option_13.__value = '30';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_11);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["spc-outlook"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"], () => "spc-outlook", 200, 75);
 
-						var option_14 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_13);
+								var input_12 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_11, 6);
 
-						option_14.value = option_14.__value = '60';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_12);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["satellite"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"], () => "satellite", 203, 72);
 
-						var option_15 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_14);
+								var input_13 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_12, 6);
 
-						option_15.value = option_15.__value = '120';
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_2);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["location-alerts"]["alert-check-frequency"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "alert-check-frequency", 229, 51);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_13);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["radar"]["polygons"]["high-res"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"], () => "high-res", 206, 71);
 
-						var select_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_2, 8);
+								var select_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_13, 11);
+								var option_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_1);
 
-						select_3.__change = [playAlarmSoundMain, allSettings];
+								option_3.value = option_3.__value = '0';
 
-						var option_16 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_3);
+								var option_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_3);
 
-						option_16.value = option_16.__value = 'readynow';
+								option_4.value = option_4.__value = '1';
 
-						var option_17 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_16);
+								var option_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_4);
 
-						option_17.value = option_17.__value = 'suremind';
+								option_5.value = option_5.__value = '2';
 
-						var option_18 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_17);
+								var option_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_5);
 
-						option_18.value = option_18.__value = 'alternatingtones';
+								option_6.value = option_6.__value = '3';
 
-						var option_19 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_18);
+								var option_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_6);
 
-						option_19.value = option_19.__value = 'simplebeeps';
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_3);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["location-alerts"]["default-alert"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "default-alert", 238, 79);
+								option_7.value = option_7.__value = '4';
 
-						var select_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_3, 8);
+								var option_8 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_7);
 
-						select_4.__change = [playNotificationSoundMain, allSettings];
+								option_8.value = option_8.__value = '5';
 
-						var option_20 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_4);
+								var option_9 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_8);
 
-						option_20.value = option_20.__value = 'readynow';
+								option_9.value = option_9.__value = '6';
 
-						var option_21 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_20);
+								var option_10 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_9);
 
-						option_21.value = option_21.__value = 'suremind';
+								option_10.value = option_10.__value = '7';
 
-						var option_22 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_21);
+								var option_11 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_10);
 
-						option_22.value = option_22.__value = 'alternatingtones';
+								option_11.value = option_11.__value = '8';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_1);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["radar"]["color-scheme"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"], () => "color-scheme", 211, 48);
 
-						var option_23 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_22);
+								var input_14 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_1, 8);
 
-						option_23.value = option_23.__value = 'simplebeeps';
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_4);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["location-alerts"]["default-notification"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "default-notification", 247, 93);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.remove_input_defaults(input_14);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:checked={allSettings["location-alerts"]["tts-alerts"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "tts-alerts", 225, 67);
 
-						var div_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_4, 2);
+								var select_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(input_14, 11);
+								var option_12 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_2);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(div_2, 21, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(locationNames), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, name) => {
-							var h2_1 = root_6();
-							var a_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h2_1);
+								option_12.value = option_12.__value = '15';
 
-							a_3.__click = [on_click, page, name];
+								var option_13 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_12);
 
-							var text_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(a_3);
+								option_13.value = option_13.__value = '30';
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(a_3);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h2_1);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_1, `${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(name) ?? ''} Alert Settings`));
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, h2_1);
-						});
+								var option_14 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_13);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_2);
+								option_14.value = option_14.__value = '60';
 
-						var details = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(div_2, 8);
-						var div_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(details), 2);
+								var option_15 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_14);
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(div_3, 21, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(orderedWarnings), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, key) => {
-							var fragment_3 = root_7();
-							var label_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_3);
-							var text_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(label_1, true);
+								option_15.value = option_15.__value = '120';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_2);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["location-alerts"]["alert-check-frequency"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "alert-check-frequency", 230, 51);
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(label_1);
+								var select_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_2, 8);
 
-							var select_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(label_1, 4);
-							var option_24 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_5);
+								select_3.__change = [playAlarmSoundMain, allSettings];
 
-							option_24.value = option_24.__value = 'alert';
+								var option_16 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_3);
 
-							var node_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_24);
+								option_16.value = option_16.__value = 'readynow';
 
-							{
-								var consequent_3 = ($$anchor) => {
-									var option_25 = root_8();
+								var option_17 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_16);
 
-									option_25.value = option_25.__value = 'alertmove';
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, option_25);
-								};
+								option_17.value = option_17.__value = 'suremind';
 
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_4, ($$render) => {
-									if (!svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isDesktop)) $$render(consequent_3);
+								var option_18 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_17);
+
+								option_18.value = option_18.__value = 'alternatingtones';
+
+								var option_19 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_18);
+
+								option_19.value = option_19.__value = 'simplebeeps';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_3);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["location-alerts"]["default-alert"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "default-alert", 239, 79);
+
+								var select_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_3, 8);
+
+								select_4.__change = [playNotificationSoundMain, allSettings];
+
+								var option_20 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_4);
+
+								option_20.value = option_20.__value = 'readynow';
+
+								var option_21 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_20);
+
+								option_21.value = option_21.__value = 'suremind';
+
+								var option_22 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_21);
+
+								option_22.value = option_22.__value = 'alternatingtones';
+
+								var option_23 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_22);
+
+								option_23.value = option_23.__value = 'simplebeeps';
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_4);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["location-alerts"]["default-notification"]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"], () => "default-notification", 248, 93);
+
+								var div_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(select_4, 2);
+
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(div_2, 21, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(locationNames), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, name) => {
+									var h2_1 = root_7();
+									var a_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(h2_1);
+
+									a_3.__click = [on_click, page, name];
+
+									var text_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(a_3);
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(a_3);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(h2_1);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_1, `${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(name) ?? ''} Alert Settings`));
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, h2_1);
 								});
-							}
 
-							var option_26 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_4);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_2);
 
-							option_26.value = option_26.__value = 'soundnotification';
+								var details = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(div_2, 8);
+								var div_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(details), 2);
 
-							var option_27 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_26);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(div_3, 21, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(orderedWarnings), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, key) => {
+									var fragment_4 = root_8();
+									var label_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_4);
+									var text_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(label_1, true);
 
-							option_27.value = option_27.__value = 'silentnotification';
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(label_1);
 
-							var option_28 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_27);
+									var select_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(label_1, 4);
+									var option_24 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_5);
 
-							option_28.value = option_28.__value = 'nothing';
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_5);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["alert-types"]["warnings"][key]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["warnings"], () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), 267, 28);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+									option_24.value = option_24.__value = 'alert';
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(
-								($0) => {
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_attribute(label_1, 'for', `setting-warning-${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key) ?? ''}`);
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_2, $0);
-								},
-								[
-									() => formatTitle(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), "Warning")
-								]
-							);
+									var node_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_24);
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_5, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["warnings"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["warnings"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)] = $$value);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_3);
-						});
+									{
+										var consequent_3 = ($$anchor) => {
+											var option_25 = root_9();
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_3);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(details);
+											option_25.value = option_25.__value = 'alertmove';
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, option_25);
+										};
 
-						var details_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(details, 2);
-						var div_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(details_1), 2);
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_5, ($$render) => {
+											if (!svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isDesktop)) $$render(consequent_3);
+										});
+									}
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(div_4, 21, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(orderedWatches), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, key) => {
-							var fragment_4 = root_9();
-							var label_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_4);
-							var text_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(label_2, true);
+									var option_26 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_5);
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(label_2);
+									option_26.value = option_26.__value = 'soundnotification';
 
-							var select_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(label_2, 4);
-							var option_29 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_6);
+									var option_27 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_26);
 
-							option_29.value = option_29.__value = 'alert';
+									option_27.value = option_27.__value = 'silentnotification';
 
-							var node_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_29);
+									var option_28 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_27);
 
-							{
-								var consequent_4 = ($$anchor) => {
-									var option_30 = root_10();
+									option_28.value = option_28.__value = 'nothing';
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_5);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["alert-types"]["warnings"][key]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["warnings"], () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), 268, 28);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
 
-									option_30.value = option_30.__value = 'alertmove';
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, option_30);
-								};
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(
+										($0) => {
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_attribute(label_1, 'for', `setting-warning-${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key) ?? ''}`);
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_2, $0);
+										},
+										[
+											() => formatTitle(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), "Warning")
+										]
+									);
 
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_5, ($$render) => {
-									if (!svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isDesktop)) $$render(consequent_4);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_5, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["warnings"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["warnings"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)] = $$value);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_4);
 								});
-							}
 
-							var option_31 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_5);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_3);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(details);
 
-							option_31.value = option_31.__value = 'soundnotification';
+								var details_1 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(details, 2);
+								var div_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(details_1), 2);
 
-							var option_32 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_31);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(div_4, 21, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(orderedWatches), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, key) => {
+									var fragment_5 = root_10();
+									var label_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_5);
+									var text_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(label_2, true);
 
-							option_32.value = option_32.__value = 'silentnotification';
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(label_2);
 
-							var option_33 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_32);
+									var select_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(label_2, 4);
+									var option_29 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_6);
 
-							option_33.value = option_33.__value = 'nothing';
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_6);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["alert-types"]["watches"][key]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["watches"], () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), 286, 28);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+									option_29.value = option_29.__value = 'alert';
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(
-								($0) => {
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_attribute(label_2, 'for', `setting-watch-${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key) ?? ''}`);
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_3, $0);
-								},
-								[() => formatTitle(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), "Watch")]
-							);
+									var node_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_29);
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_6, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["watches"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["watches"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)] = $$value);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_4);
-						});
+									{
+										var consequent_4 = ($$anchor) => {
+											var option_30 = root_11();
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_4);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(details_1);
+											option_30.value = option_30.__value = 'alertmove';
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, option_30);
+										};
 
-						var details_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(details_1, 2);
-						var div_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(details_2), 2);
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_6, ($$render) => {
+											if (!svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isDesktop)) $$render(consequent_4);
+										});
+									}
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(div_5, 21, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(orderedAdvisories), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, key) => {
-							var fragment_5 = root_11();
-							var label_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_5);
-							var text_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(label_3, true);
+									var option_31 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_6);
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(label_3);
+									option_31.value = option_31.__value = 'soundnotification';
 
-							var select_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(label_3, 4);
-							var option_34 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_7);
+									var option_32 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_31);
 
-							option_34.value = option_34.__value = 'alert';
+									option_32.value = option_32.__value = 'silentnotification';
 
-							var node_6 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_34);
+									var option_33 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_32);
 
-							{
-								var consequent_5 = ($$anchor) => {
-									var option_35 = root_12();
+									option_33.value = option_33.__value = 'nothing';
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_6);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["alert-types"]["watches"][key]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["watches"], () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), 287, 28);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
 
-									option_35.value = option_35.__value = 'alertmove';
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, option_35);
-								};
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(
+										($0) => {
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_attribute(label_2, 'for', `setting-watch-${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key) ?? ''}`);
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_3, $0);
+										},
+										[() => formatTitle(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), "Watch")]
+									);
 
-								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_6, ($$render) => {
-									if (!svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isDesktop)) $$render(consequent_5);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_6, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["watches"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["watches"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)] = $$value);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_5);
 								});
-							}
 
-							var option_36 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_6);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_4);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(details_1);
 
-							option_36.value = option_36.__value = 'soundnotification';
+								var details_2 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(details_1, 2);
+								var div_5 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(details_2), 2);
 
-							var option_37 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_36);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.each(div_5, 21, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(orderedAdvisories), svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.index, ($$anchor, key) => {
+									var fragment_6 = root_12();
+									var label_3 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.first_child(fragment_6);
+									var text_4 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(label_3, true);
 
-							option_37.value = option_37.__value = 'silentnotification';
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(label_3);
 
-							var option_38 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_37);
+									var select_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(label_3, 4);
+									var option_34 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.child(select_7);
 
-							option_38.value = option_38.__value = 'nothing';
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_7);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["alert-types"]["advisory"][key]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["advisory"], () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), 305, 28);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+									option_34.value = option_34.__value = 'alert';
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(
-								($0) => {
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_attribute(label_3, 'for', `setting-watch-${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key) ?? ''}`);
-									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_4, $0);
-								},
-								[
-									() => formatTitle(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), "Advisory")
-								]
-							);
+									var node_7 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_34);
 
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_7, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["advisory"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["advisory"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)] = $$value);
-							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_5);
-						});
+									{
+										var consequent_5 = ($$anchor) => {
+											var option_35 = root_13();
 
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_5);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(details_2);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text, `${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["page-transition-duration"] ?? ''}ms`));
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["weather"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["weather"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_1, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["alerts"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["alerts"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["theme"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["theme"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_value(input_2, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["page-transition-duration"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["page-transition-duration"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_3, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["atmos-logo"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["atmos-logo"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_5, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["update-notify"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["update-notify"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_6, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"]["severe-future"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"]["severe-future"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_7, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"]["rain-future"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"]["rain-future"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_8, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["watch"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["watch"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_9, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["advisories"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["advisories"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_10, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["warnings"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["warnings"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_11, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["spc-outlook"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["spc-outlook"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_12, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["satellite"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["satellite"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_13, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["high-res"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["high-res"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_1, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["color-scheme"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["color-scheme"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_14, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["tts-alerts"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["tts-alerts"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_2, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["alert-check-frequency"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["alert-check-frequency"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_3, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-alert"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-alert"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_4, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-notification"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-notification"] = $$value);
-						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, div);
+											option_35.value = option_35.__value = 'alertmove';
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, option_35);
+										};
+
+										svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_7, ($$render) => {
+											if (!svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(isDesktop)) $$render(consequent_5);
+										});
+									}
+
+									var option_36 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(node_7);
+
+									option_36.value = option_36.__value = 'soundnotification';
+
+									var option_37 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_36);
+
+									option_37.value = option_37.__value = 'silentnotification';
+
+									var option_38 = svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.sibling(option_37);
+
+									option_38.value = option_38.__value = 'nothing';
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(select_7);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.validate_binding('bind:value={allSettings["alert-types"]["advisory"][key]}', () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["advisory"], () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), 306, 28);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.next(2);
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(
+										($0) => {
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_attribute(label_3, 'for', `setting-watch-${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key) ?? ''}`);
+											svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text_4, $0);
+										},
+										[
+											() => formatTitle(svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key), "Advisory")
+										]
+									);
+
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_7, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["advisory"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["alert-types"]["advisory"][svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(key)] = $$value);
+									svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_6);
+								});
+
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div_5);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(details_2);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.reset(div);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.template_effect(() => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.set_text(text, `${svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["page-transition-duration"] ?? ''}ms`));
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["weather"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["weather"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_1, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["alerts"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location"]["alerts"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["theme"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["theme"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_value(input_2, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["page-transition-duration"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["page-transition-duration"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_3, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["atmos-logo"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["atmos-logo"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_5, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["update-notify"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["personalization"]["update-notify"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_6, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"]["severe-future"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"]["severe-future"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_7, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"]["rain-future"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["notifications"]["rain-future"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_8, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["watch"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["watch"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_9, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["advisories"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["advisories"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_10, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["warnings"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["warnings"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_11, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["spc-outlook"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["spc-outlook"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_12, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["satellite"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["satellite"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_13, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["high-res"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["polygons"]["high-res"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_1, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["color-scheme"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["radar"]["color-scheme"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_checked(input_14, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["tts-alerts"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["tts-alerts"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_2, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["alert-check-frequency"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["alert-check-frequency"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_3, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-alert"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-alert"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.bind_select_value(select_4, () => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-notification"], ($$value) => svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)["location-alerts"]["default-notification"] = $$value);
+								svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, div);
+							};
+
+							svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_3, ($$render) => {
+								if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)) $$render(consequent_6);
+							});
+						}
+
+						svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.append($$anchor, fragment_2);
 					};
 
-					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node_2, ($$render) => {
-						if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.get(allSettings)) $$render(consequent_6);
+					svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__["if"](node, ($$render) => {
+						if (svelte_internal_client__WEBPACK_IMPORTED_MODULE_1__.strict_equals(page(), "settings")) $$render(consequent_7);
 					});
 				}
 

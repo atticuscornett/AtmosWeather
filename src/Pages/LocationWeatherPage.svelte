@@ -9,6 +9,7 @@
     let editing = $state(false);
     let widgets = $state();
     let addingTemplate = $state(false);
+    let readyToLoad = $state(false);
 
     function removeLocation(){
         let locations = JSON.parse(localStorage.getItem("weather-locations"));
@@ -95,10 +96,13 @@
             widgetLayout = templates[templateCode.replace("Template:", "")];
             widgetLayout.push([templateCode]);
         }
+
+        readyToLoad = true;
     }
 
 </script>
 <TabSlot name="location-{locationData.name}" bind:page={page} onOpen={refreshWidgets}>
+    {#if readyToLoad}
     <h1>{locationData.name}</h1>
     <br>
 
@@ -139,6 +143,7 @@
         {#if locationData.name !== "Current Location"}
             <button onclick={removeLocation}>Remove This Location</button>
         {/if}
+    {/if}
     {/if}
 </TabSlot>
 

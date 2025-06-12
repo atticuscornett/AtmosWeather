@@ -124,6 +124,7 @@
 </script>
 
 <TabSlot name="settings" bind:page={page} onOpen={refreshSettings}>
+    {#if page === "settings"}
     <h1>Settings</h1>
     <h6>
         <a href="#" onclick={page = "about"}>About Atmos Weather</a>
@@ -316,5 +317,6 @@
             </div>
         </details>
     </div>
+    {/if}
     {/if}
 </TabSlot>
