@@ -32,14 +32,6 @@
             <button onclick={addWidget} value="SunriseSunset">Sunrise/Sunset</button>
             <button onclick={addWidget} value="UVIndex">UV Index</button>
             <button onclick={addWidget} value="RadarGlance">Radar Preview</button>
-        </details>
-
-        <details>
-            <summary>Advanced</summary>
-        </details>
-
-        <details>
-            <summary>15-minute Forecasts</summary>
             <button onclick={addWidget} value="Next15Minutes">Next 15 Minutes</button>
         </details>
 
