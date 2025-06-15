@@ -50,5 +50,6 @@
         text-align: center;
         padding-top: 15px;
         padding-bottom: 15px;
+        height: calc(100% - 30px);
     }
 </style>
