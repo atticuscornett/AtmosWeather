@@ -704,28 +704,29 @@ body.dark details[open] summary{
         margin-top: 10px;
     }
 
-    .centerContainer.svelte-105udsc {
+    .centerContainer.svelte-1p9wn3w {
         background: #555;
         border-radius: 7px;
         margin-bottom: 15px;
-        height: 100%;
+        height: calc(100% - 30px);
         color: white;
         text-align: center;
         padding-top: 15px;
         padding-bottom: 15px;
     }
 
-    h1.svelte-105udsc {
+    h1.svelte-1p9wn3w {
         padding-top: 1px;
     }
 
-    div.svelte-13sphys {
+    div.svelte-nfndrm {
         background: #555;
         border-radius: 7px;
         color: white;
         text-align: center;
         padding-top: 15px;
         padding-bottom: 15px;
+        height: calc(100% - 30px);
     }
 
     div.svelte-1t969oa {
