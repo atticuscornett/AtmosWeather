@@ -83,7 +83,7 @@
         <br>
     {/if}
 {:else}
-    <div class="location {barClass}" onclick={page = "location-" + locationData.name}>
+    <div class="location {barClass}" onclick={()=>{page = "location-" + locationData.name}}>
         <div class="imgContainer">
             <img alt="Weather Status - {image}" src="img/{image}.svg">
         </div>
