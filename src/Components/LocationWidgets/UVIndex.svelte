@@ -32,14 +32,25 @@
 
     }
 
+    let getUVIndexText = (value) => {
+        // Generate text description according to https://www.epa.gov/sites/default/files/documents/uviguide.pdf
+        if (value === "Loading...") return "Loading...";
+
+        if (value < 3) return "Low";
+        if (value < 6) return "Moderate";
+        if (value < 8) return "High";
+        if (value < 11) return "Very High";
+        return "Extreme";
+    }
+
     getUVIndex();
 </script>
 
 <div>
     <img src="img/uv-index.svg" alt="UV Index Icon" width="75">
-    <h3>UV Index: {UVIndex}</h3>
-    <h3>UV Index (Clear Sky): {UVIndexClear}</h3>
-    <h3>Max UV Index (24 Hours): {UVIndexMax24}</h3>
+    <h3>UV Index: {UVIndex} ({getUVIndexText(UVIndex)})</h3>
+    <h3>UV Index (Clear Sky): {UVIndexClear} ({getUVIndexText(UVIndexClear)})</h3>
+    <h3>Max UV Index (24 Hours): {UVIndexMax24} ({getUVIndexText(UVIndexMax24)})</h3>
 </div>
 
 <style>
