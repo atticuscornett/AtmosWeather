@@ -6,6 +6,7 @@
     let map;
 
     let refreshRadar = () => {
+        console.log(locationData)
         if (map){
             map.remove();
         }
@@ -54,7 +55,14 @@
 <h2>Radar Preview</h2>
 <div id="location-radar-{randomId}">
 </div>
-<button onclick={()=>{page="radar";}}>Go To Radar Page</button>
+<button onclick={()=>{
+    let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+    let locationIndex = locationNames.indexOf(locationData.name);
+    setTimeout(()=>{
+        radarJumpTo(locationIndex)
+    }, 5000);
+    page="radar";
+}}>Go To Radar Page</button>
 
 <style>
     div {
