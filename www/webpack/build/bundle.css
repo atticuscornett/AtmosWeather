@@ -719,7 +719,7 @@ body.dark details[open] summary{
         padding-top: 1px;
     }
 
-    div.svelte-nfndrm {
+    div.svelte-my0air {
         background: #555;
         border-radius: 7px;
         color: white;
@@ -727,6 +727,31 @@ body.dark details[open] summary{
         padding-top: 15px;
         padding-bottom: 15px;
         height: calc(100% - 30px);
+    }
+
+    .low.svelte-my0air {
+        background: #3ec770;
+        background: linear-gradient(143deg, rgba(62, 199, 112, 1) 0%, rgba(0, 181, 66, 1) 100%);
+    }
+
+    .moderate.svelte-my0air {
+        background: #f0c330;
+        background: linear-gradient(143deg, rgba(240, 195, 48, 1) 0%, rgba(255, 170, 0, 1) 100%);
+    }
+
+    .high.svelte-my0air {
+        background: #f08c30;
+        background: linear-gradient(143deg, rgba(240, 140, 48, 1) 0%, rgba(255, 100, 0, 1) 100%);
+    }
+
+    .very-high.svelte-my0air {
+        background: #f03030;
+        background: linear-gradient(143deg, rgba(240, 48, 48, 1) 0%, rgba(255, 0, 0, 1) 100%);
+    }
+
+    .extreme.svelte-my0air {
+        background: #f03030;
+        background: linear-gradient(143deg, rgba(240, 48, 48, 1) 0%, rgba(255, 0, 0, 1) 100%);
     }
 
     div.svelte-1t969oa {

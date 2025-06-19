@@ -46,7 +46,7 @@
     getUVIndex();
 </script>
 
-<div>
+<div class={getUVIndexText(UVIndex).toLocaleLowerCase()}>
     <img src="img/uv-index.svg" alt="UV Index Icon" width="75">
     <h3>UV Index: {UVIndex} ({getUVIndexText(UVIndex)})</h3>
     <h3>UV Index (Clear Sky): {UVIndexClear} ({getUVIndexText(UVIndexClear)})</h3>
@@ -62,5 +62,30 @@
         padding-top: 15px;
         padding-bottom: 15px;
         height: calc(100% - 30px);
+    }
+
+    .low {
+        background: #3ec770;
+        background: linear-gradient(143deg, rgba(62, 199, 112, 1) 0%, rgba(0, 181, 66, 1) 100%);
+    }
+
+    .moderate {
+        background: #f0c330;
+        background: linear-gradient(143deg, rgba(240, 195, 48, 1) 0%, rgba(255, 170, 0, 1) 100%);
+    }
+
+    .high {
+        background: #f08c30;
+        background: linear-gradient(143deg, rgba(240, 140, 48, 1) 0%, rgba(255, 100, 0, 1) 100%);
+    }
+
+    .very-high {
+        background: #f03030;
+        background: linear-gradient(143deg, rgba(240, 48, 48, 1) 0%, rgba(255, 0, 0, 1) 100%);
+    }
+
+    .extreme {
+        background: #f03030;
+        background: linear-gradient(143deg, rgba(240, 48, 48, 1) 0%, rgba(255, 0, 0, 1) 100%);
     }
 </style>
