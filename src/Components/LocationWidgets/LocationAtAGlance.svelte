@@ -26,7 +26,7 @@
     });
 </script>
 
-<div class="location {locationData.alert}" onclick={page = "location-" + locationData.name}>
+<div class="location {locationData.alert}">
     <div class="imgContainer">
         <img style="vertical-align:center;" src="img/{image}.svg">
     </div>
