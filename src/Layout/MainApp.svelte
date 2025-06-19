@@ -17,6 +17,8 @@
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
     let alertSelection = $state({});
+    let lastPage = "locations";
+    let currentPage = "locations";
 
     $inspect(weatherDataDictionary);
 
@@ -71,6 +73,19 @@
     window.setNWSAvailable = (value) => {
         nwsAvailable = value;
     }
+
+    // Update back button history
+    $effect(() => {
+        lastPage = currentPage;
+        currentPage = page;
+    })
+
+    // Set up the back button listener
+    setTimeout(() => {
+        cap.addBackButtonListener(() => {
+            page = lastPage;
+        })
+    }, 200);
 
     getCurrentLocation();
 </script>

@@ -3,6 +3,7 @@ import '@capacitor/core';
 // import { Geolocation } from '@capacitor/geolocation';
 //import { polygon, simplify, area} from '@turf/turf';
 import {Capacitor, registerPlugin} from "@capacitor/core";
+import { App } from '@capacitor/app';
 
 let lastBackup = 5;
 
@@ -43,6 +44,12 @@ export async function syncPreferences(){
 	}
 	NativeStorage.setItem("localStorageBackup", JSON.stringify(localStorage), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
 	lastBackup = 0;
+}
+
+export async function addBackButtonListener(callback){
+	App.addListener('backButton', (data) => {
+		callback(data);
+	});
 }
 
 // export function simplifyToFourPoints(originalPolygon){
