@@ -19,6 +19,7 @@
     import AQINext3Days from "./LocationWidgets/AQINext3Days.svelte";
     import UVIndex from "./LocationWidgets/UVIndex.svelte";
     import RadarGlance from "./LocationWidgets/RadarGlance.svelte";
+    import MoonPhase from "./LocationWidgets/MoonPhase.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -95,6 +96,9 @@
                 {/if}
                 {#if widget === "RadarGlance"}
                     <RadarGlance locationData={locationData} bind:page={page}/>
+                {/if}
+                {#if widget === "MoonPhase"}
+                    <MoonPhase/>
                 {/if}
             </div>
         {/each}

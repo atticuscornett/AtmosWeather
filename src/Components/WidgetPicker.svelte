@@ -30,6 +30,7 @@
             <button onclick={addWidget} value="WeekAtAGlance">Week At A Glance</button>
             <button onclick={addWidget} value="LongNWSForecast">NWS Full-text Forecast</button>
             <button onclick={addWidget} value="SunriseSunset">Sunrise/Sunset</button>
+            <button onclick={addWidget} value="MoonPhase">Moon Phase</button>
             <button onclick={addWidget} value="UVIndex">UV Index</button>
             <button onclick={addWidget} value="RadarGlance">Radar Preview</button>
             <button onclick={addWidget} value="Next15Minutes">Next 15 Minutes</button>

@@ -772,6 +772,40 @@ body.dark details[open] summary{
         margin-bottom: 7px;
     }
 
+    div.svelte-vhhro2 {
+        background: #555;
+        border-radius: 7px;
+        color: white;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        height: calc(100% - 30px);
+    }
+
+    h1.svelte-vhhro2 {
+        font-size: 5em;
+        margin: 0;
+    }
+
+    h3.svelte-vhhro2, h4.svelte-vhhro2 {
+        margin: 0;
+    }
+
+    .dark.svelte-vhhro2 {
+        background: #051726;
+        background: linear-gradient(130deg, rgba(5, 23, 38, 0.95) 0%, rgba(44, 62, 102, 1) 100%);
+    }
+
+    .medium.svelte-vhhro2 {
+        background: #2c3e66;
+        background: linear-gradient(130deg, rgba(44, 62, 102, 0.95) 0%, rgba(59, 88, 163, 1) 100%);
+    }
+
+    .bright.svelte-vhhro2 {
+        background: #3b58a3;
+        background: linear-gradient(130deg, rgba(59, 88, 163, 0.95) 0%, rgba(85, 116, 194, 1) 100%);
+    }
+
     .widgetRow.svelte-18wecqf {
         display: flex;
         overflow: auto;
