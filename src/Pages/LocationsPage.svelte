@@ -51,7 +51,7 @@
     }
 
     let refreshLocations = async () => {
-        let tempWeatherDataDictionary = JSON.parse(JSON.stringify(weatherDataDictionary));
+        let tempWeatherDataDictionary = {};
         if (page !== "locations"){
             return;
         }

@@ -100,6 +100,13 @@
         readyToLoad = true;
     }
 
+    $effect(()=>{
+        if (readyToLoad && page !== "location-" + locationData.name){
+            readyToLoad = false;
+        }
+    })
+
+
 </script>
 <TabSlot name="location-{locationData.name}" bind:page={page} onOpen={refreshWidgets}>
     {#if readyToLoad}
