@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 3000000,
-      "versionName": "3.0.0-prealpha.1",
+      "versionCode": 3000001,
+      "versionName": "3.0.0-alpha.1",
       "outputFile": "app-release.apk"
     }
   ],

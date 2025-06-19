@@ -1,7 +1,7 @@
 {
   "name": "io.atticusc.atmosweather",
   "displayName": "Atmos Weather",
-  "version": "3.0.0-prealpha.1",
+  "version": "3.0.0-alpha.1",
   "description": "A lightweight weather app for alerts and forecasts.",
   "main": "atmos-ui.js",
   "scripts": {
