@@ -3,7 +3,7 @@ setTimeout(() => {
     window.PermissionManagement = cap.getPlugin("PermissionManagement")
 }, 100);
 
-
+let updateFiles = false;
 
 window.atmosVersion = "3.0.0-prealpha.1";
 window.atmosUpdated = "12-11-2024";
@@ -24,7 +24,7 @@ window.atmosUpdateNotes = `
 // Sync files with native code
 window.syncFiles = () => {
     if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa") && !getPlatform().includes("unknown")) {
-        cap.syncPreferences();
+        updateFiles = true;
     }
 }
 
@@ -96,3 +96,15 @@ setInterval(async () => {
 setTimeout(async () => {
     setNWSAvailable(await checkAPIstatus());
 }, 100);
+
+// Update files maximum of once per second
+setInterval(async () => {
+    if (updateFiles) {
+        updateFiles = false;
+        try {
+            cap.syncPreferences();
+        } catch (err) {
+            console.error("Error updating files:", err);
+        }
+    }
+}, 1000);

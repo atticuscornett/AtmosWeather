@@ -4,6 +4,8 @@ import '@capacitor/core';
 //import { polygon, simplify, area} from '@turf/turf';
 import {Capacitor, registerPlugin} from "@capacitor/core";
 
+let lastBackup = 5;
+
 export async function getDevice(){
 	window.deviceInfo = {};
 	window.deviceInfo.platform = Capacitor.getPlatform();
@@ -20,19 +22,27 @@ export function getPlugin(plugin){
 // }
 
 export async function syncPreferences(){
-    NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("old-alerts", JSON.parse(localStorage.getItem("nws-alerts-old")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("nws-alerts-cache", JSON.parse(localStorage.getItem("nws-alerts-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("nominatim-storage", JSON.parse(localStorage.getItem("nominatim-storage")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("nws-alerts-current", JSON.parse(localStorage.getItem("nws-alerts-current")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("nws-hourly-forecast-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("nws-forecast-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("nws-boundaries-cache", JSON.parse(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("notice-weatherAlerts", JSON.parse(localStorage.getItem("notice-weatherAlerts")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+    NativeStorage.setItem("settings", JSON.stringify(localStorage.getItem("atmos-settings")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("locations", JSON.stringify(localStorage.getItem("weather-locations")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("location-names", JSON.stringify(localStorage.getItem("weather-location-names")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("location-cache", JSON.stringify(localStorage.getItem("nws-location-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	//NativeStorage.setItem("old-alerts", JSON.stringify(localStorage.getItem("nws-alerts-old")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	//NativeStorage.setItem("nws-alerts-cache", JSON.stringify(localStorage.getItem("nws-alerts-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	//NativeStorage.setItem("nominatim-storage", JSON.stringify(localStorage.getItem("nominatim-storage")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	//NativeStorage.setItem("nws-alerts-current", JSON.stringify(localStorage.getItem("nws-alerts-current")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	//NativeStorage.setItem("nws-hourly-forecast-cache", JSON.stringify(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	//NativeStorage.setItem("nws-forecast-cache", JSON.stringify(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	//NativeStorage.setItem("nws-boundaries-cache", JSON.stringify(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	//NativeStorage.setItem("notice-weatherAlerts", JSON.stringify(localStorage.getItem("notice-weatherAlerts")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+
+	// Only backup full localStorage every 5 syncs (for performance reasons)
+	// This backup is in preparation for future Capacitor major version updates, which may clear localStorage
+	if (lastBackup < 5){
+		lastBackup++;
+		return;
+	}
 	NativeStorage.setItem("localStorageBackup", JSON.stringify(localStorage), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	lastBackup = 0;
 }
 
 // export function simplifyToFourPoints(originalPolygon){

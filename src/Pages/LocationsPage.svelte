@@ -51,11 +51,13 @@
     }
 
     let refreshLocations = async () => {
+        let tempWeatherDataDictionary = JSON.parse(JSON.stringify(weatherDataDictionary));
         if (page !== "locations"){
             return;
         }
 
         refreshWidgets();
+
 
         alertLocations = [];
         otherLocations = [];
@@ -67,7 +69,7 @@
         showCurrentLocation = settings["location"]["weather"];
 
         if (showCurrentLocation){
-            weatherDataDictionary["Current Location"] = {"name": "Current Location", "hourly": []};
+            tempWeatherDataDictionary["Current Location"] = {"name": "Current Location", "hourly": []};
             getCurrentLocation(() => {
                 if (window.currentLat) {
                     setTimeout(getWeatherAlertsForPosAsync.bind(null, window.currentLat, window.currentLong, (alerts) => {
@@ -129,8 +131,8 @@
                     }), 50);
                 }
                 else {
-                    weatherDataDictionary["Current Location"].denied = true;
-                    mainLocations.unshift(weatherDataDictionary["Current Location"]);
+                    tempWeatherDataDictionary["Current Location"].denied = true;
+                    mainLocations.unshift(tempWeatherDataDictionary["Current Location"]);
                 }
             });
         }
@@ -159,28 +161,28 @@
                         setTimeout(()=>{
                             getForecastAsync(nomRes, (forecast) => {
                                 locationData.forecast = forecast;
-                                weatherDataDictionary[nomLocationNames[i]] = locationData;
+                                tempWeatherDataDictionary[nomLocationNames[i]] = locationData;
                             });
 
                             getAdditionalWeatherDataForNomAsync(nomLocations[i], (additionalData) => {
                                 locationData.openMeteoData = additionalData;
-                                weatherDataDictionary[nomLocationNames[i]] = locationData;
+                                tempWeatherDataDictionary[nomLocationNames[i]] = locationData;
                             }, getWidgetsForLocation(nomLocationNames[i]));
 
                             getCurrentAQIForNomAsync(nomLocations[i], (AQI, currentTimeIndex) => {
                                 locationData.AQI = AQI["hourly"]["us_aqi"][currentTimeIndex];
                                 locationData.AirQualityAPIIndex = currentTimeIndex;
                                 locationData.AirQualityAPI = AQI;
-                                weatherDataDictionary[nomLocationNames[i]] = locationData;
+                                tempWeatherDataDictionary[nomLocationNames[i]] = locationData;
                             }, getWidgetsForLocation(nomLocationNames[i]));}, Math.random()*250);
 
                         getCurrentAQIForPositionAsync(currentLat, currentLong, (AQI, currentTimeIndex) => {
-                            weatherDataDictionary["Current Location"].AQI = AQI["hourly"]["us_aqi"][currentTimeIndex];
-                            weatherDataDictionary["Current Location"].AirQualityAPIIndex = currentTimeIndex;
-                            weatherDataDictionary["Current Location"].AirQualityAPI = AQI;
+                            tempWeatherDataDictionary["Current Location"].AQI = AQI["hourly"]["us_aqi"][currentTimeIndex];
+                            tempWeatherDataDictionary["Current Location"].AirQualityAPIIndex = currentTimeIndex;
+                            tempWeatherDataDictionary["Current Location"].AirQualityAPI = AQI;
                         });
 
-                        weatherDataDictionary[nomLocationNames[i]] = locationData;
+                        tempWeatherDataDictionary[nomLocationNames[i]] = locationData;
 
                         if (!hourly[0]){
                             queueRefresh();
@@ -204,6 +206,7 @@
         }
 
         let renderLocationsSimultaneous = ()=>{
+            console.log("Attempting to render locations simultaneously...");
             if (loadedLocations !== nomLocations.length){
                 setTimeout(renderLocationsSimultaneous, 300);
                 return;
@@ -212,6 +215,7 @@
             alertLocations = alertLocations.concat(alertLocationsDefer);
             otherLocations = otherLocations.concat(otherLocationsDefer);
             mainLocations = mainLocations.concat(mainLocationsDefer);
+            weatherDataDictionary = tempWeatherDataDictionary;
 
             removeLoadingKey("allLocations");
 
