@@ -603,41 +603,41 @@ body.dark details[open] summary{
         height: 100%;
     }
 
-    .text-holder.svelte-cfysft {
+    .text-holder.svelte-wktxbt {
         display: inline-block;
     }
 
-    .spaced-holder.svelte-cfysft {
+    .spaced-holder.svelte-wktxbt {
         margin-right: 40px;
     }
 
-    h4.svelte-cfysft {
+    h4.svelte-wktxbt {
         width: fit-content;
         margin-bottom: 0;
     }
 
-    h3.svelte-cfysft {
+    h3.svelte-wktxbt {
         margin-bottom: 0;
     }
 
-    h2.svelte-cfysft {
+    h2.svelte-wktxbt {
         margin-bottom: 0;
     }
 
-    .centerContainer.svelte-cfysft {
+    .centerContainer.svelte-wktxbt {
         display: flex;
         justify-content: center;
         align-items: center;
         background: #555;
         border-radius: 7px;
         margin-bottom: 15px;
-        height: 100%;
+        height: calc(100% - 30px);
         color: white;
         flex-direction: column;
         padding-bottom: 15px;
     }
 
-    img.svelte-cfysft {
+    img.svelte-wktxbt {
         margin-top: 10px;
     }
 
@@ -666,41 +666,41 @@ body.dark details[open] summary{
         margin-bottom: 0;
     }
 
-    .text-holder.svelte-cfysft {
+    .text-holder.svelte-wktxbt {
         display: inline-block;
     }
 
-    .spaced-holder.svelte-cfysft {
+    .spaced-holder.svelte-wktxbt {
         margin-right: 40px;
     }
 
-    h4.svelte-cfysft {
+    h4.svelte-wktxbt {
         width: fit-content;
         margin-bottom: 0;
     }
 
-    h3.svelte-cfysft {
+    h3.svelte-wktxbt {
         margin-bottom: 0;
     }
 
-    h2.svelte-cfysft {
+    h2.svelte-wktxbt {
         margin-bottom: 0;
     }
 
-    .centerContainer.svelte-cfysft {
+    .centerContainer.svelte-wktxbt {
         display: flex;
         justify-content: center;
         align-items: center;
         background: #555;
         border-radius: 7px;
         margin-bottom: 15px;
-        height: 100%;
+        height: calc(100% - 30px);
         color: white;
         flex-direction: column;
         padding-bottom: 15px;
     }
 
-    img.svelte-cfysft {
+    img.svelte-wktxbt {
         margin-top: 10px;
     }
 

@@ -82,7 +82,7 @@
         background: #555;
         border-radius: 7px;
         margin-bottom: 15px;
-        height: 100%;
+        height: calc(100% - 30px);
         color: white;
         flex-direction: column;
         padding-bottom: 15px;
