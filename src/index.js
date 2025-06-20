@@ -23,10 +23,10 @@ export function getPlugin(plugin){
 // }
 
 export async function syncPreferences(){
-    NativeStorage.setItem("settings", JSON.stringify(localStorage.getItem("atmos-settings")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("locations", JSON.stringify(localStorage.getItem("weather-locations")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("location-names", JSON.stringify(localStorage.getItem("weather-location-names")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("location-cache", JSON.stringify(localStorage.getItem("nws-location-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+    NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
 	//NativeStorage.setItem("old-alerts", JSON.stringify(localStorage.getItem("nws-alerts-old")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
 	//NativeStorage.setItem("nws-alerts-cache", JSON.stringify(localStorage.getItem("nws-alerts-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
 	//NativeStorage.setItem("nominatim-storage", JSON.stringify(localStorage.getItem("nominatim-storage")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
