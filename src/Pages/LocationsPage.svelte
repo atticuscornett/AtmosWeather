@@ -28,6 +28,12 @@
         }
     }
 
+    let templates = {
+        default: [],
+        dense: [["LocationAtAGlance", "AirQualityIndex", "UVIndex"], ["SunriseSunset", "MoonPhase"], ["GraphSwitcher"], ["RadarGlance"]]
+    };
+    window.widgetTemplates = templates;
+
     let refreshWidgets = () => {
         if (localStorage.getItem("widgets") === null){
             localStorage.setItem("widgets", "{}");
@@ -43,11 +49,28 @@
     }
 
     let getWidgetsForLocation = (location) => {
+        templates["default"] = JSON.parse(localStorage.getItem("default-widgets"));
+
+        if (templates["default"] === null){
+            templates["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]];
+            localStorage.setItem("default-widgets", JSON.stringify(templates["default"]));
+        }
+
+        let widgetLayout;
         if (widgetDictionary[location] === undefined){
             return widgetDictionary["default"];
         }
+        else {
+            widgetLayout = widgetDictionary[location];
+        }
 
-        return widgetDictionary[location];
+        if (widgetLayout[0].includes("Template:")){
+            let templateCode = widgetLayout[0];
+            widgetLayout = templates[templateCode.replace("Template:", "")];
+            widgetLayout.push([templateCode]);
+        }
+
+        return widgetLayout
     }
 
     let refreshLocations = async () => {
