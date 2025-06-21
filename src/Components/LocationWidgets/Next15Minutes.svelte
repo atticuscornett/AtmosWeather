@@ -47,18 +47,20 @@
     });
 </script>
 
-<h2>Next 15 Minutes</h2>
 {#if locationData.openMeteoData && dataAvailable}
-    <div class="widgetOutline clear-border">
-        <div class="column">
-            <h3>Temperature: {minutelyData["temp"]}° F</h3>
-            <h3>Feels Like: {minutelyData["apparent_temp"]}° F</h3>
-            <h3>Precipitation: {minutelyData["precip"]} in</h3>
-        </div>
-        <div class="column">
-            <h3>Wind Speed: {minutelyData["wind_speed"]} mph</h3>
-            <h3>Wind Gusts: {minutelyData["wind_gusts"]} mph</h3>
-            <h3>Visibility: {minutelyData["visibility"]}</h3>
+    <div class="clear-border">
+        <h2>Next 15 Minutes</h2>
+        <div class="widgetOutline">
+            <div class="column">
+                <h3>Temperature: {minutelyData["temp"]}° F</h3>
+                <h3>Feels Like: {minutelyData["apparent_temp"]}° F</h3>
+                <h3>Precipitation: {minutelyData["precip"]} in</h3>
+            </div>
+            <div class="column">
+                <h3>Wind Speed: {minutelyData["wind_speed"]} mph</h3>
+                <h3>Wind Gusts: {minutelyData["wind_gusts"]} mph</h3>
+                <h3>Visibility: {minutelyData["visibility"]}</h3>
+            </div>
         </div>
     </div>
 {:else}
