@@ -204,6 +204,22 @@
             return title + " " + ending;
         }
     }
+
+    function removeLocation(){
+        let locations = JSON.parse(localStorage.getItem("weather-locations"));
+        let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+        let name = locationData.name;
+        // Disable the remove location button to prevent accidental double taps causing multiple locations to be removed.
+        let index = locationNames.indexOf(name);
+        if (index === -1){
+            return;
+        }
+        locationNames.splice(index, 1);
+        locations.splice(index, 1);
+        localStorage.setItem("weather-locations", JSON.stringify(locations));
+        localStorage.setItem("weather-location-names", JSON.stringify(locationNames));
+        page = "locations";
+    }
 </script>
 
 <TabSlot name="settings-{locationData.name}" bind:page={page} onOpen={refreshSettings}>
@@ -303,7 +319,22 @@
                 {/each}
             </div>
         </details>
+        <hr>
+        <button class="removeLocation" onclick={removeLocation}>Remove This Location</button>
     </div>
     {/if}
     {/if}
 </TabSlot>
+
+<style>
+    .removeLocation {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Secular One, sans-serif;
+    }
+</style>

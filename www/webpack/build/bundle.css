@@ -965,6 +965,17 @@ body.dark details[open] summary{
         font-size: 15px;
     }
 
+    .removeLocation.svelte-pssn8w {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Secular One, sans-serif;
+    }
+
     #android-permission-setup.svelte-x0w4it{
         z-index: 99;
         position: absolute;
