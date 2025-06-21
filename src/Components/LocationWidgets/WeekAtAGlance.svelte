@@ -128,6 +128,7 @@
         justify-content: space-around;
         overflow-x: auto;
         margin-bottom: 15px;
+        width: calc(100vw - 50px);
     }
 
     .daily-look {

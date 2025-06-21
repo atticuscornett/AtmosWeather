@@ -642,14 +642,15 @@ body.dark details[open] summary{
         margin-top: 10px;
     }
 
-    .look-container.svelte-101f7iy {
+    .look-container.svelte-z26epr {
         display: flex;
         justify-content: space-around;
         overflow-x: auto;
         margin-bottom: 15px;
+        width: calc(100vw - 50px);
     }
 
-    .daily-look.svelte-101f7iy {
+    .daily-look.svelte-z26epr {
         display: inline-block;
         margin-right: 20px;
         border: black 5px solid;
@@ -659,11 +660,11 @@ body.dark details[open] summary{
         padding: 15px;
     }
 
-    body.dark .daily-look.svelte-101f7iy {
+    body.dark .daily-look.svelte-z26epr {
         border: white 5px solid;
     }
 
-    h3.svelte-101f7iy, h4.svelte-101f7iy, h5.svelte-101f7iy {
+    h3.svelte-z26epr, h4.svelte-z26epr, h5.svelte-z26epr {
         margin-bottom: 0;
     }
 
