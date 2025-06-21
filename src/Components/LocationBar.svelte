@@ -34,10 +34,13 @@
                 }
             }
 
+            let warningCountText = (locationData.fullStatus[1] !== 1) ? " warnings" : " warning";
+            let watchCountText = (locationData.fullStatus[2] !== 1) ? " watches" : " watch";
+
             if (locationData.alert === "warning"){
                 image = "warning";
                 if (locationData.name !== "Current Location"){
-                    info = locationData.fullStatus[1].toString() + " warning(s) and " + locationData.fullStatus[2].toString() + " watch(es)";
+                    info = locationData.fullStatus[1].toString() + " " + warningCountText + " and " + locationData.fullStatus[2].toString() + " " + watchCountText;
                 }
                 else{
                     info = "A warning is in effect for your location.";
@@ -45,7 +48,7 @@
             }
             if (locationData.alert === "watch"){
                 if (locationData.name !== "Current Location"){
-                    info = locationData.fullStatus[2].toString() + " watch(es)";
+                    info = locationData.fullStatus[2].toString() + " " + watchCountText;
                 }
                 else{
                     info = "A watch is in effect for your location.";
