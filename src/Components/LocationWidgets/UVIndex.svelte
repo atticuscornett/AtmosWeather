@@ -62,6 +62,16 @@
         padding-top: 15px;
         padding-bottom: 15px;
         height: calc(100% - 30px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+        flex-direction: column;
+    }
+
+    h3 {
+        margin-bottom: 2px;
+        margin-top: 2px;
     }
 
     .low {
