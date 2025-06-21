@@ -30,7 +30,8 @@
 
     let templates = {
         default: [],
-        dense: [["LocationAtAGlance", "AirQualityIndex", "UVIndex"], ["SunriseSunset", "MoonPhase"], ["GraphSwitcher"], ["RadarGlance"]]
+        dense: [["LocationAtAGlance", "AirQualityIndex", "UVIndex"], ["SunriseSunset", "MoonPhase"], ["GraphSwitcher"], ["RadarGlance"]],
+        conditions: [["LocationAtAGlance"], ["Next15Minutes"], ["GraphSwitcher"], ["WeekAtAGlance"], ["RadarGlance"]]
     };
     window.widgetTemplates = templates;
 

@@ -549,31 +549,31 @@ body.dark details[open] summary{
         margin-bottom: 7px;
     }
 
-    .column.svelte-169h7ai {
+    .column.svelte-1ck9dkt {
         display: flex;
         flex-direction: column;
     }
 
-    .widgetOutline.svelte-169h7ai {
+    .widgetOutline.svelte-1ck9dkt {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
 
     }
 
-    h2.svelte-169h7ai {
+    h2.svelte-1ck9dkt {
         text-align: center;
-        margin-top: 0;
+        margin-top: 10px;
     }
 
-    .clear-border.svelte-169h7ai{
+    .clear-border.svelte-1ck9dkt{
         border: black solid;
         border-radius: 7px;
         box-shadow: 0 0 7px #898989;
         padding: 0 20px 0 20px;
     }
 
-    body.dark .clear-border.svelte-169h7ai{
+    body.dark .clear-border.svelte-1ck9dkt{
         border: white solid;
         border-radius: 7px;
         box-shadow: 0 0 7px #898989;

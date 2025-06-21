@@ -82,7 +82,7 @@
 
     h2 {
         text-align: center;
-        margin-top: 0;
+        margin-top: 10px;
     }
 
     .clear-border{

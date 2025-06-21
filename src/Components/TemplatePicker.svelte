@@ -35,6 +35,7 @@
 
         <button onclick={selectTemplate} value="default">Default Template</button>
         <button onclick={selectTemplate} value="dense">Dense Tiles</button>
+        <button onclick={selectTemplate} value="conditions">Conditions At A Glance</button>
     </div>
 </div>
 
