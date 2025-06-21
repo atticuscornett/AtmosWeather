@@ -405,31 +405,32 @@ body.dark details[open] summary{
     }
 
 
-   .imgContainer.svelte-1k5846i{
+   .imgContainer.svelte-hri9sp{
        display: inline-block;
-       margin-top: 20px;
+       margin-top: 25px;
+       vertical-align: top;
    }
 
-   .error.svelte-1k5846i{
+   .error.svelte-hri9sp{
        background-color: darkslategray !important;
    }
 
-   .errorImg.svelte-1k5846i {
+   .errorImg.svelte-hri9sp {
        vertical-align: center;
        animation: loadAnim infinite 2s;
    }
 
-   .statusImg.svelte-1k5846i {
+   .statusImg.svelte-hri9sp {
        vertical-align: center;
    }
 
-   .locationView.svelte-1k5846i {
+   .locationView.svelte-hri9sp {
        display:inline-block;
        margin-left:8px;
        margin-right:8px;
    }
 
-    .location.svelte-1k5846i{
+    .location.svelte-hri9sp{
         background-color: blue;
         color: white;
         border-radius: 7px;
@@ -444,7 +445,7 @@ body.dark details[open] summary{
         height: 100%;
     }
 
-    h3.svelte-1k5846i {
+    h3.svelte-hri9sp {
         margin-right: 8px;
     }
 

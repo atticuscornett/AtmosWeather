@@ -51,7 +51,8 @@
 
    .imgContainer{
        display: inline-block;
-       margin-top: 20px;
+       margin-top: 25px;
+       vertical-align: top;
    }
 
    .error{
