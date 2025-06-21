@@ -405,33 +405,31 @@ body.dark details[open] summary{
     }
 
 
-   .imgContainer.svelte-ievjhn{
+   .imgContainer.svelte-1k5846i{
        display: inline-block;
-       height: inherit;
-       vertical-align: top;
        margin-top: 20px;
    }
 
-   .error.svelte-ievjhn{
+   .error.svelte-1k5846i{
        background-color: darkslategray !important;
    }
 
-   .errorImg.svelte-ievjhn {
+   .errorImg.svelte-1k5846i {
        vertical-align: center;
        animation: loadAnim infinite 2s;
    }
 
-   .statusImg.svelte-ievjhn {
+   .statusImg.svelte-1k5846i {
        vertical-align: center;
    }
 
-   .locationView.svelte-ievjhn {
+   .locationView.svelte-1k5846i {
        display:inline-block;
        margin-left:8px;
        margin-right:8px;
    }
 
-    .location.svelte-ievjhn{
+    .location.svelte-1k5846i{
         background-color: blue;
         color: white;
         border-radius: 7px;
@@ -443,18 +441,19 @@ body.dark details[open] summary{
         box-sizing: border-box;
         cursor: pointer;
         box-shadow: 0 0 7px #898989;
+        height: 100%;
     }
 
-    h3.svelte-ievjhn {
+    h3.svelte-1k5846i {
         margin-right: 8px;
     }
 
-    .gauge-container.svelte-1k2to8j{
+    .gauge-container.svelte-1has28n{
         height: 22px;
         position: relative;
     }
 
-    .gauge-background.svelte-1k2to8j {
+    .gauge-background.svelte-1has28n {
         position: absolute;
         background: linear-gradient(90deg, rgb(16, 167, 74) 0%, rgb(244, 248, 9) 20%, rgb(255, 145, 0) 40%, rgb(253, 1, 1) 60%, rgb(146, 13, 158) 80%, rgb(97, 12, 19) 100%);
         height: 22px;
@@ -462,7 +461,7 @@ body.dark details[open] summary{
         border-radius: 5px;
     }
 
-    .gauge-marker.svelte-1k2to8j{
+    .gauge-marker.svelte-1has28n{
         background-color: white;
         position: relative;
         border-radius: 50%;
@@ -472,14 +471,15 @@ body.dark details[open] summary{
         left: 3.5px;
     }
 
-    .clear-border.svelte-1k2to8j{
+    .clear-border.svelte-1has28n{
         border: black solid;
         border-radius: 7px;
         box-shadow: 0 0 7px #898989;
         padding: 0 20px 0 20px;
+        height: calc(100% - 5px);
     }
 
-    body.dark .clear-border.svelte-1k2to8j{
+    body.dark .clear-border.svelte-1has28n{
         border: white solid;
         border-radius: 7px;
         box-shadow: 0 0 7px #898989;
@@ -847,17 +847,17 @@ body.dark details[open] summary{
 
     }
 
-    .gray-background.svelte-1vllmdr {
+    .gray-background.svelte-16vkadp {
         background-color: rgba(0,0,0,0.5);
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 100;
+        z-index: 999;
     }
 
-    .popup-container.svelte-1vllmdr {
+    .popup-container.svelte-16vkadp {
         background-color: white;
         width: 80%;
         max-height: 80vh;
@@ -871,11 +871,11 @@ body.dark details[open] summary{
         overflow: auto;
     }
 
-    body.dark .popup-container.svelte-1vllmdr{
+    body.dark .popup-container.svelte-16vkadp{
         background-color: #111111;
     }
 
-    button.svelte-1vllmdr {
+    button.svelte-16vkadp {
         width: 100%;
         cursor: pointer;
         background-color: darkslategray;

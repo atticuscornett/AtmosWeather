@@ -34,6 +34,7 @@
         <h1>Use Template</h1>
 
         <button onclick={selectTemplate} value="default">Default Template</button>
+        <button onclick={selectTemplate} value="dense">Dense Tiles</button>
     </div>
 </div>
 
@@ -45,7 +46,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 100;
+        z-index: 999;
     }
 
     .popup-container {

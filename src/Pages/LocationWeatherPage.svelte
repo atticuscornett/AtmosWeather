@@ -85,7 +85,8 @@
         }
 
         let templates = {
-            default: widgets["default"]
+            default: widgets["default"],
+            dense: [["LocationAtAGlance", "AirQualityIndex", "UVIndex"], ["SunriseSunset", "MoonPhase"], ["GraphSwitcher"], ["RadarGlance"]]
         }
 
         widgetLayout = widgets[locationData.name];

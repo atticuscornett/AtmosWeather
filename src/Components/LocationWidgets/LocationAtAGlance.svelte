@@ -51,8 +51,6 @@
 
    .imgContainer{
        display: inline-block;
-       height: inherit;
-       vertical-align: top;
        margin-top: 20px;
    }
 
@@ -87,6 +85,7 @@
         box-sizing: border-box;
         cursor: pointer;
         box-shadow: 0 0 7px #898989;
+        height: 100%;
     }
 
     h3 {
