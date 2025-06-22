@@ -41,7 +41,7 @@
 
 		if (settings){
 			if (settings["personalization"]){
-				if (settings["personalization"]["update-notify"]){
+				if (settings["personalization"]["update-notify"] !== undefined){
 					notifyUpdates = settings["personalization"]["update-notify"];
 				}
 			}
