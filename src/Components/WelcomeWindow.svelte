@@ -13,7 +13,7 @@
     function showNextIntro(){
         welcomeStyle = "animation: simpleFadeOut 0.5s; animation-fill-mode: forwards;";
         setTimeout(function(){
-            welcomeStyle = "animation: simpleFadeIn 2s; animation-fill-mode: forwards;";
+            welcomeStyle = "animation: simpleFadeIn 0.5s; animation-fill-mode: forwards;";
             if (welcomeTitle === "Welcome To Atmos Weather"){
                 welcomeTitle = "Prepare For The Day Ahead";
                 welcomeBody = "With forecast notifications for rain, storms, and severe weather, never get caught unprepared again.";
@@ -31,7 +31,7 @@
             }
             else if (welcomeTitle === "Everywhere You Care About"){
                 welcomeTitle = "Privacy First";
-                welcomeBody = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Precise location data is only sent to the National Weather Service, Open-Meteo, and OpenStreetMap.<br>A full list of how your information is handled can be found in the privacy statement (located in settings.)";
+                welcomeBody = "No tracking. No data selling.<br>Atmos Weather only uses the information necessary to provide app features.<br>Precise location data is only sent to services that provide forecasts and other app features that require location.<br>A full list of how your information is handled can be found in the privacy statement (located in settings.)";
                 welcomeImage = "img/privacy.svg";
             }
             else if (welcomeTitle === "Privacy First"){
@@ -44,7 +44,7 @@
                 localStorage.setItem("run-before", "true");
 				setTimeout(function(){
 					showWelcome = false;
-				}, 2000);
+				}, 1000);
                 if (platform === "android"){
                     showPermissionDialog();
                 }
@@ -53,25 +53,25 @@
                 }
             }
 
-        }, 750);
+        }, 600);
     }
 </script>
 
 {#if showWelcome}
 	<div id="welcome-window-native">
 		<div style={welcomeStyle}>
-			<center>
+			<div class="centered">
 				<br>
-				<img src="img/logo.svg" id="atmos-logo-welcome">
-			</center>
-			<center id="fade-section">
+				<img src="img/logo.svg" id="atmos-logo-welcome" alt="Atmos Weather Wordmark">
+			</div>
+			<div id="fade-section" class="centered">
 				<br>
-				<img id="welcome-image-native" src={welcomeImage}>
+				<img id="welcome-image-native" src={welcomeImage} alt="{welcomeTitle}">
 				<h1 id="welcome-title-native">{welcomeTitle}</h1>
 				<h3 id="welcome-body-native">{@html welcomeBody}</h3>
 				<br>
 				<button id="welcome-button-native" onclick={showNextIntro}>Next</button>
-			</center>
+			</div>
 		</div>
 	</div>
 {/if}
@@ -121,5 +121,9 @@
 	h3 {
 		margin-right: 25px;
 		margin-left: 25px;
+	}
+
+	.centered {
+		text-align: center;
 	}
 </style>

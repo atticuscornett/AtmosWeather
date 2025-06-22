@@ -212,7 +212,7 @@ function isTilesLoading() {
 }
 
 function playRadarAnimation(){
-    if (screenAt == "radar"){
+    if (screenAt === "radar"){
         if (playingRadar){
             showFrame(animationPosition + 1);
         }

@@ -15,6 +15,10 @@
             loadingKeys.splice(loadingIndex, 1);
         }
     }
+
+    window.getLoadingKeys = () => {
+        return loadingKeys.length;
+    }
 </script>
 
 {#if loadingKeys.length > 0}

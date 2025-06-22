@@ -12,10 +12,13 @@
     import AndroidPermissionPopup from "../Components/AndroidPermissionPopup.svelte";
     import WelcomeWindow from "../Components/WelcomeWindow.svelte";
     import LoadingDots from "../Components/LoadingDots.svelte";
+    import DeferRendering from "../Components/DeferRendering.svelte";
 
     let { page = $bindable() } = $props();
     let weatherDataDictionary = $state({});
     let alertSelection = $state({});
+    let lastPage = "locations";
+    let currentPage = "locations";
 
     $inspect(weatherDataDictionary);
 
@@ -24,7 +27,15 @@
     window.lastLocationGrab = 0;
 
     window.getCurrentLocation = (callback=null) =>{
+
         if (navigator.geolocation){
+            if (!callback){
+                return;
+            }
+
+            callback(31.8088, -85.9700);
+            return;
+
             if (Date.now() - lastLocationGrab < 60000){
                 if (callback){
                     callback(currentLat, currentLong);
@@ -63,6 +74,19 @@
         nwsAvailable = value;
     }
 
+    // Update back button history
+    $effect(() => {
+        lastPage = currentPage;
+        currentPage = page;
+    })
+
+    // Set up the back button listener
+    setTimeout(() => {
+        cap.addBackButtonListener(() => {
+            page = lastPage;
+        })
+    }, 200);
+
     getCurrentLocation();
 </script>
 
@@ -91,7 +115,9 @@
     {/if}
 
     {#each Object.entries(weatherDataDictionary) as [key, value]}
-        <LocationWeatherPage locationData={value} bind:page={page} bind:alertSelection={alertSelection}/>
+        <DeferRendering>
+            <LocationWeatherPage locationData={value} bind:page={page} bind:alertSelection={alertSelection}/>
+        </DeferRendering>
     {/each}
 
     {#each Object.entries(weatherDataDictionary) as [key, value]}

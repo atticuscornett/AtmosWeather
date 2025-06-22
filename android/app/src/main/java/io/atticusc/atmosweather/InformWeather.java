@@ -2,10 +2,12 @@ package io.atticusc.atmosweather;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,9 +17,6 @@ import io.atticusc.atmosweather.notifications.NotificationHandler;
 
 public class InformWeather {
     public static Boolean InformWeatherReturn(String eventTitle, String locationName, String eventInfo, Context context){
-        if (eventTitle.contains("Red Flag Warning")){
-            eventTitle = "Fire Weather Warning";
-        }
         SharedPreferences settings = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
         String defaultSettings = "{\"location\":{\"weather\":true,\"alerts\":true},\"notifications\":{\"severe-future\":true,\"rain-future\":false},\"location-alerts\":{\"default-alert\":\"readynow\",\"default-notification\":\"readynow\",\"locations\":{}},\"alert-types\":{\"warnings\":{\"tornado\":\"alert\",\"hurricane\":\"alert\",\"hurricane-force-wind\":\"alert\",\"tropical-storm\":\"alert\",\"special-marine\":\"alert\",\"severe-thunderstorm\":\"alert\",\"storm\":\"alert\",\"gale\":\"alert\",\"flash-flood\":\"alertmove\",\"flood\":\"alertmove\",\"coastal-flood\":\"alertmove\",\"river-flood\":\"alertmove\",\"high-wind\":\"soundnotification\",\"extreme-wind\":\"alert\",\"excessive-heat\":\"soundnotification\",\"fire-weather\":\"alert\",\"blizzard\":\"alert\",\"snow-squall\":\"alertmove\",\"ice-storm\":\"alert\",\"winter-storm\":\"alert\",\"freeze\":\"soundnotification\",\"wind-chill\":\"soundnotification\"},\"watches\":{\"tornado\":\"soundnotification\",\"hurricane\":\"soundnotification\",\"tropical-storm\":\"soundnotification\",\"severe-thunderstorm\":\"soundnotification\",\"flash-flood\":\"soundnotification\",\"flood\":\"soundnotification\",\"coastal-flood\":\"soundnotification\",\"river-flood\":\"soundnotification\",\"high-wind\":\"soundnotification\",\"excessive-heat\":\"soundnotification\",\"fire-weather\":\"soundnotification\",\"winter-storm\":\"soundnotification\",\"freeze\":\"soundnotification\"},\"advisory\":{\"wind\":\"soundnotification\",\"winter-weather\":\"soundnotification\",\"frost\":\"soundnotification\",\"wind-chill\":\"soundnotification\",\"heat\":\"soundnotification\",\"dense-fog\":\"soundnotification\",\"small-craft\":\"soundnotification\",\"coastal-flood\":\"soundnotification\"}},\"per-location\":{}}";
         JSONObject jsonObject = null;
@@ -53,43 +52,7 @@ public class InformWeather {
             System.out.println("Using default tts setting");
         }
         String jsonKey = eventTitle.toLowerCase(Locale.ROOT).replaceAll(" ", "-");
-        switch (jsonKey) {
-            case "air-quality-alert":
-                jsonKey = "air-quality-warning";
-                break;
-            case "hazardous-weather-outlook":
-                jsonKey = "hazardous-weather-outlook-advisory";
-                break;
-            case "hydrologic-outlook":
-                jsonKey = "hydrologic-outlook-advisory";
-                break;
-            case "special-weather-statement":
-                jsonKey = "special-weather-statement-advisory";
-                break;
-            case "marine-weather-statement":
-                jsonKey = "marine-weather-statement-advisory";
-                break;
-            case "coastal-flood-statement":
-                jsonKey = "coastal-flood-advisory";
-                break;
-            case "rip-current-statement":
-                jsonKey = "rip-current-statement-advisory";
-                break;
-            case "beach-hazards-statement":
-                jsonKey = "beach-hazards-statement-advisory";
-                break;
-            case "severe-weather-statement":
-                jsonKey = "severe-weather-statement-advisory";
-                break;
-            case "hurricane-local-statement":
-                jsonKey = "hurricane-local-statement-advisory";
-                break;
-            case "tropical-cyclone-statement":
-                jsonKey = "tropical-cyclone-statement-advisory";
-                break;
-            default:
-                break;
-        }
+
         String behavior = "soundnotification";
         int iconID = R.drawable.lightning_icon;
         try {
@@ -130,6 +93,37 @@ public class InformWeather {
         }
 
         int id = ThreadLocalRandom.current().nextInt(1, 5000 + 1);
+
+        if (behavior.contains("soundnotification")){
+            // Check if it is quiet hours, if so, make sound notification silent
+            try {
+                // Check if quiet hour setting is enabled
+                if (jsonObject.getJSONObject("notifications").getBoolean("quiet-hours")){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        LocalTime now = LocalTime.now();
+                        int currentHour = now.getHour();
+                        int quietHourStart = jsonObject.getJSONObject("notifications").getInt("quiet-start");
+                        int quietHourEnd = jsonObject.getJSONObject("notifications").getInt("quiet-end");
+
+                        if (quietHourStart > quietHourEnd){
+                            if (quietHourStart <= currentHour || currentHour < quietHourEnd) {
+                                behavior = "silentnotification";
+                            }
+                        }
+                        else {
+                            if (quietHourStart <= currentHour && currentHour < quietHourEnd) {
+                                behavior = "silentnotification";
+                            }
+                        }
+
+                    }
+
+                }
+            }
+            catch (Exception e){
+                System.out.println("Could not determine quiet hours.");
+            }
+        }
 
         AtmosNotificationBuilder builder =
                 new AtmosNotificationBuilder(context)

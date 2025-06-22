@@ -1,7 +1,7 @@
 {
   "name": "io.atticusc.atmosweather",
   "displayName": "Atmos Weather",
-  "version": "3.0.0-prealpha.1",
+  "version": "3.0.0-alpha.2",
   "description": "A lightweight weather app for alerts and forecasts.",
   "main": "atmos-ui.js",
   "scripts": {
@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@capacitor/android": "^6.0.0",
+    "@capacitor/app": "^6.0.2",
     "@capacitor/core": "^6.0.0",
     "@capacitor/device": "^6.0.0",
     "@turf/turf": "^6.5.0",

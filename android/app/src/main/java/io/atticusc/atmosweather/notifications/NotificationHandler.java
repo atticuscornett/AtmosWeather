@@ -1,13 +1,16 @@
 package io.atticusc.atmosweather.notifications;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Build;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -27,6 +30,9 @@ public class NotificationHandler {
     public static void notify(int id, AtmosNotification notification) {
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(notification.getContext());
 
+        if (ActivityCompat.checkSelfPermission(notification.getContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         notificationManagerCompat.notify(id, notification.buildNotification());
     }
 

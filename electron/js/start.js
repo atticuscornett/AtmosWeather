@@ -3,14 +3,14 @@ setTimeout(() => {
     window.PermissionManagement = cap.getPlugin("PermissionManagement")
 }, 100);
 
+let updateFiles = false;
 
-
-window.atmosVersion = "3.0.0-prealpha.1";
-window.atmosUpdated = "12-11-2024";
-window.atmosUpdateTitle = "Atmos Weather v3.0.0-prealpha.1 is here!";
+window.atmosVersion = "3.0.0-alpha.2";
+window.atmosUpdated = "6-21-2025";
+window.atmosUpdateTitle = "Atmos Weather v3.0.0 Alpha Two is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>
-		    <dt>This is a prealpha release!</dt>
+		    <dt>This is an alpha release!</dt>
 		    <dd>- Release notes will be made available for the full release.</dd>
 		    <dd>- Please report any bugs you find to the Atmos Weather GitHub repo.</dd>
 <!--			<dt>Bug Fixes</dt>-->
@@ -21,9 +21,10 @@ window.atmosUpdateNotes = `
 		</dl> 
 		`;
 
+// Sync files with native code
 window.syncFiles = () => {
     if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa") && !getPlatform().includes("unknown")) {
-        cap.syncPreferences();
+        updateFiles = true;
     }
 }
 
@@ -39,6 +40,7 @@ function getDeviceInfo(){
 
 getDeviceInfo();
 
+// Returns the platform that Atmos Weather is running on
 function getPlatform(){
     if (!window.deviceInfo){
         return "unknown";
@@ -95,15 +97,14 @@ setTimeout(async () => {
     setNWSAvailable(await checkAPIstatus());
 }, 100);
 
-
-// Handle loading animation
-window.loadingElements = 0;
-
-
-// Sync with native code
-function syncFiles(){
-    if (!getPlatform().includes("desktop") && !getPlatform().includes("pwa")){
-        cap.syncPreferences();
+// Update files maximum of once per second
+setInterval(async () => {
+    if (updateFiles) {
+        updateFiles = false;
+        try {
+            cap.syncPreferences();
+        } catch (err) {
+            console.error("Error updating files:", err);
+        }
     }
-}
-
+}, 1000);

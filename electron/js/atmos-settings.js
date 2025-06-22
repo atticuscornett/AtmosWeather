@@ -3,12 +3,13 @@
 	Handles the setting up and storing of app settings
 */
 
-// Initializes settings and updates settings on new version
+// Initializes settings and updates settings on update
 setTimeout(function(){
 	// Get default settings for platform
-	var atmosSettingsTemp;
+	let atmosSettingsTemp;
+	let thePlatform;
 	try{
-		var thePlatform = getPlatform();
+		thePlatform = getPlatform();
 	}
 	catch(err){
 		thePlatform = "other";
@@ -18,7 +19,7 @@ setTimeout(function(){
 		atmosSettingsTemp = {
 			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false, "run-startup": true, "update-notify": false},
 			"location": {"weather": false, "alerts": false},
-			"notifications": {"severe-future": true, "rain-future": false},
+			"notifications": {"severe-future": true, "rain-future": false, "quiet-hours": false, "quiet-start": 23, "quiet-end": 6},
 			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
 			"location-alerts": {"tts-alerts": false, "alert-check-frequency": "30", "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 			"alert-types": {
@@ -43,6 +44,7 @@ setTimeout(function(){
 					"excessive-heat": "soundnotification",
 					"fire-weather": "alert",
 					"air-quality": "soundnotification",
+					"extreme-cold": "soundnotification",
 					"blizzard": "alert",
 					"snow-squall": "alert",
 					"ice-storm": "alert",
@@ -55,7 +57,21 @@ setTimeout(function(){
 					"dust-storm": "alert",
 					"hazardous-seas": "soundnotification",
 					"heavy-freezing-spray": "soundnotification",
-					"fire": "alert"
+					"fire": "alert",
+					"shelter-in-place": "alert",
+					"civil-danger": "alert",
+					"nuclear-power-plant": "alert",
+					"radiological-hazard": "alert",
+					"hazardous-materials": "alert",
+					"law-enforcement": "alert",
+					"typhoon": "alert",
+					"blowing-dust": "alert",
+					"earthquake": "alert",
+					"volcano": "alert",
+					"ashfall": "alert",
+					"high-surf": "soundnotification",
+					"extreme-heat": "soundnotification",
+					"red-flag": "soundnotification"
 				},
 				"watches":{
 					"tornado": "soundnotification",
@@ -72,12 +88,19 @@ setTimeout(function(){
 					"high-wind": "soundnotification",
 					"excessive-heat": "soundnotification",
 					"fire-weather": "soundnotification",
+					"extreme-cold": "soundnotification",
 					"winter-storm": "soundnotification",
 					"avalanche": "soundnotification",
 					"hazardous-seas": "soundnotification",
 					"freeze": "soundnotification",
 					"hard-freeze": "soundnotification",
-					"wind-chill": "soundnotification"
+					"wind-chill": "soundnotification",
+					"tsunami": "alert",
+					"hurricane-force-wind": "soundnotification",
+					"typhoon": "soundnotification",
+					"extreme-heat": "soundnotification",
+					"gale": "soundnotification",
+					"heavy-freezing-spray": "soundnotification"
 				},
 				"advisory":{
 					"wind": "soundnotification",
@@ -102,13 +125,32 @@ setTimeout(function(){
 					"coastal-flood": "soundnotification",
 					"lakeshore-flood": "soundnotification",
 					"high-surf": "soundnotification",
+					"cold-weather": "soundnotification",
 					"brisk-wind": "soundnotification",
 					"lake-wind": "soundnotification",
 					"air-stagnation": "soundnotification",
 					"low-water": "soundnotification",
 					"blowing-dust": "soundnotification",
 					"freezing-spray": "soundnotification",
-					"hydrologic-outlook": "soundnotification"
+					"hydrologic-outlook": "soundnotification",
+					"flash-flood-statement": "soundnotification",
+					"evacuation-immediate": "alert",
+					"civil-emergency-message": "alert",
+					"ashfall": "soundnotification",
+					"flood-statement": "soundnotification",
+					"tropical-cyclone-local-statement": "soundnotification",
+					"avalanche": "soundnotification",
+					"dense-smoke": "soundnotification",
+					"local-area-emergency": "alert",
+					"extreme-fire-danger": "soundnotification",
+					"911-telephone-outage": "alert",
+					"coastal-flood-statement": "soundnotification",
+					"lakeshore-flood-statement": "soundnotification",
+					"air-quality-alert": "soundnotification",
+					"short-term-forecast": "soundnotification",
+					"administrative-message": "soundnotification",
+					"child-abduction-emergency": "soundnotification",
+					"blue-alert": "alert"
 				}
 			},
 			"per-location": {}
@@ -119,7 +161,7 @@ setTimeout(function(){
 		atmosSettingsTemp = {
 		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false, "run-startup": false, "update-notify": true},
 		"location": {"weather": true, "alerts": true},
-		"notifications": {"severe-future": true, "rain-future": false},
+		"notifications": {"severe-future": true, "rain-future": false, "quiet-hours": false, "quiet-start": 23, "quiet-end": 6},
 		"location-alerts": {"tts-alerts": false, "alert-check-frequency": "60", "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
 		"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res":false}},
 		"alert-types": {
@@ -144,6 +186,7 @@ setTimeout(function(){
 				"excessive-heat": "soundnotification",
 				"fire-weather": "alert",
 				"air-quality": "soundnotification",
+				"extreme-cold": "soundnotification",
 				"blizzard": "alert",
 				"snow-squall": "alertmove",
 				"ice-storm": "alert",
@@ -156,7 +199,21 @@ setTimeout(function(){
 				"dust-storm": "alert",
 				"hazardous-seas": "soundnotification",
 				"heavy-freezing-spray": "soundnotification",
-				"fire": "alert"
+				"fire": "alert",
+				"shelter-in-place": "alert",
+				"civil-danger": "alert",
+				"nuclear-power-plant": "alert",
+				"radiological-hazard": "alert",
+				"hazardous-materials": "alert",
+				"law-enforcement": "alert",
+				"typhoon": "alert",
+				"blowing-dust": "alert",
+				"earthquake": "alert",
+				"volcano": "alert",
+				"ashfall": "alert",
+				"high-surf": "soundnotification",
+				"extreme-heat": "soundnotification",
+				"red-flag": "soundnotification"
 			},
 			"watches":{
 				"tornado": "soundnotification",
@@ -173,12 +230,19 @@ setTimeout(function(){
 				"high-wind": "soundnotification",
 				"excessive-heat": "soundnotification",
 				"fire-weather": "soundnotification",
+				"extreme-cold": "soundnotification",
 				"winter-storm": "soundnotification",
 				"avalanche": "soundnotification",
 				"hazardous-seas": "soundnotification",
 				"freeze": "soundnotification",
 				"hard-freeze": "soundnotification",
-				"wind-chill": "soundnotification"
+				"wind-chill": "soundnotification",
+				"tsunami": "alert",
+				"hurricane-force-wind": "soundnotification",
+				"typhoon": "soundnotification",
+				"extreme-heat": "soundnotification",
+				"gale": "soundnotification",
+				"heavy-freezing-spray": "soundnotification"
 			},
 			"advisory":{
 				"wind": "soundnotification",
@@ -203,23 +267,69 @@ setTimeout(function(){
 				"coastal-flood": "soundnotification",
 				"lakeshore-flood": "soundnotification",
 				"high-surf": "soundnotification",
+				"cold-weather": "soundnotification",
 				"brisk-wind": "soundnotification",
 				"lake-wind": "soundnotification",
 				"air-stagnation": "soundnotification",
 				"low-water": "soundnotification",
 				"blowing-dust": "soundnotification",
 				"freezing-spray": "soundnotification",
-				"hydrologic-outlook": "soundnotification"
+				"hydrologic-outlook": "soundnotification",
+				"flash-flood-statement": "soundnotification",
+				"evacuation-immediate": "alert",
+				"civil-emergency-message": "alert",
+				"ashfall": "soundnotification",
+				"flood-statement": "soundnotification",
+				"tropical-cyclone-local-statement": "soundnotification",
+				"avalanche": "soundnotification",
+				"dense-smoke": "soundnotification",
+				"local-area-emergency": "alert",
+				"extreme-fire-danger": "soundnotification",
+				"911-telephone-outage": "alert",
+				"coastal-flood-statement": "soundnotification",
+				"lakeshore-flood-statement": "soundnotification",
+				"air-quality-alert": "soundnotification",
+				"short-term-forecast": "soundnotification",
+				"administrative-message": "soundnotification",
+				"child-abduction-emergency": "soundnotification",
+				"blue-alert": "alert"
 			}
 		},
 		"per-location": {}
 	};
 	}
-	var currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	let currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 
 	// Set missing settings values to the default
 	localStorage.setItem("atmos-settings", JSON.stringify(fixMissingKeys(atmosSettingsTemp, currentSettings)));
 }, 100);
+
+
+function checkExistentSettings(){
+	for (let i of hazardPriority){
+		let hazardLower = i.toLowerCase();
+		hazardLower = hazardLower.replaceAll(" ", "-");
+
+		let hazardType = "advisory";
+		if (hazardLower.includes("warning")){
+			hazardType = "warnings";
+			hazardLower = hazardLower.replace("-warning", "");
+		}
+		else if (hazardLower.includes("watch")){
+			hazardType = "watches";
+			hazardLower = hazardLower.replace("-watch", "");
+		}
+		else {
+			hazardType = "advisory";
+			hazardLower = hazardLower.replace("-advisory", "");
+		}
+
+		let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+		if (!settings["alert-types"][hazardType][hazardLower]){
+			console.log(i + " is missing from settings");
+		}
+	}
+}
 
 // Initialize Locations
 if (!localStorage.getItem("weather-locations")){
@@ -233,7 +343,10 @@ function formatTitle(title, ending){
 		title[i] = title[i][0].toUpperCase() + title[i].substring(1)
 	}
 	title = title.join(" ");
-	if (title.includes("Outlook") || title.includes("Statement")){
+	if (title.includes("Outlook") || title.includes("Statement") ||
+		title.includes("Immediate") || title.includes("Outage") ||
+		title.includes("Alert") || title.includes("Danger") ||
+		title.includes("Emergency") || title.includes("Forecast") || title.includes("Message")){
 		return title;
 	}
 	else{
@@ -250,8 +363,8 @@ function fixMissingKeys(defaultValues, currentValues){
 		return currentValues;
 	}
 	else{
-		var keysToCheck = Object.keys(defaultValues);
-		var a = 0;
+		let keysToCheck = Object.keys(defaultValues);
+		let a = 0;
 		while (a < keysToCheck.length){
 			currentValues[keysToCheck[a]] = fixMissingKeys(defaultValues[keysToCheck[a]], currentValues[keysToCheck[a]]);
 			a++;
@@ -278,34 +391,5 @@ function convertTempUnit(temp, unit){
 		else{
 			return temp;
 		}
-	}
-}
-
-// Check permissions while permission window is open
-
-async function repeatPermCheck(){
-	const permissions = await PermissionManagement.checkPermissions();
-	document.getElementById("android-background-permissions").innerHTML = "Background Location "
-		+ (permissions["hasBackgroundLocationPermission"] ? "✅" : "⚠️");
-	document.getElementById("android-request-background-location").innerHTML = (permissions["hasBackgroundLocationPermission"] ? "Background Location Granted" : "Request Background Location");
-	document.getElementById("android-request-background-location").disabled = permissions["hasBackgroundLocationPermission"];
-
-	document.getElementById("android-notification-permissions").innerHTML = "Notifications "
-		+ (permissions["hasNotificationPermission"] ? "✅" : "⚠️");
-	document.getElementById("android-request-notifications").innerHTML = (permissions["hasNotificationPermission"] ? "Notifications Granted" : "Request Notifications");
-	document.getElementById("android-request-notifications").disabled = permissions["hasNotificationPermission"];
-
-	document.getElementById("android-battery-exempt-permissions").innerHTML = "Battery Exemptions "
-		+ (permissions["hasBatteryOptimizationExemption"] ? "✅" : "⚠️");
-	document.getElementById("android-request-battery-exempt").innerHTML = (permissions["hasBatteryOptimizationExemption"] ? "Battery Exemptions Granted" : "Request Battery Exemptions");
-	document.getElementById("android-request-battery-exempt").disabled = permissions["hasBatteryOptimizationExemption"];
-
-	document.getElementById("android-exact-alarms-permissions").innerHTML = "Schedule Exact Alarms "
-		+ (permissions["canScheduleExactAlarms"] ? "✅" : "⚠️");
-	document.getElementById("android-request-exact-alarms").innerHTML = (permissions["canScheduleExactAlarms"] ? "Exact Alarms Granted": "Request Exact Alarms");
-	document.getElementById("android-request-exact-alarms").disabled = permissions["canScheduleExactAlarms"];
-
-	if (!document.getElementById("android-permission-setup").hidden){
-		setTimeout(repeatPermCheck, 300);
 	}
 }

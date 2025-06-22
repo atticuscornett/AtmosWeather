@@ -46,6 +46,16 @@ public class AtmosNotification {
                 .setSmallIcon(icon)
                 .setSound(soundURI);
 
+        // Show event and location first for weather events
+        if (title.contains(" for ")){
+            notification
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(body));
+            String event = title.split(" for ")[0];
+            String location = title.split(" for ")[1];
+            notification.setContentTitle(event);
+            notification.setContentText(location);
+        }
+
         return notification.build();
     }
 

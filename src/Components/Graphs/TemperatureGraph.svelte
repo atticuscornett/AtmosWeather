@@ -12,14 +12,15 @@
     let imageCallback = (data, i) => {
         let image;
         let sfor = data[i]["shortForecast"].toLowerCase();
-        if (sfor.includes("rain") || sfor.includes("drizzle")){
-            image = "rainy";
-        }
-        else if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
+
+        if (sfor.includes("tornado") || sfor.includes("storm") || sfor.includes("water spout")){
             image = "stormy";
         }
         else if (sfor.includes("snow")){
             image = "snowy";
+        }
+        else if (sfor.includes("rain") || sfor.includes("drizzle")){
+            image = "rainy";
         }
         else if (sfor.includes("wind")){
             image = "windy";

@@ -26,7 +26,7 @@
     });
 </script>
 
-<div class="location {locationData.alert}" onclick={page = "location-" + locationData.name}>
+<div class="location {locationData.alert}">
     <div class="imgContainer">
         <img style="vertical-align:center;" src="img/{image}.svg">
     </div>
@@ -51,9 +51,8 @@
 
    .imgContainer{
        display: inline-block;
-       height: inherit;
+       margin-top: 25px;
        vertical-align: top;
-       margin-top: 20px;
    }
 
    .error{
@@ -87,6 +86,7 @@
         box-sizing: border-box;
         cursor: pointer;
         box-shadow: 0 0 7px #898989;
+        height: 100%;
     }
 
     h3 {

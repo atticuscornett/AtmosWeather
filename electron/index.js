@@ -96,7 +96,7 @@ else{
 						win2.loadFile('index.html')
 					}
 					win2.show()
-					win2.webContents.executeJavaScript("navTo('about');")
+					win2.webContents.executeJavaScript("window.goPage('about');")
 				   }
 				},
 				{
@@ -236,7 +236,7 @@ function checkLocation(){
 			if (result != dateString){
 				var severeNotification =  settings["notifications"]["severe-future"];
 				var rainNotification = settings["notifications"]["rain-future"];
-				if (settings["per-location"][locationNames[cycleAt]] != undefined){
+				if (settings["per-location"][locationNames[cycleAt]]){
 					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"] != undefined){
 						severeNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"];
 					}

@@ -5,6 +5,9 @@
 
     let allSettings = $state(JSON.parse(localStorage.getItem("atmos-settings")));
     let locationNames = $state(JSON.parse(localStorage.getItem("weather-location-names")));
+    let orderedWarnings = $state([]);
+    let orderedWatches = $state([]);
+    let orderedAdvisories = $state([]);
 
     let platform = $state(false);
     let webVersionWarning = $derived(platform === "pwa");
@@ -32,16 +35,70 @@
     function saveSettings() {
         console.log(allSettings);
         let settingsSave = structuredClone($state.snapshot(allSettings));
-        settingsSave["radar"]["color-scheme"] = Number(settingsSave["radar"]["color-scheme"]);
         localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
         refreshAppTheme();
         window.locationEnabled = allSettings["location"]["weather"];
     }
 
+    function getWarningsInOrder(){
+        let warnings = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (formatKey.includes("warning")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-warning", "");
+                if (allSettings["alert-types"]["warnings"][formatKey]){
+                    warnings.push(formatKey);
+                }
+            }
+        }
+
+        return warnings;
+    }
+
+    function getWatchesInOrder(){
+        let watches = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (formatKey.includes("watch")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-watch", "");
+                if (allSettings["alert-types"]["watches"][formatKey]){
+                    watches.push(formatKey);
+                }
+            }
+        }
+
+        return watches;
+    }
+
+    function getAdvisoriesInOrder(){
+        let advisories = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (!formatKey.includes("watch") && !formatKey.includes("warning")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-advisory", "");
+                if (allSettings["alert-types"]["advisory"][formatKey]){
+                    advisories.push(formatKey);
+                }
+            }
+        }
+
+        return advisories;
+    }
+
     function ensureSettingsSet(){
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+
         if (!allSettings){
             setTimeout(ensureSettingsSet, 100);
+        }
+        else {
+            orderedWarnings = getWarningsInOrder();
+            orderedWatches = getWatchesInOrder();
+            orderedAdvisories = getAdvisoriesInOrder();
+            setInterval(ensureSettingsSet, 1000*60);
         }
     }
 
@@ -51,7 +108,10 @@
             title[i] = title[i][0].toUpperCase() + title[i].substring(1)
         }
         title = title.join(" ");
-        if (title.includes("Outlook") || title.includes("Statement")){
+        if (title.includes("Outlook") || title.includes("Statement") ||
+            title.includes("Immediate") || title.includes("Outage") ||
+            title.includes("Alert") || title.includes("Danger") ||
+            title.includes("Emergency") || title.includes("Forecast") || title.includes("Message")){
             return title;
         }
         else{
@@ -63,6 +123,7 @@
 </script>
 
 <TabSlot name="settings" bind:page={page} onOpen={refreshSettings}>
+    {#if page === "settings"}
     <h1>Settings</h1>
     <h6>
         <a href="#" onclick={page = "about"}>About Atmos Weather</a>
@@ -113,6 +174,7 @@
         {#if isDesktop}
             <input class="box" type="checkbox" id="setting-run-startup" bind:checked={allSettings["personalization"]["run-startup"]}>
             <label for="setting-run-startup">Run Atmos Weather in background on startup</label>
+            <br>
         {/if}
         <input class="box" type="checkbox" id="setting-notify-updates" bind:checked={allSettings["personalization"]["update-notify"]}>
         <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label>
@@ -123,6 +185,23 @@
         <br>
         <input class="box" type="checkbox" id="setting-future-storm-notifications" bind:checked={allSettings["notifications"]["rain-future"]}>
         <label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label>
+        <br>
+        {#if !isDesktop}
+            <input class="box" type="checkbox" id="setting-quiet-hours" bind:checked={allSettings["notifications"]["quiet-hours"]}>
+            <label for="setting-quiet-hours">Enable quiet hours</label>
+            <h5 class="addInfo">During quiet hours, sound notifications will behave like silent notifications, but alerts will still be shown.</h5>
+            <select id="setting-quiet-start" bind:value={allSettings["notifications"]["quiet-start"]} disabled={!allSettings["notifications"]["quiet-hours"]}>
+                {#each Array(24) as _, i}
+                    <option value={i}>{(i === 0) ? "12" : ((i > 12) ? i - 12 : i)}:00 {(i < 12) ? "am" : "pm"}</option>
+                {/each}
+            </select>
+            -
+            <select id="setting-quiet-end" bind:value={allSettings["notifications"]["quiet-end"]} disabled={!allSettings["notifications"]["quiet-hours"]}>
+                {#each Array(24) as _, i}
+                    <option value={i}>{(i === 0) ? "12" : ((i > 12) ? i - 12 : i)}:00 {(i < 12) ? "am" : "pm"}</option>
+                {/each}
+            </select>
+        {/if}
         <hr>
         <h2>Radar</h2>
         <h6>Radar powered by RainViewer API.</h6>
@@ -200,7 +279,7 @@
         <details>
             <summary>Warnings</summary>
             <div id="settings-warnings-list">
-                {#each Object.entries(allSettings["alert-types"]["warnings"]) as [key, value]}
+                {#each orderedWarnings as key}
                     <label for="setting-warning-{key}">{formatTitle(key, "Warning")}</label>
                     <br>
                     <select bind:value={allSettings["alert-types"]["warnings"][key]}>
@@ -219,7 +298,7 @@
         <details>
             <summary>Watches</summary>
             <div id="settings-watches-list">
-                {#each Object.entries(allSettings["alert-types"]["watches"]) as [key, value]}
+                {#each orderedWatches as key}
                     <label for="setting-watch-{key}">{formatTitle(key, "Watch")}</label>
                     <br>
                     <select bind:value={allSettings["alert-types"]["watches"][key]}>
@@ -238,7 +317,7 @@
         <details>
             <summary>Advisories/Other</summary>
             <div id="settings-advisory-list">
-                {#each Object.entries(allSettings["alert-types"]["advisory"]) as [key, value]}
+                {#each orderedAdvisories as key}
                     <label for="setting-watch-{key}">{formatTitle(key, "Advisory")}</label>
                     <br>
                     <select bind:value={allSettings["alert-types"]["advisory"][key]}>
@@ -256,4 +335,12 @@
         </details>
     </div>
     {/if}
+    {/if}
 </TabSlot>
+
+<style>
+    .addInfo {
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+</style>
