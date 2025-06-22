@@ -129,12 +129,12 @@ function getAdditionalWeatherDataForNomAsync(nom, callback, widgets=[]){
 
 
     let minutely_15_string = "&minutely_15=" + minutely_15.join(",");
-    if (minutely_15 === []){
+    if (minutely_15.length === 0){
         minutely_15_string = "";
     }
 
     let daily_string = "&daily=" + daily.join(",");
-    if (daily === []){
+    if (daily.length === 0){
         daily_string = "";
     }
 
