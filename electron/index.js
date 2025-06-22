@@ -96,7 +96,7 @@ else{
 						win2.loadFile('index.html')
 					}
 					win2.show()
-					win2.webContents.executeJavaScript("navTo('about');")
+					win2.webContents.executeJavaScript("window.goPage('about');")
 				   }
 				},
 				{
