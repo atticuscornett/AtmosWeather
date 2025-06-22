@@ -308,7 +308,8 @@ global.loadAlertE = (details) => {
 	try{
 		win2.webContents.executeJavaScript('stopAllAudio();', false);
 		win2.show()
-		win2.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
+		console.log('loadAlert("' + details.locationName + '", ' + details.at.toString() +  ')');
+		win2.webContents.executeJavaScript('loadAlert("' + details.locationName + '", ' + details.at.toString() +  ')', false);
 	}
 	catch(err){
 		win2 = new BrowserWindow({

@@ -87,6 +87,11 @@
         })
     }, 200);
 
+    window.loadAlert = (locationName, alertID) => {
+        alertSelection = {name: locationName, id: alertID};
+        page = "alert-view";
+    }
+
     getCurrentLocation();
 </script>
 
