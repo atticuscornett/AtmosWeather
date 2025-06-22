@@ -34,6 +34,7 @@
         conditions: [["LocationAtAGlance"], ["Next15Minutes"], ["GraphSwitcher"], ["WeekAtAGlance"], ["RadarGlance"]],
         detailed: [["LocationAtAGlance", "UVIndex"], ["MoonPhase", "SunriseSunset"], ["GraphSwitcher"], ["CAPEGraph"], ["Next15Minutes"], ["AllPollutants", "AQINext3Days"], ["RadarGlance"], ["LongNWSForecast"]],
         minimal: [["LocationAtAGlance"], ["WeekAtAGlance"], ["RadarGlance"]],
+        classic: [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]]
     };
     window.widgetTemplates = templates;
 
@@ -45,7 +46,7 @@
         let widgets = JSON.parse(localStorage.getItem("widgets"));
 
         if (widgets["default"] === undefined){
-            widgets["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]];
+            widgets["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["RadarGlance"], ["LongNWSForecast"]];
         }
 
         widgetDictionary = widgets;
@@ -55,7 +56,7 @@
         templates["default"] = JSON.parse(localStorage.getItem("default-widgets"));
 
         if (templates["default"] === null){
-            templates["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]];
+            templates["default"] = [["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["RadarGlance"], ["LongNWSForecast"]];
             localStorage.setItem("default-widgets", JSON.stringify(templates["default"]));
         }
 

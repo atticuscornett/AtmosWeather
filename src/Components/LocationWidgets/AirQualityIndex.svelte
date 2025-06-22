@@ -31,7 +31,7 @@
             return "Unhealthy";
         }
         else if (AQI > 100){
-            return "Unhealthy for sensitive groups";
+            return "Unhealthy for Sensitive Groups";
         }
         else if (AQI > 50){
             return "Moderate";
@@ -84,7 +84,8 @@
         border-radius: 7px;
         box-shadow: 0 0 7px #898989;
         padding: 0 20px 0 20px;
-        height: calc(100% - 5px);
+        height: calc(100% - 30px);
+        margin-top: 10px;
     }
 
     :global(body.dark) .clear-border{
@@ -92,5 +93,6 @@
         border-radius: 7px;
         box-shadow: 0 0 7px #898989;
         padding: 0 20px 0 20px;
+        margin-top: 10px;
     }
 </style>

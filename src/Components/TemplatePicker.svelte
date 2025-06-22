@@ -38,6 +38,7 @@
         <button onclick={selectTemplate} value="conditions">Conditions At A Glance</button>
         <button onclick={selectTemplate} value="detailed">Detailed Weather</button>
         <button onclick={selectTemplate} value="minimal">Minimalist</button>
+        <button onclick={selectTemplate} value="classic">Atmos Classic</button>
     </div>
 </div>
 
