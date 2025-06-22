@@ -668,41 +668,41 @@ body.dark details[open] summary{
         margin-bottom: 0;
     }
 
-    .text-holder.svelte-wktxbt {
+    .text-holder.svelte-13qcwwe {
         display: inline-block;
     }
 
-    .spaced-holder.svelte-wktxbt {
+    .spaced-holder.svelte-13qcwwe {
         margin-right: 40px;
     }
 
-    h4.svelte-wktxbt {
+    h4.svelte-13qcwwe {
         width: fit-content;
         margin-bottom: 0;
     }
 
-    h3.svelte-wktxbt {
+    h3.svelte-13qcwwe {
         margin-bottom: 0;
     }
 
-    h2.svelte-wktxbt {
+    h2.svelte-13qcwwe {
         margin-bottom: 0;
     }
 
-    .centerContainer.svelte-wktxbt {
+    .centerContainer.svelte-13qcwwe {
         display: flex;
         justify-content: center;
         align-items: center;
         background: #555;
         border-radius: 7px;
         margin-bottom: 15px;
-        height: calc(100% - 30px);
+        height: calc(100% - 15px);
         color: white;
         flex-direction: column;
         padding-bottom: 15px;
     }
 
-    img.svelte-wktxbt {
+    img.svelte-13qcwwe {
         margin-top: 10px;
     }
 

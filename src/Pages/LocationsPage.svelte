@@ -31,7 +31,8 @@
     let templates = {
         default: [],
         dense: [["LocationAtAGlance", "AirQualityIndex", "UVIndex"], ["SunriseSunset", "MoonPhase"], ["GraphSwitcher"], ["RadarGlance"]],
-        conditions: [["LocationAtAGlance"], ["Next15Minutes"], ["GraphSwitcher"], ["WeekAtAGlance"], ["RadarGlance"]]
+        conditions: [["LocationAtAGlance"], ["Next15Minutes"], ["GraphSwitcher"], ["WeekAtAGlance"], ["RadarGlance"]],
+        detailed: [["LocationAtAGlance", "UVIndex"], ["MoonPhase", "SunriseSunset"], ["GraphSwitcher"], ["CAPEGraph"], ["Next15Minutes"], ["AllPollutants", "AQINext3Days"], ["RadarGlance"], ["LongNWSForecast"]]
     };
     window.widgetTemplates = templates;
 
