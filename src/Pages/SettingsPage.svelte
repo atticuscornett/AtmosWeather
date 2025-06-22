@@ -175,6 +175,7 @@
         {#if isDesktop}
             <input class="box" type="checkbox" id="setting-run-startup" bind:checked={allSettings["personalization"]["run-startup"]}>
             <label for="setting-run-startup">Run Atmos Weather in background on startup</label>
+            <br>
         {/if}
         <input class="box" type="checkbox" id="setting-notify-updates" bind:checked={allSettings["personalization"]["update-notify"]}>
         <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label>
