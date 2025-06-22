@@ -2,10 +2,12 @@ package io.atticusc.atmosweather;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -91,6 +93,37 @@ public class InformWeather {
         }
 
         int id = ThreadLocalRandom.current().nextInt(1, 5000 + 1);
+
+        if (behavior.contains("soundnotification")){
+            // Check if it is quiet hours, if so, make sound notification silent
+            try {
+                // Check if quiet hour setting is enabled
+                if (jsonObject.getJSONObject("notifications").getBoolean("quiet-hours")){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        LocalTime now = LocalTime.now();
+                        int currentHour = now.getHour();
+                        int quietHourStart = jsonObject.getJSONObject("notifications").getInt("quiet-start");
+                        int quietHourEnd = jsonObject.getJSONObject("notifications").getInt("quiet-end");
+
+                        if (quietHourStart > quietHourEnd){
+                            if (quietHourStart <= currentHour || currentHour < quietHourEnd) {
+                                behavior = "silentnotification";
+                            }
+                        }
+                        else {
+                            if (quietHourStart <= currentHour && currentHour < quietHourEnd) {
+                                behavior = "silentnotification";
+                            }
+                        }
+
+                    }
+
+                }
+            }
+            catch (Exception e){
+                System.out.println("Could not determine quiet hours.");
+            }
+        }
 
         AtmosNotificationBuilder builder =
                 new AtmosNotificationBuilder(context)

@@ -186,6 +186,23 @@
         <br>
         <input class="box" type="checkbox" id="setting-future-storm-notifications" bind:checked={allSettings["notifications"]["rain-future"]}>
         <label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label>
+        <br>
+        {#if !isDesktop}
+            <input class="box" type="checkbox" id="setting-quiet-hours" bind:checked={allSettings["notifications"]["quiet-hours"]}>
+            <label for="setting-quiet-hours">Enable quiet hours</label>
+            <h5 class="addInfo">During quiet hours, sound notifications will behave like silent notifications, but alerts will still be shown.</h5>
+            <select id="setting-quiet-start" bind:value={allSettings["notifications"]["quiet-start"]} disabled={!allSettings["notifications"]["quiet-hours"]}>
+                {#each Array(24) as _, i}
+                    <option value={i}>{(i === 0) ? "12" : ((i > 12) ? i - 12 : i)}:00 {(i < 12) ? "am" : "pm"}</option>
+                {/each}
+            </select>
+            -
+            <select id="setting-quiet-end" bind:value={allSettings["notifications"]["quiet-end"]} disabled={!allSettings["notifications"]["quiet-hours"]}>
+                {#each Array(24) as _, i}
+                    <option value={i}>{(i === 0) ? "12" : ((i > 12) ? i - 12 : i)}:00 {(i < 12) ? "am" : "pm"}</option>
+                {/each}
+            </select>
+        {/if}
         <hr>
         <h2>Radar</h2>
         <h6>Radar powered by RainViewer API.</h6>
@@ -321,3 +338,10 @@
     {/if}
     {/if}
 </TabSlot>
+
+<style>
+    .addInfo {
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+</style>
