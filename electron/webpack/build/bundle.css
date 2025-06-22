@@ -240,6 +240,11 @@ body.dark details[open] summary{
         margin-right: 20px;
     }
 
+    .addInfo.svelte-p7c31m {
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+
     @keyframes svelte-abhtqj-loadAnim{
         0%{
             transform: rotate(0deg);
