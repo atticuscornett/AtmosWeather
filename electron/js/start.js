@@ -5,9 +5,9 @@ setTimeout(() => {
 
 let updateFiles = false;
 
-window.atmosVersion = "3.0.0-alpha.1";
-window.atmosUpdated = "6-19-2025";
-window.atmosUpdateTitle = "Atmos Weather v3.0.0 Alpha One is here!";
+window.atmosVersion = "3.0.0-alpha.2";
+window.atmosUpdated = "6-21-2025";
+window.atmosUpdateTitle = "Atmos Weather v3.0.0 Alpha Two is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>
 		    <dt>This is an alpha release!</dt>
