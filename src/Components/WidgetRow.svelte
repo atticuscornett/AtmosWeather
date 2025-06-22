@@ -115,8 +115,9 @@
 <style>
     .widgetRow {
         display: flex;
-        overflow: auto;
+        overflow-x: auto;
         margin-bottom: 10px;
+        overflow-y: clip;
     }
 
     .widgetContainer {

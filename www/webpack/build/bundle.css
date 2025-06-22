@@ -830,18 +830,19 @@ body.dark details[open] summary{
         background: linear-gradient(130deg, rgba(59, 88, 163, 0.95) 0%, rgba(85, 116, 194, 1) 100%);
     }
 
-    .widgetRow.svelte-18wecqf {
+    .widgetRow.svelte-9hvyo1 {
         display: flex;
-        overflow: auto;
+        overflow-x: auto;
         margin-bottom: 10px;
+        overflow-y: clip;
     }
 
-    .widgetContainer.svelte-18wecqf {
+    .widgetContainer.svelte-9hvyo1 {
         flex: 10;
         margin-right: 10px;
     }
 
-    .editButton.svelte-18wecqf {
+    .editButton.svelte-9hvyo1 {
         margin-bottom: 10px;
         flex: 0.5;
         min-width: auto;
