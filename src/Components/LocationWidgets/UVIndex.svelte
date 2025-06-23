@@ -6,8 +6,6 @@
     let UVIndexMax24 = $state("Loading...");
 
     let getUVIndex = () => {
-        console.log(locationData.openMeteoData)
-
         if (!locationData.openMeteoData){
             setTimeout(getUVIndex, 1000);
             return;

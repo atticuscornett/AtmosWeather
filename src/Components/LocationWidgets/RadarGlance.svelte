@@ -6,7 +6,6 @@
     let map;
 
     let refreshRadar = () => {
-        console.log(locationData)
         if (map){
             map.remove();
         }

@@ -94,8 +94,6 @@ function getAdditionalWeatherDataForNomAsync(nom, callback, widgets=[]){
     let currentParams = ["apparent_temperature"];
     let hourlyParams = ["apparent_temperature"];
 
-    console.log(widgets);
-
     for (let i of widgets){
         if (i.includes("CAPEGraph")){
             hourlyParams.push("cape");

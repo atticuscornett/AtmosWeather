@@ -19,7 +19,6 @@
         allSettings["radar"]["color-scheme"] = String(allSettings["radar"]["color-scheme"]);
         platform = window.platform;
         locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
-        console.log(locationNames)
     }
 
     function playAlarmSoundMain(){
@@ -33,7 +32,6 @@
     }
 
     function saveSettings() {
-        console.log(allSettings);
         let settingsSave = structuredClone($state.snapshot(allSettings));
         localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
         refreshAppTheme();

@@ -233,7 +233,6 @@
         }
 
         let renderLocationsSimultaneous = ()=>{
-            console.log("Attempting to render locations simultaneously...");
             if (loadedLocations !== nomLocations.length){
                 setTimeout(renderLocationsSimultaneous, 300);
                 return;

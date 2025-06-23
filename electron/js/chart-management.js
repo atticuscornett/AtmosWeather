@@ -198,7 +198,6 @@ function makeFeelsLikeGraph(location, data){
         drawnCharts[String(location)] = [];
     }
 
-    console.log(data)
 
     let timePeriods = data[0].slice(0, 24);
     let tempPeriods = [];
@@ -211,7 +210,6 @@ function makeFeelsLikeGraph(location, data){
         tempPeriods.push(data[1][a]);
     }
 
-    console.log(tempPeriods);
 
     Chart.defaults.font.size = 18;
     Chart.defaults.font.family = "Secular One";

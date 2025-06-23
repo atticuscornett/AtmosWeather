@@ -7,8 +7,6 @@
         isDataReady = locationData.AirQualityAPI &&
             locationData.AirQualityAPI["hourly"] &&
             locationData.AirQualityAPI["hourly"]["pm2_5"];
-        console.log(locationData);
-        console.log(isDataReady);
     }
 
     $effect(() => {
