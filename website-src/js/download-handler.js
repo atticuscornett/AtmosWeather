@@ -79,3 +79,15 @@ let getBestDownload = () =>{
 }
 
 getLatestRelease().then(r => {});
+
+document.getElementById("automatic-download").click();
+
+document.getElementById("download-select").onchange = (e) => {
+    let target = e.target.value;
+    let options = ["automatic", "windows", "macos", "linux", "android"];
+    for (let i = 0; i < options.length; i++){
+        console.log(options[i] + "-options");
+        document.getElementById(options[i] + "-options").classList.add("hidden");
+    }
+    document.getElementById(target + "-options").classList.remove("hidden");
+}
