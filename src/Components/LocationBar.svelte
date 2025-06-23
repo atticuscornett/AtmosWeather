@@ -7,7 +7,7 @@
     let barClass = $state("noalerts");
 
     $effect(() => {
-        if (locationData.hourly[0]){
+        if (locationData && locationData.hourly && locationData.hourly[0]){
             shortForecast = locationData.hourly[0][0]["shortForecast"].toLowerCase();
             info = locationData.hourly[0][0]["temperature"] + " F - " + locationData.hourly[0][0]["shortForecast"]
 
@@ -61,7 +61,7 @@
     });
 </script>
 
-{#if !locationData.hourly[0]}
+{#if locationData && (!locationData.hourly || !locationData.hourly[0])}
     {#if locationData.name === "Current Location" && locationData.denied}
         <div class="location currentloc">
             <div class="imgContainer">
@@ -86,16 +86,18 @@
         <br>
     {/if}
 {:else}
-    <div class="location {barClass}" onclick={()=>{page = "location-" + locationData.name}}>
-        <div class="imgContainer">
-            <img alt="Weather Status - {image}" src="img/{image}.svg">
+    {#if locationData && locationData.name}
+        <div class="location {barClass}" onclick={()=>{page = "location-" + locationData.name}}>
+            <div class="imgContainer">
+                <img alt="Weather Status - {image}" src="img/{image}.svg">
+            </div>
+            <div class="locationView">
+                <h2>{locationData.name}</h2>
+                <h3>{info}&emsp;(Tap for more info.)</h3>
+            </div>
         </div>
-        <div class="locationView">
-            <h2>{locationData.name}</h2>
-            <h3>{info}&emsp;(Tap for more info.)</h3>
-        </div>
-    </div>
-    <br>
+        <br>
+    {/if}
 {/if}
 
 

@@ -79,7 +79,7 @@
 
     let refreshLocations = async () => {
         let tempWeatherDataDictionary = {};
-        if (page !== "locations"){
+        if (page !== "locations" && page !== "location-Current Location"){
             return;
         }
 
@@ -112,12 +112,28 @@
                             }
                         }
 
+                        let fullStatus = [status, 0, 0, 0];
+
+                        for (let a = 0; a < alerts.length; a++){
+                            if (alerts[a]["properties"]["event"].toLowerCase().includes("watch")){
+                                fullStatus[1]++;
+                            }
+                            else if (alerts[a]["properties"]["event"].toLowerCase().includes("warning")){
+                                fullStatus[2]++;
+                            }
+                            else{
+                                fullStatus[3]++;
+                            }
+                            a++;
+                        }
+
                         currentLocationStatus = status;
 
                         currentLocationData = {
                             name: "Current Location",
                             alert: status,
-                            alerts: alerts
+                            alerts: alerts,
+                            fullStatus: fullStatus
                         }
 
                         JSONGetAsync("https://api.weather.gov/points/" + currentLat.toString() + "," + currentLong.toString(),
@@ -126,7 +142,7 @@
                                 JSONGetAsync(hourlyForecastLink, (hourlyForecast) => {
                                     try {
                                         currentLocationData.hourly = [hourlyForecast["properties"]["periods"]];
-                                        weatherDataDictionary["Current Location"] = currentLocationData;
+                                        tempWeatherDataDictionary["Current Location"] = currentLocationData;
                                         if (status === "warning"){
                                             alertLocations.unshift(currentLocationData);
                                         }
@@ -137,17 +153,17 @@
                                             mainLocations.unshift(currentLocationData);
                                         }
                                         JSONGetAsync(weatherGrid["properties"]["forecast"], (jsonReturn) => {
-                                            weatherDataDictionary["Current Location"]["forecast"] = [jsonReturn["properties"]["periods"]];
+                                            tempWeatherDataDictionary["Current Location"]["forecast"] = [jsonReturn["properties"]["periods"]];
                                         })
 
                                         getCurrentAQIForPositionAsync(currentLat, currentLong, (AQI, currentTimeIndex) => {
-                                            weatherDataDictionary["Current Location"].AQI = AQI["hourly"]["us_aqi"][currentTimeIndex];
-                                            weatherDataDictionary["Current Location"].AirQualityAPIIndex = currentTimeIndex;
-                                            weatherDataDictionary["Current Location"].AirQualityAPI = AQI;
+                                            tempWeatherDataDictionary["Current Location"].AQI = AQI["hourly"]["us_aqi"][currentTimeIndex];
+                                            tempWeatherDataDictionary["Current Location"].AirQualityAPIIndex = currentTimeIndex;
+                                            tempWeatherDataDictionary["Current Location"].AirQualityAPI = AQI;
                                         }, getWidgetsForLocation("Current Location"));
 
                                         getAdditionalWeatherDataForPositionAsync(currentLat, currentLong, (openMeteo) => {
-                                            weatherDataDictionary["Current Location"].openMeteoData = openMeteo;
+                                            tempWeatherDataDictionary["Current Location"].openMeteoData = openMeteo;
                                         });
 
                                     } catch (e) {
@@ -164,17 +180,21 @@
             });
         }
 
+
+
         let alertLocationsDefer = [];
         let otherLocationsDefer = [];
         let mainLocationsDefer = [];
 
         let loadedLocations = 0;
         for (let i = 0; i < nomLocations.length; i++){
+            console.log("Loading location: " + nomLocationNames[i]);
 
             setTimeout(nomToWeatherGridAsync.bind(null, nomLocations[i], (nomRes) => {
                 getHourlyForecastAsync(nomRes, (hourly) => {
                     getStatusAsync(nomLocations[i], (fullStatus, weatherAlerts) => {
                         let alertStatus = fullStatus[0];
+                        console.log(fullStatus)
 
                         let locationData = {
                             name: nomLocationNames[i],

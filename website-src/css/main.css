@@ -168,7 +168,6 @@ input:checked + label {
     .download-now {
         display: block;
         margin-top: 10px;
-        height: 40px;
         float: none;
         margin-left: auto;
         margin-right: auto;
