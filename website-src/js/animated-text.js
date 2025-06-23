@@ -3,6 +3,7 @@ let people = ["privacy enthusiasts", "the detail-oriented", "outdoor adventurers
 let index = Math.floor(Math.random() * people.length);
 
 let typeTextIn = () => {
+    document.getElementById("slideshow-photo").setAttribute("src", "website-src/img/screenshot-slide-" + String(index) + ".png");
     let text = people[index];
     document.getElementById("animated-text").innerText = text[0];
 
