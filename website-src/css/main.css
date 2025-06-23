@@ -1,0 +1,65 @@
+@font-face {
+    font-family: "Secular One";
+    src: url("../../SecularOne-Regular.ttf");
+}
+@font-face {
+    font-family: "Lexend Deca";
+    src: url("../../LexendDeca-VariableWeight.ttf");
+}
+
+body {
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    font-family: "Lexend Deca", sans-serif;
+    padding: 15px;
+}
+
+.logo {
+    height: 55px;
+    margin-bottom: 20px;
+}
+
+.main-title {
+    font-family: "Secular One", sans-serif;
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.download-now {
+    float: right;
+    margin-top: 5px;
+    height: 45px;
+    color: white;
+    border: none;
+    background-color: #00a89d;
+    font-family: "Secular One", sans-serif;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.gradient-text {
+    background: rgb(41,171,226);
+    background: linear-gradient(90deg, rgba(41,171,226,1) 0%, rgba(0,169,157,1) 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+@media (max-width: 750px) {
+    .logo {
+        height: 40px;
+    }
+
+    .download-now {
+        margin-top: 0;
+        height: 40px;
+    }
+}
+
