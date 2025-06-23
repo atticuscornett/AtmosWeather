@@ -150,8 +150,12 @@ input:checked + label {
     bottom: 20px;
 }
 
-.grid-item p {
+.version-description {
     margin-bottom: 75px;
+}
+
+.hidden {
+    display: none;
 }
 
 @media (max-width: 750px) {

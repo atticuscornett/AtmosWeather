@@ -16,7 +16,7 @@
         </div>
 
         <img src="logo.svg" alt="Atmos Weather logo" class="logo"/>
-        <button class="download-now">Download Now</button>
+        <button class="download-now" id="download-now">Download Now</button>
         <br>
         <h1 class="main-title">The weather app for <span class="gradient-text" id="animated-text"></span></h1>
         <img class="screenshot" src="website-src/img/screenshot-slide-0.png" alt="Slideshow Photo" id="slideshow-photo"/>
@@ -109,16 +109,90 @@
             <div class="grid-container">
                 <div class="grid-item">
                     <h2>Automatic Download</h2>
-                    <p>Best for most users.</p>
-                    <button class="link-button">Download</button>
+                    <p class="version-description">Best for most users.</p>
+                    <a id="download-automatic"><button class="link-button">Download</button></a>
                 </div>
                 <div class="grid-item">
                     <h2>GitHub Releases</h2>
-                    <p>Best for advanced users who want to choose a specific version.</p>
-                    <button class="link-button">View Options</button>
+                    <p class="version-description">Best for advanced users who want to choose a specific version.</p>
+                    <a href="https://github.com/atticuscornett/AtmosWeather/releases"><button class="link-button">View Options</button></a>
                 </div>
             </div>
         </div>
+        <div id="windows-options" class="hidden">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h2>Windows</h2>
+                    <p class="version-description">Requires Windows 10 or above. Unsigned.</p>
+                    <a id="download-win_x64"><button class="link-button">Download</button></a>
+                </div>
+            </div>
+        </div>
+        <div id="macos-options" class="hidden">
+            <h3>Need help installing? <a href="https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac" target="_blank">Read here.</a></h3>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h2>macOS x64 (Intel)</h2>
+                    <p class="version-description">Untested and unsigned.</p>
+                    <a id="download-mac_x64"><button class="link-button">Download</button></a>
+                </div>
+                <div class="grid-item">
+                    <h2>macOS ARM64 (Apple Silicon)</h2>
+                    <p class="version-description">Untested and unsigned.</p>
+                    <a id="download-mac_arm64"><button class="link-button">Download</button></a>
+                </div>
+            </div>
+        </div>
+        <div id="linux-options" class="hidden">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h2>Linux (deb x64)</h2>
+                    <p class="version-description">x64 Debian-based distributions (Ubuntu, Mint, etc.)<br>
+                        Untested and unsigned.</p>
+                    <a id="download-deb_x64"><button class="link-button">Download</button></a>
+                </div>
+                <div class="grid-item">
+                    <h2>Linux (AppImage x64)</h2>
+                    <p class="version-description">Universal AppImage for all x64 Linux distributions.<br>
+                        Untested and unsigned.</p>
+                    <a id="download-appimage_x64"><button class="link-button">Download</button></a>
+
+                </div>
+                <div class="grid-item">
+                    <h2>Linux (deb arm64)</h2>
+                    <p class="version-description">arm64 Debian-based distributions (Ubuntu, Mint, etc.)<br>
+                        Untested and unsigned.</p>
+                    <a id="download-deb_arm64"><button class="link-button">Download</button></a>
+                </div>
+                <div class="grid-item">
+                    <h2>Linux (AppImage arm64)</h2>
+                    <p class="version-description">Universal AppImage for all arm64 Linux distributions.<br>
+                        Untested and unsigned.</p>
+                    <a id="download-appimage_arm64"><button class="link-button">Download</button></a>
+                </div>
+                <div class="grid-item">
+                    <h2>Linux (deb armv7l)</h2>
+                    <p class="version-description">armv7l Debian-based distributions (Raspberry Pi, etc.)<br>
+                        Untested and unsigned.</p>
+                    <a id="download-deb_armv7l"><button class="link-button">Download</button></a>
+                </div>
+                <div class="grid-item">
+                    <h2>Linux (.tar.gz)</h2>
+                    <p class="version-description">Universal tarball for all Linux distributions.<br>
+                        Untested and unsigned.</p>
+                    <a id="download-tar"><button class="link-button">Download</button></a>
+                </div>
+            </div>
+        </div>
+        <div id="android-options" class="hidden">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h2>Android</h2>
+                    <p class="version-description">Requires Android 6 or above. Some features may not work on older devices.</p>
+                    <a id="download-android"><button class="link-button">Download</button></a>
+                </div>
+            </div>
     </body>
     <script src="website-src/js/animated-text.js"></script>
+    <script src="website-src/js/download-handler.js"></script>
 </html>
