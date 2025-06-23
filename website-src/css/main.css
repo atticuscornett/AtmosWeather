@@ -1,0 +1,192 @@
+@font-face {
+    font-family: "Secular One";
+    src: url("../../SecularOne-Regular.ttf");
+}
+@font-face {
+    font-family: "Lexend Deca";
+    src: url("../../LexendDeca-VariableWeight.ttf");
+}
+
+body {
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    font-family: "Lexend Deca", sans-serif;
+    padding: 15px;
+}
+
+.logo {
+    height: 55px;
+    margin-bottom: 20px;
+}
+
+.main-title {
+    font-family: "Secular One", sans-serif;
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.download-now {
+    float: right;
+    margin-top: 5px;
+    height: 45px;
+    color: white;
+    border: none;
+    background-color: #00a89d;
+    font-family: "Secular One", sans-serif;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.gradient-text {
+    background: rgb(41,171,226);
+    background: linear-gradient(90deg, rgba(41,171,226,1) 0%, rgb(0, 169, 124) 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+a {
+    color: #00a89d;
+    text-decoration: underline;
+}
+
+.no-announcement {
+    display: none;
+}
+
+.announcement {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 15px;
+    background-color: #4060a1;
+    border-radius: 10px;
+}
+
+.screenshot {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid #00a89d;
+}
+
+.link-button {
+    color: white;
+    background-color: #00a89d;
+    font-family: "Secular One", sans-serif;
+    font-size: 18px;
+    padding: 7px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+}
+
+.link-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.announcement-text {
+    font-family: "Secular One", sans-serif;
+    font-size: 20px;
+    margin: 0;
+    padding: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+}
+
+.grid-item {
+    background-color: #031527;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    position: relative;
+}
+
+input {
+    display: none;
+}
+
+label {
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    background-color: #00a89d;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+input:checked + label {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.grid-item button {
+    position: absolute;
+    bottom: 20px;
+}
+
+.version-description {
+    margin-bottom: 75px;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 750px) {
+    .logo {
+        height: 40px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .download-now {
+        display: block;
+        margin-top: 10px;
+        height: 40px;
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    .gradient-text {
+        display: block;
+    }
+
+    .screenshot {
+        width: 90%;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, auto);
+    }
+}
+

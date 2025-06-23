@@ -20,7 +20,9 @@
         <!-- Main Styling -->
         <style>
             body{
-                background-color: black;
+                background: #141E30;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to right, #243B55, #141E30);
                 color: white;
                 margin: 50px;
             }
@@ -56,7 +58,7 @@
             details{
                 font-family: Secular One;
                 font-size: 20px;
-                border: black solid;
+                border: white solid;
                 padding: 10px;
                 border-radius: 7px;
                 margin-bottom: 15px;
@@ -66,7 +68,7 @@
             details[open] summary{
                 padding-bottom: 10px;
                 margin-bottom: 10px;
-                border-bottom: black solid;
+                border-bottom: white solid;
             }
 
             summary{
