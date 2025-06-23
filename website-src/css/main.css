@@ -46,20 +46,56 @@ body {
 
 .gradient-text {
     background: rgb(41,171,226);
-    background: linear-gradient(90deg, rgba(41,171,226,1) 0%, rgba(0,169,157,1) 100%);
+    background: linear-gradient(90deg, rgba(41,171,226,1) 0%, rgb(0, 169, 124) 100%);
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
 }
 
+a {
+    color: #00a89d;
+    text-decoration: underline;
+}
+
+.no-announcement {
+    display: none;
+}
+
+.announcement {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 15px;
+    background-color: #4060a1;
+    border-radius: 10px;
+}
+
+.announcement-text {
+    font-family: "Secular One", sans-serif;
+    font-size: 20px;
+    margin: 0;
+    padding: 10px;
+}
+
 @media (max-width: 750px) {
     .logo {
         height: 40px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .download-now {
-        margin-top: 0;
+        display: block;
+        margin-top: 10px;
         height: 40px;
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    .gradient-text {
+        display: block;
     }
 }
 
