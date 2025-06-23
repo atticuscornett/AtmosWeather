@@ -37,7 +37,7 @@ body {
     border: none;
     background-color: #00a89d;
     font-family: "Secular One", sans-serif;
-    font-size: 20px;
+    font-size: 1.25em;
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 5px;
@@ -63,8 +63,7 @@ a {
 
 .announcement {
     text-align: center;
-    margin: 0;
-    margin-bottom: 15px;
+    margin: 0 0 15px;
     background-color: #4060a1;
     border-radius: 10px;
 }
@@ -83,7 +82,7 @@ a {
     color: white;
     background-color: #00a89d;
     font-family: "Secular One", sans-serif;
-    font-size: 18px;
+    font-size: 1.2em;
     padding: 7px 20px;
     border: none;
     border-radius: 5px;
@@ -130,7 +129,7 @@ input {
 
 label {
     font-family: "Lexend Deca", sans-serif;
-    font-size: 18px;
+    font-size: 1.2em;
     color: white;
     cursor: pointer;
     background-color: #00a89d;
@@ -158,7 +157,7 @@ input:checked + label {
     display: none;
 }
 
-@media (max-width: 750px) {
+@media (orientation: portrait) {
     .logo {
         height: 40px;
         display: block;
