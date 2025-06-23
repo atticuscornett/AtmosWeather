@@ -108,6 +108,21 @@ button a {
     padding: 10px;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+}
+
+.grid-item {
+    background-color: #031527;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+}
+
 @media (max-width: 750px) {
     .logo {
         height: 40px;
@@ -132,6 +147,11 @@ button a {
 
     .screenshot {
         width: 90%;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, auto);
     }
 }
 
