@@ -187,5 +187,17 @@ input:checked + label {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(6, auto);
     }
+
+    label {
+        font-size: 2em;
+    }
+
+    .link-button {
+        font-size: 2em;
+    }
+
+    .download-now {
+        font-size: 2em;
+    }
 }
 
