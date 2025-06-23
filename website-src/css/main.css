@@ -91,6 +91,11 @@ a {
     margin-top: 10px;
 }
 
+button a {
+    color: white;
+    text-decoration: none;
+}
+
 .link-container {
     text-align: center;
     margin-top: 20px;
