@@ -5,12 +5,12 @@ setTimeout(() => {
 
 let updateFiles = false;
 
-window.atmosVersion = "3.0.0-alpha.2";
-window.atmosUpdated = "6-21-2025";
-window.atmosUpdateTitle = "Atmos Weather v3.0.0 Alpha Two is here!";
+window.atmosVersion = "3.0.0-beta.1";
+window.atmosUpdated = "6-22-2025";
+window.atmosUpdateTitle = "Atmos Weather v3.0.0 Beta One is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>
-		    <dt>This is an alpha release!</dt>
+		    <dt>This is a beta release!</dt>
 		    <dd>- Release notes will be made available for the full release.</dd>
 		    <dd>- Please report any bugs you find to the Atmos Weather GitHub repo.</dd>
 <!--			<dt>Bug Fixes</dt>-->
