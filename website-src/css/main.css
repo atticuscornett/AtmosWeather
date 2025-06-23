@@ -121,6 +121,37 @@ button a {
     border-radius: 10px;
     padding: 20px;
     color: white;
+    position: relative;
+}
+
+input {
+    display: none;
+}
+
+label {
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    background-color: #00a89d;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+input:checked + label {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.grid-item button {
+    position: absolute;
+    bottom: 20px;
+}
+
+.grid-item p {
+    margin-bottom: 75px;
 }
 
 @media (max-width: 750px) {

@@ -27,6 +27,7 @@
             <a href="privacy.html"><button class="link-button">View Privacy Statement</button></a>
             <a href="https://github.com/atticuscornett/AtmosWeather/issues" target="_blank"><button class="link-button">Report Bugs/Request Features</button></a>
         </div>
+        <br>
         <h1>Why Atmos Weather?</h1>
         <div class="grid-container">
             <div class="grid-item">
@@ -89,7 +90,35 @@
                 </p>
             </div>
         </div>
+        <br>
         <h1 id="downloads-header">Downloads</h1>
+        <div id="download-select">
+            <input type="radio" name="download-option" value="automatic" id="automatic-download" checked="checked">
+            <label for="automatic-download" class="download-option">Automatic</label>
+            <input type="radio" name="download-option" value="windows" id="windows-download">
+            <label for="windows-download" class="download-option">Windows</label>
+            <input type="radio" name="download-option" value="macos" id="macos-download">
+            <label for="macos-download" class="download-option">macOS</label>
+            <input type="radio" name="download-option" value="linux" id="linux-download">
+            <label for="linux-download" class="download-option">Linux</label>
+            <input type="radio" name="download-option" value="android" id="android-download">
+            <label for="android-download" class="download-option">Android</label>
+        </div>
+        <br>
+        <div id="automatic-options">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h2>Automatic Download</h2>
+                    <p>Best for most users.</p>
+                    <button class="link-button">Download</button>
+                </div>
+                <div class="grid-item">
+                    <h2>GitHub Releases</h2>
+                    <p>Best for advanced users who want to choose a specific version.</p>
+                    <button class="link-button">View Options</button>
+                </div>
+            </div>
+        </div>
     </body>
     <script src="website-src/js/animated-text.js"></script>
 </html>
