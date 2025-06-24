@@ -5,9 +5,15 @@
         widgetLayout[widgetRow].push(e.target.value);
         addingWidget = false;
         e.stopPropagation();
+
         getAdditionalWeatherDataForNomAsync(locationData.nominatim, (additionalData)=>{
             locationData.openMeteoData = additionalData;
         }, widgetLayout)
+
+        getCurrentAQIForNomAsync(locationData.nominatim, (aqiData)=>{
+            locationData.AQI = aqiData["hourly"]["us_aqi"][locationData.AirQualityAPIIndex];
+            locationData.AirQualityAPI = aqiData;
+        }, widgetLayout);
     }
 
 
