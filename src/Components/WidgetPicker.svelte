@@ -6,6 +6,19 @@
         addingWidget = false;
         e.stopPropagation();
 
+        if (locationData.name === "Current Location"){
+            getAdditionalWeatherDataForPositionAsync(window.currentLat, window.currentLong, (additionalData)=>{
+                locationData.openMeteoData = additionalData;
+            }, widgetLayout);
+
+            getCurrentAQIForPositionAsync(window.currentLat, window.currentLong, (aqiData)=>{
+                locationData.AQI = aqiData["hourly"]["us_aqi"][locationData.AirQualityAPIIndex];
+                locationData.AirQualityAPI = aqiData;
+            }, widgetLayout);
+
+            return;
+        }
+
         getAdditionalWeatherDataForNomAsync(locationData.nominatim, (additionalData)=>{
             locationData.openMeteoData = additionalData;
         }, widgetLayout)

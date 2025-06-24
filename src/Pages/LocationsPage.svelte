@@ -97,6 +97,7 @@
 
         if (showCurrentLocation){
             tempWeatherDataDictionary["Current Location"] = {"name": "Current Location", "hourly": []};
+
             getCurrentLocation(() => {
                 if (window.currentLat) {
                     setTimeout(getWeatherAlertsForPosAsync.bind(null, window.currentLat, window.currentLong, (alerts) => {
@@ -164,7 +165,7 @@
 
                                         getAdditionalWeatherDataForPositionAsync(currentLat, currentLong, (openMeteo) => {
                                             tempWeatherDataDictionary["Current Location"].openMeteoData = openMeteo;
-                                        });
+                                        }, getWidgetsForLocation("Current Location"));
 
                                     } catch (e) {
                                         queueRefresh();
