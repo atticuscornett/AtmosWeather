@@ -189,13 +189,11 @@
 
         let loadedLocations = 0;
         for (let i = 0; i < nomLocations.length; i++){
-            console.log("Loading location: " + nomLocationNames[i]);
 
             setTimeout(nomToWeatherGridAsync.bind(null, nomLocations[i], (nomRes) => {
                 getHourlyForecastAsync(nomRes, (hourly) => {
                     getStatusAsync(nomLocations[i], (fullStatus, weatherAlerts) => {
                         let alertStatus = fullStatus[0];
-                        console.log(fullStatus)
 
                         let locationData = {
                             name: nomLocationNames[i],
