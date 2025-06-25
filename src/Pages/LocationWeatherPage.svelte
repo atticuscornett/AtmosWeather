@@ -67,7 +67,6 @@
     let widgetLayout = $state([["LocationAtAGlance"], ["AirQualityIndex"], ["GraphSwitcher"], ["LongNWSForecast"]]);
 
     function refreshWidgets(){
-        console.log("Refreshing widgets for " + locationData.name);
         if (localStorage.getItem("widgets") === null){
             localStorage.setItem("widgets", "{}");
         }
@@ -96,8 +95,6 @@
             widgetLayout.push([templateCode]);
         }
 
-        console.log("Ready to load widgets for " + locationData.name + ": " + widgetLayout);
-        console.log(locationData)
 
         if (locationData.name === "Current Location" && !locationData.hourly[0]){
             refreshLocations()
