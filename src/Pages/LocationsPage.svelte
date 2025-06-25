@@ -307,7 +307,7 @@
             <LocationBar locationData={locationData} bind:page={page} />
         {/each}
     </div>
-    <button id="add-location" onclick={page="search"}>Add Location +</button>
+    <button id="add-location" onclick={()=>{page="search"}}>Add Location +</button>
 </TabSlot>
 
 <style>
