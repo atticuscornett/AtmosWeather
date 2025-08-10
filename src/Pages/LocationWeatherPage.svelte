@@ -141,10 +141,10 @@
                             refreshWidgets={refreshWidgets}/>
         {/if}
 
-        <button onclick={toggleEdit}>{editing ? "Save Changes" : "Edit This Page"}</button>
+        <button onclick={toggleEdit}>{editing ? "Save This Page" : "Edit This Page"}</button>
 
         {#if editing}
-            <button onclick={saveAsDefaultTemplate}>Save As Default Template</button>
+            <button onclick={saveAsDefaultTemplate}>Save Page as Default for All Locations</button>
         {/if}
 
         <br>
