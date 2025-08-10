@@ -37,6 +37,7 @@
         refreshWidgets();
 
         toggleEdit();
+        page = "locations";
     }
 
     function toggleEdit(){
