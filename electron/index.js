@@ -17,15 +17,18 @@ dialog.showErrorBox = function(title, content) {
 };
 
 const createWindow = () => {
-const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-	icon: __dirname + "/img/icon.png",
-	autoHideMenuBar: true,
-	show: false
-})
-win2 = win;
-  win.loadFile('index.html')
+	const win = new BrowserWindow({
+		width: 800,
+		height: 600,
+		icon: __dirname + "/img/icon.png",
+		autoHideMenuBar: true,
+		show: false
+	})
+
+	win2 = win;
+	win.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
+	win2.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
+  	win.loadFile('index.html')
 }
 
 // Check if app is already running to prevent multiple background instances

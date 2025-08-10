@@ -17,7 +17,8 @@
         query = query.toLowerCase();
         let searchCache = JSON.parse(window.localStorage.getItem("nominatim-storage"));
 
-        if (searchCache.hasOwnProperty(query)){
+        if (searchCache.hasOwnProperty(query) && searchCache[query].length > 0){
+            console.log("Using cached results for: " + query);
             searchResults = searchCache[query];
             filteredResults = [];
             for (let  i = 0; i < searchResults.length; i++){
