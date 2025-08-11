@@ -19,6 +19,13 @@ let refreshRadar = () => {
 
     locationAvailable = window.currentLat;
 
+    // Attempt to get location if it has not been loaded yet
+    if (!locationAvailable){
+        getCurrentLocation(()=>{
+            locationAvailable = window.currentLat;
+        });
+    }
+
     if (map){
         map.remove();
     }
