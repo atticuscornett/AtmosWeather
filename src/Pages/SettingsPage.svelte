@@ -140,6 +140,7 @@
     <hr>
     {#if allSettings}
         <div onchange={saveSettings}>
+        {#if !isDesktop}
         <div id="settings-device-location">
             <h2>Device Location</h2>
             <h6>Settings related to use of your GPS location.</h6>
@@ -150,6 +151,7 @@
             <label for="setting-current-location-alerts">Give Alerts for Current Location</label>
             <hr>
         </div>
+        {/if}
         <h2>Personalization</h2>
         <label for="setting-app-theme">App Theme</label>
         <br>
