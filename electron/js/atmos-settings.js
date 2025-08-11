@@ -159,7 +159,7 @@ setTimeout(function(){
 	else{
 		//document.getElementById("settings-startup").hidden = true;
 		atmosSettingsTemp = {
-		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-weather":false, "run-startup": false, "update-notify": true},
+		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo":false, "run-startup": false, "update-notify": true},
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false, "quiet-hours": false, "quiet-start": 23, "quiet-end": 6},
 		"location-alerts": {"tts-alerts": false, "alert-check-frequency": "60", "default-alert": "readynow", "default-notification": "readynow", "locations":{}},
