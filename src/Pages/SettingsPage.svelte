@@ -96,7 +96,6 @@
             orderedWarnings = getWarningsInOrder();
             orderedWatches = getWatchesInOrder();
             orderedAdvisories = getAdvisoriesInOrder();
-            setInterval(ensureSettingsSet, 1000*60);
         }
     }
 
@@ -118,6 +117,7 @@
     }
 
     ensureSettingsSet();
+    setInterval(ensureSettingsSet, 1000*60);
 </script>
 
 <TabSlot name="settings" bind:page={page} onOpen={refreshSettings}>
