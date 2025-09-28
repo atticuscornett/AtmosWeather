@@ -5,18 +5,14 @@ setTimeout(() => {
 
 let updateFiles = false;
 
-window.atmosVersion = "3.0.1";
-window.atmosUpdated = "8-10-2025";
-window.atmosUpdateTitle = "Atmos Weather v3.0.1 is here!";
+window.atmosVersion = "3.0.2";
+window.atmosUpdated = "9-27-2025";
+window.atmosUpdateTitle = "Atmos Weather v3.0.2 is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>
 		    <dt>Bug Fixes</dt>
-		    <dd>- Fixed location search not working on desktop versions</dd>
-		    <dd>- Changed button text to clarify functions when editing location pages</dd>
-		    <dd>- Fixed bug when updating default location page</dd>
-		    <dd>- Fixed bug with current location option on radar page</dd>
-		    <dd>- Fixed bug with logo showing on startup</dd>
-		    <dd>- Fixed mobile version settings displaying on desktop versions of Atmos</dd>
+		    <dd>- Fixed bug that resulted in high memory and CPU usage</dd>
+		    <dd>- Updated dependencies</dd>
 		</dl> 
 		`;
 
