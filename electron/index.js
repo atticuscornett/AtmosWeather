@@ -11,7 +11,7 @@ var settings;
 var cycleAt = 0;
 var lastNetworkCheck = true;
 let trayIcon = null;
-let userAgentString = "Atmos Weather (electron) Search (https://github.com/atticuscornett/AtmosWeather/issues)"
+let userAgentString = "Atmos Weather (Electron) Search (https://github.com/atticuscornett/AtmosWeather/issues)"
 
 
 dialog.showErrorBox = function(title, content) {
