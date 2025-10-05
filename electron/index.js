@@ -11,6 +11,8 @@ var settings;
 var cycleAt = 0;
 var lastNetworkCheck = true;
 let trayIcon = null;
+let userAgentString = "Atmos Weather (electron) Search (https://github.com/atticuscornett/AtmosWeather/issues)"
+
 
 dialog.showErrorBox = function(title, content) {
     console.log(`${title}\n${content}`);
@@ -24,6 +26,7 @@ const createWindow = () => {
 		autoHideMenuBar: true,
 		show: false
 	})
+	win.webContents.setUserAgent(userAgentString);
 
 	win2 = win;
 	win.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
@@ -73,6 +76,7 @@ else{
 							icon: __dirname + "/img/icon.png",
 							autoHideMenuBar: true
 						});
+						win2.webContents.setUserAgent(userAgentString);
 						win2.loadFile('index.html')
 						win2.hide()
 					}
@@ -96,6 +100,7 @@ else{
 							icon: __dirname + "/img/icon.png",
 							autoHideMenuBar: true
 						});
+						win2.webContents.setUserAgent(userAgentString);
 						win2.loadFile('index.html')
 					}
 					win2.show()
@@ -122,6 +127,7 @@ else{
 						icon: __dirname + "/img/icon.png",
 						autoHideMenuBar: true
 					});
+					win2.webContents.setUserAgent(userAgentString);
 					win2.loadFile('index.html')
 					win2.hide()
 				}
@@ -229,6 +235,7 @@ function checkLocation(){
 			icon: __dirname + "/img/icon.png",
 			autoHideMenuBar: true
 		});
+		win2.webContents.setUserAgent();
 		win2.loadFile('index.html')
 		win2.hide();
 	}
@@ -321,6 +328,7 @@ global.loadAlertE = (details) => {
 			icon: __dirname + "/img/icon.png",
 			autoHideMenuBar: true
 		});
+		win2.webContents.setUserAgent(userAgentString);
 		win2.loadFile('index.html')
 		win2.webContents.executeJavaScript('stopAllAudio();', false);
 		win2.show()

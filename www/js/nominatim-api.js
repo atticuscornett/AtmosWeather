@@ -15,7 +15,12 @@ if (!window.localStorage.getItem("nominatim-storage")){
  * @param {function} callback - The callback function to handle the response or error.
  */
 function JSONGetAsync(urlGet, callback){
-	fetch(urlGet)
+	fetch(urlGet, {
+		method: 'GET', // Or 'POST', 'PUT', etc.
+		headers: {
+			'User-Agent': "Atmos Weather Search (https://github.com/atticuscornett/AtmosWeather/issues)",
+		}
+	})
 		.then((response) => response.json())
 		.then(callback)
 		.catch((err) => callback(err));
