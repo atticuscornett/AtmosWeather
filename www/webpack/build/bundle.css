@@ -654,7 +654,7 @@ body.dark details[open] summary{
         justify-content: space-around;
         overflow-x: auto;
         margin-bottom: 15px;
-        width: calc(100vw - 50px);
+        margin-top: 70px;
     }
 
     .daily-look.svelte-1xniifn {
@@ -673,6 +673,10 @@ body.dark details[open] summary{
 
     h3.svelte-1xniifn, h4.svelte-1xniifn, h5.svelte-1xniifn {
         margin-bottom: 0;
+    }
+
+    h2.svelte-1xniifn {
+        position: absolute;
     }
 
     .text-holder.svelte-ihlfle {

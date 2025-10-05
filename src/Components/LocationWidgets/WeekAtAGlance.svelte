@@ -128,7 +128,7 @@
         justify-content: space-around;
         overflow-x: auto;
         margin-bottom: 15px;
-        width: calc(100vw - 50px);
+        margin-top: 70px;
     }
 
     .daily-look {
@@ -147,5 +147,9 @@
 
     h3, h4, h5 {
         margin-bottom: 0;
+    }
+
+    h2 {
+        position: absolute;
     }
 </style>
