@@ -5,14 +5,14 @@ setTimeout(() => {
 
 let updateFiles = false;
 
-window.atmosVersion = "3.0.2";
-window.atmosUpdated = "9-27-2025";
-window.atmosUpdateTitle = "Atmos Weather v3.0.2 is here!";
+window.atmosVersion = "3.0.3";
+window.atmosUpdated = "10-5-2025";
+window.atmosUpdateTitle = "Atmos Weather v3.0.3 is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>
 		    <dt>Bug Fixes</dt>
-		    <dd>- Fixed bug that resulted in high memory and CPU usage</dd>
-		    <dd>- Updated dependencies</dd>
+		    <dd>- Fixed scrolling issues with widgets</dd>
+		    <dd>- Fixed issues with location search on desktop</dd>
 		</dl> 
 		`;
 
