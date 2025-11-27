@@ -30,6 +30,8 @@ const createWindow = () => {
 
 	mainWindow.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
   	mainWindow.loadFile('index.html')
+
+    // Run in background instead of closing
     mainWindow.on('close', (e)=>{
         e.preventDefault();
         mainWindow.hide();
@@ -43,6 +45,7 @@ if (!singleAppLock){
 	app.quit();
 }
 else{
+    // Show window when a second instance is run
 	app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
 		mainWindow.show()
 		if (mainWindow.isMinimized()){
@@ -50,75 +53,33 @@ else{
 			mainWindow.focus();
 		}
 	})
+
+
 	app.whenReady().then(() => {
+        // Check for updates on Windows only (autoUpdater not supported on Linux/Mac)
 		if (process.platform === 'win32'){
 			app.setAppUserModelId("Atmos Weather");
 			autoUpdater.checkForUpdatesAndNotify()
 		}
+
         createWindow();
+
+        // Show main window if first run, otherwise keep in tray
 		mainWindow.webContents.executeJavaScript('localStorage.getItem("run-before")', true)
 		.then(result => {
 			if (!result){
 				mainWindow.show();
 			}
 		});
+
+
 		trayIcon = new Tray(__dirname + "/img/icon.png")
 		trayIcon.setToolTip('Atmos Weather')
-		const trayMenuTemplate = [{
-				   label: 'Atmos Weather',
-				   enabled: true,
-				   click: () => {
-					if (mainWindow == null){
-						mainWindow = new BrowserWindow({
-							width: 800,
-							height: 600,
-							icon: __dirname + "/img/icon.png",
-							autoHideMenuBar: true
-						});
-						mainWindow.webContents.setUserAgent(userAgentString);
-						mainWindow.loadFile('index.html')
-						mainWindow.hide()
-					}
-					if (mainWindow.isVisible()) {
-						mainWindow.hide()
-					} else {
-						// Refresh displayed weather data so that old data is not shown to the user
-						mainWindow.webContents.executeJavaScript('refreshLocations();', false);
-						mainWindow.show()
-					}
-				   }
-				},
-				{
-				   label: 'About Atmos Weather',
-				   enabled: true,
-				   click: () => {
-					if (mainWindow == null){
-						mainWindow = new BrowserWindow({
-							width: 800,
-							height: 600,
-							icon: __dirname + "/img/icon.png",
-							autoHideMenuBar: true
-						});
-						mainWindow.webContents.setUserAgent(userAgentString);
-						mainWindow.loadFile('index.html')
-					}
-					mainWindow.show()
-					mainWindow.webContents.executeJavaScript("window.goPage('about');")
-				   }
-				},
-				{
-					label: 'Quit',
-					enabled: true,
-					click: () => {
-						app.quit()
-					}
-				}
-			 ]
-
-			 let trayMenu = Menu.buildFromTemplate(trayMenuTemplate)
-			 trayIcon.setContextMenu(trayMenu)
-			 trayIcon.on('click', function(e){
-				// If window was destroyed, create a new one. Otherwise, show current window.
+		const trayMenuTemplate = [
+            {
+                label: 'Atmos Weather',
+				enabled: true,
+				click: () => {
 				if (mainWindow == null){
 					mainWindow = new BrowserWindow({
 						width: 800,
@@ -137,7 +98,37 @@ else{
 					mainWindow.webContents.executeJavaScript('refreshLocations();', false);
 					mainWindow.show()
 				}
-			});
+                }
+				},
+            {
+                label: 'About Atmos Weather',
+				enabled: true,
+                click: () => {
+                    mainWindow.show()
+					mainWindow.webContents.executeJavaScript("window.goPage('about');")
+                }
+            },
+            {
+                label: 'Quit',
+				enabled: true,
+				click: () => {
+					app.quit()
+				}
+            }
+        ]
+
+        let trayMenu = Menu.buildFromTemplate(trayMenuTemplate)
+        trayIcon.setContextMenu(trayMenu)
+
+        trayIcon.on('click', function(e){
+            if (mainWindow.isVisible()) {
+				mainWindow.hide()
+			} else {
+				// Refresh displayed weather data so that old data is not shown to the user
+				mainWindow.webContents.executeJavaScript('refreshLocations();', false);
+				mainWindow.show()
+			}
+        });
 
 	})
 }
