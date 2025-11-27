@@ -19,19 +19,17 @@ dialog.showErrorBox = function(title, content) {
 };
 
 const createWindow = () => {
-	const win = new BrowserWindow({
+	mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
 		icon: __dirname + "/img/icon.png",
 		autoHideMenuBar: true,
 		show: false
 	})
-	win.webContents.setUserAgent(userAgentString);
+	mainWindow.webContents.setUserAgent(userAgentString);
 
-	mainWindow = win;
-	win.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
 	mainWindow.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
-  	win.loadFile('index.html')
+  	mainWindow.loadFile('index.html')
 }
 
 // Check if app is already running to prevent multiple background instances
