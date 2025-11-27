@@ -44,9 +44,6 @@ if (!singleAppLock){
 }
 else{
 	app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
-		if (mainWindow == null){
-			createWindow();
-		}
 		mainWindow.show()
 		if (mainWindow.isMinimized()){
 			mainWindow.restore();
@@ -58,7 +55,7 @@ else{
 			app.setAppUserModelId("Atmos Weather");
 			autoUpdater.checkForUpdatesAndNotify()
 		}
-		createWindow()
+        createWindow();
 		mainWindow.webContents.executeJavaScript('localStorage.getItem("run-before")', true)
 		.then(result => {
 			if (!result){
@@ -146,9 +143,6 @@ else{
 }
 
 setInterval(function(){
-	if (mainWindow == null){
-		createWindow();
-	}
 	// Get app settings from window localStorage
 	mainWindow.webContents.executeJavaScript('localStorage.getItem("weather-locations");', true)
 		.then(result => {
