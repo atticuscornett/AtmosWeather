@@ -30,6 +30,10 @@ const createWindow = () => {
 
 	mainWindow.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
   	mainWindow.loadFile('index.html')
+    mainWindow.on('close', (e)=>{
+        e.preventDefault();
+        mainWindow.hide();
+    })
 }
 
 // Check if app is already running to prevent multiple background instances
@@ -138,10 +142,6 @@ else{
 				}
 			});
 
-	})
-
-	app.on("window-all-closed", () => {
-		mainWindow = null;
 	})
 }
 
