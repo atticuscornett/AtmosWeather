@@ -66,8 +66,8 @@ function alertCheck(location, alert, at, playedAlready){
             notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
             notif.show()
             notif.on('click', loadAlertE.bind(null, {"locationName":locationNames[cycleAt], "at":at}))
-            win2.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();allAudio.push(audio);", false);
-            notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
+            mainWindow.webContents.executeJavaScript("var audio = new Audio('audio/" + alertSound + "extended.mp3');audio.play();allAudio.push(audio);", false);
+            notif.on('close', () => {mainWindow.webContents.executeJavaScript("stopAllAudio();", false)});
             if (tts){
                 ttsTask(alert["properties"]["headline"] + ". " + alert["properties"]["description"].replaceAll("'", "\\'"));
             }
@@ -82,16 +82,16 @@ function alertCheck(location, alert, at, playedAlready){
                 notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
                 notif.show()
                 notif.on('click', loadAlertE.bind(null, {"locationName":locationNames[cycleAt], "at":at}))
-                notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
+                notif.on('close', () => {mainWindow.webContents.executeJavaScript("stopAllAudio();", false)});
             }
             else{
                 notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/alerts.png"});
                 notif.show()
                 notif.on('click', loadAlertE.bind(null, {"locationName":locationNames[cycleAt], "at":at}))
-                notif.on('close', () => {win2.webContents.executeJavaScript("stopAllAudio();", false)});
+                notif.on('close', () => {mainWindow.webContents.executeJavaScript("stopAllAudio();", false)});
             }
             if (!playedAlready.includes(notificationSound)){
-                win2.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
+                mainWindow.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
                 playedAlready.push(notificationSound);
             }
         }
@@ -142,10 +142,10 @@ function transformEventType(eventType){
 
 function ttsTask(toSay){
     setTimeout(function(){
-        win2.webContents.executeJavaScript("stopAllAudio();", false);
+        mainWindow.webContents.executeJavaScript("stopAllAudio();", false);
         toSay = toSay.replaceAll("\n", " ")
         console.log(toSay);
-        win2.webContents.executeJavaScript("sayTTS('" +  toSay + "');", false);
+        mainWindow.webContents.executeJavaScript("sayTTS('" +  toSay + "');", false);
     }, 3000);
 }
 

@@ -3,13 +3,13 @@ const { autoUpdater } = require("electron-updater")
 const turf = require("@turf/turf")
 const {checkPolygons} = require("./alert-checking");
 const fs = require("fs");
-global.win2 = null;
-var weatherLocations;
-var locationNames;
-var locationCache;
-var settings;
-var cycleAt = 0;
-var lastNetworkCheck = true;
+global.mainWindow = null;
+let weatherLocations;
+let locationNames;
+let locationCache;
+let settings;
+let cycleAt = 0;
+let lastNetworkCheck = true;
 let trayIcon = null;
 let userAgentString = "Atmos Weather (Electron) Search (https://github.com/atticuscornett/AtmosWeather/issues)"
 
@@ -28,9 +28,9 @@ const createWindow = () => {
 	})
 	win.webContents.setUserAgent(userAgentString);
 
-	win2 = win;
+	mainWindow = win;
 	win.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
-	win2.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
+	mainWindow.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
   	win.loadFile('index.html')
 }
 
@@ -42,13 +42,13 @@ if (!singleAppLock){
 }
 else{
 	app.on('second-instance', (event, commandLine, workingDirectory, additionalData) => {
-		if (win2 == null){
+		if (mainWindow == null){
 			createWindow();
 		}
-		win2.show()
-		if (win2.isMinimized()){
-			win2.restore();
-			win2.focus();
+		mainWindow.show()
+		if (mainWindow.isMinimized()){
+			mainWindow.restore();
+			mainWindow.focus();
 		}
 	})
 	app.whenReady().then(() => {
@@ -57,10 +57,10 @@ else{
 			autoUpdater.checkForUpdatesAndNotify()
 		}
 		createWindow()
-		win2.webContents.executeJavaScript('localStorage.getItem("run-before")', true)
+		mainWindow.webContents.executeJavaScript('localStorage.getItem("run-before")', true)
 		.then(result => {
 			if (!result){
-				win2.show();
+				mainWindow.show();
 			}
 		});
 		trayIcon = new Tray(__dirname + "/img/icon.png")
@@ -69,23 +69,23 @@ else{
 				   label: 'Atmos Weather',
 				   enabled: true,
 				   click: () => {
-					if (win2 == null){
-						win2 = new BrowserWindow({
+					if (mainWindow == null){
+						mainWindow = new BrowserWindow({
 							width: 800,
 							height: 600,
 							icon: __dirname + "/img/icon.png",
 							autoHideMenuBar: true
 						});
-						win2.webContents.setUserAgent(userAgentString);
-						win2.loadFile('index.html')
-						win2.hide()
+						mainWindow.webContents.setUserAgent(userAgentString);
+						mainWindow.loadFile('index.html')
+						mainWindow.hide()
 					}
-					if (win2.isVisible()) {
-						win2.hide()
+					if (mainWindow.isVisible()) {
+						mainWindow.hide()
 					} else {
 						// Refresh displayed weather data so that old data is not shown to the user
-						win2.webContents.executeJavaScript('refreshLocations();', false);
-						win2.show()
+						mainWindow.webContents.executeJavaScript('refreshLocations();', false);
+						mainWindow.show()
 					}
 				   }
 				},
@@ -93,18 +93,18 @@ else{
 				   label: 'About Atmos Weather',
 				   enabled: true,
 				   click: () => {
-					if (win2 == null){
-						win2 = new BrowserWindow({
+					if (mainWindow == null){
+						mainWindow = new BrowserWindow({
 							width: 800,
 							height: 600,
 							icon: __dirname + "/img/icon.png",
 							autoHideMenuBar: true
 						});
-						win2.webContents.setUserAgent(userAgentString);
-						win2.loadFile('index.html')
+						mainWindow.webContents.setUserAgent(userAgentString);
+						mainWindow.loadFile('index.html')
 					}
-					win2.show()
-					win2.webContents.executeJavaScript("window.goPage('about');")
+					mainWindow.show()
+					mainWindow.webContents.executeJavaScript("window.goPage('about');")
 				   }
 				},
 				{
@@ -120,56 +120,56 @@ else{
 			 trayIcon.setContextMenu(trayMenu)
 			 trayIcon.on('click', function(e){
 				// If window was destroyed, create a new one. Otherwise, show current window.
-				if (win2 == null){
-					win2 = new BrowserWindow({
+				if (mainWindow == null){
+					mainWindow = new BrowserWindow({
 						width: 800,
 						height: 600,
 						icon: __dirname + "/img/icon.png",
 						autoHideMenuBar: true
 					});
-					win2.webContents.setUserAgent(userAgentString);
-					win2.loadFile('index.html')
-					win2.hide()
+					mainWindow.webContents.setUserAgent(userAgentString);
+					mainWindow.loadFile('index.html')
+					mainWindow.hide()
 				}
-				if (win2.isVisible()) {
-					win2.hide()
+				if (mainWindow.isVisible()) {
+					mainWindow.hide()
 				} else {
 					// Refresh displayed weather data so that old data is not shown to the user
-					win2.webContents.executeJavaScript('refreshLocations();', false);
-					win2.show()
+					mainWindow.webContents.executeJavaScript('refreshLocations();', false);
+					mainWindow.show()
 				}
 			});
 
 	})
 
 	app.on("window-all-closed", () => {
-		win2 = null;
+		mainWindow = null;
 	})
 }
 
 setInterval(function(){
-	if (win2 == null){
+	if (mainWindow == null){
 		createWindow();
 	}
 	// Get app settings from window localStorage
-	win2.webContents.executeJavaScript('localStorage.getItem("weather-locations");', true)
+	mainWindow.webContents.executeJavaScript('localStorage.getItem("weather-locations");', true)
 		.then(result => {
 			global.weatherLocations = JSON.parse(result);
 	});
-	win2.webContents.executeJavaScript('localStorage.getItem("weather-location-names")', true)
+	mainWindow.webContents.executeJavaScript('localStorage.getItem("weather-location-names")', true)
 		.then(result =>{
 		global.locationNames = JSON.parse(result);
 	});
-	win2.webContents.executeJavaScript('localStorage.getItem("nws-location-cache")', true)
+	mainWindow.webContents.executeJavaScript('localStorage.getItem("nws-location-cache")', true)
 		.then(result =>{
 		global.locationCache = JSON.parse(result);
 	});
-	win2.webContents.executeJavaScript('localStorage.getItem("atmos-settings")', true)
+	mainWindow.webContents.executeJavaScript('localStorage.getItem("atmos-settings")', true)
 		.then(result => {
 		global.settings = JSON.parse(result);
 		runAtStartup();
 	});
-	win2.webContents.executeJavaScript('navigator.onLine', true)
+	mainWindow.webContents.executeJavaScript('navigator.onLine', true)
 		.then(result => {
 		global.isOnline = result;
 	});
@@ -228,18 +228,18 @@ function checkLocation(){
 	if (locationNames.length > 0){
 		checkPolygons();
 	}
-	if (win2 == null){
-		win2 = new BrowserWindow({
+	if (mainWindow == null){
+		mainWindow = new BrowserWindow({
 			width: 800,
 			height: 600,
 			icon: __dirname + "/img/icon.png",
 			autoHideMenuBar: true
 		});
-		win2.webContents.setUserAgent();
-		win2.loadFile('index.html')
-		win2.hide();
+		mainWindow.webContents.setUserAgent();
+		mainWindow.loadFile('index.html')
+		mainWindow.hide();
 	}
-	win2.webContents.executeJavaScript('localStorage.getItem("lastForecastNotification' + locationNames[cycleAt] + '");', true)
+	mainWindow.webContents.executeJavaScript('localStorage.getItem("lastForecastNotification' + locationNames[cycleAt] + '");', true)
 		.then(result => {
 			var date = new Date();
 			var dateString = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
@@ -268,7 +268,7 @@ function checkLocation(){
 									chunk = JSON.parse(chunk);
 									var fullForecast = chunk["properties"]["periods"][0]["detailedForecast"] + " " + chunk["properties"]["periods"][1]["detailedForecast"];
 									var fullForecastCaps = fullForecast;
-									win2.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
+									mainWindow.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
 									fullForecast = fullForecast.toLowerCase();
 									// Check for severe trigger words
 									if (fullForecast.includes("severe") || fullForecast.includes("tropical") || fullForecast.includes("hurricane") || fullForecast.includes("strong") || fullForecast.includes("tornado") || fullForecast.includes("damaging") || fullForecast.includes("damage") || fullForecast.includes("hail")){
@@ -307,7 +307,7 @@ function checkLocation(){
 					}
 				}
 				else{
-					win2.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
+					mainWindow.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
 				}
 			}
 	});
@@ -316,22 +316,22 @@ function checkLocation(){
 global.loadAlertE = (details) => {
 	console.log(details)
 	try{
-		win2.webContents.executeJavaScript('stopAllAudio();', false);
-		win2.show()
+		mainWindow.webContents.executeJavaScript('stopAllAudio();', false);
+		mainWindow.show()
 		console.log('loadAlert("' + details.locationName + '", ' + details.at.toString() +  ')');
-		win2.webContents.executeJavaScript('loadAlert("' + details.locationName + '", ' + details.at.toString() +  ')', false);
+		mainWindow.webContents.executeJavaScript('loadAlert("' + details.locationName + '", ' + details.at.toString() +  ')', false);
 	}
 	catch(err){
-		win2 = new BrowserWindow({
+		mainWindow = new BrowserWindow({
 			width: 800,
 			height: 600,
 			icon: __dirname + "/img/icon.png",
 			autoHideMenuBar: true
 		});
-		win2.webContents.setUserAgent(userAgentString);
-		win2.loadFile('index.html')
-		win2.webContents.executeJavaScript('stopAllAudio();', false);
-		win2.show()
-		win2.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
+		mainWindow.webContents.setUserAgent(userAgentString);
+		mainWindow.loadFile('index.html')
+		mainWindow.webContents.executeJavaScript('stopAllAudio();', false);
+		mainWindow.show()
+		mainWindow.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
 	}
 }
