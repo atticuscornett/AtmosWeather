@@ -219,7 +219,8 @@ function checkLocation(){
 		.then(result => {
 			let date = new Date();
 			let dateString = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
-			if (result === dateString){
+
+			if (String(result) === dateString){
 				return; // Already sent notification today
 			}
 
