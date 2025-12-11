@@ -6,8 +6,6 @@ const fs = require("fs");
 global.mainWindow = null;
 let weatherLocations;
 let locationNames;
-let locationCache;
-let settings;
 let cycleAt = 0;
 let lastNetworkCheck = true;
 let trayIcon = null;
@@ -216,7 +214,6 @@ function checkLocation(){
 		checkPolygons();
 	}
 
-
 	// Check if future forecast notifications are enabled
 	mainWindow.webContents.executeJavaScript('localStorage.getItem("lastForecastNotification' + locationNames[cycleAt] + '");', true)
 		.then(result => {
@@ -281,6 +278,7 @@ function checkLocation(){
 						}
 						catch(err){
 							console.log("There was an error getting the forecast.")
+							console.log(err);
 						}
 					})
 				})
