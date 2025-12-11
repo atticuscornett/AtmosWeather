@@ -200,51 +200,54 @@ alertCheckHandler();
 // Check the location for alerts
 function checkLocation(){
 	console.log(new Date().toString())
+
+	// Wait for main window to load settings
 	let locationNames = global.locationNames;
-	if (locationNames == undefined){
+	if (locationNames === undefined){
 		setTimeout(checkLocation, 200);
 		return;
 	}
+
 	if (cycleAt >= locationNames.length){
 		cycleAt = 0;
 	}
+
 	if (locationNames.length > 0){
 		checkPolygons();
 	}
-	if (mainWindow == null){
-		mainWindow = new BrowserWindow({
-			width: 800,
-			height: 600,
-			icon: __dirname + "/img/icon.png",
-			autoHideMenuBar: true
-		});
-		mainWindow.webContents.setUserAgent();
-		mainWindow.loadFile('index.html')
-		mainWindow.hide();
-	}
+
+
+	// Check if future forecast notifications are enabled
 	mainWindow.webContents.executeJavaScript('localStorage.getItem("lastForecastNotification' + locationNames[cycleAt] + '");', true)
 		.then(result => {
-			var date = new Date();
-			var dateString = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
-			if (result != dateString){
-				var severeNotification =  settings["notifications"]["severe-future"];
-				var rainNotification = settings["notifications"]["rain-future"];
+			let date = new Date();
+			let dateString = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
+			if (result !== dateString){
+				// Get default notification settings
+				let severeNotification =  settings["notifications"]["severe-future"];
+				let rainNotification = settings["notifications"]["rain-future"];
+
+				// Override with per-location settings if they exist
 				if (settings["per-location"][locationNames[cycleAt]]){
-					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"] != undefined){
+					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"] !== undefined){
 						severeNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"];
 					}
-					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"] != undefined){
+					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"] !== undefined){
 						rainNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"];
 					}
 				}
+
+				// Send notification if enabled
 				if (severeNotification || rainNotification){
 					try{
-						if (locationNames.length == 0){
+						if (locationNames.length === 0){
 							// Don't send garbage requests if there are no locations
 							return;
 						}
-						var forecastLink = JSON.parse(locationCache[locationNames[cycleAt]])["properties"]['forecast'];
-						var notificationRequest = net.request(forecastLink);
+
+						// Check forecast using NWS API
+						let forecastLink = JSON.parse(locationCache[locationNames[cycleAt]])["properties"]['forecast'];
+						let notificationRequest = net.request(forecastLink);
 						notificationRequest.on("response", (response) => {
 							response.on("data", (chunk) => {
 								try{
