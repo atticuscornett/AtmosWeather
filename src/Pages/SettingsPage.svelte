@@ -133,6 +133,12 @@
         {/if}
     </h6>
 
+    {#if window.electronAPI && window.atmosVersion !== window.atmosLatest}
+        <h3>There is an update available ({window.atmosLatest}).</h3>
+        <br>
+        <button class="updateButton" onclick={()=>{window.electronAPI.updateNow();}}>Update Now</button>
+    {/if}
+
     {#if webVersionWarning}
         <h2>Some settings/features are not functional on the web version, including weather alerts.</h2>
     {/if}
@@ -342,5 +348,16 @@
     .addInfo {
         margin-top: 5px;
         margin-left: 5px;
+    }
+
+    .updateButton {
+        background-color: dodgerblue;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Secular One, sans-serif;
     }
 </style>

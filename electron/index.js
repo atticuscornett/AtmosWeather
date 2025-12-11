@@ -1,8 +1,9 @@
-const { app, BrowserWindow, Notification, Tray, Menu, net, dialog} = require('electron')
+const { app, BrowserWindow, Notification, Tray, Menu, net, dialog, ipcMain} = require('electron')
 const { autoUpdater } = require("electron-updater")
 const turf = require("@turf/turf")
 const {checkPolygons} = require("./alert-checking");
 const fs = require("fs");
+const {join} = require("node:path");
 global.mainWindow = null;
 let weatherLocations;
 let locationNames;
@@ -22,7 +23,10 @@ const createWindow = () => {
 		height: 600,
 		icon: __dirname + "/img/icon.png",
 		autoHideMenuBar: true,
-		show: false
+		show: false,
+		webPreferences: {
+			preload: join(__dirname, 'preload.js')
+		}
 	})
 	mainWindow.webContents.setUserAgent(userAgentString);
 
@@ -58,6 +62,10 @@ else{
 		if (process.platform === 'win32'){
 			app.setAppUserModelId("Atmos Weather");
 			autoUpdater.checkForUpdatesAndNotify()
+
+			ipcMain.on("updateNow", () => {
+				updateNow();
+			})
 		}
 
         createWindow();
@@ -155,6 +163,17 @@ setInterval(function(){
 		global.isOnline = result;
 	});
 }, 10000);
+
+function updateNow(){
+	autoUpdater.checkForUpdates().then(result => {
+		if (result === null){
+			return;
+		}
+		autoUpdater.downloadUpdate().then(result => {
+			autoUpdater.quitAndInstall();
+		});
+	})
+}
 
 function runAtStartup(){
 	let shouldRunAtStartup = true;

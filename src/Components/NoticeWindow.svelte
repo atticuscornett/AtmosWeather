@@ -49,32 +49,35 @@
 
 		// Check for updates if enabled
 
-		if (notifyUpdates) {
-			JSONGetAsync("https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest", (latest) => {
+		JSONGetAsync("https://api.github.com/repos/atticuscornett/AtmosWeather/releases/latest", (latest) => {
 
-				// Support tag names with and without the "v" prefix
-				if (latest["tag_name"][0] === "v"){
-					latest = latest["tag_name"].slice(1);
-				}
-				else{
-					latest = latest["tag_name"];
-				}
+			// Support tag names with and without the "v" prefix
+			if (latest["tag_name"][0] === "v"){
+				latest = latest["tag_name"].slice(1);
+			}
+			else{
+				latest = latest["tag_name"];
+			}
 
-				console.log("Current version: " + window.atmosVersion);
-				console.log("Latest version: " + latest);
+			console.log("Current version: " + window.atmosVersion);
+			console.log("Latest version: " + latest);
+			window.atmosLatest = latest;
 
-				if (latest !== window.atmosVersion){
-					noticeTitles.push("An update is available!");
-					notices.push(`You are on an older version of Atmos Weather (` + window.atmosVersion + `).<br>
+			if (!notifyUpdates) {
+				return;
+			}
+
+			if (latest !== window.atmosVersion){
+				noticeTitles.push("An update is available!");
+				notices.push(`You are on an older version of Atmos Weather (` + window.atmosVersion + `).<br>
 						A new version of Atmos Weather (` + latest +  `)
 						can be downloaded <a href="https://atticuscornett.github.io/AtmosWeather" target="_blank">here</a>.<br>
 						Updates may include security upgrades, so it is important to keep your apps updated.`
-					);
+				);
 
-					showNotice = true;
-				}
-			});
-		}
+				showNotice = true;
+			}
+		});
 
 		if (window.localStorage.getItem("notice-version") !== window.atmosVersion){
 			noticeTitles.push(window.atmosUpdateTitle);
