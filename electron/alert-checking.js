@@ -119,36 +119,15 @@ function transformEventType(eventType){
     if (eventType.includes("Red Flag Warning")){
         eventType = "Fire Weather Warning";
     }
-    if (eventType === "special-weather-statement"){
-        eventType = "special-weather-statement-advisory";
+
+    if (eventType.endsWith("statement") || eventType.endsWith("outlook")){
+        eventType = eventType + "-advisory";
     }
-    if (eventType === "severe-weather-statement"){
-        eventType = "severe-weather-statement-advisory";
-    }
-    if (eventType === "tropical-cyclone-statement"){
-        eventType = "tropical-cyclone-statement-advisory";
-    }
-    if (eventType === "hurricane-local-statement"){
-        eventType = "hurricane-local-statement-advisory";
-    }
-    if (eventType === "marine-weather-statement"){
-        eventType = "marine-weather-statement-advisory";
-    }
-    if (eventType === "rip-current-statement"){
-        eventType = "rip-current-statement-advisory";
-    }
-    if (eventType === "coastal-flood-statement"){
+
+    if (eventType === "coastal-flood-statement-advisory"){
         eventType = "coastal-flood-advisory";
     }
-    if (eventType === "beach-hazards-statement"){
-        eventType = "beach-hazards-statement-advisory";
-    }
-    if (eventType === "hazardous-weather-outlook"){
-        eventType = "hazardous-weather-outlook-advisory";
-    }
-    if (eventType === "hydrologic-outlook"){
-        eventType = "hydrologic-outlook-advisory";
-    }
+
     if (eventType === "air-quality-alert"){
         eventType = "air-quality-warning";
     }
