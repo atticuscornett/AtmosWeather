@@ -305,25 +305,8 @@ function checkLocation(){
 	});
 }
 
-global.loadAlertE = (details) => {
-	console.log(details)
-	try{
-		mainWindow.webContents.executeJavaScript('stopAllAudio();', false);
-		mainWindow.show()
-		console.log('loadAlert("' + details.locationName + '", ' + details.at.toString() +  ')');
-		mainWindow.webContents.executeJavaScript('loadAlert("' + details.locationName + '", ' + details.at.toString() +  ')', false);
-	}
-	catch(err){
-		mainWindow = new BrowserWindow({
-			width: 800,
-			height: 600,
-			icon: __dirname + "/img/icon.png",
-			autoHideMenuBar: true
-		});
-		mainWindow.webContents.setUserAgent(userAgentString);
-		mainWindow.loadFile('index.html')
-		mainWindow.webContents.executeJavaScript('stopAllAudio();', false);
-		mainWindow.show()
-		mainWindow.webContents.executeJavaScript('loadAlert("' + details.cycleAt.toString() + '-' + details.at.toString() +  '")', false);
-	}
+global.loadAlertDetails = (details) => {
+	mainWindow.webContents.executeJavaScript('stopAllAudio();', false);
+	mainWindow.show()
+	mainWindow.webContents.executeJavaScript('loadAlert("' + details.locationName + '", ' + details.at.toString() +  ')', false);
 }
