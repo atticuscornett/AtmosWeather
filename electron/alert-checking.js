@@ -6,8 +6,10 @@ let notifiedAlerts = [];
 function alertCheck(location, alert, at, playedAlready){
     let cycleAt = locationNames.indexOf(location);
     console.log(cycleAt);
+
     // Get Alert Settings
     if (!notifiedAlerts.includes(alert["id"])){
+        // Determine Event Type
         let eventType = alert["properties"]["event"];
         let notificationSetting;
         let notificationSound = settings["location-alerts"]["default-notification"];
@@ -15,6 +17,8 @@ function alertCheck(location, alert, at, playedAlready){
         eventType = eventType.toLowerCase().replaceAll(" ", "-");
         eventType = transformEventType(eventType);
         console.log(eventType);
+
+        //Get text-to-speech setting and notification setting
         let tts = settings["location-alerts"]["tts-alerts"];
         if (eventType.includes("warning")){
             notificationSetting = settings["alert-types"]["warnings"][eventType.replace("-warning", "")];
@@ -25,24 +29,28 @@ function alertCheck(location, alert, at, playedAlready){
         else{
             notificationSetting = settings["alert-types"]["advisory"][eventType.replace("-advisory", "")];
         }
-        // Check if has location specific settings
+
+        // Check if location specific settings exist
         if (settings["per-location"][locationNames[cycleAt]] !== undefined){
+            let currentLocAlertTypes = settings["per-location"][locationNames[cycleAt]]["alert-types"];
             if (eventType.includes("warning")){
-                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")] !== undefined){
-                    notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["warnings"][eventType.replace("-warning", "")];
+                if (currentLocAlertTypes["warnings"][eventType.replace("-warning", "")] !== undefined){
+                    notificationSetting = currentLocAlertTypes["warnings"][eventType.replace("-warning", "")];
                 }
             }
             else if (eventType.includes("watches")){
-                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"] !== undefined){
-                    notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["watches"][eventType.replace("-watch", "")];
+                if (currentLocAlertTypes["watches"] !== undefined){
+                    notificationSetting = currentLocAlertTypes["watches"][eventType.replace("-watch", "")];
                 }
                 notificationSetting = settings["alert-types"]["watches"][eventType.replace("-watch", "")];
             }
             else{
-                if (settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")] !== undefined){
-                    notificationSetting = settings["per-location"][locationNames[cycleAt]]["alert-types"]["advisory"][eventType.replace("-advisory", "")];
+                if (currentLocAlertTypes["advisory"][eventType.replace("-advisory", "")] !== undefined){
+                    notificationSetting = currentLocAlertTypes["advisory"][eventType.replace("-advisory", "")];
                 }
             }
+
+            // Check for location specific sounds
             if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"] !== undefined){
                 notificationSound = settings["per-location"][locationNames[cycleAt]]["location-alerts"]["default-notification"];
             }
@@ -56,6 +64,7 @@ function alertCheck(location, alert, at, playedAlready){
 
         let notif;
         if (notificationSetting === "alert"){
+            // Check for location specific tts setting
             if (settings["per-location"][locationNames[cycleAt]] !== undefined){
                 if (settings["per-location"][locationNames[cycleAt]]["location-alerts"] !== undefined){
                     if (settings["per-location"][locationNames[cycleAt]]["location-alerts"]["tts-alerts"] !== undefined){
@@ -63,6 +72,8 @@ function alertCheck(location, alert, at, playedAlready){
                     }
                 }
             }
+
+            // Show alert notification
             notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/warning.png"});
             notif.show()
             notif.on('click', loadAlertDetails.bind(null, {"locationName":locationNames[cycleAt], "at":at}))
@@ -73,11 +84,13 @@ function alertCheck(location, alert, at, playedAlready){
             }
         }
         else if (notificationSetting === "silentnotification"){
+            // Show silent alert notification
             notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], urgency: "critical", timeoutType: 'never', silent: true, sound: __dirname + "/audio/readynownotification.mp3", icon: __dirname + "/img/alerts.png"});
             notif.show()
             notif.on('click', loadAlertDetails.bind(null, {"locationName":locationNames[cycleAt], "at":at}))
         }
         else if (notificationSetting === "soundnotification"){
+            // Show sound notification
             if (alert["properties"]["event"].toLowerCase().includes("watch")){
                 notif = new Notification({ title: alert["properties"]["event"] + " issued for " + locationNames[cycleAt], body: alert["properties"]["description"], silent: true, icon: __dirname + "/img/watch.png"});
                 notif.show()
@@ -90,6 +103,8 @@ function alertCheck(location, alert, at, playedAlready){
                 notif.on('click', loadAlertDetails.bind(null, {"locationName":locationNames[cycleAt], "at":at}))
                 notif.on('close', () => {mainWindow.webContents.executeJavaScript("stopAllAudio();", false)});
             }
+
+
             if (!playedAlready.includes(notificationSound)){
                 mainWindow.webContents.executeJavaScript("var audio = new Audio('audio/" + notificationSound + "notification.mp3');audio.play();allAudio.push(audio);", false);
                 playedAlready.push(notificationSound);

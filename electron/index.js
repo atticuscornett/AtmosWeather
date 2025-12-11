@@ -70,7 +70,7 @@ else{
 			}
 		});
 
-
+		// Create system tray icon and menu
 		trayIcon = new Tray(__dirname + "/img/icon.png")
 		trayIcon.setToolTip('Atmos Weather')
 		const trayMenuTemplate = [
@@ -214,13 +214,16 @@ function checkLocation(){
 		checkPolygons();
 	}
 
+	cycleAt = 9;
 	// Check if future forecast notifications are enabled
 	mainWindow.webContents.executeJavaScript('localStorage.getItem("lastForecastNotification' + locationNames[cycleAt] + '");', true)
 		.then(result => {
 			let date = new Date();
 			let dateString = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
 
+			console.log("Checking future forecast notifications for " + locationNames[cycleAt]);
 			if (String(result) === dateString){
+				console.log("Already sent notification today for " + locationNames[cycleAt]);
 				return; // Already sent notification today
 			}
 
