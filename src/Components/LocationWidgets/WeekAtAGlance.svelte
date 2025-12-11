@@ -3,6 +3,8 @@
 
     let dayDictionary = {};
     let dayOrder = [];
+    let dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let dayOfWeekOrder = [];
     let dailyForecast = $state([]);
     let imagePriority = ["stormy", "snowy", "rainy", "windy", "cloudy", "sunny"];
 
@@ -17,6 +19,7 @@
             }
             if (!dayOrder.includes(day)){
                 dayOrder.push(day);
+                dayOfWeekOrder.push(dayOfWeek[new Date(day + "T00:00:00").getDay()]);
             }
             dayDictionary[day].push(forecast[i]);
         }
@@ -61,6 +64,7 @@
         for (let i = 0; i < dayOrder.length; i++){
             let forecastDictionary = {};
             forecastDictionary["day"] = dayOrder[i].slice(5).replace("-", "/");
+            forecastDictionary["weekday"] = dayOfWeekOrder[i];
 
             forecastDictionary["precipChance"] = 0;
             forecastDictionary["highTemp"] = -1000;
@@ -117,6 +121,7 @@
                 {/if}
                 <h4>{forecast?.precipChance ?? 0}%</h4>
                 <h5>{forecast?.day ?? ''}</h5>
+                <h5>{forecast?.weekday ?? ''}</h5>
             </div>
         {/each}
     {/if}
