@@ -222,79 +222,86 @@ function checkLocation(){
 		.then(result => {
 			let date = new Date();
 			let dateString = date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear();
-			if (result !== dateString){
-				// Get default notification settings
-				let severeNotification =  settings["notifications"]["severe-future"];
-				let rainNotification = settings["notifications"]["rain-future"];
+			if (result === dateString){
+				return; // Already sent notification today
+			}
 
-				// Override with per-location settings if they exist
-				if (settings["per-location"][locationNames[cycleAt]]){
-					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"] !== undefined){
-						severeNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"];
-					}
-					if (settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"] !== undefined){
-						rainNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"];
-					}
+			// Get default notification settings
+			let severeNotification =  settings["notifications"]["severe-future"];
+			let rainNotification = settings["notifications"]["rain-future"];
+
+			// Override with per-location settings if they exist
+			if (settings["per-location"][locationNames[cycleAt]]){
+				if (settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"] !== undefined){
+					severeNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["severe-future"];
+				}
+				if (settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"] !== undefined){
+					rainNotification =  settings["per-location"][locationNames[cycleAt]]["notifications"]["rain-future"];
+				}
+			}
+
+			// If neither notification is enabled, skip
+			if (!severeNotification && !rainNotification){
+				mainWindow.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
+				return;
+			}
+
+
+			try{
+				if (locationNames.length === 0){
+					// Don't send garbage requests if there are no locations
+					return;
 				}
 
-				// Send notification if enabled
-				if (severeNotification || rainNotification){
-					try{
-						if (locationNames.length === 0){
-							// Don't send garbage requests if there are no locations
-							return;
-						}
+				// Check forecast using NWS API
+				let forecastLink = JSON.parse(locationCache[locationNames[cycleAt]])["properties"]['forecast'];
+				let notificationRequest = net.request(forecastLink);
 
-						// Check forecast using NWS API
-						let forecastLink = JSON.parse(locationCache[locationNames[cycleAt]])["properties"]['forecast'];
-						let notificationRequest = net.request(forecastLink);
-						notificationRequest.on("response", (response) => {
-							response.on("data", (chunk) => {
-								try{
-									chunk = JSON.parse(chunk);
-									var fullForecast = chunk["properties"]["periods"][0]["detailedForecast"] + " " + chunk["properties"]["periods"][1]["detailedForecast"];
-									var fullForecastCaps = fullForecast;
-									mainWindow.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
-									fullForecast = fullForecast.toLowerCase();
-									// Check for severe trigger words
-									if (fullForecast.includes("severe") || fullForecast.includes("tropical") || fullForecast.includes("hurricane") || fullForecast.includes("strong") || fullForecast.includes("tornado") || fullForecast.includes("damaging") || fullForecast.includes("damage") || fullForecast.includes("hail")){
-										new Notification({ title: "Future severe weather expected at " + locationNames[cycleAt], body: fullForecastCaps, icon: __dirname + "/img/icon.png"}).show();
-									}
-									else{
-										if (rainNotification){
-											// Check rain trigger words
-											if (fullForecast.includes("rain") || fullForecast.includes("storm")){
-												new Notification({ title: "Future rain/storms expected at " + locationNames[cycleAt], body: fullForecastCaps, icon: __dirname + "/img/icon.png"}).show();
-											}
-										}
-									}
-								}
-								catch(err){
-									console.log("There was an error getting the forecast.")
-								}
-							})
-						})
-						notificationRequest.on("error", (error)=>{
-							// Decide if should give offline notification (TODO - Add offline notification settings)
-							if (error.message == "net::ERR_NETWORK_IO_SUSPENDED"){
-								console.log("Computer is going to sleep.")
+				notificationRequest.on("response", (response) => {
+					response.on("data", (chunk) => {
+						try{
+							chunk = JSON.parse(chunk);
+							let fullForecast = chunk["properties"]["periods"][0]["detailedForecast"] + " " + chunk["properties"]["periods"][1]["detailedForecast"];
+							let fullForecastCaps = fullForecast;
+							mainWindow.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
+							fullForecast = fullForecast.toLowerCase();
+
+							// Check for severe trigger words
+							if (fullForecast.includes("severe") || fullForecast.includes("tropical") || fullForecast.includes("hurricane") || fullForecast.includes("strong") || fullForecast.includes("tornado") || fullForecast.includes("damaging") || fullForecast.includes("damage") || fullForecast.includes("hail")){
+								new Notification({ title: "Future severe weather expected at " + locationNames[cycleAt], body: fullForecastCaps, icon: __dirname + "/img/icon.png"}).show();
 							}
 							else{
-								if (lastNetworkCheck){
-									lastNetworkCheck = false;
-									console.log("Computer is now offline.")
+								if (rainNotification){
+									// Check rain trigger words
+									if (fullForecast.includes("rain") || fullForecast.includes("storm")){
+										new Notification({ title: "Future rain/storms expected at " + locationNames[cycleAt], body: fullForecastCaps, icon: __dirname + "/img/icon.png"}).show();
+									}
 								}
 							}
-						})
-						notificationRequest.end()
+						}
+						catch(err){
+							console.log("There was an error getting the forecast.")
+						}
+					})
+				})
+
+				// Handle network errors
+				notificationRequest.on("error", (error)=>{
+					// Decide if should give offline notification (TODO - Add offline notification settings)
+					if (String(error.message) === "net::ERR_NETWORK_IO_SUSPENDED"){
+						console.log("Computer is going to sleep.")
 					}
-					catch (err){
-						console.log(err)
+					else{
+						if (lastNetworkCheck){
+							lastNetworkCheck = false;
+							console.log("Computer is now offline.")
+						}
 					}
-				}
-				else{
-					mainWindow.webContents.executeJavaScript('localStorage.setItem("lastForecastNotification' + locationNames[cycleAt] + '", "' + dateString + '");')
-				}
+				})
+				notificationRequest.end()
+			}
+			catch (err){
+				console.log(err)
 			}
 	});
 }
