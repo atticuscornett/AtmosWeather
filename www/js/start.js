@@ -5,14 +5,16 @@ setTimeout(() => {
 
 let updateFiles = false;
 
-window.atmosVersion = "3.0.3";
-window.atmosUpdated = "10-5-2025";
-window.atmosUpdateTitle = "Atmos Weather v3.0.3 is here!";
+window.atmosVersion = "3.0.4";
+window.atmosUpdated = "12-11-2025";
+window.atmosUpdateTitle = "Atmos Weather v3.0.4 is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>
+		    <dt>New Features</dt>
+		    <dd>- Day of the week added to week at a glance</dd>
+		    <dd>- Added option to update Atmos Weather manually on desktop versions</dd>
 		    <dt>Bug Fixes</dt>
-		    <dd>- Fixed scrolling issues with widgets</dd>
-		    <dd>- Fixed issues with location search on desktop</dd>
+		    <dd>- Fixed upcoming weather notifications on desktop versions</dd>
 		</dl> 
 		`;
 
