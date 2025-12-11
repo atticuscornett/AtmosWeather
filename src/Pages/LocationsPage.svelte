@@ -248,13 +248,18 @@
                     });
                 });
             }),
-                Math.round(Math.random()*3000));
+                Math.round(Math.random()*1500));
         }
 
-        let renderLocationsSimultaneous = ()=>{
+        let renderLocationsSimultaneous = (attempt=0) => {
+            // Wait for all locations to load
             if (loadedLocations !== nomLocations.length){
-                setTimeout(renderLocationsSimultaneous, 300);
-                return;
+                setTimeout(renderLocationsSimultaneous.bind(null, attempt + 1), 300);
+
+                // Prevent infinite waiting when something goes wrong
+                if (attempt < 11){
+                    return;
+                }
             }
 
             alertLocations = alertLocations.concat(alertLocationsDefer);

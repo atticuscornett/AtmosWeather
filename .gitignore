@@ -35,3 +35,4 @@ builder-debug.yml
 *.blockmap
 /android/app/release/
 android/.idea/deploymentTargetSelector.xml
+/android/.idea
