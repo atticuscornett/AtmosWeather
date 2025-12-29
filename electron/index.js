@@ -118,7 +118,7 @@ else{
                 label: 'Quit',
 				enabled: true,
 				click: () => {
-					app.quit()
+					app.exit()
 				}
             }
         ]
