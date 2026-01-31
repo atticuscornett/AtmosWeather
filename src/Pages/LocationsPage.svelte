@@ -274,6 +274,19 @@
         addLoadingKey("allLocations");
         setTimeout(renderLocationsSimultaneous, 300);
     }
+
+    let removeDuplicates = async (locationList) => {
+        let uniqueNames = [];
+        let uniqueLocations = [];
+        for (let i = locationList.length - 1; i >= 0; i--) {
+            if (uniqueNames.indexOf(locationList[i].name) === -1) {
+                uniqueNames.push(locationList[i].name);
+                uniqueLocations.push(locationList[i]);
+            }
+        }
+
+        return uniqueLocations.reverse();
+    }
     window.refreshLocations = refreshLocations;
 
 
@@ -308,7 +321,7 @@
         {#if nomLocations.length === 0 && !showCurrentLocation}
             <div class="location"><h2>You have no locations.</h2></div>
         {/if}
-        {#each mainLocations as locationData}
+        {#each removeDuplicates(mainLocations) as locationData}
             <LocationBar locationData={locationData} bind:page={page} />
         {/each}
     </div>
