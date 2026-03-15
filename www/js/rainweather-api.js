@@ -24,6 +24,13 @@ let outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/out
 let lastRenderedDynamic = "";
 let radarMap;
 let screenAt;
+let baseRadar = null;
+let radarParams = {
+    layers: '0',
+    format: 'image/png',
+    transparent: true,
+    attribution: "NOAA/NWS"
+};
 
 function passScreen(screen){
     screenAt = screen;
@@ -33,15 +40,30 @@ function passRadarMap(map){
     radarMap = map;
 }
 
-function loadRadarData(){
-    let apiRequest = new XMLHttpRequest();
-    apiRequest.open("GET", "https://api.rainviewer.com/public/weather-maps.json", true);
-    apiRequest.onload = function(e) {
-        // store the API response for re-use purposes in memory
-        radarData = JSON.parse(apiRequest.response);
-        initialize(radarData, radarKind);
-    };
-    apiRequest.send();
+function loadRadarData(relativeTime = 0){
+    if (baseRadar !== null){
+        radarMap.removeLayer(baseRadar);
+    }
+
+    console.log("Testing One")
+    // baseRadar = L.tileLayer.wms("https://mapservices.weather.noaa.gov/eventdriven/services/radar/radar_base_reflectivity_time/MapServer/WMSServer?time=" + String(Date.now() - relativeTime));
+    //
+    // L.esri
+    //     .dynamicMapLayer({
+    //         url: outlookLink
+    //     });
+    // baseRadar.setParams(radarParams);
+    // baseRadar.addTo(radarMap);
+    baseRadar = L.esri.imageMapLayer({
+        url: "https://mapservices.weather.noaa.gov/eventdriven/rest/services/radar/radar_base_reflectivity_time/ImageServer" // Example service URL
+    }).addTo(radarMap);
+    baseRadar.setTimeRange(Date.now() - relativeTime - 10 * 60 * 1000, Date.now() - relativeTime);
+
+    console.log("Testing Two")
+}
+
+function setRadarTime(relativeTime){
+    baseRadar.setTimeRange(Date.now() - relativeTime - 10 * 60 * 1000, Date.now() - relativeTime);
 }
 
 function radarJumpTo(index){
