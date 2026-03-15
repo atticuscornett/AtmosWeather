@@ -56,6 +56,20 @@ function radarJumpTo(index){
 }
 
 function initialize(api, kind) {
+    console.log("Trying some new stuff again")
+    const radarLayer = L.tileLayer.wms("https://mapservices.weather.noaa.gov/eventdriven/services/radar/radar_base_reflectivity/MapServer/WMSServer", {
+        layers: '0', // The ID for the radar reflectivity layer
+        format: 'image/png',
+        transparent: true,
+        attribution: "NOAA/NWS"
+    }).addTo(radarMap);
+    radarLayer.on('add', function() {
+        // 0.5px to 1.5px is usually enough to soften pixels without making it too blurry
+        wmsLayer.getContainer().style.filter = 'blur(1px)';
+    });
+
+    return;
+
     let settings = JSON.parse(localStorage.getItem("atmos-settings"));
     radarColorScheme = settings["radar"]["color-scheme"];
     if (settings["radar"]["satellite"]){
@@ -98,6 +112,7 @@ function initialize(api, kind) {
         }
     });
     redrawSPCOutlook();
+
 
     if (!api) {
         return;
@@ -174,6 +189,7 @@ function redrawSPCOutlook(){
     }
     document.getElementById("spc-outlook-loading").hidden = true;
     lastRenderedDynamic = spcOutlookLayer._currentImage._url;
+
 }
 
 function addLayer(frame) {
