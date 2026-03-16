@@ -229,19 +229,6 @@
         <input class="box" type="checkbox" id="setting-radar-high-res" bind:checked={allSettings["radar"]["polygons"]["high-res"]}>
         <label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label>
         <br><br>
-        <label for="setting-radar-color-scheme">Radar Color Scheme</label>
-        <br>
-        <select id="setting-radar-color-scheme" bind:value={allSettings["radar"]["color-scheme"]}>
-            <option value="0">Black & White</option>
-            <option value="1">Original</option>
-            <option value="2">Universal Blue</option>
-            <option value="3">TITAN</option>
-            <option value="4">TWC</option>
-            <option value="5">Meteored</option>
-            <option value="6">NEXRAD Level III</option>
-            <option value="7">Rainbow</option>
-            <option value="8">Dark Sky</option>
-        </select>
         <hr>
         <h2>Location Alerts</h2>
         <h6>Choose the level of alerts for different locations.</h6>
