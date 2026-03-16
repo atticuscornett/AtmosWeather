@@ -97,7 +97,7 @@ setInterval(radarAnimationHandler, 1500);
         <div class="radarSettings">
             <label>Radar Transparency</label>
             <br>
-            <input type="range" onchange={()=>{setRadarTransparency(radarTransparency)}} min="1" max="100" bind:value={radarTransparency} class="slider" id="radar-opacity">
+            <input type="range" oninput={()=>{setRadarTransparency(radarTransparency)}} min="1" max="100" bind:value={radarTransparency} class="slider" id="radar-opacity">
         </div>
         <div class="radarButtonContainer">
             <button id="radar-animation-control" onclick={()=>{playbackEnabled = !playbackEnabled;}}>{playbackEnabled ? "Pause" : "Play"}</button>
@@ -143,7 +143,6 @@ setInterval(radarAnimationHandler, 1500);
         width:fit-content;
         display: inline-block;
         margin-right: 20px;
-        margin-top:15px;
     }
 
     .radarButtonContainer {
