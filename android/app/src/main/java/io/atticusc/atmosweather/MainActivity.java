@@ -19,6 +19,7 @@ import com.getcapacitor.BridgeActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.woheller69.freeDroidWarn.FreeDroidWarn;
 
 import java.util.Calendar;
 import java.util.Map;
@@ -78,6 +79,8 @@ public class MainActivity extends BridgeActivity {
 //                }
 //            }
 //        }
+
+        FreeDroidWarn.showWarningOnUpgrade(this, BuildConfig.VERSION_CODE);
     }
     private boolean getLocationInBackgroundEnabled() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("NativeStorage", MODE_MULTI_PROCESS);

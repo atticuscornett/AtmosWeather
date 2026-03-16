@@ -36,3 +36,5 @@ builder-debug.yml
 /android/app/release/
 android/.idea/deploymentTargetSelector.xml
 /android/.idea
+/android/.idea
+android/.idea/deploymentTargetSelector.xml
