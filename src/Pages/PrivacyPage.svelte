@@ -26,7 +26,7 @@
         <h3><b>National Weather Service API</b></h3>
         <h4>Domain(s): api.weather.gov</h4>
         <h4>Information: GPS Location (when app is open and in background), Saved Locations (when app is open and in background), IP Address (when app is open and in background)</h4>
-        <h4>Why: The National Weather Service provides the forecast information displayed in the app and provides weather alerts in the background.</h4>
+        <h4>Why: The National Weather Service provides the forecast information and radar imagery displayed in the app and provides weather alerts in the background.</h4>
         <br>
         <h3><b>Open-Meteo</b></h3>
         <h4>Domain(s): air-quality-api.open-meteo.com, api.open-meteo.com</h4>
@@ -38,15 +38,10 @@
         <h4>Information: Location Searches (when app is open), IP Address (when app is open)</h4>
         <h4>Why: OpenStreetMap's Nominatim API powers the location search feature and OpenStreetMap's tile servers provide the map tiles used for the radar and alerts.</h4>
         <br>
-        <h3><b>RainViewer</b></h3>
-        <h4>Domain(s): tilecache.rainviewer.com</h4>
-        <h4>Information: IP Address (when app is open)</h4>
-        <h4>Why: RainViewer provides the radar imagery displayed on the radar page.</h4>
-        <br>
         <h3><b>NOAA Map Services</b></h3>
         <h4>Domain(s): mapservices.weather.noaa.gov</h4>
         <h4>Information: IP Address (when app is open)</h4>
-        <h4>Why: NOAA provides the SPC outlooks that are displayed on the radar page.</h4>
+        <h4>Why: NOAA provides the SPC outlooks and radar imagery that are displayed on the radar page.</h4>
         <br>
         <h3><b>GitHub Releases</b></h3>
         <h4>Domain(s): github.com, api.github.com</h4>
