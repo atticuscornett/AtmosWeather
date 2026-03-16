@@ -988,6 +988,15 @@ body.dark details[open] summary{
         font-size: 15px;
     }
 
+    .radarTime.svelte-1ui026f {
+        font-family: monospace;
+        width: 45ch;
+    }
+
+    #radar-opacity.svelte-1ui026f {
+        width: 100%;
+    }
+
     .removeLocation.svelte-r6sbhz {
         background-color: #ff4d4d;
         color: white;

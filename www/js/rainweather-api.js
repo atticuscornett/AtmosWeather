@@ -5,20 +5,8 @@
     https://github.com/rainviewer/rainviewer-api-example/blob/master/rainviewer-api-example.html
 */
 
-let radarData = {};
-let radarFrames = [];
-let radarLayers = [];
 let spcOutlookLayer;
-let radarTileSize = 256;
-let smoothRadarData = 1;
-let radarColorScheme = 4;
-let radarSnowColors = 1;
-let radarAnimPos = 0;
-let radarKind = "radar";
-let loadingTilesCount = 0;
-let loadedTilesCount = 0;
 let animationPosition = 0;
-let lastPastFramePosition = -1;
 let playingRadar = true;
 let outlookLink = "https://mapservices.weather.noaa.gov/vector/rest/services/outlooks/SPC_wx_outlks/MapServer/";
 let lastRenderedDynamic = "";
@@ -41,71 +29,33 @@ function passRadarMap(map){
 }
 
 function loadRadarData(relativeTime = 0){
+    // Load latest reflectivity maps
     if (baseRadar !== null){
         radarMap.removeLayer(baseRadar);
     }
 
-    console.log("Testing One")
-    // baseRadar = L.tileLayer.wms("https://mapservices.weather.noaa.gov/eventdriven/services/radar/radar_base_reflectivity_time/MapServer/WMSServer?time=" + String(Date.now() - relativeTime));
-    //
-    // L.esri
-    //     .dynamicMapLayer({
-    //         url: outlookLink
-    //     });
-    // baseRadar.setParams(radarParams);
-    // baseRadar.addTo(radarMap);
     baseRadar = L.esri.imageMapLayer({
         url: "https://mapservices.weather.noaa.gov/eventdriven/rest/services/radar/radar_base_reflectivity_time/ImageServer" // Example service URL
     }).addTo(radarMap);
+
     baseRadar.setTimeRange(Date.now() - relativeTime - 10 * 60 * 1000, Date.now() - relativeTime);
+    baseRadar.setZIndex(1);
 
-    console.log("Testing Two")
-}
 
-function setRadarTime(relativeTime){
-    baseRadar.setTimeRange(Date.now() - relativeTime - 10 * 60 * 1000, Date.now() - relativeTime);
-}
-
-function radarJumpTo(index){
-    if (index === -1) {
-        radarMap.invalidateSize(true);
-        radarMap.setView([window.currentLat, window.currentLong], 12);
-        return;
-    }
-    radarMap.invalidateSize(true);
-    let locations = JSON.parse(localStorage.getItem("weather-locations"))
-    radarMap.setView([parseFloat(locations[index]["lat"]), parseFloat(locations[index]["lon"])], 12)
-}
-
-function initialize(api, kind) {
-    let settings = JSON.parse(localStorage.getItem("atmos-settings"));
-    radarColorScheme = settings["radar"]["color-scheme"];
-    if (settings["radar"]["satellite"]){
-        radarKind = "satellite";
-        kind = "satellite";
-    }
-    else{
-        radarKind = "radar";
-        kind = "radar";
-    }
-    // remove all already added tiled layers
-    for (let i in radarLayers) {
-        radarMap.removeLayer(radarLayers[i]);
-    }
-    radarFrames = [];
-    radarLayers = [];
-    animationPosition = 0;
-
+    // Load SPC outlooks
     if (spcOutlookLayer){
         spcOutlookLayer.remove()
     }
+    let settings = JSON.parse(localStorage.getItem("atmos-settings"));
 
     spcOutlookLayer = L.esri
         .dynamicMapLayer({
-          url: outlookLink
+            url: outlookLink
         });
     spcOutlookLayer.setOpacity(0.4);
     spcOutlookLayer.addTo(radarMap);
+    spcOutlookLayer.setZIndex(10);
+
     if (!settings["radar"]["spc-outlook"]){
         spcOutlookLayer.remove();
         document.getElementById("spc-select-container").style.display = "none";
@@ -119,118 +69,39 @@ function initialize(api, kind) {
             redrawSPCOutlook();
         }
     });
-    redrawSPCOutlook();
-
-    if (!api) {
-        return;
-    }
-    if (kind == 'satellite' && api.satellite && api.satellite.infrared) {
-        radarFrames = api.satellite.infrared;
-
-        lastPastFramePosition = api.satellite.infrared.length - 1;
-        showFrame(lastPastFramePosition, true);
-    }
-    else if (api.radar && api.radar.past) {
-        radarFrames = api.radar.past;
-        if (api.radar.nowcast) {
-            radarFrames = radarFrames.concat(api.radar.nowcast);
-        }
-
-        // show the last "past" frame
-        lastPastFramePosition = api.radar.past.length - 1;
-        showFrame(lastPastFramePosition, true);
-    }
 }
 
-function showFrame(nextPosition, force) {
-    let preloadingDirection = nextPosition - animationPosition > 0 ? 1 : -1;
-
-    changeRadarPosition(nextPosition, false, force);
-
-    // preload next next frame (typically, +1 frame)
-    // if don't do that, the animation will be blinking at the first loop
-    changeRadarPosition(nextPosition + preloadingDirection, true);
+function setRadarTime(relativeTime){
+    baseRadar.setTimeRange(Date.now() - relativeTime - 10 * 60 * 1000, Date.now() - relativeTime);
 }
 
-function changeRadarPosition(position, preloadOnly, force) {
-    if (radarFrames.length < 1){
+function setRadarTransparency(t){
+    baseRadar.setOpacity(t/100);
+}
+
+function radarJumpTo(index){
+    radarMap.invalidateSize(true);
+    if (index === -1) {
+        radarMap.invalidateSize(true);
+        radarMap.setView([window.currentLat, window.currentLong], 12);
         return;
     }
-    while (position >= radarFrames.length) {
-        position -= radarFrames.length;
-    }
-    while (position < 0) {
-        position += radarFrames.length;
-    }
-
-    let currentFrame = radarFrames[animationPosition];
-    let nextFrame = radarFrames[position];
-
-    addLayer(nextFrame);
-
-    // Quit if this call is for preloading only by design
-    // or some times still loading in background
-    if (preloadOnly || (isTilesLoading() && !force)) {
-        return;
-    }
-
-    animationPosition = position;
-
-    if (radarLayers[currentFrame.path]) {
-        radarLayers[currentFrame.path].setOpacity(0);
-    }
-    radarLayers[nextFrame.path].setOpacity(Number(document.getElementById("radar-opacity").value)/100);
-
-
-    let pastOrForecast = nextFrame.time > Date.now() / 1000 ? 'FORECAST' : 'PAST';
-
-    document.getElementById("radar-time").innerHTML = pastOrForecast + ': ' + (new Date(nextFrame.time * 1000)).toString();
+    let locations = JSON.parse(localStorage.getItem("weather-locations"))
+    radarMap.setView([parseFloat(locations[index]["lat"]), parseFloat(locations[index]["lon"])], 12)
 }
 
 function redrawSPCOutlook(){
+    console.log("redrawSPCOutlook");
     if (!spcOutlookLayer._currentImage || lastRenderedDynamic === spcOutlookLayer._currentImage._url){
         document.getElementById("spc-outlook-loading").hidden = false;
         spcOutlookLayer.redraw();
+        spcOutlookLayer.setZIndex(10);
+        baseRadar.setZIndex(1);
         setTimeout(redrawSPCOutlook, 1000);
         return;
     }
     document.getElementById("spc-outlook-loading").hidden = true;
     lastRenderedDynamic = spcOutlookLayer._currentImage._url;
-}
-
-function addLayer(frame) {
-    if (!radarLayers[frame.path]) {
-        let colorScheme = radarKind == 'satellite' ? 0 : radarColorScheme;
-        let smooth = radarKind == 'satellite' ? 0 : smoothRadarData;
-        let snow = radarKind == 'satellite' ? 0 : radarSnowColors;
-
-        let source = new L.TileLayer(radarData.host + frame.path + '/' + radarTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.png', {
-            tileSize: 256,
-            zIndex: frame.time
-        });
-        // Track layer loading state to not display the overlay 
-        // before it will completelly loads
-        source.on('loading', startLoadingTile);
-        source.on('load', finishLoadingTile); 
-        source.on('remove', finishLoadingTile);
-        source.setOpacity(Number(document.getElementById("radar-opacity").value)/100);
-        radarLayers[frame.path] = source;
-    }
-    if (!radarMap.hasLayer(radarLayers[frame.path])) {
-        radarMap.addLayer(radarLayers[frame.path]);
-    }
-}
-
-function startLoadingTile() {
-    loadingTilesCount++;    
-}
-
-function finishLoadingTile() {
-    setTimeout(function() { loadedTilesCount++; }, 250);
-}
-
-function isTilesLoading() {
-    return loadingTilesCount > loadedTilesCount;
 }
 
 function playRadarAnimation(){

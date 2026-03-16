@@ -6,8 +6,12 @@ let { page = $bindable() } = $props();
 let settings = $state(JSON.parse(localStorage.getItem("atmos-settings")));
 let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
 let locationAvailable = $state(false);
+let radarFrame = $state(10);
 
 let map;
+let radarTransparency = $state(85);
+let radarTime = $state(new Date().toTimeString());
+let playbackEnabled = $state(true);
 
 $effect(() => {
     passScreen(page);
@@ -38,7 +42,10 @@ let refreshRadar = () => {
     setTimeout(function(){
         map.invalidateSize(true);
         passRadarMap(map);
-        setTimeout(loadRadarData, 1000);
+        setTimeout(loadRadarData, 100);
+        setTimeout(()=>{
+            setRadarTransparency(radarTransparency);
+        }, 500);
         setTimeout(playRadarAnimation, 5000);
         var polygon;
         setTimeout(function(){
@@ -51,6 +58,21 @@ let refreshRadar = () => {
         }, 5000)
     }, 2000);
 }
+
+let radarAnimationHandler = () =>{
+    if (playbackEnabled && page === "radar"){
+        if (radarFrame < 10){
+            radarFrame++;
+        }
+        else {
+            radarFrame = 1;
+        }
+        setRadarTime((11-radarFrame)*10*60*1000);
+        radarTime = new Date(Date.now() - (11-radarFrame)*10*60*1000).toTimeString();
+    }
+}
+
+setInterval(radarAnimationHandler, 1500);
 </script>
 
 <TabSlot name="radar" bind:page={page} onOpen={refreshRadar}>
@@ -60,15 +82,27 @@ let refreshRadar = () => {
     <h5 id="polygon-load-count" hidden></h5>
     <h5 id="spc-outlook-loading" hidden>Loading SPC outlook...</h5>
     <h6 id="radar-time"></h6>
+    <div class="radarSettings">
+        <label class="radarTime">{radarTime}</label>
+        <br>
+        <input type="range"
+               oninput={()=>{
+                   setRadarTime((10-radarFrame)*10*60*1000);
+                   playbackEnabled = false;
+                   radarTime = new Date(Date.now() - (11-radarFrame)*10*60*1000).toTimeString();
+               }}
+               min="1" max="10" bind:value={radarFrame} class="slider" id="radar-opacity">
+    </div>
     <div class="flexSettings">
         <div class="radarSettings">
             <label>Radar Transparency</label>
             <br>
-            <input type="range" min="1" max="100" value="85" class="slider" id="radar-opacity">
+            <input type="range" onchange={()=>{setRadarTransparency(radarTransparency)}} min="1" max="100" bind:value={radarTransparency} class="slider" id="radar-opacity">
         </div>
         <div class="radarButtonContainer">
-            <button id="radar-animation-control" onclick={toggleRadarPlayback}>Pause ⏸️</button>
+            <button id="radar-animation-control" onclick={()=>{playbackEnabled = !playbackEnabled;}}>{playbackEnabled ? "Pause" : "Play"}</button>
         </div>
+
     </div>
     <div class="radarSettings" id="spc-select-container">
         <label>Weather Outlook Type</label>
@@ -136,5 +170,14 @@ let refreshRadar = () => {
 
     select {
         font-size: 15px;
+    }
+
+    .radarTime {
+        font-family: monospace;
+        width: 45ch;
+    }
+
+    #radar-opacity {
+        width: 100%;
     }
 </style>
