@@ -1,6 +1,7 @@
 <script>
     import TabSlot from "../Layout/TabSlot.svelte";
     import LocationBar from "../Components/LocationBar.svelte";
+    import main from "../main";
 
     let { page = $bindable(), weatherDataDictionary = $bindable() } = $props();
 
@@ -275,7 +276,7 @@
         setTimeout(renderLocationsSimultaneous, 300);
     }
 
-    let removeDuplicates = async (locationList) => {
+    let removeDuplicates = (locationList) => {
         let uniqueNames = [];
         let uniqueLocations = [];
         for (let i = locationList.length - 1; i >= 0; i--) {
@@ -288,9 +289,6 @@
         return uniqueLocations.reverse();
     }
     window.refreshLocations = refreshLocations;
-
-
-
 </script>
 
 <TabSlot name="locations" bind:page={page} onOpen={refreshLocations}>
@@ -300,7 +298,7 @@
             <LocationBar bind:page={page} />
         {/if}
 
-        {#each alertLocations as locationData}
+        {#each removeDuplicates(alertLocations) as locationData}
             <LocationBar locationData={locationData} bind:page={page} />
         {/each}
     </div>
@@ -309,7 +307,7 @@
             <LocationBar bind:page={page} />
         {/if}
 
-        {#each otherLocations as locationData}
+        {#each removeDuplicates(otherLocations) as locationData}
             <LocationBar locationData={locationData} bind:page={page} />
         {/each}
     </div>
