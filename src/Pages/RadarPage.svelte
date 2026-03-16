@@ -46,7 +46,6 @@ let refreshRadar = () => {
         setTimeout(()=>{
             setRadarTransparency(radarTransparency);
         }, 500);
-        setTimeout(playRadarAnimation, 5000);
         var polygon;
         setTimeout(function(){
             getAllActiveAlertsAsync(

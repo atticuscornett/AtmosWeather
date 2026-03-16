@@ -1,9 +1,33 @@
 <script>
+    import {onDestroy, onMount} from "svelte";
+
     let { locationData, page=$bindable() } = $props();
 
     let randomId = Math.floor(Math.random() * 1000000);
 
     let map;
+
+    let radarFrame = 10;
+
+    let radarAnimationHandler = () =>{
+        if (page !== "location-" + locationData.name){
+            return;
+        }
+        setRadarTransparency(40)
+        if (radarFrame < 10){
+            radarFrame++;
+        }
+        else {
+            radarFrame = 1;
+        }
+        setRadarTime((11-radarFrame)*10*60*1000);
+    }
+
+    let interval;
+
+    onMount(()=> {
+        interval = setInterval(radarAnimationHandler, 1500);
+    })
 
     let refreshRadar = () => {
         if (map){
@@ -41,7 +65,6 @@
             map.invalidateSize(true);
             passRadarMap(map);
             setTimeout(loadRadarData, 1000);
-            setTimeout(playRadarAnimation, 5000);
             passScreen("radar");
         }, 2000);
     }

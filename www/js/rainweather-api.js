@@ -72,10 +72,16 @@ function loadRadarData(relativeTime = 0){
 }
 
 function setRadarTime(relativeTime){
+    if (baseRadar == null){
+        return;
+    }
     baseRadar.setTimeRange(Date.now() - relativeTime - 10 * 60 * 1000, Date.now() - relativeTime);
 }
 
 function setRadarTransparency(t){
+    if (baseRadar == null){
+        return;
+    }
     baseRadar.setOpacity(t/100);
 }
 
@@ -91,7 +97,6 @@ function radarJumpTo(index){
 }
 
 function redrawSPCOutlook(){
-    console.log("redrawSPCOutlook");
     if (!spcOutlookLayer._currentImage || lastRenderedDynamic === spcOutlookLayer._currentImage._url){
         document.getElementById("spc-outlook-loading").hidden = false;
         spcOutlookLayer.redraw();
@@ -102,15 +107,6 @@ function redrawSPCOutlook(){
     }
     document.getElementById("spc-outlook-loading").hidden = true;
     lastRenderedDynamic = spcOutlookLayer._currentImage._url;
-}
-
-function playRadarAnimation(){
-    if (screenAt === "radar"){
-        if (playingRadar){
-            showFrame(animationPosition + 1);
-        }
-        setTimeout(playRadarAnimation, 400);
-    }
 }
 
 function toggleRadarPlayback(){
