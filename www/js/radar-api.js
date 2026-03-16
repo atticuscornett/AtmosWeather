@@ -1,8 +1,6 @@
 /*
-    rainweather-api.js
-    Weather radar page functions
-    Largely based on RainWeather API Example Code
-    https://github.com/rainviewer/rainviewer-api-example/blob/master/rainviewer-api-example.html
+    radar-api.js
+    NWS Weather Radar Imagery and SPC Outlooks
 */
 
 let spcOutlookLayer;
