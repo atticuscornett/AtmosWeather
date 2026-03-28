@@ -142,6 +142,20 @@
         allWarningsSelected = !allWarningsSelected;
     }
 
+    let bulkEditWarnings = (e) => {
+        console.log(e.target.id)
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedWarnings){
+                if (document.getElementById("setting-warning-" + key + "-check").checked){
+                    console.log("setting-warning-" + key + "-check");
+                    allSettings["alert-types"]["warnings"][key] = e.target.value;
+                }
+            }
+            console.log(allSettings["alert-types"]["warnings"]);
+            saveSettings();
+        }
+    }
+
     ensureSettingsSet();
     setInterval(ensureSettingsSet, 1000*60);
 </script>
@@ -308,7 +322,7 @@
                     <input type="checkbox" id="setting-warning-{key}-check" class="vertical-center" onchange={updateWarningsSelectedCheck}>
                     <label for="setting-warning-{key}-check">{formatTitle(key, "Warning")}</label>
                     <br>
-                    <select bind:value={allSettings["alert-types"]["warnings"][key]}>
+                    <select bind:value={allSettings["alert-types"]["warnings"][key]} onchange={bulkEditWarnings} id="setting-warning-{key}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
