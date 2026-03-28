@@ -232,8 +232,7 @@ function checkLocation(){
 	if (locationNames.length > 0){
 		checkPolygons();
 	}
-
-	cycleAt = 9;
+	
 	// Check if future forecast notifications are enabled
 	mainWindow.webContents.executeJavaScript('localStorage.getItem("lastForecastNotification' + locationNames[cycleAt] + '");', true)
 		.then(result => {
