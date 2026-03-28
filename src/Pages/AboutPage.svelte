@@ -21,6 +21,5 @@
     <h3><a href="https://open-meteo.com/" target="_blank">Open-Meteo API</a></h3>
     <h3><a href="https://leafletjs.com/index.html" target="_blank">LeafletJS</a></h3>
     <h3><a href="https://www.electronjs.org/" target="_blank">ElectronJS</a></h3>
-    <h3><a href="https://www.rainviewer.com/api.html" target="_blank">RainViewer</a></h3>
     <h3><a href="https://storyset.com/people" target="_blank">People illustrations by Storyset</a></h3>
 </TabSlot>

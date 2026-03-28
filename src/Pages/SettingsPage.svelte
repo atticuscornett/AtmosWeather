@@ -210,7 +210,6 @@
         {/if}
         <hr>
         <h2>Radar</h2>
-        <h6>Radar powered by RainViewer API.</h6>
         <input class="box" type="checkbox" id="setting-radar-show-watches" bind:checked={allSettings["radar"]["polygons"]["watch"]}>
         <label for="setting-radar-show-watches">Show watch polygons on radar</label>
         <br>
@@ -222,9 +221,6 @@
         <br>
         <input class="box" type="checkbox" id="setting-radar-show-outlook" bind:checked={allSettings["radar"]["spc-outlook"]}>
         <label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label>
-        <br>
-        <input class="box" type="checkbox" id="setting-radar-satellite" bind:checked={allSettings["radar"]["satellite"]}>
-        <label for="setting-radar-satellite">Show satellite instead of radar</label>
         <br>
         <input class="box" type="checkbox" id="setting-radar-high-res" bind:checked={allSettings["radar"]["polygons"]["high-res"]}>
         <label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label>
