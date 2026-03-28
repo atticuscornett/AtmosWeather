@@ -256,6 +256,10 @@ body.dark details[open] summary{
         font-family: Secular One, sans-serif;
     }
 
+    .vertical-center.svelte-v59opo{
+        vertical-align: center;
+    }
+
     @keyframes svelte-1mag29o-loadAnim{
         0%{
             transform: rotate(0deg);

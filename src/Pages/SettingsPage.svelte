@@ -116,6 +116,32 @@
         }
     }
 
+    let allWarningsSelected = $state(false);
+
+    let checkAllWarningsSelected = () => {
+        let allWarningsSelected = true;
+
+        for (let key of orderedWarnings){
+            if (!document.getElementById("setting-warning-" + key + "-check").checked){
+                allWarningsSelected = false;
+                break;
+            }
+        }
+
+        return allWarningsSelected;
+    }
+
+    let updateWarningsSelectedCheck = () => {
+        allWarningsSelected = checkAllWarningsSelected();
+    }
+
+    let selectAllWarnings = () => {
+        for (let key of orderedWarnings){
+            document.getElementById("setting-warning-" + key + "-check").checked = !allWarningsSelected;
+        }
+        allWarningsSelected = !allWarningsSelected;
+    }
+
     ensureSettingsSet();
     setInterval(ensureSettingsSet, 1000*60);
 </script>
@@ -264,12 +290,23 @@
         </div>
         <hr>
         <h2>Alert Types</h2>
-        <h6>Choose the level of alerts for different types of events. Overridden if location priority is lower.<br>Alert if moving alerts you if the app detects you are in a vehicle.<br>If location permission is not allowed, will always alert.</h6>
+        <h6>
+            Choose the level of alerts for different types of events. Overridden if location priority is lower. <br>
+            Alert if moving alerts you if the app detects you are in a vehicle. <br>
+            If location permission is not allowed, will always alert. <br>
+            <br><br>
+            Use the checkboxes to batch edit settings.
+        </h6>
         <details>
             <summary>Warnings</summary>
             <div id="settings-warnings-list">
+                <input type="checkbox" id="select-all-warnings" class="vertical-center" checked={allWarningsSelected} onclick={selectAllWarnings}>
+                <label for="select-all-warnings">Select all warnings</label>
+                <br>
+                <br>
                 {#each orderedWarnings as key}
-                    <label for="setting-warning-{key}">{formatTitle(key, "Warning")}</label>
+                    <input type="checkbox" id="setting-warning-{key}-check" class="vertical-center" onchange={updateWarningsSelectedCheck}>
+                    <label for="setting-warning-{key}-check">{formatTitle(key, "Warning")}</label>
                     <br>
                     <select bind:value={allSettings["alert-types"]["warnings"][key]}>
                         <option value="alert">Alert</option>
@@ -342,5 +379,9 @@
         cursor: pointer;
         font-size: 16px;
         font-family: Secular One, sans-serif;
+    }
+
+    .vertical-center{
+        vertical-align: center;
     }
 </style>
