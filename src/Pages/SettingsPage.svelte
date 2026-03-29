@@ -117,6 +117,8 @@
     }
 
     let allWarningsSelected = $state(false);
+    let allWatchesSelected = $state(false);
+    let allAdvisoriesSelected = $state(false);
 
     let checkAllWarningsSelected = () => {
         let allWarningsSelected = true;
@@ -131,8 +133,25 @@
         return allWarningsSelected;
     }
 
+    let checkAllWatchesSelected = () => {
+        let allWatchesSelected = true;
+
+        for (let key of orderedWatches){
+            if (!document.getElementById("setting-watch-" + key + "-check").checked){
+                allWatchesSelected = false;
+                break;
+            }
+        }
+
+        return allWatchesSelected;
+    }
+
     let updateWarningsSelectedCheck = () => {
         allWarningsSelected = checkAllWarningsSelected();
+    }
+
+    let updateWatchesSelectedCheck = () => {
+        allWatchesSelected = checkAllWatchesSelected();
     }
 
     let selectAllWarnings = () => {
@@ -142,16 +161,34 @@
         allWarningsSelected = !allWarningsSelected;
     }
 
+    let selectAllWatches = () => {
+        for (let key of orderedWatches){
+            document.getElementById("setting-watch-" + key + "-check").checked = !allWatchesSelected;
+        }
+        allWatchesSelected = !allWatchesSelected;
+    }
+
     let bulkEditWarnings = (e) => {
-        console.log(e.target.id)
         if (document.getElementById(e.target.id + "-check").checked){
             for (let key of orderedWarnings){
                 if (document.getElementById("setting-warning-" + key + "-check").checked){
-                    console.log("setting-warning-" + key + "-check");
                     allSettings["alert-types"]["warnings"][key] = e.target.value;
                 }
             }
             console.log(allSettings["alert-types"]["warnings"]);
+            saveSettings();
+        }
+    }
+
+    let bulkEditWatches = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedWatches){
+                if (document.getElementById("setting-watch-" + key + "-check").checked){
+                    console.log("setting-watch-" + key + "-check");
+                    allSettings["alert-types"]["watches"][key] = e.target.value;
+                }
+            }
+            console.log(allSettings["alert-types"]["watches"]);
             saveSettings();
         }
     }
@@ -338,10 +375,15 @@
         <details>
             <summary>Watches</summary>
             <div id="settings-watches-list">
+                <input type="checkbox" id="select-all-watches" class="vertical-center" checked={allWatchesSelected} onclick={selectAllWatches}>
+                <label for="select-all-watches">Select all watches</label>
+                <br>
+                <br>
                 {#each orderedWatches as key}
-                    <label for="setting-watch-{key}">{formatTitle(key, "Watch")}</label>
+                    <input type="checkbox" id="setting-watch-{key}-check" class="vertical-center" onchange={updateWatchesSelectedCheck}>
+                    <label for="setting-watch-{key}-check">{formatTitle(key, "Watch")}</label>
                     <br>
-                    <select bind:value={allSettings["alert-types"]["watches"][key]}>
+                    <select bind:value={allSettings["alert-types"]["watches"][key]} onchange={bulkEditWatches} id="setting-watch-{key}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
