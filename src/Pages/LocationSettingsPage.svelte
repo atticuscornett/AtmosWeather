@@ -474,10 +474,15 @@
         <details>
             <summary>Watches</summary>
             <div id="settings-watches-list">
+                <input type="checkbox" id="select-all-watches-{locationData.name}" class="vertical-center" checked={allWatchesSelected} onclick={selectAllWatches}>
+                <label for="select-all-watches-{locationData.name}">Select all watches</label>
+                <br>
+                <br>
                 {#each orderedWatches as key}
-                    <label for="setting-watch-{key}">{formatTitle(key, "Watch")}</label>
+                    <input type="checkbox" id="setting-watch-{key}-{locationData.name}-check" class="vertical-center" onchange={updateWatchesSelectedCheck}>
+                    <label for="setting-watch-{key}-{locationData.name}-check">{formatTitle(key, "Watch")}</label>
                     <br>
-                    <select bind:value={locationSettings["alert-types"]["watches"][key]}>
+                    <select bind:value={locationSettings["alert-types"]["watches"][key]} onchange={bulkEditWatches} id="setting-watch-{key}-{locationData.name}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
