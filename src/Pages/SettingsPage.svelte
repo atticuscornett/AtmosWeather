@@ -120,6 +120,7 @@
     let allWatchesSelected = $state(false);
     let allAdvisoriesSelected = $state(false);
 
+    // Tests if all warning checkboxes are selected
     let checkAllWarningsSelected = () => {
         let allWarningsSelected = true;
 
@@ -133,6 +134,7 @@
         return allWarningsSelected;
     }
 
+    // Tests if all watch checkboxes are selected
     let checkAllWatchesSelected = () => {
         let allWatchesSelected = true;
 
@@ -146,14 +148,17 @@
         return allWatchesSelected;
     }
 
+    // Updates the allWarningsSelected variable to reflect checkbox state
     let updateWarningsSelectedCheck = () => {
         allWarningsSelected = checkAllWarningsSelected();
     }
 
+    // Updates the allWatchesSelected variable to reflect checkbox state
     let updateWatchesSelectedCheck = () => {
         allWatchesSelected = checkAllWatchesSelected();
     }
 
+    // Selects or deselects all warnings
     let selectAllWarnings = () => {
         for (let key of orderedWarnings){
             document.getElementById("setting-warning-" + key + "-check").checked = !allWarningsSelected;
@@ -161,6 +166,7 @@
         allWarningsSelected = !allWarningsSelected;
     }
 
+    // Selects or deselects all watches
     let selectAllWatches = () => {
         for (let key of orderedWatches){
             document.getElementById("setting-watch-" + key + "-check").checked = !allWatchesSelected;
@@ -168,6 +174,7 @@
         allWatchesSelected = !allWatchesSelected;
     }
 
+    // Edits all selected warnings
     let bulkEditWarnings = (e) => {
         if (document.getElementById(e.target.id + "-check").checked){
             for (let key of orderedWarnings){
@@ -180,6 +187,7 @@
         }
     }
 
+    // Edits all selected watches
     let bulkEditWatches = (e) => {
         if (document.getElementById(e.target.id + "-check").checked){
             for (let key of orderedWatches){
