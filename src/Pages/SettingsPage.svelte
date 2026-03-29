@@ -148,6 +148,20 @@
         return allWatchesSelected;
     }
 
+    // Tests if all advisory checkboxes are selected
+    let checkAllAdvisoriesSelected = () => {
+        let allAdvisoriesSelected = true;
+
+        for (let key of orderedAdvisories){
+            if (!document.getElementById("setting-advisory-" + key + "-check").checked){
+                allAdvisoriesSelected = false;
+                break;
+            }
+        }
+
+        return allAdvisoriesSelected;
+    }
+
     // Updates the allWarningsSelected variable to reflect checkbox state
     let updateWarningsSelectedCheck = () => {
         allWarningsSelected = checkAllWarningsSelected();
@@ -156,6 +170,11 @@
     // Updates the allWatchesSelected variable to reflect checkbox state
     let updateWatchesSelectedCheck = () => {
         allWatchesSelected = checkAllWatchesSelected();
+    }
+
+    // Updates the allAdvisoriesSelected variable to reflect checkbox state
+    let updateAdvisoriesSelectedCheck = () => {
+        allAdvisoriesSelected = checkAllAdvisoriesSelected();
     }
 
     // Selects or deselects all warnings
@@ -172,6 +191,14 @@
             document.getElementById("setting-watch-" + key + "-check").checked = !allWatchesSelected;
         }
         allWatchesSelected = !allWatchesSelected;
+    }
+
+    // Selects or deselects all advisories
+    let selectAllAdvisories = () => {
+        for (let key of orderedAdvisories){
+            document.getElementById("setting-advisory-" + key + "-check").checked = !allAdvisoriesSelected;
+        }
+        allAdvisoriesSelected = !allAdvisoriesSelected;
     }
 
     // Edits all selected warnings
@@ -197,6 +224,20 @@
                 }
             }
             console.log(allSettings["alert-types"]["watches"]);
+            saveSettings();
+        }
+    }
+
+    // Edits all selected advisories
+    let bulkEditAdvisories = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedAdvisories){
+                if (document.getElementById("setting-advisory-" + key + "-check").checked){
+                    console.log("setting-advisory-" + key + "-check");
+                    allSettings["alert-types"]["advisory"][key] = e.target.value;
+                }
+            }
+            console.log(allSettings["alert-types"]["advisory"]);
             saveSettings();
         }
     }
@@ -407,10 +448,15 @@
         <details>
             <summary>Advisories/Other</summary>
             <div id="settings-advisory-list">
+                <input type="checkbox" id="select-all-advisories" class="vertical-center" checked={allAdvisoriesSelected} onclick={selectAllAdvisories}>
+                <label for="select-all-advisories">Select all advisories</label>
+                <br>
+                <br>
                 {#each orderedAdvisories as key}
-                    <label for="setting-watch-{key}">{formatTitle(key, "Advisory")}</label>
+                    <input type="checkbox" id="setting-advisory-{key}-check" class="vertical-center" onchange={updateAdvisoriesSelectedCheck}>
+                    <label for="setting-advisory-{key}-check">{formatTitle(key, "Advisory")}</label>
                     <br>
-                    <select bind:value={allSettings["alert-types"]["advisory"][key]}>
+                    <select bind:value={allSettings["alert-types"]["advisory"][key]} onchange={bulkEditAdvisories} id="setting-advisory-{key}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
