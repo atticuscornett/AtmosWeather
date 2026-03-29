@@ -13,6 +13,10 @@
     let locationSettings = $state({});
     let settingsLoaded = $state(false);
 
+    let orderedWarnings = $state([]);
+    let orderedWatches = $state([]);
+    let orderedAdvisories = $state([]);
+
     // Generates the settings object for the location
     function generateSettings(){
         // Checks if a location-specific setting exists, and if not, uses the global setting
@@ -172,12 +176,65 @@
         localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
     }
 
+    function getWarningsInOrder(){
+        let warnings = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (formatKey.includes("warning")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-warning", "");
+                if (allSettings["alert-types"]["warnings"][formatKey]){
+                    warnings.push(formatKey);
+                }
+            }
+        }
+
+        return warnings;
+    }
+
+    function getWatchesInOrder(){
+        let watches = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (formatKey.includes("watch")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-watch", "");
+                if (allSettings["alert-types"]["watches"][formatKey]){
+                    watches.push(formatKey);
+                }
+            }
+        }
+
+        return watches;
+    }
+
+    function getAdvisoriesInOrder(){
+        let advisories = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (!formatKey.includes("watch") && !formatKey.includes("warning")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-advisory", "");
+                if (allSettings["alert-types"]["advisory"][formatKey]){
+                    advisories.push(formatKey);
+                }
+            }
+        }
+
+        return advisories;
+    }
+
 
     // Ensures the settings object is set
     function ensureSettingsSet(){
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         if (!allSettings){
             setTimeout(ensureSettingsSet, 100);
+        }
+        else {
+            orderedWarnings = getWarningsInOrder();
+            orderedWatches = getWatchesInOrder();
+            orderedAdvisories = getAdvisoriesInOrder();
         }
         if (!allSettings["per-location"].hasOwnProperty(locationData.name)){
             allSettings["per-location"][locationData.name] = {"notifications":{}, "location-alerts":{}, "alert-types":{"warnings":{}, "watches":{}, "advisory":{}}};
@@ -308,8 +365,10 @@
 
     // Edits all selected warnings
     let bulkEditWarnings = (e) => {
+        console.log(e.target.id)
         if (document.getElementById(e.target.id + "-check").checked){
             for (let key of orderedWarnings){
+                console.log("setting-warning-" + key + "-" + locationData.name + "-check")
                 if (document.getElementById("setting-warning-" + key + "-" + locationData.name + "-check").checked){
                     locationSettings["alert-types"]["warnings"][key] = e.target.value;
                 }
@@ -395,11 +454,11 @@
                 <label for="select-all-warnings-{locationData.name}">Select all warnings</label>
                 <br>
                 <br>
-                {#each Object.entries(locationSettings["alert-types"]["warnings"]) as [key, value]}
+                {#each orderedWarnings as key}
                     <input type="checkbox" id="setting-warning-{key}-{locationData.name}-check" class="vertical-center" onchange={updateWarningsSelectedCheck}>
                     <label for="setting-warning-{key}-{locationData.name}-check">{formatTitle(key, "Warning")}</label>
                     <br>
-                    <select bind:value={locationSettings["alert-types"]["warnings"][key]}>
+                    <select bind:value={locationSettings["alert-types"]["warnings"][key]} onchange={bulkEditWarnings} id="setting-warning-{key}-{locationData.name}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
@@ -415,7 +474,7 @@
         <details>
             <summary>Watches</summary>
             <div id="settings-watches-list">
-                {#each Object.entries(locationSettings["alert-types"]["watches"]) as [key, value]}
+                {#each orderedWatches as key}
                     <label for="setting-watch-{key}">{formatTitle(key, "Watch")}</label>
                     <br>
                     <select bind:value={locationSettings["alert-types"]["watches"][key]}>
@@ -434,7 +493,7 @@
         <details>
             <summary>Advisories/Other</summary>
             <div id="settings-advisory-list">
-                {#each Object.entries(locationSettings["alert-types"]["advisory"]) as [key, value]}
+                {#each orderedAdvisories as key}
                     <label for="setting-watch-{key}">{formatTitle(key, "Advisory")}</label>
                     <br>
                     <select bind:value={locationSettings["alert-types"]["advisory"][key]}>
