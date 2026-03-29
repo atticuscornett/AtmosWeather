@@ -498,10 +498,15 @@
         <details>
             <summary>Advisories/Other</summary>
             <div id="settings-advisory-list">
+                <input type="checkbox" id="select-all-advisories-{locationData.name}" class="vertical-center" checked={allAdvisoriesSelected} onclick={selectAllAdvisories}>
+                <label for="select-all-advisories-{locationData.name}">Select all advisories</label>
+                <br>
+                <br>
                 {#each orderedAdvisories as key}
-                    <label for="setting-watch-{key}">{formatTitle(key, "Advisory")}</label>
+                    <input type="checkbox" id="setting-advisory-{key}-{locationData.name}-check" class="vertical-center" onchange={updateAdvisoriesSelectedCheck}>
+                    <label for="setting-advisory-{key}-{locationData.name}-check">{formatTitle(key, "Advisory")}</label>
                     <br>
-                    <select bind:value={locationSettings["alert-types"]["advisory"][key]}>
+                    <select bind:value={locationSettings["alert-types"]["advisory"][key]} onchange={bulkEditAdvisories} id="setting-advisory-{key}-{locationData.name}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
