@@ -220,6 +220,132 @@
         localStorage.setItem("weather-location-names", JSON.stringify(locationNames));
         page = "locations";
     }
+
+    let allWarningsSelected = $state(false);
+    let allWatchesSelected = $state(false);
+    let allAdvisoriesSelected = $state(false);
+
+    // Tests if all warning checkboxes are selected
+    let checkAllWarningsSelected = () => {
+        let allWarningsSelected = true;
+
+        for (let key of orderedWarnings){
+            if (!document.getElementById("setting-warning-" + key + "-" + locationData.name + "-check").checked){
+                allWarningsSelected = false;
+                break;
+            }
+        }
+
+        return allWarningsSelected;
+    }
+
+    // Tests if all watch checkboxes are selected
+    let checkAllWatchesSelected = () => {
+        let allWatchesSelected = true;
+
+        for (let key of orderedWatches){
+            if (!document.getElementById("setting-watch-" + key + "-" + locationData.name + "-check").checked){
+                allWatchesSelected = false;
+                break;
+            }
+        }
+
+        return allWatchesSelected;
+    }
+
+    // Tests if all advisory checkboxes are selected
+    let checkAllAdvisoriesSelected = () => {
+        let allAdvisoriesSelected = true;
+
+        for (let key of orderedAdvisories){
+            if (!document.getElementById("setting-advisory-" + key + "-" + locationData.name + "-check").checked){
+                allAdvisoriesSelected = false;
+                break;
+            }
+        }
+
+        return allAdvisoriesSelected;
+    }
+
+    // Updates the allWarningsSelected variable to reflect checkbox state
+    let updateWarningsSelectedCheck = () => {
+        allWarningsSelected = checkAllWarningsSelected();
+    }
+
+    // Updates the allWatchesSelected variable to reflect checkbox state
+    let updateWatchesSelectedCheck = () => {
+        allWatchesSelected = checkAllWatchesSelected();
+    }
+
+    // Updates the allAdvisoriesSelected variable to reflect checkbox state
+    let updateAdvisoriesSelectedCheck = () => {
+        allAdvisoriesSelected = checkAllAdvisoriesSelected();
+    }
+
+    // Selects or deselects all warnings
+    let selectAllWarnings = () => {
+        for (let key of orderedWarnings){
+            document.getElementById("setting-warning-" + key + "-" + locationData.name + "-check").checked = !allWarningsSelected;
+        }
+        allWarningsSelected = !allWarningsSelected;
+    }
+
+    // Selects or deselects all watches
+    let selectAllWatches = () => {
+        for (let key of orderedWatches){
+            document.getElementById("setting-watch-" + key + "-" + locationData.name + "-check").checked = !allWatchesSelected;
+        }
+        allWatchesSelected = !allWatchesSelected;
+    }
+
+    // Selects or deselects all advisories
+    let selectAllAdvisories = () => {
+        for (let key of orderedAdvisories){
+            document.getElementById("setting-advisory-" + key + "-" + locationData.name + "-check").checked = !allAdvisoriesSelected;
+        }
+        allAdvisoriesSelected = !allAdvisoriesSelected;
+    }
+
+    // Edits all selected warnings
+    let bulkEditWarnings = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedWarnings){
+                if (document.getElementById("setting-warning-" + key + "-" + locationData.name + "-check").checked){
+                    locationSettings["alert-types"]["warnings"][key] = e.target.value;
+                }
+            }
+            console.log(locationSettings["alert-types"]["warnings"]);
+            saveSettings();
+        }
+    }
+
+    // Edits all selected watches
+    let bulkEditWatches = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedWatches){
+                if (document.getElementById("setting-watch-" + key + "-" + locationData.name + "-check").checked){
+                    console.log("setting-watch-" + key + "-check");
+                    locationSettings["alert-types"]["watches"][key] = e.target.value;
+                }
+            }
+            console.log(locationSettings["alert-types"]["watches"]);
+            saveSettings();
+        }
+    }
+
+    // Edits all selected advisories
+    let bulkEditAdvisories = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedAdvisories){
+                if (document.getElementById("setting-advisory-" + key + "-" + locationData.name + "-check").checked){
+                    console.log("setting-advisory-" + key + "-check");
+                    locationSettings["alert-types"]["advisory"][key] = e.target.value;
+                }
+            }
+            console.log(locationSettings["alert-types"]["advisory"]);
+            saveSettings();
+        }
+    }
 </script>
 
 <TabSlot name="settings-{locationData.name}" bind:page={page} onOpen={refreshSettings}>
@@ -265,8 +391,13 @@
         <details>
             <summary>Warnings</summary>
             <div id="settings-warnings-list">
+                <input type="checkbox" id="select-all-warnings-{locationData.name}" class="vertical-center" checked={allWarningsSelected} onclick={selectAllWarnings}>
+                <label for="select-all-warnings-{locationData.name}">Select all warnings</label>
+                <br>
+                <br>
                 {#each Object.entries(locationSettings["alert-types"]["warnings"]) as [key, value]}
-                    <label for="setting-warning-{key}">{formatTitle(key, "Warning")}</label>
+                    <input type="checkbox" id="setting-warning-{key}-{locationData.name}-check" class="vertical-center" onchange={updateWarningsSelectedCheck}>
+                    <label for="setting-warning-{key}-{locationData.name}-check">{formatTitle(key, "Warning")}</label>
                     <br>
                     <select bind:value={locationSettings["alert-types"]["warnings"][key]}>
                         <option value="alert">Alert</option>
