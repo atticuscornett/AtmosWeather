@@ -116,6 +116,132 @@
         }
     }
 
+    let allWarningsSelected = $state(false);
+    let allWatchesSelected = $state(false);
+    let allAdvisoriesSelected = $state(false);
+
+    // Tests if all warning checkboxes are selected
+    let checkAllWarningsSelected = () => {
+        let allWarningsSelected = true;
+
+        for (let key of orderedWarnings){
+            if (!document.getElementById("setting-warning-" + key + "-check").checked){
+                allWarningsSelected = false;
+                break;
+            }
+        }
+
+        return allWarningsSelected;
+    }
+
+    // Tests if all watch checkboxes are selected
+    let checkAllWatchesSelected = () => {
+        let allWatchesSelected = true;
+
+        for (let key of orderedWatches){
+            if (!document.getElementById("setting-watch-" + key + "-check").checked){
+                allWatchesSelected = false;
+                break;
+            }
+        }
+
+        return allWatchesSelected;
+    }
+
+    // Tests if all advisory checkboxes are selected
+    let checkAllAdvisoriesSelected = () => {
+        let allAdvisoriesSelected = true;
+
+        for (let key of orderedAdvisories){
+            if (!document.getElementById("setting-advisory-" + key + "-check").checked){
+                allAdvisoriesSelected = false;
+                break;
+            }
+        }
+
+        return allAdvisoriesSelected;
+    }
+
+    // Updates the allWarningsSelected variable to reflect checkbox state
+    let updateWarningsSelectedCheck = () => {
+        allWarningsSelected = checkAllWarningsSelected();
+    }
+
+    // Updates the allWatchesSelected variable to reflect checkbox state
+    let updateWatchesSelectedCheck = () => {
+        allWatchesSelected = checkAllWatchesSelected();
+    }
+
+    // Updates the allAdvisoriesSelected variable to reflect checkbox state
+    let updateAdvisoriesSelectedCheck = () => {
+        allAdvisoriesSelected = checkAllAdvisoriesSelected();
+    }
+
+    // Selects or deselects all warnings
+    let selectAllWarnings = () => {
+        for (let key of orderedWarnings){
+            document.getElementById("setting-warning-" + key + "-check").checked = !allWarningsSelected;
+        }
+        allWarningsSelected = !allWarningsSelected;
+    }
+
+    // Selects or deselects all watches
+    let selectAllWatches = () => {
+        for (let key of orderedWatches){
+            document.getElementById("setting-watch-" + key + "-check").checked = !allWatchesSelected;
+        }
+        allWatchesSelected = !allWatchesSelected;
+    }
+
+    // Selects or deselects all advisories
+    let selectAllAdvisories = () => {
+        for (let key of orderedAdvisories){
+            document.getElementById("setting-advisory-" + key + "-check").checked = !allAdvisoriesSelected;
+        }
+        allAdvisoriesSelected = !allAdvisoriesSelected;
+    }
+
+    // Edits all selected warnings
+    let bulkEditWarnings = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedWarnings){
+                if (document.getElementById("setting-warning-" + key + "-check").checked){
+                    allSettings["alert-types"]["warnings"][key] = e.target.value;
+                }
+            }
+            console.log(allSettings["alert-types"]["warnings"]);
+            saveSettings();
+        }
+    }
+
+    // Edits all selected watches
+    let bulkEditWatches = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedWatches){
+                if (document.getElementById("setting-watch-" + key + "-check").checked){
+                    console.log("setting-watch-" + key + "-check");
+                    allSettings["alert-types"]["watches"][key] = e.target.value;
+                }
+            }
+            console.log(allSettings["alert-types"]["watches"]);
+            saveSettings();
+        }
+    }
+
+    // Edits all selected advisories
+    let bulkEditAdvisories = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedAdvisories){
+                if (document.getElementById("setting-advisory-" + key + "-check").checked){
+                    console.log("setting-advisory-" + key + "-check");
+                    allSettings["alert-types"]["advisory"][key] = e.target.value;
+                }
+            }
+            console.log(allSettings["alert-types"]["advisory"]);
+            saveSettings();
+        }
+    }
+
     ensureSettingsSet();
     setInterval(ensureSettingsSet, 1000*60);
 </script>
@@ -264,14 +390,25 @@
         </div>
         <hr>
         <h2>Alert Types</h2>
-        <h6>Choose the level of alerts for different types of events. Overridden if location priority is lower.<br>Alert if moving alerts you if the app detects you are in a vehicle.<br>If location permission is not allowed, will always alert.</h6>
+        <h6>
+            Choose the level of alerts for different types of events. Overridden if location priority is lower. <br>
+            Alert if moving alerts you if the app detects you are in a vehicle. <br>
+            If location permission is not allowed, will always alert. <br>
+            <br><br>
+            Use the checkboxes to batch edit settings.
+        </h6>
         <details>
             <summary>Warnings</summary>
             <div id="settings-warnings-list">
+                <input type="checkbox" id="select-all-warnings" class="vertical-center" checked={allWarningsSelected} onclick={selectAllWarnings}>
+                <label for="select-all-warnings">Select all warnings</label>
+                <br>
+                <br>
                 {#each orderedWarnings as key}
-                    <label for="setting-warning-{key}">{formatTitle(key, "Warning")}</label>
+                    <input type="checkbox" id="setting-warning-{key}-check" class="vertical-center" onchange={updateWarningsSelectedCheck}>
+                    <label for="setting-warning-{key}-check">{formatTitle(key, "Warning")}</label>
                     <br>
-                    <select bind:value={allSettings["alert-types"]["warnings"][key]}>
+                    <select bind:value={allSettings["alert-types"]["warnings"][key]} onchange={bulkEditWarnings} id="setting-warning-{key}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
@@ -287,10 +424,15 @@
         <details>
             <summary>Watches</summary>
             <div id="settings-watches-list">
+                <input type="checkbox" id="select-all-watches" class="vertical-center" checked={allWatchesSelected} onclick={selectAllWatches}>
+                <label for="select-all-watches">Select all watches</label>
+                <br>
+                <br>
                 {#each orderedWatches as key}
-                    <label for="setting-watch-{key}">{formatTitle(key, "Watch")}</label>
+                    <input type="checkbox" id="setting-watch-{key}-check" class="vertical-center" onchange={updateWatchesSelectedCheck}>
+                    <label for="setting-watch-{key}-check">{formatTitle(key, "Watch")}</label>
                     <br>
-                    <select bind:value={allSettings["alert-types"]["watches"][key]}>
+                    <select bind:value={allSettings["alert-types"]["watches"][key]} onchange={bulkEditWatches} id="setting-watch-{key}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
@@ -306,10 +448,15 @@
         <details>
             <summary>Advisories/Other</summary>
             <div id="settings-advisory-list">
+                <input type="checkbox" id="select-all-advisories" class="vertical-center" checked={allAdvisoriesSelected} onclick={selectAllAdvisories}>
+                <label for="select-all-advisories">Select all advisories</label>
+                <br>
+                <br>
                 {#each orderedAdvisories as key}
-                    <label for="setting-watch-{key}">{formatTitle(key, "Advisory")}</label>
+                    <input type="checkbox" id="setting-advisory-{key}-check" class="vertical-center" onchange={updateAdvisoriesSelectedCheck}>
+                    <label for="setting-advisory-{key}-check">{formatTitle(key, "Advisory")}</label>
                     <br>
-                    <select bind:value={allSettings["alert-types"]["advisory"][key]}>
+                    <select bind:value={allSettings["alert-types"]["advisory"][key]} onchange={bulkEditAdvisories} id="setting-advisory-{key}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
@@ -342,5 +489,9 @@
         cursor: pointer;
         font-size: 16px;
         font-family: Secular One, sans-serif;
+    }
+
+    .vertical-center{
+        vertical-align: center;
     }
 </style>

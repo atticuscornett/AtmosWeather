@@ -13,6 +13,10 @@
     let locationSettings = $state({});
     let settingsLoaded = $state(false);
 
+    let orderedWarnings = $state([]);
+    let orderedWatches = $state([]);
+    let orderedAdvisories = $state([]);
+
     // Generates the settings object for the location
     function generateSettings(){
         // Checks if a location-specific setting exists, and if not, uses the global setting
@@ -172,12 +176,65 @@
         localStorage.setItem("atmos-settings", JSON.stringify(settingsSave));
     }
 
+    function getWarningsInOrder(){
+        let warnings = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (formatKey.includes("warning")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-warning", "");
+                if (allSettings["alert-types"]["warnings"][formatKey]){
+                    warnings.push(formatKey);
+                }
+            }
+        }
+
+        return warnings;
+    }
+
+    function getWatchesInOrder(){
+        let watches = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (formatKey.includes("watch")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-watch", "");
+                if (allSettings["alert-types"]["watches"][formatKey]){
+                    watches.push(formatKey);
+                }
+            }
+        }
+
+        return watches;
+    }
+
+    function getAdvisoriesInOrder(){
+        let advisories = [];
+        for (let key of hazardPriority){
+            let formatKey = key.toLowerCase();
+            if (!formatKey.includes("watch") && !formatKey.includes("warning")){
+                formatKey = formatKey.replaceAll(" ", "-");
+                formatKey = formatKey.replace("-advisory", "");
+                if (allSettings["alert-types"]["advisory"][formatKey]){
+                    advisories.push(formatKey);
+                }
+            }
+        }
+
+        return advisories;
+    }
+
 
     // Ensures the settings object is set
     function ensureSettingsSet(){
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         if (!allSettings){
             setTimeout(ensureSettingsSet, 100);
+        }
+        else {
+            orderedWarnings = getWarningsInOrder();
+            orderedWatches = getWatchesInOrder();
+            orderedAdvisories = getAdvisoriesInOrder();
         }
         if (!allSettings["per-location"].hasOwnProperty(locationData.name)){
             allSettings["per-location"][locationData.name] = {"notifications":{}, "location-alerts":{}, "alert-types":{"warnings":{}, "watches":{}, "advisory":{}}};
@@ -219,6 +276,134 @@
         localStorage.setItem("weather-locations", JSON.stringify(locations));
         localStorage.setItem("weather-location-names", JSON.stringify(locationNames));
         page = "locations";
+    }
+
+    let allWarningsSelected = $state(false);
+    let allWatchesSelected = $state(false);
+    let allAdvisoriesSelected = $state(false);
+
+    // Tests if all warning checkboxes are selected
+    let checkAllWarningsSelected = () => {
+        let allWarningsSelected = true;
+
+        for (let key of orderedWarnings){
+            if (!document.getElementById("setting-warning-" + key + "-" + locationData.name + "-check").checked){
+                allWarningsSelected = false;
+                break;
+            }
+        }
+
+        return allWarningsSelected;
+    }
+
+    // Tests if all watch checkboxes are selected
+    let checkAllWatchesSelected = () => {
+        let allWatchesSelected = true;
+
+        for (let key of orderedWatches){
+            if (!document.getElementById("setting-watch-" + key + "-" + locationData.name + "-check").checked){
+                allWatchesSelected = false;
+                break;
+            }
+        }
+
+        return allWatchesSelected;
+    }
+
+    // Tests if all advisory checkboxes are selected
+    let checkAllAdvisoriesSelected = () => {
+        let allAdvisoriesSelected = true;
+
+        for (let key of orderedAdvisories){
+            if (!document.getElementById("setting-advisory-" + key + "-" + locationData.name + "-check").checked){
+                allAdvisoriesSelected = false;
+                break;
+            }
+        }
+
+        return allAdvisoriesSelected;
+    }
+
+    // Updates the allWarningsSelected variable to reflect checkbox state
+    let updateWarningsSelectedCheck = () => {
+        allWarningsSelected = checkAllWarningsSelected();
+    }
+
+    // Updates the allWatchesSelected variable to reflect checkbox state
+    let updateWatchesSelectedCheck = () => {
+        allWatchesSelected = checkAllWatchesSelected();
+    }
+
+    // Updates the allAdvisoriesSelected variable to reflect checkbox state
+    let updateAdvisoriesSelectedCheck = () => {
+        allAdvisoriesSelected = checkAllAdvisoriesSelected();
+    }
+
+    // Selects or deselects all warnings
+    let selectAllWarnings = () => {
+        for (let key of orderedWarnings){
+            document.getElementById("setting-warning-" + key + "-" + locationData.name + "-check").checked = !allWarningsSelected;
+        }
+        allWarningsSelected = !allWarningsSelected;
+    }
+
+    // Selects or deselects all watches
+    let selectAllWatches = () => {
+        for (let key of orderedWatches){
+            document.getElementById("setting-watch-" + key + "-" + locationData.name + "-check").checked = !allWatchesSelected;
+        }
+        allWatchesSelected = !allWatchesSelected;
+    }
+
+    // Selects or deselects all advisories
+    let selectAllAdvisories = () => {
+        for (let key of orderedAdvisories){
+            document.getElementById("setting-advisory-" + key + "-" + locationData.name + "-check").checked = !allAdvisoriesSelected;
+        }
+        allAdvisoriesSelected = !allAdvisoriesSelected;
+    }
+
+    // Edits all selected warnings
+    let bulkEditWarnings = (e) => {
+        console.log(e.target.id)
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedWarnings){
+                console.log("setting-warning-" + key + "-" + locationData.name + "-check")
+                if (document.getElementById("setting-warning-" + key + "-" + locationData.name + "-check").checked){
+                    locationSettings["alert-types"]["warnings"][key] = e.target.value;
+                }
+            }
+            console.log(locationSettings["alert-types"]["warnings"]);
+            saveSettings();
+        }
+    }
+
+    // Edits all selected watches
+    let bulkEditWatches = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedWatches){
+                if (document.getElementById("setting-watch-" + key + "-" + locationData.name + "-check").checked){
+                    console.log("setting-watch-" + key + "-check");
+                    locationSettings["alert-types"]["watches"][key] = e.target.value;
+                }
+            }
+            console.log(locationSettings["alert-types"]["watches"]);
+            saveSettings();
+        }
+    }
+
+    // Edits all selected advisories
+    let bulkEditAdvisories = (e) => {
+        if (document.getElementById(e.target.id + "-check").checked){
+            for (let key of orderedAdvisories){
+                if (document.getElementById("setting-advisory-" + key + "-" + locationData.name + "-check").checked){
+                    console.log("setting-advisory-" + key + "-check");
+                    locationSettings["alert-types"]["advisory"][key] = e.target.value;
+                }
+            }
+            console.log(locationSettings["alert-types"]["advisory"]);
+            saveSettings();
+        }
     }
 </script>
 
@@ -265,10 +450,15 @@
         <details>
             <summary>Warnings</summary>
             <div id="settings-warnings-list">
-                {#each Object.entries(locationSettings["alert-types"]["warnings"]) as [key, value]}
-                    <label for="setting-warning-{key}">{formatTitle(key, "Warning")}</label>
+                <input type="checkbox" id="select-all-warnings-{locationData.name}" class="vertical-center" checked={allWarningsSelected} onclick={selectAllWarnings}>
+                <label for="select-all-warnings-{locationData.name}">Select all warnings</label>
+                <br>
+                <br>
+                {#each orderedWarnings as key}
+                    <input type="checkbox" id="setting-warning-{key}-{locationData.name}-check" class="vertical-center" onchange={updateWarningsSelectedCheck}>
+                    <label for="setting-warning-{key}-{locationData.name}-check">{formatTitle(key, "Warning")}</label>
                     <br>
-                    <select bind:value={locationSettings["alert-types"]["warnings"][key]}>
+                    <select bind:value={locationSettings["alert-types"]["warnings"][key]} onchange={bulkEditWarnings} id="setting-warning-{key}-{locationData.name}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
@@ -284,10 +474,15 @@
         <details>
             <summary>Watches</summary>
             <div id="settings-watches-list">
-                {#each Object.entries(locationSettings["alert-types"]["watches"]) as [key, value]}
-                    <label for="setting-watch-{key}">{formatTitle(key, "Watch")}</label>
+                <input type="checkbox" id="select-all-watches-{locationData.name}" class="vertical-center" checked={allWatchesSelected} onclick={selectAllWatches}>
+                <label for="select-all-watches-{locationData.name}">Select all watches</label>
+                <br>
+                <br>
+                {#each orderedWatches as key}
+                    <input type="checkbox" id="setting-watch-{key}-{locationData.name}-check" class="vertical-center" onchange={updateWatchesSelectedCheck}>
+                    <label for="setting-watch-{key}-{locationData.name}-check">{formatTitle(key, "Watch")}</label>
                     <br>
-                    <select bind:value={locationSettings["alert-types"]["watches"][key]}>
+                    <select bind:value={locationSettings["alert-types"]["watches"][key]} onchange={bulkEditWatches} id="setting-watch-{key}-{locationData.name}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
@@ -303,10 +498,15 @@
         <details>
             <summary>Advisories/Other</summary>
             <div id="settings-advisory-list">
-                {#each Object.entries(locationSettings["alert-types"]["advisory"]) as [key, value]}
-                    <label for="setting-watch-{key}">{formatTitle(key, "Advisory")}</label>
+                <input type="checkbox" id="select-all-advisories-{locationData.name}" class="vertical-center" checked={allAdvisoriesSelected} onclick={selectAllAdvisories}>
+                <label for="select-all-advisories-{locationData.name}">Select all advisories</label>
+                <br>
+                <br>
+                {#each orderedAdvisories as key}
+                    <input type="checkbox" id="setting-advisory-{key}-{locationData.name}-check" class="vertical-center" onchange={updateAdvisoriesSelectedCheck}>
+                    <label for="setting-advisory-{key}-{locationData.name}-check">{formatTitle(key, "Advisory")}</label>
                     <br>
-                    <select bind:value={locationSettings["alert-types"]["advisory"][key]}>
+                    <select bind:value={locationSettings["alert-types"]["advisory"][key]} onchange={bulkEditAdvisories} id="setting-advisory-{key}-{locationData.name}">
                         <option value="alert">Alert</option>
                         {#if !isDesktop}
                             <option value="alertmove">Alert if moving</option>
