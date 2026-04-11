@@ -5,19 +5,17 @@ setTimeout(() => {
 
 let updateFiles = false;
 
-window.atmosVersion = "3.0.5";
-window.atmosUpdated = "3-16-2026";
-window.atmosUpdateTitle = "Atmos Weather v3.0.5 is here!";
+window.atmosVersion = "3.0.6";
+window.atmosUpdated = "4-10-2026";
+window.atmosUpdateTitle = "Atmos Weather v3.0.6 is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>
 		    <dt>New Features</dt>
-		    <dd>- Added radar time slider</dd>
+		    <dd>- Bulk edit notification settings for alerts</dd>
 		    <dt>Bug Fixes</dt>
-		    <dd>- Updated privacy statement</dd>
-		    <dd>- Fixed radar zoom issues</dd>
-		    <dd>- Removed radar color selection</dd>
-		    <dd>- Fixed Atmos being unclosable on desktop</dd>
-		    <dd>- Fixed locations appearing multiple times</dd>
+		    <dd>- Fixed forecast notification issues on desktop</dd>
+		    <dd>- Removed additional references to RainViewer</dd>
+		    <dd>- Fixed faulty update notification in settings</dd>
 		</dl> 
 		`;
 
