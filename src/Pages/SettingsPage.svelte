@@ -259,7 +259,7 @@
         {/if}
     </h6>
 
-    {#if window.electronAPI && window.atmosVersion !== window.atmosLatest}
+    {#if window.electronAPI && window.atmosVersion !== window.atmosLatest && window.atmosVersion !== "" && window.atmosVersion !== undefined}
         <h3>There is an update available ({window.atmosLatest}).</h3>
         <br>
         <button class="updateButton" onclick={()=>{window.electronAPI.updateNow();}}>Update Now</button>
