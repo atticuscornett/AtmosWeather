@@ -120,13 +120,15 @@ All non-Svelte code (such as JavaScript libraries and media) are in the `www` fo
 To view the web version, run `npm run watch` to build and open `www/index.html` in a browser.
 
 ### Desktop
+*Note: New cross-platform features should be written in for web first, then copied into electron.* \
 The desktop version is built using Electron.
 The Electron code is in the `electron` folder.
 The Electron code is a wrapper around the web version with additional code for platform-specific features.
 It is built for Windows, macOS, and Linux.
 
 Before working on the desktop version, be sure to copy the code in the `www` folder to the `electron` folder.
-(The `src` folder does not have to be copied, as the Svelte code is built into the `www` folder.)
+(The `src` folder does not have to be copied, as the Svelte code is built into the `www` folder. The 
+files must be built using `npm run watch` before copying to the `electron` folder.)
 
 To run the desktop version, run `npm start` in the `electron` folder.
 
