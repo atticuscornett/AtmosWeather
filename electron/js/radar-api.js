@@ -59,7 +59,7 @@ function loadRadarData(relativeTime = 0){
         document.getElementById("spc-select-container").style.display = "none";
     }
     else{
-        document.getElementById("spc-select-container").style.display = "inline-block";
+        document.getElementById("spc-select-container").style.display = "flex";
     }
 
     radarMap.on("moveend", ()=>{
@@ -81,6 +81,13 @@ function setRadarTransparency(t){
         return;
     }
     baseRadar.setOpacity(t/100);
+}
+
+function setOutlookTransparency(t){
+    if (spcOutlookLayer == null){
+        return;
+    }
+    spcOutlookLayer.setOpacity(t/100);
 }
 
 function radarJumpTo(index){

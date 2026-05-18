@@ -974,7 +974,8 @@ body.dark details[open] summary{
 
     .flexSettings.svelte-1ui026f {
         display: flex;
-        align-items:center;
+        align-items: center;
+        margin-right: 15px;
     }
 
     #radar-animation-control.svelte-1ui026f{
@@ -985,6 +986,12 @@ body.dark details[open] summary{
         cursor: pointer;
         border: none;
         font-family: Secular One, sans-serif;
+    }
+
+    #spc-select-container.svelte-1ui026f {
+        display: flex;
+        flex-basis: auto;
+        flex-wrap: wrap;
     }
 
     select.svelte-1ui026f {
@@ -998,6 +1005,14 @@ body.dark details[open] summary{
 
     #radar-opacity.svelte-1ui026f {
         width: 100%;
+    }
+
+    .vertical-bottom.svelte-1ui026f {
+        vertical-align: bottom;
+    }
+
+    .column-flex.svelte-1ui026f {
+        flex-direction: column;
     }
 
     .removeLocation.svelte-r6sbhz {

@@ -199,7 +199,6 @@ function runAtStartup(){
 
 function alertCheckHandler(){
 	checkLocation();
-	cycleAt++;
 	let locationCheckFrequency = 30*1000;
 	if (global.settings !== undefined){
 		if (global.settings["location-alerts"] !== undefined){
@@ -216,6 +215,7 @@ alertCheckHandler();
 
 // Check the location for alerts
 function checkLocation(){
+	cycleAt++;
 	console.log(new Date().toString())
 
 	// Wait for main window to load settings
