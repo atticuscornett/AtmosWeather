@@ -11,6 +11,8 @@
             thisChart.destroy();
         }
 
+        let root = document.documentElement;
+
         let forecastTime;
         let AMPM;
         let timePeriods = [];
@@ -43,7 +45,9 @@
             if (i > 0 && image !== lastImage && lastImageChange + 2 < i){
                 let colorScheme = window.appTheme;
                 let imageObj = new Image();
-                imageObj.src = colorScheme === "dark" ? "img/"+image+".svg" : "img/"+image+"-adaptive.svg";
+                let graphImageColor = getComputedStyle(root).getPropertyValue('--graph-icon-color').trim();
+
+                imageObj.src = graphImageColor === "white" ? "img/"+image+".svg" : "img/"+image+"-adaptive.svg";
                 imagePeriods.push(imageObj);
                 lastImage = image;
                 lastImageChange = i;
@@ -59,6 +63,7 @@
 
         Chart.defaults.font.size = 18;
         Chart.defaults.font.family = "Secular One";
+        Chart.defaults.color = getComputedStyle(root).getPropertyValue('--graph-text-color').trim();
 
         let chartConfig = {
             type: 'line',

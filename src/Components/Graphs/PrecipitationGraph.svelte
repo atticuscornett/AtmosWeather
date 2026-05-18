@@ -5,7 +5,12 @@
 
     let chartList = $derived(locationData["hourly"][0]);
 
-    const precipColorGradient = chroma.scale(["white", "dodgerblue", "blue"]);
+    const root = document.documentElement;
+    const startGradientColor = getComputedStyle(root).getPropertyValue('--precipitation-graph-start').trim();
+    const gradientColor2 = getComputedStyle(root).getPropertyValue('--precipitation-graph-2').trim();
+    const endGradientColor = getComputedStyle(root).getPropertyValue('--precipitation-graph-end').trim();
+
+    const precipColorGradient = chroma.scale([startGradientColor, gradientColor2, endGradientColor]);
 
     let labelCallback = (item) =>`${item.dataset.label}: ${item.formattedValue}%`;
 

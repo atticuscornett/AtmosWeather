@@ -61,4 +61,32 @@
 
     --sunrise-sunset-background-color: #555;
     --sunrise-sunset-text-color: white;
+
+    /* Graph Colors */
+    --graph-text-color: white;
+
+    --cape-graph-start: white;
+    --cape-graph-end: red;
+
+    --humidity-graph-start: white;
+    --humidity-graph-end: yellow;
+
+    --wind-graph-start: white;
+    --wind-graph-end: deeppink;
+
+    --precipitation-graph-start: white;
+    --precipitation-graph-2: dodgerblue;
+    --precipitation-graph-end: blue;
+
+    /* Used for dewpoint, feels like, and temperature graphs */
+    --temp-graph-start: purple;
+    --temp-graph-2: dodgerblue;
+    --temp-graph-3: lime;
+    --temp-graph-4: yellow;
+    --temp-graph-end: red;
+
+    /* For SVGs that only come in limited colors */
+
+    /* Current options: white, black */
+    --graph-icon-color: white;
 }

@@ -7,7 +7,11 @@
 
     let currentCape;
 
-    const tempColorGradient = chroma.scale(['white', 'red']);
+    const root = document.documentElement;
+    const startGradientColor = getComputedStyle(root).getPropertyValue('--cape-graph-start').trim();
+    const endGradientColor = getComputedStyle(root).getPropertyValue('--cape-graph-end').trim();
+
+    const tempColorGradient = chroma.scale([startGradientColor, endGradientColor]);
 
     let labelCallback = (item) =>`${item.dataset.label}: ${item.formattedValue} J/kg`;
 

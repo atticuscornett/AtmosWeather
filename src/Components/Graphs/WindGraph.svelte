@@ -5,7 +5,10 @@
 
     let chartList = $derived(locationData["hourly"][0]);
 
-    const windColorGradient = chroma.scale(["white", "deeppink"]);
+    const root = document.documentElement;
+    const startGradientColor = getComputedStyle(root).getPropertyValue('--wind-graph-start').trim();
+    const endGradientColor = getComputedStyle(root).getPropertyValue('--wind-graph-end').trim();
+    const windColorGradient = chroma.scale([startGradientColor, endGradientColor]);
 
     let labelCallback = (item) =>`${item.dataset.label}: ${item.formattedValue} mph`;
 
