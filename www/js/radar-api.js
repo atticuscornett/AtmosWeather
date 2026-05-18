@@ -59,7 +59,7 @@ function loadRadarData(relativeTime = 0){
         document.getElementById("spc-select-container").style.display = "none";
     }
     else{
-        document.getElementById("spc-select-container").style.display = "inline-block";
+        document.getElementById("spc-select-container").style.display = "flex";
     }
 
     radarMap.on("moveend", ()=>{

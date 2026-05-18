@@ -105,8 +105,8 @@ setInterval(radarAnimationHandler, 1500);
 
     </div>
     <div class="radarSettings" id="spc-select-container">
-        <div class="radarSettings">
-        <label for="radar-opacity">Weather Outlook Type</label>
+        <div class="flexSettings column-flex">
+            <label for="radar-opacity">Weather Outlook Type</label>
             <br>
             <select id="spc-select" onchange={changeWeatherOutlook}>
                 <option value="severe-outlook">Severe Weather Outlook</option>
@@ -114,7 +114,7 @@ setInterval(radarAnimationHandler, 1500);
                 <option value="hazards-outlook">Hazards Outlook</option>
             </select>
         </div>
-        <div class="radarSettings vertical-bottom">
+        <div class="flexSettings vertical-bottom">
             <div>
                 <label for="outlook-opacity">Outlook Transparency</label>
                 <br>
@@ -163,7 +163,8 @@ setInterval(radarAnimationHandler, 1500);
 
     .flexSettings {
         display: flex;
-        align-items:center;
+        align-items: center;
+        margin-right: 15px;
     }
 
     #radar-animation-control{
@@ -174,6 +175,12 @@ setInterval(radarAnimationHandler, 1500);
         cursor: pointer;
         border: none;
         font-family: Secular One, sans-serif;
+    }
+
+    #spc-select-container {
+        display: flex;
+        flex-basis: auto;
+        flex-wrap: wrap;
     }
 
     select {
@@ -191,5 +198,9 @@ setInterval(radarAnimationHandler, 1500);
 
     .vertical-bottom {
         vertical-align: bottom;
+    }
+
+    .column-flex {
+        flex-direction: column;
     }
 </style>
