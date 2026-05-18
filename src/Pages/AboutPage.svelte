@@ -10,6 +10,11 @@
     <h3 id="atmos-app-updated">Updated on {window.atmosUpdated}</h3>
     <h6>Written by Atticus Cornett and <a href="https://github.com/atticuscornett/AtmosWeather/graphs/contributors" target="_blank">contributors</a></h6>
     <hr>
+    <details>
+        <summary>Update Notes</summary>
+        <h4>{@html window.atmosUpdateNotes}</h4>
+    </details>
+    <br>
     <h2>Resources</h2>
     <h3><a href="https://tablericons.com/" target="_blank">Tabler Icons</a></h3>
     <h3><a href="https://capacitorjs.com/" target="_blank">CapacitorJS</a></h3>
