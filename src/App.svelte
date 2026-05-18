@@ -20,7 +20,14 @@
             }
         }
 
-        document.getElementById("theme-css").setAttribute("href", `./css/${window.appTheme}-theme.css`);
+        document.getElementById("theme-css").setAttribute("href", `./css/themes/${window.appTheme}-theme.css`);
+
+        setTimeout(()=>{
+            let root = document.documentElement;
+            let fallbackTheme = getComputedStyle(root).getPropertyValue('--fallback-theme').trim();
+            fallbackTheme = fallbackTheme === "black" ? "dark" : "light";
+            document.getElementById("fallback-theme-css").setAttribute("href", `./css/themes/${fallbackTheme}-theme.css`);
+        }, 100)
     }
 
     setTimeout(refreshAppTheme, 100);

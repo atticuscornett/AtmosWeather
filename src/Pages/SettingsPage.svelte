@@ -291,6 +291,7 @@
             <option value="system">System Default</option>
             <option value="dark">Dark Theme</option>
             <option value="light">Light Theme</option>
+            <option value="forest">Forest Theme</option>
         </select>
         <br>
         <label for="setting-page-transition-duration">Page Transition Duration</label>

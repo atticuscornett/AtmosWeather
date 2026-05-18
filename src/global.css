@@ -75,3 +75,7 @@ select{
 	animation-duration: 5s !important;
 	color: var(--statement-text-color) !important;
 }
+
+input {
+	accent-color: var(--input-accent);
+}
