@@ -75,8 +75,8 @@
    }
 
     .location{
-        background-color: blue;
-        color: white;
+        background-color: var(--default-background);
+        color: var(--location-text-color);
         border-radius: 7px;
         padding-top: 1px;
         padding-bottom: 1px;
@@ -85,7 +85,7 @@
         -mox-box-sizing: border-box;
         box-sizing: border-box;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
         height: 100%;
     }
 

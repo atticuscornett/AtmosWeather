@@ -94,8 +94,8 @@
 
     button {
         width: 100%;
-        background-color: darkslategray;
-        color: white;
+        background-color: var(--editor-background);
+        color: var(--editor-text-color);
         border: none;
         border-radius: 7px;
         cursor: pointer;

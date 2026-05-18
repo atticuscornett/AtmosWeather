@@ -21,18 +21,18 @@
 <div>
     <h1>Hourly Forecasts</h1>
     <div onchange={changeGraph}>
-        <input type="radio" id="{name}-loc-hourly-temp-{randomId}" name="{name}-loc-hourly-{randomId}" value="temp" class="hourlySelector" checked>
-        <label for="{name}-loc-hourly-temp-{randomId}" class="hourlySelectorLabel">Temperature</label>
-        <input type="radio" id="{name}-loc-hourly-feels-like-{randomId}" name="{name}-loc-hourly-{randomId}" value="feels-like" class="hourlySelector">
-        <label for="{name}-loc-hourly-feels-like-{randomId}" class="hourlySelectorLabel">Feels Like</label>
-        <input type="radio" id="{name}-loc-hourly-precip-{randomId}" name="{name}-loc-hourly-{randomId}" value="precip" class="hourlySelector">
-        <label for="{name}-loc-hourly-precip-{randomId}" class="hourlySelectorLabel">Precipitation</label>
-        <input type="radio" id="{name}-loc-hourly-humid-{randomId}" name="{name}-loc-hourly-{randomId}" value="humid" class="hourlySelector">
-        <label for="{name}-loc-hourly-humid-{randomId}" class="hourlySelectorLabel">Humidity</label>
-        <input type="radio" id="{name}-loc-hourly-wind-{randomId}" name="{name}-loc-hourly-{randomId}" value="wind" class="hourlySelector">
-        <label for="{name}-loc-hourly-wind-{randomId}" class="hourlySelectorLabel">Wind Speed</label>
-        <input type="radio" id="{name}-loc-hourly-dewpoint-{randomId}" name="{name}-loc-hourly-{randomId}" value="dewpoint" class="hourlySelector">
-        <label for="{name}-loc-hourly-dewpoint-{randomId}" class="hourlySelectorLabel">Dew Point</label>
+        <input type="radio" id="{name}-loc-hourly-temp-{randomId}" name="{name}-loc-hourly-{randomId}" value="temp" class="hourly-selector" checked>
+        <label for="{name}-loc-hourly-temp-{randomId}" class="hourly-selector-label">Temperature</label>
+        <input type="radio" id="{name}-loc-hourly-feels-like-{randomId}" name="{name}-loc-hourly-{randomId}" value="feels-like" class="hourly-selector">
+        <label for="{name}-loc-hourly-feels-like-{randomId}" class="hourly-selector-label">Feels Like</label>
+        <input type="radio" id="{name}-loc-hourly-precip-{randomId}" name="{name}-loc-hourly-{randomId}" value="precip" class="hourly-selector">
+        <label for="{name}-loc-hourly-precip-{randomId}" class="hourly-selector-label">Precipitation</label>
+        <input type="radio" id="{name}-loc-hourly-humid-{randomId}" name="{name}-loc-hourly-{randomId}" value="humid" class="hourly-selector">
+        <label for="{name}-loc-hourly-humid-{randomId}" class="hourly-selector-label">Humidity</label>
+        <input type="radio" id="{name}-loc-hourly-wind-{randomId}" name="{name}-loc-hourly-{randomId}" value="wind" class="hourly-selector">
+        <label for="{name}-loc-hourly-wind-{randomId}" class="hourly-selector-label">Wind Speed</label>
+        <input type="radio" id="{name}-loc-hourly-dewpoint-{randomId}" name="{name}-loc-hourly-{randomId}" value="dewpoint" class="hourly-selector">
+        <label for="{name}-loc-hourly-dewpoint-{randomId}" class="hourly-selector-label">Dew Point</label>
     </div>
 
     {#if selectedGraph === "temp"}
@@ -58,18 +58,18 @@
 </div>
 
 <style>
-    .hourlySelectorLabel {
+    .hourly-selector-label {
         cursor: pointer;
         margin-right: 20px;
         user-select: none;
     }
 
-    .hourlySelector:checked + .hourlySelectorLabel {
+    .hourly-selector:checked + .hourly-selector-label {
         text-decoration: underline solid;
         font-weight: 700;
     }
 
-    .hourlySelector {
+    .hourly-selector {
         display: none;
     }
 </style>

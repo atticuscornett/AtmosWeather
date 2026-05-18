@@ -43,7 +43,7 @@
     })
 </script>
 
-<div class="centerContainer">
+<div class="center-container">
     <img src="img/sunny.svg" alt="Sunrise/Sunset" style="width: 50px; height: 50px;">
     <div class="text-holder">
         <h4>Sunrise: {sunrise}</h4>
@@ -66,14 +66,14 @@
         width: fit-content;
     }
 
-    .centerContainer {
+    .center-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #555;
+        background: var(--sunrise-sunset-background-color);
         border-radius: 7px;
         margin-bottom: 15px;
-        color: white;
+        color: var(--sunrise-sunset-text-color);
         height: 100%;
     }
 </style>

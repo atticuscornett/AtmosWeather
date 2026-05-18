@@ -65,6 +65,7 @@
         align-items: center;
         margin-bottom: 15px;
         flex-direction: column;
+        border: white 5px solid;
     }
 
     h3 {

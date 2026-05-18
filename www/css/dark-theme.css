@@ -58,4 +58,7 @@
     /* Widget-specific Colors */
     --polutant-background-color: #555;
     --polutant-text-color: white;
+
+    --sunrise-sunset-background-color: #555;
+    --sunrise-sunset-text-color: white;
 }
