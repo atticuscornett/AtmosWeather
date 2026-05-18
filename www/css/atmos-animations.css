@@ -27,37 +27,37 @@
 
 @keyframes watchAnim{
 	0%{
-		background-color: darkgoldenrod;
+		background-color: var(--watch-background);
 	}
 	50%{
-		background-color: goldenrod;
+		background-color: var(--watch-background-secondary);
 	}
 	100%{
-		background-color: darkgoldenrod;
+		background-color: var(--watch-background);
 	}
 }
 
 @keyframes warningAnim{
 	0%{
-		background-color: darkred;
+		background-color: var(--warning-background);
 	}
 	50%{
-		background-color: red;
+		background-color: var(--warning-background-secondary);
 	}
 	100%{
-		background-color: darkred;
+		background-color: var(--warning-background);
 	}
 }
 
 @keyframes otherAnim{
 	0%{
-		background-color: grey;
+		background-color: var(--statement-background);
 	}
 	50%{
-		background-color: slategray;
+		background-color: var(--statement-background-secondary);
 	}
 	100%{
-		background-color: grey;
+		background-color: var(--statement-background);
 	}
 }
 

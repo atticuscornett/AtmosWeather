@@ -6,7 +6,29 @@
     --background-end: #222222;
     --background-angle: 90deg;
 
-    --main-text-color: white;
+    --primary-text-color: white;
+    --secondary-text-color: dodgerblue;
+
+    --accordian-border-color: white;
+    --accordian-shadow-color: #898989;
+
+    /* Location List Colors */
+    --no-alerts-background: dodgerblue;
+    --no-alerts-text-color: white;
+
+    --watch-background: darkgoldenrod;
+    --watch-background-secondary: goldenrod;
+    --watch-text-color: white;
+
+    --warning-background: darkred;
+    --warning-background-secondary: red;
+    --warning-text-color: white;
+
+    --statement-background: grey;
+    --statement-background-secondary: slategray;
+    --statement-text-color: white;
+
+
 
 
 }

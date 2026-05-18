@@ -1,5 +1,6 @@
 body {
 	background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
+	color: var(--primary-text-color);
 }
 h1 {
 	font-family: Secular One, sans-serif;
@@ -10,19 +11,19 @@ h2, h3, h4, h5, h6 {
 }
 
 details{
-	font-family: Secular One;
+	font-family: Secular One, sans-serif;
 	font-size: 20px;
-	border: black solid;
+	border: var(--accordian-border-color) solid;
 	padding: 10px;
 	border-radius: 7px;
 	margin-bottom: 15px;
-	box-shadow: 0px 0px 7px #898989;
+	box-shadow: 0 0 7px var(--accordian-shadow-color);
 }
 
 details[open] summary{
 	padding-bottom: 10px;
 	margin-bottom: 10px;
-	border-bottom: black solid;
+	border-bottom: var(--accordian-border-color) solid;
 }
 
 summary{
@@ -31,7 +32,7 @@ summary{
 }
 
 a{
-	color: dodgerblue;
+	color: var(--secondary-text-color);
 }
 
 label{
@@ -45,35 +46,27 @@ select{
 	margin-bottom: 8px;
 }
 
-body.dark details{
-	border: white solid;
-	border-radius: 7px;
-	box-shadow: 0px 0px 7px #898989;
-}
-body.dark details[open] summary{
-	border-bottom: white solid;
-}
 
 .noalerts.noalerts{
-	background-color: dodgerblue !important;
+	background-color: var(--no-alerts-background) !important;
 }
 
 .watch.watch{
-	background-color: darkgoldenrod;
+	background-color: var(--watch-background);
 	animation-name: watchAnim !important;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
 }
 
 .warning.warning{
-	background-color: darkred;
+	background-color: var(--warning-background);
 	animation-name: warningAnim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 2s !important;
 }
 
 .other.other{
-	background-color: grey;
+	background-color: var(--statement-background);
 	animation-name: otherAnim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
