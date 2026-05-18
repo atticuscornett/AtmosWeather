@@ -24,12 +24,7 @@
     }
 
     .selected-nav {
-        background-color: #EEEEEE;
-        border-radius: 7px;
-    }
-
-    :global(body.dark) .selected-nav{
-        background-color: #111111;
+        background-color: var(--nav-button-selected);
         border-radius: 7px;
     }
 </style>

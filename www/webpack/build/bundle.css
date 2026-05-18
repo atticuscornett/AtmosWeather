@@ -193,12 +193,7 @@ select{
     }
 
     .selected-nav.svelte-1b3qbt1 {
-        background-color: #EEEEEE;
-        border-radius: 7px;
-    }
-
-    body.dark .selected-nav.svelte-1b3qbt1{
-        background-color: #111111;
+        background-color: var(--nav-button-selected);
         border-radius: 7px;
     }
 
@@ -1199,11 +1194,7 @@ select{
     #app-nav.svelte-1n46o8q{
         height: 8%;
         width: 100%;
-        background-color: white;
+        background-color: var(--nav-button-background);
         cursor: pointer;
         display: flex;
     }
-
-    body.dark #app-nav.svelte-1n46o8q{
-         background-color: hsla(0,0%,15%,1.00);
-     }

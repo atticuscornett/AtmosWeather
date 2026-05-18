@@ -51,12 +51,8 @@
     #app-nav{
         height: 8%;
         width: 100%;
-        background-color: white;
+        background-color: var(--nav-button-background);
         cursor: pointer;
         display: flex;
     }
-
-    :global(body.dark) #app-nav{
-         background-color: hsla(0,0%,15%,1.00);
-     }
 </style>
