@@ -145,14 +145,14 @@ select{
 
 	h1.svelte-1my6its {
 		margin-left:20px;
-		color: dodgerblue;
+		color: var(--secondary-text-color);
 	}
 
-    .closeButton.svelte-1my6its {
+    .close-button.svelte-1my6its {
         position: absolute;
         top:0;
-        right:25px;
-        color:dodgerblue;
+        right: 25px;
+        color: var(--secondary-text-color);
         cursor: pointer;
         text-decoration: underline;
     }
@@ -160,7 +160,7 @@ select{
     #notice-window-container.svelte-1my6its{
         z-index: 99;
         position: absolute;
-        background-color: white;
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         width: 100%;
         min-height: 100%;
         top: 0;
@@ -169,16 +169,6 @@ select{
 
     #notice-window.svelte-1my6its {
         padding: 20px;
-    }
-
-    body.dark #notice-window-container.svelte-1my6its{
-        z-index: 98;
-        position: absolute;
-        background-color: #222222;
-        width: 100%;
-        min-height: 100%;
-        top: 0;
-        left: 0;
     }
 
     div.svelte-1b3qbt1 {
