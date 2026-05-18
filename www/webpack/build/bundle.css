@@ -995,7 +995,7 @@ select{
     #android-permission-setup.svelte-vi0x0u{
         z-index: 99;
         position: absolute;
-        background-color: hsla(0,0%,99%,1.00);
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         width: 100%;
         height: 100%;
         top: 0;
@@ -1005,7 +1005,7 @@ select{
 
     #android-permission-container.svelte-vi0x0u {
         padding: 15px;
-        background-color: hsla(0,0%,99%,1.00);
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         text-align: center;
     }
 
@@ -1023,14 +1023,6 @@ select{
 
     .permission-button.svelte-vi0x0u:disabled {
         background-color: grey;
-    }
-
-    body.dark #android-permission-setup.svelte-vi0x0u {
-        background-color: #222222;
-    }
-
-    body.dark #android-permission-container.svelte-vi0x0u {
-        background-color: #222222;
     }
 
     #atmos-logo-welcome.svelte-cmi35s {
