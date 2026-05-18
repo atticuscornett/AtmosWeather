@@ -481,8 +481,8 @@
     }
 
     .updateButton {
-        background-color: dodgerblue;
-        color: white;
+        background-color: var(--positive-button);
+        color: var(--positive-button-text);
         border: none;
         padding: 10px 20px;
         border-radius: 5px;

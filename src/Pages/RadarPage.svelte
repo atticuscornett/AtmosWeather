@@ -82,7 +82,7 @@ setInterval(radarAnimationHandler, 1500);
     <h5 id="polygon-load-count" hidden></h5>
     <h5 id="spc-outlook-loading" hidden>Loading SPC outlook...</h5>
     <h6 id="radar-time"></h6>
-    <div class="radarSettings">
+    <div class="radar-settings">
         <label class="radarTime">{radarTime}</label>
         <br>
         <input type="range"
@@ -93,19 +93,19 @@ setInterval(radarAnimationHandler, 1500);
                }}
                min="1" max="10" bind:value={radarFrame} class="slider" id="radar-opacity">
     </div>
-    <div class="flexSettings">
-        <div class="radarSettings">
+    <div class="flex-settings">
+        <div class="radar-settings">
             <label>Radar Transparency</label>
             <br>
             <input type="range" oninput={()=>{setRadarTransparency(radarTransparency)}} min="1" max="100" bind:value={radarTransparency} class="slider" id="radar-opacity">
         </div>
-        <div class="radarButtonContainer">
+        <div class="radar-button-container">
             <button id="radar-animation-control" onclick={()=>{playbackEnabled = !playbackEnabled;}}>{playbackEnabled ? "Pause" : "Play"}</button>
         </div>
 
     </div>
-    <div class="radarSettings" id="spc-select-container">
-        <div class="flexSettings column-flex">
+    <div class="radar-settings" id="spc-select-container">
+        <div class="flex-settings column-flex">
             <label for="radar-opacity">Weather Outlook Type</label>
             <br>
             <select id="spc-select" onchange={changeWeatherOutlook}>
@@ -114,7 +114,7 @@ setInterval(radarAnimationHandler, 1500);
                 <option value="hazards-outlook">Hazards Outlook</option>
             </select>
         </div>
-        <div class="flexSettings vertical-bottom">
+        <div class="flex-settings vertical-bottom">
             <div>
                 <label for="outlook-opacity">Outlook Transparency</label>
                 <br>
@@ -138,38 +138,38 @@ setInterval(radarAnimationHandler, 1500);
 
 <style>
     #radar-map {
-        height:65%;
-        border-radius:7px;
-        box-shadow: 0 0 7px #898989;
+        height: 65%;
+        border-radius: 7px;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     label {
         font-size: 15px;
     }
 
-    .radarSettings {
+    .radar-settings {
         text-align: center;
         width:fit-content;
         display: inline-block;
         margin-right: 20px;
     }
 
-    .radarButtonContainer {
+    .radar-button-container {
         text-align: center;
-        width:fit-content;
+        width: fit-content;
         display: inline-block;
         margin-right: 10px;
     }
 
-    .flexSettings {
+    .flex-settings {
         display: flex;
         align-items: center;
         margin-right: 15px;
     }
 
     #radar-animation-control{
-        background-color: dodgerblue;
-        color: white;
+        background-color: var(--positive-button);
+        color: var(--positive-button-text);
         font-size: 20px;
         border-radius: 7px;
         cursor: pointer;

@@ -14,6 +14,18 @@
 
     --loading-dots-color: #186bbf;
 
+    --add-location-button: rgba(34,55,91,0.88);
+    --add-location-button-text: white;
+
+    --box-shadow-color: #898989;
+
+    --positive-button: dodgerblue;
+    --positive-button-text: white;
+
+    /* Currently Only Used for Remove Location in Settings */
+    --negative-button: #ff4d4d;
+    --negative-button-text: white;
+
     /* Navigation Buttons */
     --nav-button-background: white;
     --nav-button-selected: #EEEEEE;
@@ -27,7 +39,6 @@
     --error-background: darkslategray;
     --current-location-background: cadetblue;
     --location-text-color: white;
-    --box-shadow-color: #898989;
 
     --no-alerts-background: dodgerblue;
     --no-alerts-text-color: white;

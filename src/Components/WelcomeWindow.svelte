@@ -95,8 +95,8 @@
 
 	#welcome-button-native{
 		border: none;
-		background-color: var(--secondary-text-color);
-		color: var(--primary-text-color);
+		background-color: var(--positive-button);
+		color: var(--positive-button-text);
 		font-family: Secular One, sans-serif;
 		font-size: 25px;
 		border-radius: 7px;

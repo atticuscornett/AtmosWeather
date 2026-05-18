@@ -201,8 +201,8 @@ select{
     }
 
     .updateButton.svelte-v59opo {
-        background-color: dodgerblue;
-        color: white;
+        background-color: var(--positive-button);
+        color: var(--positive-button-text);
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
@@ -284,18 +284,18 @@ select{
         padding-left: 15px;
         padding-right: 15px;
         border: none;
-        background-color: rgba(34,55,91,0.88);
-        color: white;
+        background-color: var(--add-location-button);
+        color: var(--add-location-button-text);
         font-family: Secular One, sans-serif;
         font-size: 25px;
         border-radius: 7px;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     .location.svelte-j9q2wf{
-        background-color: blue;
-        color: white;
+        background-color: var(--default-background);
+        color: var(--location-text-color);
         border-radius: 7px;
         padding-top: 1px;
         padding-bottom: 1px;
@@ -304,7 +304,7 @@ select{
         -mox-box-sizing: border-box;
         box-sizing: border-box;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     #search-button.svelte-1y69fe9 {
@@ -312,22 +312,22 @@ select{
         cursor: pointer;
     }
 
-    .locationIcon.svelte-1y69fe9 {
-        float:left;
+    .location-icon.svelte-1y69fe9 {
+        float: left;
         vertical-align: text-bottom;
         width: 35px;
         margin-left: 10px;
     }
 
-    .resultTitle.svelte-1y69fe9 {
+    .result-title.svelte-1y69fe9 {
         margin-left: 40px;
     }
 
     .searchResult.svelte-1y69fe9{
         display: flex;
         align-items: center;
-        background-color: dodgerblue;
-        color: white;
+        background-color: var(--no-alerts-background);
+        color: var(--no-alerts-text-color);
         border: none;
         border-radius: 7px;
         padding: 20px 0;
@@ -867,8 +867,8 @@ select{
     button.svelte-felu7o {
         width: 100%;
         cursor: pointer;
-        background-color: darkslategray;
-        color: white;
+        background-color: var(--editor-background);
+        color: var(--editor-text-color);
         border: none;
         border-radius: 7px;
         font-size: 20px;
@@ -888,7 +888,7 @@ select{
     #alert-map.svelte-1u5306y {
         height:40%;
         border-radius:7px;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     #alert-details.svelte-1u5306y {
@@ -896,38 +896,38 @@ select{
     }
 
     #radar-map.svelte-1ui026f {
-        height:65%;
-        border-radius:7px;
-        box-shadow: 0 0 7px #898989;
+        height: 65%;
+        border-radius: 7px;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     label.svelte-1ui026f {
         font-size: 15px;
     }
 
-    .radarSettings.svelte-1ui026f {
+    .radar-settings.svelte-1ui026f {
         text-align: center;
         width:fit-content;
         display: inline-block;
         margin-right: 20px;
     }
 
-    .radarButtonContainer.svelte-1ui026f {
+    .radar-button-container.svelte-1ui026f {
         text-align: center;
-        width:fit-content;
+        width: fit-content;
         display: inline-block;
         margin-right: 10px;
     }
 
-    .flexSettings.svelte-1ui026f {
+    .flex-settings.svelte-1ui026f {
         display: flex;
         align-items: center;
         margin-right: 15px;
     }
 
     #radar-animation-control.svelte-1ui026f{
-        background-color: dodgerblue;
-        color: white;
+        background-color: var(--positive-button);
+        color: var(--positive-button-text);
         font-size: 20px;
         border-radius: 7px;
         cursor: pointer;
@@ -963,8 +963,8 @@ select{
     }
 
     .removeLocation.svelte-r6sbhz {
-        background-color: #ff4d4d;
-        color: white;
+        background-color: var(--negative-button);
+        color: var(--negative-button-text);
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
@@ -1024,8 +1024,8 @@ select{
 
 	#welcome-button-native.svelte-cmi35s{
 		border: none;
-		background-color: var(--secondary-text-color);
-		color: var(--primary-text-color);
+		background-color: var(--positive-button);
+		color: var(--positive-button-text);
 		font-family: Secular One, sans-serif;
 		font-size: 25px;
 		border-radius: 7px;

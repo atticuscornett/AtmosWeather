@@ -161,8 +161,8 @@
     button {
         width: 100%;
         cursor: pointer;
-        background-color: darkslategray;
-        color: white;
+        background-color: var(--editor-background);
+        color: var(--editor-text-color);
         border: none;
         border-radius: 7px;
         font-size: 20px;

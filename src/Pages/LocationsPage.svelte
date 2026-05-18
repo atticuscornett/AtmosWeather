@@ -338,18 +338,18 @@
         padding-left: 15px;
         padding-right: 15px;
         border: none;
-        background-color: rgba(34,55,91,0.88);
-        color: white;
+        background-color: var(--add-location-button);
+        color: var(--add-location-button-text);
         font-family: Secular One, sans-serif;
         font-size: 25px;
         border-radius: 7px;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     .location{
-        background-color: blue;
-        color: white;
+        background-color: var(--default-background);
+        color: var(--location-text-color);
         border-radius: 7px;
         padding-top: 1px;
         padding-bottom: 1px;
@@ -358,6 +358,6 @@
         -mox-box-sizing: border-box;
         box-sizing: border-box;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 </style>

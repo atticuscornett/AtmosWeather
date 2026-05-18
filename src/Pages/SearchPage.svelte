@@ -92,8 +92,8 @@
     <div id="search-results">
         {#each searchNames as name, i}
             <div class="searchResult" onclick={() => selectResult(i)}>
-                <img alt="Location Pin" class="locationIcon" src="img/location-pin.svg">
-                <h1 class="resultTitle">{name}</h1>
+                <img alt="Location Pin" class="location-icon" src="img/location-pin.svg">
+                <h1 class="result-title">{name}</h1>
             </div>
             <br>
         {/each}
@@ -110,22 +110,22 @@
         cursor: pointer;
     }
 
-    .locationIcon {
-        float:left;
+    .location-icon {
+        float: left;
         vertical-align: text-bottom;
         width: 35px;
         margin-left: 10px;
     }
 
-    .resultTitle {
+    .result-title {
         margin-left: 40px;
     }
 
     .searchResult{
         display: flex;
         align-items: center;
-        background-color: dodgerblue;
-        color: white;
+        background-color: var(--no-alerts-background);
+        color: var(--no-alerts-text-color);
         border: none;
         border-radius: 7px;
         padding: 20px 0;

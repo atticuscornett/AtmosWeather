@@ -528,8 +528,8 @@
 
 <style>
     .removeLocation {
-        background-color: #ff4d4d;
-        color: white;
+        background-color: var(--negative-button);
+        color: var(--negative-button-text);
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
