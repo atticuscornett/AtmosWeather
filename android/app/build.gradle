@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
 
 
-    namespace 'io.atticusc.atmosweather'
+    namespace = 'io.atticusc.atmosweather'
     buildFeatures {
         viewBinding true
     }
-    compileSdk rootProject.ext.compileSdkVersion
+    compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "io.atticusc.atmosweather"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -18,7 +18,7 @@ android {
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
              // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
-            ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
     buildTypes {
@@ -59,6 +59,15 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.github.woheller69:FreeDroidWarn:V1.8'
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        if (details.requested.group == 'org.jetbrains.kotlin') {
+            details.useVersion "1.8.10"
+            details.because "Align Kotlin stdlib versions to avoid duplicate classes"
+        }
+    }
 }
 
 apply from: 'capacitor.build.gradle'
