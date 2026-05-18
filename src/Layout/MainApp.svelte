@@ -95,11 +95,11 @@
 
 <div id="main-app">
     {#if !nwsAvailable}
-        <div class="location error" id="offlineError">
-            <div id="offlineErrorChild">
+        <div class="location error" id="offline-error">
+            <div id="offline-error-child">
                 <img src="img/internet.svg">
             </div>
-            <div id="offlineText"><h2>Are you offline?</h2><h3>Can't connect to the NWS API right now!</h3></div>
+            <div id="offline-text"><h2>Are you offline?</h2><h3>Can't connect to the NWS API right now!</h3></div>
         </div>
     {/if}
     <br>
@@ -139,7 +139,7 @@
         overflow-x: hidden;
     }
 
-    #offlineErrorChild {
+    #offline-error-child {
         display: inline-block;
         height: inherit;
         vertical-align: top;
@@ -150,18 +150,18 @@
         vertical-align: center;
     }
 
-    #offlineText {
-        display:inline-block;
+    #offline-text {
+        display: inline-block;
         margin-left:8px;
     }
 
     .error{
-        background-color: darkslategray !important;
+        background-color: var(--error-background) !important;
     }
 
     .location{
-        background-color: blue;
-        color: white;
+        background-color: var(--default-background);
+        color: var(--location-text-color);
         border-radius: 7px;
         padding-top: 1px;
         padding-bottom: 1px;
@@ -170,6 +170,6 @@
         -mox-box-sizing: border-box;
         box-sizing: border-box;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 </style>

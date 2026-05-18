@@ -1120,7 +1120,7 @@ select{
         overflow-x: hidden;
     }
 
-    #offlineErrorChild.svelte-1bjgh72 {
+    #offline-error-child.svelte-1bjgh72 {
         display: inline-block;
         height: inherit;
         vertical-align: top;
@@ -1131,18 +1131,18 @@ select{
         vertical-align: center;
     }
 
-    #offlineText.svelte-1bjgh72 {
-        display:inline-block;
+    #offline-text.svelte-1bjgh72 {
+        display: inline-block;
         margin-left:8px;
     }
 
     .error.svelte-1bjgh72{
-        background-color: darkslategray !important;
+        background-color: var(--error-background) !important;
     }
 
     .location.svelte-1bjgh72{
-        background-color: blue;
-        color: white;
+        background-color: var(--default-background);
+        color: var(--location-text-color);
         border-radius: 7px;
         padding-top: 1px;
         padding-bottom: 1px;
@@ -1151,7 +1151,7 @@ select{
         -mox-box-sizing: border-box;
         box-sizing: border-box;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     #app.svelte-1n46o8q {
