@@ -53,21 +53,21 @@ select{
 
 .watch.watch{
 	background-color: var(--watch-background);
-	animation-name: watchAnim !important;
+	animation-name: watch-anim !important;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
 }
 
 .warning.warning{
 	background-color: var(--warning-background);
-	animation-name: warningAnim;
+	animation-name: warning-anim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 2s !important;
 }
 
 .other.other{
 	background-color: var(--statement-background);
-	animation-name: otherAnim;
+	animation-name: other-anim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
 }

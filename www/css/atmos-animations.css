@@ -16,7 +16,7 @@
 
 
 
-@keyframes logoBackgroundAnim{
+@keyframes logo-background-anim {
 	0% {
 		background: linear-gradient(var(--background-angle), var(--background-end), var(--background-start));
 	}
@@ -25,7 +25,7 @@
 	}
 }
 
-@keyframes watchAnim{
+@keyframes watch-anim {
 	0%{
 		background-color: var(--watch-background);
 	}
@@ -37,7 +37,7 @@
 	}
 }
 
-@keyframes warningAnim{
+@keyframes warning-anim {
 	0%{
 		background-color: var(--warning-background);
 	}
@@ -49,7 +49,7 @@
 	}
 }
 
-@keyframes otherAnim{
+@keyframes other-anim {
 	0%{
 		background-color: var(--statement-background);
 	}
@@ -61,7 +61,7 @@
 	}
 }
 
-@keyframes delayedFadeIn{
+@keyframes delayed-fade-in {
 	0%{
 		opacity: 0;
 	}
@@ -75,7 +75,7 @@
 
 /* General Animations */
 
-@keyframes fadeOut {
+@keyframes fade-out {
 	0%{
 		opacity: 1.0;
 		background-color: hsla(0,0%,99%,1.00);
@@ -88,25 +88,25 @@
 	}
 }
 
-@keyframes offLeft{
+@keyframes off-left {
 	0%{
-		right: 0%;
+		right: 0;
 	}
 	100%{
 		right: 300%;
 	}
 }
 
-@keyframes onRight{
+@keyframes on-right{
 	0%{
 		left: 300%;
 	}
 	100%{
-		left: 0%;
+		left: 0;
 	}
 }
 
-@keyframes simpleFadeOut{
+@keyframes simple-fade-out{
 	0%{
 		opacity: 1.0;
 	}
@@ -114,7 +114,7 @@
 		opacity: 0;
 	}
 }
-@keyframes simpleFadeIn{
+@keyframes simple-fade-in{
 	0%{
 		opacity: 0;
 	}
