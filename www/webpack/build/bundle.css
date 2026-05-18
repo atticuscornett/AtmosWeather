@@ -1000,6 +1000,10 @@ body.dark details[open] summary{
         width: 100%;
     }
 
+    .vertical-bottom.svelte-1ui026f {
+        vertical-align: bottom;
+    }
+
     .removeLocation.svelte-r6sbhz {
         background-color: #ff4d4d;
         color: white;

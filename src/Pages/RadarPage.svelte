@@ -4,12 +4,13 @@ import TabSlot from "../Layout/TabSlot.svelte";
 let { page = $bindable() } = $props();
 
 let settings = $state(JSON.parse(localStorage.getItem("atmos-settings")));
-let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+let locationNames = $state(JSON.parse(localStorage.getItem("weather-location-names")));
 let locationAvailable = $state(false);
 let radarFrame = $state(10);
 
 let map;
 let radarTransparency = $state(85);
+let outlookTransparency = $state(40);
 let radarTime = $state(new Date().toTimeString());
 let playbackEnabled = $state(true);
 
@@ -104,13 +105,22 @@ setInterval(radarAnimationHandler, 1500);
 
     </div>
     <div class="radarSettings" id="spc-select-container">
-        <label>Weather Outlook Type</label>
-        <br>
-        <select id="spc-select" onchange={changeWeatherOutlook}>
-            <option value="severe-outlook">Severe Weather Outlook</option>
-            <option value="fire-outlook">Fire Outlook</option>
-            <option value="hazards-outlook">Hazards Outlook</option>
-        </select>
+        <div class="radarSettings">
+        <label for="radar-opacity">Weather Outlook Type</label>
+            <br>
+            <select id="spc-select" onchange={changeWeatherOutlook}>
+                <option value="severe-outlook">Severe Weather Outlook</option>
+                <option value="fire-outlook">Fire Outlook</option>
+                <option value="hazards-outlook">Hazards Outlook</option>
+            </select>
+        </div>
+        <div class="radarSettings vertical-bottom">
+            <div>
+                <label for="outlook-opacity">Outlook Transparency</label>
+                <br>
+                <input type="range" oninput={()=>{setOutlookTransparency(outlookTransparency)}} min="1" max="100" bind:value={outlookTransparency} class="slider" id="outlook-opacity">
+            </div>
+        </div>
     </div>
     <h3>Jump To Location</h3>
     <div id="radar-locations">
@@ -177,5 +187,9 @@ setInterval(radarAnimationHandler, 1500);
 
     #radar-opacity {
         width: 100%;
+    }
+
+    .vertical-bottom {
+        vertical-align: bottom;
     }
 </style>

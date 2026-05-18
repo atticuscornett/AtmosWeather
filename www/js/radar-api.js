@@ -83,6 +83,13 @@ function setRadarTransparency(t){
     baseRadar.setOpacity(t/100);
 }
 
+function setOutlookTransparency(t){
+    if (spcOutlookLayer == null){
+        return;
+    }
+    spcOutlookLayer.setOpacity(t/100);
+}
+
 function radarJumpTo(index){
     radarMap.invalidateSize(true);
     if (index === -1) {
