@@ -19,7 +19,8 @@
                 window.appTheme = currentSettings["personalization"]["theme"];
             }
         }
-        document.body.setAttribute("class", window.appTheme);
+
+        document.getElementById("theme-css").setAttribute("href", `./css/${window.appTheme}-theme.css`);
     }
 
     setTimeout(refreshAppTheme, 100);

@@ -1,12 +1,6 @@
 body {
-	background-color: hsla(0,0%,99%,1.00);
+	background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
 }
-
-body.dark {
-	background-color: #222222;
-	color: white;
-}
-
 h1 {
 	font-family: Secular One, sans-serif;
 }

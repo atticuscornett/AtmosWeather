@@ -1,0 +1,12 @@
+:root {
+    /* Primary App Colors */
+
+    /* Background Gradient */
+    --background-start: #222222;
+    --background-end: #222222;
+    --background-angle: 90deg;
+
+    --main-text-color: white;
+
+
+}

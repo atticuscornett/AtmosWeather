@@ -99,11 +99,13 @@ NOTHING YET:
 	}
 }
 
+body {
+	background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
+}
 
 
 /* Dark Mode Colors */
 body.dark {
-	background-color: #222222;
 	color: white;
 
 

@@ -1,0 +1,13 @@
+:root {
+
+    /* Primary App Colors */
+
+    /* Background Gradient */
+    --background-start: hsla(0,0%,99%,1.00);
+    --background-end: hsla(0,0%,99%,1.00);
+    --background-angle: 90deg;
+
+    --main-text-color: black;
+
+
+}

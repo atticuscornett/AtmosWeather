@@ -2,26 +2,26 @@
 
 /* Logo Animations */
 
-body {
-	--startColor: white;
-	--backgroundStart: black;
-	--backgroundEnd: hsla(0,0%,99%,1.00);
-}
+/*body {*/
+/*	--startColor: white;*/
+/*	--backgroundStart: black;*/
+/*	--backgroundEnd: hsla(0,0%,99%,1.00);*/
+/*}*/
 
-body.dark {
-	--startColor: black;
-	--backgroundStart: hsla(0,0%,99%,1.00);
-	--backgroundEnd: black;
-}
+/*body.dark {*/
+/*	--startColor: black;*/
+/*	--backgroundStart: hsla(0,0%,99%,1.00);*/
+/*	--backgroundEnd: black;*/
+/*}*/
 
 
 
 @keyframes logoBackgroundAnim{
 	0% {
-		background-color: var(--backgroundStart);
+		background: linear-gradient(var(--background-angle), var(--background-end), var(--background-start));
 	}
 	100%{
-		background-color: var(--backgroundEnd);
+		background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
 	}
 }
 
