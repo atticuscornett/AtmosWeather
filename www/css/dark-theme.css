@@ -18,6 +18,10 @@
     --nav-button-background: hsla(0,0%,15%,1.00);;
     --nav-button-selected: #111111;
 
+    /* Editor Buttons */
+    --editor-background: darkslategray;
+    --editor-text-color: white;
+
     /* Location List Colors */
     --default-background: blue;
     --error-background: darkslategray;

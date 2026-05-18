@@ -496,7 +496,7 @@ select{
     }
 
     .popup-container.svelte-e5rh8a {
-        background-color: white;
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         width: 80%;
         max-height: 80vh;
         margin: 0 auto;
@@ -509,15 +509,11 @@ select{
         overflow: auto;
     }
 
-    body.dark .popup-container.svelte-e5rh8a{
-        background-color: #111111;
-    }
-
     button.svelte-e5rh8a {
         width: 100%;
         cursor: pointer;
-        background-color: darkslategray;
-        color: white;
+        background-color: var(--editor-background);
+        color: var(--editor-text-color);
         border: none;
         border-radius: 7px;
         font-size: 20px;
@@ -820,11 +816,11 @@ select{
         margin-bottom: 10px;
         flex: 0.5;
         min-width: auto;
-        background-color: darkslategray;
+        background-color: var(--editor-background);
         border: white dashed 5px;
         margin-right: 10px;
         border-radius: 7px;
-        color: white;
+        color: var(--editor-text-color);
         font-weight: bold;
         min-height: 75px;
         cursor: pointer;
@@ -842,7 +838,7 @@ select{
     }
 
     .popup-container.svelte-oghyk8 {
-        background-color: white;
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         width: 80%;
         max-height: 80vh;
         margin: 0 auto;
@@ -855,15 +851,11 @@ select{
         overflow: auto;
     }
 
-    body.dark .popup-container.svelte-oghyk8{
-        background-color: #111111;
-    }
-
     button.svelte-oghyk8 {
         width: 100%;
         cursor: pointer;
-        background-color: darkslategray;
-        color: white;
+        background-color: var(--editor-background);
+        color: var(--editor-text-color);
         border: none;
         border-radius: 7px;
         font-size: 20px;
@@ -1019,31 +1011,21 @@ select{
         max-height: 10vh;
     }
 
-	body.dark #welcome-window-native.svelte-cmi35s{
-		z-index: 100;
-		position: absolute;
-		background-color: #222222;
-		min-width: 100%;
-		min-height: 100%;
-		top: 0;
-		left: 0;
-	}
-
 	#welcome-window-native.svelte-cmi35s{
 		z-index: 99;
 		position: absolute;
-		background-color: black;
+		background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
 		min-width: 100%;
 		min-height: 100%;
 		top: 0;
 		left: 0;
-		color: white;
+		color: var(--primary-text-color);
 	}
 
 	#welcome-button-native.svelte-cmi35s{
 		border: none;
-		background-color: dodgerblue;
-		color: white;
+		background-color: var(--secondary-text-color);
+		color: var(--primary-text-color);
 		font-family: Secular One, sans-serif;
 		font-size: 25px;
 		border-radius: 7px;
