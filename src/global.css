@@ -49,6 +49,7 @@ select{
 
 .noalerts.noalerts{
 	background-color: var(--no-alerts-background) !important;
+	color: var(--no-alerts-text-color) !important;
 }
 
 .watch.watch{
@@ -56,6 +57,7 @@ select{
 	animation-name: watch-anim !important;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
+	color: var(--watch-text-color) !important;
 }
 
 .warning.warning{
@@ -63,6 +65,7 @@ select{
 	animation-name: warning-anim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 2s !important;
+	color: var(--warning-text-color) !important;
 }
 
 .other.other{
@@ -70,4 +73,5 @@ select{
 	animation-name: other-anim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
+	color: var(--statement-text-color) !important;
 }

@@ -1,5 +1,4 @@
 :root {
-
     /* Primary App Colors */
 
     /* Background Gradient */
@@ -13,7 +12,15 @@
     --accordian-border-color: black;
     --accordian-shadow-color: #898989;
 
+    --loading-dots-color: #186bbf;
+
     /* Location List Colors */
+    --default-background: blue;
+    --error-background: darkslategray;
+    --current-location-background: cadetblue;
+    --location-text-color: white;
+    --box-shadow-color: #898989;
+
     --no-alerts-background: dodgerblue;
     --no-alerts-text-color: white;
 
@@ -28,6 +35,4 @@
     --statement-background: grey;
     --statement-background-secondary: slategray;
     --statement-text-color: white;
-
-
 }

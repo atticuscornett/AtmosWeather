@@ -30,7 +30,7 @@
                 image = "current-location";
 
                 if (locationData.alert === "noalerts"){
-                    barClass = "currentloc";
+                    barClass = "current-loc";
                 }
             }
 
@@ -63,11 +63,11 @@
 
 {#if locationData && (!locationData.hourly || !locationData.hourly[0])}
     {#if locationData.name === "Current Location" && locationData.denied}
-        <div class="location currentloc">
-            <div class="imgContainer">
+        <div class="location current-loc">
+            <div class="img-container">
                 <img alt="Location" src="img/current-location.svg">
             </div>
-            <div class="locationView">
+            <div class="location-view">
                 <h2>{locationData.name}</h2>
                 <h3>Please allow location permission or disable this in app settings.</h3>
             </div>
@@ -75,10 +75,10 @@
         <br>
     {:else}
         <div class="location error">
-            <div class="imgContainer">
-                <img class="errorImg" alt="Location Error" src="img/error.svg">
+            <div class="img-container">
+                <img class="error-img" alt="Location Error" src="img/error.svg">
             </div>
-            <div class="locationView">
+            <div class="location-view">
                 <h2>{locationData.name}</h2>
                 <h3>Loading location data...</h3>
             </div>
@@ -88,10 +88,10 @@
 {:else}
     {#if locationData && locationData.name}
         <div class="location {barClass}" onclick={()=>{page = "location-" + locationData.name}}>
-            <div class="imgContainer">
+            <div class="img-container">
                 <img alt="Weather Status - {image}" src="img/{image}.svg">
             </div>
-            <div class="locationView">
+            <div class="location-view">
                 <h2>{locationData.name}</h2>
                 <h3>{info}&emsp;(Tap for more info.)</h3>
             </div>
@@ -102,49 +102,49 @@
 
 
 <style>
-    @keyframes loadAnim{
-        0%{
+    @keyframes load-anim {
+        0% {
             transform: rotate(0deg);
         }
-        100%{
+        100% {
             transform: rotate(360deg);
         }
     }
 
-   .imgContainer{
-       display: inline-block;
-       height: inherit;
-       vertical-align: top;
-       margin-top:35px;
-   }
+    .img-container {
+        display: inline-block;
+        height: inherit;
+        vertical-align: top;
+        margin-top: 35px;
+    }
 
-   .error{
-       background-color: darkslategray !important;
-   }
+    .error {
+        background-color: var(--error-background) !important;
+    }
 
-    .currentloc {
-        background-color: cadetblue !important;
+    .current-loc {
+        background-color: var(--current-location-background) !important;
     }
 
 
-   .errorImg {
-       vertical-align: center;
-       animation: loadAnim infinite 2s;
-   }
+    .error-img {
+        vertical-align: center;
+        animation: load-anim infinite 2s;
+    }
 
-   .statusImg {
-       vertical-align: center;
-   }
+    .status-img {
+        vertical-align: center;
+    }
 
-   .locationView {
-       display:inline-block;
-       margin-left:8px;
-       margin-right:8px;
-   }
+    .location-view {
+       display: inline-block;
+       margin-left: 8px;
+       margin-right: 8px;
+    }
 
     .location{
-        background-color: blue;
-        color: white;
+        background-color: var(--default-background);
+        color: var(--location-text-color);
         border-radius: 7px;
         padding-top: 1px;
         padding-bottom: 1px;
@@ -153,7 +153,7 @@
         -mox-box-sizing: border-box;
         box-sizing: border-box;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     h3 {
