@@ -6,7 +6,7 @@ setTimeout(() => {
 let updateFiles = false;
 
 window.atmosVersion = "3.0.6";
-window.atmosUpdated = "4-10-2026";
+window.atmosUpdated = "5-17-2026";
 window.atmosUpdateTitle = "Atmos Weather v3.0.6 is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>

@@ -17,7 +17,7 @@
   "license": "GPL-3.0 License",
   "devDependencies": {
     "@capacitor/assets": "^3.0.4",
-    "@capacitor/cli": "^7.0.0",
+    "@capacitor/cli": "^8.0.0",
     "cordova-plugin-nativestorage": "github:TheCocoaProject/cordova-plugin-nativestorage",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
@@ -27,10 +27,10 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "@capacitor/android": "^7.0.0",
-    "@capacitor/app": "^7.0.0",
-    "@capacitor/core": "^7.0.0",
-    "@capacitor/device": "^7.0.0",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/device": "^8.0.0",
     "@turf/turf": "^6.5.0",
     "cordova-plugin-geolocation": "^5.0.0"
   }
