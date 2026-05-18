@@ -54,4 +54,8 @@
     --statement-background: grey;
     --statement-background-secondary: slategray;
     --statement-text-color: white;
+
+    /* Widget-specific Colors */
+    --polutant-background-color: #555;
+    --polutant-text-color: white;
 }

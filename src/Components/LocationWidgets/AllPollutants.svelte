@@ -14,7 +14,7 @@
     });
 </script>
 
-<div class="centerContainer">
+<div class="center-container">
     <img src="img/windy.svg" alt="Air Quality" style="width: 50px; height: 50px;">
     <h2>All Pollutants</h2>
     <h3>AQI: {locationData.AQI}</h3>
@@ -73,15 +73,15 @@
         margin-bottom: 0;
     }
 
-    .centerContainer {
+    .center-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #555;
+        background: var(--polutant-background-color);
         border-radius: 7px;
         margin-bottom: 15px;
         height: calc(100% - 15px);
-        color: white;
+        color: var(--polutant-text-color);
         flex-direction: column;
         padding-bottom: 15px;
     }

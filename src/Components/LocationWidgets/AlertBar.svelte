@@ -7,10 +7,10 @@
 
 {#if status !== "noalerts"}
     <div class="location {status}">
-        <div class="imgContainer">
+        <div class="img-container">
             <img src="img/{status === 'warning' ? 'warning' : 'watch'}.svg" alt="Alert Symbol">
         </div>
-        <div class="alertContainer">
+        <div class="alert-container">
             {#if status === "warning"}
                 <h1>This location has active warnings!</h1>
             {/if}
@@ -38,14 +38,14 @@
 {/if}
 
 <style>
-    .imgContainer {
+    .img-container {
         display: inline-block;
         height: inherit;
         vertical-align: top;
         margin-top:20px;
     }
 
-    .alertContainer {
+    .alert-container {
         display:inline-block;
         margin-left:8px;
         margin-right: 8px;
@@ -64,8 +64,8 @@
     }
 
     .location{
-        background-color: blue;
-        color: white;
+        background-color: var(--default-background);
+        color: var(--location-text-color);
         border-radius: 7px;
         padding-top: 1px;
         padding-bottom: 1px;
@@ -74,7 +74,7 @@
         -mox-box-sizing: border-box;
         box-sizing: border-box;
         cursor: pointer;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
         margin-right: 10px;
     }
 </style>
