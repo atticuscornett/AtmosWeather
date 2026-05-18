@@ -80,13 +80,21 @@
         page = "locations";
         syncFiles();
     }
+
+    let root = document.documentElement;
+    let navIconColor = $state("");
+
+    setTimeout(()=>{
+        let navIconProperty = getComputedStyle(root).getPropertyValue('--nav-icon-color').trim();
+        navIconColor = navIconProperty === "white" || navIconProperty === "black" ? "-" + navIconProperty : "";
+    }, 500);
 </script>
 
 <TabSlot name="search" bind:page={page}>
     <h1>Location Search</h1>
     <h6>Enter a city name or a zip code.</h6>
     <input id="location-search" bind:value={searchQuery} onkeydown={handleEnter}>
-    <img alt="Search Icon" id="search-button" src="img/search.svg"  onclick={locationSearch}>
+    <img alt="Search Icon" id="search-button" src={"img/search" + navIconColor + ".svg"}  onclick={locationSearch}>
     <h6>Powered by the <a href="https://nominatim.org/" target="_blank">Nominatim API</a></h6>
     <br><br><br>
     <div id="search-results">

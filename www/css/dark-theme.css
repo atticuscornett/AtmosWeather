@@ -89,4 +89,7 @@
 
     /* Current options: white, black */
     --graph-icon-color: white;
+
+    /* Current options: white, black, dodgerblue */
+    --nav-icon-color: dodgerblue;
 }
