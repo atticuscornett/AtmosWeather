@@ -247,10 +247,19 @@
             const reader = new FileReader();
 
             reader.onload = (e) => {
-                if (importTheme(String(e.target.result))){
-                    allSettings["personalization"]["theme"] = "custom";
-                    allSettings["personalization"]["custom-theme"] = String(e.target.result);
-                    saveSettings();
+                try {
+                    if (importTheme(String(e.target.result))) {
+                        themeChanged = true;
+                        allSettings["personalization"]["theme"] = "custom";
+                        allSettings["personalization"]["custom-theme"] = String(e.target.result);
+                        saveSettings();
+                        themeError = false;
+                    }
+                    else {
+                        themeError = true;
+                    }
+                } catch (error) {
+                    themeError = true;
                 }
             };
 
@@ -259,6 +268,7 @@
     }
 
     let themeChanged = $state(false);
+    let themeError = $state(false);
 
 
     ensureSettingsSet();
@@ -306,6 +316,13 @@
                     </div>
                 {/if}
                 <h2>Personalization</h2>
+                {#if themeChanged}
+                    <div class="reload-div">
+                        <h2>To fully load the new theme, please reload the app.</h2>
+                        <button class="reload-button" onclick={()=>{location.reload()}}>Reload App Now</button>
+                    </div>
+                    <br>
+                {/if}
                 <label for="setting-app-theme">App Theme</label>
                 <br>
                 <select id="setting-app-theme" onchange={()=>{themeChanged = true;}} bind:value={allSettings["personalization"]["theme"]}>
@@ -320,11 +337,10 @@
                 <br>
                 <input type="file" id="setting-custom-app-theme" accept=".json" bind:value={fileTest} onchange={importCustomTheme}/>
                 <h4>Only import themes from trusted sources.</h4>
-                <br>
-                {#if themeChanged}
-                    To fully load the new theme, please reload the app.
+                {#if themeError}
+                    <h4>There was an error importing that theme.</h4>
                 {/if}
-
+                <br>
                 <label for="setting-page-transition-duration">Page Transition Duration</label>
                 <br>
                 <input type="range" min="0" max="3000" step="100" id="setting-page-transition-duration"
@@ -558,5 +574,23 @@
 
     .vertical-center {
         vertical-align: center;
+    }
+
+    .reload-div {
+        background-color: white;
+        border-radius: 5px;
+        color: black;
+        padding: 15px;
+    }
+
+    .reload-button {
+        background-color: dodgerblue;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Secular One, sans-serif;
     }
 </style>
