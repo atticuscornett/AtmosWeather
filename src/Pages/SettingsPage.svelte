@@ -340,6 +340,7 @@
                 <br>
                 <input type="file" id="setting-custom-app-theme" accept=".json" bind:value={fileTest} onchange={importCustomTheme}/>
                 <h4>Only import themes from trusted sources.</h4>
+                <h4><a href="https://github.com/atticuscornett/AtmosWeather/blob/main/THEMES.md" target="_blank">More about custom themes</a></h4>
                 {#if themeError}
                     <h4>There was an error importing that theme.</h4>
                 {/if}

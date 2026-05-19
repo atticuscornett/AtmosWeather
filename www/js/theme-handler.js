@@ -37,7 +37,7 @@ function importTheme(theme){
             return false;
         }
 
-        if (!(/^[A-Za-z0-9(), \-#]*$/.test(themeData[key]))) {
+        if (!(/^[A-Za-z0-9(), \-#.%]*$/.test(themeData[key]))) {
             console.log(`Malformed theme: Invalid data for property ${key} (Invalid character)`);
             return false;
         }
