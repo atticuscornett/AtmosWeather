@@ -330,6 +330,7 @@
                     <option value="dark">Dark Theme</option>
                     <option value="light">Light Theme</option>
                     <option value="forest">Forest Theme</option>
+                    <option value="midnight">Midnight Theme</option>
                     <option value="custom">Custom Theme</option>
                 </select>
                 <br>

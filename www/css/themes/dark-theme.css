@@ -29,7 +29,7 @@
     --negative-button-text: white;
 
     /* Navigation Buttons */
-    --nav-button-background: hsla(0,0%,15%,1.00);;
+    --nav-button-background: hsla(0,0%,15%,1.00);
     --nav-button-selected: #111111;
 
     /* Editor Buttons */

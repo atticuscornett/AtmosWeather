@@ -10,7 +10,7 @@
 
     --secondary-text-color: green;
     --positive-button: green;
-    --add-location-button: green;
+    --add-location-button: hsla(120, 100%, 25%, 0.7);
     --no-alerts-background: darkgreen;
     --box-shadow-color: green;
 
