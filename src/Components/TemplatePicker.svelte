@@ -54,7 +54,7 @@
     }
 
     .popup-container {
-        background-color: white;
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         width: 80%;
         max-height: 80vh;
         margin: 0 auto;
@@ -67,15 +67,11 @@
         overflow: auto;
     }
 
-    :global(body.dark) .popup-container{
-        background-color: #111111;
-    }
-
     button {
         width: 100%;
         cursor: pointer;
-        background-color: darkslategray;
-        color: white;
+        background-color: var(--editor-background);
+        color: var(--editor-text-color);
         border: none;
         border-radius: 7px;
         font-size: 20px;

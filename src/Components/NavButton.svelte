@@ -5,10 +5,18 @@
         selected = navName;
         page = navName;
     }
+
+    let root = document.documentElement;
+    let navIconColor = $state("");
+
+    setTimeout(()=>{
+        let navIconProperty = getComputedStyle(root).getPropertyValue('--nav-icon-color').trim();
+        navIconColor = navIconProperty === "white" || navIconProperty === "black" ? "-" + navIconProperty : "";
+    }, 500);
 </script>
 
 <div id="{navName}-nav" class={selected === navName ? "selected-nav" : ""} onclick={navigate}>
-    <img src="img/{navName}.svg" class="nav-icon" alt={navName}>
+    <img src={"img/" + navName + navIconColor + ".svg"} class="nav-icon" alt={navName}>
 </div>
 
 <style>
@@ -24,12 +32,7 @@
     }
 
     .selected-nav {
-        background-color: #EEEEEE;
-        border-radius: 7px;
-    }
-
-    :global(body.dark) .selected-nav{
-        background-color: #111111;
+        background-color: var(--nav-button-selected);
         border-radius: 7px;
     }
 </style>

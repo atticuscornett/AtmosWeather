@@ -59,12 +59,13 @@
         text-align: center;
         padding-top: 15px;
         padding-bottom: 15px;
-        height: calc(100% - 30px);
+        height: calc(100% - 35px);
         display: flex;
         justify-content: center;
         align-items: center;
         margin-bottom: 15px;
         flex-direction: column;
+        border: white 2px solid;
     }
 
     h3 {

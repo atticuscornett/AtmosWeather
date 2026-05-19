@@ -19,7 +19,21 @@
                 window.appTheme = currentSettings["personalization"]["theme"];
             }
         }
-        document.body.setAttribute("class", window.appTheme);
+
+        if (currentSettings["personalization"]["theme"] === "custom") {
+            if (currentSettings["personalization"]["custom-theme"]) {
+                importTheme(currentSettings["personalization"]["custom-theme"]);
+            }
+        }
+
+        document.getElementById("theme-css").setAttribute("href", `./css/themes/${window.appTheme}-theme.css`);
+
+        setTimeout(()=>{
+            let root = document.documentElement;
+            let fallbackTheme = getComputedStyle(root).getPropertyValue('--fallback-theme').trim();
+            fallbackTheme = fallbackTheme === "black" ? "dark" : "light";
+            document.getElementById("fallback-theme-css").setAttribute("href", `./css/themes/${fallbackTheme}-theme.css`);
+        }, 100)
     }
 
     setTimeout(refreshAppTheme, 100);
@@ -50,12 +64,8 @@
     #app-nav{
         height: 8%;
         width: 100%;
-        background-color: white;
+        background-color: var(--nav-button-background);
         cursor: pointer;
         display: flex;
     }
-
-    :global(body.dark) #app-nav{
-         background-color: hsla(0,0%,15%,1.00);
-     }
 </style>

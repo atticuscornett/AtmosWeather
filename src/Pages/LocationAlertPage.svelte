@@ -110,7 +110,7 @@
     #alert-map {
         height:40%;
         border-radius:7px;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
     }
 
     #alert-details {

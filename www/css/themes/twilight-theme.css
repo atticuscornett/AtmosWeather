@@ -1,0 +1,34 @@
+:root {
+    /*
+    All themes (other than the dark and light themes) should declare
+    a fallback theme (black or white) from which default values are pulled.
+     */
+    --fallback-theme: black;
+
+    --background-start: #000027;
+    --background-end: #000017;
+
+    --primary-text-color: white;
+    --secondary-text-color: dodgerblue;
+    --positive-button: #080887;
+    --add-location-button: hsla(240, 100%, 9%, 0.5);
+
+    --no-alerts-background: #080887;
+    --box-shadow-color: #080887;
+
+    --input-accent: darkblue;
+
+    --nav-button-background: #020233;
+    --nav-button-selected: #020242;
+
+    --loading-dots-color: #020233;
+
+    --editor-background: #080887;
+
+    --polutant-background-color: #080887;
+    --sunrise-sunset-background-color: #080887;
+
+    --accordian-border-color: white;
+
+    --nav-icon-color: white;
+}

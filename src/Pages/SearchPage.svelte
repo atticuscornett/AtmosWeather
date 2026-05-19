@@ -80,20 +80,28 @@
         page = "locations";
         syncFiles();
     }
+
+    let root = document.documentElement;
+    let navIconColor = $state("");
+
+    setTimeout(()=>{
+        let navIconProperty = getComputedStyle(root).getPropertyValue('--nav-icon-color').trim();
+        navIconColor = navIconProperty === "white" || navIconProperty === "black" ? "-" + navIconProperty : "";
+    }, 500);
 </script>
 
 <TabSlot name="search" bind:page={page}>
     <h1>Location Search</h1>
     <h6>Enter a city name or a zip code.</h6>
     <input id="location-search" bind:value={searchQuery} onkeydown={handleEnter}>
-    <img alt="Search Icon" id="search-button" src="img/search.svg"  onclick={locationSearch}>
+    <img alt="Search Icon" id="search-button" src={"img/search" + navIconColor + ".svg"}  onclick={locationSearch}>
     <h6>Powered by the <a href="https://nominatim.org/" target="_blank">Nominatim API</a></h6>
     <br><br><br>
     <div id="search-results">
         {#each searchNames as name, i}
             <div class="searchResult" onclick={() => selectResult(i)}>
-                <img alt="Location Pin" class="locationIcon" src="img/location-pin.svg">
-                <h1 class="resultTitle">{name}</h1>
+                <img alt="Location Pin" class="location-icon" src="img/location-pin.svg">
+                <h1 class="result-title">{name}</h1>
             </div>
             <br>
         {/each}
@@ -110,22 +118,22 @@
         cursor: pointer;
     }
 
-    .locationIcon {
-        float:left;
+    .location-icon {
+        float: left;
         vertical-align: text-bottom;
         width: 35px;
         margin-left: 10px;
     }
 
-    .resultTitle {
+    .result-title {
         margin-left: 40px;
     }
 
     .searchResult{
         display: flex;
         align-items: center;
-        background-color: dodgerblue;
-        color: white;
+        background-color: var(--no-alerts-background);
+        color: var(--no-alerts-text-color);
         border: none;
         border-radius: 7px;
         padding: 20px 0;

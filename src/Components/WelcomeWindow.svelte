@@ -8,12 +8,12 @@
     let welcomeTitle = $state("Welcome To Atmos Weather");
     let welcomeBody = $state("Atmos Weather is the ultimate lightweight weather forecast and alert program.");
     let welcomeImage = $state("img/sunny-day.svg");
-    let welcomeStyle = $state("animation: simpleFadeIn 2s; animation-fill-mode: forwards;");
+    let welcomeStyle = $state("animation: simple-fade-in 2s; animation-fill-mode: forwards;");
 
     function showNextIntro(){
-        welcomeStyle = "animation: simpleFadeOut 0.5s; animation-fill-mode: forwards;";
+        welcomeStyle = "animation: simple-fade-out 0.5s; animation-fill-mode: forwards;";
         setTimeout(function(){
-            welcomeStyle = "animation: simpleFadeIn 0.5s; animation-fill-mode: forwards;";
+            welcomeStyle = "animation: simple-fade-in 0.5s; animation-fill-mode: forwards;";
             if (welcomeTitle === "Welcome To Atmos Weather"){
                 welcomeTitle = "Prepare For The Day Ahead";
                 welcomeBody = "With forecast notifications for rain, storms, and severe weather, never get caught unprepared again.";
@@ -40,7 +40,7 @@
                 welcomeImage = "img/fast-loading.svg";
             }
             else{
-                welcomeStyle = "animation: simpleFadeOut 2s; animation-fill-mode: forwards;";
+                welcomeStyle = "animation: simple-fade-out 2s; animation-fill-mode: forwards;";
                 localStorage.setItem("run-before", "true");
 				setTimeout(function(){
 					showWelcome = false;
@@ -82,31 +82,21 @@
         max-height: 10vh;
     }
 
-	:global(body.dark) #welcome-window-native{
-		z-index: 100;
-		position: absolute;
-		background-color: #222222;
-		min-width: 100%;
-		min-height: 100%;
-		top: 0;
-		left: 0;
-	}
-
 	#welcome-window-native{
 		z-index: 99;
 		position: absolute;
-		background-color: black;
+		background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
 		min-width: 100%;
 		min-height: 100%;
 		top: 0;
 		left: 0;
-		color: white;
+		color: var(--primary-text-color);
 	}
 
 	#welcome-button-native{
 		border: none;
-		background-color: dodgerblue;
-		color: white;
+		background-color: var(--positive-button);
+		color: var(--positive-button-text);
 		font-family: Secular One, sans-serif;
 		font-size: 25px;
 		border-radius: 7px;

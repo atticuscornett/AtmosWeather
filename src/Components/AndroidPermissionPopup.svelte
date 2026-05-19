@@ -93,7 +93,7 @@
     #android-permission-setup{
         z-index: 99;
         position: absolute;
-        background-color: hsla(0,0%,99%,1.00);
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         width: 100%;
         height: 100%;
         top: 0;
@@ -103,7 +103,7 @@
 
     #android-permission-container {
         padding: 15px;
-        background-color: hsla(0,0%,99%,1.00);
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         text-align: center;
     }
 
@@ -121,13 +121,5 @@
 
     .permission-button:disabled {
         background-color: grey;
-    }
-
-    :global(body.dark) #android-permission-setup {
-        background-color: #222222;
-    }
-
-    :global(body.dark) #android-permission-container {
-        background-color: #222222;
     }
 </style>

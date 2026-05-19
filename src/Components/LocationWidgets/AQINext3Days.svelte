@@ -44,7 +44,7 @@
     getHighestAQIs();
 </script>
 
-<div class="centerContainer">
+<div class="center-container">
     <h1>Highest AQI Next 3 Days</h1>
 
     <h2>Today: {aqiData[0]}</h2>
@@ -53,12 +53,12 @@
 </div>
 
 <style>
-    .centerContainer {
-        background: #555;
+    .center-container {
+        background: var(--polutant-background-color);
         border-radius: 7px;
         margin-bottom: 15px;
         height: calc(100% - 30px);
-        color: white;
+        color: var(--polutant-text-color);
         text-align: center;
         padding-top: 15px;
         padding-bottom: 15px;

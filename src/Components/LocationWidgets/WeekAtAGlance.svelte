@@ -93,9 +93,11 @@
                 }
             }
 
-            let colorScheme = window.appTheme;
-            forecastDictionary["imageSrc"] = colorScheme === "dark" ? "img/"+forecastDictionary["image"]+".svg"
-                : "img/"+forecastDictionary["image"]+"-adaptive.svg";
+            let root = document.documentElement;
+            let graphImageColor = getComputedStyle(root).getPropertyValue('--graph-icon-color').trim();
+
+            forecastDictionary["imageSrc"] = graphImageColor === "white" ?
+                "img/"+forecastDictionary["image"]+".svg" : "img/"+forecastDictionary["image"]+"-adaptive.svg";
 
             tempDailyForecast.push(forecastDictionary);
         }
@@ -139,15 +141,11 @@
     .daily-look {
         display: inline-block;
         margin-right: 20px;
-        border: black 5px solid;
+        border: var(--primary-text-color) 5px solid;
         border-radius: 7px;
         flex: 0 0 0;
         text-align: center;
         padding: 15px;
-    }
-
-    :global(body.dark) .daily-look {
-        border: white 5px solid;
     }
 
     h3, h4, h5 {

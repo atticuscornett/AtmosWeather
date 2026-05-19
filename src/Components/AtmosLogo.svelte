@@ -40,10 +40,10 @@
 </div>
 
 <style>
-    .logo-container{
-        position:absolute;
-        top:50%;
-        left:50%;
+    .logo-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
         white-space: nowrap;
         font-size: 30px;
@@ -51,45 +51,46 @@
 
     #weatherLogo {
         text-align: center;
-        animation: delayedFadeIn 2s;
+        animation: delayed-fade-in 2s;
         position: relative;
         bottom: 70px;
         font-family: Secular One, sans-serif;
+		color: var(--primary-text-color);
     }
 
 	#atmos-logo.fade {
-		animation: fadeOut 2s !important;
+		animation: fade-out 2s !important;
 		animation-fill-mode: forwards !important;
 	}
 
-	@keyframes logoAnim{
+	@keyframes logo-anim{
 		0%{
 			font-size: 10000px;
 			padding-left: 100px;
 			padding-right: 100px;
-			color: var(--startColor);
+			color: var(--primary-text-color);
 		}
 		49%{
 			font-size: 30px;
 			padding-left: 100px;
 			padding-right: 100px;
-			color: var(--startColor);
+			color: var(--primary-text-color);
 		}
 		50%{
-			color: var(--startColor);
+			color: var(--primary-text-color);
 		}
 		100%{
 			padding-left: 10px;
 			padding-right: 10px;
-			color: dodgerblue;
+			color: var(--secondary-text-color);
 		}
 	}
 
-	#atmos-logo{
+	#atmos-logo {
 		z-index: 999;
 		position: absolute;
 		overflow: hidden;
-		background-color: hsla(0,0%,99%,1.00);
+		background-color: var(--background-start);
 		width: 100%;
 		height: 100%;
 		top: 0;
@@ -100,32 +101,9 @@
 	.logoLetter{
 		font-family: Secular One, sans-serif;
 		display: inline;
-		animation: logoAnim 2s;
+		animation: logo-anim 2s;
 		padding-left: 10px;
 		padding-right: 10px;
-		color: dodgerblue;
+		color: var(--secondary-text-color);
 	}
-
-	/* Dark Mode Background */
-	:global(body.dark) #weatherLogo {
-			color: white;
-	}
-
-	:global(body.dark) #atmos-logo{
-			z-index: 999;
-			position: absolute;
-			overflow: hidden;
-			background-color: black;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			animation: logoBackgroundAnim 2s;
-	}
-
-	:global(body.dark) #atmos-logo.fade {
-		animation: fadeOut 2s !important;
-		animation-fill-mode: forwards !important;
-	}
-
 </style>

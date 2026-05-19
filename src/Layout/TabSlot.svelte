@@ -19,7 +19,7 @@
         if (page === name) {
             // Animate onto screen after delay
             setTimeout(function(){
-                document.getElementById("tab-" + name).style.animation = `onRight ${duration}`;
+                document.getElementById("tab-" + name).style.animation = `on-right ${duration}`;
                 document.getElementById("tab-" + name).hidden = false;
 
                 // Run page open function
@@ -29,7 +29,7 @@
             }, delay);
         } else {
             // Animate off the screen
-            document.getElementById("tab-" + name).style.animation = `offLeft ${duration}`;
+            document.getElementById("tab-" + name).style.animation = `off-left ${duration}`;
 
             setTimeout(function(){
                 document.getElementById("tab-" + name).style.animation = "";

@@ -1,12 +1,7 @@
 body {
-	background-color: hsla(0,0%,99%,1.00);
+	background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
+	color: var(--primary-text-color);
 }
-
-body.dark {
-	background-color: #222222;
-	color: white;
-}
-
 h1 {
 	font-family: Secular One, sans-serif;
 }
@@ -16,19 +11,19 @@ h2, h3, h4, h5, h6 {
 }
 
 details{
-	font-family: Secular One;
+	font-family: Secular One, sans-serif;
 	font-size: 20px;
-	border: black solid;
+	border: var(--accordian-border-color) solid;
 	padding: 10px;
 	border-radius: 7px;
 	margin-bottom: 15px;
-	box-shadow: 0px 0px 7px #898989;
+	box-shadow: 0 0 7px var(--accordian-shadow-color);
 }
 
 details[open] summary{
 	padding-bottom: 10px;
 	margin-bottom: 10px;
-	border-bottom: black solid;
+	border-bottom: var(--accordian-border-color) solid;
 }
 
 summary{
@@ -37,7 +32,7 @@ summary{
 }
 
 a{
-	color: dodgerblue;
+	color: var(--secondary-text-color);
 }
 
 label{
@@ -51,36 +46,36 @@ select{
 	margin-bottom: 8px;
 }
 
-body.dark details{
-	border: white solid;
-	border-radius: 7px;
-	box-shadow: 0px 0px 7px #898989;
-}
-body.dark details[open] summary{
-	border-bottom: white solid;
-}
 
 .noalerts.noalerts{
-	background-color: dodgerblue !important;
+	background-color: var(--no-alerts-background) !important;
+	color: var(--no-alerts-text-color) !important;
 }
 
 .watch.watch{
-	background-color: darkgoldenrod;
-	animation-name: watchAnim !important;
+	background-color: var(--watch-background);
+	animation-name: watch-anim !important;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
+	color: var(--watch-text-color) !important;
 }
 
 .warning.warning{
-	background-color: darkred;
-	animation-name: warningAnim;
+	background-color: var(--warning-background);
+	animation-name: warning-anim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 2s !important;
+	color: var(--warning-text-color) !important;
 }
 
 .other.other{
-	background-color: grey;
-	animation-name: otherAnim;
+	background-color: var(--statement-background);
+	animation-name: other-anim;
 	animation-iteration-count: infinite !important;
 	animation-duration: 5s !important;
+	color: var(--statement-text-color) !important;
+}
+
+input {
+	accent-color: var(--input-accent);
 }

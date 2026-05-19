@@ -5,7 +5,10 @@
 
     let chartList = $derived(locationData["hourly"][0]);
 
-    const humidColorGradient = chroma.scale(["white", "yellow"]);
+    const root = document.documentElement;
+    const startGradientColor = getComputedStyle(root).getPropertyValue('--humidity-graph-start').trim();
+    const endGradientColor = getComputedStyle(root).getPropertyValue('--humidity-graph-end').trim();
+    const humidColorGradient = chroma.scale([startGradientColor, endGradientColor]);
 
     let labelCallback = (item) =>`${item.dataset.label}: ${item.formattedValue}%`;
 

@@ -86,16 +86,9 @@
     }
 
     .clear-border{
-        border: black solid;
+        border: var(--primary-text-color) solid;
         border-radius: 7px;
-        box-shadow: 0 0 7px #898989;
-        padding: 0 20px 0 20px;
-    }
-
-    :global(body.dark) .clear-border{
-        border: white solid;
-        border-radius: 7px;
-        box-shadow: 0 0 7px #898989;
+        box-shadow: 0 0 7px var(--box-shadow-color);
         padding: 0 20px 0 20px;
     }
 </style>

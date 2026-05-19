@@ -129,11 +129,11 @@
         margin-bottom: 10px;
         flex: 0.5;
         min-width: auto;
-        background-color: darkslategray;
+        background-color: var(--editor-background);
         border: white dashed 5px;
         margin-right: 10px;
         border-radius: 7px;
-        color: white;
+        color: var(--editor-text-color);
         font-weight: bold;
         min-height: 75px;
         cursor: pointer;

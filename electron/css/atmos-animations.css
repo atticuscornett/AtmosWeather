@@ -2,66 +2,66 @@
 
 /* Logo Animations */
 
-body {
-	--startColor: white;
-	--backgroundStart: black;
-	--backgroundEnd: hsla(0,0%,99%,1.00);
-}
+/*body {*/
+/*	--startColor: white;*/
+/*	--backgroundStart: black;*/
+/*	--backgroundEnd: hsla(0,0%,99%,1.00);*/
+/*}*/
 
-body.dark {
-	--startColor: black;
-	--backgroundStart: hsla(0,0%,99%,1.00);
-	--backgroundEnd: black;
-}
+/*body.dark {*/
+/*	--startColor: black;*/
+/*	--backgroundStart: hsla(0,0%,99%,1.00);*/
+/*	--backgroundEnd: black;*/
+/*}*/
 
 
 
-@keyframes logoBackgroundAnim{
+@keyframes logo-background-anim {
 	0% {
-		background-color: var(--backgroundStart);
+		background: linear-gradient(var(--background-angle), var(--background-end), var(--background-start));
 	}
 	100%{
-		background-color: var(--backgroundEnd);
+		background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
 	}
 }
 
-@keyframes watchAnim{
+@keyframes watch-anim {
 	0%{
-		background-color: darkgoldenrod;
+		background-color: var(--watch-background);
 	}
 	50%{
-		background-color: goldenrod;
+		background-color: var(--watch-background-secondary);
 	}
 	100%{
-		background-color: darkgoldenrod;
+		background-color: var(--watch-background);
 	}
 }
 
-@keyframes warningAnim{
+@keyframes warning-anim {
 	0%{
-		background-color: darkred;
+		background-color: var(--warning-background);
 	}
 	50%{
-		background-color: red;
+		background-color: var(--warning-background-secondary);
 	}
 	100%{
-		background-color: darkred;
+		background-color: var(--warning-background);
 	}
 }
 
-@keyframes otherAnim{
+@keyframes other-anim {
 	0%{
-		background-color: grey;
+		background-color: var(--statement-background);
 	}
 	50%{
-		background-color: slategray;
+		background-color: var(--statement-background-secondary);
 	}
 	100%{
-		background-color: grey;
+		background-color: var(--statement-background);
 	}
 }
 
-@keyframes delayedFadeIn{
+@keyframes delayed-fade-in {
 	0%{
 		opacity: 0;
 	}
@@ -75,7 +75,7 @@ body.dark {
 
 /* General Animations */
 
-@keyframes fadeOut {
+@keyframes fade-out {
 	0%{
 		opacity: 1.0;
 		background-color: hsla(0,0%,99%,1.00);
@@ -88,25 +88,25 @@ body.dark {
 	}
 }
 
-@keyframes offLeft{
+@keyframes off-left {
 	0%{
-		right: 0%;
+		right: 0;
 	}
 	100%{
 		right: 300%;
 	}
 }
 
-@keyframes onRight{
+@keyframes on-right{
 	0%{
 		left: 300%;
 	}
 	100%{
-		left: 0%;
+		left: 0;
 	}
 }
 
-@keyframes simpleFadeOut{
+@keyframes simple-fade-out{
 	0%{
 		opacity: 1.0;
 	}
@@ -114,7 +114,7 @@ body.dark {
 		opacity: 0;
 	}
 }
-@keyframes simpleFadeIn{
+@keyframes simple-fade-in{
 	0%{
 		opacity: 0;
 	}

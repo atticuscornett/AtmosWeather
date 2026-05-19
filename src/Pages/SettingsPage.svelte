@@ -1,7 +1,7 @@
 <script>
     import TabSlot from "../Layout/TabSlot.svelte";
 
-    let { page = $bindable() } = $props();
+    let {page = $bindable()} = $props();
 
     let allSettings = $state(JSON.parse(localStorage.getItem("atmos-settings")));
     let locationNames = $state(JSON.parse(localStorage.getItem("weather-location-names")));
@@ -21,12 +21,12 @@
         locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
     }
 
-    function playAlarmSoundMain(){
+    function playAlarmSoundMain() {
         let audio = new Audio('audio/' + allSettings["location-alerts"]["default-alert"] + 'alarm.mp3');
         audio.play();
     }
 
-    function playNotificationSoundMain(){
+    function playNotificationSoundMain() {
         let audio = new Audio('audio/' + allSettings["location-alerts"]["default-notification"] + 'notification.mp3');
         audio.play();
     }
@@ -38,14 +38,14 @@
         window.locationEnabled = allSettings["location"]["weather"];
     }
 
-    function getWarningsInOrder(){
+    function getWarningsInOrder() {
         let warnings = [];
-        for (let key of hazardPriority){
+        for (let key of hazardPriority) {
             let formatKey = key.toLowerCase();
-            if (formatKey.includes("warning")){
+            if (formatKey.includes("warning")) {
                 formatKey = formatKey.replaceAll(" ", "-");
                 formatKey = formatKey.replace("-warning", "");
-                if (allSettings["alert-types"]["warnings"][formatKey]){
+                if (allSettings["alert-types"]["warnings"][formatKey]) {
                     warnings.push(formatKey);
                 }
             }
@@ -54,14 +54,14 @@
         return warnings;
     }
 
-    function getWatchesInOrder(){
+    function getWatchesInOrder() {
         let watches = [];
-        for (let key of hazardPriority){
+        for (let key of hazardPriority) {
             let formatKey = key.toLowerCase();
-            if (formatKey.includes("watch")){
+            if (formatKey.includes("watch")) {
                 formatKey = formatKey.replaceAll(" ", "-");
                 formatKey = formatKey.replace("-watch", "");
-                if (allSettings["alert-types"]["watches"][formatKey]){
+                if (allSettings["alert-types"]["watches"][formatKey]) {
                     watches.push(formatKey);
                 }
             }
@@ -70,14 +70,14 @@
         return watches;
     }
 
-    function getAdvisoriesInOrder(){
+    function getAdvisoriesInOrder() {
         let advisories = [];
-        for (let key of hazardPriority){
+        for (let key of hazardPriority) {
             let formatKey = key.toLowerCase();
-            if (!formatKey.includes("watch") && !formatKey.includes("warning")){
+            if (!formatKey.includes("watch") && !formatKey.includes("warning")) {
                 formatKey = formatKey.replaceAll(" ", "-");
                 formatKey = formatKey.replace("-advisory", "");
-                if (allSettings["alert-types"]["advisory"][formatKey]){
+                if (allSettings["alert-types"]["advisory"][formatKey]) {
                     advisories.push(formatKey);
                 }
             }
@@ -86,32 +86,30 @@
         return advisories;
     }
 
-    function ensureSettingsSet(){
+    function ensureSettingsSet() {
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
 
-        if (!allSettings){
+        if (!allSettings) {
             setTimeout(ensureSettingsSet, 100);
-        }
-        else {
+        } else {
             orderedWarnings = getWarningsInOrder();
             orderedWatches = getWatchesInOrder();
             orderedAdvisories = getAdvisoriesInOrder();
         }
     }
 
-    function formatTitle(title, ending){
+    function formatTitle(title, ending) {
         title = title.split("-");
-        for (let i in title){
-            title[i] = title[i][0].toUpperCase() + title[i].substring(1)
+        for (let i in title) {
+            title[i] = title[i][0].toUpperCase() + title[i].substring(1);
         }
         title = title.join(" ");
         if (title.includes("Outlook") || title.includes("Statement") ||
             title.includes("Immediate") || title.includes("Outage") ||
             title.includes("Alert") || title.includes("Danger") ||
-            title.includes("Emergency") || title.includes("Forecast") || title.includes("Message")){
+            title.includes("Emergency") || title.includes("Forecast") || title.includes("Message")) {
             return title;
-        }
-        else{
+        } else {
             return title + " " + ending;
         }
     }
@@ -124,101 +122,101 @@
     let checkAllWarningsSelected = () => {
         let allWarningsSelected = true;
 
-        for (let key of orderedWarnings){
-            if (!document.getElementById("setting-warning-" + key + "-check").checked){
+        for (let key of orderedWarnings) {
+            if (!document.getElementById("setting-warning-" + key + "-check").checked) {
                 allWarningsSelected = false;
                 break;
             }
         }
 
         return allWarningsSelected;
-    }
+    };
 
     // Tests if all watch checkboxes are selected
     let checkAllWatchesSelected = () => {
         let allWatchesSelected = true;
 
-        for (let key of orderedWatches){
-            if (!document.getElementById("setting-watch-" + key + "-check").checked){
+        for (let key of orderedWatches) {
+            if (!document.getElementById("setting-watch-" + key + "-check").checked) {
                 allWatchesSelected = false;
                 break;
             }
         }
 
         return allWatchesSelected;
-    }
+    };
 
     // Tests if all advisory checkboxes are selected
     let checkAllAdvisoriesSelected = () => {
         let allAdvisoriesSelected = true;
 
-        for (let key of orderedAdvisories){
-            if (!document.getElementById("setting-advisory-" + key + "-check").checked){
+        for (let key of orderedAdvisories) {
+            if (!document.getElementById("setting-advisory-" + key + "-check").checked) {
                 allAdvisoriesSelected = false;
                 break;
             }
         }
 
         return allAdvisoriesSelected;
-    }
+    };
 
     // Updates the allWarningsSelected variable to reflect checkbox state
     let updateWarningsSelectedCheck = () => {
         allWarningsSelected = checkAllWarningsSelected();
-    }
+    };
 
     // Updates the allWatchesSelected variable to reflect checkbox state
     let updateWatchesSelectedCheck = () => {
         allWatchesSelected = checkAllWatchesSelected();
-    }
+    };
 
     // Updates the allAdvisoriesSelected variable to reflect checkbox state
     let updateAdvisoriesSelectedCheck = () => {
         allAdvisoriesSelected = checkAllAdvisoriesSelected();
-    }
+    };
 
     // Selects or deselects all warnings
     let selectAllWarnings = () => {
-        for (let key of orderedWarnings){
+        for (let key of orderedWarnings) {
             document.getElementById("setting-warning-" + key + "-check").checked = !allWarningsSelected;
         }
         allWarningsSelected = !allWarningsSelected;
-    }
+    };
 
     // Selects or deselects all watches
     let selectAllWatches = () => {
-        for (let key of orderedWatches){
+        for (let key of orderedWatches) {
             document.getElementById("setting-watch-" + key + "-check").checked = !allWatchesSelected;
         }
         allWatchesSelected = !allWatchesSelected;
-    }
+    };
 
     // Selects or deselects all advisories
     let selectAllAdvisories = () => {
-        for (let key of orderedAdvisories){
+        for (let key of orderedAdvisories) {
             document.getElementById("setting-advisory-" + key + "-check").checked = !allAdvisoriesSelected;
         }
         allAdvisoriesSelected = !allAdvisoriesSelected;
-    }
+    };
 
     // Edits all selected warnings
     let bulkEditWarnings = (e) => {
-        if (document.getElementById(e.target.id + "-check").checked){
-            for (let key of orderedWarnings){
-                if (document.getElementById("setting-warning-" + key + "-check").checked){
+        if (document.getElementById(e.target.id + "-check").checked) {
+            for (let key of orderedWarnings) {
+                if (document.getElementById("setting-warning-" + key + "-check").checked) {
                     allSettings["alert-types"]["warnings"][key] = e.target.value;
                 }
             }
             console.log(allSettings["alert-types"]["warnings"]);
             saveSettings();
         }
-    }
+    };
 
     // Edits all selected watches
     let bulkEditWatches = (e) => {
-        if (document.getElementById(e.target.id + "-check").checked){
-            for (let key of orderedWatches){
-                if (document.getElementById("setting-watch-" + key + "-check").checked){
+        if (document.getElementById(e.target.id + "-check").checked) {
+            for (let key of orderedWatches) {
+                if (document.getElementById("setting-watch-" + key + "-check").checked) {
                     console.log("setting-watch-" + key + "-check");
                     allSettings["alert-types"]["watches"][key] = e.target.value;
                 }
@@ -226,13 +224,13 @@
             console.log(allSettings["alert-types"]["watches"]);
             saveSettings();
         }
-    }
+    };
 
     // Edits all selected advisories
     let bulkEditAdvisories = (e) => {
-        if (document.getElementById(e.target.id + "-check").checked){
-            for (let key of orderedAdvisories){
-                if (document.getElementById("setting-advisory-" + key + "-check").checked){
+        if (document.getElementById(e.target.id + "-check").checked) {
+            for (let key of orderedAdvisories) {
+                if (document.getElementById("setting-advisory-" + key + "-check").checked) {
                     console.log("setting-advisory-" + key + "-check");
                     allSettings["alert-types"]["advisory"][key] = e.target.value;
                 }
@@ -240,237 +238,324 @@
             console.log(allSettings["alert-types"]["advisory"]);
             saveSettings();
         }
+    };
+
+    let fileTest = $state("");
+    let importCustomTheme = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                try {
+                    if (importTheme(String(e.target.result))) {
+                        themeChanged = true;
+                        allSettings["personalization"]["theme"] = "custom";
+                        allSettings["personalization"]["custom-theme"] = String(e.target.result);
+                        saveSettings();
+                        themeError = false;
+                    }
+                    else {
+                        themeError = true;
+                    }
+                } catch (error) {
+                    themeError = true;
+                }
+            };
+
+            reader.readAsText(file);
+        }
     }
 
+    let themeChanged = $state(false);
+    let themeError = $state(false);
+
+
     ensureSettingsSet();
-    setInterval(ensureSettingsSet, 1000*60);
+    setInterval(ensureSettingsSet, 1000 * 60);
 </script>
 
 <TabSlot name="settings" bind:page={page} onOpen={refreshSettings}>
     {#if page === "settings"}
-    <h1>Settings</h1>
-    <h6>
-        <a href="#" onclick={page = "about"}>About Atmos Weather</a>
-        &emsp;
-        <a href="#" onclick={page="privacy"}>Privacy Statement</a>
-        <br>
-        {#if isAndroid}
-            <a onclick={showPermissionDialog} href="#">Android Permissions</a>
-        {/if}
-    </h6>
-
-    {#if window.electronAPI && window.atmosVersion !== window.atmosLatest && window.atmosVersion !== "" && window.atmosVersion !== undefined}
-        <h3>There is an update available ({window.atmosLatest}).</h3>
-        <br>
-        <button class="updateButton" onclick={()=>{window.electronAPI.updateNow();}}>Update Now</button>
-    {/if}
-
-    {#if webVersionWarning}
-        <h2>Some settings/features are not functional on the web version, including weather alerts.</h2>
-    {/if}
-
-    <hr>
-    {#if allSettings}
-        <div onchange={saveSettings}>
-        {#if !isDesktop}
-        <div id="settings-device-location">
-            <h2>Device Location</h2>
-            <h6>Settings related to use of your GPS location.</h6>
-            <input class="box" type="checkbox" id="setting-current-location" bind:checked={allSettings["location"]["weather"]}>
-            <label for="setting-current-location" >Give Weather for Current Location</label>
-            <br>
-            <input class="box" type="checkbox" id="setting-current-location-alerts" bind:checked={allSettings["location"]["alerts"]}>
-            <label for="setting-current-location-alerts">Give Alerts for Current Location</label>
-            <hr>
-        </div>
-        {/if}
-        <h2>Personalization</h2>
-        <label for="setting-app-theme">App Theme</label>
-        <br>
-        <select id="setting-app-theme" bind:value={allSettings["personalization"]["theme"]}>
-            <option value="system">System Default</option>
-            <option value="dark">Dark Theme</option>
-            <option value="light">Light Theme</option>
-        </select>
-        <br>
-        <label for="setting-page-transition-duration">Page Transition Duration</label>
-        <br>
-        <input type="range" min="0" max="3000" step="100" id="setting-page-transition-duration" bind:value={allSettings["personalization"]["page-transition-duration"]}>
-        <label id="setting-page-transition-duration-text" for="setting-page-transition-duration">
-            {allSettings["personalization"]["page-transition-duration"]}ms
-        </label>
-        <br><br>
-        <input class="box" type="checkbox" id="setting-atmos-logo" bind:checked={allSettings["personalization"]["atmos-logo"]}>
-        <label for="setting-atmos-logo">Show Atmos Weather logo on app open</label>
-        <br>
-        {#if isDesktop}
-            <input class="box" type="checkbox" id="setting-run-startup" bind:checked={allSettings["personalization"]["run-startup"]}>
-            <label for="setting-run-startup">Run Atmos Weather in background on startup</label>
-            <br>
-        {/if}
-        <input class="box" type="checkbox" id="setting-notify-updates" bind:checked={allSettings["personalization"]["update-notify"]}>
-        <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label>
-        <hr>
-        <h2>Notifications</h2>
-        <input class="box" type="checkbox" id="setting-future-severe-notifications" bind:checked={allSettings["notifications"]["severe-future"]}>
-        <label for="setting-future-severe-notifications">Get notifications for forecast future severe weather</label>
-        <br>
-        <input class="box" type="checkbox" id="setting-future-storm-notifications" bind:checked={allSettings["notifications"]["rain-future"]}>
-        <label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain (not severe)</label>
-        <br>
-        {#if !isDesktop}
-            <input class="box" type="checkbox" id="setting-quiet-hours" bind:checked={allSettings["notifications"]["quiet-hours"]}>
-            <label for="setting-quiet-hours">Enable quiet hours</label>
-            <h5 class="addInfo">During quiet hours, sound notifications will behave like silent notifications, but alerts will still be shown.</h5>
-            <select id="setting-quiet-start" bind:value={allSettings["notifications"]["quiet-start"]} disabled={!allSettings["notifications"]["quiet-hours"]}>
-                {#each Array(24) as _, i}
-                    <option value={i}>{(i === 0) ? "12" : ((i > 12) ? i - 12 : i)}:00 {(i < 12) ? "am" : "pm"}</option>
-                {/each}
-            </select>
-            -
-            <select id="setting-quiet-end" bind:value={allSettings["notifications"]["quiet-end"]} disabled={!allSettings["notifications"]["quiet-hours"]}>
-                {#each Array(24) as _, i}
-                    <option value={i}>{(i === 0) ? "12" : ((i > 12) ? i - 12 : i)}:00 {(i < 12) ? "am" : "pm"}</option>
-                {/each}
-            </select>
-        {/if}
-        <hr>
-        <h2>Radar</h2>
-        <input class="box" type="checkbox" id="setting-radar-show-watches" bind:checked={allSettings["radar"]["polygons"]["watch"]}>
-        <label for="setting-radar-show-watches">Show watch polygons on radar</label>
-        <br>
-        <input class="box" type="checkbox" id="setting-radar-show-advisories" bind:checked={allSettings["radar"]["polygons"]["advisories"]}>
-        <label for="setting-radar-show-advisories">Show advisory polygons on radar</label>
-        <br>
-        <input class="box" type="checkbox" id="setting-radar-show-warnings" bind:checked={allSettings["radar"]["polygons"]["warnings"]}>
-        <label for="setting-radar-show-warnings">Show warning polygons on radar</label>
-        <br>
-        <input class="box" type="checkbox" id="setting-radar-show-outlook" bind:checked={allSettings["radar"]["spc-outlook"]}>
-        <label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label>
-        <br>
-        <input class="box" type="checkbox" id="setting-radar-high-res" bind:checked={allSettings["radar"]["polygons"]["high-res"]}>
-        <label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label>
-        <br><br>
-        <hr>
-        <h2>Location Alerts</h2>
-        <h6>Choose the level of alerts for different locations.</h6>
-        <input class="box" type="checkbox" id="setting-tts-alerts" bind:checked={allSettings["location-alerts"]["tts-alerts"]}>
-        <label for="setting-tts-alerts">Read alerts with text to speech</label>
-        <br><br>
-        <label for="setting-alert-check-frequency">Alert Check Frequency</label>
-        <br>
-        <select id="setting-alert-check-frequency" bind:value={allSettings["location-alerts"]["alert-check-frequency"]}>
-            <option value="15">Every 15 seconds</option>
-            <option value="30">Every 30 seconds</option>
-            <option value="60">Every 1 minute</option>
-            <option value="120">Every 2 minutes</option>
-        </select>
-        <h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6>
-        <label for="setting-default-sound-alert">Default Alert Sound</label>
-        <br>
-        <select id="setting-default-sound-alert" onchange={playAlarmSoundMain} bind:value={allSettings["location-alerts"]["default-alert"]}>
-            <option value="readynow">ReadyNow Warning</option>
-            <option value="suremind">SureMind Warning</option>
-            <option value="alternatingtones">Alternating Tones</option>
-            <option value="simplebeeps">Simple Beeps</option>
-        </select>
-        <br>
-        <label for="setting-default-sound-notification">Default Notification Sound</label>
-        <br>
-        <select id="setting-default-sound-notification" onchange={playNotificationSoundMain} bind:value={allSettings["location-alerts"]["default-notification"]}>
-            <option value="readynow">ReadyNow Watch</option>
-            <option value="suremind">SureMind Watch</option>
-            <option value="alternatingtones">Alternating Tones</option>
-            <option value="simplebeeps">Simple Beeps</option>
-        </select>
-        <div id="location-settings-div">
-            {#each locationNames as name, i}
-                <h2><a href='#' onclick={()=>{page = "settings-" + name}}>{name} Alert Settings</a></h2>
-            {/each}
-        </div>
-        <hr>
-        <h2>Alert Types</h2>
+        <h1>Settings</h1>
         <h6>
-            Choose the level of alerts for different types of events. Overridden if location priority is lower. <br>
-            Alert if moving alerts you if the app detects you are in a vehicle. <br>
-            If location permission is not allowed, will always alert. <br>
-            <br><br>
-            Use the checkboxes to batch edit settings.
+            <a href="#" onclick={page = "about"}>About Atmos Weather</a>
+            &emsp;
+            <a href="#" onclick={page="privacy"}>Privacy Statement</a>
+            <br>
+            {#if isAndroid}
+                <a onclick={showPermissionDialog} href="#">Android Permissions</a>
+            {/if}
         </h6>
-        <details>
-            <summary>Warnings</summary>
-            <div id="settings-warnings-list">
-                <input type="checkbox" id="select-all-warnings" class="vertical-center" checked={allWarningsSelected} onclick={selectAllWarnings}>
-                <label for="select-all-warnings">Select all warnings</label>
-                <br>
-                <br>
-                {#each orderedWarnings as key}
-                    <input type="checkbox" id="setting-warning-{key}-check" class="vertical-center" onchange={updateWarningsSelectedCheck}>
-                    <label for="setting-warning-{key}-check">{formatTitle(key, "Warning")}</label>
+
+        {#if window.electronAPI && window.atmosVersion !== window.atmosLatest && window.atmosVersion !== "" && window.atmosVersion !== undefined}
+            <h3>There is an update available ({window.atmosLatest}).</h3>
+            <br>
+            <button class="updateButton" onclick={()=>{window.electronAPI.updateNow();}}>Update Now</button>
+        {/if}
+
+        {#if webVersionWarning}
+            <h2>Some settings/features are not functional on the web version, including weather alerts.</h2>
+        {/if}
+
+        <hr>
+        {#if allSettings}
+            <div onchange={saveSettings}>
+                {#if !isDesktop}
+                    <div id="settings-device-location">
+                        <h2>Device Location</h2>
+                        <h6>Settings related to use of your GPS location.</h6>
+                        <input class="box" type="checkbox" id="setting-current-location"
+                               bind:checked={allSettings["location"]["weather"]}>
+                        <label for="setting-current-location">Give Weather for Current Location</label>
+                        <br>
+                        <input class="box" type="checkbox" id="setting-current-location-alerts"
+                               bind:checked={allSettings["location"]["alerts"]}>
+                        <label for="setting-current-location-alerts">Give Alerts for Current Location</label>
+                        <hr>
+                    </div>
+                {/if}
+                <h2>Personalization</h2>
+                {#if themeChanged}
+                    <div class="reload-div">
+                        <h2>To fully load the new theme, please reload the app.</h2>
+                        <button class="reload-button" onclick={()=>{location.reload()}}>Reload App Now</button>
+                    </div>
                     <br>
-                    <select bind:value={allSettings["alert-types"]["warnings"][key]} onchange={bulkEditWarnings} id="setting-warning-{key}">
-                        <option value="alert">Alert</option>
-                        {#if !isDesktop}
-                            <option value="alertmove">Alert if moving</option>
-                        {/if}
-                        <option value="soundnotification">Sound Notification</option>
-                        <option value="silentnotification">Silent Notification</option>
-                        <option value="nothing">Nothing</option>
+                {/if}
+                <label for="setting-app-theme">App Theme</label>
+                <br>
+                <select id="setting-app-theme" onchange={()=>{themeChanged = true;}} bind:value={allSettings["personalization"]["theme"]}>
+                    <option value="system">System Default</option>
+                    <option value="dark">Dark Theme</option>
+                    <option value="light">Light Theme</option>
+                    <option value="forest">Forest Theme</option>
+                    <option value="dawn">Dawn Theme</option>
+                    <option value="midnight">Midnight Theme</option>
+                    <option value="twilight">Twilight Theme</option>
+                    <option value="custom">Custom Theme</option>
+                </select>
+                <br>
+                <label for="setting-custom-app-theme">Import Custom Theme</label>
+                <br>
+                <input type="file" id="setting-custom-app-theme" accept=".json" bind:value={fileTest} onchange={importCustomTheme}/>
+                <h4>Only import themes from trusted sources.</h4>
+                <h4><a href="https://github.com/atticuscornett/AtmosWeather/blob/main/THEMES.md" target="_blank">More about custom themes</a></h4>
+                {#if themeError}
+                    <h4>There was an error importing that theme.</h4>
+                {/if}
+                <br>
+                <label for="setting-page-transition-duration">Page Transition Duration</label>
+                <br>
+                <input type="range" min="0" max="3000" step="100" id="setting-page-transition-duration"
+                       bind:value={allSettings["personalization"]["page-transition-duration"]}>
+                <label id="setting-page-transition-duration-text" for="setting-page-transition-duration">
+                    {allSettings["personalization"]["page-transition-duration"]}ms
+                </label>
+                <br><br>
+                <input class="box" type="checkbox" id="setting-atmos-logo"
+                       bind:checked={allSettings["personalization"]["atmos-logo"]}>
+                <label for="setting-atmos-logo">Show Atmos Weather logo on app open</label>
+                <br>
+                {#if isDesktop}
+                    <input class="box" type="checkbox" id="setting-run-startup"
+                           bind:checked={allSettings["personalization"]["run-startup"]}>
+                    <label for="setting-run-startup">Run Atmos Weather in background on startup</label>
+                    <br>
+                {/if}
+                <input class="box" type="checkbox" id="setting-notify-updates"
+                       bind:checked={allSettings["personalization"]["update-notify"]}>
+                <label for="setting-notify-updates">Notify of new Atmos Weather versions on launch</label>
+                <hr>
+                <h2>Notifications</h2>
+                <input class="box" type="checkbox" id="setting-future-severe-notifications"
+                       bind:checked={allSettings["notifications"]["severe-future"]}>
+                <label for="setting-future-severe-notifications">Get notifications for forecast future severe
+                    weather</label>
+                <br>
+                <input class="box" type="checkbox" id="setting-future-storm-notifications"
+                       bind:checked={allSettings["notifications"]["rain-future"]}>
+                <label for="setting-future-storm-notifications">Get notifications for forecast future storms and rain
+                    (not severe)</label>
+                <br>
+                {#if !isDesktop}
+                    <input class="box" type="checkbox" id="setting-quiet-hours"
+                           bind:checked={allSettings["notifications"]["quiet-hours"]}>
+                    <label for="setting-quiet-hours">Enable quiet hours</label>
+                    <h5 class="addInfo">During quiet hours, sound notifications will behave like silent notifications,
+                        but alerts will still be shown.</h5>
+                    <select id="setting-quiet-start" bind:value={allSettings["notifications"]["quiet-start"]}
+                            disabled={!allSettings["notifications"]["quiet-hours"]}>
+                        {#each Array(24) as _, i}
+                            <option value={i}>{(i === 0) ? "12" : ((i > 12) ? i - 12 : i)}
+                                :00 {(i < 12) ? "am" : "pm"}</option>
+                        {/each}
                     </select>
-                    <br>
-                {/each}
-            </div>
-        </details>
-        <details>
-            <summary>Watches</summary>
-            <div id="settings-watches-list">
-                <input type="checkbox" id="select-all-watches" class="vertical-center" checked={allWatchesSelected} onclick={selectAllWatches}>
-                <label for="select-all-watches">Select all watches</label>
-                <br>
-                <br>
-                {#each orderedWatches as key}
-                    <input type="checkbox" id="setting-watch-{key}-check" class="vertical-center" onchange={updateWatchesSelectedCheck}>
-                    <label for="setting-watch-{key}-check">{formatTitle(key, "Watch")}</label>
-                    <br>
-                    <select bind:value={allSettings["alert-types"]["watches"][key]} onchange={bulkEditWatches} id="setting-watch-{key}">
-                        <option value="alert">Alert</option>
-                        {#if !isDesktop}
-                            <option value="alertmove">Alert if moving</option>
-                        {/if}
-                        <option value="soundnotification">Sound Notification</option>
-                        <option value="silentnotification">Silent Notification</option>
-                        <option value="nothing">Nothing</option>
+                    -
+                    <select id="setting-quiet-end" bind:value={allSettings["notifications"]["quiet-end"]}
+                            disabled={!allSettings["notifications"]["quiet-hours"]}>
+                        {#each Array(24) as _, i}
+                            <option value={i}>{(i === 0) ? "12" : ((i > 12) ? i - 12 : i)}
+                                :00 {(i < 12) ? "am" : "pm"}</option>
+                        {/each}
                     </select>
-                    <br>
-                {/each}
-            </div>
-        </details>
-        <details>
-            <summary>Advisories/Other</summary>
-            <div id="settings-advisory-list">
-                <input type="checkbox" id="select-all-advisories" class="vertical-center" checked={allAdvisoriesSelected} onclick={selectAllAdvisories}>
-                <label for="select-all-advisories">Select all advisories</label>
+                {/if}
+                <hr>
+                <h2>Radar</h2>
+                <input class="box" type="checkbox" id="setting-radar-show-watches"
+                       bind:checked={allSettings["radar"]["polygons"]["watch"]}>
+                <label for="setting-radar-show-watches">Show watch polygons on radar</label>
                 <br>
+                <input class="box" type="checkbox" id="setting-radar-show-advisories"
+                       bind:checked={allSettings["radar"]["polygons"]["advisories"]}>
+                <label for="setting-radar-show-advisories">Show advisory polygons on radar</label>
                 <br>
-                {#each orderedAdvisories as key}
-                    <input type="checkbox" id="setting-advisory-{key}-check" class="vertical-center" onchange={updateAdvisoriesSelectedCheck}>
-                    <label for="setting-advisory-{key}-check">{formatTitle(key, "Advisory")}</label>
+                <input class="box" type="checkbox" id="setting-radar-show-warnings"
+                       bind:checked={allSettings["radar"]["polygons"]["warnings"]}>
+                <label for="setting-radar-show-warnings">Show warning polygons on radar</label>
+                <br>
+                <input class="box" type="checkbox" id="setting-radar-show-outlook"
+                       bind:checked={allSettings["radar"]["spc-outlook"]}>
+                <label for="setting-radar-show-outlook">Show NOAA/NWS weather outlooks on radar</label>
+                <br>
+                <input class="box" type="checkbox" id="setting-radar-high-res"
+                       bind:checked={allSettings["radar"]["polygons"]["high-res"]}>
+                <label for="setting-radar-high-res">Use high resolution polygons (causes lag)</label>
+                <br><br>
+                <hr>
+                <h2>Location Alerts</h2>
+                <h6>Choose the level of alerts for different locations.</h6>
+                <input class="box" type="checkbox" id="setting-tts-alerts"
+                       bind:checked={allSettings["location-alerts"]["tts-alerts"]}>
+                <label for="setting-tts-alerts">Read alerts with text to speech</label>
+                <br><br>
+                <label for="setting-alert-check-frequency">Alert Check Frequency</label>
+                <br>
+                <select id="setting-alert-check-frequency"
+                        bind:value={allSettings["location-alerts"]["alert-check-frequency"]}>
+                    <option value="15">Every 15 seconds</option>
+                    <option value="30">Every 30 seconds</option>
+                    <option value="60">Every 1 minute</option>
+                    <option value="120">Every 2 minutes</option>
+                </select>
+                <h6 style="margin-top:5px;">More frequent checks means faster alerts but more battery usage.</h6>
+                <label for="setting-default-sound-alert">Default Alert Sound</label>
+                <br>
+                <select id="setting-default-sound-alert" onchange={playAlarmSoundMain}
+                        bind:value={allSettings["location-alerts"]["default-alert"]}>
+                    <option value="readynow">ReadyNow Warning</option>
+                    <option value="suremind">SureMind Warning</option>
+                    <option value="alternatingtones">Alternating Tones</option>
+                    <option value="simplebeeps">Simple Beeps</option>
+                </select>
+                <br>
+                <label for="setting-default-sound-notification">Default Notification Sound</label>
+                <br>
+                <select id="setting-default-sound-notification" onchange={playNotificationSoundMain}
+                        bind:value={allSettings["location-alerts"]["default-notification"]}>
+                    <option value="readynow">ReadyNow Watch</option>
+                    <option value="suremind">SureMind Watch</option>
+                    <option value="alternatingtones">Alternating Tones</option>
+                    <option value="simplebeeps">Simple Beeps</option>
+                </select>
+                <div id="location-settings-div">
+                    {#each locationNames as name, i}
+                        <h2><a href='#' onclick={()=>{page = "settings-" + name}}>{name} Alert Settings</a></h2>
+                    {/each}
+                </div>
+                <hr>
+                <h2>Alert Types</h2>
+                <h6>
+                    Choose the level of alerts for different types of events. Overridden if location priority is lower.
                     <br>
-                    <select bind:value={allSettings["alert-types"]["advisory"][key]} onchange={bulkEditAdvisories} id="setting-advisory-{key}">
-                        <option value="alert">Alert</option>
-                        {#if !isDesktop}
-                            <option value="alertmove">Alert if moving</option>
-                        {/if}
-                        <option value="soundnotification">Sound Notification</option>
-                        <option value="silentnotification">Silent Notification</option>
-                        <option value="nothing">Nothing</option>
-                    </select>
-                    <br>
-                {/each}
+                    Alert if moving alerts you if the app detects you are in a vehicle. <br>
+                    If location permission is not allowed, will always alert. <br>
+                    <br><br>
+                    Use the checkboxes to batch edit settings.
+                </h6>
+                <details>
+                    <summary>Warnings</summary>
+                    <div id="settings-warnings-list">
+                        <input type="checkbox" id="select-all-warnings" class="vertical-center"
+                               checked={allWarningsSelected} onclick={selectAllWarnings}>
+                        <label for="select-all-warnings">Select all warnings</label>
+                        <br>
+                        <br>
+                        {#each orderedWarnings as key}
+                            <input type="checkbox" id="setting-warning-{key}-check" class="vertical-center"
+                                   onchange={updateWarningsSelectedCheck}>
+                            <label for="setting-warning-{key}-check">{formatTitle(key, "Warning")}</label>
+                            <br>
+                            <select bind:value={allSettings["alert-types"]["warnings"][key]} onchange={bulkEditWarnings}
+                                    id="setting-warning-{key}">
+                                <option value="alert">Alert</option>
+                                {#if !isDesktop}
+                                    <option value="alertmove">Alert if moving</option>
+                                {/if}
+                                <option value="soundnotification">Sound Notification</option>
+                                <option value="silentnotification">Silent Notification</option>
+                                <option value="nothing">Nothing</option>
+                            </select>
+                            <br>
+                        {/each}
+                    </div>
+                </details>
+                <details>
+                    <summary>Watches</summary>
+                    <div id="settings-watches-list">
+                        <input type="checkbox" id="select-all-watches" class="vertical-center"
+                               checked={allWatchesSelected} onclick={selectAllWatches}>
+                        <label for="select-all-watches">Select all watches</label>
+                        <br>
+                        <br>
+                        {#each orderedWatches as key}
+                            <input type="checkbox" id="setting-watch-{key}-check" class="vertical-center"
+                                   onchange={updateWatchesSelectedCheck}>
+                            <label for="setting-watch-{key}-check">{formatTitle(key, "Watch")}</label>
+                            <br>
+                            <select bind:value={allSettings["alert-types"]["watches"][key]} onchange={bulkEditWatches}
+                                    id="setting-watch-{key}">
+                                <option value="alert">Alert</option>
+                                {#if !isDesktop}
+                                    <option value="alertmove">Alert if moving</option>
+                                {/if}
+                                <option value="soundnotification">Sound Notification</option>
+                                <option value="silentnotification">Silent Notification</option>
+                                <option value="nothing">Nothing</option>
+                            </select>
+                            <br>
+                        {/each}
+                    </div>
+                </details>
+                <details>
+                    <summary>Advisories/Other</summary>
+                    <div id="settings-advisory-list">
+                        <input type="checkbox" id="select-all-advisories" class="vertical-center"
+                               checked={allAdvisoriesSelected} onclick={selectAllAdvisories}>
+                        <label for="select-all-advisories">Select all advisories</label>
+                        <br>
+                        <br>
+                        {#each orderedAdvisories as key}
+                            <input type="checkbox" id="setting-advisory-{key}-check" class="vertical-center"
+                                   onchange={updateAdvisoriesSelectedCheck}>
+                            <label for="setting-advisory-{key}-check">{formatTitle(key, "Advisory")}</label>
+                            <br>
+                            <select bind:value={allSettings["alert-types"]["advisory"][key]}
+                                    onchange={bulkEditAdvisories} id="setting-advisory-{key}">
+                                <option value="alert">Alert</option>
+                                {#if !isDesktop}
+                                    <option value="alertmove">Alert if moving</option>
+                                {/if}
+                                <option value="soundnotification">Sound Notification</option>
+                                <option value="silentnotification">Silent Notification</option>
+                                <option value="nothing">Nothing</option>
+                            </select>
+                            <br>
+                        {/each}
+                    </div>
+                </details>
             </div>
-        </details>
-    </div>
-    {/if}
+        {/if}
     {/if}
 </TabSlot>
 
@@ -481,8 +566,8 @@
     }
 
     .updateButton {
-        background-color: dodgerblue;
-        color: white;
+        background-color: var(--positive-button);
+        color: var(--positive-button-text);
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
@@ -491,7 +576,25 @@
         font-family: Secular One, sans-serif;
     }
 
-    .vertical-center{
+    .vertical-center {
         vertical-align: center;
+    }
+
+    .reload-div {
+        background-color: white;
+        border-radius: 5px;
+        color: black;
+        padding: 15px;
+    }
+
+    .reload-button {
+        background-color: dodgerblue;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: Secular One, sans-serif;
     }
 </style>

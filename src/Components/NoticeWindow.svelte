@@ -92,7 +92,7 @@
 	<div id="notice-window-container">
 		<h1>a t m o s weather</h1>
 		<div id="notice-window">
-			<h2 class="closeButton" onclick={hideNotices}>x</h2>
+			<h2 class="close-button" onclick={hideNotices}>x</h2>
 
 			{#each notices as notice, i}
 				<h2>{noticeTitles[i]}</h2>
@@ -107,14 +107,14 @@
 <style>
 	h1 {
 		margin-left:20px;
-		color: dodgerblue;
+		color: var(--secondary-text-color);
 	}
 
-    .closeButton {
+    .close-button {
         position: absolute;
         top:0;
-        right:25px;
-        color:dodgerblue;
+        right: 25px;
+        color: var(--secondary-text-color);
         cursor: pointer;
         text-decoration: underline;
     }
@@ -122,7 +122,7 @@
     #notice-window-container{
         z-index: 99;
         position: absolute;
-        background-color: white;
+        background: linear-gradient(var(--background-angle), var(--background-start), var(--background-end));
         width: 100%;
         min-height: 100%;
         top: 0;
@@ -131,15 +131,5 @@
 
     #notice-window {
         padding: 20px;
-    }
-
-    :global(body.dark) #notice-window-container{
-        z-index: 98;
-        position: absolute;
-        background-color: #222222;
-        width: 100%;
-        min-height: 100%;
-        top: 0;
-        left: 0;
     }
 </style>
