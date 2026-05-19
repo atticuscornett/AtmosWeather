@@ -131,6 +131,11 @@ public class InformWeather {
                         .setBody(eventInfo)
                         .setIcon(iconID);
 
+        if (eventInfo.contains("THIS_MESSAGE_IS_FOR_TEST_PURPOSES_ONLY")){
+            // Test notifications should not be sent to the user, so override behavior and do not send notification
+            behavior = "nothing";
+        }
+
         if (behavior.contains("silentnotification")) {
             NotificationHandler.notify(id, builder.setChannel("silentnotification").build());
         } else if (behavior.contains("soundnotification")) {

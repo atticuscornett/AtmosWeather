@@ -63,6 +63,18 @@ function alertCheck(location, alert, at, playedAlready){
         }
 
         let notif;
+
+        try {
+            // Don't notify about tests
+            if (alert["properties"]["description"].contains("THIS_MESSAGE_IS_FOR_TEST_PURPOSES_ONLY")){
+                notificationSetting = "nothing";
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+
         if (notificationSetting === "alert"){
             // Check for location specific tts setting
             if (settings["per-location"][locationNames[cycleAt]] !== undefined){
