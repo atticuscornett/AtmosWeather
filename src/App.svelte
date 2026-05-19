@@ -20,6 +20,12 @@
             }
         }
 
+        if (currentSettings["personalization"]["theme"] === "custom") {
+            if (currentSettings["personalization"]["custom-theme"]) {
+                importTheme(currentSettings["personalization"]["custom-theme"]);
+            }
+        }
+
         document.getElementById("theme-css").setAttribute("href", `./css/themes/${window.appTheme}-theme.css`);
 
         setTimeout(()=>{
