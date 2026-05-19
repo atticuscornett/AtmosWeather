@@ -249,7 +249,7 @@
                     });
                 });
             }),
-                Math.round(Math.random()*1500));
+                Math.round(Math.random()*200));
         }
 
         let renderLocationsSimultaneous = (attempt=0) => {

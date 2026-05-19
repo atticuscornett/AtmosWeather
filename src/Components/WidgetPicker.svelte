@@ -65,6 +65,7 @@
             <button onclick={addWidget} value="DewpointGraph">Dew Point Graph</button>
             <button onclick={addWidget} value="FeelsLikeGraph">Feels Like Graph</button>
             <button onclick={addWidget} value="CAPEGraph">CAPE Graph</button>
+            <button onclick={addWidget} value="AQIGraph">AQI Graph</button>
         </details>
 
         <details>
@@ -73,6 +74,7 @@
             <button onclick={addWidget} value="AQIBreakdown">Air Quality Breakdown</button>
             <button onclick={addWidget} value="AllPollutants">All Pollutants</button>
             <button onclick={addWidget} value="AQINext3Days">AQI Next 3 Days</button>
+            <button onclick={addWidget} value="AQIGraph">AQI Graph</button>
         </details>
     </div>
 </div>

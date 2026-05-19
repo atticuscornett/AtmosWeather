@@ -20,6 +20,7 @@
     import UVIndex from "./LocationWidgets/UVIndex.svelte";
     import RadarGlance from "./LocationWidgets/RadarGlance.svelte";
     import MoonPhase from "./LocationWidgets/MoonPhase.svelte";
+    import AQIGraph from "./Graphs/AQIGraph.svelte";
 
     let { locationData, widgets, editing, rowIndex, widgetLayout=$bindable(), page=$bindable() } = $props();
 
@@ -99,6 +100,9 @@
                 {/if}
                 {#if widget === "MoonPhase"}
                     <MoonPhase/>
+                {/if}
+                {#if widget === "AQIGraph"}
+                    <AQIGraph uniqueName="AQI-{locationData.name}" locationData={locationData} />
                 {/if}
             </div>
         {/each}
