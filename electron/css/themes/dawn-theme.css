@@ -1,0 +1,35 @@
+:root {
+    /*
+    All themes (other than the dark and light themes) should declare
+    a fallback theme (black or white) from which default values are pulled.
+     */
+    --fallback-theme: white;
+
+    --background-start: #ffd4b7;
+    --background-end: #ffc493;
+    --background-angle: 45deg;
+
+    --primary-text-color: gray;
+    --secondary-text-color: orange;
+    --positive-button: orange;
+    --add-location-button: hsla(26, 100%, 59%, 0.7);
+
+    --no-alerts-background: orange;
+    --box-shadow-color: orange;
+
+    --input-accent: orange;
+
+    --nav-button-background: orange;
+    --nav-button-selected: #ffb224;
+
+    --loading-dots-color: orange;
+
+    --editor-background: orange;
+
+    --polutant-background-color: orange;
+    --sunrise-sunset-background-color: orange;
+
+    --accordian-border-color: gray;
+
+    --nav-icon-color: white;
+}

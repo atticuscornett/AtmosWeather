@@ -93,9 +93,11 @@
                 }
             }
 
-            let colorScheme = window.appTheme;
-            forecastDictionary["imageSrc"] = colorScheme === "dark" ? "img/"+forecastDictionary["image"]+".svg"
-                : "img/"+forecastDictionary["image"]+"-adaptive.svg";
+            let root = document.documentElement;
+            let graphImageColor = getComputedStyle(root).getPropertyValue('--graph-icon-color').trim();
+
+            forecastDictionary["imageSrc"] = graphImageColor === "white" ?
+                "img/"+forecastDictionary["image"]+".svg" : "img/"+forecastDictionary["image"]+"-adaptive.svg";
 
             tempDailyForecast.push(forecastDictionary);
         }
