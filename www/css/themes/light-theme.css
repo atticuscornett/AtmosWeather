@@ -65,7 +65,7 @@
     --sunrise-sunset-text-color: white;
 
     /* Graph Colors */
-    --graph-text-color: white;
+    --graph-text-color: black;
 
     --cape-graph-start: white;
     --cape-graph-end: red;
