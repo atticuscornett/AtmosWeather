@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Notification, Tray, Menu, net, dialog, ipcMain} = require('electron')
+const { app, BrowserWindow, Notification, Tray, Menu, net, dialog, ipcMain, shell} = require('electron')
 const { autoUpdater } = require("electron-updater")
 const turf = require("@turf/turf")
 const {checkPolygons} = require("./alert-checking");
@@ -30,8 +30,18 @@ const createWindow = () => {
 	})
 	mainWindow.webContents.setUserAgent(userAgentString);
 
+	// Open _blank windows in browser instead of Electron
+	mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+		// Check if the URL is external (http/https)
+		if (url.startsWith('http:') || url.startsWith('https:')) {
+			shell.openExternal(url); // Open in the user's default browser
+			return { action: 'deny' }; // Prevent Electron from opening a new window
+		}
+		return { action: 'allow' };
+	});
+
 	mainWindow.webContents.setUserAgent('AtmosWeather/' + app.getVersion() + ' (Electron) (https://github.com/atticuscornett/AtmosWeather)');
-  	mainWindow.loadFile('index.html')
+  	mainWindow.loadFile('index.html');
 
     // Run in background instead of closing
     mainWindow.on('close', (e)=>{
