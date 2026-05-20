@@ -789,33 +789,74 @@ function getCountyPolyAsync(forecastZone, callback, extraReturn=null){
  * @returns {Array} The sorted list of weather alerts.
  */
 function sortByEventType(alertsList){
-	var allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
-	var a = 0;
-	var watchesL = [];
-	var otherL = [];
-	var warningL = [];
-	while (a < alertsList[0].length){
-		if (alertsList[0][a]["properties"]["event"].toLowerCase().includes("warning")){
-			if (allSettings["radar"]["polygons"]["warnings"]){
-				warningL.push(alertsList[0][a]);
+	let allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	let a = 0;
+	let watchesL = [];
+	let otherL = [];
+	let warningL = [];
+
+	let reverseHazardPriority = hazardPriority.toReversed();
+	let unsortedAlerts = alertsList[0];
+	let alertsListOrdered = [[], alertsList[1]];
+
+	for (let alertType of reverseHazardPriority) {
+		let remove = [];
+
+		for (let i = 0; i < unsortedAlerts.length; i++) {
+			let alert = unsortedAlerts[i];
+			if (!alert){
+				continue;
+			}
+			if (alert["properties"]["event"] === alertType) {
+				remove.push(i);
+				alertsListOrdered[0].push(alert);
 			}
 		}
-		else if (alertsList[0][a]["properties"]["event"].toLowerCase().includes("watch")){
+
+		for (let index of remove) {
+			unsortedAlerts[index] = null;
+		}
+	}
+
+	let unknownTypes = [];
+	for (let alert of unsortedAlerts) {
+		if (!alert) {
+			continue;
+		}
+		if (!unknownTypes.includes(alert["properties"]["event"])) {
+			unknownTypes.push(alert["properties"]["event"]);
+		}
+		alertsListOrdered[0].push(alert);
+	}
+
+	for (let alert of unknownTypes) {
+		if (reverseHazardPriority.includes(alert)) {
+			console.log(alert + " is not being sorted correctly");
+		}
+	}
+
+	while (a < alertsListOrdered[0].length) {
+		if (alertsListOrdered[0][a]["properties"]["event"].toLowerCase().includes("warning")){
+			if (allSettings["radar"]["polygons"]["warnings"]){
+				warningL.push(alertsListOrdered[0][a]);
+			}
+		}
+		else if (alertsListOrdered[0][a]["properties"]["event"].toLowerCase().includes("watch")){
 			if (allSettings["radar"]["polygons"]["watch"]){
-				watchesL.push(alertsList[0][a]);
+				watchesL.push(alertsListOrdered[0][a]);
 			}
 		}
 		else{
 			if (allSettings["radar"]["polygons"]["advisories"]){
-				otherL.push(alertsList[0][a]);
+				otherL.push(alertsListOrdered[0][a]);
 			}
 		}
 		a++;
 	}
-	var orgList = [];
+	let orgList = [];
 	orgList = orgList.concat(watchesL);
 	orgList = orgList.concat(otherL);
 	orgList = orgList.concat(warningL);
-	alertsList[0] = orgList;
-	return alertsList;
+	alertsListOrdered[0] = orgList;
+	return alertsListOrdered;
 }
