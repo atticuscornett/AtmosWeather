@@ -1025,7 +1025,7 @@ input {
 		color: var(--primary-text-color);
 	}
 
-	#welcome-button-native.svelte-cmi35s{
+	.welcome-button.svelte-cmi35s {
 		border: none;
 		background-color: var(--positive-button);
 		color: var(--positive-button-text);

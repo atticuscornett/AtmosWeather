@@ -55,6 +55,11 @@
 
         }, 600);
     }
+
+	function skipWelcome(){
+		welcomeTitle = "Welcome To Atmos Weather ";
+		document.getElementById("welcome-button-native").click();
+	}
 </script>
 
 {#if showWelcome}
@@ -70,7 +75,8 @@
 				<h1 id="welcome-title-native">{welcomeTitle}</h1>
 				<h3 id="welcome-body-native">{@html welcomeBody}</h3>
 				<br>
-				<button id="welcome-button-native" onclick={showNextIntro}>Next</button>
+				<button id="welcome-button-native" onclick={showNextIntro} class="welcome-button">Next</button>
+				<button id="skip-button-native" onclick={skipWelcome} class="welcome-button">Skip Welcome</button>
 			</div>
 		</div>
 	</div>
@@ -93,7 +99,7 @@
 		color: var(--primary-text-color);
 	}
 
-	#welcome-button-native{
+	.welcome-button {
 		border: none;
 		background-color: var(--positive-button);
 		color: var(--positive-button-text);
