@@ -19,15 +19,10 @@ export function getPlugin(plugin){
 let storePlugin = registerPlugin("NativeStores")
 
 export async function syncPreferences(){
-    NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("location-names", JSON.parse(localStorage.getItem("weather-location-names")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	NativeStorage.setItem("location-cache", JSON.parse(localStorage.getItem("nws-location-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-
-	storePlugin.setItem({"key": "new-settings", "value": localStorage.getItem("atmos-settings")});
-	storePlugin.setItem({"key": "new-locations", "value": localStorage.getItem("weather-locations")});
-	storePlugin.setItem({"key": "new-location-names", "value": localStorage.getItem("weather-location-names")});
-	storePlugin.setItem({"key": "new-location-cache", "value": localStorage.getItem("nws-location-cache")});
+	storePlugin.setItem({"key": "settings", "value": localStorage.getItem("atmos-settings")});
+	storePlugin.setItem({"key": "locations", "value": localStorage.getItem("weather-locations")});
+	storePlugin.setItem({"key": "location-names", "value": localStorage.getItem("weather-location-names")});
+	storePlugin.setItem({"key": "location-cache", "value": localStorage.getItem("nws-location-cache")});
 
 	// Only backup full localStorage every 5 syncs (for performance reasons)
 	// This backup is in preparation for future Capacitor major version updates, which may clear localStorage
@@ -35,8 +30,8 @@ export async function syncPreferences(){
 		lastBackup++;
 		return;
 	}
-	NativeStorage.setItem("localStorageBackup", JSON.stringify(localStorage), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
-	storePlugin.setItem({"key": "new-localStorageBackup", "value": JSON.stringify(localStorage)});
+
+	storePlugin.setItem({"key": "localStorageBackup", "value": JSON.stringify(localStorage)});
 	lastBackup = 0;
 
 }
