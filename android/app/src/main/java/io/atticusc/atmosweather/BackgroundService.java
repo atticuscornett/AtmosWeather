@@ -61,6 +61,10 @@ public class BackgroundService extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         LocationManager locMan = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         SharedPreferences weatherLocations = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
+
+        System.out.println("New Plugin Test: " + weatherLocations.getString("new-plugin-test", "No value found"));
+        System.out.println("Plugin comparison test: " + weatherLocations.getString("new-plugin-test", "No value found").equals(weatherLocations.getString("settings", "")));
+
         try {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 

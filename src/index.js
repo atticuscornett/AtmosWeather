@@ -22,6 +22,8 @@ export function getPlugin(plugin){
 //     window.currentLong = currentLoc.coords.longitude;
 // }
 
+let storePlugin = registerPlugin("NativeStores")
+
 export async function syncPreferences(){
     NativeStorage.setItem("settings", JSON.parse(localStorage.getItem("atmos-settings")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
 	NativeStorage.setItem("locations", JSON.parse(localStorage.getItem("weather-locations")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
@@ -35,6 +37,7 @@ export async function syncPreferences(){
 	//NativeStorage.setItem("nws-forecast-cache", JSON.stringify(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
 	//NativeStorage.setItem("nws-boundaries-cache", JSON.stringify(localStorage.getItem("nws-hourly-forecast-cache")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
 	//NativeStorage.setItem("notice-weatherAlerts", JSON.stringify(localStorage.getItem("notice-weatherAlerts")), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
+	storePlugin.setItem({"key":"new-plugin-test", "value":localStorage.getItem("atmos-settings")});
 
 	// Only backup full localStorage every 5 syncs (for performance reasons)
 	// This backup is in preparation for future Capacitor major version updates, which may clear localStorage
@@ -44,6 +47,7 @@ export async function syncPreferences(){
 	}
 	NativeStorage.setItem("localStorageBackup", JSON.stringify(localStorage), function(obj){}, function(error){console.log(error.exception);console.log(error.code);});
 	lastBackup = 0;
+
 }
 
 export async function addBackButtonListener(callback){
