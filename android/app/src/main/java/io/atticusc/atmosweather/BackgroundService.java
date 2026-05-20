@@ -62,8 +62,14 @@ public class BackgroundService extends BroadcastReceiver {
         LocationManager locMan = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         SharedPreferences weatherLocations = context.getSharedPreferences("NativeStorage", Context.MODE_MULTI_PROCESS);
 
-        System.out.println("New Plugin Test: " + weatherLocations.getString("new-plugin-test", "No value found"));
-        System.out.println("Plugin comparison test: " + weatherLocations.getString("new-plugin-test", "No value found").equals(weatherLocations.getString("settings", "")));
+        System.out.println("Plugin comparison test (1): " + weatherLocations.getString("new-settings", "No value found").equals(weatherLocations.getString("settings", "")));
+        System.out.println("Plugin comparison test (2): " + weatherLocations.getString("new-locations", "No value found").equals(weatherLocations.getString("locations", "")));
+        System.out.println("Plugin comparison test (3): " + weatherLocations.getString("new-location-names", "No value found").equals(weatherLocations.getString("location-names", "")));
+        System.out.println("Plugin comparison test (4): " + weatherLocations.getString("new-location-cache", "No value found").equals(weatherLocations.getString("location-cache", "")));
+        System.out.println("Plugin comparison test (5): " + weatherLocations.getString("new-localStorageBackup", "No value found").equals(weatherLocations.getString("localStorageBackup", "")));
+
+        System.out.println("Plugin comparison test (6): " + weatherLocations.getString("localStorageBackup", "No value found"));
+        System.out.println("Plugin comparison test (7): " + weatherLocations.getString("new-localStorageBackup", "No value found"));
 
         try {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
