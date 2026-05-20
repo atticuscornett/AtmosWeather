@@ -33,6 +33,7 @@ public class MainActivity extends BridgeActivity {
     public void onCreate(Bundle savedInstanceState) {
         registerPlugin(EchoPlugin.class);
         registerPlugin(PermissionManagementPlugin.class);
+        registerPlugin(NativeStoresPlugin.class);
         super.onCreate(savedInstanceState);
 
         prepareNotificationChannels();
