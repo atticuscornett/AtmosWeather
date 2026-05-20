@@ -16,7 +16,6 @@
   "author": "Atticus Cornett <64325242+atticuscornett@users.noreply.github.com>",
   "license": "GPL-3.0 License",
   "devDependencies": {
-    "@capacitor/assets": "^3.0.4",
     "@capacitor/cli": "^8.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
