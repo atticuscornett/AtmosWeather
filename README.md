@@ -1,3 +1,5 @@
+
+
 ![Atmos Weather](https://raw.githubusercontent.com/atticuscornett/AtmosWeather/main/logo.svg)
 ## The cross-platform, lightweight app for weather forecasts and alerts across the US
 Available for Windows, MacOS, Linux, and Android at the [Atmos Weather Website](https://atticuscornett.github.io/AtmosWeather)
@@ -31,7 +33,7 @@ GitHub Actions
 # Features
 
 ### Mobile and Desktop Platforms
-Atmos Weather is available on both Windows and Android.
+Atmos Weather is available on Windows, MacOS, Linux, and Android.
 Unlike most weather apps, Atmos also provides weather alerts to users on desktop.
 
 ### Total Control
