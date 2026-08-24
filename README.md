@@ -14,9 +14,9 @@ Available for Android on IzzyOnDroid
 
 GitHub Actions
 
-[![Build for Linux](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml)
-[![Build for MacOS](https://github.com/atticuscornett/AtmosWeather/actions/workflows/main.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/main.yml)
-[![Build for Windows](https://github.com/atticuscornett/AtmosWeather/actions/workflows/windows-builder.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/windows-builder.yml)
+[![Build and Publish Electron App](https://github.com/atticuscornett/AtmosWeather/actions/workflows/multiplatform-build.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/multiplatform-build.yml)
+[![pages-build-deployment](https://github.com/atticuscornett/AtmosWeather/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/pages/pages-build-deployment)
+
 
 ### Table of Contents
 [Features](#features)
