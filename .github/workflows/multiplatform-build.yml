@@ -2,7 +2,9 @@ name: Build and Publish Electron App
 
 on:
   push:
-    tags: ['v*.*.*']
+    branches:
+      - fix-builds
+  workflow_dispatch: 
 
 permissions:
   contents: write
