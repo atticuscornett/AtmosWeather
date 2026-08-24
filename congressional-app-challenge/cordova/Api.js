@@ -239,7 +239,7 @@ Api.prototype.prepare = function (cordovaProject, options) {
                 var contents = fs.readFileSync(startUrlPath, 'utf-8');
                 // matches <meta name="theme-color" content="#FF0044">
                 var themeColorRegex = /<meta(?=[^>]*name="theme-color")\s[^>]*content="([^>]*)"/i;
-                var result = themeColorRegex.exec(contents);
+                var result = contents.match(themeColorRegex);
                 var themeColor;
                 if (result && result.length >= 2) {
                     themeColor = result[1];
