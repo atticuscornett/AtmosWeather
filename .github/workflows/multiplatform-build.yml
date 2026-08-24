@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - fix-builds
-  workflow_dispatch: 
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -23,7 +23,9 @@ jobs:
           path: ~/.cache/electron
           key: mac-electron-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
+        working-directory: ./electron
       - run: npx electron-builder --mac --publish always
+        working-directory: ./electron
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -40,7 +42,9 @@ jobs:
           path: ~\AppData\Local\electron
           key: win-electron-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
+        working-directory: ./electron
       - run: npx electron-builder --win --publish always
+        working-directory: ./electron
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -57,6 +61,8 @@ jobs:
           path: ~/.cache/electron
           key: linux-electron-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
+        working-directory: ./electron
       - run: npx electron-builder --linux --publish always
+        working-directory: ./electron
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
