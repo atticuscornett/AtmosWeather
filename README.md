@@ -1,5 +1,3 @@
-
-
 ![Atmos Weather](https://raw.githubusercontent.com/atticuscornett/AtmosWeather/main/logo.svg)
 ## The cross-platform, lightweight app for weather forecasts and alerts across the US
 Available for Windows, MacOS, Linux, and Android at the [Atmos Weather Website](https://atticuscornett.github.io/AtmosWeather)
@@ -16,8 +14,9 @@ Available for Android on IzzyOnDroid
 
 GitHub Actions
 
-[![Build for Linux](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/linux-builder.yml)
-[![Build for MacOS](https://github.com/atticuscornett/AtmosWeather/actions/workflows/main.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/main.yml)
+[![Build and Publish Electron App](https://github.com/atticuscornett/AtmosWeather/actions/workflows/multiplatform-build.yml/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/multiplatform-build.yml)
+[![pages-build-deployment](https://github.com/atticuscornett/AtmosWeather/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/atticuscornett/AtmosWeather/actions/workflows/pages/pages-build-deployment)
+
 
 ### Table of Contents
 [Features](#features)
