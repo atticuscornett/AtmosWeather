@@ -17,7 +17,7 @@ setTimeout(function(){
 	if (thePlatform.includes("desktop")){
 		//document.getElementById("settings-device-location").hidden = true;
 		atmosSettingsTemp = {
-			"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo": false, "run-startup": true, "update-notify": false},
+			"personalization": {"theme": "system", "font": "Default", "page-transition-duration": 1500, "atmos-logo": false, "run-startup": true, "update-notify": false},
 			"location": {"weather": false, "alerts": false},
 			"notifications": {"severe-future": true, "rain-future": false, "quiet-hours": false, "quiet-start": 23, "quiet-end": 6},
 			"radar":{"color-scheme":4, "satellite": false, "spc-outlook":true, "polygons":{"watch":true, "advisories":true, "warnings":true, "high-res": false}},
@@ -159,7 +159,7 @@ setTimeout(function(){
 	else{
 		//document.getElementById("settings-startup").hidden = true;
 		atmosSettingsTemp = {
-		"personalization": {"theme": "system", "page-transition-duration": 1500, "atmos-logo":false, "run-startup": false, "update-notify": true},
+		"personalization": {"theme": "system", "font": "Default", "page-transition-duration": 1500, "atmos-logo":false, "run-startup": false, "update-notify": true},
 		"location": {"weather": true, "alerts": true},
 		"notifications": {"severe-future": true, "rain-future": false, "quiet-hours": false, "quiet-start": 23, "quiet-end": 6},
 		"location-alerts": {"tts-alerts": false, "alert-check-frequency": "60", "default-alert": "readynow", "default-notification": "readynow", "locations":{}},

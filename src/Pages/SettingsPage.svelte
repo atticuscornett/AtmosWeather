@@ -14,6 +14,26 @@
     let isDesktop = $derived(platform && platform.includes("desktop"));
     let isAndroid = $derived(platform && platform.includes("android"));
 
+    let availableFonts = $state(["Default"])
+
+    function getAvailableFonts(){
+        let fonts = ["Default"];
+
+        let queryFonts = async () => {
+            try {
+                for (let font of await window.queryLocalFonts()) {
+                    fonts.push(font.fullName);
+                }
+
+                availableFonts = fonts;
+            }
+            catch (error) {
+                console.error("Error querying local fonts:", error);
+            }
+        }
+        queryFonts();
+    }
+
     function refreshSettings() {
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         allSettings["radar"]["color-scheme"] = String(allSettings["radar"]["color-scheme"]);
@@ -270,7 +290,7 @@
     let themeChanged = $state(false);
     let themeError = $state(false);
 
-
+    getAvailableFonts();
     ensureSettingsSet();
     setInterval(ensureSettingsSet, 1000 * 60);
 </script>
@@ -344,6 +364,14 @@
                 {#if themeError}
                     <h4>There was an error importing that theme.</h4>
                 {/if}
+                <br>
+                <label for="setting-app-font">App Font</label>
+                <br>
+                <select id="setting-app-font">
+                    {#each availableFonts as font}
+                        <option value={font}>{font}</option>
+                    {/each}
+                </select>
                 <br>
                 <label for="setting-page-transition-duration">Page Transition Duration</label>
                 <br>
