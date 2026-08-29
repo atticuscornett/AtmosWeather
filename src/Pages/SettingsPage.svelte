@@ -601,7 +601,7 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
     }
 
     .vertical-center {
@@ -623,6 +623,6 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
     }
 </style>

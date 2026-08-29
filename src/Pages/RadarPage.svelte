@@ -174,7 +174,7 @@ setInterval(radarAnimationHandler, 1500);
         border-radius: 7px;
         cursor: pointer;
         border: none;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
     }
 
     #spc-select-container {

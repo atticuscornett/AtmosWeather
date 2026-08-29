@@ -61,8 +61,9 @@
             tempPeriods.push(dataCallback(chartList, i));
         }
 
+
         Chart.defaults.font.size = 18;
-        Chart.defaults.font.family = "Secular One";
+        Chart.defaults.font.family = getComputedStyle(root).getPropertyValue("--title-font").trim();
         Chart.defaults.color = getComputedStyle(root).getPropertyValue('--graph-text-color').trim();
 
         let chartConfig = {

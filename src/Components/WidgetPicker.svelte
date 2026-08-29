@@ -112,7 +112,7 @@
         border: none;
         border-radius: 7px;
         font-size: 20px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
         margin-top: 7px;
         margin-bottom: 7px;
     }

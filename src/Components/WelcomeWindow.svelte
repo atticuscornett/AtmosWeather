@@ -103,7 +103,7 @@
 		border: none;
 		background-color: var(--positive-button);
 		color: var(--positive-button-text);
-		font-family: Secular One, sans-serif;
+		font-family: var(--title-font), sans-serif;
 		font-size: 25px;
 		border-radius: 7px;
 		cursor: pointer;
