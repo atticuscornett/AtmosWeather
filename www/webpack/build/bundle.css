@@ -237,6 +237,11 @@ input {
         font-family: var(--title-font), sans-serif;
     }
 
+    .smallSubText.svelte-v59opo {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
     @keyframes svelte-1mag29o-load-anim {
         0% {
             transform: rotate(0deg);

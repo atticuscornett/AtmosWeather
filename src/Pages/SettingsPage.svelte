@@ -364,14 +364,25 @@
                 {#if themeError}
                     <h4>There was an error importing that theme.</h4>
                 {/if}
+                <label for="setting-title-font">Title Font</label>
+                <h5 class="smallSubText">Font primarily used for page titles and buttons</h5>
                 <br>
-                <label for="setting-app-font">App Font</label>
-                <br>
-                <select id="setting-app-font">
+                <select id="setting-title-font" bind:value={allSettings["personalization"]["title-font"]}>
                     {#each availableFonts as font}
                         <option value={font}>{font}</option>
                     {/each}
                 </select>
+
+                <br>
+                <label for="setting-body-font">Body Font</label>
+                <h5 class="smallSubText">Font used for most page content</h5>
+                <br>
+                <select id="setting-body-font" bind:value={allSettings["personalization"]["body-font"]}>
+                    {#each availableFonts as font}
+                        <option value={font}>{font}</option>
+                    {/each}
+                </select>
+                <br>
                 <br>
                 <label for="setting-page-transition-duration">Page Transition Duration</label>
                 <br>
@@ -624,5 +635,10 @@
         cursor: pointer;
         font-size: 16px;
         font-family: var(--title-font), sans-serif;
+    }
+
+    .smallSubText {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 </style>
