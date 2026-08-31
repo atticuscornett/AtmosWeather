@@ -367,7 +367,7 @@
                 <label for="setting-title-font">Title Font</label>
                 <h5 class="smallSubText">Font primarily used for page titles and buttons</h5>
                 <br>
-                <select id="setting-title-font" bind:value={allSettings["personalization"]["title-font"]}>
+                <select id="setting-title-font" bind:value={allSettings["personalization"]["title-font"]} onchange={(e)=>{setTitleFont(e.target.value);}}>
                     {#each availableFonts as font}
                         <option value={font}>{font}</option>
                     {/each}
@@ -377,7 +377,7 @@
                 <label for="setting-body-font">Body Font</label>
                 <h5 class="smallSubText">Font used for most page content</h5>
                 <br>
-                <select id="setting-body-font" bind:value={allSettings["personalization"]["body-font"]}>
+                <select id="setting-body-font" bind:value={allSettings["personalization"]["body-font"]} onchange={(e)=>{setBodyFont(e.target.value);}}>
                     {#each availableFonts as font}
                         <option value={font}>{font}</option>
                     {/each}

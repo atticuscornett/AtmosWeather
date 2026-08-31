@@ -299,9 +299,13 @@ setTimeout(function(){
 	};
 	}
 	let currentSettings = JSON.parse(localStorage.getItem("atmos-settings"));
+	let fixedSettings = fixMissingKeys(atmosSettingsTemp, currentSettings);
 
 	// Set missing settings values to the default
-	localStorage.setItem("atmos-settings", JSON.stringify(fixMissingKeys(atmosSettingsTemp, currentSettings)));
+	localStorage.setItem("atmos-settings", JSON.stringify(fixedSettings));
+
+	setTitleFont(fixedSettings["personalization"]["title-font"]);
+	setBodyFont(fixedSettings["personalization"]["body-font"]);
 }, 100);
 
 

@@ -52,3 +52,11 @@ function importTheme(theme){
 
     return true;
 }
+
+function setTitleFont(font){
+    document.documentElement.style.setProperty('--title-font', font);
+}
+
+function setBodyFont(font){
+    document.documentElement.style.setProperty('--body-font', font);
+}
