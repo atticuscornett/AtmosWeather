@@ -17,9 +17,24 @@
     let availableFonts = $state(["Default"])
 
     function getAvailableFonts(){
+        if (platform === false){
+            setTimeout(getAvailableFonts, 3000);
+            return;
+        }
+
+
         let fonts = ["Default"];
 
         let queryFonts = async () => {
+            console.log("Querying available fonts... Platform: " + platform + " isDesktop: " + isDesktop + " isAndroid: " + isAndroid);
+            if (isAndroid) {
+                console.log("Requesting available fonts from Android...");
+                fonts = (await PermissionManagement.requestAvailableFonts()).availableFonts.split(",");
+                console.log("Available fonts: " + JSON.stringify(fonts));
+                availableFonts = fonts;
+                return;
+            }
+
             try {
                 for (let font of await window.queryLocalFonts()) {
                     fonts.push(font.fullName);
