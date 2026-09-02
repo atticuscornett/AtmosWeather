@@ -3,15 +3,15 @@ body {
 	color: var(--primary-text-color);
 }
 h1 {
-	font-family: Secular One, sans-serif;
+	font-family: var(--title-font), sans-serif;
 }
 
 h2, h3, h4, h5, h6 {
-	font-family: Lexend Deca, sans-serif;
+	font-family: var(--body-font), sans-serif;
 }
 
 details{
-	font-family: Secular One, sans-serif;
+	font-family: var(--title-font), sans-serif;
 	font-size: 20px;
 	border: var(--accordian-border-color) solid;
 	padding: 10px;
@@ -36,12 +36,12 @@ a{
 }
 
 label{
-	font-family: Lexend Deca, sans-serif;
+	font-family: var(--body-font), sans-serif;
 	font-size: 25px;
 }
 
 select{
-	font-family: Lexend Deca, sans-serif;
+	font-family: var(--body-font), sans-serif;
 	font-size: 23px;
 	margin-bottom: 8px;
 }
@@ -212,7 +212,7 @@ input {
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
     }
 
     .vertical-center.svelte-v59opo {
@@ -234,7 +234,12 @@ input {
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
+    }
+
+    .smallSubText.svelte-v59opo {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
     @keyframes svelte-1mag29o-load-anim {
@@ -308,7 +313,7 @@ input {
         border: none;
         background-color: var(--add-location-button);
         color: var(--add-location-button-text);
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
         font-size: 25px;
         border-radius: 7px;
         cursor: pointer;
@@ -530,7 +535,7 @@ input {
         border: none;
         border-radius: 7px;
         font-size: 20px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
         margin-top: 7px;
         margin-bottom: 7px;
     }
@@ -759,7 +764,7 @@ input {
         border-radius: 7px;
         cursor: pointer;
         font-size: 20px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
         margin-top: 7px;
         margin-bottom: 7px;
     }
@@ -862,7 +867,7 @@ input {
         border: none;
         border-radius: 7px;
         font-size: 20px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
         margin-top: 7px;
         margin-bottom: 7px;
     }
@@ -875,7 +880,7 @@ input {
         border: none;
         border-radius: 7px;
         font-size: 20px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
         margin-top: 7px;
         margin-bottom: 7px;
     }
@@ -935,7 +940,7 @@ input {
         border-radius: 7px;
         cursor: pointer;
         border: none;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
     }
 
     #spc-select-container.svelte-1ui026f {
@@ -973,7 +978,7 @@ input {
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
     }
 
     #android-permission-setup.svelte-vi0x0u{
@@ -999,7 +1004,7 @@ input {
         border: none;
         background-color: rgba(34,55,91,0.88);
         color: white;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
         font-size: 25px;
         border-radius: 7px;
         cursor: pointer;
@@ -1029,7 +1034,7 @@ input {
 		border: none;
 		background-color: var(--positive-button);
 		color: var(--positive-button-text);
-		font-family: Secular One, sans-serif;
+		font-family: var(--title-font), sans-serif;
 		font-size: 25px;
 		border-radius: 7px;
 		cursor: pointer;

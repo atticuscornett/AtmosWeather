@@ -113,7 +113,7 @@
         border: none;
         background-color: rgba(34,55,91,0.88);
         color: white;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
         font-size: 25px;
         border-radius: 7px;
         cursor: pointer;

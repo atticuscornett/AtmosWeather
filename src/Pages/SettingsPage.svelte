@@ -14,6 +14,41 @@
     let isDesktop = $derived(platform && platform.includes("desktop"));
     let isAndroid = $derived(platform && platform.includes("android"));
 
+    let availableFonts = $state(["Default"])
+
+    function getAvailableFonts(){
+        if (platform === false){
+            setTimeout(getAvailableFonts, 3000);
+            return;
+        }
+
+
+        let fonts = ["Default"];
+
+        let queryFonts = async () => {
+            console.log("Querying available fonts... Platform: " + platform + " isDesktop: " + isDesktop + " isAndroid: " + isAndroid);
+            if (isAndroid) {
+                console.log("Requesting available fonts from Android...");
+                fonts = (await PermissionManagement.requestAvailableFonts()).availableFonts.split(",");
+                console.log("Available fonts: " + JSON.stringify(fonts));
+                availableFonts = fonts;
+                return;
+            }
+
+            try {
+                for (let font of await window.queryLocalFonts()) {
+                    fonts.push(font.fullName);
+                }
+
+                availableFonts = fonts;
+            }
+            catch (error) {
+                console.error("Error querying local fonts:", error);
+            }
+        }
+        queryFonts();
+    }
+
     function refreshSettings() {
         allSettings = JSON.parse(localStorage.getItem("atmos-settings"));
         allSettings["radar"]["color-scheme"] = String(allSettings["radar"]["color-scheme"]);
@@ -270,7 +305,7 @@
     let themeChanged = $state(false);
     let themeError = $state(false);
 
-
+    getAvailableFonts();
     ensureSettingsSet();
     setInterval(ensureSettingsSet, 1000 * 60);
 </script>
@@ -344,6 +379,25 @@
                 {#if themeError}
                     <h4>There was an error importing that theme.</h4>
                 {/if}
+                <label for="setting-title-font">Title Font</label>
+                <h5 class="smallSubText">Font primarily used for page titles and buttons</h5>
+                <br>
+                <select id="setting-title-font" bind:value={allSettings["personalization"]["title-font"]} onchange={(e)=>{setTitleFont(e.target.value);}}>
+                    {#each availableFonts as font}
+                        <option value={font}>{font}</option>
+                    {/each}
+                </select>
+
+                <br>
+                <label for="setting-body-font">Body Font</label>
+                <h5 class="smallSubText">Font used for most page content</h5>
+                <br>
+                <select id="setting-body-font" bind:value={allSettings["personalization"]["body-font"]} onchange={(e)=>{setBodyFont(e.target.value);}}>
+                    {#each availableFonts as font}
+                        <option value={font}>{font}</option>
+                    {/each}
+                </select>
+                <br>
                 <br>
                 <label for="setting-page-transition-duration">Page Transition Duration</label>
                 <br>
@@ -573,7 +627,7 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
     }
 
     .vertical-center {
@@ -595,6 +649,11 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-        font-family: Secular One, sans-serif;
+        font-family: var(--title-font), sans-serif;
+    }
+
+    .smallSubText {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 </style>

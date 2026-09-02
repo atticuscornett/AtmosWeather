@@ -94,4 +94,8 @@
 
     /* Current options: white, black, dodgerblue */
     --nav-icon-color: dodgerblue;
+
+    /* Fonts */
+    --title-font: "Secular One", sans-serif;
+    --body-font: "Lexend Deca", sans-serif;
 }

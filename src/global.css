@@ -3,15 +3,15 @@ body {
 	color: var(--primary-text-color);
 }
 h1 {
-	font-family: Secular One, sans-serif;
+	font-family: var(--title-font), sans-serif;
 }
 
 h2, h3, h4, h5, h6 {
-	font-family: Lexend Deca, sans-serif;
+	font-family: var(--body-font), sans-serif;
 }
 
 details{
-	font-family: Secular One, sans-serif;
+	font-family: var(--title-font), sans-serif;
 	font-size: 20px;
 	border: var(--accordian-border-color) solid;
 	padding: 10px;
@@ -36,12 +36,12 @@ a{
 }
 
 label{
-	font-family: Lexend Deca, sans-serif;
+	font-family: var(--body-font), sans-serif;
 	font-size: 25px;
 }
 
 select{
-	font-family: Lexend Deca, sans-serif;
+	font-family: var(--body-font), sans-serif;
 	font-size: 23px;
 	margin-bottom: 8px;
 }

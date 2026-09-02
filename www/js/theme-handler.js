@@ -52,3 +52,17 @@ function importTheme(theme){
 
     return true;
 }
+
+function setTitleFont(font){
+    if (font === "Default"){
+        font = "Secular One, sans-serif";
+    }
+    document.documentElement.style.setProperty('--title-font', font);
+}
+
+function setBodyFont(font){
+    if (font === "Default"){
+        font = "Lexend Deca, sans-serif";
+    }
+    document.documentElement.style.setProperty('--body-font', font);
+}

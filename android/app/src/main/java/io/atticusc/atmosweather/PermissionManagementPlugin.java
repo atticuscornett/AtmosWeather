@@ -6,6 +6,9 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
+import android.graphics.fonts.Font;
+import android.graphics.fonts.SystemFonts;
 import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
@@ -20,7 +23,10 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Set;
 
 @CapacitorPlugin(name = "PermissionManagement")
 public class PermissionManagementPlugin extends Plugin {
@@ -110,5 +116,77 @@ public class PermissionManagementPlugin extends Plugin {
                 getContext().startActivity(alarmIntent);
             }
         }
+    }
+
+    @PluginMethod()
+    public void requestAvailableFonts(PluginCall call){
+        ArrayList<String> fontNames = new ArrayList<>();
+        fontNames.add("Default");
+        fontNames.add("serif");
+        fontNames.add("sans-serif");
+        fontNames.add("monospace");
+        fontNames.add("cursive");
+        fontNames.add("fantasy");
+
+        JSObject ret = new JSObject();
+        ret.put("availableFonts", String.join(",", fontNames));
+        call.resolve(ret);
+
+        /*
+        Do not delete this code yet - it may be used for a future font system. It would have to
+        load the fonts by passing them as base64 data to the webview (to get around the face that
+        it cannot access the system fonts directly by name).
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+
+            System.out.println("Starting thread:");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // Set<Font> availableFonts = SystemFonts.getAvailableFonts();
+
+                    JSObject ret = new JSObject();
+                    ret.put("availableFonts", String.join(",", fontNames));
+                    call.resolve(ret);
+
+
+
+                    return;
+
+
+                    for (Font font : availableFonts) {
+                        File fontFile = font.getFile();
+                        if (fontFile != null) {
+                            String fileName = fontFile.getName();
+                            // Clean up file name extensions to make valid CSS safe-strings
+                            String cleanName = fileName.replace(".ttf", "").replace(".otf", "");
+
+                            if (!fontNames.contains(cleanName)) {
+                                fontNames.add(cleanName);
+                            }
+                        }
+                    }
+
+                    System.out.println("Resolving in thread with fonts: " + String.join(",", fontNames));
+
+                    JSObject ret = new JSObject();
+                    ret.put("availableFonts", String.join(",", fontNames));
+                    call.resolve(ret);
+
+
+                }
+            }).start();
+        }
+        else {
+            System.out.println("Resolving on main with fonts: " + String.join(",", fontNames));
+
+            System.out.println("Available fonts: " + fontNames);
+
+
+            JSObject ret = new JSObject();
+            ret.put("availableFonts", String.join(",", fontNames));
+            call.resolve(ret);
+        }
+        */
     }
 }
