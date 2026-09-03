@@ -44,6 +44,7 @@
 <div id="app">
     <MainApp bind:page={page} />
     <div id="app-nav">
+        <NavButton navName="home" bind:selected={selected} bind:page={page} />
         <NavButton navName="locations" bind:selected={selected} bind:page={page} />
         <NavButton navName="alerts" bind:selected={selected} bind:page={page} />
         <NavButton navName="radar" bind:selected={selected} bind:page={page} />
