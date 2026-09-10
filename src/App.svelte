@@ -7,6 +7,7 @@
     let selected = $state("locations");
     let page = $state("locations");
     let homeEnabled = $state(false);
+    let homeLocation = $state("None");
 
     window.goPage = (goTo) => {
         page = goTo;
@@ -42,6 +43,13 @@
         let settings = JSON.parse(localStorage.getItem("atmos-settings"));
         homeEnabled = settings && settings["personalization"] && settings["personalization"]["home-location"]
             && settings["personalization"]["home-location"] !== "None";
+
+        if (homeEnabled) {
+            homeLocation = settings["personalization"]["home-location"];
+        }
+        else {
+            homeLocation = "None";
+        }
     }
 
     setTimeout(refreshAppTheme, 100);
@@ -54,7 +62,7 @@
     <MainApp bind:page={page} />
     <div id="app-nav">
         {#if homeEnabled}
-            <NavButton navName="home" bind:selected={selected} bind:page={page} />
+            <NavButton navName="location-{homeLocation}" navIcon="home" bind:selected={selected} bind:page={page} />
         {/if}
 
         <NavButton navName="locations" bind:selected={selected} bind:page={page} />
