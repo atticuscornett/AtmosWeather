@@ -53,7 +53,13 @@
     }
 
     setTimeout(refreshAppTheme, 100);
-    setTimeout(updateHomeLocation, 100);
+    setTimeout(()=>{
+        updateHomeLocation();
+        if (homeEnabled) {
+            selected = "location-" + homeLocation;
+            page = "location-" + homeLocation;
+        }
+    }, 500);
 </script>
 
 <AtmosLogo />
