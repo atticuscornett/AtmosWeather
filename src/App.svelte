@@ -44,7 +44,15 @@
         homeEnabled = settings && settings["personalization"] && settings["personalization"]["home-location"]
             && settings["personalization"]["home-location"] !== "None";
 
+        // Check that home location exists
         if (homeEnabled) {
+            let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+            if (!locationNames.includes(settings["personalization"]["home-location"])) {
+                homeEnabled = false;
+                settings["personalization"]["home-location"] = "None";
+                localStorage.setItem("atmos-settings", JSON.stringify(settings));
+            }
+
             homeLocation = settings["personalization"]["home-location"];
         }
         else {
