@@ -381,9 +381,9 @@
                 {/if}
                 <br>
                 <label for="setting-home-location">Home Location</label>
-                <h5>When enabled, adds a home tab to jump straight to this location.</h5>
+                <h5 class="smallSubText">When enabled, adds a home tab to jump straight to this location.</h5>
                 <br>
-                <select id="setting-home-location" bind:value={allSettings["personalization"]["home-location"]}>
+                <select id="setting-home-location" bind:value={allSettings["personalization"]["home-location"]} onchange={() => {setTimeout(window.updateHomeLocation, 100); }}>
                     <option value="None">None</option>
                     {#each locationNames as name}
                         <option value={name}>{name}</option>
