@@ -379,6 +379,18 @@
                 {#if themeError}
                     <h4>There was an error importing that theme.</h4>
                 {/if}
+                <br>
+                <label for="setting-home-location">Home Location</label>
+                <h5 class="smallSubText">When enabled, adds a home tab to jump straight to this location.</h5>
+                <br>
+                <select id="setting-home-location" bind:value={allSettings["personalization"]["home-location"]} onchange={() => {setTimeout(window.updateHomeLocation, 100); }}>
+                    <option value="None">None</option>
+                    {#each locationNames as name}
+                        <option value={name}>{name}</option>
+                    {/each}
+                </select>
+                <br>
+
                 <label for="setting-title-font">Title Font</label>
                 <h5 class="smallSubText">Font primarily used for page titles and buttons</h5>
                 <br>
@@ -655,5 +667,12 @@
     .smallSubText {
         margin-top: 0;
         margin-bottom: 0;
+    }
+
+    select {
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 </style>

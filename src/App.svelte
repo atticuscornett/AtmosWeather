@@ -6,6 +6,8 @@
 
     let selected = $state("locations");
     let page = $state("locations");
+    let homeEnabled = $state(false);
+    let homeLocation = $state("None");
 
     window.goPage = (goTo) => {
         page = goTo;
@@ -36,7 +38,36 @@
         }, 100)
     }
 
+    window.updateHomeLocation = () => {
+        // Check if a home location is set
+        let settings = JSON.parse(localStorage.getItem("atmos-settings"));
+        homeEnabled = settings && settings["personalization"] && settings["personalization"]["home-location"]
+            && settings["personalization"]["home-location"] !== "None";
+
+        // Check that home location exists
+        if (homeEnabled) {
+            let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+            if (!locationNames.includes(settings["personalization"]["home-location"])) {
+                homeEnabled = false;
+                settings["personalization"]["home-location"] = "None";
+                localStorage.setItem("atmos-settings", JSON.stringify(settings));
+            }
+
+            homeLocation = settings["personalization"]["home-location"];
+        }
+        else {
+            homeLocation = "None";
+        }
+    }
+
     setTimeout(refreshAppTheme, 100);
+    setTimeout(()=>{
+        updateHomeLocation();
+        if (homeEnabled) {
+            selected = "location-" + homeLocation;
+            page = "location-" + homeLocation;
+        }
+    }, 500);
 </script>
 
 <AtmosLogo />
@@ -44,6 +75,10 @@
 <div id="app">
     <MainApp bind:page={page} />
     <div id="app-nav">
+        {#if homeEnabled}
+            <NavButton navName="location-{homeLocation}" navIcon="home" bind:selected={selected} bind:page={page} />
+        {/if}
+
         <NavButton navName="locations" bind:selected={selected} bind:page={page} />
         <NavButton navName="alerts" bind:selected={selected} bind:page={page} />
         <NavButton navName="radar" bind:selected={selected} bind:page={page} />

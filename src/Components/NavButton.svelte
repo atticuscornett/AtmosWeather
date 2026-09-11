@@ -1,7 +1,15 @@
 <script>
-    let { navName, selected = $bindable(), page = $bindable() } = $props();
+    let { navName, selected = $bindable(), page = $bindable(), navIcon = navName } = $props();
 
     let navigate = () => {
+        if (navName.startsWith("location-")){
+            let locationNames = JSON.parse(localStorage.getItem("weather-location-names"));
+            if (!locationNames.includes(navName.replace("location-", ""))){
+                updateHomeLocation();
+                return;
+            }
+        }
+
         selected = navName;
         page = navName;
     }
@@ -16,7 +24,7 @@
 </script>
 
 <div id="{navName}-nav" class={selected === navName ? "selected-nav" : ""} onclick={navigate}>
-    <img src={"img/" + navName + navIconColor + ".svg"} class="nav-icon" alt={navName}>
+    <img src={"img/" + navIcon + navIconColor + ".svg"} class="nav-icon" alt={navName}>
 </div>
 
 <style>
