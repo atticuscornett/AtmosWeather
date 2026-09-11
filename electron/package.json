@@ -67,5 +67,31 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/atticuscornett/AtmosWeather.git"
+  },
+  "overrides": {
+    "app-builder-lib": {
+      "js-yaml": "4.3.2"
+    },
+    "builder-util": {
+      "js-yaml": "4.3.2"
+    },
+    "dmg-builder": {
+      "js-yaml": "4.3.2"
+    },
+    "electron-builder": {
+      "js-yaml": "4.3.2"
+    },
+    "electron-builder-squirrel-windows": {
+      "js-yaml": "4.3.2"
+    },
+    "electron-publish": {
+      "js-yaml": "4.3.2"
+    },
+    "electron-updater": {
+      "js-yaml": "4.3.2"
+    },
+    "js-yaml": {
+      "js-yaml": "4.3.2"
+    }
   }
 }
