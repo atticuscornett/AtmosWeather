@@ -242,6 +242,13 @@ input {
         margin-bottom: 0;
     }
 
+    select.svelte-v59opo {
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     @keyframes svelte-1mag29o-load-anim {
         0% {
             transform: rotate(0deg);

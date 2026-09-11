@@ -668,4 +668,11 @@
         margin-top: 0;
         margin-bottom: 0;
     }
+
+    select {
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>
