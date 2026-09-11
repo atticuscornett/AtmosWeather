@@ -9,6 +9,21 @@
     let homeEnabled = $state(false);
     let homeLocation = $state("None");
 
+    window.lastFocus = Date.now();
+
+    window.addEventListener('focus', () => {
+        let currentTime = Date.now();
+        if (currentTime - window.lastFocus > 60*1000*15) {
+            // If data is 15 minutes old, refresh the page to get new data
+            window.location.reload();
+        }
+        window.lastFocus = currentTime;
+    });
+
+    window.addEventListener('blur', () => {
+        window.lastFocus = Date.now();
+    });
+
     window.goPage = (goTo) => {
         page = goTo;
     }
