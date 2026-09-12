@@ -5,20 +5,15 @@ setTimeout(() => {
 
 let updateFiles = false;
 
-window.atmosVersion = "3.1.0";
-window.atmosUpdated = "5-20-2026";
-window.atmosUpdateTitle = "Atmos Weather v3.1.0 is here!";
+window.atmosVersion = "3.1.1";
+window.atmosUpdated = "9-12-2026";
+window.atmosUpdateTitle = "Atmos Weather v3.1.1 is here!";
 window.atmosUpdateNotes = `
 		<dl style='font-family: Secular One, sans-serif;'>
 		    <dt>New Features</dt>
-		    <dd>- Import custom themes</dd>
-		    <dd>- 4 new built-in themes</dd>
-		    <dd>- Outlook transparency slider on radar</dd>
-		    <dd>- AQI graph widget added</dd>
-		    <dt>Bug Fixes</dt>
-		    <dd>- Fixed repeated forecast notification issues on desktop</dd>
-		    <dd>- External links now open in browser on desktop</dd>
-		    <dd>- Wind graph arrows more accurately reflect wind direction</dd>
+		    <dd>- App fonts can now be changed in settings</dd>
+		    <dd>- Home location can now be selected in settings</dd>
+		    <dd>- App automatically refreshes data when idle for 10 minutes</dd>
 		</dl> 
 		`;
 

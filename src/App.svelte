@@ -13,7 +13,7 @@
 
     window.addEventListener('focus', () => {
         let currentTime = Date.now();
-        if (currentTime - window.lastFocus > 60*1000*15) {
+        if (currentTime - window.lastFocus > 60*1000*10) {
             // If data is 15 minutes old, refresh the page to get new data
             window.location.reload();
         }
